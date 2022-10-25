@@ -228,7 +228,7 @@
                   ]
                 },
                 "delete": {
-                  "description": "Deletes a document schema. Returns NOT_FOUND if the document schema does not exist.",
+                  "description": "Deletes a document schema. Returns NOT_FOUND if the document schema does not exist. Returns BAD_REQUEST if the document schema has documents depending on it.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/documentSchemas/{documentSchemasId}",
                   "httpMethod": "DELETE",
                   "id": "contentwarehouse.projects.locations.documentSchemas.delete",
@@ -314,7 +314,7 @@
                   ]
                 },
                 "patch": {
-                  "description": "Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the Document Schema is non-empty and does not equal the existing name. Supports only appending new properties and updating existing properties will result into INVALID_ARGUMENT.",
+                  "description": "Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the Document Schema is non-empty and does not equal the existing name. Supports only appending new properties, adding new ENUM possible values, and updating the EnumTypeOptions.validation_check_disabled flag for ENUM possible values. Updating existing properties will result into INVALID_ARGUMENT.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/documentSchemas/{documentSchemasId}",
                   "httpMethod": "PATCH",
                   "id": "contentwarehouse.projects.locations.documentSchemas.patch",
@@ -1046,7 +1046,7 @@
       }
     }
   },
-  "revision": "20220920",
+  "revision": "20221018",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3488,7 +3488,12 @@
             "PRODUCTION2020_UIE_AFFINITY",
             "SPEAKEASY_AFFINITY",
             "DOCS_TASKS_AFFINITY",
-            "DYNAMITE_SEARCH_AFFINITY"
+            "DYNAMITE_SEARCH_AFFINITY",
+            "GPAY_RELEASE_OPS_AFFINITY",
+            "VOICE_PBX_AFFINITY",
+            "VOICE_WEB_AFFINITY",
+            "SKILLSSTACK_AFFINITY",
+            "WHOSTORY_AFFINITY"
           ],
           "enumDescriptions": [
             "",
@@ -3505,6 +3510,11 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -4179,6 +4189,23 @@
         },
         "value": {
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AppsPeopleOzExternalMergedpeopleapiConnectionReminder": {
+      "description": "Contact-level people-prompts settings and contact-level connection reminders. Part of go/people-prompts.",
+      "id": "AppsPeopleOzExternalMergedpeopleapiConnectionReminder",
+      "properties": {
+        "metadata": {
+          "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        },
+        "prompt": {
+          "description": "Contact-level \"reminder to connect\" prompts for this contact.",
+          "items": {
+            "$ref": "SocialGraphApiProtoPrompt"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -5560,9 +5587,6 @@
           "description": "Most specific textual description of individual desk location.",
           "type": "string"
         },
-        "extendedData": {
-          "$ref": "AppsPeopleOzExternalMergedpeopleapiLocationExtendedData"
-        },
         "floorName": {
           "type": "string"
         },
@@ -5597,16 +5621,6 @@
         },
         "value": {
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AppsPeopleOzExternalMergedpeopleapiLocationExtendedData": {
-      "id": "AppsPeopleOzExternalMergedpeopleapiLocationExtendedData",
-      "properties": {
-        "corpDeskbookingExtendedData": {
-          "$ref": "SocialGraphWireProtoPeopleapiExtensionCorpDeskbookingLocationExtendedData",
-          "description": "Populated by CORP_DESKBOOKING_FLEXIBLE_DESK_LOCATIONS extension."
         }
       },
       "type": "object"
@@ -6273,6 +6287,13 @@
           },
           "type": "array"
         },
+        "connectionReminder": {
+          "description": "Reminder to connect with a Contact (part of go/people-prompts). Also contains contact-level prompts settings. Each Contact can have a single `connection_reminder` (but can have multiple Prompts inside of it). Field is repeated per PeopleAPI data model go/people-api-concepts#repeated. Only supported for CONTACT container.",
+          "items": {
+            "$ref": "AppsPeopleOzExternalMergedpeopleapiConnectionReminder"
+          },
+          "type": "array"
+        },
         "contactGroupMembership": {
           "description": "Contact groups that this person is a member of.",
           "items": {
@@ -6485,7 +6506,7 @@
           "type": "array"
         },
         "personId": {
-          "description": "The ID of the person. This is determined by the backend, is unstable, and may not be the same as a user_id. Internally referred as 'personKey' to distinguish from the common PersonId pojo. See go/fwgau",
+          "description": "The ID of the person. This is determined by the backend, is unstable, and may not be the same as a user_id. Internally referred as 'personKey' to distinguish from the common PersonId pojo. See go/people-api-concepts#person-id",
           "type": "string"
         },
         "phone": {
@@ -7001,7 +7022,7 @@
         },
         "bestDisplayName": {
           "$ref": "AppsPeopleOzExternalMergedpeopleapiBestDisplayName",
-          "description": "The best name to use for this person for user-facing display. See go/people-api-howto:names for details about how this field is computed. In many cases this will simply be Person.name[0]. However, Person.name returns only explicit Name fields, but other fields maybe usable as a name (for example: nicknames, file_as, ...). `best_display_name` will be calculated from all fields in storage which are usable as a name, even fields which are not explicitly requested in the MergedPerson result. See PersonNameFormatter.java: go/lvztl."
+          "description": "The best name to use for this person for user-facing display. See go/people-api-howto:names for details about how this field is computed. In many cases this will simply be Person.name[0]. However, Person.name returns only explicit Name fields, but other fields maybe usable as a name (for example: nicknames, file_as, ...). `best_display_name` will be calculated from all fields in storage which are usable as a name, even fields which are not explicitly requested in the MergedPerson result. See go/javagoog/apps/tacotown/socialgraph/entity/PersonNameFormatter.java"
         },
         "blockType": {
           "description": "DEPRECATED. Indicates whether the profile owner has blocked this person. Please use `person.read_only_profile_info.block_type` instead.",
@@ -8345,7 +8366,7 @@
           "type": "boolean"
         },
         "id": {
-          "description": "The encoded id of the data source. This field correlates to PersonFieldMetadata.encoded_container_id. The possible values of this `id` field are as follows based on the value of the `container_type` field: CONTACT: Hex-encoded contact id. PROFILE: DOMAIN_PROFILE: GOOGLE_GROUP: NAMED_CHAT_ROOM: Focus-obfuscated Gaia ID. DOMAIN_CONTACT: Synthetic-contact id representing the domain shared contact. PLACE: Encoded PlaceId, encoded using go/djlcf (PlaceIdEncoder.java) RAW_DEVICE_CONTACT: Pair of device_id and raw_contact_id, encoded as base64 serialized social.graph.peopleapi.proto.internal.RawDeviceContactId proto. CONTACT_ANNOTATION: Pair of annotation_id and event_timestamp, encoded as base64 serialized social.graph.peopleapi.proto.internal.ContactAnnotationId proto. -- DEPRECATED container types -- If the container is CIRCLE, then the id is going to be the synthetic- contact id representing the email-only circle member or gaia circle member for which the requester does not have a contact for.",
+          "description": "The encoded id of the data source. This field correlates to PersonFieldMetadata.encoded_container_id. The possible values of this `id` field are as follows based on the value of the `container_type` field: CONTACT: Hex-encoded contact id. PROFILE: DOMAIN_PROFILE: GOOGLE_GROUP: NAMED_CHAT_ROOM: Focus-obfuscated Gaia ID. DOMAIN_CONTACT: Synthetic-contact id representing the domain shared contact. PLACE: Encoded PlaceId (go/javagoog/maps/api/places/util/PlaceIdEncoder.java) RAW_DEVICE_CONTACT: Pair of device_id and raw_contact_id, encoded as base64 serialized social.graph.peopleapi.proto.internal.RawDeviceContactId proto. CONTACT_ANNOTATION: Pair of annotation_id and event_timestamp, encoded as base64 serialized social.graph.peopleapi.proto.internal.ContactAnnotationId proto. -- DEPRECATED container types -- If the container is CIRCLE, then the id is going to be the synthetic- contact id representing the email-only circle member or gaia circle member for which the requester does not have a contact for.",
           "type": "string"
         },
         "lastUpdated": {
@@ -9230,6 +9251,7 @@
               "ACTIVE_EDGE_SENSITIVITY",
               "ADAPTIVE_BATTERY",
               "ADAPTIVE_BRIGHTNESS",
+              "ADD_BLUETOOTH_DEVICE",
               "ADD_DEVICE",
               "ADD_FINGERPRINT",
               "AIRPLANE_MODE",
@@ -9295,6 +9317,7 @@
               "MOBILE",
               "MOBILE_DATA",
               "MUSIC",
+              "MUTE_MODE",
               "NETWORK",
               "NFC",
               "NIGHT_LIGHT_INTENSITY",
@@ -9321,6 +9344,7 @@
               "TEXT_TO_SPEECH",
               "USB_TETHERING",
               "VERBOSE_TTS",
+              "VIBRATION_MODE",
               "VOICE",
               "VOLUME_LEVEL",
               "WAKE_SCREEN_FOR_NOTIFICATIONS",
@@ -9384,7 +9408,8 @@
               "",
               "",
               "",
-              "",
+              "Pair a bluetooth device.",
+              "Link a device to Assistant/Google Home.",
               "",
               "",
               "",
@@ -9448,6 +9473,8 @@
               "",
               "Wireless internet settings, including WiFi, Cellular, etc.",
               "Setting to enable/disable cellular data connection being used on the device. https://screenshot.googleplex.com/jMSRtW3Aq4o",
+              "",
+              "",
               "",
               "",
               "",
@@ -11363,7 +11390,7 @@
       "type": "object"
     },
     "AssistantApiDeviceCapabilities": {
-      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 32",
+      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 34",
       "id": "AssistantApiDeviceCapabilities",
       "properties": {
         "androidIntentCapabilities": {
@@ -11385,6 +11412,27 @@
         "camera": {
           "$ref": "AssistantApiCameraCapabilities",
           "description": "These capabilities are scoped to the camera abilities of this device."
+        },
+        "carUxRestrictions": {
+          "description": "UX restrictions for Auto.",
+          "items": {
+            "enum": [
+              "UX_RESTRICTIONS_UNSPECIFIED",
+              "UX_RESTRICTIONS_BASELINE",
+              "UX_RESTRICTIONS_FULLY_RESTRICTED",
+              "UX_RESTRICTIONS_NO_KEYBOARD",
+              "UX_RESTRICTIONS_NO_VIDEO"
+            ],
+            "enumDescriptions": [
+              "This value should not be used.",
+              "No specific restrictions in place, but baseline distraction optimization guidelines need to be adhered to when CarUxRestrictions.isRequiresDistractionOptimization() returns true.",
+              "All restrictions are in effect.",
+              "No text entry for the purpose of searching or other manual text string entry activities.",
+              "No video - no animated frames > 1fps."
+            ],
+            "type": "string"
+          },
+          "type": "array"
         },
         "cast": {
           "$ref": "AssistantApiCastCapabilities",
@@ -11460,6 +11508,20 @@
         "outputRestrictions": {
           "$ref": "AssistantApiOutputRestrictions",
           "description": "These are user configured restrictions indicating what the device is allowed to output from the privacy point of view."
+        },
+        "popOnLockscreenCapability": {
+          "description": "Capability to support Pop on lockscreen. TODO(b/230626444) this is for short term workaround for TNG MA DF. Should be deprecated when long term solution is available. go/pop-on-lockscreen-for-tng-ma.",
+          "enum": [
+            "POP_ON_LOCKSCREEN_DEFAULT",
+            "POP_ON_LOCKSCREEN_ENABLED",
+            "POP_ON_LOCKSCREEN_DISABLED"
+          ],
+          "enumDescriptions": [
+            "Pop will default to enabled on lockscreen.",
+            "Pop is enabled on lockscreen.",
+            "Pop is disabled on lockscreen."
+          ],
+          "type": "string"
         },
         "safetyRestrictions": {
           "description": "Indicates if the client has safety related restriction.",
@@ -15896,6 +15958,11 @@
       },
       "type": "object"
     },
+    "AssistantDevicesPlatformProtoDeviceTakePhotoCapability": {
+      "id": "AssistantDevicesPlatformProtoDeviceTakePhotoCapability",
+      "properties": {},
+      "type": "object"
+    },
     "AssistantDevicesPlatformProtoExecutionConfig": {
       "description": "Specifies the routing capabilities of the Intent. It will apply only when the Intent is triggered. Next ID: 8",
       "id": "AssistantDevicesPlatformProtoExecutionConfig",
@@ -16236,6 +16303,10 @@
           "$ref": "AssistantDevicesPlatformProtoDeviceModifySettingCapability",
           "description": "|device_modify_setting| specifies the support for device.MODIFY_SETTING client_op, and the corresponding device_modify_setting field in assistant.embedded.v1.DeviceOp."
         },
+        "deviceTakePhoto": {
+          "$ref": "AssistantDevicesPlatformProtoDeviceTakePhotoCapability",
+          "description": "[device_take_photo] specifies the support for the device.TAKE_PHOTO clientop, and the corresponding device_take_photo field in assistant.embedded.v1.DeviceOp."
+        },
         "mediaNext": {
           "$ref": "AssistantDevicesPlatformProtoMediaNextCapability"
         },
@@ -16328,6 +16399,171 @@
             "Deep NLU, the cloud request specifies a structured description of the media the user wants to act upon. E.g.: for query \"Play an action movie with Tom Cruise\", the structured description would be: \"parsedMediaDescription\": { \"mediaType\": \"MOVIE\", \"genre\": { \"name\": \"action\", \"externalId\": { \"tmsId\": \"tmsIdForActionGenre\" }, }, \"actor\": { \"name\": \"Tom Cruise\", \"externalId\": { \"tmsId\": \"tmsRootIdForTomCruise\", }, }, },"
           ],
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantGroundingRankerContactGroundingProviderFeatures": {
+      "description": "Features to be passed from Contact GP to HGR. Next ID: 13",
+      "id": "AssistantGroundingRankerContactGroundingProviderFeatures",
+      "properties": {
+        "conceptId": {
+          "description": "Concept id for relationships in English, e.g. \"Mother\" for all non-English locales. It's only populated for source = RELATIONSHIP.",
+          "type": "string"
+        },
+        "contactSource": {
+          "enum": [
+            "FOCUS_CONTACT",
+            "DEVICE_CONTACT",
+            "GMAIL_INFERENCE",
+            "S3_DECORATOR",
+            "RELATIONSHIP",
+            "VANITY",
+            "SIGNED_OUT_DEVICE",
+            "SHARED_CONTACT",
+            "FAMILY_MEMBER",
+            "SHARED_DEVICE_USER",
+            "ON_DEVICE_CONTACT_LOOKUP"
+          ],
+          "enumDescriptions": [
+            "Contacts from Focus",
+            "Contacts from device, see go/device-content",
+            "Contacts inferred from Gmail",
+            "Contacts from S3 decorator",
+            "Whitelisted relationships no matter if user has such contact, see go/sls-personal_relationship_names_and_aliases.",
+            "Vanity nicknames or user's own profile name.",
+            "Signed out device contact names",
+            "Contacts shared from other users. See go/multi-user-shared-contact.",
+            "People in the user's family group in http://families.google.com who are not contacts.",
+            "People who share a device with the user who are not contacts.",
+            "Contacts from on device lookup during contact fulfillment."
+          ],
+          "type": "string"
+        },
+        "isRelationshipFromAnnotation": {
+          "description": "Whether the query is a relationship query based on the annotation source.",
+          "type": "boolean"
+        },
+        "isRelationshipFromSource": {
+          "description": "Whether the contact has relationship in the contact metadata.",
+          "type": "boolean"
+        },
+        "isSingleCandidate": {
+          "description": "Whether only populates a single candidate.",
+          "type": "boolean"
+        },
+        "isStarred": {
+          "description": "Whether the contact is starred contact.",
+          "type": "boolean"
+        },
+        "matchedNameType": {
+          "enum": [
+            "UNSPECIFIED",
+            "GIVEN_NAME",
+            "FAMILY_NAME",
+            "FULL_NAME",
+            "NICKNAME",
+            "OTHER",
+            "INITIAL_WITH_FAMILY_NAME",
+            "EMAIL_USERNAME",
+            "VANITY_NICKNAME",
+            "GIVEN_NAME_ALIAS",
+            "FULL_NAME_ALIAS",
+            "HOMOPHONE_GIVEN_NAME",
+            "HOMOPHONE_FAMILY_NAME",
+            "HOMOPHONE_FULL_NAME",
+            "HOMOPHONE_NICKNAME",
+            "GIVEN_MIDDLE_NAME",
+            "GIVEN_NAME_WITH_FAMILY_NAME_INITIAL",
+            "EMAIL_OF_FAMILY_MEMBER"
+          ],
+          "enumDescriptions": [
+            "",
+            "Contact's given name, or first word in name, or last word if query is in CJK.",
+            "Contact's family name, or last word in name, or first word if query is in CJK.",
+            "Contact's display name, or given+family, or family+given if query is in CJK. Contact's middle name is optional.",
+            "Query span matches contact's nickname.",
+            "Not used yet.",
+            "Either or both of first/middle initials along with family name.",
+            "Email username, controlled by FocusNameParams.annotate_email_username.",
+            "Vanity nicknames like \"myself\", data is at //quality/qrewrite/servlets/internal/focus_name/data/vanity_nickname.txt",
+            "Contact's given name is a common name alias of query span, e.g. query [Bob] may match contact with given name \"Robert\".",
+            "Contact's given name is a common name alias of first word in query span, while remaining parts fully matched.",
+            "Homophone name match of given name, or last word. Only for CJK query.",
+            "Homophone name match of family name, or first word. Only for CJK query.",
+            "Homophone name match of full name, or family+given. Only for CJK query.",
+            "Homophone name match of nickname. Only for CJK query.",
+            "Contact's given name + middle name. Only for contacts with 3 words.",
+            "Contact's given name along with last name initial. Only support non-CJKT contact name.",
+            "This type indicates we find a match of the user's family member - as defined by families.google.com - by matching the email full address. Controlled by FocusNameParams.annotate_email_full_address."
+          ],
+          "type": "string"
+        },
+        "numAlternateNameFromFuzzyContactMatch": {
+          "description": "Number of alternate contact names from fuzzy contact match.",
+          "format": "float",
+          "type": "number"
+        },
+        "numAlternateNamesFromS3": {
+          "description": "Number of alternate contact names from S3_HYPOTHESES.",
+          "format": "float",
+          "type": "number"
+        },
+        "numAlternativeNamesFromInterpretation": {
+          "description": "Number of alternate contact names from interpretation.",
+          "format": "float",
+          "type": "number"
+        },
+        "numCandidates": {
+          "description": "Number of contacts populated by the contact Grounding Provider.",
+          "format": "float",
+          "type": "number"
+        },
+        "recognitionAlternateSource": {
+          "enum": [
+            "NONE",
+            "S3_HYPOTHESES",
+            "GENIE_QUERY_ALTERNATIVES",
+            "NAME_CORRECTION_LOG",
+            "FUZZY_CONTACT_MATCH",
+            "NEURAL_CONTACT_MATCH",
+            "NEURAL_CONTACT_MATCH_DARK_LAUNCH"
+          ],
+          "enumDescriptions": [
+            "",
+            "Alternate name from S3 recognition topN hypothesis.",
+            "Alternate name from Genie query alternatives.",
+            "Alternate name from contact correction history.",
+            "Fuzzy match with user's contacts.",
+            "Neural match. See go/phonetic-contact-match.",
+            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantGroundingRankerGroundingProviderFeatures": {
+      "description": "Next ID: 3",
+      "id": "AssistantGroundingRankerGroundingProviderFeatures",
+      "properties": {
+        "contactGroundingProviderFeatures": {
+          "$ref": "AssistantGroundingRankerContactGroundingProviderFeatures"
+        },
+        "mediaGroundingProviderFeatures": {
+          "$ref": "AssistantGroundingRankerMediaGroundingProviderFeatures"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantGroundingRankerMediaGroundingProviderFeatures": {
+      "description": "Features to be passed from Media GP to HGR. Next ID: 2",
+      "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
+      "properties": {
+        "mscRate": {
+          "description": "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac",
+          "format": "float",
+          "type": "number"
         }
       },
       "type": "object"
@@ -16850,6 +17086,10 @@
         "deviceId": {
           "description": "The identification of the device. DeviceId (go/as-device-id) has multiple fields. To consloidate it to a single to make dremel easier, we use the string obtained by calling go/get-device-id.",
           "type": "string"
+        },
+        "deviceIdLog": {
+          "$ref": "AssistantLogsSettingsDeviceIdLog",
+          "description": "The identification of the device. The logging version of the full DeviceId."
         },
         "deviceIndex": {
           "description": "We index linked devices and log these index to avoid logging device_id. device_index should always be a positive number or -1. -1 means this device is not in homegraph.",
@@ -17971,6 +18211,37 @@
       },
       "type": "object"
     },
+    "AssistantLogsSettingsDeviceIdLog": {
+      "description": "The logging-version of DeviceId proto, which identifies a device. This mirrors cs/google3/assistant/api/core_types/device_type.proto?q=symbol:DeviceId Next ID: 6",
+      "id": "AssistantLogsSettingsDeviceIdLog",
+      "properties": {
+        "agsaClientInstanceId": {
+          "description": "The client_instance_id on devices with GSA. See 'client_instance_field' in go/androidids.",
+          "type": "string"
+        },
+        "canonicalDeviceId": {
+          "description": "A unique device ID for Assistant devices as proposed by go/ocelot-team.",
+          "type": "string"
+        },
+        "castDeviceId": {
+          "description": "If set, indicates that the device is a cast device, and contains the UUID of the cast device. Corresponds to the device_id field of the CastDevice proto.",
+          "type": "string"
+        },
+        "clientInstanceId": {
+          "description": "DUSI (go/dusi) is used as the identifier here. This identifier is unique to the user and device. This will help identify which device or application the user's request originated from. This is not to be confused with the client_instance_id that android devices provide. This is currently used by surfaces that use the assistant-legacy-nexus and assistant-legacy-clockwork pipelines. DUSI is created and set in S3. This field is only filled for GAIA requests.",
+          "type": "string"
+        },
+        "homeGraphDeviceId": {
+          "description": "The unique device ID for HomeGraph devices. This is the HomeGraph ID, created when the device is registered into HomeGraph. It is immutable for the same device unless it is completely deleted and recreated. See go/home-graph for details. }",
+          "type": "string"
+        },
+        "libassistantDeviceId": {
+          "description": "The unique ID for libassistant based devices.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AssistantLogsStructureAnnotationLog": {
       "description": "Structure annotation mentioned in query.",
       "id": "AssistantLogsStructureAnnotationLog",
@@ -18026,17 +18297,17 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 25",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 30",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
+        "bindingSetAuis": {
+          "description": "Assistant User Interaction Score for binding set.",
+          "format": "float",
+          "type": "number"
+        },
         "calibratedParsingScore": {
           "description": "A parsing score that is independently calibrated by each parser/IG.",
           "format": "double",
-          "type": "number"
-        },
-        "calibratedParsingScoreFloat": {
-          "description": "Same semantics as 'calibrated_parsing_score' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
           "type": "number"
         },
         "dominant": {
@@ -18052,6 +18323,10 @@
           "description": "Grounding Signals. Score indicating how grounded the intent is, populated by the Grounding Box.",
           "format": "double",
           "type": "number"
+        },
+        "groundingProviderFeatures": {
+          "$ref": "AssistantGroundingRankerGroundingProviderFeatures",
+          "description": "Grounding Provider related ranking features, including general Grounding Provider ranking features(shared among multiple GPs) and specific Grounding Provider ranking features(provided by a specific GP)."
         },
         "inQueryMaxEffectiveArgSpanLength": {
           "description": "This is a cross-intent feature which is calculated by iterating all intent candidates. This feature should be populated in post-IG stage (before GB).",
@@ -18076,14 +18351,14 @@
           "description": "This feature is always false / no-op in serving time. In training time, this feature may be set true on specific examples for weighted training where when this signal is true, only cross-intent level features are used for training and other candidate level features are masked (set as missing).",
           "type": "boolean"
         },
+        "numAlternativeHypothesis": {
+          "description": "Number of alternative hypotheses from speech recognition(S3).",
+          "format": "float",
+          "type": "number"
+        },
         "numConstraints": {
           "description": "Sum of the number of constraints used by the Grounding Box to ground each variable.",
           "format": "double",
-          "type": "number"
-        },
-        "numConstraintsFloat": {
-          "description": "Same semantics as 'num_constraints' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
           "type": "number"
         },
         "numConstraintsSatisfied": {
@@ -18091,19 +18366,9 @@
           "format": "double",
           "type": "number"
         },
-        "numConstraintsSatisfiedFloat": {
-          "description": "Same semantics as 'num_constraints_satisfied' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
-          "type": "number"
-        },
         "numGroundableArgs": {
           "description": "Number of groundable arguments the intent has, populated by the Grounding Box.",
           "format": "double",
-          "type": "number"
-        },
-        "numGroundableArgsFloat": {
-          "description": "Same semantics as 'num_groundable_args' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
           "type": "number"
         },
         "numGroundedArgs": {
@@ -18111,29 +18376,14 @@
           "format": "double",
           "type": "number"
         },
-        "numGroundedArgsFloat": {
-          "description": "Same semantics as 'num_grounded_args' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
-          "type": "number"
-        },
         "numVariables": {
           "description": "Signals as proposed in go/improved-grounding-signals. Number of arguments, possibly nested, that the Grounding Box tried to ground.",
           "format": "double",
           "type": "number"
         },
-        "numVariablesFloat": {
-          "description": "Same semantics as 'num_variables' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
-          "type": "number"
-        },
         "numVariablesGrounded": {
           "description": "Number of arguments, possibly nested, that the Grounding Box was able to ground. This includes ambiguously grounded arguments.",
           "format": "double",
-          "type": "number"
-        },
-        "numVariablesGroundedFloat": {
-          "description": "Same semantics as 'num_variables_grounded' but in float form. Some RL models (such as decision tree) doesn't consume double input well.",
-          "format": "float",
           "type": "number"
         },
         "pq2tVsAssistantIbstCosine": {
@@ -18144,6 +18394,16 @@
         "pq2tVsIbstCosine": {
           "description": "Cosine similarity between predicted query-to-term model and intent-type-based salient terms. This is intended to be used as a backoff to pq2t_vs_qibst_cosine if it is missing.",
           "format": "double",
+          "type": "number"
+        },
+        "topHypothesisConfidence": {
+          "description": "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256",
+          "format": "float",
+          "type": "number"
+        },
+        "verticalConfidenceScore": {
+          "description": "Horizontal feature that stores information about confidence scores for each resolution within the binding set.",
+          "format": "float",
           "type": "number"
         }
       },
@@ -19880,7 +20140,7 @@
       "type": "object"
     },
     "CompositeDoc": {
-      "description": "Protocol record used for collecting together all information about a document. Please consult go/dme for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 190",
+      "description": "Protocol record used for collecting together all information about a document. Please consult go/dme for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 191",
       "id": "CompositeDoc",
       "properties": {
         "ContentChecksum96": {
@@ -19949,7 +20209,7 @@
         },
         "docinfoPassthroughAttachments": {
           "$ref": "Proto2BridgeMessageSet",
-          "description": "This messageset is used for data pushed into the index using the signals framework that is never to be used in Mustang or TG Continuum scoring/snippeting code. Any protocol buffer stored in this messageset is automatically returned in a docinfo response - it ends up in the \"info\" messageset in the WWWSnippetResponse, so it can be used in post-doc twiddlers and for display in GWS with no code changes in Mustang or Teragoogle."
+          "description": "This message set is used for data pushed into the index using the signals framework that is never to be used in Mustang or TG Continuum scoring/snippeting code. Any protocol buffer stored in this message set is automatically returned in a docinfo response - it ends up in the \"info\" message set in the WWWSnippetResponse, so it can be used in post-doc twiddlers and for display in GWS with no code changes in Mustang or Teragoogle."
         },
         "embeddedContentInfo": {
           "$ref": "IndexingEmbeddedContentEmbeddedContentInfo",
@@ -19973,6 +20233,11 @@
           },
           "type": "array"
         },
+        "indexingIntermediate": {
+          "description": "Serialized indexing intermediate data.",
+          "format": "byte",
+          "type": "string"
+        },
         "indexinginfo": {
           "$ref": "CompositeDocIndexingInfo"
         },
@@ -19995,9 +20260,6 @@
         },
         "localizedvariations": {
           "$ref": "CompositeDocLocalizedVariations"
-        },
-        "manyboxData": {
-          "$ref": "ManyboxData"
         },
         "partialUpdateInfo": {
           "$ref": "CompositeDocPartialUpdateInfo",
@@ -22406,7 +22668,7 @@
             "e.g. suite, room, hallway, cubicle.",
             "A terminal point represents a good location for a user to meet a taxi, ridesharing vehicle, or general driver.",
             "An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone. Features of this type should have one or more gcids corresponding to their specific regulation.",
-            "RESERVED",
+            "A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.",
             "DEPRECATED",
             "A feature of completely unknown type. This should only be used when absolutely necessary. One example in which this type is useful is in the Chinese importer, which must heuristically segment addresses into components - it often does not know what types to make those components. Please note that the Oyster address formatter does not currently support address components of TYPE_UNKNOWN well."
           ],
@@ -27292,6 +27554,8 @@
             "PROVIDER_GOOGLE_SA_QUALITY",
             "PROVIDER_GOOGLE_GDCE_CLEANUP",
             "PROVIDER_GOOGLE_UGC_QUALITY_CHAINS",
+            "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
+            "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -27825,7 +28089,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AA",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AC",
             "ABSTRACT",
             "",
             "",
@@ -27989,6 +28253,8 @@
             "",
             "",
             "",
+            "",
+            "Shopping Attributes Discovery",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -29795,6 +30061,10 @@
           "format": "byte",
           "type": "string"
         },
+        "featureReplacementInfo": {
+          "$ref": "GeostoreFeatureReplacementInfoProto",
+          "description": "Metadata for tracking when a feature is derived from or replaced by another feature or set of features."
+        },
         "fieldMetadata": {
           "$ref": "GeostoreFeatureFieldMetadataProto",
           "description": "Metadata about certain repeated fields and their subfields, for which field type is not granular enough."
@@ -29820,12 +30090,12 @@
       "id": "GeostoreFeaturePropertyIdProto",
       "properties": {
         "attachmentTypeId": {
-          "description": "field_type == ATTACHMENT",
+          "description": "Required when field_type == ATTACHMENT.",
           "format": "uint64",
           "type": "string"
         },
         "attributeId": {
-          "description": "field_type == FEATURE_ATTRIBUTE",
+          "description": "Required when field_type == FEATURE_ATTRIBUTE.",
           "type": "string"
         },
         "fieldType": {
@@ -30238,7 +30508,11 @@
           "type": "string"
         },
         "kgPropertyId": {
-          "description": "field_type == KNOWLEDGE_GRAPH_PROPERTY",
+          "description": "Required when field_type == KNOWLEDGE_GRAPH_PROPERTY.",
+          "type": "string"
+        },
+        "nameLanguage": {
+          "description": "RESERVED",
           "type": "string"
         }
       },
@@ -30413,8 +30687,7 @@
           "$ref": "GeostoreLocaleProto"
         },
         "logicalBorder": {
-          "$ref": "GeostoreLogicalBorderProto",
-          "description": "RESERVED"
+          "$ref": "GeostoreLogicalBorderProto"
         },
         "metadata": {
           "$ref": "GeostoreFeatureMetadataProto",
@@ -31367,7 +31640,7 @@
             "e.g. suite, room, hallway, cubicle.",
             "A terminal point represents a good location for a user to meet a taxi, ridesharing vehicle, or general driver.",
             "An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone. Features of this type should have one or more gcids corresponding to their specific regulation.",
-            "RESERVED",
+            "A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.",
             "DEPRECATED",
             "A feature of completely unknown type. This should only be used when absolutely necessary. One example in which this type is useful is in the Chinese importer, which must heuristically segment addresses into components - it often does not know what types to make those components. Please note that the Oyster address formatter does not currently support address components of TYPE_UNKNOWN well."
           ],
@@ -31385,6 +31658,27 @@
           "description": "The official website of this feature. Stored as a repeated field to allow for multilingual official websites (see comments in url.proto).",
           "items": {
             "$ref": "GeostoreUrlProto"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreFeatureReplacementInfoProto": {
+      "description": "Metadata to track feature derivations and replacements. This is used to track feature provenance (particularly for road segments).",
+      "id": "GeostoreFeatureReplacementInfoProto",
+      "properties": {
+        "derivedFrom": {
+          "description": "This feature was created to replace other features that are referenced by this field.",
+          "items": {
+            "$ref": "GeostoreFeatureIdProto"
+          },
+          "type": "array"
+        },
+        "replacedBy": {
+          "description": "This feature was replaced by other features that are referenced by this this field.",
+          "items": {
+            "$ref": "GeostoreFeatureIdProto"
           },
           "type": "array"
         }
@@ -32052,6 +32346,8 @@
             "PROVIDER_GOOGLE_SA_QUALITY",
             "PROVIDER_GOOGLE_GDCE_CLEANUP",
             "PROVIDER_GOOGLE_UGC_QUALITY_CHAINS",
+            "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
+            "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -32585,7 +32881,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AA",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AC",
             "ABSTRACT",
             "",
             "",
@@ -32749,6 +33045,8 @@
             "",
             "",
             "",
+            "",
+            "Shopping Attributes Discovery",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -34175,6 +34473,8 @@
             "PROVIDER_GOOGLE_SA_QUALITY",
             "PROVIDER_GOOGLE_GDCE_CLEANUP",
             "PROVIDER_GOOGLE_UGC_QUALITY_CHAINS",
+            "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
+            "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -34708,7 +35008,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AA",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AC",
             "ABSTRACT",
             "",
             "",
@@ -34872,6 +35172,8 @@
             "",
             "",
             "",
+            "",
+            "Shopping Attributes Discovery",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -36599,6 +36901,8 @@
             "PROVIDER_GOOGLE_SA_QUALITY",
             "PROVIDER_GOOGLE_GDCE_CLEANUP",
             "PROVIDER_GOOGLE_UGC_QUALITY_CHAINS",
+            "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
+            "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -37132,7 +37436,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AA",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AC",
             "ABSTRACT",
             "",
             "",
@@ -37296,6 +37600,8 @@
             "",
             "",
             "",
+            "",
+            "Shopping Attributes Discovery",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -38263,7 +38569,7 @@
             "The feature that represents the level/floor the feature exists on. Allowed source types: - TYPE_CARTOGRAPHIC (at most 1 such relation) - TYPE_COMPOUND_SECTION (at most 1 such relation) - TYPE_ENTRANCE (at most 1 such relation) - TYPE_ESTABLISHMENT_POI - TYPE_INTERSECTION (at most 1 such relation) - TYPE_SEGMENT (at most 2 such relations) - TYPE_TERMINAL_POINT (at most 1 such relations) Allowed destination types: - TYPE_LEVEL strong reference",
             "This feature physically occupies the other feature. Allowed source types: - TYPE_ESTABLISHMENT_POI Allowed destination types: - TYPE_COMPOUND Consumers should use the geometry of the target feature instead of the geometry of this feature. strong reference",
             "ABSTRACT",
-            "e.g. \u201cespn zone\" moved from time square to Boston. The feature representing the business at the old location will refer to the one representing the business at the new location with this relation type. If a feature has this relation, its existence should show that the feature has closed and the close reason should be set to MOVED. Allowed source types: - TYPE_ESTABLISHMENT_POI Allowed destination types: - TYPE_ESTABLISHMENT_POI",
+            "e.g. \u201cespn zone\" moved from Times Square to Boston. The feature representing the business at the old location, or with the old service area, will refer to the one representing the business at the new location, or with the new service area, with this relation type. If a feature has this relation, its existence should show that the feature has closed and the close reason should be set to MOVED. Allowed source types: - TYPE_ESTABLISHMENT Allowed destination types: - TYPE_ESTABLISHMENT",
             "e.g. \"Holiday Inn\" rebranded to \"Double Tree\". The feature representing \"Holiday Inn\" will refer to the feature representing \"Double Tree\" with this relation type. If a feature has this relation, its existence should show that the feature has closed and the close reason should be set to REBRANDED. Allowed source types: - TYPE_ESTABLISHMENT Allowed destination types: - TYPE_ESTABLISHMENT",
             "Used by specific chain stores/franchises to refer to their parent chain. e.g. an individual Walmart store is a member of the \"Walmart\" chain. Transit stations can be members of multiple chains (transit agencies). All other establishments can have at most one explicit RELATION_MEMBER_OF_CHAIN relation. Subtypes may have different requirements. TYPE_TRANSIT_AGENCY is a temporarily allowed destination type while we migrate transit stations <-> transit agencies to a new representation (b/197741661) Allowed source types: - TYPE_ESTABLISHMENT Allowed destination types: - TYPE_BUSINESS_CHAIN - TYPE_TRANSIT_AGENCY strong reference",
             "Indicates that a feature sells merchandise for a given brand chain (e.g. Honda vehicles). Source currently restricted to features with gcid:car_dealer. strong reference",
@@ -39629,7 +39935,7 @@
           "type": "array"
         },
         "contactCategory": {
-          "description": "RESERVED",
+          "description": "Disambiguates between the types of information or service a caller might seek when contacting this phone number.",
           "enum": [
             "CONTACT_CATEGORY_UNSPECIFIED",
             "CUSTOMER_SERVICE",
@@ -39689,7 +39995,7 @@
           "description": "An internationalized representation of a phone number. See //java/com/google/i18n/phonenumbers/phonenumber.proto"
         },
         "serviceLocationFeature": {
-          "description": "RESERVED",
+          "description": "The features from which this phone number can be called from. For instance, if a phone number can only be called from Europe, this field will contain a reference to the TYPE_CONTINENT feature of Europe. This field is analogous to http://kg/schema/common/phone_number/service_location. The only valid destination feature types are TYPE_CONTINENT and TYPE_POLITICAL. If empty, this phone number can be called from anywhere in Earth (this is the case for the majority of phones).",
           "items": {
             "$ref": "GeostoreFeatureIdProto"
           },
@@ -42871,7 +43177,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1Document": {
-      "description": "Defines the structure for content warehouse document proto. Next ID: 20",
+      "description": "Defines the structure for content warehouse document proto.",
       "id": "GoogleCloudContentwarehouseV1Document",
       "properties": {
         "asyncEnabled": {
@@ -43027,7 +43333,6 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1DocumentQuery": {
-      "description": "NEXT_ID: 13",
       "id": "GoogleCloudContentwarehouseV1DocumentQuery",
       "properties": {
         "customPropertyFilter": {
@@ -43289,7 +43594,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1GetDocumentRequest": {
-      "description": "Request message for DocumentService.GetDocument. Next ID: 4",
+      "description": "Request message for DocumentService.GetDocument.",
       "id": "GoogleCloudContentwarehouseV1GetDocumentRequest",
       "properties": {
         "requestMetadata": {
@@ -43689,7 +43994,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1PropertyDefinition": {
-      "description": "Defines the metadata for a schema property. Next ID: 18",
+      "description": "Defines the metadata for a schema property.",
       "id": "GoogleCloudContentwarehouseV1PropertyDefinition",
       "properties": {
         "dateTimeTypeOptions": {
@@ -43980,7 +44285,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1RuleSet": {
-      "description": "Represents a set of rules from a single customer. Next id: 9",
+      "description": "Represents a set of rules from a single customer.",
       "id": "GoogleCloudContentwarehouseV1RuleSet",
       "properties": {
         "description": {
@@ -44006,6 +44311,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1SearchDocumentsRequest": {
+      "description": "Request message for DocumentService.SearchDocuments.",
       "id": "GoogleCloudContentwarehouseV1SearchDocumentsRequest",
       "properties": {
         "documentQuery": {
@@ -44047,7 +44353,7 @@
           "description": "The meta information collected about the end user, used to enforce access control and improve the search quality of the service."
         },
         "requireTotalSize": {
-          "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Defaults to false.",
+          "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false.",
           "type": "boolean"
         }
       },
@@ -44080,7 +44386,7 @@
           "type": "string"
         },
         "totalSize": {
-          "description": "The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true`. Otherwise, the value will be `-1`.",
+          "description": "The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true`. Otherwise, the value will be `-1`. `total_size` will max at \"100,000\". If this is returned, then it can be assumed that the count is equal to or greater than 100,000. Typically a UI would handle this condition by displaying \"of many\", for example: \"Displaying 10 of many\".",
           "format": "int32",
           "type": "integer"
         }
@@ -44726,6 +45032,10 @@
           "$ref": "GoogleCloudDocumentaiV1DocumentPageImage",
           "description": "Rendered image for this page. This image is preprocessed to remove any skew, rotation, and distortions such that the annotation bounding boxes can be upright and axis-aligned."
         },
+        "imageQualityScores": {
+          "$ref": "GoogleCloudDocumentaiV1DocumentPageImageQualityScores",
+          "description": "Image Quality Scores."
+        },
         "layout": {
           "$ref": "GoogleCloudDocumentaiV1DocumentPageLayout",
           "description": "Layout for the page."
@@ -44999,6 +45309,41 @@
       },
       "type": "object"
     },
+    "GoogleCloudDocumentaiV1DocumentPageImageQualityScores": {
+      "description": "Image Quality Scores for the page image",
+      "id": "GoogleCloudDocumentaiV1DocumentPageImageQualityScores",
+      "properties": {
+        "detectedDefects": {
+          "description": "A list of detected defects.",
+          "items": {
+            "$ref": "GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect"
+          },
+          "type": "array"
+        },
+        "qualityScore": {
+          "description": "The overall quality score. Range [0, 1] where 1 is perfect quality.",
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect": {
+      "description": "Image Quality Defects",
+      "id": "GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect",
+      "properties": {
+        "confidence": {
+          "description": "Confidence of detected defect. Range [0, 1] where 1 indicates strong confidence of that the defect exists.",
+          "format": "float",
+          "type": "number"
+        },
+        "type": {
+          "description": "Name of the defect type. Supported values are \"quality/defect_blurry\", \"quality/defect_noisy\", \"quality/defect_dark\", \"quality/defect_faint\", \"quality/defect_text_too_small\", \"quality/defect_document_cutoff\", \"quality/defect_text_cutoff\", \"quality/defect_glare\"",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudDocumentaiV1DocumentPageLayout": {
       "description": "Visual element describing a layout unit on a page.",
       "id": "GoogleCloudDocumentaiV1DocumentPageLayout",
@@ -45154,6 +45499,10 @@
         "layout": {
           "$ref": "GoogleCloudDocumentaiV1DocumentPageLayout",
           "description": "Layout for Table."
+        },
+        "provenance": {
+          "$ref": "GoogleCloudDocumentaiV1DocumentProvenance",
+          "description": "The history of this table."
         }
       },
       "type": "object"
@@ -45732,6 +46081,15 @@
       "description": "The status indicating the user should not be disturbed.",
       "id": "GoogleInternalAppsWaldoV1alphaDoNotDisturb",
       "properties": {
+        "committedUntil": {
+          "description": "The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "committedUntilIsMixed": {
+          "description": "Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
+          "type": "boolean"
+        },
         "nextAvailable": {
           "description": "The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.",
           "format": "google-datetime",
@@ -45755,6 +46113,15 @@
       "description": "The status indicating the user is in a meeting.",
       "id": "GoogleInternalAppsWaldoV1alphaInMeeting",
       "properties": {
+        "committedUntil": {
+          "description": "The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "committedUntilIsMixed": {
+          "description": "Whether the status of the user until committed_until has more than one status type (e.g. InMeeting + DoNotDisturb).",
+          "type": "boolean"
+        },
         "eventSummary": {
           "description": "The summary of the corresponding event in Calendar.",
           "type": "string"
@@ -45770,7 +46137,7 @@
           "type": "string"
         },
         "occupiedUntil": {
-          "description": "The time when the user will stop being occupied, i.e., when their status will be neither inMeeting, Busy nor DoNotDisturb.",
+          "description": "The time when the user will stop being occupied, i.e., when their status will be neither InMeeting, Busy nor DoNotDisturb.",
           "format": "google-datetime",
           "type": "string"
         }
@@ -45780,7 +46147,17 @@
     "GoogleInternalAppsWaldoV1alphaInactive": {
       "description": "The status indicating that no other status applies.",
       "id": "GoogleInternalAppsWaldoV1alphaInactive",
-      "properties": {},
+      "properties": {
+        "nextCommitmentStatus": {
+          "$ref": "GoogleInternalAppsWaldoV1alphaUserStatus",
+          "description": "The status type of the next change which is considered a commitment. The status will be an empty instance of the corresponding type, no additional data will be provided."
+        },
+        "nextCommitmentTime": {
+          "description": "The time when the user will start having a status of InMeeting, DoNotDisturb or short OutOfOffice.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "GoogleInternalAppsWaldoV1alphaLocalTimeContext": {
@@ -48906,9 +49283,11 @@
             "STARBURST_V3",
             "STARBURST_V4",
             "STARBURST_VISUAL_V4",
-            "STARBURST_V5"
+            "STARBURST_V5",
+            "STARBURST_V5_5"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -48929,7 +49308,8 @@
             "V4_ORIGINAL",
             "V4_STRETCH_RESIZE",
             "VISUAL_V4_ORIGINAL",
-            "V5_ORIGINAL"
+            "V5_ORIGINAL",
+            "V5_5_ORIGINAL"
           ],
           "enumDescriptions": [
             "",
@@ -48940,7 +49320,8 @@
             "Minor versions for Starburst V4.",
             "V4 with stretch resize, instead of cropping. See b/154565902.",
             "Minor versions for Starburst Visual V4.",
-            "Minor version for Starburst V5."
+            "Minor version for Starburst V5.",
+            "Minor version for Starburst V5.5."
           ],
           "type": "string"
         },
@@ -51893,11 +52274,6 @@
           "format": "float",
           "type": "number"
         },
-        "offensiveScore": {
-          "description": "The score produced by the sensitive_seti model.",
-          "format": "float",
-          "type": "number"
-        },
         "pornScore": {
           "description": "Image OCR racyness/pornyness, computed by porn query classifier.",
           "format": "float",
@@ -53603,6 +53979,9 @@
       "id": "IndexingDocjoinerDataVersion",
       "properties": {
         "acceleratedShoppingSignal": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "chromeCounts": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo",
           "description": "LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/websearch_main.sdl)"
         },
@@ -58453,7 +58832,11 @@
             "RECIPE",
             "PERSON",
             "COMM_ENDPOINT",
-            "NEWS"
+            "NEWS",
+            "MEDIA",
+            "CONCEPT",
+            "RELATION",
+            "ATTENTIONAL_ENTITY"
           ],
           "enumDescriptions": [
             "",
@@ -58472,6 +58855,10 @@
             "",
             "",
             "Comms specific id types. go/call-object-iff",
+            "",
+            "",
+            "Media specific id types. go/media-gb-data",
+            "Concept and relation identifiers (go/discovered-not-designed)",
             "",
             ""
           ],
@@ -62313,24 +62700,6 @@
       },
       "type": "object"
     },
-    "ManyboxData": {
-      "description": "Manybox container message",
-      "id": "ManyboxData",
-      "properties": {
-        "components": {
-          "$ref": "Proto2BridgeMessageSet"
-        },
-        "dataSummary": {
-          "description": "a bit vector of the available manybox data types",
-          "format": "int32",
-          "type": "integer"
-        },
-        "debug": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "MapsQualitySpecialWordsFlags": {
       "description": "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 20 --",
       "id": "MapsQualitySpecialWordsFlags",
@@ -63157,7 +63526,7 @@
       "type": "object"
     },
     "NewsReconServiceLrsQ2lrs2EntryPayload": {
-      "description": "Next ID: 6",
+      "description": "Next ID: 7",
       "id": "NewsReconServiceLrsQ2lrs2EntryPayload",
       "properties": {
         "isDailyMoment": {
@@ -63169,6 +63538,14 @@
         },
         "isPlannedMoment": {
           "type": "boolean"
+        },
+        "lrsTypes": {
+          "description": "This is meant to hold `LongRunningStory.Type`s only, unfortunately adding an import here causes a circular dependency.",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
         },
         "momentRankingScore": {
           "format": "int64",
@@ -65848,7 +66225,7 @@
       "type": "object"
     },
     "NlpSemanticParsingDatetimeAbsoluteDateTime": {
-      "description": "AbsoluteDateTime represents the resolved date/time expressions that need no further calculation. It has a section for date and a section for time. The date section will always be filled; if the time section is filled, hour is always filled; for (minute, second, partial_second), they are optional with a zero default value. But if partial_second is filled, (minute, second) must be filled, even they are 0s; if second is filled, minute must be filled. Next field#: 21.",
+      "description": "AbsoluteDateTime represents the resolved date/time expressions that need no further calculation. It has a section for date and a section for time. The date section will always be filled; if the time section is filled, hour is always filled; for (minute, second, partial_second), they are optional with a zero default value. But if partial_second is filled, (minute, second) must be filled, even they are 0s; if second is filled, minute must be filled. Next field#: 22.",
       "id": "NlpSemanticParsingDatetimeAbsoluteDateTime",
       "properties": {
         "allowPersonal": {
@@ -65885,6 +66262,7 @@
           "type": "integer"
         },
         "hourState": {
+          "description": "Note: This is marked as deprecated as we are moving into explicit parses using the `meridiem` field, and leave the inference over implicit parses to the grounding/resolution libraries.",
           "enum": [
             "UNAMBIGUOUS",
             "AMBIGUOUS",
@@ -65900,6 +66278,20 @@
         "isBc": {
           "description": "|is_bc| is true if and only the date is Before Christ/Common Era. If |is_bc| is true, only year is meaningful in this proto, as Gregorian calendar is only meaningful for A.D. date/times.",
           "type": "boolean"
+        },
+        "meridiem": {
+          "description": "For expressions such as \"am\", \"pm\". Note: the name \"meridiem\" has been taken by a field in message ResolutionProperties. Examples: * \"9 am\": point { hour: 9 meridiem: AM hour_state: UNAMBIGUOUS }",
+          "enum": [
+            "INVALID_MERIDIEM",
+            "AM",
+            "PM"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
         },
         "minute": {
           "format": "int32",
@@ -66407,6 +66799,397 @@
       "description": "This message is defined to be a representation of events that could interact with datetimes expressions through composition by shifting or fetching. For \"native\" datetime events like sunset, sunrise, etc the type is enough, but this should be extended as needed to represent richer event information.",
       "id": "NlpSemanticParsingDatetimeEvent",
       "properties": {
+        "holiday": {
+          "enum": [
+            "UNKNOWN_HOLIDAY",
+            "AIDS_DAY",
+            "AIR_FORCES_DAY",
+            "ALL_SAINTS_DAY",
+            "ALL_SOULDS_DAY",
+            "ANZAC_DAY",
+            "APARECIDA_DAY",
+            "APPLE_SAVIOUR_DAY",
+            "ARBOR_DAY",
+            "ARMED_FORCES_DAY",
+            "ARMISTICE_DAY",
+            "ASCENSION_DAY",
+            "ASH_WEDNESDAY",
+            "ASSUMPTION_OF_MARY",
+            "ATATURK_DAY",
+            "BERCHTOLDS_DAY",
+            "BLACK_DAY",
+            "BLACK_FRIDAY",
+            "BRAZIL_PROCLAMATION_DAY",
+            "CABOTAGE_DAY",
+            "CAMBODIAN_CORONATION_DAY",
+            "CANDLEMAS",
+            "CARINTHIAN_PLEBISCITE_DAY",
+            "CHAKRI_DAY",
+            "CHILDRENS_DAY",
+            "CHINA_COMMUNIST_PARTY_DAY",
+            "CHINA_GRAVE_SWEEPING_FESTIVAL",
+            "CHINA_HUMILIATION_DAY",
+            "LUNAR_NEW_YEAR",
+            "CHRISTMAS",
+            "CHRISTMAS_EVE",
+            "CHULA_MEMORIAL_DAY",
+            "CIVIL_SERVANT_DAY",
+            "COLUMBUS_DAY",
+            "COMING_OF_AGE_DAY",
+            "CONFUCIUS_DAY",
+            "CONSTITUTION_MEMORIAL_DAY",
+            "CONSUMERS_DAY",
+            "COPTIC_CHRISTMAS",
+            "CORPUS_CRISTI",
+            "CULTURE_DAY",
+            "CYBER_MONDAY",
+            "CZECH_FREEDOM_DEMOCRACY_DAY",
+            "DOCTORS_DAY",
+            "EARTH_DAY",
+            "EASTER",
+            "EASTERN_ANNUNCIATION_DAY",
+            "EASTER_MONDAY",
+            "ELECTION_DAY",
+            "ELECTION_DAY_RUNOFF",
+            "EPIPHANY",
+            "FATHERLAND_DEFENDER_DAY",
+            "FATHERS_DAY",
+            "FIRST_ADVENT_SUNDAY",
+            "FLAG_DAY",
+            "FLEMISH_COMMUNITY_DAY",
+            "FOOLS_DAY",
+            "FOURTH_ADVENT_SUNDAY",
+            "FREEDOM_DAY",
+            "FRENCH_COMMUNITY_DAY",
+            "GERMAN_COMMUNITY_DAY",
+            "GOOD_FRIDAY",
+            "GRAND_FATHERS_DAY",
+            "GRAND_MOTHERS_DAY",
+            "GRAND_PARENTS_DAY",
+            "GREAT_PRAYER_DAY",
+            "GREENERY_DAY",
+            "GROUNDHOG_DAY",
+            "HALLOWEEN",
+            "HEALTH_DAY",
+            "HIDIRELLEZ",
+            "HOLY_SATURDAY",
+            "HONEY_SAVIOUR_DAY",
+            "HONG_KONG_HANDOVER_DAY",
+            "HUMAN_RIGHTS_DAY",
+            "IMMACULATE_CONCEPTION_DAY",
+            "INDEPENDENCE_DAY",
+            "INDEPENDENCE_MOVEMENT_DAY",
+            "INTERCESSION_DAY",
+            "INTERNATIONAL_WORKERS_DAY",
+            "INTERNATIONA_WOMEN_DAY",
+            "JAPANESE_EMPERORS_BIRTHDAY",
+            "JESUS_BAPTISM",
+            "JOHN_HUS_DAY",
+            "JOURNALIST_DAY",
+            "KINGS_DAY",
+            "KING_OF_CAMBODIAS_BIRTHDAY",
+            "KING_OF_CAMBODIA_FATHERS_BIRTHDAY",
+            "KING_OF_CAMBODIA_MOTHERS_BIRTHDAY",
+            "KING_RAMA_IX_DEATH_ANNIVERSARY",
+            "KING_RAMA_X_BIRTHDAY",
+            "KNOWLEDGE_DAY",
+            "KOREAN_ALPHABET_DAY",
+            "KOREAN_MEMORIAL_DAY",
+            "KUPALA_NIGHT",
+            "KVEN_NATIONAL_DAY",
+            "LABOUR_DAY",
+            "LABOUR_THANKSGIVING_DAY",
+            "LIBERATION_DAY",
+            "LITTLE_CHRISTMAS_EVE",
+            "MACAU_DAY",
+            "MARDI_GRAS",
+            "MARTIAL_DAY",
+            "MARTIN_LUTHER_KING_DAY",
+            "MAUNDY_THURSDAY",
+            "MAY_DAY",
+            "MEDICINE_DAY",
+            "MELBOURNE_CUP",
+            "MEMORIAL_DAY",
+            "MIDSUMMER_DAY",
+            "MIDSUMMER_EVE",
+            "MOTHERING_SUNDAY",
+            "MOTHERS_DAY",
+            "NATIONAL_DAY",
+            "NATIONAL_FOUNDATION_DAY",
+            "NEW_YEAR",
+            "NEW_YEARS_EVE",
+            "NURSE_DAY",
+            "OBON_FESTIVAL",
+            "OCEAN_DAY",
+            "OCTOBER_REVOLUTION_DAY",
+            "ORTHODOX_CHRISTMAS",
+            "ORTHODOX_EASTER",
+            "ORTHODOX_NEW_YEAR",
+            "ORTHODOX_NEW_YEARS_EVE",
+            "PALM_SUNDAY",
+            "PARATROOPERS_DAY",
+            "PARENTS_DAY",
+            "PARIS_PEACE_AGREEMENTS_DAY",
+            "PARLIAMNET_DAY",
+            "PEACE_DAY",
+            "PENTECOST",
+            "PENTECOST_EVE",
+            "PEPERO_DAY",
+            "PERSIAN_NEW_YEAR",
+            "PLOUGHING_CEREMONY_DAY",
+            "POLICE_DAY",
+            "POLISH_MAY_HOLIDAYS",
+            "PORTUGAL_PROCLAMATION_DAY",
+            "PRESIDENT_DAY",
+            "REFORMATION_DAY",
+            "REMEMBRANCE_AND_SORROW_DAY",
+            "REMEMBRANCE_DAY",
+            "REPENTANCE_AND_PRAYER_DAY",
+            "REPUBLIC_DAY",
+            "RESPECT_FOR_THE_ELDERLY_DAY",
+            "ROSE_DAY",
+            "RUSSIAN_GUARD_DAY",
+            "SAINT_CYRIL_METHODIUS_DAY",
+            "SAINT_FLORIAN_DAY",
+            "SAINT_FRANCIS_DAY",
+            "SAINT_JOHN_DAY",
+            "SAINT_JOHN_EVE",
+            "SAINT_JOSEPH",
+            "SAINT_LEOPOLD_DAY",
+            "SAINT_LUCY_DAY",
+            "SAINT_MARTIN_DAY",
+            "SAINT_NICHOLAS_DAY",
+            "SAINT_OLAF_DAY",
+            "SAINT_RUPERT_DAY",
+            "SAINT_STEPHEN_DAY",
+            "SAMI_NATIONAL_DAY",
+            "SCOUTING_DAY",
+            "SECOND_ADVENT_SUNDAY",
+            "SECOND_CHRISTMAS_DAY",
+            "SHOWA_DAY",
+            "SINAI_DAY",
+            "SINGLES_DAY",
+            "SONGKRAN_DAY",
+            "SPORTS_DAY",
+            "SUNFLOWER_MOVEMENT_DAY",
+            "TATIANA_DAY",
+            "TEACHERS_DAY",
+            "THAI_CORONATION_DAY",
+            "THAI_PONGAL_DAY",
+            "THANKSGIVING_DAY",
+            "THIRD_ADVENT_SUNDAY",
+            "TIRADENTES_DAY",
+            "UNITY_DAY",
+            "VALENTINE_DAY",
+            "VETERANS_DAY",
+            "VICTORY_DAY",
+            "VIETNAMESE_REUNIFICATION_DAY",
+            "VIETNAM_COMMUNIST_PARTY_DAY",
+            "VIETNAM_REWVOLUATIONARY_PRESS_DAY",
+            "WALPURGIS_NIGHT",
+            "WENCESLAUS_DAY",
+            "WESTERN_ANNUNCIATION_DAY",
+            "WHITE_DAY",
+            "WHIT_MONDAY",
+            "WOMEN_RIGHTS_DAY",
+            "YOUTH_DAY"
+          ],
+          "enumDescriptions": [
+            "",
+            "https://en.wikipedia.org/wiki/World_AIDS_Day",
+            "https://en.wikipedia.org/wiki/Air_Force_Day",
+            "https://en.wikipedia.org/wiki/All_Saints'_Day",
+            "https://en.wikipedia.org/wiki/All_Souls'_Day",
+            "https://en.wikipedia.org/wiki/Anzac_Day",
+            "https://en.wikipedia.org/wiki/Our_Lady_of_Aparecida",
+            "https://en.wikipedia.org/wiki/Apple_Feast_of_the_Saviour",
+            "https://en.wikipedia.org/wiki/Arbor_Day#Around_the_world",
+            "https://en.wikipedia.org/wiki/Armed_Forces_Day",
+            "https://en.wikipedia.org/wiki/Armistice_Day",
+            "https://en.wikipedia.org/wiki/Feast_of_the_Ascension",
+            "https://en.wikipedia.org/wiki/Ash_Wednesday",
+            "https://en.wikipedia.org/wiki/Assumption_of_Mary",
+            "https://en.wikipedia.org/wiki/Commemoration_of_Atat%C3%BCrk,_Youth_and_Sports_Day",
+            "https://en.wikipedia.org/wiki/Berchtoldstag",
+            "https://en.wikipedia.org/wiki/Black_Day_(South_Korea)",
+            "https://en.wikipedia.org/wiki/Black_Friday_(shopping)",
+            "https://en.wikipedia.org/wiki/Proclamation_of_the_Republic_(Brazil)",
+            "https://en.wikipedia.org/wiki/Cabotage_Day",
+            "https://en.wikipedia.org/wiki/Public_holidays_in_Cambodia",
+            "Candlemas / Chandeleur / Presentation day: February 2nd https://en.wikipedia.org/wiki/Candlemas",
+            "https://en.wikipedia.org/wiki/1920_Carinthian_plebiscite",
+            "https://en.wikipedia.org/wiki/Chakri_dynasty",
+            "https://en.wikipedia.org/wiki/Children's_Day",
+            "https://en.wikipedia.org/wiki/Chinese_Communist_Party",
+            "https://en.wikipedia.org/wiki/Qingming_Festival",
+            "China's National Humiliation Day: September 18th",
+            "https://en.wikipedia.org/wiki/Lunar_New_Year",
+            "https://en.wikipedia.org/wiki/Christmas",
+            "https://en.wikipedia.org/wiki/Christmas",
+            "https://en.wikipedia.org/wiki/Chulalongkorn",
+            "https://en.wikipedia.org/wiki/UN_Public_Service_Day",
+            "https://en.wikipedia.org/wiki/Columbus_Day",
+            "https://en.wikipedia.org/wiki/Coming_of_Age_Day https://en.wikipedia.org/wiki/Coming_of_age",
+            "https://en.wikipedia.org/wiki/Confucius%27_Birthday",
+            "https://en.wikipedia.org/wiki/Constitution_Memorial_Day https://en.wikipedia.org/wiki/Constitution_Day",
+            "https://en.wikipedia.org/wiki/Consumers_International#World_Consumer_Rights_Day",
+            "https://en.wikipedia.org/wiki/Christmas",
+            "https://en.wikipedia.org/wiki/Feast_of_Corpus_Christi",
+            "https://en.wikipedia.org/wiki/Culture_Day",
+            "https://en.wikipedia.org/wiki/Cyber_Monday",
+            "https://en.wikipedia.org/wiki/Struggle_for_Freedom_and_Democracy_Day",
+            "https://en.wikipedia.org/wiki/National_Doctors%27_Day",
+            "https://en.wikipedia.org/wiki/Earth_Day",
+            "https://en.wikipedia.org/wiki/Easter",
+            "https://en.wikipedia.org/wiki/Feast_of_the_Annunciation",
+            "https://en.wikipedia.org/wiki/Easter_Monday",
+            "https://en.wikipedia.org/wiki/Election_day",
+            "https://en.wikipedia.org/wiki/Election_day",
+            "https://en.wikipedia.org/wiki/Epiphany_(holiday)",
+            "https://en.wikipedia.org/wiki/Defender_of_the_Fatherland_Day",
+            "https://en.wikipedia.org/wiki/Father's_Day",
+            "https://en.wikipedia.org/wiki/Advent_Sunday",
+            "https://en.wikipedia.org/wiki/Flag_Day",
+            "Day of the Flemish commumity (Jul 11, Belgian holiday) https://en.wikipedia.org/wiki/Day_of_the_Flemish_Community",
+            "https://en.wikipedia.org/wiki/April_Fools'_Day",
+            "https://en.wikipedia.org/wiki/Advent_Sunday",
+            "https://en.wikipedia.org/wiki/Freedom_Day",
+            "Day of the French speaking community in Belgium (Sept 27, Belgian holiday) https://en.wikipedia.org/wiki/French_Community_Holiday",
+            "Day of the German speaking community in Belgium (Nov 15, Belgian Holiday) https://en.wikipedia.org/wiki/Day_of_the_German-speaking_Community",
+            "https://en.wikipedia.org/wiki/Good_Friday",
+            "https://en.wikipedia.org/wiki/Grandparents%27_Day",
+            "https://en.wikipedia.org/wiki/Grandparents%27_Day",
+            "https://en.wikipedia.org/wiki/Grandparents%27_Day",
+            "https://en.wikipedia.org/wiki/Store_Bededag",
+            "https://en.wikipedia.org/wiki/Greenery_Day",
+            "https://en.wikipedia.org/wiki/Groundhog_Day",
+            "https://en.wikipedia.org/wiki/Halloween",
+            "https://en.wikipedia.org/wiki/World_Health_Day",
+            "https://en.wikipedia.org/wiki/H%C4%B1d%C4%B1rellez",
+            "https://en.wikipedia.org/wiki/Holy_Saturday",
+            "https://en.wikipedia.org/wiki/Feast_of_the_Cross",
+            "https://en.wikipedia.org/wiki/Handover_of_Hong_Kong",
+            "https://en.wikipedia.org/wiki/Human_Rights_Day",
+            "https://en.wikipedia.org/wiki/Feast_of_the_Immaculate_Conception",
+            "https://en.wikipedia.org/wiki/List_of_national_independence_days",
+            "https://en.wikipedia.org/wiki/March_1st_Movement",
+            "https://en.wikipedia.org/wiki/Intercession_of_the_Theotokos",
+            "https://en.wikipedia.org/wiki/International_Workers%27_Day",
+            "https://en.wikipedia.org/wiki/International_Women's_Day",
+            "https://en.wikipedia.org/wiki/The_Emperor's_Birthday",
+            "https://en.wikipedia.org/wiki/Baptism_of_Jesus",
+            "https://en.wikipedia.org/wiki/Jan_Hus#Holidays_commemorating_Hus",
+            "https://en.wikipedia.org/wiki/World_Press_Freedom_Day",
+            "https://en.wikipedia.org/wiki/Koningsdag",
+            "https://en.wikipedia.org/wiki/Norodom_Sihamoni",
+            "https://en.wikipedia.org/wiki/Norodom_Sihanouk#Death_and_funeral",
+            "https://en.wikipedia.org/wiki/Norodom_Monineath",
+            "https://en.wikipedia.org/wiki/Bhumibol_Adulyadej",
+            "https://en.wikipedia.org/wiki/Bhumibol_Adulyadej",
+            "https://en.wikipedia.org/wiki/Knowledge_Day",
+            "https://en.wikipedia.org/wiki/Hangul_Day",
+            "https://en.wikipedia.org/wiki/Memorial_Day_(South_Korea)",
+            "https://en.wikipedia.org/wiki/Kupala_Night",
+            "https://en.wikipedia.org/wiki/Kven_people",
+            "https://en.wikipedia.org/wiki/Labour_Day",
+            "https://en.wikipedia.org/wiki/Labor_Thanksgiving_Day",
+            "https://en.wikipedia.org/wiki/Liberation_Day",
+            "https://da.wikipedia.org/wiki/Lillejuleaften",
+            "https://en.wikipedia.org/wiki/Macau",
+            "https://en.wikipedia.org/wiki/Mardi_Gras",
+            "Martial Day: July 15th",
+            "https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day",
+            "https://en.wikipedia.org/wiki/Maundy_Thursday",
+            "https://en.wikipedia.org/wiki/May_Day",
+            "https://en.wikipedia.org/wiki/National_Doctors%27_Day",
+            "https://en.wikipedia.org/wiki/Melbourne_Cup",
+            "https://en.wikipedia.org/wiki/Memorial_Day",
+            "https://en.wikipedia.org/wiki/Midsummer",
+            "https://en.wikipedia.org/wiki/Midsummer",
+            "https://en.wikipedia.org/wiki/Mothering_Sunday",
+            "https://en.wikipedia.org/wiki/Mother%27s_Day",
+            "https://en.wikipedia.org/wiki/National_day",
+            "https://en.wikipedia.org/wiki/National_Foundation_Day",
+            "https://en.wikipedia.org/wiki/New_Year",
+            "https://en.wikipedia.org/wiki/New_Year",
+            "https://en.wikipedia.org/wiki/International_Nurses_Day",
+            "https://en.wikipedia.org/wiki/Bon_(festival)",
+            "https://en.wikipedia.org/wiki/Marine_Day",
+            "https://en.wikipedia.org/wiki/October_Revolution_Day",
+            "https://en.wikipedia.org/wiki/Christmas",
+            "https://en.wikipedia.org/wiki/Easter",
+            "https://en.wikipedia.org/wiki/Old_New_Year",
+            "https://en.wikipedia.org/wiki/Old_New_Year",
+            "https://en.wikipedia.org/wiki/Palm_Sunday",
+            "https://en.wikipedia.org/wiki/Paratroopers%27_Day",
+            "https://en.wikipedia.org/wiki/Parents'_Day",
+            "https://en.wikipedia.org/wiki/1991_Paris_Peace_Agreements",
+            "Danish Parliamnet day: 1st Tuesday in October (da-DK) specific",
+            "https://en.wikipedia.org/wiki/International_Day_of_Peace",
+            "https://en.wikipedia.org/wiki/Pentecost",
+            "https://en.wikipedia.org/wiki/Pentecost",
+            "https://en.wikipedia.org/wiki/Pepero_Day",
+            "https://en.wikipedia.org/wiki/Nowruz",
+            "https://en.wikipedia.org/wiki/Royal_Ploughing_Ceremony",
+            "https://en.wikipedia.org/wiki/Police_Day",
+            "https://en.wikipedia.org/wiki/Public_holidays_in_Poland#May_Holidays",
+            "https://en.wikipedia.org/wiki/5_October_1910_revolution",
+            "https://en.wikipedia.org/wiki/Presidents%27_Day",
+            "https://en.wikipedia.org/wiki/Reformation_Day",
+            "https://en.wikipedia.org/wiki/Day_of_Remembrance_and_Sorrow",
+            "https://en.wikipedia.org/wiki/National_Memorial_Day_of_the_Exiles_and_Foibe",
+            "https://en.wikipedia.org/wiki/Bu%C3%9F-_und_Bettag",
+            "https://en.wikipedia.org/wiki/Republic_Day",
+            "https://en.wikipedia.org/wiki/Respect_for_the_Aged_Day",
+            "Rose day: May 14th",
+            "https://en.wikipedia.org/wiki/National_Guard_Day_(Russia)",
+            "https://en.wikipedia.org/wiki/Cyril_and_Methodius#Saints_Cyril_and_Methodius'_Day",
+            "https://en.wikipedia.org/wiki/Saint_Florian",
+            "https://en.wikipedia.org/wiki/Francis_of_Assisi",
+            "https://en.wikipedia.org/wiki/Saint-Jean-Baptiste_Day",
+            "https://en.wikipedia.org/wiki/Saint-Jean-Baptiste_Day",
+            "https://en.wikipedia.org/wiki/Saint_Joseph's_Day",
+            "https://en.wikipedia.org/wiki/Leopold_III,_Margrave_of_Austria",
+            "https://en.wikipedia.org/wiki/Saint_Lucy's_Day",
+            "https://en.wikipedia.org/wiki/St._Martin's_Day",
+            "https://en.wikipedia.org/wiki/Saint_Nicholas_Day",
+            "https://en.wikipedia.org/wiki/Olaf_II_of_Norway",
+            "https://en.wikipedia.org/wiki/Rupert_of_Salzburg",
+            "https://en.wikipedia.org/wiki/Saint_Stephen's_Day",
+            "https://en.wikipedia.org/wiki/S%C3%A1mi_National_Day",
+            "https://en.wikipedia.org/wiki/Scouts'_Day ?",
+            "https://en.wikipedia.org/wiki/Advent_Sunday",
+            "https://en.wikipedia.org/wiki/Christmas",
+            "https://en.wikipedia.org/wiki/Sh%C5%8Dwa_Day",
+            "https://en.wikipedia.org/wiki/Sinai_Liberation_Day",
+            "https://en.wikipedia.org/wiki/Singles'_Day",
+            "https://en.wikipedia.org/wiki/Songkran_(Thailand)",
+            "https://en.wikipedia.org/wiki/Sports_day",
+            "https://en.wikipedia.org/wiki/Sunflower_Student_Movement",
+            "https://en.wikipedia.org/wiki/Tatiana_Day",
+            "https://en.wikipedia.org/wiki/List_of_Teachers'_Days",
+            "https://en.wikipedia.org/wiki/Coronation_of_the_Thai_monarch",
+            "https://en.wikipedia.org/wiki/Pongal_(festival)",
+            "https://en.wikipedia.org/wiki/Thanksgiving",
+            "https://en.wikipedia.org/wiki/Advent_Sunday",
+            "https://en.wikipedia.org/wiki/Tiradentes",
+            "https://en.wikipedia.org/wiki/Unity_Day",
+            "https://en.wikipedia.org/wiki/Valentine's_Day",
+            "https://en.wikipedia.org/wiki/Veterans_Day_(disambiguation)",
+            "https://en.wikipedia.org/wiki/Victory_Day",
+            "https://en.wikipedia.org/wiki/Reunification_Day",
+            "https://en.wikipedia.org/wiki/Communist_Party_of_Vietnam",
+            "Journalist Day: June 21st",
+            "https://en.wikipedia.org/wiki/Walpurgis_Night",
+            "https://en.wikipedia.org/wiki/Wenceslaus_I,_Duke_of_Bohemia#Veneration",
+            "https://en.wikipedia.org/wiki/Feast_of_the_Annunciation",
+            "https://en.wikipedia.org/wiki/White_Day",
+            "https://en.wikipedia.org/wiki/Whit_Monday",
+            "Women Rights Day: 5th of December",
+            "https://en.wikipedia.org/wiki/Youth_Day"
+          ],
+          "type": "string"
+        },
         "moonEvent": {
           "$ref": "NlpSemanticParsingDatetimeMoonEventInfo"
         },
@@ -66430,9 +67213,11 @@
         "type": {
           "enum": [
             "INVALID_EVENT",
-            "ASTRONOMICAL_EVENT"
+            "ASTRONOMICAL_EVENT",
+            "HOLIDAY_EVENT"
           ],
           "enumDescriptions": [
+            "",
             "",
             ""
           ],
@@ -67290,7 +68075,7 @@
       "id": "NlpSemanticParsingDatetimeResolutionProperties",
       "properties": {
         "meridiem": {
-          "description": "Simple enum container for exporting meridiem mentions.",
+          "description": "Simple enum container for exporting meridiem mentions. Note: this is marked as deprecated as we are moving to properly parse expressions with explicit meridiem information.",
           "enum": [
             "INVALID_MERIDIEM",
             "AM",
@@ -68223,6 +69008,26 @@
       },
       "type": "object"
     },
+    "NlpSemanticParsingLocalHealthInsuranceConstraint": {
+      "description": "Constraint for the health insurance network of a provider.",
+      "id": "NlpSemanticParsingLocalHealthInsuranceConstraint",
+      "properties": {
+        "network": {
+          "enum": [
+            "UNKNOWN_HEALTH_INSURANCE",
+            "ACCEPTS_MEDICARE",
+            "ACCEPTS_MEDICAID"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "NlpSemanticParsingLocalHotelType": {
       "description": "Hotel Type used by the hotels team to differentiate sub classes of accommodations. For any questions please contact hotel-search-quality@. Next ID: 48",
       "id": "NlpSemanticParsingLocalHotelType",
@@ -68593,7 +69398,7 @@
       "type": "object"
     },
     "NlpSemanticParsingLocalLocationConstraint": {
-      "description": "All the possible location constraints. This message is associated with a location and can be nested accordingly. E.g., for a compound location the constraint may be associated with the entire location or with either of the two internal locations (loc_1 and loc_2). There is an implicit AND relation between the different constraints. Next ID: 23.",
+      "description": "All the possible location constraints. This message is associated with a location and can be nested accordingly. E.g., for a compound location the constraint may be associated with the entire location or with either of the two internal locations (loc_1 and loc_2). There is an implicit AND relation between the different constraints. Next ID: 24.",
       "id": "NlpSemanticParsingLocalLocationConstraint",
       "properties": {
         "amenities": {
@@ -68612,6 +69417,10 @@
         "gcidConstraint": {
           "$ref": "NlpSemanticParsingLocalGcidConstraint",
           "description": "Used for GCID filter. Unlike other grammar, for now this is populated in Superroot (currently based on QBLD classification, and an allowlist of GCID)."
+        },
+        "healthInsurance": {
+          "$ref": "NlpSemanticParsingLocalHealthInsuranceConstraint",
+          "description": "Used for health insurance filter populator."
         },
         "hyperReliableData": {
           "$ref": "NlpSemanticParsingLocalHyperReliableData",
@@ -74423,6 +75232,7 @@
             "YOUTUBE_COMMENTS_INDEXING",
             "YOUTUBE_COMMENTS_NEWEST_FIRST",
             "YOUTUBE_SUBSCRIPTIONS_FEEDS",
+            "YOUTUBE_COMMENT_API",
             "GHUB_COMMENTS",
             "GOOGLE_KEEP",
             "VEGA",
@@ -74748,6 +75558,9 @@
             "FUSION",
             "PRODUCTION2020_UIE",
             "SPEAKEASY",
+            "GPAY_RELEASE_OPS",
+            "SKILLSSTACK",
+            "WHOSTORY",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -75046,6 +75859,7 @@
             "Youtube Comments: Top comments indexing go/ytcci Team contact: yt-comments-team@google.com",
             "Youtube Comments: Newest First. go/ytcci Team contact: yt-comments-team@google.com",
             "Youtube Comments: Subscription notifications go/ytn-inbox-comment-decoration Team contact: yt-notifications@google.com",
+            "YouTube Comment API go/yt-comment-api Team contact: yt-comment-api-eng@google.com",
             "Comments for gHub Finance. Team contact: introspect-eng@google.com",
             "Google Keep. https://sites.google.com/a/google.com/keep/",
             "Vega / Google+ for Business (Android and iOS clients). http://go/vega",
@@ -75371,6 +76185,9 @@
             "Test Fusion Team contact: fusion-team@google.com",
             "Production2020 Uie Team contact: p2020-ui-excellence-team@google.com",
             "Speakeasy Team contact: speakeasy-eng@google.com",
+            "Gpay Release Ops Team contact: gpay-release-ops@google.com",
+            "Skillsstack Team contact:",
+            "Whostory Team contact: whostory@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -75871,7 +76688,7 @@
           "type": "integer"
         },
         "freshnessEncodedSignals": {
-          "description": "Stores freshness and aging related data, such as time-related quality metrics predicted from url-pattern level signals. Use the encoding decoding API in quality/freshness/docclassifier/aging/encoded-pattern-signals.h",
+          "description": "Stores freshness and aging related data, such as time-related quality metrics predicted from url-pattern level signals. Use the encoding decoding API in quality/freshness/docclassifier/aging/encoded-pattern-signals.h This field is deprecated.",
           "format": "int64",
           "type": "string"
         },
@@ -77039,7 +77856,7 @@
             "e.g. suite, room, hallway, cubicle.",
             "A terminal point represents a good location for a user to meet a taxi, ridesharing vehicle, or general driver.",
             "An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone. Features of this type should have one or more gcids corresponding to their specific regulation.",
-            "RESERVED",
+            "A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.",
             "DEPRECATED",
             "A feature of completely unknown type. This should only be used when absolutely necessary. One example in which this type is useful is in the Chinese importer, which must heuristically segment addresses into components - it often does not know what types to make those components. Please note that the Oyster address formatter does not currently support address components of TYPE_UNKNOWN well."
           ],
@@ -78797,7 +79614,7 @@
       "type": "object"
     },
     "PornFlagData": {
-      "description": "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 50.",
+      "description": "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 51.",
       "id": "PornFlagData",
       "properties": {
         "adaboostContentScore": {
@@ -78843,16 +79660,16 @@
           "description": "A string that indicates the version of SafeSearch classifier used to compute final_violence_score.",
           "type": "string"
         },
-        "imageEntitiesViolenceScore": {
-          "format": "float",
-          "type": "number"
-        },
         "imageStats": {
           "description": "PornStatsImage is repeated even though we use only a single version, to help with rolling out new versions with miminum risk. Multiple versions should exist only for a short window of time. Once the new version is rolled out, the data for older versions should no longer be generated.",
           "items": {
             "$ref": "PornStatsImage"
           },
           "type": "array"
+        },
+        "internalSignals": {
+          "$ref": "SafesearchInternalImageSignals",
+          "description": "A proto that stores SafeSearch internal signals that are not exported to clients. SafeSearch team does not provide any guarantees about the presence or the semantics of these signals in the future."
         },
         "largestFaceFrac": {
           "description": "largest face, scaled by 1000 This field is same as ImageData.largest_face_frac.",
@@ -78935,15 +79752,6 @@
         },
         "semanticSexualizationScore": {
           "description": "Starburst-based score predicting sexualization level of the image.",
-          "format": "float",
-          "type": "number"
-        },
-        "starburstPornScore": {
-          "description": "Additional SafeSearch signals that are used to compute final scores.",
-          "format": "float",
-          "type": "number"
-        },
-        "starburstViolenceScore": {
           "format": "float",
           "type": "number"
         },
@@ -80358,7 +81166,7 @@
             "Notification sent to notify users to change default media provider in Assistant Settings. See go/change-dmp-dd for more details.",
             "",
             "",
-            "Media specific notifications. Notification sent to promote Media Assistant on phones for existing Chirp/Jasper users. go/media-cross-device-promotion.",
+            "Deprecated. Media specific notifications. Notification sent to promote Media Assistant on phones for existing Chirp/Jasper users. go/media-cross-device-promotion.",
             "Notification sent to notify users link their 3p music account in Assistant Settings. See go/media-notif-link-3p-account for more details.",
             "Notification sent to notify users to choose a preferred podcast provider in Assistant Settings. See b/159824581 for more details.",
             "",
@@ -82737,7 +83545,7 @@
       "type": "object"
     },
     "QualityNsrNsrData": {
-      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 31",
+      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 48",
       "id": "QualityNsrNsrData",
       "properties": {
         "articleScore": {
@@ -82746,6 +83554,15 @@
           "type": "number"
         },
         "articleScoreV2": {
+          "format": "float",
+          "type": "number"
+        },
+        "chard": {
+          "description": "Site-level chard score: site quality predictor based on content.",
+          "format": "float",
+          "type": "number"
+        },
+        "chardVariance": {
           "format": "float",
           "type": "number"
         },
@@ -82762,8 +83579,33 @@
           "format": "float",
           "type": "number"
         },
+        "clutterScores": {
+          "items": {
+            "$ref": "QualityNsrVersionedFloatSignal"
+          },
+          "type": "array"
+        },
+        "directFrac": {
+          "format": "float",
+          "type": "number"
+        },
+        "healthScore": {
+          "description": "Categorical signals.",
+          "format": "float",
+          "type": "number"
+        },
         "host": {
           "type": "string"
+        },
+        "i18nBucket": {
+          "description": "Currently corresponds to i18n_g42_bucket.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "impressions": {
+          "description": "Site-level impressions.",
+          "format": "float",
+          "type": "number"
         },
         "isCovidLocalAuthority": {
           "description": "Bit to determine whether the site has the local authority covid signal, as computed by go/covid-local-authority",
@@ -82776,6 +83618,14 @@
         "isVideoFocusedSite": {
           "description": "Bit to determine whether the site has mostly video content, but is not hosted on any known video-hosting domains. Site is considered to be video-focused, if it has > 50% of the URLs with watch pages (with smoothing prior). ariane/4045246",
           "type": "boolean"
+        },
+        "language": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "largeOrgId": {
+          "format": "int32",
+          "type": "integer"
         },
         "localityScore": {
           "description": "Locality score of the site, i.e. the locality component of the LocalAuthority signal (see go/pq-localauthority).",
@@ -82808,9 +83658,18 @@
           "description": "If true indicates that we do not have NSR data computed for the chunk, and instead the data is coming from an average of other host chunks.",
           "type": "boolean"
         },
+        "pnav": {
+          "description": "Fractional signals.",
+          "format": "float",
+          "type": "number"
+        },
         "secondarySiteChunk": {
           "description": "Secondary NSR sitechunk. When present, it provides more granular chunking than primary sitechunks (see quality/nsr/util/sitechunker.h for details).",
           "type": "string"
+        },
+        "shoppingScore": {
+          "format": "float",
+          "type": "number"
         },
         "siteAutopilotScore": {
           "description": "Aggregated value of url autopilot scores for this sitechunk.",
@@ -82865,6 +83724,21 @@
           "format": "float",
           "type": "number"
         },
+        "spambrainLavcScores": {
+          "items": {
+            "$ref": "QualityNsrVersionedFloatSignal"
+          },
+          "type": "array"
+        },
+        "tofu": {
+          "description": "Site-level tofu score: site quality predictor based on content.",
+          "format": "float",
+          "type": "number"
+        },
+        "ugcScore": {
+          "format": "float",
+          "type": "number"
+        },
         "url": {
           "type": "string"
         },
@@ -82875,8 +83749,21 @@
           },
           "type": "array"
         },
+        "videoScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "vlq": {
+          "description": "Score of the Video LQ model.",
+          "format": "float",
+          "type": "number"
+        },
         "vlqNsr": {
           "description": "NSR from a headroom model targeting low-quality video sites.",
+          "format": "float",
+          "type": "number"
+        },
+        "ymylNewsV2Score": {
           "format": "float",
           "type": "number"
         }
@@ -82912,8 +83799,14 @@
       "type": "object"
     },
     "QualityNsrPQData": {
+      "description": "Next id: 17",
       "id": "QualityNsrPQData",
       "properties": {
+        "chard": {
+          "description": "URL-level chard prediction (encoded as an int).",
+          "format": "int32",
+          "type": "integer"
+        },
         "deltaAutopilotScore": {
           "format": "float",
           "type": "number"
@@ -82923,6 +83816,11 @@
           "type": "number"
         },
         "deltaLinkOutgoing": {
+          "format": "float",
+          "type": "number"
+        },
+        "deltaPageQuality": {
+          "description": "The delta score of the URL-level quality predictor.",
           "format": "float",
           "type": "number"
         },
@@ -82939,6 +83837,11 @@
           "format": "float",
           "type": "number"
         },
+        "numOffdomainAnchors": {
+          "description": "The total number of offdomain anchors seen by the NSR pipeline for this page.",
+          "format": "float",
+          "type": "number"
+        },
         "page2vecLq": {
           "format": "float",
           "type": "number"
@@ -82949,7 +83852,17 @@
           },
           "type": "array"
         },
+        "tofu": {
+          "description": "URL-level tofu prediction.",
+          "format": "float",
+          "type": "number"
+        },
         "urlAutopilotScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "vlq": {
+          "description": "URL-level score of the VLQ model.",
           "format": "float",
           "type": "number"
         }
@@ -82978,6 +83891,22 @@
         "type": {
           "description": "Type of this chunk. Eg, ymyl_health, d2v, etc.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QualityNsrVersionedFloatSignal": {
+      "id": "QualityNsrVersionedFloatSignal",
+      "properties": {
+        "value": {
+          "description": "The corresponding float value.",
+          "format": "float",
+          "type": "number"
+        },
+        "versionId": {
+          "description": "Unique version id.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -86004,10 +86933,10 @@
         "nonDisplayableCurrency": {
           "type": "string"
         },
-        "nonDisplayableOrganicMscore": {
-          "description": "non_displayable_organic_mscore is a organic confidence score that a merchant will not cause financial or consumer trust damage. In range [0, 1]. See go/merchant-quality-score .",
-          "format": "float",
-          "type": "number"
+        "nonDisplayableOrganicScoreMillis": {
+          "description": "Normalized riskiness score for Organic destinations. It's in range [0,1000] with 0 being the worst score and 1000 being the best.",
+          "format": "int32",
+          "type": "integer"
         },
         "offerDocid": {
           "format": "uint64",
@@ -86114,10 +87043,6 @@
         },
         "catalogId": {
           "format": "uint64",
-          "type": "string"
-        },
-        "encodedProductSalientTerms": {
-          "format": "byte",
           "type": "string"
         },
         "globalProductClusterId": {
@@ -86577,7 +87502,11 @@
             "LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_CONTENTAGE",
             "LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION",
             "LSU_V2_ANNOTATION_WITH_PATTERN_BYLINE_TAG",
-            "LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION"
+            "LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT"
           ],
           "enumDescriptions": [
             "",
@@ -86588,7 +87517,11 @@
             "The signal comes from publication markup date supported by ContentAge.",
             "The signal comes from publication markup date supported by annotation.",
             "The signal comes from date annotation often selected as a byline.",
-            "The signal comes from ContentAge that's supported by date annotation."
+            "The signal comes from ContentAge that's supported by date annotation.",
+            "",
+            "",
+            "",
+            ""
           ],
           "type": "string"
         }
@@ -87812,22 +88745,6 @@
       },
       "type": "object"
     },
-    "RepositoryWebrefAbsoluteLegacyId": {
-      "description": "Represents a unique id for each entity. It contains the domain, entity type and a legacy_id that is unique within that space. This protocol buffer stems from a time when we were building our model based on entities from different sources. Nowadays the domain_name and entity_type_name can be ignored and the legacy_id is the Knowledge Graph mid except in some WebRef internal pipelines such as reconciliation where it is still a vertical specific id. Current usages (see GetKey and SetKey in entity-join-util.cc): domain_name = \"FreebaseDomain\", entity_type_name = \"Topic\" domain_name = \"GeoDomain\", entity_type_name = \"Geo\" domain_name = \"ProductsDomain\", entity_type_name = \"Product\" domain_name = \"ProductsDomain\", entity_type_name = \"ProductCluster\" domain_name = \"UniversalDomain\", entity_type_name = \"Concept\"",
-      "id": "RepositoryWebrefAbsoluteLegacyId",
-      "properties": {
-        "domainName": {
-          "type": "string"
-        },
-        "entityTypeName": {
-          "type": "string"
-        },
-        "legacyId": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "RepositoryWebrefAggregatedEntityNameScores": {
       "description": "Represents the aggregated score of the entities for a given name, aggregated over all sources. Next available tag: 3.",
       "id": "RepositoryWebrefAggregatedEntityNameScores",
@@ -88182,20 +89099,6 @@
           },
           "type": "array"
         },
-        "fatcatCategory": {
-          "description": "verticals4 categories that describe this entity.",
-          "items": {
-            "$ref": "RepositoryWebrefFatcatCategory"
-          },
-          "type": "array"
-        },
-        "fatcatContext": {
-          "description": "verticals4 categories that describe the context of the entity.",
-          "items": {
-            "$ref": "RepositoryWebrefFatcatCategory"
-          },
-          "type": "array"
-        },
         "freebaseType": {
           "items": {
             "$ref": "RepositoryWebrefFreebaseType"
@@ -88306,7 +89209,7 @@
           "type": "string"
         },
         "sequenceId": {
-          "description": "Rule sequence id. The rule with the lowest sequence id in a cluster will contribute its id to the id of the cluster.",
+          "description": "No longer set.",
           "format": "int32",
           "type": "integer"
         }
@@ -89193,10 +90096,6 @@
       "description": "Provides some debug info for the entity. This data shown to engineers (for debugging) and to raters (so it ultimately impacts eval metrics), but is also used to train ML models (see below). IMPORTANT: Despite the proto naming, this data has production quality impact. The data below is mostly human-readable text that is useful to help engineers with debugging. However the text is also used as input to machine-learned natural language processing models, which are used in production Webref.",
       "id": "RepositoryWebrefEntityDebugInfo",
       "properties": {
-        "containsRestrictedData": {
-          "description": "Internal flag to mark this data as restricted. This flag should never be set in data in the final entityjoins, it is only used during the preprocessing pipeline.",
-          "type": "boolean"
-        },
         "description": {
           "description": "A human-readable description of the entity. This can range from brief, machine-generated notes to lengthy human-written paragraphs from Wikipedia.",
           "type": "string"
@@ -89282,10 +90181,6 @@
         },
         "nameSignals": {
           "$ref": "RepositoryWebrefPreprocessingNameSignals"
-        },
-        "preprocessingId": {
-          "$ref": "RepositoryWebrefAbsoluteLegacyId",
-          "description": "Deprecated id, only access through EntityJoinUtil::GetEntityId(), while we are migrating to annotated_entity_id. Setters should go through EntityJoinUtil::SetEntityId() during the transition period."
         },
         "refconNameInfo": {
           "description": "Contains names and names metadata used by Refcon.",
@@ -89828,10 +90723,6 @@
     "RepositoryWebrefFatcatCategory": {
       "id": "RepositoryWebrefFatcatCategory",
       "properties": {
-        "debugId": {
-          "description": "Category normalized name (for debug purposes). For example, for category \"/Beauty & Fitness\" the debug_id would be \"beauty_and_fitness\".",
-          "type": "string"
-        },
         "id": {
           "description": "The category ID from verticals4. See go/verticals4 and where we read them in http://google3/repository/webref/preprocessing/fatcat-categories.cc",
           "format": "int32",
@@ -90384,7 +91275,9 @@
             "SUPERLATIVE",
             "PLURAL",
             "FEMALE",
-            "ASPECT"
+            "ASPECT",
+            "TARGET_AUDIENCE",
+            "TARGET_PURPOSE"
           ],
           "enumDescriptions": [
             "",
@@ -90392,7 +91285,9 @@
             "An adjectival range is expressed in the superlaive degree.",
             "A range which is lexically plural.",
             "A range expressing unequivocally a (semantic) female gender. This could be for expressions that are intrinsically female (\"aunt\") or the female expression of an entity that is lexically gendered (\"chairwoman\" as opposed to \"chairman\" or \"chairperson\").",
-            "The range designates an aspect, that is, a modifier of some other range."
+            "The range designates an aspect, that is, a modifier of some other range.",
+            "Facets.",
+            ""
           ],
           "type": "string"
         },
@@ -90509,7 +91404,9 @@
             "MASCULINE_HONORIFIC",
             "FEMININE_HONORIFIC",
             "GENERIC_HONORIFIC",
-            "NEGATIVE_SUPERLATIVE"
+            "NEGATIVE_SUPERLATIVE",
+            "FACET_AUDIENCE",
+            "FACET_PURPOSE"
           ],
           "enumDescriptions": [
             "",
@@ -90561,6 +91458,8 @@
             "Masculine Honorific markers.",
             "Feminine Honorific markers.",
             "Non-specific Honorifc markers.",
+            "",
+            "Facets.",
             ""
           ],
           "type": "string"
@@ -94231,7 +95130,7 @@
             "e.g. suite, room, hallway, cubicle.",
             "A terminal point represents a good location for a user to meet a taxi, ridesharing vehicle, or general driver.",
             "An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone. Features of this type should have one or more gcids corresponding to their specific regulation.",
-            "RESERVED",
+            "A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.",
             "DEPRECATED",
             "A feature of completely unknown type. This should only be used when absolutely necessary. One example in which this type is useful is in the Chinese importer, which must heuristically segment addresses into components - it often does not know what types to make those components. Please note that the Oyster address formatter does not currently support address components of TYPE_UNKNOWN well."
           ],
@@ -96413,6 +97312,26 @@
       },
       "type": "object"
     },
+    "SafesearchInternalImageSignals": {
+      "description": "A proto that stores SafeSearch internal signals that are not exported to clients.",
+      "id": "SafesearchInternalImageSignals",
+      "properties": {
+        "imageEntitiesViolenceScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "starburstPornScore": {
+          "description": "Additional SafeSearch signals that are used to compute final scores.",
+          "format": "float",
+          "type": "number"
+        },
+        "starburstViolenceScore": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "SafesearchVideoClassifierOutput": {
       "description": "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 5",
       "id": "SafesearchVideoClassifierOutput",
@@ -97434,8 +98353,15 @@
           "description": "Text name of the agency. For analysis. Plus for agencies that don't have an enum.",
           "type": "string"
         },
+        "DebugExtractionInfo": {
+          "description": "Funding entries for the same agency and grant number can be merged during our extraction process so we maintain a record of all the deduped ExtractionInfo messages within the remaining entry.",
+          "items": {
+            "$ref": "ScienceCitationFundingExtractionInfo"
+          },
+          "type": "array"
+        },
         "DebugFundingTextBlock": {
-          "description": "Text block from which the funding entry was extracted. Intended to be used for offline analysis.",
+          "description": "Text block from which the funding entry was extracted. Intended to be used for offline analysis. DEPRECATED",
           "type": "string"
         },
         "GrantNumber": {
@@ -97452,6 +98378,72 @@
         "UrlBasedFundingSource": {
           "description": "Whether this funding info was added because this article was at the exclusive repository for this agency.",
           "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ScienceCitationFundingExtractionInfo": {
+      "description": "Holds information about the source of the funding entry.",
+      "id": "ScienceCitationFundingExtractionInfo",
+      "properties": {
+        "DebugFundingTextBlock": {
+          "description": "Text block context from which the funding entry was extracted. Optionally filled and intended to be used for offline analysis.",
+          "type": "string"
+        },
+        "DocPart": {
+          "enum": [
+            "UNSPECIFIED_DOC_PART",
+            "DOC_PREFIX",
+            "BEFORE_REFS",
+            "AFTER_REFS",
+            "DOC_SUFFIX"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "ParseSection": {
+          "enum": [
+            "UNKNOWN",
+            "ACKNOWLEDGEMENT",
+            "FOOTNOTE",
+            "NEAR_REFS",
+            "BODY"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "Source": {
+          "enum": [
+            "UNSPECIFIED",
+            "HTML",
+            "HTML_METADATA",
+            "PDF",
+            "XML_METADATA",
+            "XML_TEXT",
+            "URL_BASED_FUNDING"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -99270,7 +100262,6 @@
       "type": "object"
     },
     "SnippetExtraInfo": {
-      "description": "Extra snippet info used for snippet scoring / modification in superroot. Next ID: 11",
       "id": "SnippetExtraInfo",
       "properties": {
         "candidateInfo": {
@@ -99296,6 +100287,10 @@
           "description": "Snippet candidate index selected by snippet brain model. This field will get populated in SnippetFlow in superroot. go/snippets-brain",
           "format": "int32",
           "type": "integer"
+        },
+        "snippetsbrainModelInfo": {
+          "$ref": "SnippetExtraInfoSnippetsBrainModelInfo",
+          "description": "SnippetsBrain model information for snippets popup debug."
         }
       },
       "type": "object"
@@ -99330,9 +100325,6 @@
             "type": "string"
           },
           "type": "array"
-        },
-        "snippetSource": {
-          "type": "string"
         },
         "snippetText": {
           "description": "`snippet_text` will be filled by snippet brain flow in SR for model scoring and debugging purpose.",
@@ -99400,6 +100392,23 @@
           "description": "Final rank given by SnippetFlow.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SnippetExtraInfoSnippetsBrainModelInfo": {
+      "description": "Log model name, partition and input processor used to generate SnippetsBrain scores, if SnippetsBrain debugging is enabled.",
+      "id": "SnippetExtraInfoSnippetsBrainModelInfo",
+      "properties": {
+        "snippetsbrainModelName": {
+          "description": "The below fields are populated by SnippetFlow in superroot.",
+          "type": "string"
+        },
+        "snippetsbrainModelPartition": {
+          "type": "string"
+        },
+        "snippetsbrainTokenizerType": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -99978,6 +100987,12 @@
       },
       "type": "object"
     },
+    "SocialGraphApiProtoDailyRecurrence": {
+      "description": "Pattern for a DAILY (or every N day) recurrence. Time of the day that the notification will occur is taken from the Prompt that owns this recurrence. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoDailyRecurrence",
+      "properties": {},
+      "type": "object"
+    },
     "SocialGraphApiProtoDelegatedGroupId": {
       "description": "Represents a delegated group id, delegated groups refer to groups that are owned by another gaiaId, but this user has access to.",
       "id": "SocialGraphApiProtoDelegatedGroupId",
@@ -100105,6 +101120,89 @@
       },
       "type": "object"
     },
+    "SocialGraphApiProtoMonthlyDayRecurrence": {
+      "description": "Pattern for a MONTHLY recurrence. This Monthly reccurence supports: 1. Absolute days of the month (i.e. the 1st and 15th) 2. Relative day from the end of the month (i.e. -1 for last day, -2 for second-to-last day). Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoMonthlyDayRecurrence",
+      "properties": {
+        "monthDay": {
+          "description": "Absolute day of the month (if positive) or relative day from the end of the month (if negative). Example: 2nd and 20th of the month [2, 20]. Example: Last day of the month [-1]. Positive values should correspond to actual calendar day number (indexing starts at 1).",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "useLastDayIfMonthDayPastEnd": {
+          "description": "If true, month_day beyond the end of month (i.e. month_day=31 in February) will default to the last day of the month.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoMonthlyRecurrence": {
+      "description": "A MONTHLY recurrence can be one of a MonthlyDayRecurrence or MonthlyWeekdayRecurrence but not both. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoMonthlyRecurrence",
+      "properties": {
+        "monthlyDayRecurrence": {
+          "$ref": "SocialGraphApiProtoMonthlyDayRecurrence"
+        },
+        "monthlyWeekdayRecurrence": {
+          "$ref": "SocialGraphApiProtoMonthlyWeekdayRecurrence"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoMonthlyWeekdayRecurrence": {
+      "description": "Pattern for a MONTHLY recurrence. This Monthly reccurence supports: 1. The nth specific weekday of the month. For example, the 3rd Wednesday of the month. This represents the 3rd instance of a Wednesday of the month, regardless of what weekday the month started on. It does not necessarily mean the Wednesday on the 3rd week of the month. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoMonthlyWeekdayRecurrence",
+      "properties": {
+        "weekDay": {
+          "description": "The nth occurrence of week_day to match. I.e. For 3rd Wednesday of the month, week_day = WEDNESDAY and week_day_number = 3. Values beyond the end of the month are skipped. Negative values are relative from end of month (e.g. Last Friday of every month).",
+          "enum": [
+            "DAY_OF_WEEK_UNSPECIFIED",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ],
+          "enumDescriptions": [
+            "The day of the week is unspecified.",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "type": "string"
+        },
+        "weekDayNumber": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoNotificationTrigger": {
+      "description": "Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoNotificationTrigger",
+      "properties": {
+        "daysBeforeActiveDate": {
+          "description": "Positive number of days before active date. The value 0 will denote a notification on the same day.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "notificationTimeOfDay": {
+          "$ref": "GoogleTypeTimeOfDay",
+          "description": "Time of day that notification is sent to user. This is local to the user's device."
+        }
+      },
+      "type": "object"
+    },
     "SocialGraphApiProtoPartialNameOptions": {
       "id": "SocialGraphApiProtoPartialNameOptions",
       "properties": {
@@ -100209,6 +101307,64 @@
         },
         "givenNameSpec": {
           "$ref": "SocialGraphApiProtoPartialNameOptionsNamePartSpec"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoPrompt": {
+      "description": "Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoPrompt",
+      "properties": {
+        "content": {
+          "$ref": "SocialGraphApiProtoPromptContent"
+        },
+        "lastDismissDate": {
+          "$ref": "GoogleTypeDate",
+          "description": "The most recent day the user dismissed this prompt. Empty means the user has never dismissed the prompt."
+        },
+        "notificationTriggers": {
+          "description": "If this is empty, only the \"Prompt Spark\" will be displayed (in the time-range read from per type config), no push notifications will be shown. If push notification are configured with this field, the \"Prompt Spark\" time-range will be determined by earliest notification value here.",
+          "items": {
+            "$ref": "SocialGraphApiProtoNotificationTrigger"
+          },
+          "type": "array"
+        },
+        "purpose": {
+          "description": "Read-only. This is derived from the containing field value.",
+          "enum": [
+            "UNKNOWN_PURPOSE",
+            "BIRTHDAY",
+            "ANNIVERSARY",
+            "SIGNIFICANT_DATE",
+            "CONNECTION_FREQUENCY"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "recurrence": {
+          "$ref": "SocialGraphApiProtoRecurrence",
+          "description": "How frequently will this prompt occur and how many times."
+        },
+        "uniquePromptId": {
+          "description": "Prompt ID is generated by server on initial mutate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoPromptContent": {
+      "description": "Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoPromptContent",
+      "properties": {
+        "title": {
+          "description": "Title of prompt/spark being sent.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -100320,6 +101476,56 @@
           "type": "array"
         }
       },
+      "type": "object"
+    },
+    "SocialGraphApiProtoRecurrence": {
+      "description": "Flexible Recurrence proto to be used with People Prompts. Examples: Single recurrence that occurs on a specific date: single_recurrence { date { year: 2022 month: 11 day: 17 } } Yearly recurrence such as a birthday or anniversary: yearly_recurrence { monthly_pattern { monthly_day_recurrence { month_day: 17 } } months: JULY } Weekly reccurrence such as: every two weeks on Monday: every: 2 weekly_recurrence { week_day: MONDAY } Monthly recurrence such as: third Thursday of every month: monthly_recurrence { monthly_weekday_recurrence { week_day: THURSDAY week_day_number: 3 } } Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService) TODO(b/240850530) add link to validators when created.",
+      "id": "SocialGraphApiProtoRecurrence",
+      "properties": {
+        "dailyRecurrence": {
+          "$ref": "SocialGraphApiProtoDailyRecurrence"
+        },
+        "every": {
+          "description": "Multiplier on the frequency of the recurrence. Use this to specify patterns that recur every X days, months, years, etc. Example: [remind me to call mom every 2nd week]. Default value will be considered 1 (every day,every week,...) and not 0. This is ignored for a SingleRecurrence. Optional.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "monthlyRecurrence": {
+          "$ref": "SocialGraphApiProtoMonthlyRecurrence"
+        },
+        "recurrenceEndDate": {
+          "$ref": "GoogleTypeDateTime",
+          "description": "Ends at abstract DateTime. (inclusive)"
+        },
+        "recurrenceStart": {
+          "$ref": "GoogleTypeDateTime",
+          "description": "The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence and YearlyRecurrence."
+        },
+        "repeatCount": {
+          "description": "Will repeat only a finite number of times. This is the original number of times the recurrence will repeat and not how many times are left for it to repeat.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "repeatForever": {
+          "$ref": "SocialGraphApiProtoRecurrenceRepeatForever",
+          "description": "Will continue to repeat until prompt is deleted."
+        },
+        "singleRecurrence": {
+          "$ref": "SocialGraphApiProtoSingleRecurrence"
+        },
+        "weeklyRecurrence": {
+          "$ref": "SocialGraphApiProtoWeeklyRecurrence"
+        },
+        "yearlyRecurrence": {
+          "$ref": "SocialGraphApiProtoYearlyRecurrence"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoRecurrenceRepeatForever": {
+      "description": "An internal message to signal that this recurrence has no end date.",
+      "id": "SocialGraphApiProtoRecurrenceRepeatForever",
+      "properties": {},
       "type": "object"
     },
     "SocialGraphApiProtoSearchProfileData": {
@@ -100632,6 +101838,16 @@
       },
       "type": "object"
     },
+    "SocialGraphApiProtoSingleRecurrence": {
+      "description": "This prompt will occur one time only. Could be a single event such as a graduation or a single connection reminder e.g. remind me to call X on 2022/03/19. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoSingleRecurrence",
+      "properties": {
+        "date": {
+          "$ref": "GoogleTypeDate"
+        }
+      },
+      "type": "object"
+    },
     "SocialGraphApiProtoSyncInfo": {
       "description": "LINT.IfChange",
       "id": "SocialGraphApiProtoSyncInfo",
@@ -100691,6 +101907,88 @@
       },
       "type": "object"
     },
+    "SocialGraphApiProtoWeeklyRecurrence": {
+      "description": "Pattern for a WEEKLY recurrence. You must specify at least one week_day. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoWeeklyRecurrence",
+      "properties": {
+        "weekDay": {
+          "description": "Set of weekdays the recurrence applies to.",
+          "items": {
+            "enum": [
+              "DAY_OF_WEEK_UNSPECIFIED",
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ],
+            "enumDescriptions": [
+              "The day of the week is unspecified.",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoYearlyRecurrence": {
+      "description": "Pattern for a YEARLY recurrence. A YEARLY recurrence is specified using a monthly pattern and a set of months the pattern applies to. Some examples: \"Every January 16\" : monthly_pattern { month_day: 16 } months: JANUARY \"Last day of every April and August\" : monthly_pattern { month_day: -1 } months: APRIL months: AUGUST Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)",
+      "id": "SocialGraphApiProtoYearlyRecurrence",
+      "properties": {
+        "monthlyPattern": {
+          "$ref": "SocialGraphApiProtoMonthlyRecurrence",
+          "description": "The monthly pattern to recur."
+        },
+        "months": {
+          "description": "The months of the year to apply the pattern.",
+          "items": {
+            "enum": [
+              "MONTH_UNSPECIFIED",
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ],
+            "enumDescriptions": [
+              "The unspecified month.",
+              "The month of January.",
+              "The month of February.",
+              "The month of March.",
+              "The month of April.",
+              "The month of May.",
+              "The month of June.",
+              "The month of July.",
+              "The month of August.",
+              "The month of September.",
+              "The month of October.",
+              "The month of November.",
+              "The month of December."
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "SocialGraphWireProtoPeopleapiAffinityMetadata": {
       "description": "Extra ranking info returned with affinity data. This info is returned by DAS and passed to PAPI clients (Yenta), where it is used for ranking and filtering device and server suggestions together.",
       "id": "SocialGraphWireProtoPeopleapiAffinityMetadata",
@@ -100742,17 +102040,6 @@
       "properties": {
         "availabilities": {
           "$ref": "GoogleInternalAppsWaldoV1alphaUserAvailabilities"
-        }
-      },
-      "type": "object"
-    },
-    "SocialGraphWireProtoPeopleapiExtensionCorpDeskbookingLocationExtendedData": {
-      "description": "Corp Deskbooking-related extension data for use with Location.",
-      "id": "SocialGraphWireProtoPeopleapiExtensionCorpDeskbookingLocationExtendedData",
-      "properties": {
-        "validityInterval": {
-          "$ref": "GoogleTypeInterval",
-          "description": "If present, indicates that the location is valid only for this time interval."
         }
       },
       "type": "object"
@@ -103646,6 +104933,7 @@
             "CONTENT_APPLICATION_XPROTOBUF",
             "CONTENT_VIDEO_WEBM",
             "CONTENT_AUDIO_WEBM",
+            "CONTENT_TEXT_CONVERTED_XML",
             "CONTENT_NUM_TYPES"
           ],
           "enumDescriptions": [
@@ -103782,7 +105070,8 @@
             "Binary protocol buffers",
             "Handles the video/webm content type",
             "Handles the audio/webm content type",
-            "Add new content types above this"
+            "CONTENT_APPLICATION_XML or",
+            "CONTENT_TEXT_XML converted to HTML. Add new content types above this"
           ],
           "type": "string"
         },
@@ -104893,8 +106182,11 @@
               "APPS_ST_PRICE_INTENT",
               "APPS_ST_AUDIENCE_INTENT",
               "APPS_PERSONALIZED_TOPIC_QUERY_EVENT_LEVEL",
+              "APPS_PERSONALIZED_TG_QUERY_EVENT_LEVEL",
               "APPS_PERSONALIZED_ALL_GAME_QUERIES_EVENT_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_EVENT_LEVEL",
+              "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_EVENT_LEVEL",
+              "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_EVENT_LEVEL",
               "CDP_PROMOTIONAL_IMAGE_LOCALE_MATCH",
               "CDP_PROMOTIONAL_IMAGE_LOCALE_MISMATCH",
               "CDP_SCREENSHOT_LOCALE_MISMATCH",
@@ -105016,6 +106308,8 @@
               "TRUSTED_GENOME_RELATED_QUERY_CLUSTER_EVENT",
               "NAV_TG_RELATED_QUERY_EVENT",
               "PROMOTABLE_APPS_EVENT",
+              "PROMOTABLE_APPS_STRONG_CAT_EVENT",
+              "PROMOTABLE_APPS_CAT_EVENT",
               "INLINE_DETAILS_TQUALITY_CHECK_PASS",
               "INLINE_DETAILS_TQUALITY_CHECK_FAIL",
               "INLINE_DETAILS_IS_INLINE_URL",
@@ -105026,6 +106320,7 @@
               "CLUSTER_REQUEST_LATENCY_EVENT_LEVEL",
               "EDITORS_CHOICE_CLUSTER_SERP_EVENT_LEVEL",
               "BESTK_CLUSTER_SERP_EVENT_LEVEL",
+              "LIVEOPS_CLUSTER_SERP_EVENT_LEVEL",
               "INLINE_DETAILS_AQUALITY_CHECK_PASS",
               "INLINE_DETAILS_AQUALITY_CHECK_FAIL",
               "FRESH_RESULTS_SEEKING_CURRENT_YEAR_EVENT_LEVEL",
@@ -105038,6 +106333,8 @@
               "DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL",
               "DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL",
               "PTP_CLUSTER_SERP_P13N_RANKING_EVENT_LEVEL",
+              "BROAD_INTENT_REWEIGHTING_EVENT_LEVEL",
+              "QUERY_DEPENDENT_SNIPPET_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "RESERVED_4",
               "RESERVED_5",
@@ -105303,8 +106600,11 @@
               "APPS_SEARCH_TOPIC_RFY_CLUSTER_AT_SESSION_LEVEL",
               "APPS_SEARCH_MINI_TOP_CHARTS_CLUSTER_AT_SESSION_LEVEL",
               "APPS_PERSONALIZED_TOPIC_QUERY_SESSION_LEVEL",
+              "APPS_PERSONALIZED_TG_QUERY_SESSION_LEVEL",
               "APPS_PERSONALIZED_ALL_GAME_QUERIES_SESSION_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_SESSION_LEVEL",
+              "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_SESSION_LEVEL",
+              "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_SESSION_LEVEL",
               "PLAY_STORE_SHOW_CART",
               "MOVIES_RENTER",
               "LOYALTY_HOME_FIRST_TAB_SESSION_LEVEL",
@@ -105753,12 +107053,16 @@
               "TRUSTED_GENOME_RELATED_QUERY_CLUSTER_SESSION",
               "NAV_TG_RELATED_QUERY_SESSION",
               "PROMOTABLE_APPS_SESSION",
+              "PROMOTABLE_APPS_STRONG_CAT_SESSION",
+              "PROMOTABLE_APPS_CAT_SESSION",
               "GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL",
+              "GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SERVER_SESSION_LEVEL",
               "LIVE_OPS_ROI_HOLDBACK",
               "TRUSTED_GENOME_OR_BROAD_INTENT_CATEGORICAL_QUERY_CLUSTER_SESSION",
               "CLUSTER_REQUEST_LATENCY_SESSION_LEVEL",
               "EDITORS_CHOICE_CLUSTER_SERP_SESSION_LEVEL",
               "BESTK_CLUSTER_SERP_SESSION_LEVEL",
+              "LIVEOPS_CLUSTER_SERP_SESSION_LEVEL",
               "WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_SESSION_LEVEL",
               "ALTERNATE_DEVICE_PRESENT_SESSION_LEVEL",
               "MULTIPLE_ALTERNATE_DEVICES_PER_FORM_FACTOR_SESSION_LEVEL",
@@ -105802,6 +107106,7 @@
               "FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_SESSION_LEVEL",
               "FOP_STEERING_PROMOTION_CART_ADD_FOP_SESSION_LEVEL",
               "FOP_STEERING_PROMOTION_CART_CHANGE_FOP_SESSION_LEVEL",
+              "FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_SESSION_LEVEL",
               "PTP_CLUSTER_SERP_P13N_RANKING_SESSION_LEVEL",
               "QUERY_DEPENDENT_SNIPPET_FRONT_END_SESSION_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_SESSION_LEVEL",
@@ -105819,6 +107124,47 @@
               "SEND_PAYMENT_DECLINE_EMAIL_SESSION_LEVEL",
               "PSS_GENERAL_PAGINATION_SESSION_LEVEL",
               "PSS_GENERAL_PAGINATION_GAME_SEEKING_SESSION_LEVEL",
+              "INLINE_ADD_PAYMENT_CREDIT_CARD_ELIGIBLE",
+              "INLINE_ADD_PAYMENT_CARRIER_BILLING_ELIGIBLE",
+              "INLINE_ADD_PAYMENT_EWALLET_ELIGIBLE",
+              "INLINE_ADD_PAYMENT_NO_ELIGIBLE_TYPE",
+              "SHOULD_NOT_SEE_NOW_CONTENT_AH",
+              "SHOULD_SEE_NOW_CONTENT_AH_K1",
+              "SHOULD_SEE_NOW_CONTENT_AH_K2",
+              "SHOULD_SEE_NOW_CONTENT_AH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_AH_GTE_K5",
+              "SHOULD_NOT_SEE_NOW_CONTENT_GH",
+              "SHOULD_SEE_NOW_CONTENT_GH_K1",
+              "SHOULD_SEE_NOW_CONTENT_GH_K2",
+              "SHOULD_SEE_NOW_CONTENT_GH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_GH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_AH_K1",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_AH_K2",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_AH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_AH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_GH_K1",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_GH_K2",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_GH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_GH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_AH_K1",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_AH_K2",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_AH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_AH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_GH_K1",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_GH_K2",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_GH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_GH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_AH_K1",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_AH_K2",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_AH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_AH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_K1",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_K2",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_GTE_K5",
+              "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL",
+              "WALLET_WELLBEING_ALERT_SESSION_LEVEL",
+              "BROAD_INTENT_REWEIGHTING_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL",
               "CART_ABANDONMENT_USER_LEVEL",
@@ -105857,8 +107203,11 @@
               "APPS_DETAILS_PAGE_PROMOTION_EXP_3_PREMIUM_APP_NEVERS_USER_LEVEL",
               "APPS_DETAILS_PAGE_PROMOTION_EXP_3_IN_APP_ITEM_BUYERS_USER_LEVEL",
               "APPS_PERSONALIZED_TOPIC_QUERY_USER_LEVEL",
+              "APPS_PERSONALIZED_TG_QUERY_USER_LEVEL",
               "APPS_PERSONALIZED_ALL_GAME_QUERIES_USER_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_USER_LEVEL",
+              "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_USER_LEVEL",
+              "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_USER_LEVEL",
               "SUBSCRIPTION_CANCELLATION_PROMOTION_USER_LEVEL",
               "SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_USER_LEVEL",
               "SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_USER_LEVEL",
@@ -106153,11 +107502,13 @@
               "NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V2",
               "NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V3",
               "NOVEL_TOPIC_CLUSTER_IMPRESSED_AT_USER_LEVEL",
+              "IPS_ITEM_LEVEL_RECS_REMOVED_USER_LEVEL",
               "ALLOWLIST_EXPANSION_FOR_P13N_LIVEOPS_USER_LEVEL",
               "SURVEY_RECS_LIST_AT_USER_LEVEL",
               "DEV_OFFER_SWGOH_USER_LEVEL",
               "ALLOWLIST_EXPANSION_FOR_P13N_NOTIFICATIONS_USER_LEVEL",
               "GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_USER_LEVEL",
+              "GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SERVER_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL",
@@ -106169,10 +107520,15 @@
               "FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_USER_LEVEL",
               "FOP_STEERING_PROMOTION_CART_ADD_FOP_USER_LEVEL",
               "FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL",
+              "FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL",
               "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL",
+              "HAS_LAST_28D_CART_ABANDONMENT_USER_LEVEL",
+              "HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL",
               "LINK_BIOMETRICS_USER_LEVEL",
+              "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
+              "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -106325,6 +107681,9 @@
               "",
               "",
               "",
+              "",
+              "",
+              "",
               "Indicates triggering of Topic RFY cluster",
               "Triggered Mini Topcharts in apps search.",
               "",
@@ -106430,7 +107789,9 @@
               "",
               "Event level test code that indicates that a tg related query search cluster could be shown.",
               "Event level test code that indicates that tg related queries could be inserted to related query cluster for navigational search.",
-              "Event level testcode for promotable apps in search.",
+              "Event level testcode for promotable apps in search. STRONG_CAT and CAT are for strong CAT and general CAT query slices.",
+              "",
+              "",
               "Event level test codes containing result of tquality lookup during market details url matching. A failed tquality result suppresses inline details.",
               "",
               "Event level test code indicating external details URL is an inline URL.",
@@ -106439,6 +107800,7 @@
               "",
               "",
               "Event level test code for Clusters in SERP",
+              "",
               "",
               "",
               "Event level test codes containing result of aQuality lookup during market details url matching. A failed aQuality result suppresses inline details.",
@@ -106453,6 +107815,8 @@
               "",
               "",
               "Event level test code for cluster, p13n ranking.",
+              "TestCode for Broad Intent Reweighting Event Level.",
+              "Event level test code for query dependent snippet.",
               "",
               "",
               "",
@@ -106711,6 +108075,9 @@
               "",
               "",
               "Subscription retry fop flow when the primary fop is dcb.",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -107167,11 +108534,15 @@
               "",
               "Session level test code that indicates that a tg related query search cluster could be shown.",
               "Session level test code that indicates that tg related queries could be inserted to related query cluster for navigational search.",
-              "Event level test code that indicates promotable apps boosting is enabled.",
+              "Event level test code that indicates promotable apps boosting is enabled. STRONG_CAT and CAT are for strong CAT and general CAT query slices.",
+              "",
+              "",
               "Session level test code for Growth Coffee Card Phase 1 launch, for tracking users who made eligible purchases and are eligible for the GCC in purchase flow.",
+              "Session level test code for Growth Coffee Card, for tracking users who made eligible purchases and are eligible for the GCC in purchase flow. This test code is logged on server side.",
               "Test code for live ops ROI holdback experiment. Record the test code if user was in control/treatment and was eligible to see at least one liveop prior to filtering. For more info, see: go/roi-design",
               "Session level test code that indicates that grouping is applied on TG or broad intent categorical quries.",
               "Session level test code for clusters in SERP",
+              "",
               "",
               "",
               "Session level test code logged when the wide media card has invalid video asset in the asset agnostic 3x experiment.",
@@ -107217,6 +108588,7 @@
               "Session level test code for Fop Steering Promotion with initial billing profile.",
               "Session level test code for Fop Steering Promotion displayed in cart with add fop action.",
               "Session level test code for Fop Steering Promotion displayed in cart with change fop action.",
+              "Session level test code for Fop Steering Promotion displayed in cart with apply promotion action.",
               "Session level test code for cluster, p13n ranking.",
               "Session level test code for query dependent snippet. It is logged when the front end shows at least 1 query dependent snippet.",
               "Session level test code that indicates that at least one high churn fop options is available for user when visiting add fop page for subscription purchase. Deprecated, use 10779 instead.",
@@ -107234,6 +108606,47 @@
               "Session level test code that indicates the subscription payment decline email is sent.",
               "Session level test code that indicates the related query cluster is supposed to be displayed at the manual pagination location.",
               "Besides (10794), the query is also game seeking.",
+              "Session level test code that marks eligibility of inline payment add. Eligibility bucketed based on payment method types.",
+              "",
+              "",
+              "",
+              "Session level test codes for Now! content coverage metrics. Any Now! content on Apps Home.",
+              "",
+              "",
+              "",
+              "",
+              "Any Now! content on Games Home.",
+              "",
+              "",
+              "",
+              "",
+              "New release Now! content on Apps Home.",
+              "",
+              "",
+              "",
+              "New release Now! content on Games Home.",
+              "",
+              "",
+              "",
+              "Editorial Now! content on Apps Home.",
+              "",
+              "",
+              "",
+              "Editorial Now! content on Games Home.",
+              "",
+              "",
+              "",
+              "Live Ops Now! content on Apps Home.",
+              "",
+              "",
+              "",
+              "Live Ops Now! content on Games Home.",
+              "",
+              "",
+              "",
+              "Session level test code for Quest Platform Loyalty Stamp Card in Purchase flow.",
+              "TestCode for slicing the users cohorts that should have received a budget Warning alert",
+              "TestCode for Broad Intent Reweighting Session Level.",
               "",
               "User should see the live op cluster.",
               "Cart abandonment flow for purchase flow.",
@@ -107272,6 +108685,9 @@
               "promotion for Nevers in App Details Page. User saw/would have seen the details page premium app",
               "promotion for Nevers in App Details Page. User saw/would have seen the details page in-app item",
               "promotion for Lapsed Buyers in App Details Page.",
+              "",
+              "",
+              "",
               "",
               "",
               "Subscription cancellation flow for purchase flow per user.",
@@ -107568,11 +108984,13 @@
               "",
               "",
               "",
+              "User level test code for tracking users who have IPS low appeal recommendations removed from their feed.",
               "User level test code for tracking users who have p13n LiveOps impressions.",
               "User-level test code logged when PRS returns a survey RecsList.",
               "User level test code logged when the Dev Offer EAP campaign is about to be returned.",
               "User level test code for tracking users who have p13n Notifications candidates.",
               "User level test code for Growth Coffee Card Phase 1 launch, for tracking users who made eligible purchases and are eligible for the GCC in purchase flow.",
+              "User level test code for Growth Coffee Card, for tracking users who made eligible purchases and are eligible for the GCC in purchase flow. This test code is logged on server side.",
               "User level test code that indicates that at least one high churn fop options is available for user when visiting add fop page for subscription purchase. Deprecated, use 20361 instead.",
               "",
               "",
@@ -107584,10 +109002,15 @@
               "User level test code for Fop Steering Promotion with initial billing profile.",
               "User level test code for Fop Steering Promotion displayed in cart with add fop action.",
               "User level test code for Fop Steering Promotion displayed in cart with change fop action.",
+              "User level test code for Fop Steering Promotion displayed in cart with apply promotion action.",
               "User level test code for Quest Platform Loyalty Stamp Card in Purchase flow.",
               "User level test code for users who have made any monetization behavior(sub, iap) before (controlled by fsUlyssesBuyerState), used for AH/GH monetization experiments.",
               "User level test code for users who have made any monetization behavior(sub, iap) for the last 180 days (controlled by ULYSSES_OOP_SPEND_PER_PURCHASE_180D), used for AH/GH monetization experiments.",
+              "User level test code for users who have any purchase card abandon behavior in the last 28 day (controlled by LAST_28D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
+              "User level test code for users who have any purchase card abandon behavior in the last 7 day (controlled by LAST_7D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for link biometrics for free app acquisitions.",
+              "User level test code for post success add backup flow .",
+              "User level test code for skipping ckechmark screen with backup flow.",
               ""
             ],
             "type": "string"
@@ -109134,6 +110557,7 @@
             "STARBURST_V4_01",
             "STARBURST_VISUAL_V4",
             "STARBURST_V5",
+            "STARBURST_V5_5",
             "ATTRIBUTE_EMBEDDING_V1",
             "PHOTOCAT_V1",
             "PHOTOCAT_V3",
@@ -109161,6 +110585,7 @@
             "GCN_LAYOUT",
             "FACE_DETECTION_V1",
             "FACE_DETECTION_LANDMARKLESS_V2",
+            "FACE_DETECTION_V2",
             "PRODUCT_POSE_SHOE_V1",
             "GOCR_LATEST",
             "GOCR_STABLE",
@@ -109235,6 +110660,7 @@
             "",
             "Starburstv4 with stretch resize.",
             "",
+            "",
             "LINT.ThenChange(//depot/google3/image/content/proto/image_content.proto)",
             "Attribute embedding versions.",
             "PhotoCat versions. The photocat v1 signal is based on the photocat qic v1 model trained from the Starburst v3 embeddings and the ICA labels.",
@@ -109262,6 +110688,7 @@
             "OCR Page layout analysis versions.",
             "",
             "Face Detection versions. These versions are only used with module_wanted: \"face_detection\", with the intent of deprecating module_wanted: \"face_detection_nextgen\". When using FACE_DETECTION_V1, models with and without landmarks are specified by setting the \"Source\" value in VisualSearchRequestContext.face_detection_options to either FACESSD or FACESSD_LANDMARKLESS. Going forward, all new versions of face detectors will use the following enums to indicate whether the model produces landmarks, with a version numbering specifying how recent that model is. E.g. FACE_DETECTION_V3 will use a newer face detection model than FACE_DETECTION_V2, while FACE_DETECTION_LANDMARKLESS_V3 will use a newer landmarkless face detection model than FACE_DETECTION_LANDMARKLESS_V2.",
+            "",
             "",
             "Pursuit product pose versions.",
             "GOCR versions.",
@@ -110176,6 +111603,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "nTextsInSameFrame": {
+          "description": "# of OCR texts that appear in the same frame. If duration of this OCR text is not zero, the maximum number among multiple frames where this OCR text appears is set to this field.",
+          "format": "int32",
+          "type": "integer"
+        },
         "occurrenceCount": {
           "description": "The number of OCR texts that have the same text among temporally-merged OCR texts.",
           "format": "float",
@@ -110985,7 +112417,7 @@
       "type": "object"
     },
     "VideoContentSearchVideoAnchor": {
-      "description": "Next ID: 22",
+      "description": "Next ID: 23",
       "id": "VideoContentSearchVideoAnchor",
       "properties": {
         "anchorScore": {
@@ -111018,7 +112450,8 @@
             "RADISH_QA",
             "GENERATIVE_ASR",
             "ASR_TRANSCRIPT",
-            "COMMENT"
+            "COMMENT",
+            "GENERATIVE_ASR_V2"
           ],
           "enumDescriptions": [
             "",
@@ -111043,8 +112476,13 @@
             "QUESTION_AND_ANSWER anchors that are generated via Radish in Goldmine.",
             "Generative ASR anchors.",
             "Anchors where each timed anchor represents one sentence in the ASR transcript.",
-            "Anchors extracted from a YouTube comment."
+            "Anchors extracted from a YouTube comment.",
+            "Generative ASR anchors V2."
           ],
+          "type": "string"
+        },
+        "contextText": {
+          "description": "Context text from ASR of long duration, used for longT5 models.",
           "type": "string"
         },
         "destinationUrl": {
@@ -111385,7 +112823,8 @@
             "RADISH_QA",
             "GENERATIVE_ASR",
             "ASR_TRANSCRIPT",
-            "COMMENT"
+            "COMMENT",
+            "GENERATIVE_ASR_V2"
           ],
           "enumDescriptions": [
             "",
@@ -111410,7 +112849,8 @@
             "QUESTION_AND_ANSWER anchors that are generated via Radish in Goldmine.",
             "Generative ASR anchors.",
             "Anchors where each timed anchor represents one sentence in the ASR transcript.",
-            "Anchors extracted from a YouTube comment."
+            "Anchors extracted from a YouTube comment.",
+            "Generative ASR anchors V2."
           ],
           "type": "string"
         },
@@ -111496,7 +112936,8 @@
               "RADISH_QA",
               "GENERATIVE_ASR",
               "ASR_TRANSCRIPT",
-              "COMMENT"
+              "COMMENT",
+              "GENERATIVE_ASR_V2"
             ],
             "enumDescriptions": [
               "",
@@ -111521,7 +112962,8 @@
               "QUESTION_AND_ANSWER anchors that are generated via Radish in Goldmine.",
               "Generative ASR anchors.",
               "Anchors where each timed anchor represents one sentence in the ASR transcript.",
-              "Anchors extracted from a YouTube comment."
+              "Anchors extracted from a YouTube comment.",
+              "Generative ASR anchors V2."
             ],
             "type": "string"
           },
@@ -111911,9 +113353,11 @@
             "STARBURST_V3",
             "STARBURST_V4",
             "STARBURST_VISUAL_V4",
-            "STARBURST_V5"
+            "STARBURST_V5",
+            "STARBURST_V5_5"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -113343,6 +114787,8 @@
             "MODEL_RACY_WATCHPAGE_V4",
             "MODEL_RACY_SHORTS_WATCHPAGE_V1",
             "MODEL_RACY_SHORTS_WATCHPAGE_V1_FLAGGED",
+            "MODEL_RACY_SHORTS_WATCHPAGE_V2",
+            "MODEL_RACY_SHORTS_WATCHPAGE_V2_FLAGGED",
             "MODEL_RACY_THUMB_2019_04_02",
             "MODEL_RACY_THUMB_2019_08_12",
             "MODEL_RACY_THUMB_2019_08_12A",
@@ -113390,6 +114836,8 @@
             "Racy watchpage model v4 (go/racy-watchpage-v4).",
             "Racy shorts watchpage model v1.",
             "",
+            "Racy shorts watchpage model v2.",
+            "",
             "Racy thumb model which corresponds to https://mldash.corp.google.com/experiments/156747527161891342",
             "Racy thumb model V3 based on cotraining. https://mldash.corp.google.com/experiments/2626243069925683800",
             "Historical: Used before 05/06/2020. Racy thumb model V3 based on cotraining. Variant 1. https://mldash.corp.google.com/experiments/2626243069925683800",
@@ -113428,7 +114876,8 @@
             "REASON_RACY_WARTCHPAGE_RATING",
             "REASON_RACY_THUMBNAIL_RATING",
             "REASON_THUMBNAIL_REPORT",
-            "REASON_VIDEO_REPORT"
+            "REASON_VIDEO_REPORT",
+            "REASON_CLUSTER_HEURISTIC"
           ],
           "enumDescriptions": [
             "",
@@ -113436,7 +114885,8 @@
             "",
             "Overwrite using CorpusTable::kDefaultThumbnailRacyRatingScoreCol.",
             "Overwrite using thumbnail user reports and elmo score.",
-            "Overwrite using video user reports and elmo score."
+            "Overwrite using video user reports and elmo score.",
+            "Overwrite using cluster heuristics"
           ],
           "type": "string"
         },
@@ -124116,7 +125566,7 @@
       "type": "object"
     },
     "YoutubeDiscoveryLegosLegosAnnotation": {
-      "description": "The annotation of a document by a given entity, for a given type of relationship. The annotation should be valid for the complete annotated document, not simply a part of the document such as a video segment.",
+      "description": "The annotation of a document by a given entity, for a given type of relationship.",
       "id": "YoutubeDiscoveryLegosLegosAnnotation",
       "properties": {
         "entity": {
@@ -124127,9 +125577,13 @@
           "$ref": "YoutubeDiscoveryLegosLegosFormatRelationship",
           "description": "The annotation is a format annotation, i.e. it tells the format of the video."
         },
+        "present": {
+          "$ref": "YoutubeDiscoveryLegosLegosPresentRelationship",
+          "description": "The annotation is present in the video. Semantic Legos and Presence Legos naturally overlap and can contain the same entities. However, we do not enforce a strict subset relation."
+        },
         "semantic": {
           "$ref": "YoutubeDiscoveryLegosLegosSemanticRelationship",
-          "description": "The annotation is a semantic annotation, i.e. it tells what the document is about."
+          "description": "The annotation is a semantic annotation, i.e. it tells what the document is about and what the reasons to watch the video are. The annotation should be valid for the complete annotated document, not simply a part of the document such as a video segment."
         },
         "taxonomic": {
           "$ref": "YoutubeDiscoveryLegosLegosTaxonomicRelationship",
@@ -124175,6 +125629,25 @@
           "description": "Format classification confidence score, in the 0-1 range. A score of XX% means that we expect at least XX% of the documents annotated with this format to be correctly annotated; i.e. thresholding at XX% yields a precision of at least XX%.",
           "format": "float",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeDiscoveryLegosLegosPresentRelationship": {
+      "description": "Description of a present Legos annotation.",
+      "id": "YoutubeDiscoveryLegosLegosPresentRelationship",
+      "properties": {
+        "confidence": {
+          "description": "Confidence score. Thresholding at the confidence score at 0.XX yields annotations of precision of at least XX%.",
+          "format": "float",
+          "type": "number"
+        },
+        "contexts": {
+          "description": "Extra context about how the entity relates to the document. Typically vertical-specific. Please refrain from populating this field as we're working on migrating most of the use cases to the LegosEntity proto so clients don't have to scan all relationships to know which annotations they may be interested in.",
+          "items": {
+            "$ref": "YoutubeDiscoveryLegosLegosSemanticRelationshipContext"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -124305,7 +125778,8 @@
             "HAS_A_VOTING_MID",
             "GEO_LEGOS_TEST_SET_V2_POLITICAL",
             "GEO_LEGOS_TEST_SET_V2_TRAVEL_DESTINATIONS",
-            "GEO_LEGOS_TEST_SET_V2_DINING"
+            "GEO_LEGOS_TEST_SET_V2_DINING",
+            "GEO_LEGOS_TEST_SET_V2_HOTEL"
           ],
           "enumDescriptions": [
             "",
@@ -124399,6 +125873,7 @@
             "To help with monitoring: marks preexisting annotations before applying rules that increase recall for this mid.",
             "",
             "To use in Geo Legos launch report. Each context defines a slice of docs to subsample in a test.",
+            "",
             "",
             ""
           ],
