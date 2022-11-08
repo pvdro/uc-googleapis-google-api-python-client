@@ -1046,7 +1046,7 @@
       }
     }
   },
-  "revision": "20221028",
+  "revision": "20221104",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -16670,6 +16670,13 @@
           },
           "type": "array"
         },
+        "devicesAfterPromoters": {
+          "description": "DeviceInfo for devices after the filters and promoters. - When device targeting is only configured for single target, these are ambiguous devices that would have been the output of Lumos. Downstream may perform extra check before disambiguation dialog. For example, Media Initiation checks playability for devices. The output here is before the check. - When configured for multi-target, these are just the target devices. For privacy consideration, we may only log device id field inside.",
+          "items": {
+            "$ref": "AssistantLogsDeviceInfoLog"
+          },
+          "type": "array"
+        },
         "finalTargetDevice": {
           "$ref": "AssistantLogsDeviceInfoLog",
           "description": "the final targeted device selected by playability filter or DeviceSelectionDialog"
@@ -17213,7 +17220,8 @@
             "MEDIA_PLAYBACK_PROMOTER",
             "SAME_NAME_DEVICE_PROMOTER",
             "PHONE_TARGETING_PROMOTER",
-            "TRAITS_PROMOTER"
+            "TRAITS_PROMOTER",
+            "DEVICE_TYPE_PROMOTER"
           ],
           "enumDescriptions": [
             "",
@@ -17230,6 +17238,7 @@
             "",
             "",
             "promoters",
+            "",
             "",
             "",
             "",
@@ -17915,7 +17924,8 @@
             "MEDIA_PLAYBACK_PROMOTER",
             "SAME_NAME_DEVICE_PROMOTER",
             "PHONE_TARGETING_PROMOTER",
-            "TRAITS_PROMOTER"
+            "TRAITS_PROMOTER",
+            "DEVICE_TYPE_PROMOTER"
           ],
           "enumDescriptions": [
             "",
@@ -17932,6 +17942,7 @@
             "",
             "",
             "promoters",
+            "",
             "",
             "",
             "",
@@ -19046,7 +19057,7 @@
       "type": "object"
     },
     "AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData": {
-      "description": "Next ID: 40",
+      "description": "Next ID: 42",
       "id": "AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData",
       "properties": {
         "actionProjectConfigs": {
@@ -19124,6 +19135,27 @@
           "description": "Other agent id + foreign id pairs associated with the device. This can be used to represent a group of devices (e.g. Sonos' bonded zone) as a single device, or a device that comes in through different sync flows (e.g. Newman with a Nest camera).",
           "items": {
             "$ref": "AssistantVerticalsHomeautomationProtoAgentDeviceId"
+          },
+          "type": "array"
+        },
+        "otherDeviceSources": {
+          "description": "Additional device sources. This can be the result of the device being merged with other devices with a different source.",
+          "items": {
+            "enum": [
+              "UNKNOWN",
+              "CLOUD_SYNC",
+              "ASSISTANT_SETTING_OOBE",
+              "LOCAL_SYNC",
+              "CHIP_SYNC"
+            ],
+            "enumDescriptions": [
+              "",
+              "Device is created through HA2 SyncDevices flow, are HA2 cloud agent devices. ultravox is a cloud agent as well as surface device and it's using Sync flow.",
+              "Device created through Assistant Setting at OOBE time, they're things that are mastered within google internally.",
+              "Device is created through the local device platform to HGS sync flow. These devices are not necessarily mastered in a 3P cloud - they are locally detected by an assistant device and then synced to HGS directly. See go/aogh-dd.",
+              "Device created through local CHIP provision and sync up. Chip synced devices can be the same devices as the devices synced from cloud, and the sync and de-dup logic can be very complicated."
+            ],
+            "type": "string"
           },
           "type": "array"
         },
@@ -19223,6 +19255,11 @@
           },
           "description": "Only present for an AoGH device. HGS Device ID of a target device and the signal strength (RSSI in dB, higher is better) between that target device and the AoGH device. If this map is empty, there are no target devices reachable by this AoGH device.",
           "type": "object"
+        },
+        "tdssUpdateTimestamp": {
+          "description": "The timestamp at which the TDSS map was last updated. This information is used to help determine which hub would be preferred if multiple hubs report the same reach-ability for a device.",
+          "format": "google-datetime",
+          "type": "string"
         },
         "traitRoutingHints": {
           "description": "For SHED devices, some traits can only be executed on 3P cloud, e.g. \"action.devices.traits.MediaInitiation\", \"action.devices.traits.Channel\" go/shed-per-trait-routing",
@@ -26567,7 +26604,7 @@
           "type": "integer"
         },
         "parsedName": {
-          "description": "The parsed_name field contains one or more names of an address component. Its actual contents depends on where in the Geo/Google stack you are reading a feature: 1. When an address is initially parsed via a feed or other raw input and structured as an AddressProto, parsed_name should contain the set of names that corresponds to the (possibly normalized) raw text from the raw input. In MapFacts, the address component may be linked to an actual feature via feature_id. Any address formatting directly from MapFacts should follow links to retrieve names when possible. The parsed_name contents may be formatted directly if the address component is unlinked following the same rules as selecting and formatting the name of a feature. The cached parsed_name is regularly refreshed from the linked feature with the minimal set of names for address components (usually just a single, preferred name, in the local language). 2. In serving systems, the names of linked features may be denormalized into the parsed_name field to facilitate quicker address formatting or for simple data filtering (e.g. finding all geocodes in California by name). If reading a feature from such a system, the parsed_name field could contain multiple names in multiple languages that reflect a cached copy of the names associated with the linked features. Formatting of such names should follow the same rules as selecting and formatting the name of a feature itself.",
+          "description": "The parsed_name field contains one or more names of an address component. Its actual contents depends on where in the Geo/Google stack you are reading a feature: 1. When an address is initially parsed via a feed or other raw input and structured as an AddressProto, parsed_name should contain the set of names that corresponds to the (possibly normalized) raw text from the raw input. 2. In MapFacts, the address component may be linked to an actual feature via feature_id. Any address formatting directly from MapFacts should follow links to retrieve names when possible. The parsed_name contents may be formatted directly if the address component is unlinked following the same rules as selecting and formatting the name of a feature. The cached parsed_name is regularly refreshed from the linked feature with the minimal set of names for address components (usually just a single, preferred name, in the local language, plus a Latin-script name: go/story-of-ac-names). 3. In serving systems, the names of linked features may be denormalized into the parsed_name field to facilitate quicker address formatting or for simple data filtering (e.g. finding all geocodes in California by name). If reading a feature from such a system, the parsed_name field could contain multiple names in multiple languages that reflect a cached copy of the names associated with the linked features. Formatting of such names should follow the same rules as selecting and formatting the name of a feature itself.",
           "items": {
             "$ref": "GeostoreNameProto"
           },
@@ -28193,7 +28230,9 @@
             "PROVIDER_GREEN_ACTION_STUDIO",
             "PROVIDER_EVINY",
             "PROVIDER_MASTERCARD",
-            "PROVIDER_VATTENFALL"
+            "PROVIDER_VATTENFALL",
+            "PROVIDER_VIETGIS",
+            "PROVIDER_UNITE"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -28894,7 +28933,9 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126C."
+            "",
+            "",
+            "Note: Next available value is 0x126E."
           ],
           "type": "string"
         },
@@ -32987,7 +33028,9 @@
             "PROVIDER_GREEN_ACTION_STUDIO",
             "PROVIDER_EVINY",
             "PROVIDER_MASTERCARD",
-            "PROVIDER_VATTENFALL"
+            "PROVIDER_VATTENFALL",
+            "PROVIDER_VIETGIS",
+            "PROVIDER_UNITE"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -33688,7 +33731,9 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126C."
+            "",
+            "",
+            "Note: Next available value is 0x126E."
           ],
           "type": "string"
         }
@@ -35116,7 +35161,9 @@
             "PROVIDER_GREEN_ACTION_STUDIO",
             "PROVIDER_EVINY",
             "PROVIDER_MASTERCARD",
-            "PROVIDER_VATTENFALL"
+            "PROVIDER_VATTENFALL",
+            "PROVIDER_VIETGIS",
+            "PROVIDER_UNITE"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -35817,7 +35864,9 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126C."
+            "",
+            "",
+            "Note: Next available value is 0x126E."
           ],
           "type": "string"
         },
@@ -37546,7 +37595,9 @@
             "PROVIDER_GREEN_ACTION_STUDIO",
             "PROVIDER_EVINY",
             "PROVIDER_MASTERCARD",
-            "PROVIDER_VATTENFALL"
+            "PROVIDER_VATTENFALL",
+            "PROVIDER_VIETGIS",
+            "PROVIDER_UNITE"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -38247,7 +38298,9 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126C."
+            "",
+            "",
+            "Note: Next available value is 0x126E."
           ],
           "type": "string"
         }
@@ -43316,6 +43369,22 @@
           "$ref": "GoogleCloudDocumentaiV1Document",
           "description": "Document AI format to save the structured content, including OCR."
         },
+        "contentCategory": {
+          "description": "Indicates the category (image, audio, video etc.) of the original content.",
+          "enum": [
+            "CONTENT_CATEGORY_UNSPECIFIED",
+            "CONTENT_CATEGORY_IMAGE",
+            "CONTENT_CATEGORY_AUDIO",
+            "CONTENT_CATEGORY_VIDEO"
+          ],
+          "enumDescriptions": [
+            "No category is specified.",
+            "Content is of image type.",
+            "Content is of audio type.",
+            "Content is of video type."
+          ],
+          "type": "string"
+        },
         "createTime": {
           "description": "Output only. The time when the document is created.",
           "format": "google-datetime",
@@ -44483,6 +44552,20 @@
         "requireTotalSize": {
           "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false.",
           "type": "boolean"
+        },
+        "totalResultSize": {
+          "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.",
+          "enum": [
+            "TOTAL_RESULT_SIZE_UNSPECIFIED",
+            "ESTIMATED_SIZE",
+            "ACTUAL_SIZE"
+          ],
+          "enumDescriptions": [
+            "Total number calculation will be skipped.",
+            "Estimate total number.",
+            "It may adversely impact performance."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -44774,7 +44857,7 @@
           ],
           "enumDescriptions": [
             "Defaults to full replace behavior, ie. FULL_REPLACE.",
-            "Fully replace all the fields. Any field masks will be ignored.",
+            "Fully replace all the fields (including previously linked raw document). Any field masks will be ignored.",
             "Merge the fields into the existing entities.",
             "Inserts the properties by names.",
             "Replace the properties by names.",
@@ -49132,10 +49215,12 @@
             "THUMBNAIL_TYPE_ORIGINAL",
             "THUMBNAIL_TYPE_ORIGINAL_HQ",
             "THUMBNAIL_TYPE_FAVICON_16",
+            "THUMBNAIL_TYPE_FAVICON_28",
             "THUMBNAIL_TYPE_FAVICON_32",
             "THUMBNAIL_TYPE_FAVICON_64",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL",
             "THUMBNAIL_TYPE_FAVICON_16_DARK",
+            "THUMBNAIL_TYPE_FAVICON_28_DARK",
             "THUMBNAIL_TYPE_FAVICON_32_DARK",
             "THUMBNAIL_TYPE_FAVICON_64_DARK",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK",
@@ -49175,11 +49260,13 @@
             "This refers to a thumbnail that fits in a 800x800 box.",
             "This refers to re-encoding original image to JPEG at the same size (up to 10000x10000). Output quality may be lower.",
             "Re-encode image at the same size as original (up to 10000x10000) but with high-quality (q=90). This was introduced by TYPHOON client and is expected only for very few images in our table (under 10k). If you plan to use this contact amarna-dev@ and/or crt@",
-            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 32 or 64.",
+            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 28, 32 or 64.",
+            "",
             "",
             "",
             "This type of favicon will preserve the size of the original image.",
             "These refer to favicon thumbnails for dark mode. This triggers dark mode on the SVG decoding (and otherwise, the same as the above favicon types)",
+            "",
             "",
             "",
             "",
@@ -49488,7 +49575,7 @@
       "type": "object"
     },
     "ImageData": {
-      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 127",
+      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 128",
       "id": "ImageData",
       "properties": {
         "adaboostImageFeaturePorn": {
@@ -49576,6 +49663,10 @@
         "deepCrop": {
           "$ref": "DeepCropIndexing",
           "description": "DeepCrop based cropping information. See go/creatism/deepcrop for details."
+        },
+        "deepImageEngagingness": {
+          "$ref": "ImageRepositoryDeepImageEngagingnessOutput",
+          "description": "Productionized Deep Image Engagingness score."
         },
         "deepTags": {
           "$ref": "CommerceDatastoreImageDeepTags",
@@ -50036,10 +50127,12 @@
             "THUMBNAIL_TYPE_ORIGINAL",
             "THUMBNAIL_TYPE_ORIGINAL_HQ",
             "THUMBNAIL_TYPE_FAVICON_16",
+            "THUMBNAIL_TYPE_FAVICON_28",
             "THUMBNAIL_TYPE_FAVICON_32",
             "THUMBNAIL_TYPE_FAVICON_64",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL",
             "THUMBNAIL_TYPE_FAVICON_16_DARK",
+            "THUMBNAIL_TYPE_FAVICON_28_DARK",
             "THUMBNAIL_TYPE_FAVICON_32_DARK",
             "THUMBNAIL_TYPE_FAVICON_64_DARK",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK",
@@ -50079,11 +50172,13 @@
             "This refers to a thumbnail that fits in a 800x800 box.",
             "This refers to re-encoding original image to JPEG at the same size (up to 10000x10000). Output quality may be lower.",
             "Re-encode image at the same size as original (up to 10000x10000) but with high-quality (q=90). This was introduced by TYPHOON client and is expected only for very few images in our table (under 10k). If you plan to use this contact amarna-dev@ and/or crt@",
-            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 32 or 64.",
+            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 28, 32 or 64.",
+            "",
             "",
             "",
             "This type of favicon will preserve the size of the original image.",
             "These refer to favicon thumbnails for dark mode. This triggers dark mode on the SVG decoding (and otherwise, the same as the above favicon types)",
+            "",
             "",
             "",
             "",
@@ -51567,6 +51662,17 @@
       },
       "type": "object"
     },
+    "ImageRepositoryDeepImageEngagingnessOutput": {
+      "id": "ImageRepositoryDeepImageEngagingnessOutput",
+      "properties": {
+        "score": {
+          "description": "DeepImageEngagingness score.",
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "ImageRepositoryFileTruncationInfo": {
       "description": "Describes our knowledge about whether a stored file is truncated with respect to its original file online.",
       "id": "ImageRepositoryFileTruncationInfo",
@@ -51948,7 +52054,7 @@
       "type": "object"
     },
     "ImageRepositoryUnwantedContent": {
-      "description": "To indicate whether the image is to be deleted from the repository due to legal reasons.",
+      "description": "To indicate whether the image or video is to be deleted from the repository due to legal reasons or hidden from search results.",
       "id": "ImageRepositoryUnwantedContent",
       "properties": {
         "deletionReason": {
@@ -51959,6 +52065,17 @@
           "enumDescriptions": [
             "",
             "abusive images involving children."
+          ],
+          "type": "string"
+        },
+        "hideReason": {
+          "enum": [
+            "UNKNOWN",
+            "NCEI"
+          ],
+          "enumDescriptions": [
+            "",
+            "NCEI stands for 'non-consensual explicit imagery', aka 'revenge porn'. However in this case the name is misleading as it actually only applies for videos."
           ],
           "type": "string"
         }
@@ -60645,7 +60762,7 @@
       "type": "object"
     },
     "KnowledgeAnswersValueType": {
-      "description": "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. Next tag id: 24 LINT.IfChange",
+      "description": "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. Next tag id: 25 LINT.IfChange",
       "id": "KnowledgeAnswersValueType",
       "properties": {
         "anyType": {
@@ -60676,6 +60793,22 @@
         },
         "entityType": {
           "$ref": "KnowledgeAnswersEntityType"
+        },
+        "inputCompositionConfig": {
+          "description": "When specified on a slot's type, restricts composition based on the enum value. This does not mean anything when the value type is to be interpreted as an output_type.",
+          "enum": [
+            "UNSPECIFIED_COMPOSITION",
+            "ALL_COMPOSITION",
+            "PRIMITIVES_ONLY_COMPOSITION",
+            "PRIMITIVES_AND_OPERATORS_OF_PRIMITIVES_COMPOSITION"
+          ],
+          "enumDescriptions": [
+            "An unspecified value is required by enum best practices. It will not be used anywhere as the default is ALL_COMPOSITION.",
+            "",
+            "",
+            "To handle cases where we have a Group of entities"
+          ],
+          "type": "string"
         },
         "measurementType": {
           "$ref": "KnowledgeAnswersMeasurementType"
@@ -62856,7 +62989,7 @@
       "type": "object"
     },
     "MapsQualitySpecialWordsFlags": {
-      "description": "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 20 --",
+      "description": "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 21 --",
       "id": "MapsQualitySpecialWordsFlags",
       "properties": {
         "isCommonWord": {
@@ -62869,6 +63002,10 @@
         },
         "isDirectionalModifier": {
           "description": "Directional modifier. E.g.: north, south, etc.",
+          "type": "boolean"
+        },
+        "isDistanceMarker": {
+          "description": "An affix that indicates distance marker on a route, e.g., 'km'.",
           "type": "boolean"
         },
         "isForbiddenWord": {
@@ -63564,9 +63701,17 @@
           },
           "type": "array"
         },
+        "displaySnippet": {
+          "$ref": "QualityPreviewRanklabSnippet",
+          "description": "Snippet features for the final chosen snippet. This field is firstly populated by Muppet, and then overwriten by Superroot if SnippetBrain is triggered."
+        },
         "documentLanguage": {
           "description": "locale of the document.",
           "type": "string"
+        },
+        "originalQueryTermCoverages": {
+          "$ref": "QualityPreviewSnippetQueryTermCoverageFeatures",
+          "description": "Original query term coverage in titles and / or snippets."
         },
         "queryLanguage": {
           "description": "locale of the query,",
@@ -63583,7 +63728,7 @@
           "type": "number"
         },
         "snippets": {
-          "description": "Snippet features for ranklab models, generated only by snippets scorer v2. In production, only the data for chosen snippet will be recorded.",
+          "description": "Snippet features for Muppet snippet candidates. In production, only the data for chosen snippet will be recorded.",
           "items": {
             "$ref": "QualityPreviewRanklabSnippet"
           },
@@ -79777,19 +79922,6 @@
       "description": "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 51.",
       "id": "PornFlagData",
       "properties": {
-        "adaboostContentScore": {
-          "description": "Content score - computed on the image pixel data only. Additionally, we store a version and minor version number of the model which was used to compute this score. Note: these fields are copies of adaboost_image_feature_porn* in ImageData.",
-          "format": "float",
-          "type": "number"
-        },
-        "adaboostContentScoreMinorVersion": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adaboostContentScoreVersion": {
-          "format": "int32",
-          "type": "integer"
-        },
         "coclickBrainScores": {
           "$ref": "ImageSafesearchContentBrainPornAnnotation",
           "description": "Aggregated brain_porn_scores for navboost co-clicked images. Historical: this signal is deprecated and no longer populated as of 2020-12-01. Refer to b/172897542 for more information."
@@ -79820,25 +79952,9 @@
           "description": "A string that indicates the version of SafeSearch classifier used to compute final_violence_score.",
           "type": "string"
         },
-        "imageStats": {
-          "description": "PornStatsImage is repeated even though we use only a single version, to help with rolling out new versions with miminum risk. Multiple versions should exist only for a short window of time. Once the new version is rolled out, the data for older versions should no longer be generated.",
-          "items": {
-            "$ref": "PornStatsImage"
-          },
-          "type": "array"
-        },
         "internalSignals": {
           "$ref": "SafesearchInternalImageSignals",
           "description": "A proto that stores SafeSearch internal signals that are not exported to clients. SafeSearch team does not provide any guarantees about the presence or the semantics of these signals in the future."
-        },
-        "largestFaceFrac": {
-          "description": "largest face, scaled by 1000 This field is same as ImageData.largest_face_frac.",
-          "format": "float",
-          "type": "number"
-        },
-        "largestFaceFraction": {
-          "format": "int32",
-          "type": "integer"
         },
         "numberFaces": {
           "description": "number of faces",
@@ -79858,11 +79974,6 @@
           "$ref": "ImageSafesearchContentOffensiveSymbolDetection",
           "description": "QuimbyCongas-based detection of offensive symbols in the image (currently swastika and Nazi yellow badge)."
         },
-        "overallPornScore": {
-          "description": "Overall porn score that determines the porn restricts used during image search retrieval.",
-          "format": "float",
-          "type": "number"
-        },
         "photodnaHash": {
           "description": "Binary version of the PhotoDNA hash (144 bytes long). If not set (has_photodna_hash() == false) it means that it was not computed, if empty (has_photodna_hash() == true && photodna_hash() == \"\") it means that the computation failed (cannot be computed for images smaller than 50 x 50).",
           "format": "byte",
@@ -79870,17 +79981,6 @@
         },
         "pornWithHighConfidence": {
           "description": "This field is set to true when we are pretty confident that the image is porn (with higher precision than the img_porn_moderate restrict). In particular, it means that the image might be demoted for non-porn queries when SafeSearch is Off.",
-          "type": "boolean"
-        },
-        "propAnyPornFlag": {
-          "description": "OR of the prop_porn_flag and prop_softporn_flag.",
-          "type": "boolean"
-        },
-        "propPornFlag": {
-          "description": "Text classifier properties for the referrer page.",
-          "type": "boolean"
-        },
-        "propSoftpornFlag": {
           "type": "boolean"
         },
         "qbstOffensiveScore": {
@@ -79915,13 +80015,6 @@
           "format": "float",
           "type": "number"
         },
-        "textStats": {
-          "description": "PornStatsText is repeated even though we use only a single version, to help with rolling out new versions with miminum risk. Multiple versions should exist only for a short window of time. Once the new version is rolled out, the data for older versions should no longer be generated.",
-          "items": {
-            "$ref": "PornStatsText"
-          },
-          "type": "array"
-        },
         "url": {
           "description": "url of the image",
           "type": "string"
@@ -79929,47 +80022,6 @@
         "urlPornScores": {
           "$ref": "ClassifierPornAggregatedUrlPornScores",
           "description": "Information about the URL porn scores for image URLs associated with this image."
-        }
-      },
-      "type": "object"
-    },
-    "PornStatsImage": {
-      "description": "Site aggregated image content signals are captured in this protocol buffer. This is versioned. Not all fields are present in each version. It is important to document all the fields that are used in each version here.",
-      "id": "PornStatsImage",
-      "properties": {
-        "imageCount": {
-          "description": "image content score data",
-          "format": "uint64",
-          "type": "string"
-        },
-        "siteKey": {
-          "type": "string"
-        },
-        "version": {
-          "format": "uint64",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PornStatsText": {
-      "description": "Site aggregated text signals are captured in this protocol buffer. This is versioned. Not all fields are present in each version. It is important to document all the fields that are used in each version here.",
-      "id": "PornStatsText",
-      "properties": {
-        "anyPornPageCount": {
-          "format": "uint64",
-          "type": "string"
-        },
-        "pageCount": {
-          "format": "uint64",
-          "type": "string"
-        },
-        "siteKey": {
-          "type": "string"
-        },
-        "version": {
-          "format": "uint64",
-          "type": "string"
         }
       },
       "type": "object"
@@ -80710,7 +80762,7 @@
       "type": "object"
     },
     "QualityActionsReminder": {
-      "description": "Next id: 30",
+      "description": "Next id: 32",
       "id": "QualityActionsReminder",
       "properties": {
         "archived": {
@@ -81583,6 +81635,12 @@
           "description": "OPTIONAL. Full-length description of the reminder.",
           "type": "string"
         },
+        "documentAssignmentSource": {
+          "$ref": "QualityActionsReminderDocument"
+        },
+        "dynamiteGroupAssignmentSource": {
+          "$ref": "QualityActionsReminderDynamiteGroup"
+        },
         "id": {
           "description": "DEPRECATED. Use `client_id` or `server_id` instead.",
           "type": "string"
@@ -81644,6 +81702,18 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "QualityActionsReminderDocument": {
+      "description": "Message representing a Document (i.e. Google Docs, Sheets, Slides) This is currently only used to indicate the existence of said document and can be later extended to include more document information as needed.",
+      "id": "QualityActionsReminderDocument",
+      "properties": {},
+      "type": "object"
+    },
+    "QualityActionsReminderDynamiteGroup": {
+      "description": "Message representing a Dynamite Group (AKA Google Chat space) This is currently only used to indicate the existence of said group and can be later extended to include more group information as needed.",
+      "id": "QualityActionsReminderDynamiteGroup",
+      "properties": {},
       "type": "object"
     },
     "QualityActionsReminderLocation": {
@@ -82090,7 +82160,7 @@
       "type": "object"
     },
     "QualityCalypsoAppsUniversalAuLiveOpFormat": {
-      "description": "Contains the format information for a single LiveOp/LiveEvent. Next ID: 8",
+      "description": "Contains the format information for a single LiveOp/LiveEvent. Next ID: 10",
       "id": "QualityCalypsoAppsUniversalAuLiveOpFormat",
       "properties": {
         "deeplink": {
@@ -82100,10 +82170,17 @@
           "type": "string"
         },
         "eyebrow": {
-          "description": "iOS only",
+          "description": "iOS only, kind of event type",
           "type": "string"
         },
         "imageUrl": {
+          "type": "string"
+        },
+        "squareImageUrl": {
+          "type": "string"
+        },
+        "status": {
+          "description": "iOS only, sort of start schedule",
           "type": "string"
         },
         "title": {
@@ -84675,7 +84752,7 @@
       "type": "object"
     },
     "QualityPreviewChosenSnippetInfo": {
-      "description": "Information for chosen snippet. Next ID: 7",
+      "description": "Information for chosen snippet. Next ID: 8",
       "id": "QualityPreviewChosenSnippetInfo",
       "properties": {
         "isVulgar": {
@@ -84683,6 +84760,10 @@
           "type": "boolean"
         },
         "leadingTextType": {
+          "type": "string"
+        },
+        "snippetHtml": {
+          "description": "The rendered snippet html.",
           "type": "string"
         },
         "snippetType": {
@@ -84719,7 +84800,7 @@
           "type": "string"
         },
         "source": {
-          "description": "Source of the chosen snippet, decided in PORC. String value of quality.porc.TextSnippetCandidate.TextSnippetSource defined at google3/quality/porc/proto/text_snippet.proto Note: This field is only populated and used in offline pipeline.",
+          "description": "Source of the chosen snippet, decided in PORC. String value of quality.porc.TextSnippetCandidate.TextSnippetSource defined at google3/quality/porc/proto/text_snippet.proto",
           "type": "string"
         },
         "tidbits": {
@@ -84764,7 +84845,7 @@
       "type": "object"
     },
     "QualityPreviewRanklabSnippet": {
-      "description": "Snippet candidate related information and signal scores.",
+      "description": "Snippet candidate related information and signal scores. Next ID: 11",
       "id": "QualityPreviewRanklabSnippet",
       "properties": {
         "brainFeatures": {
@@ -84776,6 +84857,19 @@
         "experimentalFeatures": {
           "$ref": "QualityPreviewSnippetExperimentalFeatures"
         },
+        "finalScore": {
+          "description": "The final score of this candidate.",
+          "format": "float",
+          "type": "number"
+        },
+        "isMuppetSelectedSnippet": {
+          "description": "Is this the candidate chosen by Muppet scorer.",
+          "type": "boolean"
+        },
+        "originalQueryTermCoverageFeatures": {
+          "$ref": "QualityPreviewSnippetQueryTermCoverageFeatures",
+          "description": "Query term (original terms only) coverage features."
+        },
         "qualityFeatures": {
           "$ref": "QualityPreviewSnippetQualityFeatures"
         },
@@ -84784,7 +84878,8 @@
           "description": "Core set of snippet features."
         },
         "queryTermCoverageFeatures": {
-          "$ref": "QualityPreviewSnippetQueryTermCoverageFeatures"
+          "$ref": "QualityPreviewSnippetQueryTermCoverageFeatures",
+          "description": "Query term (including synonyms) coverage features."
         },
         "snippetInfo": {
           "$ref": "QualityPreviewChosenSnippetInfo",
@@ -87048,9 +87143,14 @@
       "type": "object"
     },
     "QualityShoppingShoppingAttachment": {
-      "description": "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. Next ID: 20",
+      "description": "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. Next ID: 21",
       "id": "QualityShoppingShoppingAttachment",
       "properties": {
+        "datasetModelArticleScore": {
+          "description": "Score from the blockbert article classifier model. go/article-understanding-project",
+          "format": "int32",
+          "type": "integer"
+        },
         "datasetModelBuyingGuideScore": {
           "format": "int32",
           "type": "integer"
@@ -97471,13 +97571,6 @@
           "format": "uint64",
           "type": "string"
         },
-        "fieldOfStudyEntity": {
-          "description": "A set of entities from /collection/field_of_studies in knowledge graph schema (http://shortn/_ldBsa14lo8).",
-          "items": {
-            "$ref": "ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo"
-          },
-          "type": "array"
-        },
         "indexTier": {
           "description": "Index tiers (BASE, UNIFIED_ZEPPELIN, etc) that the document belongs to. NOTE: Each document may belong to multiple tiers. NOTE: The original data type is an enum CompositeDoc::SubIndexType. However we don't want to depend on segindexer/compositedoc.proto because the proto is too large. Instead, we use CompositeDoc::SubIndexType_Name( subindexid) to convert into a string representation. To convert string back to CompositeDoc::SubIndexType, use CompositeDoc::SubIndexType_Parse.",
           "items": {
@@ -97538,6 +97631,13 @@
         "url": {
           "description": "The url of the document. ",
           "type": "string"
+        },
+        "webrefEntity": {
+          "description": "A set of entities copied from WebRefEntities on cDoc.",
+          "items": {
+            "$ref": "ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -97548,6 +97648,19 @@
       "properties": {
         "description": {
           "description": "The English description of the mid from the KG.",
+          "type": "string"
+        },
+        "entityType": {
+          "enum": [
+            "UNKNOWN",
+            "FIELD_OF_STUDY",
+            "GEO"
+          ],
+          "enumDescriptions": [
+            "",
+            "/collection/field_of_studies in KG.",
+            "/collection/geo/* in KG."
+          ],
           "type": "string"
         },
         "mid": {
@@ -103338,7 +103451,7 @@
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. This is an access restriction to access provider provided popularity score to rank entities within a provider's catalog. go/ps-to-kg , b/154547652 YOU MUST CONTACT ke-media-actions@ before reading or writing this data.",
             "Data ingested by Carbon Index for internal processing and aggregation, not fit for display on any surface irrespective of attribution. YOU MUST CONTACT area120-carbonindex-eng@ before reading this data.",
             "Data fit for display on the Carbon Index frontend to trusted testers, with proper attribution and controls. YOU MUST CONTACT area120-carbonindex-eng@ before reading this data.",
-            "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YOU MUST CONTACT travel-activities-eng-team@ before reading or writing this data.",
+            "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YOU MUST CONTACT travel-ttd-ecosystem-team@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YOU MUST CONTACT fo-partner-eng@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. This is an access restriction for accessing Yeti publisher image data in KG. For now it should be used ONLY for Yeti. YOU MUST CONTACT stadia-knowledge-eng@ before reading or writing this data.",
             "In order to test BBC metadata before serving code populates them to the public",
@@ -106800,6 +106913,7 @@
               "TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_EVENT",
               "EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL",
               "COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL",
+              "BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "RESERVED_4",
               "RESERVED_5",
@@ -107403,6 +107517,7 @@
               "PLAY_STORE_IAP_SALES_APP_12",
               "PLAY_STORE_IAP_SALES_APP_13",
               "PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE",
+              "PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS",
               "CROSS_DEVICE_INSTALL_OPTIONS_FETCHED_IN_SESSION",
               "CROSS_DEVICE_INSTALL_OPTIONS_ITEM_FIELDS_TRIGGERED",
               "PAIRED_DEVICE_COMPATIBILITY_CHECKED_IN_SESSION",
@@ -107689,6 +107804,8 @@
               "EXPANDED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL",
               "COLLAPSED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL",
               "DOWNLOAD_COUNT_ELIGIBLE",
+              "PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL",
+              "BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL",
               "CART_ABANDONMENT_USER_LEVEL",
@@ -108059,6 +108176,66 @@
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL",
+              "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL",
+              "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -108353,6 +108530,7 @@
               "Event level test code for SERP L2,L3 TG2 category queries.",
               "Event level test code for dev success cluster.",
               "",
+              "TestCode for Broad Intent Games TimeSpent Event Level.",
               "",
               "",
               "",
@@ -108956,6 +109134,7 @@
               "",
               "",
               "",
+              "",
               "Test codes for cross-device features. See go/play-cross-device.",
               "",
               "",
@@ -109242,6 +109421,8 @@
               "Session level test code for dev success cluster.",
               "",
               "Session level test code for 1.5x ad format. See here for details: http://shortn/_04Q1LMyoTe.",
+              "Session level test code for merch run planogram experiment",
+              "TestCode for Broad Intent Games TimeSpent Session Level.",
               "",
               "User should see the live op cluster.",
               "Cart abandonment flow for purchase flow.",
@@ -109612,6 +109793,66 @@
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
               "User level test code for users who are eligible for one-click backup fop.",
+              "User level test codes for pre-period user page visit frequency in past 28 days.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "User level test codes for post-period user page visit frequency in past 28 days.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               ""
             ],
             "type": "string"
@@ -113228,6 +113469,13 @@
           "description": "Average score of description quality.",
           "format": "float",
           "type": "number"
+        },
+        "furballUrl": {
+          "description": "Furball URL(s) of the rating score (may have been rated more than once)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -124402,10 +124650,12 @@
             "THUMBNAIL_TYPE_ORIGINAL",
             "THUMBNAIL_TYPE_ORIGINAL_HQ",
             "THUMBNAIL_TYPE_FAVICON_16",
+            "THUMBNAIL_TYPE_FAVICON_28",
             "THUMBNAIL_TYPE_FAVICON_32",
             "THUMBNAIL_TYPE_FAVICON_64",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL",
             "THUMBNAIL_TYPE_FAVICON_16_DARK",
+            "THUMBNAIL_TYPE_FAVICON_28_DARK",
             "THUMBNAIL_TYPE_FAVICON_32_DARK",
             "THUMBNAIL_TYPE_FAVICON_64_DARK",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK",
@@ -124445,11 +124695,13 @@
             "This refers to a thumbnail that fits in a 800x800 box.",
             "This refers to re-encoding original image to JPEG at the same size (up to 10000x10000). Output quality may be lower.",
             "Re-encode image at the same size as original (up to 10000x10000) but with high-quality (q=90). This was introduced by TYPHOON client and is expected only for very few images in our table (under 10k). If you plan to use this contact amarna-dev@ and/or crt@",
-            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 32 or 64.",
+            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 28, 32 or 64.",
+            "",
             "",
             "",
             "This type of favicon will preserve the size of the original image.",
             "These refer to favicon thumbnails for dark mode. This triggers dark mode on the SVG decoding (and otherwise, the same as the above favicon types)",
+            "",
             "",
             "",
             "",
@@ -124548,10 +124800,12 @@
             "THUMBNAIL_TYPE_ORIGINAL",
             "THUMBNAIL_TYPE_ORIGINAL_HQ",
             "THUMBNAIL_TYPE_FAVICON_16",
+            "THUMBNAIL_TYPE_FAVICON_28",
             "THUMBNAIL_TYPE_FAVICON_32",
             "THUMBNAIL_TYPE_FAVICON_64",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL",
             "THUMBNAIL_TYPE_FAVICON_16_DARK",
+            "THUMBNAIL_TYPE_FAVICON_28_DARK",
             "THUMBNAIL_TYPE_FAVICON_32_DARK",
             "THUMBNAIL_TYPE_FAVICON_64_DARK",
             "THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK",
@@ -124591,11 +124845,13 @@
             "This refers to a thumbnail that fits in a 800x800 box.",
             "This refers to re-encoding original image to JPEG at the same size (up to 10000x10000). Output quality may be lower.",
             "Re-encode image at the same size as original (up to 10000x10000) but with high-quality (q=90). This was introduced by TYPHOON client and is expected only for very few images in our table (under 10k). If you plan to use this contact amarna-dev@ and/or crt@",
-            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 32 or 64.",
+            "These refer to favicon thumbnails of 16x16, 32x32 or 64x64. If the original image is an ico file containing multiple embedded images including 16x16, 32x32 or 64x64, these thumbnails are derived from the embedded image of the corresponding size. (If no such embedded image is found, prefer the closest size that's larger. If still no such size exists, prefer largest.) If no such size exists, these thumbnails are rescaled to an image whose maximum dimension is 16, 28, 32 or 64.",
+            "",
             "",
             "",
             "This type of favicon will preserve the size of the original image.",
             "These refer to favicon thumbnails for dark mode. This triggers dark mode on the SVG decoding (and otherwise, the same as the above favicon types)",
+            "",
             "",
             "",
             "",
@@ -125502,7 +125758,7 @@
       "type": "object"
     },
     "YoutubeCommentsClusteringMiniStanza": {
-      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 74",
+      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 75",
       "id": "YoutubeCommentsClusteringMiniStanza",
       "properties": {
         "ansibleScores": {
@@ -126009,6 +126265,10 @@
         "textQualityScores": {
           "$ref": "YoutubeCommentsRankingYouTubeCommentTextQualityAnnotation",
           "description": "Predicted probability of the comment being flagged based on the text."
+        },
+        "textQualityScores2": {
+          "$ref": "YoutubeCommentsRankingYouTubeCommentTextQualityAnnotation",
+          "description": "Predicted probability of the comment being flagged based on the text. For testing the new annotation process only."
         },
         "videoId": {
           "description": "The video this comment belongs to.",
