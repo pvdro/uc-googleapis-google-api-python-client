@@ -1046,7 +1046,7 @@
       }
     }
   },
-  "revision": "20221104",
+  "revision": "20221110",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3952,6 +3952,10 @@
         "metadata": {
           "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         },
+        "prompt": {
+          "$ref": "SocialGraphApiProtoPrompt",
+          "description": "People Prompts settings for contact birthday data."
+        },
         "value": {
           "description": "Actual value entered. Allows unstructured values.",
           "type": "string"
@@ -4789,6 +4793,10 @@
         },
         "metadata": {
           "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        },
+        "prompt": {
+          "$ref": "SocialGraphApiProtoPrompt",
+          "description": "People Prompts settings for contact event data."
         },
         "timestampMillis": {
           "description": "Clients are recommended to read the calendar_day field instead of timestamp_millis. When writing events, new clients must set calendar_day instead of timestamp_millis. Events are currently represented as timestamp values, although the interpretation of these timestamp values is a calendar date. There are a few important details about how this value should be mapped to a calendar date that should be consistent among all clients. For detailed information, see Birthday.date_ms.",
@@ -9272,8 +9280,10 @@
               "ADD_FINGERPRINT",
               "AIRPLANE_MODE",
               "ALARM_VOLUME",
+              "ALARM_SOUND",
               "AMBIENT_DISPLAY_ALWAYS_ON",
               "AMBIENT_DISPLAY_NEW_NOTIFICATION",
+              "ANDROID_AUTO",
               "ANDROID_VERSION",
               "APP_BATTERY_USAGE",
               "APP_DATA_USAGE",
@@ -9286,14 +9296,19 @@
               "ASSISTANT_VOICE_MATCH",
               "AUTO_ROTATE",
               "AUTO_ROTATE_FACE_DETECTION",
+              "BACKUP",
               "BATTERY_LEVEL",
               "BATTERY_LOW",
               "BATTERY_PERCENTAGE",
               "BATTERY_PRESENT",
               "BATTERY_SAVER",
+              "BATTERY_SHARE",
               "BATTERY_USAGE",
               "BIOMETRIC",
               "BLUETOOTH",
+              "BLUETOOTH_NAME",
+              "BLUETOOTH_ADDRESS",
+              "BLUETOOTH_SETTINGS",
               "BRIGHTNESS_LEVEL",
               "BUBBLES",
               "CALL_VOLUME",
@@ -9302,16 +9317,28 @@
               "COLOR_INVERSION",
               "CHARGING_SOUNDS_AND_VIBRATION",
               "CHARGING_STATE",
+              "CONNECTED_DEVICES",
               "CONTACTLESS_PAYMENTS",
               "DATA_ROAMING",
               "DATA_SAVER",
               "DATA_USAGE",
+              "DATA_LIMIT",
+              "DATA_LIMIT_LEVEL",
+              "DATA_WARNING",
+              "DATA_WARNING_LEVEL",
               "DEFAULT_APPS",
               "DEVELOPER_OPTIONS",
+              "DEVICE_NAME",
               "DISPLAY_OVER_OTHER_APPS",
               "DISPLAY_SIZE",
               "DO_NOT_DISTURB",
+              "DO_NOT_DISTURB_MESSAGES",
+              "DO_NOT_DISTURB_CALLS",
+              "DO_NOT_DISTURB_ALARMS",
+              "DO_NOT_DISTURB_SCHEDULES",
               "DOUBLE_TAP_CHECK_PHONE",
+              "DRIVING_MODE",
+              "EMERGENCY",
               "EMERGENCY_ALERTS",
               "EMERGENCY_INFORMATION",
               "ETHERNET_TETHERING",
@@ -9323,9 +9350,11 @@
               "GESTURES",
               "HAPTIC_FEEDBACK_VIBRATION",
               "HEADS_UP",
+              "HIGH_REFRESH_RATE",
               "HOT_SPOT",
               "HOTSPOT_TETHERING",
               "HOT_WORD",
+              "IP_ADDRESS",
               "IMPROVE_LOCATION_ACCURACY",
               "JUMP_TO_CAMERA",
               "KEYBOARD_SHORTCUTS",
@@ -9336,6 +9365,7 @@
               "LOCK_SCREEN",
               "LOCK_SCREEN_DEVICE_CONTROLS",
               "LOCK_SCREEN_WALLET",
+              "MAC_ADDRESS",
               "MAGNIFICATION",
               "MAGNIFY_BUTTON",
               "MAGNIFY_TRIPLE_TAP",
@@ -9348,16 +9378,20 @@
               "MUSIC",
               "MUTE_MODE",
               "NETWORK",
+              "NETWORK_RESET",
               "NFC",
               "NIGHT_LIGHT_INTENSITY",
               "NIGHT_LIGHT_SWITCH",
               "NIGHT_MODE",
               "NOTIFICATION_BADGE",
+              "NOTIFICATION_SOUND",
               "NOTIFICATION_ON_SCREEN",
               "NOTIFY_FOR_PUBLIC_NETWORKS",
               "ONEHANDED_MODE",
               "PASSWORD",
+              "PERMISSION_MANAGER",
               "PERSONALIZATION",
+              "PHONE_NUMBER",
               "PICTURE_IN_PICTURE",
               "POINTER_SPEED",
               "POWER_MENU",
@@ -9365,6 +9399,8 @@
               "REQUIRE_DEVICE_UNLOCK_FOR_NFC",
               "RINGTONE",
               "RING_VOLUME",
+              "NEARBY_DEVICES_SCANNING",
+              "NEARBY_SHARE",
               "SCREEN_LOCKING_SOUND",
               "SCREEN_MAGNIFICATION",
               "SCREEN_TIMEOUT",
@@ -9380,6 +9416,9 @@
               "SYSTEM_UPDATE",
               "TALKBACK_PASSWORDS",
               "TEXT_TO_SPEECH",
+              "TIME_ZONE",
+              "UNUSED_APPS",
+              "USB",
               "USB_TETHERING",
               "VERBOSE_TTS",
               "VIBRATE",
@@ -9390,6 +9429,8 @@
               "WALLPAPERS",
               "WEBVIEW",
               "WIFI",
+              "WIFI_ADD_NETWORK",
+              "WIFI_ADD_NETWORK_QR_CODE",
               "WIFI_CALLING",
               "WIFI_HOTSPOT",
               "ABOUT_PHONE",
@@ -9437,7 +9478,10 @@
               "WEARABLE_AMBIENT",
               "WEARABLE_NOISE_CANCELLATION",
               "WEARABLE_TOUCH_CONTROLS",
-              "RAISE_TO_TALK"
+              "RAISE_TO_TALK",
+              "BEDTIME_MODE",
+              "THEATER_MODE",
+              "TOUCH_LOCK"
             ],
             "enumDescriptions": [
               "",
@@ -9479,6 +9523,14 @@
               "",
               "",
               "",
+              "Bluetooth on/off toggle",
+              "",
+              "",
+              "Bluetooth preferences page",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -9488,6 +9540,23 @@
               "",
               "",
               "Cellular carrier (non-wifi) data usage statistics & settings for the device.",
+              "Toggle to enable data use limit",
+              "The mobile data use after which mobile data is automatically disabled.",
+              "Toggle to enable data use warning",
+              "The mobile data use after which a warning is shown to the user.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "Special mode for using device hands-free while driving.",
+              "Main emergency settings",
               "",
               "",
               "",
@@ -9503,6 +9572,7 @@
               "",
               "",
               "",
+              "Show my IP address",
               "",
               "",
               "",
@@ -9513,11 +9583,7 @@
               "",
               "",
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
+              "Show my MAC address",
               "",
               "",
               "",
@@ -9527,6 +9593,15 @@
               "",
               "Wireless internet settings, including WiFi, Cellular, etc.",
               "Setting to enable/disable cellular data connection being used on the device. https://screenshot.googleplex.com/jMSRtW3Aq4o",
+              "",
+              "",
+              "",
+              "Restarts the device network stack, no settings are deleted.",
+              "",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -9565,6 +9640,8 @@
               "",
               "",
               "Corresponds to \"Vibration & haptics\" toggle in the settings app. Reference: http://shortn/_wE1WCid2aM",
+              "",
+              "",
               "",
               "",
               "",
@@ -9617,6 +9694,9 @@
               "",
               "End of Chrome OS specific accessibility settings",
               "Wearable device settings",
+              "",
+              "",
+              "",
               "",
               "",
               "End of Wearable device settings"
@@ -16617,7 +16697,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerGroundingProviderFeatures": {
-      "description": "Next ID: 3",
+      "description": "Next ID: 4",
       "id": "AssistantGroundingRankerGroundingProviderFeatures",
       "properties": {
         "contactGroundingProviderFeatures": {
@@ -16625,6 +16705,9 @@
         },
         "mediaGroundingProviderFeatures": {
           "$ref": "AssistantGroundingRankerMediaGroundingProviderFeatures"
+        },
+        "providerGroundingProviderFeatures": {
+          "$ref": "AssistantGroundingRankerProviderGroundingProviderFeatures"
         }
       },
       "type": "object"
@@ -16635,6 +16718,18 @@
       "properties": {
         "mscRate": {
           "description": "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac",
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantGroundingRankerProviderGroundingProviderFeatures": {
+      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 2",
+      "id": "AssistantGroundingRankerProviderGroundingProviderFeatures",
+      "properties": {
+        "pslScore": {
+          "description": "Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.",
           "format": "float",
           "type": "number"
         }
@@ -18396,7 +18491,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 33",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 34",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -18445,6 +18540,10 @@
           "description": "Assistant User Interaction Score which is aggregated using intent name from exp laelaps.",
           "format": "double",
           "type": "number"
+        },
+        "isFeasible": {
+          "description": "Feasibility of fulfilling the binding set. Eg: For PlayMedia, this is equivalent to playability. More details: go/hgr-feasibility-feature.",
+          "type": "boolean"
         },
         "kscorerRank": {
           "description": "The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.",
@@ -21080,7 +21179,7 @@
           "type": "number"
         },
         "lowQuality": {
-          "description": "S2V low quality score: converted from quality_nsr.NsrData, applied in Qstar. See NsrUtil::ConvertNsrDataToLowQuality.",
+          "description": "S2V low quality score: converted from quality_nsr.NsrData, applied in Qstar. See quality_nsr::util::ConvertNsrDataToLowQuality.",
           "format": "uint32",
           "type": "integer"
         },
@@ -24053,6 +24152,7 @@
             "CHAPTER_TITLE_MATCHING",
             "DBSCAN_FRAME_CHAPTER_SIMILARITY",
             "EYES_NOT_VISIBLY_CLOSED",
+            "ENGAGINESS",
             "MERGED"
           ],
           "enumDescriptions": [
@@ -24091,6 +24191,7 @@
             "",
             "",
             "go/nima",
+            "",
             "",
             "",
             "",
@@ -27714,6 +27815,7 @@
             "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
             "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING",
+            "PROVIDER_GOOGLE_UGC_AGGREGATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -28249,7 +28351,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AD",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AE",
             "ABSTRACT",
             "",
             "",
@@ -28415,6 +28517,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "The next new \"Google\" provider entries should be placed above.",
@@ -30360,6 +30463,7 @@
             "RESTRICTION_GROUP_SEGMENT",
             "ROAD_MONITOR_MONITORED_ROAD",
             "ROUTE_CHILD_TYPE",
+            "SCHOOL_DISTRICT_TYPE",
             "SEGMENT_ADVISORY_MAXIMUM_SPEED",
             "SEGMENT_AVERAGE_SPEED",
             "SEGMENT_BARRIER",
@@ -30466,6 +30570,7 @@
             "DEPRECATED_DO_NOT_USE_WORKAREA"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -30865,7 +30970,7 @@
         },
         "operations": {
           "$ref": "GeostoreOperationsProto",
-          "description": "RESERVED"
+          "description": "Information about this feature's operations, e.g. when this feature is temporarily closed. NOTE: for legacy reasons, some closure-specifc information (e.g. permanent closure reason) lives in ExistenceProto instead. In the future, such information should move here in OperationsProto."
         },
         "originalId": {
           "$ref": "GeostoreFeatureIdProto",
@@ -32512,6 +32617,7 @@
             "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
             "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING",
+            "PROVIDER_GOOGLE_UGC_AGGREGATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -33047,7 +33153,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AD",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AE",
             "ABSTRACT",
             "",
             "",
@@ -33213,6 +33319,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "The next new \"Google\" provider entries should be placed above.",
@@ -34645,6 +34752,7 @@
             "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
             "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING",
+            "PROVIDER_GOOGLE_UGC_AGGREGATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -35180,7 +35288,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AD",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AE",
             "ABSTRACT",
             "",
             "",
@@ -35346,6 +35454,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "The next new \"Google\" provider entries should be placed above.",
@@ -37079,6 +37188,7 @@
             "PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY",
             "PROVIDER_GOOGLE_GEO_LDE",
             "PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING",
+            "PROVIDER_GOOGLE_UGC_AGGREGATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -37614,7 +37724,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AD",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730AE",
             "ABSTRACT",
             "",
             "",
@@ -37780,6 +37890,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "The next new \"Google\" provider entries should be placed above.",
@@ -44516,7 +44627,7 @@
           "description": "Query used to search against documents (keyword, filters, etc.)."
         },
         "histogramQueries": {
-          "description": "An expression specifying a histogram request against matching documents. Expression syntax is an aggregation function call with histogram facets and other options. The following aggregation functions are supported: * `count(string_histogram_facet)`: Count the number of matching entities for each distinct attribute value. Data types: * Histogram facet (aka filterable properties): Facet names with format <schema id>.<facet>. Facets will have the format of: a-zA-Z. If the facet is a child facet, then the parent hierarchy needs to be specified separated by dots in the prefix after the schema id. Thus, the format for a multi- level facet is: <schema id>.<parent facet name>. <child facet name>. Example: schema123.root_parent_facet.middle_facet.child_facet * DocumentSchemaId: (with no schema id prefix) to get histograms for each document type (returns the schema id path, e.g. projects/12345/locations/us-west/documentSchemas/abc123). Example expression: * Document type counts: count('DocumentSchemaId') * For schema id, abc123, get the counts for MORTGAGE_TYPE: count('abc123.MORTGAGE_TYPE')",
+          "description": "An expression specifying a histogram request against matching documents. Expression syntax is an aggregation function call with histogram facets and other options. The following aggregation functions are supported: * `count(string_histogram_facet)`: Count the number of matching entities for each distinct attribute value. Data types: * Histogram facet (aka filterable properties): Facet names with format <schema id>.<facet>. Facets will have the format of: `a-zA-Z`. If the facet is a child facet, then the parent hierarchy needs to be specified separated by dots in the prefix after the schema id. Thus, the format for a multi- level facet is: <schema id>.<parent facet name>. <child facet name>. Example: schema123.root_parent_facet.middle_facet.child_facet * DocumentSchemaId: (with no schema id prefix) to get histograms for each document type (returns the schema id path, e.g. projects/12345/locations/us-west/documentSchemas/abc123). Example expression: * Document type counts: count('DocumentSchemaId') * For schema id, abc123, get the counts for MORTGAGE_TYPE: count('abc123.MORTGAGE_TYPE')",
           "items": {
             "$ref": "GoogleCloudContentwarehouseV1HistogramQuery"
           },
@@ -44562,8 +44673,8 @@
           ],
           "enumDescriptions": [
             "Total number calculation will be skipped.",
-            "Estimate total number.",
-            "It may adversely impact performance."
+            "Estimate total number. The total result size will be accurated up to 10,000. This option will add cost and latency to your request.",
+            "It may adversely impact performance. The limit is 1000,000."
           ],
           "type": "string"
         }
@@ -44597,7 +44708,7 @@
           "type": "string"
         },
         "totalSize": {
-          "description": "The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true`. Otherwise, the value will be `-1`. `total_size` will max at \"100,000\". If this is returned, then it can be assumed that the count is equal to or greater than 100,000. Typically a UI would handle this condition by displaying \"of many\", for example: \"Displaying 10 of many\".",
+          "description": "The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true` or set SearchDocumentsRequest.total_result_size to `ESTIMATED_SIZE` or `ACTUAL_SIZE`. Otherwise, the value will be `-1`. Typically a UI would handle this condition by displaying \"of many\", for example: \"Displaying 10 of many\".",
           "format": "int32",
           "type": "integer"
         }
@@ -44979,15 +45090,15 @@
       "id": "GoogleCloudDocumentaiV1Barcode",
       "properties": {
         "format": {
-          "description": "Format of a barcode. The supported formats are: CODE_128: Code 128 type. CODE_39: Code 39 type. CODE_93: Code 93 type. CODABAR: Codabar type. DATA_MATRIX: 2D Data Matrix type. ITF: ITF type. EAN_13: EAN-13 type. EAN_8: EAN-8 type. QR_CODE: 2D QR code type. UPC_A: UPC-A type. UPC_E: UPC-E type. PDF417: PDF417 type. AZTEC: 2D Aztec code type. DATABAR: GS1 DataBar code type.",
+          "description": "Format of a barcode. The supported formats are: - `CODE_128`: Code 128 type. - `CODE_39`: Code 39 type. - `CODE_93`: Code 93 type. - `CODABAR`: Codabar type. - `DATA_MATRIX`: 2D Data Matrix type. - `ITF`: ITF type. - `EAN_13`: EAN-13 type. - `EAN_8`: EAN-8 type. - `QR_CODE`: 2D QR code type. - `UPC_A`: UPC-A type. - `UPC_E`: UPC-E type. - `PDF417`: PDF417 type. - `AZTEC`: 2D Aztec code type. - `DATABAR`: GS1 DataBar code type.",
           "type": "string"
         },
         "rawValue": {
-          "description": "Raw value encoded in the barcode. For example, 'MEBKM:TITLE:Google;URL:https://www.google.com;;'.",
+          "description": "Raw value encoded in the barcode. For example: `'MEBKM:TITLE:Google;URL:https://www.google.com;;'`.",
           "type": "string"
         },
         "valueFormat": {
-          "description": "Value format describes the format of the value that a barcode encodes. The supported formats are: CONTACT_INFO: Contact information. EMAIL: Email address. ISBN: ISBN identifier. PHONE: Phone number. PRODUCT: Product. SMS: SMS message. TEXT: Text string. URL: URL address. WIFI: Wifi information. GEO: Geo-localization. CALENDAR_EVENT: Calendar event. DRIVER_LICENSE: Driver's license.",
+          "description": "Value format describes the format of the value that a barcode encodes. The supported formats are: - `CONTACT_INFO`: Contact information. - `EMAIL`: Email address. - `ISBN`: ISBN identifier. - `PHONE`: Phone number. - `PRODUCT`: Product. - `SMS`: SMS message. - `TEXT`: Text string. - `URL`: URL address. - `WIFI`: Wifi information. - `GEO`: Geo-localization. - `CALENDAR_EVENT`: Calendar event. - `DRIVER_LICENSE`: Driver's license.",
           "type": "string"
         }
       },
@@ -45068,7 +45179,7 @@
           "type": "string"
         },
         "textChanges": {
-          "description": "Placeholder. A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.",
+          "description": "Placeholder. A list of text corrections made to Document.text. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.",
           "items": {
             "$ref": "GoogleCloudDocumentaiV1DocumentTextChange"
           },
@@ -45093,7 +45204,7 @@
       "id": "GoogleCloudDocumentaiV1DocumentEntity",
       "properties": {
         "confidence": {
-          "description": "Optional. Confidence of detected Schema entity. Range [0, 1].",
+          "description": "Optional. Confidence of detected Schema entity. Range `[0, 1]`.",
           "format": "float",
           "type": "number"
         },
@@ -45335,7 +45446,7 @@
           "description": "Optional. Identifies the bounding polygon of a layout element on the page."
         },
         "confidence": {
-          "description": "Optional. Confidence of detected page element, if applicable. Range [0, 1].",
+          "description": "Optional. Confidence of detected page element, if applicable. Range `[0, 1]`.",
           "format": "float",
           "type": "number"
         },
@@ -45417,12 +45528,12 @@
       "id": "GoogleCloudDocumentaiV1DocumentPageDetectedLanguage",
       "properties": {
         "confidence": {
-          "description": "Confidence of detected language. Range [0, 1].",
+          "description": "Confidence of detected language. Range `[0, 1]`.",
           "format": "float",
           "type": "number"
         },
         "languageCode": {
-          "description": "The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.",
+          "description": "The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.",
           "type": "string"
         }
       },
@@ -45532,7 +45643,7 @@
           "type": "array"
         },
         "qualityScore": {
-          "description": "The overall quality score. Range [0, 1] where 1 is perfect quality.",
+          "description": "The overall quality score. Range `[0, 1]` where 1 is perfect quality.",
           "format": "float",
           "type": "number"
         }
@@ -45544,12 +45655,12 @@
       "id": "GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect",
       "properties": {
         "confidence": {
-          "description": "Confidence of detected defect. Range [0, 1] where 1 indicates strong confidence of that the defect exists.",
+          "description": "Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.",
           "format": "float",
           "type": "number"
         },
         "type": {
-          "description": "Name of the defect type. Supported values are \"quality/defect_blurry\", \"quality/defect_noisy\", \"quality/defect_dark\", \"quality/defect_faint\", \"quality/defect_text_too_small\", \"quality/defect_document_cutoff\", \"quality/defect_text_cutoff\", \"quality/defect_glare\"",
+          "description": "Name of the defect type. Supported values are: - `quality/defect_blurry` - `quality/defect_noisy` - `quality/defect_dark` - `quality/defect_faint` - `quality/defect_text_too_small` - `quality/defect_document_cutoff` - `quality/defect_text_cutoff` - `quality/defect_glare`",
           "type": "string"
         }
       },
@@ -45564,7 +45675,7 @@
           "description": "The bounding polygon for the Layout."
         },
         "confidence": {
-          "description": "Confidence of the current Layout within context of the object this layout is for. e.g. confidence can be for a single token, a table, a visual element, etc. depending on context. Range [0, 1].",
+          "description": "Confidence of the current Layout within context of the object this layout is for. e.g. confidence can be for a single token, a table, a visual element, etc. depending on context. Range `[0, 1]`.",
           "format": "float",
           "type": "number"
         },
@@ -45992,7 +46103,7 @@
           "description": "Text color."
         },
         "fontFamily": {
-          "description": "Font family such as \"Arial\", \"Times New Roman\". https://www.w3schools.com/cssref/pr_font_font-family.asp",
+          "description": "Font family such as `Arial`, `Times New Roman`. https://www.w3schools.com/cssref/pr_font_font-family.asp",
           "type": "string"
         },
         "fontSize": {
@@ -46298,7 +46409,7 @@
           "type": "string"
         },
         "committedUntilIsMixed": {
-          "description": "Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
+          "description": "Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
           "type": "boolean"
         },
         "nextAvailable": {
@@ -46330,7 +46441,7 @@
           "type": "string"
         },
         "committedUntilIsMixed": {
-          "description": "Whether the status of the user until committed_until has more than one status type (e.g. InMeeting + DoNotDisturb).",
+          "description": "Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
           "type": "boolean"
         },
         "eventSummary": {
@@ -46406,7 +46517,7 @@
           "type": "string"
         },
         "committedUntilIsMixed": {
-          "description": "Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
+          "description": "Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).",
           "type": "boolean"
         },
         "eventSummary": {
@@ -46531,13 +46642,13 @@
         },
         "workingElsewhere": {
           "$ref": "GoogleInternalAppsWaldoV1alphaWorkingElsewhereContext",
-          "description": "Set if the user is working remotely."
+          "description": "Set if the user has a working location. Not just elsewhere (legacy name)."
         }
       },
       "type": "object"
     },
     "GoogleInternalAppsWaldoV1alphaUserLocation": {
-      "description": "Location of the user, which might be \"home\", for example, or another office building, as well as a custom location specified by the user.",
+      "description": "Location of the user, which might be \"home\", for example, or an office building, as well as a custom location specified by the user.",
       "id": "GoogleInternalAppsWaldoV1alphaUserLocation",
       "properties": {
         "customLocation": {
@@ -46587,12 +46698,12 @@
       "type": "object"
     },
     "GoogleInternalAppsWaldoV1alphaWorkingElsewhereContext": {
-      "description": "The context indicating the user is working remotely (from home / from a different office).",
+      "description": "The context providing the User Location (not just Elsewhere). This is a legacy name from when it was only set for users working remotely, now it is also set when the user is working from the office.",
       "id": "GoogleInternalAppsWaldoV1alphaWorkingElsewhereContext",
       "properties": {
         "location": {
           "$ref": "GoogleInternalAppsWaldoV1alphaUserLocation",
-          "description": "The new location of the user. Might represent home / another building, or a random address on the map."
+          "description": "The new location of the user. Might represent home, office, or a custom address on the map."
         }
       },
       "type": "object"
@@ -51452,7 +51563,7 @@
         },
         "featureSetData": {
           "$ref": "DrishtiFeatureSetData",
-          "description": "Video Understanding Golden features. (go/amarna-video-signals#golden-signals) Note: Golden6 features (names matching \"video_*\") are DEPRECATED. Please migrate to Golden7 (\"VideoFeatures.*\"). For more context, see go/golden7/migrating-from-golden6 and go/amarna-golden-feature-tracker."
+          "description": "Video Understanding Golden features. (go/amarna-video-signals#golden-signals) Note: Golden6 features (names matching \"video_*\") are DEPRECATED. Please migrate to Golden7 (\"VideoFeatures.*\"). For more context, see go/golden7/migrating-from-golden6 and go/amarna-golden-feature-tracker. Signals popluated in Raffia cdoc.doc_videos are configured in cs/symbol:AMARNA_EXPORTED_GOLDEN7_FEATURES."
         },
         "golden7SoapboxSummary": {
           "$ref": "DrishtiFeatureSetData",
@@ -59088,6 +59199,7 @@
             "STOPWATCH",
             "TIMER",
             "DEVICE",
+            "DEVICE_SETTING",
             "ROOM",
             "STRUCTURE",
             "ZONE",
@@ -59112,6 +59224,7 @@
             "",
             "",
             "An go/identifier-for-generalized-device generalized device ID",
+            "An nlp_semantic_parsing.models.device.DeviceSetting that represents a single device setting.",
             "An assistant.context.RoomId aka DeviceId.home_graph_device_id",
             "An assistant.context.StructureId aka DeviceId.home_graph_device_id",
             "An identifier for a zone. See: go/zone-gp and go/smarthome-zones",
@@ -60515,9 +60628,17 @@
             "ADD_REMINDER",
             "SHOW_REMINDER",
             "UPDATE_REMINDER",
-            "DELETE_REMINDER"
+            "DELETE_REMINDER",
+            "SHOW_LIST",
+            "MODIFY_LIST",
+            "SHOW_NOTE",
+            "MODIFY_NOTE"
           ],
           "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -75531,6 +75652,7 @@
             "YOUTUBE_COMMENTS_LEGAL_TAKEOUT",
             "YOUTUBE_COMMENTS_INDEXING",
             "YOUTUBE_COMMENTS_NEWEST_FIRST",
+            "YOUTUBE_COMMENTS_BACKEND",
             "YOUTUBE_SUBSCRIPTIONS_FEEDS",
             "YOUTUBE_COMMENT_API",
             "GHUB_COMMENTS",
@@ -76158,6 +76280,7 @@
             "Youtube Comments: Comments legal takeout go/ytcci Team contact: yt-comments-team@google.com",
             "Youtube Comments: Top comments indexing go/ytcci Team contact: yt-comments-team@google.com",
             "Youtube Comments: Newest First. go/ytcci Team contact: yt-comments-team@google.com",
+            "Youtube Comments: Comments Backend. go/ytcci Team contact: yt-comments-team@google.com",
             "Youtube Comments: Subscription notifications go/ytn-inbox-comment-decoration Team contact: yt-notifications@google.com",
             "YouTube Comment API go/yt-comment-api Team contact: yt-comment-api-eng@google.com",
             "Comments for gHub Finance. Team contact: introspect-eng@google.com",
@@ -77015,7 +77138,7 @@
           "type": "integer"
         },
         "hostNsr": {
-          "description": "Site rank computed for host-level sitechunks. This value encodes nsr, site_pr and new_nsr. See NsrUtil::ConvertNsrDataToHostNsr and go/nsr.",
+          "description": "Site rank computed for host-level sitechunks. This value encodes nsr, site_pr and new_nsr. See quality_nsr::util::ConvertNsrDataToHostNsr and go/nsr.",
           "format": "uint32",
           "type": "integer"
         },
@@ -77088,7 +77211,7 @@
           "type": "boolean"
         },
         "nsrSitechunk": {
-          "description": "SiteChunk computed for nsr. It some cases it can use more information than just url (e.g. youtube channels). See NsrAnnotator for details. If sitechunk is longer than --populate_nsr_sitechunk_max_length (default=100), it will not get populated. This field might be compressed and needs to be decoded with NsrUtil::DecodeNsrSitechunk. See go/nsr-chunks for more details. This field contains only nontrivial primary chunks.",
+          "description": "SiteChunk computed for nsr. It some cases it can use more information than just url (e.g. youtube channels). See NsrAnnotator for details. If sitechunk is longer than --populate_nsr_sitechunk_max_length (default=100), it will not get populated. This field might be compressed and needs to be decoded with quality_nsr::util::DecodeNsrSitechunk. See go/nsr-chunks for more details. This field contains only nontrivial primary chunks.",
           "type": "string"
         },
         "numUrls": {
@@ -85565,7 +85688,12 @@
       "description": "Snippet brain scores.",
       "id": "QualityPreviewSnippetBrainFeatures",
       "properties": {
+        "isSnippetBrainBoldingTriggered": {
+          "description": "Is the bolding triggered.",
+          "type": "boolean"
+        },
         "modelScore": {
+          "description": "The score by SnippetBrain model.",
           "format": "float",
           "type": "number"
         }
@@ -89678,25 +89806,12 @@
       "type": "object"
     },
     "RepositoryWebrefClusterProtoRelationRule": {
-      "description": "A rule that defines a Cluster based on a relation. Given a relation (a link type) R, then: For each entity B that has incoming links of type R This defines an instance of this rule, with argument=B We create a Set S We make B a child of S For each entity A that has a link R to B, we make A a child of S ",
+      "description": "A rule that defines a Cluster based on a relation. Given a relation (a link type) R, then: For each entity B that has incoming links of type R This defines an instance of this rule, with argument=B We create a Set S We make B a child of S For each entity A that has a link R to B, we make A a child of S Next available tag: 6",
       "id": "RepositoryWebrefClusterProtoRelationRule",
       "properties": {
-        "isCollapsible": {
-          "description": "If true, cluster global names and links will be extracted from the target of the property. If false, all members of the cluster will be considered sources.",
-          "type": "boolean"
-        },
-        "isCvtRule": {
-          "description": "Whether the target of the relation is an intermediate (CVT) node in KG: - if it is not: generate external_id for the cluster - if it is: - CVT should not be /common/topic otherwise rule will not be created - cluster will reuse CVT mid as its own",
-          "type": "boolean"
-        },
         "relation": {
           "description": "The topic_property_name for the link that defines the relation, e.g. \"/tv/tv_series_episode/series\". Can start with a \"!\" to indicate that this link is reversed during extraction and we want the reversed case. Required.",
           "type": "string"
-        },
-        "sequenceId": {
-          "description": "No longer set.",
-          "format": "int32",
-          "type": "integer"
         }
       },
       "type": "object"
@@ -91608,14 +91723,23 @@
       "description": "Identifies a set of Image NavBoost queries in the CompositeDoc. Each CompositeDoc can contain several images, so we store the image index from the CompositeDoc::doc_images with the index of the particular query inside ImageData::image_data_navboost.",
       "id": "RepositoryWebrefImageQueryIndices",
       "properties": {
+        "canonicalDocid": {
+          "description": "The (canonical) image docid of the ImageData this image query is part of. Useful for identifying the ImageData even after doc_images are updated in between Webref annotation runs. Use docid only when canonical_docid == 0.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "docid": {
+          "format": "uint64",
+          "type": "string"
+        },
         "imageIndex": {
-          "description": "/ The index of the source image in CompositeDoc::doc_images.",
+          "description": "WARNING: The doc_images in docjoins are subject to updates including non-deterministic reordering of doc_images and their image_nb_data extensions. This means that without re-running WebrefAnnotator one cannot rely on the accuracy or even consistency of either image_index or query_index when parsing a cdoc from docjoins. In those situations one ought to rely on canonical_docid (or docid when canonical_docid is absent viz. 0). The index of the source image in CompositeDoc::doc_images.",
           "format": "int32",
           "type": "integer"
         },
         "queryIndex": {
           "$ref": "RepositoryWebrefQueryIndices",
-          "description": "/ Queries index in ImageData::image_data_navboost."
+          "description": "Queries index in ImageData::image_data_navboost."
         }
       },
       "type": "object"
@@ -97130,7 +97254,7 @@
       "type": "object"
     },
     "ResearchScienceSearchReconciledMetadata": {
-      "description": "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 69",
+      "description": "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 70",
       "id": "ResearchScienceSearchReconciledMetadata",
       "properties": {
         "alternateName": {
@@ -97321,6 +97445,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "isInferred": {
+          "description": "Indicates whether the metadata was inferred using an ML model rather than from the schema.org fields.",
+          "type": "boolean"
         },
         "keyword": {
           "description": "Keywords describing the dataset.",
@@ -102045,7 +102173,7 @@
         },
         "recurrenceStart": {
           "$ref": "GoogleTypeDateTime",
-          "description": "The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence and YearlyRecurrence."
+          "description": "The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence."
         },
         "repeatCount": {
           "description": "Will repeat only a finite number of times. This is the original number of times the recurrence will repeat and not how many times are left for it to repeat.",
@@ -103154,9 +103282,23 @@
           },
           "type": "array"
         },
+        "lmsClientIdsAllowed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "lmsIsEditorial": {
           "description": "The following attributes with `lms_` prefix are for supporting LMS restrictions. See go/lms-online-restrictions for details.",
           "type": "boolean"
+        },
+        "lmsModificationsAllowed": {
+          "description": "Int values corresponds to the values of image_repository.licensed.api.restrictions.Modification enum.",
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
         },
         "lmsRegionsAllowed": {
           "$ref": "KeGovernanceTypedRegions"
@@ -103189,6 +103331,10 @@
             "A horizontal policy metadata describes requirements to be applied horizontally. Typical horizontal policies are legal-related, such that data usage restrictions must be respected at all times. When there are multiple horizontal policies, they are evaluated conjunctively. When both horizontal and vertical policy metadata are present, their evaluation results are connecteted conjunctively, e.g. Evaluate(..., horizontal_metadata_1..) AND Evaluate(..., horizontal_metadata_2..) AND Evaluate(..., horizontal_metadata_3..) \u2026 AND (Evaluate(..., vertical_metadata_1..) OR Evaluate(..., vertical_metadata_2..) OR Evaluate(..., vertical_metadata_3..) \u2026)"
           ],
           "type": "string"
+        },
+        "umpPolicyMetadata": {
+          "$ref": "StorageGraphBfgUmpPolicyMetadata",
+          "description": "Policy metadata fields for UMP data. Only expected to be used by UMP providers -- please consult ke-data-governance@ before populating this field."
         }
       },
       "type": "object"
@@ -103699,6 +103845,26 @@
         },
         "spiiCertification": {
           "$ref": "StorageGraphBfgSpiiCertification"
+        }
+      },
+      "type": "object"
+    },
+    "StorageGraphBfgUmpPolicyMetadata": {
+      "description": "Metadata fields for UMP. A piece of data satisfies UMP policy if: (data access region is in the `regions_allowed` list) AND (data access time >= availability_start_timestamp) AND (data access time < availability_end_timestamp)",
+      "id": "StorageGraphBfgUmpPolicyMetadata",
+      "properties": {
+        "availabilityEnds": {
+          "description": "Timestamp after which data with this policy cannot be used.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "availabilityStarts": {
+          "description": "Timestamp before which data with this policy cannot be used.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "regionsAllowed": {
+          "$ref": "KeGovernanceTypedRegions"
         }
       },
       "type": "object"
@@ -106914,6 +107080,8 @@
               "EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL",
               "COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL",
               "BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL",
+              "PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS_EVENT_LEVEL",
+              "GEARHEAD_ATTEMPT_USB_RECOVERY",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "RESERVED_4",
               "RESERVED_5",
@@ -107795,6 +107963,12 @@
               "SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K2",
               "SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K3_4",
               "SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_GTE_K5",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_AH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_AH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_AH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH",
               "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL",
               "WALLET_WELLBEING_ALERT_SESSION_LEVEL",
               "BROAD_INTENT_REWEIGHTING_SESSION_LEVEL",
@@ -107806,6 +107980,8 @@
               "DOWNLOAD_COUNT_ELIGIBLE",
               "PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL",
               "BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL",
+              "ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_SESSION_LEVEL",
+              "SEE_REENGAGEMENT_ACC_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL",
               "CART_ABANDONMENT_USER_LEVEL",
@@ -108155,6 +108331,8 @@
               "GROWTH_CORPUS_WIDE_STAMP_CARD_PURCHASE_FLOW_SERVER_USER_LEVEL",
               "GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_USER_LEVEL",
               "LOYALTY_PURCHASE_QUEST_GAMES_HOME_USER_LEVEL",
+              "GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL",
+              "LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL",
@@ -108236,6 +108414,11 @@
               "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL",
               "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL",
               "POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL",
+              "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SERVER_USER_LEVEL",
+              "ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_USER_LEVEL",
+              "PLAY_ONBOARDING_QUEST_GAMES_HOME_USER_LEVEL",
+              "SERVED_GPP_ONBOARDING_QUEST_USER_LEVEL",
+              "YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -108531,6 +108714,8 @@
               "Event level test code for dev success cluster.",
               "",
               "TestCode for Broad Intent Games TimeSpent Event Level.",
+              "Test codes for the feature and each early-access partners for the Play Store IAP sales project at event-level. go/play-store-iap-sales-dd",
+              "USB connection recovery.",
               "",
               "",
               "",
@@ -109412,6 +109597,12 @@
               "",
               "",
               "",
+              "Merch featuring Now! content on Top of Apps Home.",
+              "",
+              "",
+              "Merch featuring Now! content on Top of Games Home.",
+              "",
+              "",
               "Session level test code for Quest Platform Loyalty Stamp Card in Purchase flow.",
               "TestCode for slicing the users cohorts that should have received a budget Warning alert",
               "TestCode for Broad Intent Reweighting Session Level.",
@@ -109423,6 +109614,8 @@
               "Session level test code for 1.5x ad format. See here for details: http://shortn/_04Q1LMyoTe.",
               "Session level test code for merch run planogram experiment",
               "TestCode for Broad Intent Games TimeSpent Session Level.",
+              "Session level test code for eligible users for manage in-app details",
+              "Session level test code for users that see reengagement ACC",
               "",
               "User should see the live op cluster.",
               "Cart abandonment flow for purchase flow.",
@@ -109772,6 +109965,8 @@
               "User level test code for Corpus Wide Growth Stamp Card, for tracking users who made eligible purchases and are eligible for the GSC in purchase flow. This test code is logged on server side.",
               "User level test code for Corpus Wide Growth Stamp Card, for tracking users who are eligible for the GSC in Games Home.",
               "User level test code for Loyalty Purchase Quest, for tracking users who are eligible for the LPQ in Games Home.",
+              "User level test code for Corpus Wide Growth Stamp Card, for tracking users who are eligible for the GSC in Games Home. This test code is logged on server side.",
+              "User level test code for Loyalty Purchase Quest, for tracking users who are eligible for the LPQ in Games Home. This test code is logged on server side.",
               "User level test code that indicates that at least one high churn fop options is available for user when visiting add fop page for subscription purchase. Deprecated, use 20361 instead.",
               "",
               "",
@@ -109853,6 +110048,11 @@
               "",
               "",
               "",
+              "Test code for Loyalty Stamp Card, for tracking users who made eligible purchases and are eligible for the LSC in purchase flow.",
+              "User level test code for eligible users for manage in-app details",
+              "User level test code for Play Onboarding quest, tracking users who are eligible for Play Onboarding quest in Games Home",
+              "User level test code for users who have been served GPP onboarding quest.",
+              "User level test code for YouTube commerce, tracking users who opted in notification driven prefetch.",
               ""
             ],
             "type": "string"
@@ -110164,7 +110364,7 @@
             "Put all the assets in a satisfactory state.",
             "Enough was done on the ingredient for the video to be playable.",
             "The validation asset is ready.",
-            "The most important transcodes and other assets have been completed. Roughly equlvalent to GFLAG_FULLY_PROCESSED, limited to UGC and Reels. As of 6/2019, resolutions up to 4K are represented.",
+            "The most important transcodes and other assets have been completed. Drives \"is_fully_processed\" in VAPI. Limited to UGC and Reels. Also used to atomically publish all latency-sensitive transcodes after an edit.",
             "A representation for the video in advance of all completed assets is ready.",
             "The transmuxed transcode for the video, used for faster playback in certain early GO_LIVE scenarios, is playable. This is currently limited to Photos.",
             "Basic media information is available -- a rare single-asset objective, to advertise a video's general information as quickly as possible.",
@@ -115822,7 +116022,8 @@
             "TYPE_STARBURST_TOKENS",
             "TYPE_MACRO_MARKERS",
             "TYPE_THUMB_QUERY_EMBEDDING",
-            "TYPE_COLOR_SAMPLING"
+            "TYPE_COLOR_SAMPLING",
+            "TYPE_ENGAGINESS"
           ],
           "enumDescriptions": [
             "",
@@ -115852,6 +116053,7 @@
             "",
             "",
             "Porn Query Classifier (go/pqc) scores.",
+            "",
             "",
             "",
             "",
@@ -125962,7 +126164,8 @@
             "GOOGLE_ASSISTANT",
             "GOOGLE_LIST_RECS",
             "GOOGLE_MEDIA_ACTIONS",
-            "MEDIA_CONNECT_FRONTEND"
+            "MEDIA_CONNECT_FRONTEND",
+            "GOOGLE_TV"
           ],
           "enumDescriptions": [
             "",
@@ -126060,7 +126263,8 @@
             "Middleware or Frontend Server Clients Google Assistant integration with Voz",
             "List Recs Service Clients",
             "Media Actions Service Clients",
-            "YouTube Media Connect Frontend (YMCFE)"
+            "YouTube Media Connect Frontend (YMCFE)",
+            "Google TV clients New Google TV devices (go/gtv-deck). This is added to support go/gtv-ads."
           ],
           "type": "string"
         },
@@ -126629,7 +126833,6 @@
             "GEO_TYPES_COLLECTION_POTENTIALLY_SENSITIVE",
             "GEO_TYPE",
             "ADDED_DURING_GEO_ENTITIES_PROMOTION",
-            "GEO_TYPE_PUBLIC_SPACES_AND_MONUMENTS",
             "GEO_TYPE_COMPOUND_BUILDING",
             "GEO_TYPE_POLITICAL",
             "GEO_TYPES_COLLECTION_SMALL_POLITICALS",
@@ -126717,21 +126920,20 @@
             "This context indicates that a Legos annotation is of a shopping category. See go/shopping-kg-schema#product-categories.",
             "This context indicates that a Legos annotation comes from a creator shopping product annotation (go/shoptube).",
             "This context indicates that a Legos annotation was output by VSU.",
-            "Context used by Geo that indicates if an entity is a restaurant or cafe.",
-            "Context used by Geo that indicates if an entity is an establishment point of interest.",
-            "Context used by Geo to indicate destination which is included in the travel vertical, corresponding to kg_types for both travel and tourism.",
-            "Context used by Geo that indicates an entity is an entertainment and recreation destination.",
-            "Context used by Geo that indicates an entity is part of business vertical. Includes /geo/type/services, /geo/type/business_related, and /geo/type/vehicle_dealers.",
-            "Context used by Geo to filter out destinations which might be sensitive to users from showing up in the structured description UI. Includes /geo/type/potentially_sensitive_entity, /geo/type/government, and /geo/type/religious_institution.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
             "Context used by Geo that indicates if an entity is a geo feature.",
-            "Assigned only to geo entities that are added during postprocessing due to their high webref topicalities and confidences.",
-            "Assigned to geo entities of type public spaces and monuments.",
-            "Assigned to geo entities of type compound building.",
-            "Assigned to geo entities of type political.",
-            "Assigned to geo entities of type political that represent areas smaller than a city, such as sublocalities and neighborhoods.",
-            "Assigned to geo entities of type political that could represent a city, such as localities and small administrative areas.",
-            "Assigned to geo entities of type political that are larger than a city, such as large administrative areas and countries.",
-            "Assigned to geo entities of type natural, except for continents.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
+            "Deprecated. See b/244583433. Instead, consider relying on GEO_TYPE and looking up individual KG types in YTKS.",
             "Assigned to an entity that has been denormalized from an entity which it geographically contains according to the containing entity's type.",
             "",
             "",
