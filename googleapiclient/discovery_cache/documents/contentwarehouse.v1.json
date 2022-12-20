@@ -1075,7 +1075,7 @@
       }
     }
   },
-  "revision": "20221206",
+  "revision": "20221219",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3529,7 +3529,12 @@
             "BASECAMP_AFFINITY",
             "DRIVE_SEARCH_FILTER_AFFINITY",
             "CULTURE_EVENTS_CALENDAR_AFFINITY",
-            "DATABRIDGE_CONSOLE_AFFINITY"
+            "DATABRIDGE_CONSOLE_AFFINITY",
+            "COMMSTAR_AFFINITY",
+            "CDDB_AFFINITY",
+            "DATA_STUDIO_SPACES_AFFINITY",
+            "SOJI_AFFINITY",
+            "PLAY_MOVIES_ANDROID_AFFINITY"
           ],
           "enumDescriptions": [
             "",
@@ -3546,6 +3551,11 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -4257,6 +4267,32 @@
             "$ref": "SocialGraphApiProtoPrompt"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo": {
+      "description": "Contact creation timestamps and related metadata. See go/contact-edit-history. This message is a pure wrapper of the shared ContactCreactionContext message so that it can be a top-level person field. No other fields should be added to the message.",
+      "id": "AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo",
+      "properties": {
+        "contactCreateContext": {
+          "$ref": "SocialGraphApiProtoContactCreateContext"
+        },
+        "metadata": {
+          "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        }
+      },
+      "type": "object"
+    },
+    "AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo": {
+      "description": "Contact edit timestamps and related metadata. See go/contact-edit-history. This message is a pure wrapper of the shared ContactCreactionContext message so that it can be a top-level person field. No other fields should be added to the message.",
+      "id": "AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo",
+      "properties": {
+        "contactEditContext": {
+          "$ref": "SocialGraphApiProtoContactEditContext"
+        },
+        "metadata": {
+          "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         }
       },
       "type": "object"
@@ -6349,6 +6385,18 @@
           },
           "type": "array"
         },
+        "contactCreateContextInfo": {
+          "items": {
+            "$ref": "AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo"
+          },
+          "type": "array"
+        },
+        "contactEditContextInfo": {
+          "items": {
+            "$ref": "AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo"
+          },
+          "type": "array"
+        },
         "contactGroupMembership": {
           "description": "Contact groups that this person is a member of.",
           "items": {
@@ -6622,6 +6670,7 @@
           "type": "array"
         },
         "relation": {
+          "description": "See go/relation-vs-relationship for relation vs relationship explanation.",
           "items": {
             "$ref": "AppsPeopleOzExternalMergedpeopleapiRelation"
           },
@@ -8054,7 +8103,7 @@
       "type": "object"
     },
     "AppsPeopleOzExternalMergedpeopleapiRelation": {
-      "description": "Relation stores the related person between the contact or profile and a third person This field currently includes RelationshipToMe data in fields value and canonical_value for ContainerType CONTACT_ANNOTATION. This will be moved to RelationshipToMe in b/221081499.",
+      "description": "Relation stores the related person between the contact or profile and a third person. See go/relation-vs-relationship for relation vs relationship explanation. This field currently includes RelationshipToMe data in fields value and canonical_value for ContainerType CONTACT_ANNOTATION. This will be moved to RelationshipToMe in b/221081499.",
       "id": "AppsPeopleOzExternalMergedpeopleapiRelation",
       "properties": {
         "canonicalValue": {
@@ -9474,6 +9523,7 @@
               "SWIPE_FOR_NOTIFICATION",
               "SWITCH_ACCESS",
               "SYSTEM_UPDATE",
+              "SYSTEM_UPDATES",
               "SYSTEM_NAVIGATION",
               "TALKBACK_PASSWORDS",
               "TEXT_TO_SPEECH",
@@ -9712,6 +9762,7 @@
               "",
               "",
               "",
+              "Deprecated, use SYSTEM_UPDATES instead.",
               "",
               "Settings page for configuring how navigation between apps is done. Specifically android has choice between Buttons of Gestures mode.",
               "",
@@ -12190,7 +12241,7 @@
       "id": "AssistantApiLensPerceptionCapabilitiesLensCapabilitiesTranslate",
       "properties": {
         "supportedLanguageTags": {
-          "description": "The list of language IETF BCP 47 tags that are supported. See the full list at go/androidlanguages.",
+          "description": "The list of language IETF BCP 47 tags that are supported. See the full details in the comment on the equivalent field in: http://google3/java/com/google/android/apps/gsa/search/shared/service/proto/lens_service_event.proto;l=55;rcl=355512559",
           "items": {
             "type": "string"
           },
@@ -15269,9 +15320,13 @@
       "type": "object"
     },
     "AssistantApiSupportedClientOpSupportedExecution": {
-      "description": "Additional properties that client can support for executing the client op.",
+      "description": "Additional properties that client can support for executing the client op. They are surface-specific execution properties and are unrelated to the execution model.",
       "id": "AssistantApiSupportedClientOpSupportedExecution",
       "properties": {
+        "supportsPartialFulfillment": {
+          "description": "ClientOp execution supports special rendering behavior while the user is in the middle of expressing their query. This behavior includes: 1) New partial output always over-writes prior partial output. 2) Canceling the interaction removes partial fulfilment from any user visible interaction history. If this is true, whether to apply the special rendering behavior will be determined by PartialFulfillmentRenderingParams. More details can be found at go/ma-natcon-pf-api.",
+          "type": "boolean"
+        },
         "supportsSynchronousExecution": {
           "description": "Client can support synchronous execution of the client op. For tts.OUTPUT client op it means that client would honor |synchronous_playback_args| argument. Please see more at go/synchronous-sounds-design.",
           "type": "boolean"
@@ -16803,9 +16858,17 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 2",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 4",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
+        "isSeedRadio": {
+          "description": "True if the media deeplink has tag SEED_RADIO.",
+          "type": "boolean"
+        },
+        "isSeedRadioRequest": {
+          "description": "True if the user requests seed radio.",
+          "type": "boolean"
+        },
         "mscRate": {
           "description": "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac",
           "format": "float",
@@ -17962,7 +18025,8 @@
             "CROSS_STRUCTURE_TARGETING_DISALLOWED",
             "NO_DEVICE_MEETS_STADIA_GAMING_CAPABILITY",
             "MEDIA_STATES_MISSING",
-            "NO_DEVICE_SATISFIES_CAPABILITIES_REQUIREMENT"
+            "NO_DEVICE_SATISFIES_CAPABILITIES_REQUIREMENT",
+            "HYBRID_DEVICE_NOT_QUALIFIED"
           ],
           "enumDescriptions": [
             "Used when the type of error is not known explicitly.",
@@ -17987,7 +18051,8 @@
             "When user tries to target a device which is in a different structure and is not allowed. For example, if user doesn't own the structure. See go/on-multi-user-access-transitivity for more details.",
             "When all devices do not qualify for stadia support.",
             "Used when any critical media state is missing so the selection decision cannot be made. See go/partial-states-in-targeting-library for more details.",
-            "Error about when no qualified device satisfies the device capability requirement."
+            "Error about when no qualified device satisfies the device capability requirement.",
+            "All remote hybrid devices fail the propertries requirement specific (lock/unlock, etc) for hybrid devices (such as Tangor)."
           ],
           "type": "string"
         },
@@ -19090,9 +19155,11 @@
             "UNDEFINED",
             "CURATED",
             "ALARM",
-            "CUSTOM"
+            "CUSTOM",
+            "CUSTOM_SCRIPT"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -24120,7 +24187,8 @@
             "VERSION_MOVING_LIVE_0",
             "VERSION_MOVING_MANUAL_0",
             "VERSION_LITE_1",
-            "VERSION_CUSTOM"
+            "VERSION_CUSTOM",
+            "VERSION_REJECTED"
           ],
           "enumDescriptions": [
             "",
@@ -24143,7 +24211,8 @@
             "Moving thumbnailer version 0 for live.",
             "Moving thumbnail generated manually.",
             "Lite Thumbnailer (previously known as FirstFrameThumbnailer)",
-            "Custom image (not generated). Likely client provided."
+            "Custom image (not generated). Likely client provided.",
+            "A gray fallback image for images that have been rejected."
           ],
           "type": "string"
         },
@@ -28450,7 +28519,8 @@
             "PROVIDER_VATTENFALL",
             "PROVIDER_VIETGIS",
             "PROVIDER_UNITE",
-            "PROVIDER_NEOGY"
+            "PROVIDER_NEOGY",
+            "PROVIDER_AMPUP"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -29158,7 +29228,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126F."
+            "",
+            "Note: Next available value is 0x1270."
           ],
           "type": "string"
         },
@@ -33262,7 +33333,8 @@
             "PROVIDER_VATTENFALL",
             "PROVIDER_VIETGIS",
             "PROVIDER_UNITE",
-            "PROVIDER_NEOGY"
+            "PROVIDER_NEOGY",
+            "PROVIDER_AMPUP"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -33970,7 +34042,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126F."
+            "",
+            "Note: Next available value is 0x1270."
           ],
           "type": "string"
         }
@@ -35405,7 +35478,8 @@
             "PROVIDER_VATTENFALL",
             "PROVIDER_VIETGIS",
             "PROVIDER_UNITE",
-            "PROVIDER_NEOGY"
+            "PROVIDER_NEOGY",
+            "PROVIDER_AMPUP"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -36113,7 +36187,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126F."
+            "",
+            "Note: Next available value is 0x1270."
           ],
           "type": "string"
         },
@@ -36831,48 +36906,6 @@
       },
       "type": "object"
     },
-    "GeostorePriceInfoSourceDetails": {
-      "id": "GeostorePriceInfoSourceDetails",
-      "properties": {
-        "lastUpdateSources": {
-          "items": {
-            "$ref": "GeostorePriceInfoSourceDetailsSourceData"
-          },
-          "type": "array"
-        },
-        "sourceData": {
-          "items": {
-            "$ref": "GeostorePriceInfoSourceDetailsSourceData"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "GeostorePriceInfoSourceDetailsSourceData": {
-      "id": "GeostorePriceInfoSourceDetailsSourceData",
-      "properties": {
-        "clientProjectNumber": {
-          "description": "Project number of the GMB API client. Set only if the source is EXTERNAL_GMB_API.",
-          "format": "int64",
-          "type": "string"
-        },
-        "source": {
-          "enum": [
-            "SOURCE_UNSPECIFIED",
-            "NMX_UI",
-            "EXTERNAL_GMB_API"
-          ],
-          "enumDescriptions": [
-            "No source specified.",
-            "The menu comes from our own UI.",
-            "The menu comes from a third party."
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "GeostorePriceInfoStatus": {
       "description": "Providers of PriceInfo (e.g. SinglePlatform, YEXT) send verified and unverified listings. PriceInfoStatus is used to encapsulate this information.",
       "id": "GeostorePriceInfoStatus",
@@ -37005,10 +37038,6 @@
             "$ref": "GeostorePriceListSectionProto"
           },
           "type": "array"
-        },
-        "sourceDetails": {
-          "$ref": "GeostorePriceInfoSourceDetails",
-          "description": "Source of the information retrieved, could be from our own NMX UI or a third party API."
         },
         "sourceUrl": {
           "$ref": "GeostoreUrlListProto",
@@ -37902,7 +37931,8 @@
             "PROVIDER_VATTENFALL",
             "PROVIDER_VIETGIS",
             "PROVIDER_UNITE",
-            "PROVIDER_NEOGY"
+            "PROVIDER_NEOGY",
+            "PROVIDER_AMPUP"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -38610,7 +38640,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x126F."
+            "",
+            "Note: Next available value is 0x1270."
           ],
           "type": "string"
         }
@@ -43386,7 +43417,7 @@
             "REPLACE_POLICY_BINDING"
           ],
           "enumDescriptions": [
-            "",
+            "The unknown operation type.",
             "Adds newly given policy bindings in the existing bindings list.",
             "Removes newly given policy bindings from the existing bindings list.",
             "Replaces existing policy bindings with the given policy binding list"
@@ -43471,7 +43502,7 @@
             "ACTION_PENDING"
           ],
           "enumDescriptions": [
-            "",
+            "The unknown state.",
             "State indicating action executed successfully.",
             "State indicating action failed.",
             "State indicating action timed out.",
@@ -43545,10 +43576,10 @@
       "properties": {
         "cloudAiDocumentOption": {
           "$ref": "GoogleCloudContentwarehouseV1CloudAIDocumentOption",
-          "description": "Request Option for processing Cloud AI Document in CW Document."
+          "description": "Request Option for processing Cloud AI Document in Document Warehouse. This field offers limited support for mapping entities from Cloud AI Document to Warehouse Document. Please consult with product team before using this field and other available options."
         },
         "createMask": {
-          "description": "Field mask for creating Document fields. If mask path is empty, it means all fields are masked. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask",
+          "description": "Field mask for creating Document fields. If mask path is empty, it means all fields are masked. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.",
           "format": "google-fieldmask",
           "type": "string"
         },
@@ -43558,7 +43589,7 @@
         },
         "policy": {
           "$ref": "GoogleIamV1Policy",
-          "description": "Default document policy during creation. Conditions defined in the policy will be ignored."
+          "description": "Default document policy during creation. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document. Conditions defined in the policy will be ignored."
         },
         "requestMetadata": {
           "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
@@ -43671,10 +43702,6 @@
       "description": "Defines the structure for content warehouse document proto.",
       "id": "GoogleCloudContentwarehouseV1Document",
       "properties": {
-        "asyncEnabled": {
-          "description": "If true, makes the document visible to asynchronous policies and rules.",
-          "type": "boolean"
-        },
         "cloudAiDocument": {
           "$ref": "GoogleCloudDocumentaiV1Document",
           "description": "Document AI format to save the structured content, including OCR."
@@ -43765,16 +43792,16 @@
           "description": "The reference ID set by customers. Must be unique per project and location.",
           "type": "string"
         },
-        "structuredContentUri": {
-          "description": "A path linked to structured content file.",
-          "type": "string"
-        },
         "textExtractionDisabled": {
           "description": "If true, text extraction will not be performed.",
           "type": "boolean"
         },
+        "textExtractionEnabled": {
+          "description": "If true, text extraction will be performed.",
+          "type": "boolean"
+        },
         "title": {
-          "description": "Title that describes the document. This is usually present in the top section of the document, and is a mandatory field for the question-answering feature.",
+          "description": "Title that describes the document. This can be the top heading or text that describes the document.",
           "type": "string"
         },
         "updateTime": {
@@ -44529,7 +44556,7 @@
           "type": "boolean"
         },
         "isMetadata": {
-          "description": "Whether the property is user supplied metadata.",
+          "description": "Whether the property is user supplied metadata. This out-of-the box placeholder setting can be used to tag derived properties. Its value and interpretation logic should be implemented by API user.",
           "type": "boolean"
         },
         "isRepeatable": {
@@ -44717,7 +44744,7 @@
             "ON_UPDATE"
           ],
           "enumDescriptions": [
-            "",
+            "Trigger for unknown action.",
             "Trigger for create document action.",
             "Trigger for update document action."
           ],
@@ -44860,11 +44887,11 @@
           "description": "The meta information collected about the end user, used to enforce access control and improve the search quality of the service."
         },
         "requireTotalSize": {
-          "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false.",
+          "description": "Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false.",
           "type": "boolean"
         },
         "totalResultSize": {
-          "description": "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.",
+          "description": "Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.",
           "enum": [
             "TOTAL_RESULT_SIZE_UNSPECIFIED",
             "ESTIMATED_SIZE",
@@ -44939,7 +44966,7 @@
       "properties": {
         "policy": {
           "$ref": "GoogleIamV1Policy",
-          "description": "Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB."
+          "description": "Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document."
         },
         "projectOwner": {
           "description": "For Set Project ACL only. Authorization check for end user will be ignored when project_owner=true.",
@@ -45095,7 +45122,7 @@
       "properties": {
         "cloudAiDocumentOption": {
           "$ref": "GoogleCloudContentwarehouseV1CloudAIDocumentOption",
-          "description": "Request Option for processing Cloud AI Document in CW Document."
+          "description": "Request Option for processing Cloud AI Document in Document Warehouse. This field offers limited support for mapping entities from Cloud AI Document to Warehouse Document. Please consult with product team before using this field and other available options."
         },
         "document": {
           "$ref": "GoogleCloudContentwarehouseV1Document",
@@ -45190,6 +45217,7 @@
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1UserInfo": {
+      "description": "The user information.",
       "id": "GoogleCloudContentwarehouseV1UserInfo",
       "properties": {
         "groupIds": {
@@ -51462,9 +51490,13 @@
       "type": "object"
     },
     "ImageRepositoryAmarnaCloudSpeechSignals": {
-      "description": "Next Tag: 7",
+      "description": "Next Tag: 8",
       "id": "ImageRepositoryAmarnaCloudSpeechSignals",
       "properties": {
+        "duplicateOfYtS3Asr": {
+          "description": "If this field is set to true, it means that Youtube already processed the ASR from S3 for the langID. Please find the ASR result from transcript_asr in google3/image/repository/proto/video_search.proto instead.",
+          "type": "boolean"
+        },
         "langWithoutLocale": {
           "description": "The language id input for creating this ASR without regional info. Same format as in go/ytlangid. This field is populated in Kronos Amarna Cloud Speech operator and passed to Amarna, but it is cleared before stored in Amarna's metadata table.",
           "type": "string"
@@ -59158,7 +59190,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryFunctionCallSignals": {
-      "description": "Next ID: 34",
+      "description": "Next ID: 35",
       "id": "KnowledgeAnswersIntentQueryFunctionCallSignals",
       "properties": {
         "argumentComposingMid": {
@@ -59269,6 +59301,10 @@
         },
         "isDisambiguationIntent": {
           "description": "Denotes whether this is a sub-intent of an ambiguous SystemUncertain intent go/intent-disambiguation.",
+          "type": "boolean"
+        },
+        "isNeuralCategoricalInterpretation": {
+          "description": "Whether the interpretation was generated from the neural categorical parser.",
           "type": "boolean"
         },
         "isUiCompositionIntent": {
@@ -61981,10 +62017,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "iconicPersonBoundingBox": {
-          "$ref": "PhotosVisionGroundtruthdbNormalizedBoundingBox",
-          "description": "Normalized bounding box of the most iconic person in the image. The x,y coordinates are in the range [0, 1]. Deprecated to comply with CDS requirements (b/228535076)."
-        },
         "personBoundingBox": {
           "$ref": "LensDiscoveryStyleBoundingBox",
           "description": "Bounding box of the most iconic person in the image."
@@ -62107,10 +62139,6 @@
         "boundingBox": {
           "$ref": "LensDiscoveryStyleBoundingBox",
           "description": "Bounding box of the detected person."
-        },
-        "normalizedBoundingBox": {
-          "$ref": "PhotosVisionGroundtruthdbNormalizedBoundingBox",
-          "description": "Normalized bounding box of the detected person. The x,y coordinates are in the range [0, 1]. Deprecated to comply with CDS requirements (b/228535076)."
         }
       },
       "type": "object"
@@ -64121,6 +64149,10 @@
       "description": "Tidbit token rendered in generating snippet/title.",
       "id": "MustangSnippetsRenderedToken",
       "properties": {
+        "bolded": {
+          "description": "Is the rendered token bolded (insided )",
+          "type": "boolean"
+        },
         "byteOffsetBegin": {
           "description": "Byte offset range in the rendered text that corresponds to this token. [byte_offset_begin, byte_offset_end) inclusive",
           "format": "int32",
@@ -71419,7 +71451,8 @@
             "VIDEO_GAME",
             "DIRECTOR",
             "ACTOR",
-            "MOVIE_SERIES"
+            "MOVIE_SERIES",
+            "APP"
           ],
           "enumDescriptions": [
             "",
@@ -71459,7 +71492,8 @@
             "A video game (e.g. \"Skyrim\"). Note(shohs): As of Q4'18, this content type is not supported as a top-level content type to fulfill a query; rather, it is only used at the entity level to support queries such as \"play Skyrim soundtrack\".",
             "TV or film director. (e.g. \"James Cameron\").",
             "Actor: TV, film actor etc. (e.g. \"Tom Cruise\").",
-            "Movie series. (e.g. \"Home Alone\")."
+            "Movie series. (e.g. \"Home Alone\").",
+            "Used for App."
           ],
           "type": "string"
         },
@@ -76087,6 +76121,7 @@
             "CULTURE_EVENTS_CALENDAR",
             "DATABRIDGE_CONSOLE",
             "COMMSTAR",
+            "CDDB",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -76720,6 +76755,7 @@
             "CULTURE_EVENTS_CALENDAR Team contact: culture-events-calendar@google.com",
             "Databridge Console Team contact: databrige-eng@google.com",
             "Commstar Team contact: mdb.commstar-dev@google.com",
+            "Cddb Team contact: cddb-dev-team@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -78493,6 +78529,11 @@
           "description": "The duration of the animation or movie (not including any looping), in milliseconds. If there is only a single frame (and thus not animated), the duration will be 0.",
           "format": "int64",
           "type": "string"
+        },
+        "loopCount": {
+          "description": "The number of times the animation plays. If 0, the animation will loop indefinitely. If positive, this number includes the initial playthrough. For example, a value of 3 means that each frame is shown 3 times.",
+          "format": "int32",
+          "type": "integer"
         },
         "numFrames": {
           "format": "int64",
@@ -82333,7 +82374,8 @@
             "NEW_RELEASE",
             "IAP_SKU_SALE",
             "OFFER",
-            "IAP_SKU_DEALS"
+            "IAP_SKU_DEALS",
+            "FEATURED_PRODUCTS"
           ],
           "enumDescriptions": [
             "",
@@ -82348,7 +82390,8 @@
             "Events for major new app releases. Auto-generated by the recommendations backend.",
             "Sale events generated by sku config, rather than a sale event as declared through PDC.",
             "Offer - see offer types below for the types. go/liveops-config-deals",
-            "Out-of-app purchasable in-app promotions funded by Play."
+            "Out-of-app purchasable in-app promotions funded by Play.",
+            "Out-of-app purchasable in-app products, configured by developers through Play Console. go/store-content-featured_product-prd go/featured-in-app-products-pc-dd, go/featured-products-serving-dd"
           ],
           "type": "string"
         },
@@ -84193,7 +84236,7 @@
       "type": "object"
     },
     "QualityNsrNsrData": {
-      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 50",
+      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 51",
       "id": "QualityNsrNsrData",
       "properties": {
         "articleScore": {
@@ -84291,6 +84334,10 @@
         "nsr": {
           "format": "float",
           "type": "number"
+        },
+        "nsrEpoch": {
+          "description": "The epoch from which this NSR value is coming from.",
+          "type": "string"
         },
         "nsrOverrideBid": {
           "description": "This signal is used to unconditionally override NSR as a bid in Q*. Should only be used in case of emergency (see go/nsr-override-bid). To have any effect, the value should be present and greater than 0.001.",
@@ -85139,17 +85186,19 @@
       "type": "object"
     },
     "QualityPreviewRanklabSnippet": {
-      "description": "Snippet candidate related information and signal scores. Next ID: 11",
+      "description": "Snippet candidate related information and signal scores. This message is used for both snippet scoring and ranklab features recording. Next ID: 12 ================== Features populated in production =======================",
       "id": "QualityPreviewRanklabSnippet",
       "properties": {
         "brainFeatures": {
-          "$ref": "QualityPreviewSnippetBrainFeatures"
+          "$ref": "QualityPreviewSnippetBrainFeatures",
+          "description": "Features from SnippetFlow in Superroot."
         },
         "documentFeatures": {
           "$ref": "QualityPreviewSnippetDocumentFeatures"
         },
         "experimentalFeatures": {
-          "$ref": "QualityPreviewSnippetExperimentalFeatures"
+          "$ref": "QualityPreviewSnippetExperimentalFeatures",
+          "description": "For experimental usage, not populated yet."
         },
         "finalScore": {
           "description": "The final score of this candidate.",
@@ -85174,6 +85223,10 @@
         "queryTermCoverageFeatures": {
           "$ref": "QualityPreviewSnippetQueryTermCoverageFeatures",
           "description": "Query term (including synonyms) coverage features."
+        },
+        "radishFeatures": {
+          "$ref": "QualityPreviewSnippetRadishFeatures",
+          "description": "Radish related information."
         },
         "snippetInfo": {
           "$ref": "QualityPreviewChosenSnippetInfo",
@@ -87685,7 +87738,7 @@
       "type": "object"
     },
     "QualityShoppingShoppingAttachmentPBlock": {
-      "description": "Next ID: 15",
+      "description": "Next ID: 18",
       "id": "QualityShoppingShoppingAttachmentPBlock",
       "properties": {
         "fullTitle": {
@@ -87823,6 +87876,11 @@
             "$ref": "QualityRankembedMustangMustangRankEmbedInfo"
           },
           "type": "array"
+        },
+        "weakGlobalProductClusterId": {
+          "description": "Matched/Inferred weak product identity - set only if the global_product_cluster_id is missing",
+          "format": "uint64",
+          "type": "string"
         }
       },
       "type": "object"
@@ -88202,6 +88260,53 @@
             "$ref": "QualitySitemapTarget"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "QualitySnippetsTruncationSnippetBoldedRange": {
+      "description": "A bolded range in printed snippet lines.",
+      "id": "QualitySnippetsTruncationSnippetBoldedRange",
+      "properties": {
+        "begin": {
+          "$ref": "QualitySnippetsTruncationSnippetBoldedRangePosition",
+          "description": "Bolded range [begin, end)"
+        },
+        "end": {
+          "$ref": "QualitySnippetsTruncationSnippetBoldedRangePosition"
+        },
+        "text": {
+          "description": "Only populated for debugging.",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "TYPE_UNSPECIFIED",
+            "QUERY_TERM_MATCH",
+            "RADISH",
+            "BRAIN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QualitySnippetsTruncationSnippetBoldedRangePosition": {
+      "id": "QualitySnippetsTruncationSnippetBoldedRangePosition",
+      "properties": {
+        "byteOffset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -89256,7 +89361,7 @@
       "type": "object"
     },
     "RepositoryAnnotationsRdfaRdfaRichSnippetsApplication": {
-      "description": "This structure holds data for application information for rich snippets Next ID: 52",
+      "description": "This structure holds data for application information for rich snippets Next ID: 53",
       "id": "RepositoryAnnotationsRdfaRdfaRichSnippetsApplication",
       "properties": {
         "appTypeData": {
@@ -89358,6 +89463,9 @@
         "liveOpDetails": {
           "$ref": "QualityCalypsoAppsUniversalAuLiveOpsDetailInfo",
           "description": "Unified proto for android LiveOps and iOS LiveEvents."
+        },
+        "localizedTrustedGenome": {
+          "$ref": "RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationLocalizedTrustedGenome"
         },
         "marketplace": {
           "description": "Market Android or itunes",
@@ -89528,6 +89636,20 @@
         "price": {
           "description": "Price string converted from double value in a standard currency unit, like '199.35' or '1400'.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationLocalizedTrustedGenome": {
+      "id": "RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationLocalizedTrustedGenome",
+      "properties": {
+        "language": {
+          "description": "The chosen language",
+          "type": "string"
+        },
+        "localizedTg": {
+          "$ref": "VendingConsumerProtoTrustedGenomeAnnotation",
+          "description": "The TG tags matching the locale of the doc, if available"
         }
       },
       "type": "object"
@@ -90283,11 +90405,6 @@
           "type": "number"
         },
         "nbScore": {
-          "format": "float",
-          "type": "number"
-        },
-        "newConfidenceExperimentalDontUse": {
-          "description": "Experimental. This is used for doing experiments only. For example, new entity confidence can be populated here to experiment with replacing the one re-computed by NewAnnotationConfidence().",
           "format": "float",
           "type": "number"
         },
@@ -92098,7 +92215,8 @@
             "FEMALE",
             "ASPECT",
             "TARGET_AUDIENCE",
-            "TARGET_PURPOSE"
+            "TARGET_PURPOSE",
+            "SETTING_BY_LOCATION"
           ],
           "enumDescriptions": [
             "",
@@ -92108,7 +92226,8 @@
             "A range expressing unequivocally a (semantic) female gender. This could be for expressions that are intrinsically female (\"aunt\") or the female expression of an entity that is lexically gendered (\"chairwoman\" as opposed to \"chairman\" or \"chairperson\").",
             "The range designates an aspect, that is, a modifier of some other range.",
             "Facets.",
-            ""
+            "",
+            "End of facets. This line marks where to generate new values for facets."
           ],
           "type": "string"
         },
@@ -92226,9 +92345,10 @@
             "FEMININE_HONORIFIC",
             "GENERIC_HONORIFIC",
             "NEGATIVE_SUPERLATIVE",
+            "SUPERLATIVE",
             "FACET_AUDIENCE",
             "FACET_PURPOSE",
-            "SUPERLATIVE"
+            "FACET_SETTING_BY_LOCATION"
           ],
           "enumDescriptions": [
             "",
@@ -92281,9 +92401,10 @@
             "Feminine Honorific markers.",
             "Non-specific Honorifc markers.",
             "",
+            "",
             "Facets.",
             "",
-            ""
+            "End of facets. This line marks where to generate new values for facets."
           ],
           "type": "string"
         }
@@ -99622,7 +99743,7 @@
       "type": "object"
     },
     "SecurityCredentialsPrincipalProto": {
-      "description": "A Principal represents something to which permissions are assigned, often but not always a user or group of some kind. It is most appropriate for use in ACLs and authorization checks. Callers should prefer to use the wrapper classes in google3/security/credentials/public/principal.h google3/java/com/google/security/credentials/Principal.java google3/security/credentials/go/principal.go unless direct proto access is essential. If you update this protocol buffer, please update the wrapper classes as well.",
+      "description": "A Principal represents something to which permissions are assigned, often but not always a user or group of some kind. It is most appropriate for use in ACLs and authorization checks. Callers should prefer to use the wrapper classes in google3/security/credentials/public/principal.h google3/java/com/google/security/credentials/Principal.java google3/security/credentials/go/principal.go unless direct proto access is essential. If you update this protocol buffer, please update the wrapper classes as well. LINT.IfChange",
       "id": "SecurityCredentialsPrincipalProto",
       "properties": {
         "allAuthenticatedUsers": {
@@ -99797,7 +99918,7 @@
       "type": "object"
     },
     "SecurityCredentialsRbacRoleProto": {
-      "description": "Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).",
+      "description": "Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC provisionable (go/sphinx-rbacz).",
       "id": "SecurityCredentialsRbacRoleProto",
       "properties": {
         "name": {
@@ -99811,14 +99932,14 @@
           "type": "string"
         },
         "rbacRoleName": {
-          "description": "Format: \"RbacNamespaceName.RbacRoleName(/field=value)*\", e.g., \"hr.v1.Reader\", \"hr.v1.Reader/language=EN_US/country=USA/room=NYC-9th-11A201\".",
+          "description": "Format: \"role/z?\" - \"role\" is the Sphinx globally unique name of the Sphinx role that provisions the RBAC role. - \"/z?\" suffix indicates which Zanzibar environment stores the role membership data (\"/zd\": dev, \"/zs\": staging, \"/zp\": prod, \"/zt\": local test instance). Example: \"mysystem_myrole/zp\"",
           "type": "string"
         }
       },
       "type": "object"
     },
     "SecurityCredentialsRbacSubjectProto": {
-      "description": "Principal associated with a given RBAC subject. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).",
+      "description": "Principal associated with a given RBAC subject. This principal is used by Sphinx Provisioning Service for RBAC provisionable (go/sphinx-rbacz).",
       "id": "SecurityCredentialsRbacSubjectProto",
       "properties": {
         "username": {
@@ -100564,9 +100685,16 @@
       "type": "object"
     },
     "SnippetExtraInfoSnippetCandidateInfo": {
-      "description": "Next ID: 12",
+      "description": "Next ID: 13",
       "id": "SnippetExtraInfoSnippetCandidateInfo",
       "properties": {
+        "boldedRanges": {
+          "description": "Bolded ranges in the printed snippet lines.",
+          "items": {
+            "$ref": "QualitySnippetsTruncationSnippetBoldedRange"
+          },
+          "type": "array"
+        },
         "id": {
           "description": "Candidate identifier number, unique among all snippet candidates under each document in each request. What does this number mean: - Muppet candidates: This equals to the candidate's rank by Muppet snippets scorer. - Superroot candidates: No specific meaning, this number should be larger than that of Muppet candidates. This field is used to: - Verify whether snippet brain chooses a different snippet from Muppet (the one chosen by Muppet is always in id 0). - Print debugging information and sort candidates in debug output.",
           "format": "int32",
@@ -101153,6 +101281,16 @@
       },
       "type": "object"
     },
+    "SocialGraphApiProtoContactCreateContext": {
+      "description": "The ContactEditContext message is a wrapper around the generic ContactMutationContext data to represent when and where a contact create was performed.",
+      "id": "SocialGraphApiProtoContactCreateContext",
+      "properties": {
+        "mutationContext": {
+          "$ref": "SocialGraphApiProtoContactMutationContext"
+        }
+      },
+      "type": "object"
+    },
     "SocialGraphApiProtoContactDeletionContext": {
       "description": "The ContactDeletionContext message is a wrapper around the generic ContactMutationContext data, and will include any needed delete specific data. NOTE: Before using this message please review go/people-api-contact-deletion-context",
       "id": "SocialGraphApiProtoContactDeletionContext",
@@ -101160,6 +101298,16 @@
         "mutationContext": {
           "$ref": "SocialGraphApiProtoContactMutationContext",
           "description": "The general mutation context data"
+        }
+      },
+      "type": "object"
+    },
+    "SocialGraphApiProtoContactEditContext": {
+      "description": "The ContactEditContext message is a wrapper around the generic ContactMutationContext data to represent when and where a contact edit was performed.",
+      "id": "SocialGraphApiProtoContactEditContext",
+      "properties": {
+        "mutationContext": {
+          "$ref": "SocialGraphApiProtoContactMutationContext"
         }
       },
       "type": "object"
@@ -101553,15 +101701,19 @@
       "type": "object"
     },
     "SocialGraphApiProtoPartialNameOptionsParsedDisplayNameSpec": {
-      "description": "These options use more sophisticated logic from a location-aware name detector to parse the full name of a user into structured parts and operate on those parts. For more information on how names are parsed, see the NameOccurrence proto definition: http://google3/quality/peoplesearch/namedetector/detector/proto/name_occurrence.proto?l=50&rcl=334484707 Next ID: 7",
+      "description": "These options use more sophisticated logic from a location-aware name detector to parse the full name of a user into structured parts and operate on those parts. For more information on how names are parsed, see the NameOccurrence proto definition: http://google3/quality/peoplesearch/namedetector/detector/proto/name_occurrence.proto?l=50&rcl=334484707 In general, when parsing display names the following rules will apply to *all* specs: - Hyphenated names are broken down: \"Angelina Jollie-Pit\" is pre-processed as \"Angelina Jollie Pitt\"; - Prefixes are ignored: \"Prof. Albus Dumbledore\" is pre-processed as \"Albus Dumbledore\"; - Auxiliaries are ignored: \"Lu\u00eds de Cam\u00f5es\" is pre-processed as \"Lu\u00eds Cam\u00f5es\". Next ID: 8",
       "id": "SocialGraphApiProtoPartialNameOptionsParsedDisplayNameSpec",
       "properties": {
         "allInitialsFromParsedName": {
-          "description": "Extract an initial from each parsed name. For example, \"Niels Henrik David Bohr\" yields \"N. H. D. B.\". Other special cases are treated as follows: - Hyphenated names are broken down: \"Angelina Jollie-Pit\" yields \"A. J. P.\"; - Prefixes are ignored: \"Prof. Albus Dumbledore\" yields \"A. D.\"; - Auxiliaries are ignored: \"Lu\u00eds de Cam\u00f5es\" yields \"L. C.\".",
+          "description": "Extract an initial from each parsed name. For example, \"Niels Henrik David Bohr\" yields \"N. H. D. B.\". Other special cases are treated as follows:",
+          "type": "boolean"
+        },
+        "firstInitialAndFirstLastName": {
+          "description": "Show the initial of the very first name and the first last name, e.g. \"Hugo Daniel Hernandez Garcia\" yields \"H. Hernandez\".",
           "type": "boolean"
         },
         "firstInitialAndVeryLastName": {
-          "description": "Show the initial of the very first name and the very last name, e.g. \"Ana Maria Silva\" yields \"A. Silva\". - Hyphenated names are broken down: \"Angelina Jollie-Pitt\" yields \"A. Pitt\"; - Prefixes are ignored: \"Prof. Albus Dumbledore\" yields \"A. Dumbledore\"; - Auxiliaries are ignored: \"Lu\u00eds de Cam\u00f5es\" yields \"L. Cam\u00f5es\".",
+          "description": "Show the initial of the very first name and the very last name, e.g. \"Ana Maria Silva\" yields \"A. Silva\".",
           "type": "boolean"
         },
         "knowledgeGraphNameShortening": {
@@ -101583,11 +101735,11 @@
           "type": "string"
         },
         "veryFirstNameAndAllInitials": {
-          "description": "Show the full very first name and all the other initials, e.g. \"Ana Maria Silva\" yields \"Ana M. S.\". - Hyphenated names are broken down: \"Angelina Jollie-Pit\" yields \"Angelina J. P.\"; - Prefixes are ignored: \"Prof. Albus Dumbledore\" yields \"Albus D.\"; - Auxiliaries are ignored: \"Lu\u00eds de Cam\u00f5es\" yields \"Lu\u00eds C.\".",
+          "description": "Show the full very first name and all the other initials, e.g. \"Ana Maria Silva\" yields \"Ana M. S.\".",
           "type": "boolean"
         },
         "veryFirstNameOnly": {
-          "description": "Show the very first name only, e.g. \"Ana Maria Silva\" yields \"Ana\". - Hyphenated names are broken down: \"Mary-Kate Smith\" yields \"Mary\"; - Prefixes are ignored: \"Prof. Albus Dumbledore\" yields \"Albus\";",
+          "description": "Show the very first name only, e.g. \"Ana Maria Silva\" yields \"Ana\".",
           "type": "boolean"
         }
       },
@@ -102971,12 +103123,12 @@
       "id": "StorageGraphBfgPolicyMetadata",
       "properties": {
         "availabilityEndTimestamp": {
-          "description": "Timestamp after which data with this policy cannot be used. This value must be strictly larger/later than availability_start_time, if both are set. WARNING: This field is WIP and please do not populate it without reading go/ke-dg-tape and consulting ke-data-governance@.",
+          "description": "Timestamp after which data with this policy cannot be used. This value must be strictly larger/later than availability_start_time, if both are set.",
           "format": "google-datetime",
           "type": "string"
         },
         "availabilityStartTimestamp": {
-          "description": "Timestamp before which data with this policy cannot be used. This value must be strictly smaller/earlier than availability_end_time, if both are set. WARNING: This field is WIP and please do not populate it without reading go/ke-dg-tape and consulting ke-data-governance@.",
+          "description": "Timestamp before which data with this policy cannot be used. This value must be strictly smaller/earlier than availability_end_time, if both are set.",
           "format": "google-datetime",
           "type": "string"
         },
@@ -103235,6 +103387,7 @@
             "RIGHTS_MANAGEMENT_102",
             "DICTIONARY_DATA_OXFORD",
             "DICTIONARY_DATA_LE_ROBERT",
+            "ENTITY_TEXT_FEATURES",
             "AR_ONBOARDING_TEST",
             "AR_ONBOARDING_TEST_2",
             "MATERIALIZED_ENRICHER_INTERNAL",
@@ -103413,6 +103566,7 @@
             "Corresponding to policy id = 102.",
             "",
             "",
+            "Access controls for EntityTextFeatures computed by the Enricher. YOU MUST CONTACT deepkg-infra-dev@ before reading or writing data with this ACL.",
             "This AccessRequirement is used for testing purpose only. Please do not use it on data.",
             "",
             "Data materialized by PQM13n for Enricher. Design proposal: go/enricher-m13n-ar. YOU MUST CONTACT ke-data-platform-access@ before reading or writing data with this acl.",
@@ -106479,72 +106633,25 @@
               "TC_IN_PSS_CHECK_A",
               "TC_IN_PSS_CHECK_B",
               "QUERY_IS_BOOTS_ELIGIBLE",
-              "ENTERTAINMENT_CLUSTER_SPELLING_CORRECTION",
               "QUERY_HAS_SELECTED_BOOTS_CHIP",
               "QUERY_HAS_ONLY_UNSELECTED_BOOTS_CHIPS",
               "SPONSORED_ADS_CLUSTER",
-              "SPONSORED_ADS_CLUSTER_ATLEAST_ONE_AD",
-              "INSPIRED_BY",
-              "MOVIE_DUPLICATES_WITHIN_3_DOCS",
-              "MOVIE_DUPLICATES_WITHIN_5_DOCS",
-              "MOVIE_DUPLICATES_WITHIN_7_DOCS",
-              "SHOULD_SEE_LIVE_OP_CLUSTER",
               "BOOKS_QUERY_HAS_LANGUAGE_INTENT",
-              "REWARD_RIBBON_IMPRESSION",
               "IRON_THRONE_QUERY",
-              "FAMILY_LIBRARY_SHARED_DESTINATION",
               "GUIDED_DISCOVERY",
               "BOOKS_AUTHOR_QUERY",
-              "HOME_SPONSORED_ADS_CLUSTER",
-              "HOME_SPONSORED_ADS_CLUSTER_GAP_OPTOUT",
-              "FAMILY_FRAUD_CHALLENGE",
-              "BOOKS_MONETIZABLE_QUERY",
-              "BOOKS_NONMONETIZABLE_QUERY",
-              "NON_BOOKS_QUERY",
               "BOOTS_PROD_V1_QUERY",
-              "BOOTS_TAG_OVERRIDE_QUERY",
-              "BOOTS_KG_ANNOTATION_QUERY",
-              "EDITORIAL_REVIEW_CARD_ELIGIBLE",
-              "BOOTS_DEST_QUERY_100_INSTALLS_QUERY",
-              "BOOTS_DEST_QUERY_150_INSTALLS_QUERY",
               "SHOULD_SEE_LIVE_OP_CLUSTER_CANDIDATES",
-              "REV_BOOST_V2_TEST_CODE",
               "ENTERTAINMENT_CLUSTER_TRIGGERING",
-              "BOOTS_MIN_TAGS_2",
               "BOOTS_EN_IN",
               "BOOTS_EN_GB",
               "BOOTS_EN_PH",
               "BOOTS_EN_CA",
-              "BOOTS_EN_AU",
-              "BOOTS_EN_I18N",
-              "BOOTS_V2_STAGING",
-              "OFFLINE_APP_SEARCH",
               "ENTERTAINMENT_CLUSTER_CONTAINER_SEARCH_ENABLED",
-              "BEST_SELLER_CART_TAG",
-              "BOOTS_DEST_QUERY_50_INSTALLS_QUERY",
-              "BOOTS_SAFT_SPEC2",
               "SEARCH_NAV_SPONSORED_ADS_CLUSTER",
-              "BOOTS_ISTA",
-              "BOOTS_EN_GLOBAL",
               "TOP_CHART_RANKING_INFO",
               "CLIENT_TEST_CODE_VERIFICATION",
               "APPS_PUB_QUERY",
-              "BOOTS_V2",
-              "HAS_BOOKS_BIGPOOL_RECS",
-              "TESTING_BOTH",
-              "TESTING_EVENT",
-              "BOOTS_MORE_CHIPS",
-              "BOOTS_TAG_CONVERSION_BASED_RERANKING",
-              "BOOTS_KG_FILTERS",
-              "BOOTS_JP_KR",
-              "BOOTS_ISTA_V2",
-              "BOOTS_FILTERS",
-              "BOOTS_EN_GLOBAL_V2",
-              "BOOTS_ISTA_V2_WITH_BOOTS_V2",
-              "BOOTS_ISTA_JP_KR",
-              "BOOTS_VS_ISTA_JP_KR",
-              "CHURNED_LIVE_OP_CANDIDATES_EVENT",
-              "CHURNED_LIVE_OP_EVENT",
               "ABUSIVE_QUERY_SQUASHING_EVENT",
               "HOME_SPONSORED_ADS_RE_ENGAGEMENT_CLUSTER_EVENT_LEVEL",
               "SEARCH_LIVE_OP_QUERY_EVENT",
@@ -106605,6 +106712,10 @@
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_EVENT_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_EVENT_LEVEL",
               "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_EVENT_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_EVENT_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_GAME_EVENT_LEVEL",
+              "APPS_PERSONALIZED_MDP_EVENT_LEVEL",
+              "APPS_PERSONALIZED_MDP_GAME_EVENT_LEVEL",
               "CDP_PROMOTIONAL_IMAGE_LOCALE_MATCH",
               "CDP_PROMOTIONAL_IMAGE_LOCALE_MISMATCH",
               "CDP_SCREENSHOT_LOCALE_MISMATCH",
@@ -106739,6 +106850,7 @@
               "EDITORS_CHOICE_CLUSTER_SERP_EVENT_LEVEL",
               "BESTK_CLUSTER_SERP_EVENT_LEVEL",
               "LIVEOPS_CLUSTER_SERP_EVENT_LEVEL",
+              "QUICKPICKS_CLUSTER_SERP_EVENT_LEVEL",
               "INLINE_DETAILS_AQUALITY_CHECK_PASS",
               "INLINE_DETAILS_AQUALITY_CHECK_FAIL",
               "INLINE_DETAILS_IS_INLINE_URL_FRONTEND",
@@ -106759,6 +106871,12 @@
               "DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL",
               "PTP_CLUSTER_SERP_P13N_RANKING_EVENT_LEVEL",
               "BROAD_INTENT_REWEIGHTING_EVENT_LEVEL",
               "QUERY_DEPENDENT_SNIPPET_EVENT_LEVEL",
@@ -106777,6 +106895,8 @@
               "MDP_P13N_GAME_QUERY_L9_EVENT_LEVEL",
               "SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL",
               "SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL",
+              "EXPLORATORY_BOOSTING_EVENT_LEVEL",
+              "GEARHEAD_TOOLTIP_COOLWALK_DASHBOARD_UNAVAILABLE",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "RESERVED_4",
               "RESERVED_5",
@@ -107047,6 +107167,10 @@
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_SESSION_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_SESSION_LEVEL",
               "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_SESSION_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_SESSION_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_GAME_SESSION_LEVEL",
+              "APPS_PERSONALIZED_MDP_SESSION_LEVEL",
+              "APPS_PERSONALIZED_MDP_GAME_SESSION_LEVEL",
               "PLAY_STORE_SHOW_CART",
               "MOVIES_RENTER",
               "LOYALTY_HOME_FIRST_TAB_SESSION_LEVEL",
@@ -107507,12 +107631,15 @@
               "EDITORS_CHOICE_CLUSTER_SERP_SESSION_LEVEL",
               "BESTK_CLUSTER_SERP_SESSION_LEVEL",
               "LIVEOPS_CLUSTER_SERP_SESSION_LEVEL",
+              "QUICKPICKS_CLUSTER_SERP_SESSION_LEVEL",
               "WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_SESSION_LEVEL",
               "ALTERNATE_DEVICE_PRESENT_SESSION_LEVEL",
               "MULTIPLE_ALTERNATE_DEVICES_PER_FORM_FACTOR_SESSION_LEVEL",
               "APPS_SEARCH_DISCOVERY_CLUSTER_TRIGGERED_SESSION_LEVEL",
               "SUGGEST_CROSS_FORM_FACTOR_APPS_WEAR_SUGGESTIONS_ENABLED",
               "SUGGEST_CROSS_FORM_FACTOR_APPS_WEAR_SUGGESTIONS_AVAILABLE",
+              "SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_ENABLED",
+              "SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_AVAILABLE",
               "SUGGEST_APPS_SUBTEXT_SUGGESTIONS_SESSION_LEVEL",
               "INLINE_DETAILS_TQUALITY_CHECK_PASS_SESSION_LEVEL",
               "INLINE_DETAILS_TQUALITY_CHECK_FAIL_SESSION_LEVEL",
@@ -107520,6 +107647,12 @@
               "INLINE_DETAILS_AQUALITY_CHECK_FAIL_SESSION_LEVEL",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_SESSION_LEVEL",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_SESSION_LEVEL",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL",
+              "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL",
+              "HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL",
               "INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL",
               "INLINE_DETAILS_IS_INLINE_URL_FRONTEND_SESSION_LEVEL",
               "INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL",
@@ -107700,6 +107833,8 @@
               "YOUTUBE_FROM_LANDING_PAGE_SESSION_LEVEL",
               "SECOND_PASS_POLARIS_RERANKING_SESSION_LEVEL",
               "SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_SESSION_LEVEL",
+              "EXPLORATORY_BOOSTING_SESSION_LEVEL",
+              "PLAY_BOOKS_READING_PROGRESS_TOOLTIP_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL",
               "CART_ABANDONMENT_USER_LEVEL",
@@ -107743,6 +107878,10 @@
               "APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_USER_LEVEL",
               "APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_USER_LEVEL",
               "APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_USER_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_USER_LEVEL",
+              "APPS_PERSONALIZED_NAVIGATIONAL_GAME_USER_LEVEL",
+              "APPS_PERSONALIZED_MDP_USER_LEVEL",
+              "APPS_PERSONALIZED_MDP_GAME_USER_LEVEL",
               "SUBSCRIPTION_CANCELLATION_PROMOTION_USER_LEVEL",
               "SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_USER_LEVEL",
               "SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_USER_LEVEL",
@@ -108140,9 +108279,10 @@
               "YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL",
               "PLAY_ONBOARDING_QUEST_GAMES_HOME_SERVER_USER_LEVEL",
               "PCH_O2_WITH_CRE_USER_LEVEL",
-              "MERCH_USER_JOURNEY_ROBLOX_SPEND_USER_LEVEL",
+              "MERCH_USER_JOURNEY_SPEND_USER_LEVEL",
               "PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL",
               "PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL",
+              "PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -108160,29 +108300,9 @@
               "",
               "",
               "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "User should see the live op cluster.",
               "go/books-language-handling for details",
-              "",
               "Create test code for go/it-design experiment",
-              "",
               "go/guided-discovery-design for details.",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               "",
               "",
               "User has live op cluster candidates.",
@@ -108194,34 +108314,7 @@
               "",
               "",
               "",
-              "",
-              "",
-              "Aqua grammar is used to narrow to offline apps.",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               "For verify the client test code logging flow.",
-              "",
-              "",
-              "User has books bigpool recs.",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
               "",
               "",
               "",
@@ -108265,6 +108358,10 @@
               "",
               "",
               "Details page of an app eligible for Books XSell",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -108417,6 +108514,7 @@
               "",
               "",
               "",
+              "",
               "Event level test codes containing result of aQuality lookup during market details url matching. A failed aQuality result suppresses inline details.",
               "",
               "Event level test code for Aquality/Tquality filtering in LMD project. This is a duplicated testcode created for logging in frontend.",
@@ -108432,6 +108530,12 @@
               "Event level test codes containing results for aQuality and tQuality in the details page. See go/low-quality-dp-experiment-config for details.",
               "",
               "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "Event level test codes containing results for caller tablet aQaulity checks for HSDP.",
               "",
               "",
               "",
@@ -108455,6 +108559,8 @@
               "",
               "Second pass polaris reranking event level.",
               "Second pass polaris with ranking change event level.",
+              "Exploratory boosting event level.",
+              "Tooltip for unavailable dashboard support for selected navigation app.",
               "",
               "",
               "",
@@ -108713,6 +108819,10 @@
               "",
               "",
               "Subscription retry fop flow when the primary fop is dcb.",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -109185,16 +109295,25 @@
               "",
               "",
               "",
+              "",
               "Session level test code logged when the wide media card has invalid video asset in the asset agnostic 3x experiment.",
               "Session level test code that indicates that the user has at least one alternate form factor device.",
               "Session level test code that indicates that the user has at more than one alternate form factor devices per form factor.",
               "Session level test code that indicates that an apps discovery cluster was triggered on the search page.",
               "Session level test code that indicates that cross form factor wear Suggestion is enabled. b/222328256 for more details.",
               "Session level test code that indicates that at least one cross form factor wear suggestion is available. b/222328256 for more details.",
+              "Session level test code that indicates that cross form factor tv Suggestion is enabled. b/257494005 for more details.",
+              "Session level test code that indicates that at least one cross form factor tv suggestion is available. b/257494005 for more details.",
               "Session level test code that indicates the subtext is triggered for that group of suggestions. Could either be for XFF Cat, Nav or legacy subtext.",
               "Session level test codes containing result of tQuality lookup during market details url matching. A failed tQuality result suppresses inline details.",
               "",
               "Session level test codes containing result of aQuality lookup during market details url matching. A failed aQuality result suppresses inline details.",
+              "",
+              "",
+              "",
+              "Session level test codes containing results for caller tablet aQaulity checks for HSDP.",
+              "",
+              "",
               "",
               "",
               "",
@@ -109378,6 +109497,8 @@
               "",
               "Second pass polaris reranking session level.",
               "Second pass polaris with ranking change session level.",
+              "Exploratory boosting session level.",
+              "Session level test code for reading progress tooltip.",
               "",
               "User should see the live op cluster.",
               "Cart abandonment flow for purchase flow.",
@@ -109416,6 +109537,10 @@
               "promotion for Nevers in App Details Page. User saw/would have seen the details page premium app",
               "promotion for Nevers in App Details Page. User saw/would have seen the details page in-app item",
               "promotion for Lapsed Buyers in App Details Page.",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -109818,9 +109943,10 @@
               "User level test code for YouTube commerce, tracking users who opted in notification driven prefetch.",
               "User level test code for Play Onboarding quest, tracking users who are eligible for Play Onboarding quest in Games Home. This test code is logged on the server side.",
               "User level test code for tracking users who are being shown PersistentCartHeader through purchase flow. This test code is logged on the server side.",
-              "User level test code for Merch user journey roblox spend experiment. This test code is logged on the server side.",
+              "User level test code for Merch user journey experiment. This test code is logged on the Growth Engine server side.",
               "User level test code for new uplift modeling architecture with campaign features in treatment tower.",
               "User level test code for Non-Play Growth Events experiment (go/npge-prd). Logged on the server side and applied to users that visit Loyalty Home and are eligible to receive a quest with Play Games Achievement tasks, regardless of whether the quest was shown or held back.",
+              "User level test code for reading progress tooltip.",
               ""
             ],
             "type": "string"
@@ -113461,7 +113587,7 @@
       "type": "object"
     },
     "VideoContentSearchVideoAnchorScoreInfo": {
-      "description": "Message to contain scoring / debugging information. If you want to add information which is not directly used in the final VideoAnchor data, it should be put here. Next ID: 25",
+      "description": "Message to contain scoring / debugging information. If you want to add information which is not directly used in the final VideoAnchor data, it should be put here. Next ID: 27",
       "id": "VideoContentSearchVideoAnchorScoreInfo",
       "properties": {
         "anchorCommonFeatureSet": {
@@ -113471,6 +113597,10 @@
         "attachments": {
           "$ref": "Proto2BridgeMessageSet",
           "description": "Additional attachments which extend MessageSet."
+        },
+        "babelCheckpointPath": {
+          "description": "The path to the particular babel checkpoint",
+          "type": "string"
         },
         "captionEntityAnchorFeatures": {
           "$ref": "VideoContentSearchCaptionEntityAnchorFeatures",
@@ -113535,6 +113665,14 @@
         "multimodalTopicTrainingFeatures": {
           "$ref": "VideoContentSearchMultimodalTopicTrainingFeatures",
           "description": "Features for a generated topic used to build training data for multimodal topics."
+        },
+        "normalizedBabelEmbedding": {
+          "description": "Normalized babel embedding of anchor.label(). If the label has more than one sentences, the embedding will be the averaged normalized embedding of each sentence.",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "type": "array"
         },
         "ocrAnchorFeature": {
           "$ref": "VideoContentSearchOnScreenTextFeature",
@@ -125748,7 +125886,7 @@
       "type": "object"
     },
     "YoutubeCommentsClusteringMiniStanza": {
-      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 75",
+      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 76",
       "id": "YoutubeCommentsClusteringMiniStanza",
       "properties": {
         "ansibleScores": {
@@ -126280,6 +126418,10 @@
           "description": "Word entropy of the comment.",
           "format": "double",
           "type": "number"
+        },
+        "ytAuthorChannelId": {
+          "description": "The youtube channel id of the comment author.",
+          "type": "string"
         },
         "ytCommentQualityScore": {
           "description": "Existing quality corpus scores.",
@@ -126832,7 +126974,7 @@
     }
   },
   "servicePath": "",
-  "title": "contentwarehouse API",
+  "title": "Document AI Warehouse API",
   "version": "v1",
   "version_module": true
 }
