@@ -136,7 +136,7 @@
           ]
         },
         "setAcl": {
-          "description": "Sets the access control policy for a resource. Replaces any existing policy.",
+          "description": "Sets the access control policy for a resource. Replaces any existing policy. You can set ACL with condition for projects only. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is `DocumentSchemaId` or property name and the right of the operator is a number or a quoted string. You must escape backslash (\\\\) and quote (\\\") characters. Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for example, \"((A AND B AND C) OR D) AND E\"), a maximum of 10 comparisons are allowed in the expression. The expression must be < 6000 bytes in length. Sample condition: `\"DocumentSchemaId = \\\"some schema id\\\" \" OR SchemaId.floatPropertyName >= 10`",
           "flatPath": "v1/projects/{projectsId}:setAcl",
           "httpMethod": "POST",
           "id": "contentwarehouse.projects.setAcl",
@@ -570,7 +570,7 @@
                   ]
                 },
                 "setAcl": {
-                  "description": "Sets the access control policy for a resource. Replaces any existing policy.",
+                  "description": "Sets the access control policy for a resource. Replaces any existing policy. You can set ACL with condition for projects only. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is `DocumentSchemaId` or property name and the right of the operator is a number or a quoted string. You must escape backslash (\\\\) and quote (\\\") characters. Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for example, \"((A AND B AND C) OR D) AND E\"), a maximum of 10 comparisons are allowed in the expression. The expression must be < 6000 bytes in length. Sample condition: `\"DocumentSchemaId = \\\"some schema id\\\" \" OR SchemaId.floatPropertyName >= 10`",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/documents/{documentsId}:setAcl",
                   "httpMethod": "POST",
                   "id": "contentwarehouse.projects.locations.documents.setAcl",
@@ -1075,7 +1075,7 @@
       }
     }
   },
-  "revision": "20221219",
+  "revision": "20230106",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -13094,9 +13094,14 @@
       "type": "object"
     },
     "AssistantApiScreenCapabilities": {
-      "description": "These capabilities represent the tactile features associated with the device. This includes, for example, whether the device has a screen, how big the screen is, and privacy of the screen. Next ID: 10",
+      "description": "These capabilities represent the tactile features associated with the device. This includes, for example, whether the device has a screen, how big the screen is, and privacy of the screen. Next ID: 11",
       "id": "AssistantApiScreenCapabilities",
       "properties": {
+        "fontScaleFactor": {
+          "description": "The scale factor used to convert Scalable Pixel (SP) units to Density-independent Pixel (DP) units (DP = SP * scale factor). Fonts are measured in units of SP, and on some platforms such as Android the SP to DP scale factor can be affected by the font size a user selects in accessibility settings.",
+          "format": "float",
+          "type": "number"
+        },
         "inputType": {
           "description": "The types of input that this screen supports. Note that this can be empty in which case the screen's input type is unknown.",
           "items": {
@@ -18648,11 +18653,16 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 34",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 36",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
           "description": "Assistant User Interaction Score for binding set.",
+          "format": "float",
+          "type": "number"
+        },
+        "bindingSetPauis": {
+          "description": "Pauis score for the binding set",
           "format": "float",
           "type": "number"
         },
@@ -18710,6 +18720,11 @@
         "maskCandidateLevelFeatures": {
           "description": "This feature is always false / no-op in serving time. In training time, this feature may be set true on specific examples for weighted training where when this signal is true, only cross-intent level features are used for training and other candidate level features are masked (set as missing).",
           "type": "boolean"
+        },
+        "maxHgrScoreAcrossBindingSets": {
+          "description": "The maximum score assigned by the Horizontal Grounding Ranker (HGR) across all of the intent's binding sets.",
+          "format": "double",
+          "type": "number"
         },
         "numAlternativeHypothesis": {
           "description": "Number of alternative hypotheses from speech recognition(S3).",
@@ -19315,7 +19330,7 @@
       "type": "object"
     },
     "AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData": {
-      "description": "Next ID: 42",
+      "description": "Next ID: 43",
       "id": "AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData",
       "properties": {
         "actionProjectConfigs": {
@@ -19360,6 +19375,13 @@
         "gcmExecutionAddress": {
           "description": "GCM address for cloud execution across google cloud messaging rather than 3p cloud; for future use.",
           "type": "string"
+        },
+        "groupIds": {
+          "description": "List of parent group IDs, if the device is added to one or multiple device groups (see go/home-groups). Will be consumed by Smart Home APIs and (in the future) Assistant CTF to populate the group member list of device groups.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "hashValue": {
           "description": "The hash value from go/de-consistency-check",
@@ -20377,7 +20399,7 @@
       "type": "object"
     },
     "ClassifierPornSiteData": {
-      "description": "Next ID: 51",
+      "description": "Next ID: 52",
       "id": "ClassifierPornSiteData",
       "properties": {
         "avgPedoPageScore": {
@@ -20397,6 +20419,10 @@
         "numberOfPedoPages": {
           "description": "The number of pages with pedo restrict.",
           "format": "uint64",
+          "type": "string"
+        },
+        "site": {
+          "description": "Sitechunk used to compute the signals. The field is present only for data created after December 2022.",
           "type": "string"
         },
         "sitePornRatio": {
@@ -36917,7 +36943,7 @@
       "type": "object"
     },
     "GeostorePriceListNameInfoProto": {
-      "description": "A PriceListNameInfoProto is used by PriceListProto and fields and messages contained in it for storing names, descriptions, languages, and IDs. The name field and the description field must be in the same language, as specified by the language field. None of the fields in this proto is required, although it is not expected to have the language field set unless there is a name or description. When the language field is not set, it is understood to be the preferred language of the locale where the establishment is located. An empty string for any of the fields is treated the same as having the fields not set.",
+      "description": "A PriceListNameInfoProto is used by PriceListProto and fields and messages contained in it for storing names, descriptions, languages, and IDs. The name field and the description field must be in the same language, as specified by the language field. None of the fields in this proto is required, although it is not expected to have the language field set unless there is a name or description. When the language field is not set, it is understood to be the preferred language of the locale where the establishment is located. An empty string for any of the fields is not allowed (as enforced by lints).",
       "id": "GeostorePriceListNameInfoProto",
       "properties": {
         "description": {
@@ -37090,6 +37116,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "language": {
+          "description": "The external form of a Google International Identifiers Initiative (III) LanguageCode object. See google3/i18n/identifiers/languagecode.h for details. We place extra restrictions on languages in addition to what the III library requires. See go/geo-schema-reference/feature-properties/languages. When set, represents the language of the section and its items. Any section and item level name infos must match this language. Optional.",
+          "type": "string"
         },
         "media": {
           "description": "One or more media items (photos, videos, etc.) describing this section / category.",
@@ -43030,6 +43060,11 @@
         "dimensions": {
           "$ref": "GoogleAssistantAccessoryV1ScreenOutConfigDimensions",
           "description": "Device dimensions."
+        },
+        "fontScaleFactor": {
+          "description": "The scale factor used to convert Scalable Pixel (SP) units to Density-independent Pixel (DP) units (DP = SP * scale factor). Fonts are measured in units of SP, and on some platforms such as Android the SP to DP scale factor can be affected by the font size a user selects in accessibility settings.",
+          "format": "float",
+          "type": "number"
         }
       },
       "type": "object"
@@ -43617,6 +43652,20 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1CustomWeightsMetadata": {
+      "description": "To support the custom weighting across document schemas.",
+      "id": "GoogleCloudContentwarehouseV1CustomWeightsMetadata",
+      "properties": {
+        "weightedSchemaProperties": {
+          "description": "List of schema and property name. Allows a maximum of 10 schemas to be specified for relevance boosting.",
+          "items": {
+            "$ref": "GoogleCloudContentwarehouseV1WeightedSchemaProperty"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1DataUpdateAction": {
       "description": "Represents the action responsible for properties update operations.",
       "id": "GoogleCloudContentwarehouseV1DataUpdateAction",
@@ -43872,6 +43921,10 @@
         "customPropertyFilter": {
           "description": "This filter specifies a structured syntax to match against the [PropertyDefinition].is_filterable marked as `true`. The syntax for this expression is a subset of SQL syntax. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is a property name and the right of the operator is a number or a quoted string. You must escape backslash (\\\\) and quote (\\\") characters. Supported functions are `LOWER([property_name])` to perform a case insensitive match and `EMPTY([property_name])` to filter on the existence of a key. Boolean expressions (AND/OR/NOT) are supported up to 3 levels of nesting (for example, \"((A AND B AND C) OR NOT D) AND E\"), a maximum of 100 comparisons or functions are allowed in the expression. The expression must be < 6000 bytes in length. Sample Query: `(LOWER(driving_license)=\"class \\\"a\\\"\" OR EMPTY(driving_license)) AND driving_years > 10`",
           "type": "string"
+        },
+        "customWeightsMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1CustomWeightsMetadata",
+          "description": "To support the custom weighting across document schemas, customers need to provide the properties to be used to boost the ranking in the search request. For a search query with CustomWeightsMetadata specified, only the RetrievalImportance for the properties in the CustomWeightsMetadata will be honored."
         },
         "documentCreatorFilter": {
           "description": "The exact creator(s) of the documents to search against. If a value isn't specified, documents within the search results are associated with any creator. If multiple values are specified, documents within the search results may be associated with any of the specified creators.",
@@ -44242,6 +44295,22 @@
           ],
           "type": "string"
         },
+        "documentCreatorDefaultRole": {
+          "description": "Optional. The default role for the person who create a document.",
+          "enum": [
+            "DOCUMENT_CREATOR_DEFAULT_ROLE_UNSPECIFIED",
+            "DOCUMENT_ADMIN",
+            "DOCUMENT_EDITOR",
+            "DOCUMENT_VIEWER"
+          ],
+          "enumDescriptions": [
+            "Unspecified, will be default to document admin role.",
+            "Document Admin, same as contentwarehouse.googleapis.com/documentAdmin.",
+            "Document Editor, same as contentwarehouse.googleapis.com/documentEditor.",
+            "Document Viewer, same as contentwarehouse.googleapis.com/documentViewer."
+          ],
+          "type": "string"
+        },
         "kmsKey": {
           "description": "Optional. The KMS key used for CMEK encryption. It is required that the kms key is in the same region as the endpoint. The same key will be used for all provisioned resources, if encryption is available. If the kms_key is left empty, no encryption will be enforced.",
           "type": "string"
@@ -44582,6 +44651,28 @@
         "propertyTypeOptions": {
           "$ref": "GoogleCloudContentwarehouseV1PropertyTypeOptions",
           "description": "Nested structured data property."
+        },
+        "retrievalImportance": {
+          "description": "The retrieval importance of the property during search.",
+          "enum": [
+            "RETRIEVAL_IMPORTANCE_UNSPECIFIED",
+            "HIGHEST",
+            "HIGHER",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "LOWEST"
+          ],
+          "enumDescriptions": [
+            "No importance specified. Default medium importance.",
+            "Highest importance.",
+            "Higher importance.",
+            "High importance.",
+            "Medium importance.",
+            "Low importance (negative).",
+            "Lowest importance (negative)."
+          ],
+          "type": "string"
         },
         "textTypeOptions": {
           "$ref": "GoogleCloudContentwarehouseV1TextTypeOptions",
@@ -45267,6 +45358,24 @@
         "timestampValue": {
           "$ref": "GoogleCloudContentwarehouseV1TimestampValue",
           "description": "Represents a timestamp value."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1WeightedSchemaProperty": {
+      "description": "Specifies the schema property name.",
+      "id": "GoogleCloudContentwarehouseV1WeightedSchemaProperty",
+      "properties": {
+        "documentSchemaName": {
+          "description": "The document schema name.",
+          "type": "string"
+        },
+        "propertyNames": {
+          "description": "The property definition names in the schema.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -47525,7 +47634,7 @@
           "type": "boolean"
         },
         "trait": {
-          "description": "Trait name, e.g., \"action.devices.traits.MediaInitiation\". See [device traits](https://developers.google.com/assistant/smarthome/traits). See java/com/google/home/graph/common/devices/config/protoconf.pi for the exhaustive list of trait-strings.",
+          "description": "Trait name, e.g., \"action.devices.traits.MediaInitiation\". See [device traits](https://developers.home.google.com/cloud-to-cloud/traits). See java/com/google/home/graph/common/devices/config/protoconf.pi for the exhaustive list of trait-strings.",
           "type": "string"
         }
       },
@@ -52645,6 +52754,18 @@
         "venomMutationGeneration": {
           "description": "The generation number returned by Venom.",
           "format": "int64",
+          "type": "string"
+        },
+        "videoVenomSetting": {
+          "description": "This field is not persisted anywhere. It is only used in deletion service for converying the VideoVenomSetting when deleting Venom data.",
+          "enum": [
+            "VIDEO_VENOM_SETTING_COMMON",
+            "VIDEO_VENOM_SETTING_VINEYARD"
+          ],
+          "enumDescriptions": [
+            "This corresponds to [trustme.crawl] is {CLIENT_OTHER}.",
+            "This corresponds to [trustme.crawl] is {CLIENT_OTHER, CLIENT_VINEYARD}. LINT.ThenChange( //depot/google3/image/repository/shared/util/video_util.cc, )"
+          ],
           "type": "string"
         }
       },
@@ -61190,13 +61311,15 @@
             "UNSPECIFIED_COMPOSITION",
             "ALL_COMPOSITION",
             "PRIMITIVES_ONLY_COMPOSITION",
-            "PRIMITIVES_AND_OPERATORS_OF_PRIMITIVES_COMPOSITION"
+            "PRIMITIVES_AND_OPERATORS_OF_PRIMITIVES_COMPOSITION",
+            "PRIMITIVES_AND_SEMANTIC_TYPES_COMPOSITION"
           ],
           "enumDescriptions": [
             "An unspecified value is required by enum best practices. It will not be used anywhere as the default is ALL_COMPOSITION.",
             "",
             "",
-            "To handle cases where we have a Group of entities"
+            "To handle cases where we have a Group of entities",
+            "Allows primitives only, or specific FunctionCalls with explicitly listed semantic_types."
           ],
           "type": "string"
         },
@@ -62518,7 +62641,7 @@
             "Unknown type.",
             "Actions lead users to Food Ordering site (orderfood.google.com), powered by end to end partners that signed the full integration contact with Google. This is the default action type for most cases. go/fopa-order-button-placesheet",
             "TOA actions lead users to TOA site (eg. https://ordering.app/cuba512/downtown/contact/). go/payfood-entrypoint-experiments",
-            "Autobot actions lead users to 3p site that support Autobot. go/fo-autobot-triggering",
+            "DEPRECATED(b/261496948): Autobot has been sunset. Autobot actions lead users to 3p site that support Autobot. go/fo-autobot-triggering",
             "PAS actions lead users to Food Ordering site (orderfood.google.com), but powered by PAS partners. Note that if one restaurant is supported by both E2E and PAS partners, the action type should still be E2E. go/fo-pas-integration"
           ],
           "type": "string"
@@ -63663,7 +63786,7 @@
       "type": "object"
     },
     "MediaIndexRegion": {
-      "description": "Metadata associated with a region in an image. NEXT_ID: 13",
+      "description": "Metadata associated with a region in an image. NEXT_ID: 14",
       "id": "MediaIndexRegion",
       "properties": {
         "boundingBox": {
@@ -63730,6 +63853,9 @@
           "type": "array"
         },
         "starburstV4": {
+          "$ref": "ImageContentStarburstVersionGroup"
+        },
+        "starburstV5": {
           "$ref": "ImageContentStarburstVersionGroup"
         }
       },
@@ -69092,6 +69218,11 @@
             "The perception models believe it is likely, but not certain that the user has finished expressing their thought. This signal as a lower latency and lower precision than the COMPLETE status."
           ],
           "type": "string"
+        },
+        "textCompletenessProbability": {
+          "description": "Completeness probability as calculated by the parser's completeness layer.",
+          "format": "float",
+          "type": "number"
         }
       },
       "type": "object"
@@ -69491,11 +69622,13 @@
         "chargingSpeed": {
           "enum": [
             "UNKNOWN_CHARGING_SPEED",
-            "FAST_CHARGING_SPEED"
+            "FAST_CHARGING_SPEED",
+            "VERY_FAST_CHARGING_SPEED"
           ],
           "enumDescriptions": [
             "",
-            ""
+            "",
+            "Very fast definition : go/very-fast-speed-qbf-evcs"
           ],
           "type": "string"
         }
@@ -76509,7 +76642,7 @@
             "OnTheGo app. http://go/onthego Team contact: otg-eng@google.com",
             "Google AdSense app. Team contact: publisher-android-app@google.com",
             "Project Fi app. http://go/nova-eng Team contact: tycho-atlas@google.com",
-            "Karma team's Jam app. http://go/jam Team contact: karma-eng@google.com",
+            "Jamboard app. http://go/jamnpard-eng Team contact: jamboard-eng@google.com",
             "Huddle app. http://go/huddle Team contact: huddle-eng@google.com",
             "Chauffeur Car app. http://go/chauffeur Team contact: chauffeur-ux-eng@google.com",
             "Tailormade app. http://go/tailormade Team contact: tailormade-eng@google.com",
@@ -80705,18 +80838,9 @@
       "type": "object"
     },
     "PtokenPToken": {
-      "description": "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. Next ID: 8",
+      "description": "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 8 INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen.",
       "id": "PtokenPToken",
-      "properties": {
-        "compoundPtokenData": {
-          "format": "byte",
-          "type": "string"
-        },
-        "ptokenData": {
-          "format": "byte",
-          "type": "string"
-        }
-      },
+      "properties": {},
       "type": "object"
     },
     "QualityActionsAppInfo": {
@@ -81271,8 +81395,6 @@
             "PERSONAL_INTELLIGENCE_NOTIFICATION",
             "PERSONAL_INTELLIGENCE_LIVE_CARD",
             "LENS_REMINDER",
-            "AUTOBOT_TRANSACTION",
-            "AUTOBOT_CSAT",
             "IQS_NOTIFICATION",
             "ASSISTANT_SURVEY",
             "ASSISTANT_SURVEY_IMPORTANCE_MIN",
@@ -81668,8 +81790,6 @@
             "",
             "",
             "Notification sent when the user missed a call on Dragonglass devices: go/missed-calls-on-jasper.",
-            "",
-            "",
             "",
             "",
             "",
@@ -84493,6 +84613,11 @@
       "description": "Contains meta information about this data. This field is only available in docjoins (and potentially MDU shards), it is not populated offline. NOTE: This is a new field (Nov 2022) and we do not want clients to depend on this; please contact qscore-team@ if you want to use this information.",
       "id": "QualityNsrNsrDataMetadata",
       "properties": {
+        "encodedLookupInformation": {
+          "description": "Encoded lookup information. The fields set above are expensive to store. Storing them in docjoins is fine, but we cannot store them in MDU shards. In order for the MDU shards to display field provenance information, we store them as a bitfield. For details about the encoding and decoding scheme, see quality_nsr::util::EncodeMetadataLookupInformation. We expect this to occupy 8 bytes as long as there are less than 64 fields in NsrData proto, 12 bytes between 64 and 92 fields, etc.",
+          "format": "byte",
+          "type": "string"
+        },
         "goldmineLookupKeyPerField": {
           "additionalProperties": {
             "format": "int32",
@@ -86289,6 +86414,7 @@
       "id": "QualityQrewriteCandidateIdField",
       "properties": {
         "index": {
+          "description": "If needed, a servlet can use this field to assign an ID to distinguish between different candidates of the same CandidateType.",
           "format": "int32",
           "type": "integer"
         },
@@ -87234,9 +87360,9 @@
             "V4_2",
             "V5",
             "V5_1",
+            "V5_2",
             "V1_BODYONLY",
             "V2_BODYONLY",
-            "RENAME_ME_TO_ADD_NEW_ENUM_15",
             "RENAME_ME_TO_ADD_NEW_ENUM_16",
             "RENAME_ME_TO_ADD_NEW_ENUM_17",
             "RENAME_ME_TO_ADD_NEW_ENUM_18",
@@ -87245,7 +87371,8 @@
             "RENAME_ME_TO_ADD_NEW_ENUM_21",
             "RENAME_ME_TO_ADD_NEW_ENUM_22",
             "RENAME_ME_TO_ADD_NEW_ENUM_23",
-            "RENAME_ME_TO_ADD_NEW_ENUM_24"
+            "RENAME_ME_TO_ADD_NEW_ENUM_24",
+            "RENAME_ME_TO_ADD_NEW_ENUM_25"
           ],
           "enumDescriptions": [
             "In case an old binary doesn't know a recently added version.",
@@ -87261,6 +87388,7 @@
             "ariane/4031318). Lyrebird V4.2: Salient Terms V4.2 (ariane/4057245)",
             "Lyrebird V5: Salient Terms V5 (ariane/4076831)",
             "Lyrebird V5.1: Salient Terms V5.1 (ariane/4144754)",
+            "Lyrebird V5.2: Salient Terms V5.2 (ariane/4218250)",
             "Lyrebird BodyOnly V1.",
             "Experimental version of Lyrebird BodyOnly V2.",
             "Dummy enum values to be renamed when a new enum value is needed. Note that this is a requirement from go/cds-schema-council. If you rename one of these enum values, be sure to add (at least one) more below.",
@@ -88364,6 +88492,7 @@
       "id": "QualityTimebasedLastSignificantUpdateAdjustments",
       "properties": {
         "adjustmentSource": {
+          "description": "If the selected LSU has been adjusted, i.e. the maximum passage timestamp, firstseen or contentage were assigned to LSU, the adjustment source is stored here.",
           "enum": [
             "UNSET",
             "PASSAGE_TIMESTAMP",
@@ -88382,9 +88511,43 @@
           "description": "The timestamp is precise when it's derived from existing (>March 2022) passage timestamp.",
           "type": "boolean"
         },
-        "unadjustedTimestampInSeconds": {
-          "description": "The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. The two following fields are present only when the adjustment took place.",
+        "unboundedTimestampInSeconds": {
+          "description": "The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. Set only if it's not equal to final LSU.",
           "format": "int64",
+          "type": "string"
+        },
+        "unboundedTimestampSource": {
+          "description": "The source that produced the unbounded timestamp.",
+          "enum": [
+            "UNSET",
+            "LSU_V1",
+            "LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE",
+            "LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION",
+            "LSU_V2_ANNOTATION_WITH_UPDATE_TAG",
+            "LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_CONTENTAGE",
+            "LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION",
+            "LSU_V2_ANNOTATION_WITH_PATTERN_BYLINE_TAG",
+            "LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT",
+            "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT"
+          ],
+          "enumDescriptions": [
+            "",
+            "The signal from legacy selector (quality/timebased/lastsignificantupdate/lsu-selector.h). It's a fallback for clients relying on ~100% recall of the signal.",
+            "The signal comes from update markup date supported by ContentAge.",
+            "The signal comes from update markup date supported by annotation.",
+            "The signal comes from date annotation representing update date of a page.",
+            "The signal comes from publication markup date supported by ContentAge.",
+            "The signal comes from publication markup date supported by annotation.",
+            "The signal comes from date annotation often selected as a byline.",
+            "The signal comes from ContentAge that's supported by date annotation.",
+            "",
+            "",
+            "",
+            ""
+          ],
           "type": "string"
         },
         "upperboundTimestampInSeconds": {
@@ -92221,7 +92384,7 @@
           "enumDescriptions": [
             "",
             "A range that is an adjectival expression referring to a base entity.",
-            "An adjectival range is expressed in the superlaive degree.",
+            "An adjectival range is expressed in the superlative degree.",
             "A range which is lexically plural.",
             "A range expressing unequivocally a (semantic) female gender. This could be for expressions that are intrinsically female (\"aunt\") or the female expression of an entity that is lexically gendered (\"chairwoman\" as opposed to \"chairman\" or \"chairperson\").",
             "The range designates an aspect, that is, a modifier of some other range.",
@@ -92767,28 +92930,16 @@
             "PRODUCTS",
             "SYMPTOMS",
             "CHAINS",
-            "SYMPTOMS_PATTERN",
             "MOVIES",
             "SPORTS_TEAM",
             "EXAMS",
             "MOTORCYCLES",
-            "TOURNAMENTS",
             "PRIMEREF",
             "SONGS",
-            "AWARDS",
             "EDUCATION",
-            "EVENTS",
-            "OLYMPICS",
-            "BIG_MOMENTS",
-            "DISASTERS"
+            "EVENTS"
           ],
           "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "",
             "",
             "",
@@ -94320,11 +94471,6 @@
           "format": "float",
           "type": "number"
         },
-        "explainedNormalizedTopicality": {
-          "description": "Fraction of importance_ratio (IR) that is explained by this entity and implied entities. E.g. a page about a song with IR 0.2 for the song and 0.5 for the artist actually has explained_normalized_topicality 0.7 for the song.",
-          "format": "float",
-          "type": "number"
-        },
         "firstScore": {
           "description": "The raw topicality score of the primary entity.",
           "format": "float",
@@ -94346,11 +94492,6 @@
         },
         "referencePageScore": {
           "description": "Reference page score used to select the reference page owner.",
-          "format": "float",
-          "type": "number"
-        },
-        "referencePageSelectionScore": {
-          "description": "The score used to sort reference pages for a given entity. This score tries to assign higher scores to reference pages that are more useful to the model building.",
           "format": "float",
           "type": "number"
         },
@@ -97140,6 +97281,19 @@
           "description": "The original name for the area covered by the dataset.",
           "type": "string"
         },
+        "locationResource": {
+          "enum": [
+            "UNKNOWN",
+            "METADATA",
+            "WEBREF"
+          ],
+          "enumDescriptions": [
+            "",
+            "When the locationthe is specified in the raw metadata",
+            "When the locationthe is not specified in the raw metadata"
+          ],
+          "type": "string"
+        },
         "pointCoordinates": {
           "description": "Latitude and longitude for a single point in the form of \"lat,long\".",
           "type": "string"
@@ -97756,6 +97910,13 @@
             "/collection/organization/* in KG"
           ],
           "type": "string"
+        },
+        "kgCollection": {
+          "description": "HRID of the KG collections",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "mid": {
           "description": "The KG identifier of the WebrefEntity.",
@@ -100685,7 +100846,7 @@
       "type": "object"
     },
     "SnippetExtraInfoSnippetCandidateInfo": {
-      "description": "Next ID: 13",
+      "description": "Next ID: 14",
       "id": "SnippetExtraInfoSnippetCandidateInfo",
       "properties": {
         "boldedRanges": {
@@ -100714,6 +100875,13 @@
         },
         "scoringInfo": {
           "$ref": "SnippetExtraInfoSnippetScoringInfo"
+        },
+        "sentenceStarts": {
+          "description": "Sentence starting positions in the printed snippet lines.",
+          "items": {
+            "$ref": "QualitySnippetsTruncationSnippetBoldedRangePosition"
+          },
+          "type": "array"
         },
         "snippet": {
           "description": "Muppet fills snippet lines in `snippet` field.",
@@ -103370,6 +103538,7 @@
             "ISOLATION_PKG_YOUTUBE_PRIVATE_PLAYLISTS",
             "ISOLATION_PKG_YOUTUBE_PUBLIC_AND_PRIVATE_PLAYLISTS",
             "ISOLATION_S3_CREATOR_PRESENCE",
+            "ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS",
             "UMP_TESTING_ONLY",
             "INTENTJOINS_NB_SIGNALS",
             "ADS_INTEGRITY_ANNOTATION",
@@ -103549,6 +103718,7 @@
             "For personal playlists from YouTube's PlaylistService that have private visibility. PWG-YouTube approval required for all usecases involving this data.",
             "For data from YouTube's PlaylistService that has either public or private visibility (i.e. the combination of ISOLATION_PKG_YOUTUBE_PLAYLISTS and ISOLATION_PKG_YOUTUBE_PRIVATE_PLAYLISTS). PWG-YouTube approval required for all usecases involving this data.",
             "Access controls for Creator Channel's S-Cubed corpus data. See more in go/uro-access-required. YOU MUST CONTACT milk-tea@ before reading or writing this data",
+            "For Search sustainability's food choice feature, Recipe Ingredient Insights. Assign existing KG entities feature types to classify triggering behavior and insights. Owned by salehh@ and s12y-eng@ See go/rii-kg-triggering-migration for more information.",
             "This access control is used to guard data used by the Unified Media Platform team (ke-media-actions-serving@) for testing new features. It should never be used for purposes other than testing. More context at go/fake-media-provider.",
             "Access controls for the IntentJoins Navboost data. YOU MUST CONTACT intentjoins-eng@ before reading or writing this data.",
             "Access controls for Ads Integrity annotation data. Ads Integrity annotations are only available for Ads Integrity policy enforcement. See go/ai-political-km for more details. YOU MUST CONTACT ai-pacg@ before reading or writing this data.",
@@ -108283,6 +108453,10 @@
               "PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL",
               "PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL",
               "PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL",
+              "IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL1",
+              "POST_PURCHASE_OFFER_POST_PURCHASE_CONFIRMATION_DIALOG_SERVER_USER_LEVEL",
+              "POST_PURCHASE_OFFER_POST_PURCHASE_OFFER_SAVED_DIALOG_SERVER_USER_LEVEL",
+              "POST_PURCHASE_OFFER_VALUE_PROMOTION_DIALOG_SHOWN_SERVER_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -109947,6 +110121,10 @@
               "User level test code for new uplift modeling architecture with campaign features in treatment tower.",
               "User level test code for Non-Play Growth Events experiment (go/npge-prd). Logged on the server side and applied to users that visit Loyalty Home and are eligible to receive a quest with Play Games Achievement tasks, regardless of whether the quest was shown or held back.",
               "User level test code for reading progress tooltip.",
+              "User level test code for tracking users who should see the IAP Sku Games Home liveops card.",
+              "Post purchase offer test codes User level test code to track the user who sees the post purcahse offer redemption dialog for post purchase offer experiment.",
+              "User level test code to track the user who sees the post purcahse offer saved dialog for post purchase offer experiment.",
+              "User level test code to track the user who sees the value promotion dialog, including loyalty upsell, post purcahse offer and so on for post purchase offer experiment.",
               ""
             ],
             "type": "string"
@@ -110319,7 +110497,7 @@
           "type": "string"
         },
         "ns": {
-          "description": "LINT.ThenChange( //depot/google3/googledata/production/playbooks/video-assets/clients.md ) REQUIRED.",
+          "description": "LINT.ThenChange( //depot/google3/googledata/production/playbooks/video-assets/clients.md, //depot/google3/video/assets/venom/proto/namespace.proto ) REQUIRED.",
           "enum": [
             "NS_UNKNOWN",
             "NS_YOUTUBE",
