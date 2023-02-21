@@ -7840,7 +7840,7 @@
           ]
         },
         "getFromFamily": {
-          "description": "Returns the latest image that is part of an image family and is not deprecated.",
+          "description": "Returns the latest image that is part of an image family and is not deprecated. For more information on image families, see Public image families documentation.",
           "flatPath": "projects/{project}/global/images/family/{family}",
           "httpMethod": "GET",
           "id": "compute.images.getFromFamily",
@@ -7857,7 +7857,7 @@
               "type": "string"
             },
             "project": {
-              "description": "Project ID for this request.",
+              "description": "The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.",
               "location": "path",
               "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
               "required": true,
@@ -40433,7 +40433,7 @@
       }
     }
   },
-  "revision": "20230201",
+  "revision": "20230210",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -51811,7 +51811,7 @@
           "type": "string"
         },
         "family": {
-          "description": "The name of the image family to which this image belongs. You can create disks by specifying an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.",
+          "description": "The name of the image family to which this image belongs. The image family name can be from a publicly managed image family provided by Compute Engine, or from a custom image family you create. For example, centos-stream-9 is a publicly available image family. For more information, see Image family best practices. When creating disks, you can specify an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.",
           "type": "string"
         },
         "guestOsFeatures": {
