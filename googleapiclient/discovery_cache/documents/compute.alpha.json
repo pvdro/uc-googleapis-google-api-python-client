@@ -808,7 +808,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.",
+          "description": "Returns the specified autoscaler resource.",
           "flatPath": "projects/{project}/zones/{zone}/autoscalers/{autoscaler}",
           "httpMethod": "GET",
           "id": "compute.autoscalers.get",
@@ -1227,7 +1227,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.",
+          "description": "Returns the specified BackendBucket resource.",
           "flatPath": "projects/{project}/global/backendBuckets/{backendBucket}",
           "httpMethod": "GET",
           "id": "compute.backendBuckets.get",
@@ -1781,7 +1781,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified BackendService resource. Gets a list of available backend services.",
+          "description": "Returns the specified BackendService resource.",
           "flatPath": "projects/{project}/global/backendServices/{backendService}",
           "httpMethod": "GET",
           "id": "compute.backendServices.get",
@@ -2288,7 +2288,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified disk type. Gets a list of available disk types by making a list() request.",
+          "description": "Returns the specified disk type.",
           "flatPath": "projects/{project}/zones/{zone}/diskTypes/{diskType}",
           "httpMethod": "GET",
           "id": "compute.diskTypes.get",
@@ -2651,7 +2651,7 @@
           ]
         },
         "get": {
-          "description": "Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.",
+          "description": "Returns the specified persistent disk.",
           "flatPath": "projects/{project}/zones/{zone}/disks/{disk}",
           "httpMethod": "GET",
           "id": "compute.disks.get",
@@ -3866,7 +3866,7 @@
               "type": "string"
             },
             "parentId": {
-              "description": "Parent ID for this request.",
+              "description": "Parent ID for this request. The ID can be either be \"folders/[FOLDER_ID]\" if the parent is a folder or \"organizations/[ORGANIZATION_ID]\" if the parent is an organization.",
               "location": "query",
               "type": "string"
             },
@@ -3925,7 +3925,7 @@
               "type": "string"
             },
             "parentId": {
-              "description": "The new parent of the firewall policy.",
+              "description": "The new parent of the firewall policy. The ID can be either be \"folders/[FOLDER_ID]\" if the parent is a folder or \"organizations/[ORGANIZATION_ID]\" if the parent is an organization.",
               "location": "query",
               "type": "string"
             },
@@ -5295,7 +5295,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified address resource. Gets a list of available addresses by making a list() request.",
+          "description": "Returns the specified address resource.",
           "flatPath": "projects/{project}/global/addresses/{address}",
           "httpMethod": "GET",
           "id": "compute.globalAddresses.get",
@@ -6018,7 +6018,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+          "description": "Returns the specified network endpoint group.",
           "flatPath": "projects/{project}/global/networkEndpointGroups/{networkEndpointGroup}",
           "httpMethod": "GET",
           "id": "compute.globalNetworkEndpointGroups.get",
@@ -6849,7 +6849,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.",
+          "description": "Returns the specified HealthCheck resource.",
           "flatPath": "projects/{project}/global/healthChecks/{healthCheck}",
           "httpMethod": "GET",
           "id": "compute.healthChecks.get",
@@ -7138,7 +7138,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified HttpHealthCheck resource. Gets a list of available HTTP health checks by making a list() request.",
+          "description": "Returns the specified HttpHealthCheck resource.",
           "flatPath": "projects/{project}/global/httpHealthChecks/{httpHealthCheck}",
           "httpMethod": "GET",
           "id": "compute.httpHealthChecks.get",
@@ -7427,7 +7427,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified HttpsHealthCheck resource. Gets a list of available HTTPS health checks by making a list() request.",
+          "description": "Returns the specified HttpsHealthCheck resource.",
           "flatPath": "projects/{project}/global/httpsHealthChecks/{httpsHealthCheck}",
           "httpMethod": "GET",
           "id": "compute.httpsHealthChecks.get",
@@ -7805,7 +7805,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified image. Gets a list of available images by making a list() request.",
+          "description": "Returns the specified image.",
           "flatPath": "projects/{project}/global/images/{image}",
           "httpMethod": "GET",
           "id": "compute.images.get",
@@ -8733,7 +8733,7 @@
           ]
         },
         "get": {
-          "description": "Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.",
+          "description": "Returns all of the details about the specified managed instance group.",
           "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}",
           "httpMethod": "GET",
           "id": "compute.instanceGroupManagers.get",
@@ -10323,6 +10323,92 @@
         }
       }
     },
+    "instanceSettings": {
+      "methods": {
+        "get": {
+          "description": "Get Instance settings.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceSettings",
+          "httpMethod": "GET",
+          "id": "compute.instanceSettings.get",
+          "parameterOrder": [
+            "project",
+            "zone"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "Name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceSettings",
+          "response": {
+            "$ref": "InstanceSettings"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "patch": {
+          "description": "Patch Instance settings",
+          "flatPath": "projects/{project}/zones/{zone}/instanceSettings",
+          "httpMethod": "PATCH",
+          "id": "compute.instanceSettings.patch",
+          "parameterOrder": [
+            "project",
+            "zone"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "updateMask": {
+              "description": "update_mask indicates fields to be updated as part of this request.",
+              "format": "google-fieldmask",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The zone scoping this request. It should conform to RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceSettings",
+          "request": {
+            "$ref": "InstanceSettings"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        }
+      }
+    },
     "instanceTemplates": {
       "methods": {
         "aggregatedList": {
@@ -10425,7 +10511,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified instance template. Gets a list of available instance templates by making a list() request.",
+          "description": "Returns the specified instance template.",
           "flatPath": "projects/{project}/global/instanceTemplates/{instanceTemplate}",
           "httpMethod": "GET",
           "id": "compute.instanceTemplates.get",
@@ -11095,7 +11181,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified Instance resource. Gets a list of available instances by making a list() request.",
+          "description": "Returns the specified Instance resource.",
           "flatPath": "projects/{project}/zones/{zone}/instances/{instance}",
           "httpMethod": "GET",
           "id": "compute.instances.get",
@@ -15441,7 +15527,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified machine image. Gets a list of available machine images by making a list() request.",
+          "description": "Returns the specified machine image.",
           "flatPath": "projects/{project}/global/machineImages/{machineImage}",
           "httpMethod": "GET",
           "id": "compute.machineImages.get",
@@ -15750,7 +15836,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified machine type. Gets a list of available machine types by making a list() request.",
+          "description": "Returns the specified machine type.",
           "flatPath": "projects/{project}/zones/{zone}/machineTypes/{machineType}",
           "httpMethod": "GET",
           "id": "compute.machineTypes.get",
@@ -16722,7 +16808,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+          "description": "Returns the specified network endpoint group.",
           "flatPath": "projects/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}",
           "httpMethod": "GET",
           "id": "compute.networkEndpointGroups.get",
@@ -17757,7 +17843,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified network. Gets a list of available networks by making a list() request.",
+          "description": "Returns the specified network.",
           "flatPath": "projects/{project}/global/networks/{network}",
           "httpMethod": "GET",
           "id": "compute.networks.get",
@@ -19202,7 +19288,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified node template. Gets a list of available node templates by making a list() request.",
+          "description": "Returns the specified node template.",
           "flatPath": "projects/{project}/regions/{region}/nodeTemplates/{nodeTemplate}",
           "httpMethod": "GET",
           "id": "compute.nodeTemplates.get",
@@ -19554,7 +19640,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified node type. Gets a list of available node types by making a list() request.",
+          "description": "Returns the specified node type.",
           "flatPath": "projects/{project}/zones/{zone}/nodeTypes/{nodeType}",
           "httpMethod": "GET",
           "id": "compute.nodeTypes.get",
@@ -22662,7 +22748,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified commitment resource. Gets a list of available commitments by making a list() request.",
+          "description": "Returns the specified commitment resource.",
           "flatPath": "projects/{project}/regions/{region}/commitments/{commitment}",
           "httpMethod": "GET",
           "id": "compute.regionCommitments.get",
@@ -22971,7 +23057,7 @@
     "regionDiskTypes": {
       "methods": {
         "get": {
-          "description": "Returns the specified regional disk type. Gets a list of available disk types by making a list() request.",
+          "description": "Returns the specified regional disk type.",
           "flatPath": "projects/{project}/regions/{region}/diskTypes/{diskType}",
           "httpMethod": "GET",
           "id": "compute.regionDiskTypes.get",
@@ -24323,7 +24409,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.",
+          "description": "Returns the specified HealthCheck resource.",
           "flatPath": "projects/{project}/regions/{region}/healthChecks/{healthCheck}",
           "httpMethod": "GET",
           "id": "compute.regionHealthChecks.get",
@@ -26295,7 +26381,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified instance template. Gets a list of available instance templates by making a list() request.",
+          "description": "Returns the specified instance template.",
           "flatPath": "projects/{project}/regions/{region}/instanceTemplates/{instanceTemplate}",
           "httpMethod": "GET",
           "id": "compute.regionInstanceTemplates.get",
@@ -27073,7 +27159,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.",
+          "description": "Returns the specified network endpoint group.",
           "flatPath": "projects/{project}/regions/{region}/networkEndpointGroups/{networkEndpointGroup}",
           "httpMethod": "GET",
           "id": "compute.regionNetworkEndpointGroups.get",
@@ -29766,7 +29852,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.",
+          "description": "Returns the specified TargetHttpProxy resource in the specified region.",
           "flatPath": "projects/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}",
           "httpMethod": "GET",
           "id": "compute.regionTargetHttpProxies.get",
@@ -30061,7 +30147,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetHttpsProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.",
+          "description": "Returns the specified TargetHttpsProxy resource in the specified region.",
           "flatPath": "projects/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}",
           "httpMethod": "GET",
           "id": "compute.regionTargetHttpsProxies.get",
@@ -30701,7 +30787,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.",
+          "description": "Returns the specified UrlMap resource.",
           "flatPath": "projects/{project}/regions/{region}/urlMaps/{urlMap}",
           "httpMethod": "GET",
           "id": "compute.regionUrlMaps.get",
@@ -31094,7 +31180,7 @@
     "regions": {
       "methods": {
         "get": {
-          "description": "Returns the specified Region resource. Gets a list of available regions by making a list() request. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.",
+          "description": "Returns the specified Region resource. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.",
           "flatPath": "projects/{project}/regions/{region}",
           "httpMethod": "GET",
           "id": "compute.regions.get",
@@ -32265,7 +32351,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified Router resource. Gets a list of available routers by making a list() request.",
+          "description": "Returns the specified Router resource.",
           "flatPath": "projects/{project}/regions/{region}/routers/{router}",
           "httpMethod": "GET",
           "id": "compute.routers.get",
@@ -32767,7 +32853,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified Route resource. Gets a list of available routes by making a list() request.",
+          "description": "Returns the specified Route resource.",
           "flatPath": "projects/{project}/global/routes/{route}",
           "httpMethod": "GET",
           "id": "compute.routes.get",
@@ -33840,6 +33926,11 @@
               "required": true,
               "type": "string"
             },
+            "reconcileConnections": {
+              "description": "This flag determines how to change the status of consumer connections, when the connection policy for the corresponding project or network is modified. If the flag is false, the default case, then existing ACCEPTED and REJECTED consumer connections stay in that state. For example, even if the project is removed from the accept list, existing ACCEPTED connections will stay the same. If the flag is true, then the connection can change from ACCEPTED or REJECTED to pending when the connection policy is modified. For example, if a project is removed from the reject list, its existing REJECTED connections will move to the PENDING state. If the project is also added to the accept list, then those connections will move to the ACCEPTED state.",
+              "location": "query",
+              "type": "boolean"
+            },
             "region": {
               "description": "The region scoping this request and should conform to RFC1035.",
               "location": "path",
@@ -34005,7 +34096,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.",
+          "description": "Returns the specified Snapshot resource.",
           "flatPath": "projects/{project}/global/snapshots/{snapshot}",
           "httpMethod": "GET",
           "id": "compute.snapshots.get",
@@ -34385,7 +34476,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.",
+          "description": "Returns the specified SslCertificate resource.",
           "flatPath": "projects/{project}/global/sslCertificates/{sslCertificate}",
           "httpMethod": "GET",
           "id": "compute.sslCertificates.get",
@@ -34683,7 +34774,7 @@
           ]
         },
         "insert": {
-          "description": "Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.",
+          "description": "Returns the specified SSL policy resource.",
           "flatPath": "projects/{project}/global/sslPolicies",
           "httpMethod": "POST",
           "id": "compute.sslPolicies.insert",
@@ -35067,7 +35158,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified subnetwork. Gets a list of available subnetworks list() request.",
+          "description": "Returns the specified subnetwork.",
           "flatPath": "projects/{project}/regions/{region}/subnetworks/{subnetwork}",
           "httpMethod": "GET",
           "id": "compute.subnetworks.get",
@@ -35871,7 +35962,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.",
+          "description": "Returns the specified TargetHttpProxy resource.",
           "flatPath": "projects/{project}/global/targetHttpProxies/{targetHttpProxy}",
           "httpMethod": "GET",
           "id": "compute.targetHttpProxies.get",
@@ -36220,7 +36311,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.",
+          "description": "Returns the specified TargetHttpsProxy resource.",
           "flatPath": "projects/{project}/global/targetHttpsProxies/{targetHttpsProxy}",
           "httpMethod": "GET",
           "id": "compute.targetHttpsProxies.get",
@@ -36742,7 +36833,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.",
+          "description": "Returns the specified TargetInstance resource.",
           "flatPath": "projects/{project}/zones/{zone}/targetInstances/{targetInstance}",
           "httpMethod": "GET",
           "id": "compute.targetInstances.get",
@@ -37147,7 +37238,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified target pool. Gets a list of available target pools by making a list() request.",
+          "description": "Returns the specified target pool.",
           "flatPath": "projects/{project}/regions/{region}/targetPools/{targetPool}",
           "httpMethod": "GET",
           "id": "compute.targetPools.get",
@@ -37586,7 +37677,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.",
+          "description": "Returns the specified TargetSslProxy resource.",
           "flatPath": "projects/{project}/global/targetSslProxies/{targetSslProxy}",
           "httpMethod": "GET",
           "id": "compute.targetSslProxies.get",
@@ -38059,7 +38150,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.",
+          "description": "Returns the specified TargetTcpProxy resource.",
           "flatPath": "projects/{project}/global/targetTcpProxies/{targetTcpProxy}",
           "httpMethod": "GET",
           "id": "compute.targetTcpProxies.get",
@@ -38416,7 +38507,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.",
+          "description": "Returns the specified target VPN gateway.",
           "flatPath": "projects/{project}/regions/{region}/targetVpnGateways/{targetVpnGateway}",
           "httpMethod": "GET",
           "id": "compute.targetVpnGateways.get",
@@ -38763,7 +38854,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.",
+          "description": "Returns the specified UrlMap resource.",
           "flatPath": "projects/{project}/global/urlMaps/{urlMap}",
           "httpMethod": "GET",
           "id": "compute.urlMaps.get",
@@ -39199,7 +39290,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.",
+          "description": "Returns the specified VPN gateway.",
           "flatPath": "projects/{project}/regions/{region}/vpnGateways/{vpnGateway}",
           "httpMethod": "GET",
           "id": "compute.vpnGateways.get",
@@ -39597,7 +39688,7 @@
           ]
         },
         "get": {
-          "description": "Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.",
+          "description": "Returns the specified VpnTunnel resource.",
           "flatPath": "projects/{project}/regions/{region}/vpnTunnels/{vpnTunnel}",
           "httpMethod": "GET",
           "id": "compute.vpnTunnels.get",
@@ -40341,7 +40432,7 @@
     "zones": {
       "methods": {
         "get": {
-          "description": "Returns the specified Zone resource. Gets a list of available zones by making a list() request.",
+          "description": "Returns the specified Zone resource.",
           "flatPath": "projects/{project}/zones/{zone}",
           "httpMethod": "GET",
           "id": "compute.zones.get",
@@ -40433,7 +40524,7 @@
       }
     }
   },
-  "revision": "20230210",
+  "revision": "20230221",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -40880,7 +40971,7 @@
       "id": "AccessConfig",
       "properties": {
         "externalIpv6": {
-          "description": "The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. To use a static external IP address, it must be unused and in the same region as the instance's zone. If not specified, GCP will automatically assign an external IPv6 address from the instance's subnetwork.",
+          "description": "The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. To use a static external IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an external IPv6 address from the instance's subnetwork.",
           "type": "string"
         },
         "externalIpv6PrefixLength": {
@@ -55384,6 +55475,30 @@
       },
       "type": "object"
     },
+    "InstanceSettings": {
+      "description": "Represents a Instance Settings resource. You can use instance settings to configure default settings for Compute Engine VM instances. For example, you can use it to configure default machine type of Compute Engine VM instances.",
+      "id": "InstanceSettings",
+      "properties": {
+        "email": {
+          "description": "Email address of the service account.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#instanceSettings",
+          "description": "[Output Only] Type of the resource. Always compute#instance_settings for instance settings.",
+          "type": "string"
+        },
+        "machineType": {
+          "description": "Partial URL of the machine type resource to use for this instance, in the format: machineTypes/machine-type. This is either provided by the client or chosen by the system. For example, the following is a valid partial url to a predefined machine type: machineTypes/n2-standard-1",
+          "type": "string"
+        },
+        "zone": {
+          "description": "[Output Only] URL of the zone where the resource resides You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "InstanceTemplate": {
       "description": "Represents an Instance Template resource. You can use instance templates to create VM instances and managed instance groups. For more information, read Instance Templates.",
       "id": "InstanceTemplate",
@@ -56851,7 +56966,7 @@
           "type": "integer"
         },
         "satisfiesPzs": {
-          "description": "[Output Only] Set to true if the resource satisfies the zone separation organization policy constraints and false otherwise. Defaults to false if the field is not present.",
+          "description": "[Output Only] Reserved for future use.",
           "type": "boolean"
         },
         "selfLink": {
@@ -57087,7 +57202,7 @@
           "type": "string"
         },
         "satisfiesPzs": {
-          "description": "[Output Only] Set to true if the resource satisfies the zone separation organization policy constraints and false otherwise. Defaults to false if the field is not present.",
+          "description": "[Output Only] Reserved for future use.",
           "type": "boolean"
         },
         "selfLink": {
@@ -58007,7 +58122,7 @@
           "type": "string"
         },
         "supportsPzs": {
-          "description": "[Output Only] Set to true for locations that support physical zone separation. Defaults to false if the field is not present.",
+          "description": "[Output Only] Reserved for future use.",
           "type": "boolean"
         }
       },
@@ -62341,7 +62456,7 @@
           "type": "string"
         },
         "ipv6Address": {
-          "description": "An IPv6 internal network address for this network interface. To use a static internal IP address, it must be unused and in the same region as the instance's zone. If not specified, GCP will automatically assign an internal IPv6 address from the instance's subnetwork.",
+          "description": "An IPv6 internal network address for this network interface. To use a static internal IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an internal IPv6 address from the instance's subnetwork.",
           "type": "string"
         },
         "kind": {
@@ -63657,7 +63772,7 @@
         },
         "nodeTypeFlexibility": {
           "$ref": "NodeTemplateNodeTypeFlexibility",
-          "description": "The flexible properties of the desired node type. Node groups that use this node template will create nodes of a type that matches these properties. This field is mutually exclusive with the node_type property; you can only define one or the other, but not both."
+          "description": "Do not use. Instead, use the node_type property."
         },
         "region": {
           "description": "[Output Only] The name of the region where the node template resides, such as us-central1.",
@@ -65014,6 +65129,9 @@
         "selfLinkWithId": {
           "description": "[Output Only] Server-defined URL for this resource with the resource id.",
           "type": "string"
+        },
+        "setCommonInstanceMetadataOperationMetadata": {
+          "$ref": "SetCommonInstanceMetadataOperationMetadata"
         },
         "startTime": {
           "description": "[Output Only] The time that this operation was started by the server. This value is in RFC3339 text format.",
@@ -68216,6 +68334,8 @@
             "PREEMPTIBLE_NVIDIA_T4_GPUS",
             "PREEMPTIBLE_NVIDIA_T4_VWS_GPUS",
             "PREEMPTIBLE_NVIDIA_V100_GPUS",
+            "PREEMPTIBLE_TPU_LITE_DEVICE_V4",
+            "PREEMPTIBLE_TPU_PODSLICE_V4",
             "PRIVATE_V6_ACCESS_SUBNETWORKS",
             "PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK",
             "PSC_INTERNAL_LB_FORWARDING_RULES",
@@ -68254,6 +68374,8 @@
             "TARGET_SSL_PROXIES",
             "TARGET_TCP_PROXIES",
             "TARGET_VPN_GATEWAYS",
+            "TPU_LITE_DEVICE_V4",
+            "TPU_PODSLICE_V4",
             "URL_MAPS",
             "VPN_GATEWAYS",
             "VPN_TUNNELS",
@@ -68387,7 +68509,11 @@
             "",
             "",
             "",
+            "",
+            "",
             "The total number of snapshots allowed for a single project.",
+            "",
+            "",
             "",
             "",
             "",
@@ -71001,7 +71127,7 @@
           "type": "string"
         },
         "timeZone": {
-          "description": "Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database.",
+          "description": "Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: https://wikipedia.org/wiki/Tz_database.",
           "type": "string"
         },
         "vmStartSchedule": {
@@ -72184,7 +72310,7 @@
           "type": "string"
         },
         "advertisedGroups": {
-          "description": "User-specified list of prefix groups to advertise in custom mode, which can take one of the following options: - ALL_SUBNETS: Advertises all available subnets, including peer VPC subnets. - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the \"bgp\" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.",
+          "description": "User-specified list of prefix groups to advertise in custom mode, which currently supports the following option: - ALL_SUBNETS: Advertises all of the router's own VPC subnets. This excludes any routes learned for subnets that use VPC Network Peering. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the \"bgp\" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.",
           "items": {
             "enum": [
               "ALL_PEER_VPC_SUBNETS",
@@ -73566,6 +73692,10 @@
           "description": "Defines whether the instance is tolerant of higher cpu latency. This can only be set during instance creation, or when the instance is not currently running. It must not be set if the preemptible option is also set.",
           "type": "boolean"
         },
+        "localSsdRecoveryTimeout": {
+          "$ref": "Duration",
+          "description": "Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour."
+        },
         "locationHint": {
           "description": "An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.",
           "type": "string"
@@ -74218,9 +74348,11 @@
         "ddosProtection": {
           "enum": [
             "ADVANCED",
+            "ADVANCED_PREVIEW",
             "STANDARD"
           ],
           "enumDescriptions": [
+            "",
             "",
             ""
           ],
@@ -75643,6 +75775,53 @@
       "properties": {
         "plan": {
           "description": "The BackupPlan resource to attach to the instance. Specified as a resource reference in instances, and regional instance templates, and as just the plan name in global instance templates",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SetCommonInstanceMetadataOperationMetadata": {
+      "description": "Encapsulates partial completion metadata for SetCommonInstanceMetadata. Will be propagated on Operation.metadata as per go/partial-completion-api-clean. See go/gce-aips/2822 for API council results.",
+      "id": "SetCommonInstanceMetadataOperationMetadata",
+      "properties": {
+        "clientOperationId": {
+          "type": "string"
+        },
+        "perLocationOperations": {
+          "additionalProperties": {
+            "$ref": "SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo": {
+      "id": "SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo",
+      "properties": {
+        "error": {
+          "$ref": "Status"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "ABANDONED",
+            "DONE",
+            "FAILED",
+            "PROPAGATED",
+            "PROPAGATING",
+            "UNSPECIFIED"
+          ],
+          "enumDescriptions": [
+            "Operation not tracked in this location e.g. zone is marked as DOWN.",
+            "Operation has completed successfully.",
+            "Operation is in an error state.",
+            "Operation is confirmed to be in the location.",
+            "Operation is not yet confirmed to have been created in the location.",
+            ""
+          ],
           "type": "string"
         }
       },
@@ -77478,6 +77657,33 @@
             "",
             ""
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Status": {
+      "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+      "id": "Status",
+      "properties": {
+        "code": {
+          "description": "The status code, which should be an enum value of google.rpc.Code.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "details": {
+          "description": "A list of messages that carry the error details. There is a common set of message types for APIs to use.",
+          "items": {
+            "additionalProperties": {
+              "description": "Properties of the object. Contains field @type with type URL.",
+              "type": "any"
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
           "type": "string"
         }
       },
@@ -81593,7 +81799,7 @@
       "type": "object"
     },
     "UpcomingMaintenance": {
-      "description": "Upcoming Maintenance notification information. TODO(b/242069500) Deprecate this proto once it's fully migrated to be under proto ResourceStatus.UpcomingMaintenance.",
+      "description": "Upcoming Maintenance notification information.",
       "id": "UpcomingMaintenance",
       "properties": {
         "canReschedule": {
@@ -81601,15 +81807,15 @@
           "type": "boolean"
         },
         "date": {
-          "description": "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use start_time_window instead.",
+          "description": "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use window_start_time instead.",
           "type": "string"
         },
         "startTimeWindow": {
           "$ref": "UpcomingMaintenanceTimeWindow",
-          "description": "[Output Only] The start time window of the maintenance disruption."
+          "description": "[Output Only] The start time window of the maintenance disruption. DEPRECATED: Use window_start_time instead."
         },
         "time": {
-          "description": "[Output Only] The time when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use start_time_window instead.",
+          "description": "[Output Only] The time when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use window_start_time instead.",
           "type": "string"
         },
         "type": {
