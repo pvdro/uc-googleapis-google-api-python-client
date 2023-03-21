@@ -8176,8 +8176,60 @@
     },
     "instanceGroupManagerResizeRequests": {
       "methods": {
+        "cancel": {
+          "description": "Cancels the specified resize request and removes it from the queue. Cancelled resize request does no longer wait for the resources to be provisioned. Cancel is only possible for requests that are accepted in the queue.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagerResizeRequests.cancel",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager",
+            "resizeRequest"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group. The name should conform to RFC1035 or be a resource ID.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "resizeRequest": {
+              "description": "The name of the resize request to cancel. The name should conform to RFC1035 or be a resource ID.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located. The name should conform to RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "delete": {
-          "description": "Deletes the specified resize request.",
+          "description": "Deletes the specified, inactive resize request. Requests that are still active cannot be deleted. Deleting request does not delete instances that were provisioned previously.",
           "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
           "httpMethod": "DELETE",
           "id": "compute.instanceGroupManagerResizeRequests.delete",
@@ -18976,6 +19028,56 @@
           "path": "projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}",
           "request": {
             "$ref": "NodeGroup"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "performMaintenance": {
+          "description": "Perform maintenance on a subset of nodes in the node group.",
+          "flatPath": "projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/performMaintenance",
+          "httpMethod": "POST",
+          "id": "compute.nodeGroups.performMaintenance",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "nodeGroup"
+          ],
+          "parameters": {
+            "nodeGroup": {
+              "description": "Name of the node group scoping this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/performMaintenance",
+          "request": {
+            "$ref": "NodeGroupsPerformMaintenanceRequest"
           },
           "response": {
             "$ref": "Operation"
@@ -41786,10 +41888,12 @@
         "maintenanceInterval": {
           "description": "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`.",
           "enum": [
+            "AS_NEEDED",
             "PERIODIC",
             "RECURRENT"
           ],
           "enumDescriptions": [
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
             "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
             "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
           ],
@@ -51027,10 +51131,26 @@
             "UNKNOWN"
           ],
           "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
+            "Endpoint is being drained.",
+            "Endpoint is healthy.",
+            "Endpoint is unhealthy.",
+            "Health status of the endpoint is unknown."
+          ],
+          "type": "string"
+        },
+        "ipv6HealthState": {
+          "description": "Health state of the ipv6 network endpoint determined based on the health checks configured.",
+          "enum": [
+            "DRAINING",
+            "HEALTHY",
+            "UNHEALTHY",
+            "UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "Endpoint is being drained.",
+            "Endpoint is healthy.",
+            "Endpoint is unhealthy.",
+            "Health status of the endpoint is unknown."
           ],
           "type": "string"
         }
@@ -53719,6 +53839,7 @@
           "description": "[Output only] Current state of the request.",
           "enum": [
             "ACCEPTED",
+            "CANCELLED",
             "CREATING",
             "DELETING",
             "FAILED",
@@ -53727,6 +53848,7 @@
           ],
           "enumDescriptions": [
             "The request was created successfully and was accepted for provisioning when the capacity becomes available.",
+            "The request is cancelled.",
             "resize request is being created and may still fail creation.",
             "The request is being deleted.",
             "The request failed before or during provisioning. If the request fails during provisioning, any VMs that were created during provisioning are rolled back and removed from the MIG.",
@@ -61599,6 +61721,10 @@
           "description": "Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.",
           "type": "string"
         },
+        "ipv6Address": {
+          "description": "Optional IPv6 address of network endpoint.",
+          "type": "string"
+        },
         "port": {
           "description": "Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.",
           "format": "int32",
@@ -62988,6 +63114,20 @@
           "description": "An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.",
           "type": "string"
         },
+        "maintenanceInterval": {
+          "description": "Specifies the frequency of planned maintenance events. The accepted values are: `AS_NEEDED` and `RECURRENT`.",
+          "enum": [
+            "AS_NEEDED",
+            "PERIODIC",
+            "RECURRENT"
+          ],
+          "enumDescriptions": [
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
+          ],
+          "type": "string"
+        },
         "maintenancePolicy": {
           "description": "Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.",
           "enum": [
@@ -63441,6 +63581,10 @@
         "totalResources": {
           "$ref": "InstanceConsumptionInfo",
           "description": "Total amount of available resources on the node."
+        },
+        "upcomingMaintenance": {
+          "$ref": "UpcomingMaintenance",
+          "description": "[Output Only] The information about an upcoming maintenance event."
         }
       },
       "type": "object"
@@ -63584,6 +63728,23 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NodeGroupsPerformMaintenanceRequest": {
+      "id": "NodeGroupsPerformMaintenanceRequest",
+      "properties": {
+        "nodes": {
+          "description": "[Required] List of nodes affected by the call.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "description": "The start time of the schedule. The timestamp is an RFC3339 string.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -71677,6 +71838,10 @@
           "description": "The URL to a gateway that should handle matching packets. You can only specify the internet gateway using a full or partial valid URL: projects/ project/global/gateways/default-internet-gateway",
           "type": "string"
         },
+        "nextHopHub": {
+          "description": "[Output Only] The full resource name of the network connectivity center hub that should handle matching packets.",
+          "type": "string"
+        },
         "nextHopIlb": {
           "description": "The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets or the IP address of the forwarding Rule. For example, the following are all valid URLs: - 10.128.0.56 - https://www.googleapis.com/compute/v1/projects/project/regions/region /forwardingRules/forwardingRule - regions/region/forwardingRules/forwardingRule ",
           "type": "string"
@@ -73714,10 +73879,12 @@
         "maintenanceInterval": {
           "description": "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`.",
           "enum": [
+            "AS_NEEDED",
             "PERIODIC",
             "RECURRENT"
           ],
           "enumDescriptions": [
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
             "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
             "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
           ],
@@ -75807,9 +75974,6 @@
       "properties": {
         "error": {
           "$ref": "Status"
-        },
-        "operation": {
-          "type": "string"
         },
         "state": {
           "enum": [
@@ -81816,6 +81980,23 @@
           "description": "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use window_start_time instead.",
           "type": "string"
         },
+        "latestWindowStartTime": {
+          "description": "The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.",
+          "type": "string"
+        },
+        "maintenanceStatus": {
+          "enum": [
+            "ONGOING",
+            "PENDING",
+            "UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "There is ongoing maintenance on this VM.",
+            "There is pending maintenance.",
+            "Unknown maintenance status. Do not use this value."
+          ],
+          "type": "string"
+        },
         "startTimeWindow": {
           "$ref": "UpcomingMaintenanceTimeWindow",
           "description": "[Output Only] The start time window of the maintenance disruption. DEPRECATED: Use window_start_time instead."
@@ -81836,6 +82017,14 @@
             "No type specified. Do not use this value.",
             "Unscheduled maintenance (e.g. emergency maintenance during uptime guarantee)."
           ],
+          "type": "string"
+        },
+        "windowEndTime": {
+          "description": "The time by which the maintenance disruption will be completed. This timestamp value is in RFC3339 text format.",
+          "type": "string"
+        },
+        "windowStartTime": {
+          "description": "The current start time of the maintenance window. This timestamp value is in RFC3339 text format.",
           "type": "string"
         }
       },

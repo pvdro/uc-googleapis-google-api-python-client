@@ -225,6 +225,172 @@
             }
           },
           "resources": {
+            "collections": {
+              "methods": {
+                "create": {
+                  "description": "Creates a collection.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.collections.create",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "parent": {
+                      "description": "Required. The parent name.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+parent}/collections",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1Collection"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Collection"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "delete": {
+                  "description": "Deletes a collection.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}",
+                  "httpMethod": "DELETE",
+                  "id": "contentwarehouse.projects.locations.collections.delete",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the collection to delete.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}",
+                  "response": {
+                    "$ref": "GoogleProtobufEmpty"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "fetchCollectionAcl": {
+                  "description": "Gets the access control policy for the collection. Returns NOT_FOUND error if the collection does not exist. Returns an empty policy if the collection exists but does not have a policy set.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}:fetchCollectionAcl",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.collections.fetchCollectionAcl",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the collection. projects/{project_number}/locations/{location}/collections/{document_id}.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:fetchCollectionAcl",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1FetchCollectionAclRequest"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1FetchCollectionAclResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "get": {
+                  "description": "Gets a collection.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}",
+                  "httpMethod": "GET",
+                  "id": "contentwarehouse.projects.locations.collections.get",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the collection to retrieve.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}",
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Collection"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "search": {
+                  "description": "Searches for collections using provided SearchCollectionsRequest. This call only returns collections that the caller has permission to search against.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections:search",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.collections.search",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "parent": {
+                      "description": "Required. The parent, which owns the collections. Format: projects/{project_number}/locations/{location}.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+parent}/collections:search",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsRequest"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "setCollectionAcl": {
+                  "description": "Sets the access control policy for the collection. Replaces any existing policy.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}:setCollectionAcl",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.collections.setCollectionAcl",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the collection for which the policy is being set. projects/{project_number}/locations/{location}/collections/{document_id}.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:setCollectionAcl",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1SetCollectionAclRequest"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1SetCollectionAclResponse"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                }
+              }
+            },
             "documentSchemas": {
               "methods": {
                 "create": {
@@ -541,6 +707,34 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "lock": {
+                  "description": "Lock the document so the document cannot be updated by other users.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/documents/{documentsId}:lock",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.documents.lock",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the document to lock. Format: projects/{project_number}/locations/{location}/documents/{document}.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/documents/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:lock",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1LockDocumentRequest"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Document"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "patch": {
                   "description": "Updates a document. Returns INVALID_ARGUMENT if the name of the document is non-empty and does not equal the existing name.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/documents/{documentsId}",
@@ -774,6 +968,122 @@
                       ]
                     }
                   }
+                }
+              }
+            },
+            "links": {
+              "methods": {
+                "create": {
+                  "description": "Creates a link.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links",
+                  "httpMethod": "POST",
+                  "id": "contentwarehouse.projects.locations.links.create",
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "parameters": {
+                    "parent": {
+                      "description": "Required. The parent name.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+parent}/links",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1Link"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Link"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "delete": {
+                  "description": "Deletes a link between a collection and a document.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
+                  "httpMethod": "DELETE",
+                  "id": "contentwarehouse.projects.locations.links.delete",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the link to delete.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/links/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}",
+                  "response": {
+                    "$ref": "GoogleProtobufEmpty"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "get": {
+                  "description": "Gets a link.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
+                  "httpMethod": "GET",
+                  "id": "contentwarehouse.projects.locations.links.get",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. The name of the link to retrieve.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/links/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}",
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Link"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "patch": {
+                  "description": "Updates the link using provided UpdateLinkRequest.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
+                  "httpMethod": "PATCH",
+                  "id": "contentwarehouse.projects.locations.links.patch",
+                  "parameterOrder": [
+                    "name",
+                    "linksId"
+                  ],
+                  "parameters": {
+                    "linksId": {
+                      "location": "path",
+                      "required": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link.",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}/links/{linksId}",
+                  "request": {
+                    "$ref": "GoogleCloudContentwarehouseV1Link"
+                  },
+                  "response": {
+                    "$ref": "GoogleCloudContentwarehouseV1Link"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
                 }
               }
             },
@@ -1103,7 +1413,7 @@
       }
     }
   },
-  "revision": "20230308",
+  "revision": "20230314",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3568,7 +3878,8 @@
             "MY_ACCOUNT_AFFINITY",
             "NUDGEIT_CAMPAIGN_MANAGER_AFFINITY",
             "LEGAL_CONTRACTS_EXTERNAL_AFFINITY",
-            "CONTACTS_TO_STAR_AFFINITY"
+            "CONTACTS_TO_STAR_AFFINITY",
+            "DECS_AFFINITY"
           ],
           "enumDescriptions": [
             "",
@@ -3585,6 +3896,7 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
             "",
             "",
             "",
@@ -4823,7 +5135,7 @@
           "type": "string"
         },
         "isSynthetic": {
-          "description": "If the Preference was implicitly set by PeopleApi. A preference with this bit will not be saved. See go/contact-group-email-preference-papi-problem for more info.",
+          "description": "If the Preference was implicitly set by PeopleApi/Contacts Service. A preference with this bit will not be saved to storage. See go/contact-group-email-preference-papi-problem for more info.",
           "type": "boolean"
         },
         "type": {
@@ -9164,6 +9476,17 @@
       },
       "type": "object"
     },
+    "AssistantApiBluetoothCapabilities": {
+      "description": "Bluetooth capabilities related to usage of a feature.",
+      "id": "AssistantApiBluetoothCapabilities",
+      "properties": {
+        "isBluetoothConnectedProfileRequired": {
+          "description": "If this surface needs to bluetooth pair a phone before using a feature.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "AssistantApiCallCapabilities": {
       "description": "CallCapabilities supported by a surface. See go/call-capabilities. Next ID: 7",
       "id": "AssistantApiCallCapabilities",
@@ -11820,7 +12143,7 @@
       "type": "object"
     },
     "AssistantApiDeviceCapabilities": {
-      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 34",
+      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 35",
       "id": "AssistantApiDeviceCapabilities",
       "properties": {
         "androidIntentCapabilities": {
@@ -11834,6 +12157,10 @@
         "audioOutput": {
           "$ref": "AssistantApiAudioOutput",
           "description": "These capabilities are scoped to the ability to play audio. It includes information like the type of audio that can be played (e.g. public, private)."
+        },
+        "bluetoothCapabilities": {
+          "$ref": "AssistantApiBluetoothCapabilities",
+          "description": "Bluetooth capabilities related to usage of a feature."
         },
         "callCapabilities": {
           "$ref": "AssistantApiCallCapabilities",
@@ -16180,6 +16507,7 @@
             "NO_DEVICE_AFTER_LOCAL_DEVICE_EXCLUDED",
             "UNABLE_TO_TARGET_ONLY_LOCAL_DEVICE",
             "NO_DEVICE_MATCHED_REQUIRED_TRAITS",
+            "NO_DEVICE_MATCHED_REQUIRED_ATTRIBUTES",
             "NO_DEVICE_MATCHED_REQUIRED_DEVICE_TYPE",
             "NO_DEVICE_IN_SAME_OR_MENTIONED_STRUCTURE",
             "NO_DEVICE_SATISFIES_PLAYBACK_REQUIREMENT",
@@ -16209,6 +16537,7 @@
             "Error of no device left after local device is excluded within inclusiveness filter.",
             "Error of unable to target only local device within inclusiveness filter.",
             "Error of no qualified devices matched the required smart home traits.",
+            "Error of no qualified devices matched the required Smart Home attributes.",
             "Error of no qualified devices matched the required smart home device types.",
             "Error of no qualified devices in the mentioned structure or in the same structure as the local device.",
             "Error of no device satisfying playback requirements.",
@@ -17762,6 +18091,7 @@
             "APP_FILTER",
             "HYBRID_DEVICE_PROPERTIES_FILTER",
             "NEARBY_DEVICE_FILTER",
+            "DEVICE_ATTRIBUTES_FILTER",
             "DEFAULT_MEDIA_OUTPUT_PROMOTER",
             "DEVICE_GROUP_PROMOTER",
             "LOCAL_DEVICE_PROMOTER",
@@ -17776,6 +18106,7 @@
           "enumDescriptions": [
             "",
             "filters",
+            "",
             "",
             "",
             "",
@@ -18250,6 +18581,7 @@
             "NO_DEVICE_AFTER_LOCAL_DEVICE_EXCLUDED",
             "UNABLE_TO_TARGET_ONLY_LOCAL_DEVICE",
             "NO_DEVICE_MATCHED_REQUIRED_TRAITS",
+            "NO_DEVICE_MATCHED_REQUIRED_ATTRIBUTES",
             "NO_DEVICE_MATCHED_REQUIRED_DEVICE_TYPE",
             "NO_DEVICE_IN_SAME_OR_MENTIONED_STRUCTURE",
             "NO_DEVICE_SATISFIES_PLAYBACK_REQUIREMENT",
@@ -18279,6 +18611,7 @@
             "Error of no device left after local device is excluded within inclusiveness filter.",
             "Error of unable to target only local device within inclusiveness filter.",
             "Error of no qualified devices matched the required smart home traits.",
+            "Error of no qualified devices matched the required Smart Home attributes.",
             "Error of no qualified devices matched the required smart home device types.",
             "Error of no qualified devices in the mentioned structure or in the same structure as the local device.",
             "Error of no device satisfying playback requirements.",
@@ -18474,6 +18807,7 @@
             "APP_FILTER",
             "HYBRID_DEVICE_PROPERTIES_FILTER",
             "NEARBY_DEVICE_FILTER",
+            "DEVICE_ATTRIBUTES_FILTER",
             "DEFAULT_MEDIA_OUTPUT_PROMOTER",
             "DEVICE_GROUP_PROMOTER",
             "LOCAL_DEVICE_PROMOTER",
@@ -18488,6 +18822,7 @@
           "enumDescriptions": [
             "",
             "filters",
+            "",
             "",
             "",
             "",
@@ -31104,6 +31439,7 @@
             "SEGMENT_ROUTE",
             "SEGMENT_ROUTE_ASSOCIATION",
             "SEGMENT_SEPARATED_ROADWAYS",
+            "SEGMENT_SLOPE",
             "SEGMENT_SURFACE",
             "SEGMENT_SWEEP",
             "SEGMENT_TOLL_ROAD",
@@ -31177,6 +31513,7 @@
             "DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -31733,7 +32070,7 @@
           "description": "All features can have \"existence\" information associated with them."
         },
         "storefrontGeometry": {
-          "description": "Represents information about the store front geoemtry. Only TYPE_ESTABLISHMENT_POI should have this field set.",
+          "description": "Represents information about the store front geometry. Only TYPE_ESTABLISHMENT_POI should have this field set.",
           "items": {
             "$ref": "GeostoreAnchoredGeometryProto"
           },
@@ -37148,7 +37485,7 @@
       "type": "object"
     },
     "GeostorePolygonProto": {
-      "description": "A general non-self-intersecting spherical polygon, consisting of one or more loops defining multiple disconnected regions possibly with holes. All loops should be oriented CCW around the region they define. This applies to the exterior loop(s) as well as any holes. Within MapFacts (and underlying infrastructure) the data fields may be replaced by a single shape_id; see comments on shape_id below. Any such PolygonProtos shouldn't be expected to work with public functions in //geostore/base/public/polygon.h.",
+      "description": "A general non-self-intersecting spherical polygon, consisting of one or more loops defining multiple disconnected regions possibly with holes. All loops should be oriented CCW around the region they define. This applies to the exterior loop(s) as well as any holes. Within MapFacts (and underlying infrastructure) the data fields may be replaced by a single shape_id stored in internal_feature. Any such PolygonProtos shouldn't be expected to work with public functions in //geostore/base/public/polygon.h.",
       "id": "GeostorePolygonProto",
       "properties": {
         "baseMeters": {
@@ -37181,10 +37518,6 @@
         "metadata": {
           "$ref": "GeostoreFieldMetadataProto",
           "description": "Field-level metadata for this polygon."
-        },
-        "shapeId": {
-          "description": "A unique identifier for this polygon's data which is being held externally in Shapestore (see go/shapestore). This is only ever set internally within MapFacts or underlying infrastructure and if set is set in lieu of other fields. Clients of MapFacts (or anyone downstream of them) can rely on the guarantee that this field will never be set and that the actual data for the polygon will be present instead. This field has been deprecated in favor of FeatureProto.internal.polygon_shape_id",
-          "type": "string"
         },
         "temporaryData": {
           "$ref": "Proto2BridgeMessageSet",
@@ -40416,6 +40749,13 @@
           "$ref": "GeostoreFeatureIdProto",
           "description": "The other segment of this segment pair (see above). The segment that is referenced by the sibling field refers to this feature back via the same sibling field. Both segment and sibling should have the same properties such as geometry, country code, elevation, level relation, priority etc. Since routes are required to have segment and sibling at the same time, the set of routes on a segment is same to that of the sibling."
         },
+        "slope": {
+          "description": "RESERVED",
+          "items": {
+            "$ref": "GeostoreSlopeProto"
+          },
+          "type": "array"
+        },
         "surface": {
           "description": "clang-format on LINT.ThenChange(//depot/google3/geostore/base/proto/lane.proto) Specific lanes may override this segment-level surface type.",
           "enum": [
@@ -40667,6 +41007,22 @@
             "Bowls are large open areas, usually steep and often rocky, that are open for skiing but don't have defined trails. They are frequented mostly by expert skiers."
           ],
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreSlopeProto": {
+      "id": "GeostoreSlopeProto",
+      "properties": {
+        "slopeValue": {
+          "description": "Slope value as elevation change divided by horizontal distance, in the format of decimal, e.g., \u20180.1234\u2019 means a 12.34% slope. If a slope_value is unset, it indicates we don\u2019t have enough information to compute slope at this location.",
+          "format": "float",
+          "type": "number"
+        },
+        "startPointFraction": {
+          "description": "Indicates how far along the segment this slope value starts to apply, in the format of decimal between 0 and 1.",
+          "format": "float",
+          "type": "number"
         }
       },
       "type": "object"
@@ -43394,10 +43750,6 @@
       "description": "*Required* Fields that identify the device to the Assistant. See also: * [Register a Device - REST API](https: //developers.google.com/assistant/sdk/re // ference/device-registration/register-device-manual) * [Device Model and Instance Schemas](https: //developers.google.com/assistant/sdk/re // ference/device-registration/model-and-instance-schemas) * [Device Proto](https: //developers.google.com/assistant/sdk/re // ference/rpc/google.assistant.devices.v1#device)",
       "id": "GoogleAssistantAccessoryV1DeviceConfig",
       "properties": {
-        "deviceBuild": {
-          "$ref": "GoogleAssistantEmbeddedV1DeviceBuild",
-          "description": "*Required* Identifier for the device which sent the request."
-        },
         "deviceModelCapabilitiesOverride": {
           "$ref": "GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride",
           "description": "Device model capabilities from client to override capabilities in the primary device model."
@@ -43405,6 +43757,10 @@
         "heterodyneToken": {
           "description": "*Optional* An encrypted heterodyne_experiment_token containing the list of experiment_ids (go/ph-server-tokens).",
           "type": "string"
+        },
+        "surfaceIdentity": {
+          "$ref": "GoogleAssistantEmbeddedV1SurfaceIdentity",
+          "description": "*Required* Identifier for the device which sent the request."
         }
       },
       "type": "object"
@@ -43669,17 +44025,6 @@
       },
       "type": "object"
     },
-    "GoogleAssistantEmbeddedV1DeviceBuild": {
-      "description": "Contains fields to identify the device which sent the request.",
-      "id": "GoogleAssistantEmbeddedV1DeviceBuild",
-      "properties": {
-        "userAgentSuffix": {
-          "description": "* Fully formed user agent suffix string.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride": {
       "description": "Device model capabilities override from client.",
       "id": "GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride",
@@ -43811,6 +44156,139 @@
             "Represents a strength training activity type.",
             "Represents a snowboarding activity type."
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleAssistantEmbeddedV1SurfaceIdentity": {
+      "description": "Contains fields to identify the device which sent the request.",
+      "id": "GoogleAssistantEmbeddedV1SurfaceIdentity",
+      "properties": {
+        "surfaceType": {
+          "description": "Surface type that the device identifies as.",
+          "enum": [
+            "UNKNOWN_TYPE",
+            "ACCL",
+            "AGSA",
+            "ANDROID",
+            "ANDROID_AUTO",
+            "ANDROID_LITE",
+            "ANDROID_PHONE",
+            "ANDROID_SCREENLESS",
+            "ANDROID_SMART_DISPLAY",
+            "ANDROID_TABLET",
+            "ANDROID_THINGS",
+            "ANDROID_THINGS_CUBE",
+            "ANDROID_THINGS_JASPER",
+            "ANDROID_TV",
+            "ANDROID_WEAR",
+            "ASSISTANT_KIT",
+            "ASSISTANT_SDK",
+            "AUTO",
+            "CAST_OS",
+            "CHROME_OS",
+            "CHROMECAST_MANHATTAN",
+            "CLOUD_DEVICE",
+            "CROS",
+            "FITBIT_OS_WATCH",
+            "FITBIT_OS_WATCH_ANDROID",
+            "FITBIT_OS_WATCH_IOS",
+            "GOOGLE_HOME",
+            "HEADPHONE",
+            "HEADPHONE_ANDROID",
+            "HEADPHONE_IOS",
+            "IOPA",
+            "IOS",
+            "IOS_SCREENLESS",
+            "IPAD",
+            "IPHONE",
+            "KAI_OS",
+            "KAI_OS_AMA",
+            "LIBASSISTANT",
+            "PHONE",
+            "PIXEL",
+            "PIXEL5",
+            "PIXEL6",
+            "PIXEL7",
+            "PIXEL_BUDS",
+            "PIXEL_TABLET",
+            "PIXEL_TABLET_HUB_MODE",
+            "PIXEL_TABLET_PERSONAL_MODE",
+            "PIXEL_WATCH",
+            "SCREENLESS",
+            "SMART_DISPLAY",
+            "SPEAKER",
+            "TABLET",
+            "TELEPHONE",
+            "THING",
+            "WATCH",
+            "WEAR_OS",
+            "WEAR_OS_WATCH"
+          ],
+          "enumDescriptions": [
+            "Unknown surface type.",
+            "Android conversation client library (go/accl) is an Android library which implements the Conversation Protocol that allows a surface to have conversations with the Assistant server. OWNERS: surfaces-infra-core@",
+            "Android Google Search App (go/agsa). OWNERS: surfaces-infra-core@",
+            "Android. OWNERS: surfaces-infra-core@",
+            "Assistant on Android Auto (go/ast-auto). OWNERS: opa-android-leads@",
+            "Assistant on Android Go (not part of AGSA). OWNERS: assistantgo-eng@",
+            "Assistant on Android phones accessed through the Google App (velvet). This surface is formerly known as OPA_AGSA. OWNERS: opa-android-leads@",
+            "Assistant on Nexus with screen off/locked. Use go/bisto device to trigger. OWNERS: opa-android-leads@",
+            "Assistant on Titan hub mode (go/titan-hubmode-surface). This is OPA Android first party Smart Display devices. The UI experience is built on Opal (Gallium and Flutter) and native Android. OWNERS: opa-android-leads@",
+            "Assistant on Android tablet. OWNERS: opa-android-leads@",
+            "Android Things (go/things). OWNERS: surfaces-infra-core@",
+            "Lenovo Smart Clock v1, a stationary smart display device with a 4-inch screen, targeted for bedroom/bedside use cases like alarm, sleep tracking. Based on Android Things. See go/cube-home. OWNERS: cube-eng@",
+            "Former codename for 3P 8-inch and 10-inch Smart Displays from Lenovo, JBL and LG, targeted for use in the kitchen. Based on Android Things. See go/jasper-home. OWNERS: jasper-eng@",
+            "The Android platform that powers smart televisions, set-top-boxes, and over-the-top devices. See go/atv-eng and go/opa-tv. OWNERS: opa-tv-eng@",
+            "Legacy Wear OS Assistant. OWNERS: wear-assistant-eng@",
+            "AssistantKit (go/assistantkit) is a collection of iOS libraries allowing first party apps to integrate Google Assistant features. OWNERS: assistantkit-eng@",
+            "Standalone gRPC based client. See go/easi. OWNERS: assistant-sdk-service-eng@",
+            "Automobile. OWNERS: surfaces-infra-core@",
+            "Cast OS (go/opal-castos-docs#what-is-castos). OWNERS: surfaces-infra-core@",
+            "Chrome OS (go/chromsos) OWNERS: surfaces-infra-core@",
+            "For chromecast with assistant + screen, e.g. Newman. OWNERS: cast-eng-platform@",
+            "Virtual device for event-based triggering, e.g. executing time scheduled routines: go/scheduled-routines. OWNERS: surfaces-infra-core@",
+            "Assistant on native Chrome OS (go/croissant). OWNERS: croissant@",
+            "Assistant on Fitbit OS Watch. OWNERS: assistant-wearable-team@",
+            "Assistant on Fitbit Watch paired with AGSA. OWNERS: assistant-wearable-team@",
+            "Assistant on Fitbit Watch paired with iOPA. OWNERS: assistant-wearable-team@",
+            "Google home speaker, i.e., Chirp devices. See go/assistant-speakers. OWNERS: assistant-speaker-leads@",
+            "Headphone. OWNERS: surfaces-infra-core@",
+            "Assistant on headphones paired with AGSA. OWNERS: assistant-wearable-team@",
+            "Assistant on headphones paired with iOPA. OWNERS: assistant-wearable-team@",
+            "Assistant on iOS devices (go/opa-ios). OWNERS: opa-ios-eng@",
+            "iOS. OWNERS: surfaces-infra-core@",
+            "Assistant on iOS with screen off/locked. Use go/bisto device to trigger. OWNERS: bisto-team@",
+            "iPad devices. OWNERS: surfaces-infra-core@",
+            "iPhone devices. OWNERS: surfaces-infra-core@",
+            "Kai OS (go/kaios). OWNERS: surfaces-infra-core@",
+            "Assistant on KaiOS (go/kaiosama). OWNERS: assistant-kaios-eng@",
+            "LibAssistant (go/libassistant) C++ SDK that powers Assistant experience on both 1P devices like Google Home and 3P devices like Sonos. OWNERS: libassistant-core@",
+            "A phone. OWNERS: surfaces-infra-core@",
+            "Pixel devices. OWNERS: surfaces-infra-core@",
+            "Pixel 5. OWNERS: surfaces-infra-core@",
+            "Pixel 6. OWNERS: surfaces-infra-core@",
+            "Pixel 7. OWNERS: surfaces-infra-core@",
+            "Assistant on Pixel Buds. OWNERS: assistant-wearable-team@",
+            "Assistant on Pixel Tablet/Tangor (a.k.a, TK). OWNERS: assistant-display-eng@",
+            "Assistant on Tangor running in Hub mode. OWNERS: assistant-display-eng@",
+            "Assistant on Tangor running in Personal mode. OWNERS: assistant-display-eng@",
+            "Assistant on Pixel Watch (a.k.a., Rohan). OWNERS: assistant-wearable-team@",
+            "Devices with screen off or locked (go/bisto). OWNERS: surfaces-infra-core@",
+            "Smart surface, such as Titan. OWNERS: surfaces-infra-core@",
+            "A speaker. OWNERS: surfaces-infra-core@",
+            "A tablet. OWNERS: surfaces-infra-core@",
+            "Assistant on a phone call (go/telephone). OWNERS: telephone-assistant-eng@",
+            "IoT device. OWNERS: surfaces-infra-core@",
+            "Watch. OWNERS: surfaces-infra-core@",
+            "Wear OS. OWNERS: surfaces-infra-core@",
+            "Assistant on Wear OS Watch (a.k.a., Edoras). OWNERS: assistant-wearable-team@"
+          ],
+          "type": "string"
+        },
+        "userAgentSuffix": {
+          "description": "* Fully formed user agent suffix string.",
           "type": "string"
         }
       },
@@ -44031,6 +44509,79 @@
           "type": "boolean"
         }
       },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1Collection": {
+      "description": "Defines the structure for content warehouse collection proto.",
+      "id": "GoogleCloudContentwarehouseV1Collection",
+      "properties": {
+        "allowLinkDocuments": {
+          "description": "Whether allow the collection to link to documents. Cannot be updated after the collection is created.",
+          "type": "boolean"
+        },
+        "attributes": {
+          "additionalProperties": {
+            "description": "Properties of the object.",
+            "type": "any"
+          },
+          "description": "Other collection attributes for the use cases.",
+          "type": "object"
+        },
+        "collectionType": {
+          "description": "Indicate this collection\u2019s type.",
+          "enum": [
+            "COLLECTION_TYPE_UNSPECIFIED",
+            "DATASET",
+            "RECORD_SET",
+            "WORK_QUEUE",
+            "WORKFLOW",
+            "LEGAL_HOLD"
+          ],
+          "enumDescriptions": [
+            "Not specified.",
+            "Dataset collection.",
+            "Record set collection.",
+            "Queue collection. E.g. a queue for human review.",
+            "The working collection for a workflow. One workflow has one collection.",
+            "Legal hold collection."
+          ],
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Output only. The time when the document is created.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Required. Display name of the collection given by the user.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The resource name of the collection. Format: projects/{project_number}/locations/{location}/collections/{collection}. The name is ignored when creating a collection.",
+          "type": "string"
+        },
+        "parentCollectionId": {
+          "description": "The parent collection ID of the collection. One collection only can have one parent collection, and they should be in the same project and location.",
+          "type": "string"
+        },
+        "revokeDocEditPermission": {
+          "description": "If it is true, after adding the document to the collection, the users with document edit permission will only have view permission. Can not be updated after the collection is created.",
+          "type": "boolean"
+        },
+        "updateTime": {
+          "description": "Output only. The time when the document is last updated.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1CollectionQuery": {
+      "description": "The query string that matches against the collections.",
+      "id": "GoogleCloudContentwarehouseV1CollectionQuery",
+      "properties": {},
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1CreateDocumentLinkRequest": {
@@ -44621,6 +45172,32 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1FetchCollectionAclRequest": {
+      "description": "Request message for CollectionService.FetchAcl",
+      "id": "GoogleCloudContentwarehouseV1FetchCollectionAclRequest",
+      "properties": {
+        "requestMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
+          "description": "The meta information collected about the end user, used to enforce access control for the service."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1FetchCollectionAclResponse": {
+      "description": "Response message for CollectionService.FetchAcl.",
+      "id": "GoogleCloudContentwarehouseV1FetchCollectionAclResponse",
+      "properties": {
+        "metadata": {
+          "$ref": "GoogleCloudContentwarehouseV1ResponseMetadata",
+          "description": "Additional information for the API invocation."
+        },
+        "policy": {
+          "$ref": "GoogleIamV1Policy",
+          "description": "The IAM policy."
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1FileTypeFilter": {
       "description": "Filter for the specific types of documents returned.",
       "id": "GoogleCloudContentwarehouseV1FileTypeFilter",
@@ -44913,6 +45490,44 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1Link": {
+      "description": "Defines the structure for content warehouse link proto.",
+      "id": "GoogleCloudContentwarehouseV1Link",
+      "properties": {
+        "attributes": {
+          "additionalProperties": {
+            "description": "Properties of the object.",
+            "type": "any"
+          },
+          "description": "Other link attributes.",
+          "type": "object"
+        },
+        "collectionId": {
+          "description": "The collection the link connects to. Should have the same project and location with the link.",
+          "type": "string"
+        },
+        "createTime": {
+          "description": "Output only. The create timestamp.",
+          "format": "google-datetime",
+          "readOnly": true,
+          "type": "string"
+        },
+        "creator": {
+          "description": "Output only. Indicates who created this link.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "documentId": {
+          "description": "The document the link connects to. Should have the same project and location with the link.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1ListDocumentSchemasResponse": {
       "description": "Response message for DocumentSchemaService.ListDocumentSchemas.",
       "id": "GoogleCloudContentwarehouseV1ListDocumentSchemasResponse",
@@ -45034,6 +45649,21 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1LockDocumentRequest": {
+      "description": "Request message for DocumentService.LockDocument.",
+      "id": "GoogleCloudContentwarehouseV1LockDocumentRequest",
+      "properties": {
+        "collectionId": {
+          "description": "The collection the document connects to.",
+          "type": "string"
+        },
+        "lockingUser": {
+          "$ref": "GoogleCloudContentwarehouseV1UserInfo",
+          "description": "The user information who locks the document."
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1MapProperty": {
       "description": "Map property value. Represents a structured entries of key value pairs, consisting of field names which map to dynamically typed values.",
       "id": "GoogleCloudContentwarehouseV1MapProperty",
@@ -45069,9 +45699,9 @@
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1ProcessWithDocAi": {
+    "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline": {
       "description": "The configuration of processing documents in Document Warehouse with DocAi processors pipeline.",
-      "id": "GoogleCloudContentwarehouseV1ProcessWithDocAi",
+      "id": "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline",
       "properties": {
         "documents": {
           "description": "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}.",
@@ -45549,12 +46179,61 @@
           "description": "Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse."
         },
         "processWithDocAiPipeline": {
-          "$ref": "GoogleCloudContentwarehouseV1ProcessWithDocAi",
+          "$ref": "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline",
           "description": "Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse."
         },
         "requestMetadata": {
           "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
           "description": "The meta information collected about the end user, used to enforce access control for the service."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1SearchCollectionsRequest": {
+      "description": "Request message for CollectionService.SearchCollections.",
+      "id": "GoogleCloudContentwarehouseV1SearchCollectionsRequest",
+      "properties": {
+        "pageSize": {
+          "description": "A limit on the number of collections returned in the search results. Increasing this value above the default value of 10 can increase search response time. The value can be between 1 and 100.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageToken": {
+          "description": "The token specifying the current offset within search results. See SearchCollectionsResponse.next_page_token for an explanation of how to obtain the next set of query results.",
+          "type": "string"
+        },
+        "query": {
+          "$ref": "GoogleCloudContentwarehouseV1CollectionQuery",
+          "description": "Query used to search against collections."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1SearchCollectionsResponse": {
+      "description": "Response message for CollectionService.SearchCollections.",
+      "id": "GoogleCloudContentwarehouseV1SearchCollectionsResponse",
+      "properties": {
+        "matchingCollections": {
+          "description": "The collection entities that match the specified SearchCollectionsRequest.",
+          "items": {
+            "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "The token that specifies the starting position of the next page of results. This field is empty if there are no more results.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection": {
+      "description": "Collection entry with metadata inside SearchCollectionsResponse",
+      "id": "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection",
+      "properties": {
+        "collection": {
+          "$ref": "GoogleCloudContentwarehouseV1Collection",
+          "description": "Collection that matches the specified SearchCollectionsRequest."
         }
       },
       "type": "object"
@@ -45705,6 +46384,36 @@
         "policy": {
           "$ref": "GoogleIamV1Policy",
           "description": "The policy will be attached to a resource (e.g. projecct, document)."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1SetCollectionAclRequest": {
+      "description": "Request message for CollectionService.SetAcl.",
+      "id": "GoogleCloudContentwarehouseV1SetCollectionAclRequest",
+      "properties": {
+        "policy": {
+          "$ref": "GoogleIamV1Policy",
+          "description": "Required. REQUIRED: The complete policy to be applied to the collection. The size of the policy is limited to a few 10s of KB."
+        },
+        "requestMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
+          "description": "The meta information collected about the end user, used to enforce access control for the service."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1SetCollectionAclResponse": {
+      "description": "Response message for CollectionService.SetAcl.",
+      "id": "GoogleCloudContentwarehouseV1SetCollectionAclResponse",
+      "properties": {
+        "metadata": {
+          "$ref": "GoogleCloudContentwarehouseV1ResponseMetadata",
+          "description": "Additional information for the API invocation, such as the request tracking id."
+        },
+        "policy": {
+          "$ref": "GoogleIamV1Policy",
+          "description": "The policy created for the Collection."
         }
       },
       "type": "object"
@@ -45906,7 +46615,7 @@
             "UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES",
             "UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES",
             "UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES",
-            "UPDATE_TYPE_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES"
+            "UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES"
           ],
           "enumDescriptions": [
             "Defaults to full replace behavior, ie. FULL_REPLACE.",
@@ -45915,7 +46624,7 @@
             "Inserts the properties by names.",
             "Replace the properties by names.",
             "Delete the properties by names.",
-            "For each of the property, replaces the property if the it exists, otherwise inserts a new property."
+            "For each of the property, replaces the property if the it exists, otherwise inserts a new property. And for the rest of the fields, merge them based on update mask and merge fields options."
           ],
           "type": "string"
         }
@@ -46222,7 +46931,7 @@
       "properties": {
         "addressValue": {
           "$ref": "GoogleTypePostalAddress",
-          "description": "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_ address.proto"
+          "description": "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
         },
         "booleanValue": {
           "description": "Boolean value. Can be used for entities with binary values, or for checkboxes.",
@@ -46941,7 +47650,7 @@
             "Operation type unspecified. If no operation is specified a provenance entry is simply used to match against a `parent`.",
             "Add an element.",
             "Remove an element identified by `parent`.",
-            "Updates any fields within the given provenance scope of the message. It 'overwrites' the fields rather than replacing them. This is especially relevant when we just want to update a field value of an entity without also affecting all the child properties.",
+            "Updates any fields within the given provenance scope of the message. It overwrites the fields rather than replacing them. Use this when you want to update a field value of an entity without also updating all the child properties.",
             "Currently unused. Replace an element identified by `parent`.",
             "Deprecated. Request human review for the element identified by `parent`.",
             "Deprecated. Element is reviewed and approved at human review, confidence will be set to 1.0.",
@@ -47470,6 +48179,10 @@
         },
         "experimentalFloorId": {
           "description": "Experimental. Can change or disappear without warning or notice. The floor id. For example \"11\".",
+          "type": "string"
+        },
+        "label": {
+          "description": "The display label of this office location. For example a building name.",
           "type": "string"
         }
       },
@@ -52423,7 +53136,8 @@
             "GENUS_CONTRIB_SERVICE_SHARED",
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
             "GENUS_SEARCH_SPORTS",
-            "GENUS_BUSINESSMESSAGING"
+            "GENUS_BUSINESSMESSAGING",
+            "GENUS_AERIAL_VIEW"
           ],
           "enumDescriptions": [
             "",
@@ -52471,7 +53185,8 @@
             "Shared genus for ContribService UGC videos for small clients requesting the same set of common signals. Large ContribService Video clients should have their own genera. go/user-owned-video-content-processing",
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
             "Genus for Search Sports vertical videos",
-            "Genus for Business Messaging videos"
+            "Genus for Business Messaging videos",
+            "Genus for Geo Aerial View"
           ],
           "type": "string"
         },
@@ -53273,7 +53988,8 @@
             "GENUS_CONTRIB_SERVICE_SHARED",
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
             "GENUS_SEARCH_SPORTS",
-            "GENUS_BUSINESSMESSAGING"
+            "GENUS_BUSINESSMESSAGING",
+            "GENUS_AERIAL_VIEW"
           ],
           "enumDescriptions": [
             "",
@@ -53321,7 +54037,8 @@
             "Shared genus for ContribService UGC videos for small clients requesting the same set of common signals. Large ContribService Video clients should have their own genera. go/user-owned-video-content-processing",
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
             "Genus for Search Sports vertical videos",
-            "Genus for Business Messaging videos"
+            "Genus for Business Messaging videos",
+            "Genus for Geo Aerial View"
           ],
           "type": "string"
         },
@@ -55397,22 +56114,12 @@
         "localyp": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
-        "localypVersion": {
-          "type": "string"
-        },
         "modernFormatContent": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
-        },
-        "modernFormatContentVersion": {
-          "type": "string"
         },
         "navboost": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo",
           "description": "LINT.IfChange"
-        },
-        "navboostVersion": {
-          "description": "DEPRECATED",
-          "type": "string"
         },
         "rankembed": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
@@ -55423,14 +56130,8 @@
         "videoScoringSignal": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
-        "videoScoringSignalVersion": {
-          "type": "string"
-        },
         "volt": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
-        },
-        "voltVersion": {
-          "type": "string"
         }
       },
       "type": "object"
@@ -65122,7 +65823,8 @@
             "QU_PHASE_QBT_RESOLUTION",
             "QU_PHASE_HIGH_PRECISION",
             "QU_PHASE_COMBINED_RBT_RESOLUTION",
-            "QU_PHASE_ANALYZER_INPUT"
+            "QU_PHASE_ANALYZER_INPUT",
+            "QU_PHASE_NAGE"
           ],
           "enumDescriptions": [
             "Invalid value to use as a default.",
@@ -65135,7 +65837,8 @@
             "Phase in which QUS calls resolution service to perform slow intent resolution. Produces resolved intents.",
             "Phase in which QUS calls the fast HighPrecision workflow. Only runs if understand_mode is PRE_RESULT_AND_HIGH_PRECISION.",
             "Phase in which QUS combines the RBT result and Slow Resolution result. Only runs if understand_mode is PRE_RESULT_AND_PROBE_QUERY_AND_RESOLUTION.",
-            "Phase in which QUS returns the AnalyzerInput as a separate Phase. It copies the AnalyzerInput from QU_PHASE_QREWRITE and returns it as a QueryUnderstandingStreamingResult for the purpose of logging in ACE. See go/analyzerinput-new-qus-phase."
+            "Phase in which QUS returns the AnalyzerInput as a separate Phase. It copies the AnalyzerInput from QU_PHASE_QREWRITE and returns it as a QueryUnderstandingStreamingResult for the purpose of logging in ACE. See go/analyzerinput-new-qus-phase.",
+            "Phase in which QUS runs NSP in the QUS."
           ],
           "type": "string"
         }
@@ -77050,6 +77753,7 @@
             "MONOSPACE",
             "MY_ACCOUNT",
             "NUDGEIT_CAMPAIGN_MANAGER",
+            "DECS",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -77689,6 +78393,7 @@
             "Monospace Team contact: monospace-eng@google.com",
             "My Account Team contact: my-google-eng@google.com",
             "Nudgeit Campaign Manager Team contact: nudges-campaign-manager-team@google.com",
+            "Decs Team contact: decs-eng@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -82262,6 +82967,7 @@
             "LOCKSCREEN_PERSONAL_RESULTS_SETTING",
             "ASSISTANT_ON_LOCKSCREEN_SETTING",
             "SKIP_VOICE_RECOGNITION_SETTING",
+            "ASSISTANT_ON_LOCKSCREEN_SETTING_TNG",
             "MULTI_DEVICE_NOTIFICATION_FEEDBACK",
             "MULTI_DEVICE_FEEDBACK_CHIRP",
             "DRAGONGLASS_SPORT_MODULE",
@@ -82313,6 +83019,7 @@
             "GEO_TTL_RESERVED_RESTAURANT",
             "GEO_TTL_RESERVED_SOCIAL_EVENT",
             "GEO_TTL_FLIGHT_PASSENGER_DEPARTURE",
+            "GEO_TTL_FLIGHT_PASSENGER_DEPARTURE_RIDESHARE",
             "GEO_AAP_GROCERY_STORE",
             "GEO_AAP_BEAUTY_WELLNESS",
             "GEO_AAP_RESTAURANT",
@@ -82379,6 +83086,7 @@
             "AADC_MINOR_MOMENT",
             "PAYMENTS_SETTINGS",
             "SMARTSPACE_HOLIDAY_ALARMS",
+            "CROSS_DEVICE_ALARM",
             "CROSS_DEVICE_TIMER",
             "CROSS_DEVICE_TIMER_FCM_PING",
             "MEMORY_AWARENESS",
@@ -82668,6 +83376,7 @@
             "",
             "",
             "lockscreen settings",
+            "Notification for aol consent flow go/jit-notification-aol-permission-prd.",
             "",
             "",
             "",
@@ -82721,6 +83430,7 @@
             "Restaurant reservation Time to leave notifications from Maps. PRD(go/ga-notifications-prd)",
             "Restaurant reservation Time to leave notifications from Maps. PRD(go/ga-notifications-prd)",
             "Restaurant reservation Time to leave notifications from Maps. PRD(go/ga-notifications-prd)",
+            "Flight departure Time to leave notification when \"Book a ride\" action button is triggered. This is same notification as GEO_TTL_FLIGHT_PASSENGER_DEPARTURE with the \"book a ride\" button as the only difference. PRD(go/airport-rideshare-prd)",
             "",
             "",
             "",
@@ -82785,6 +83495,7 @@
             "",
             "",
             "AADC.",
+            "",
             "",
             "",
             "",
@@ -85208,16 +85919,18 @@
         "siteChunkSource": {
           "description": "These are annotated in the Goldmine NSR annotator.",
           "enum": [
-            "SITE_CHUNK_SOURCE_UNKNOWN",
-            "SITE_CHUNK_SOURCE_WEBUTIL",
-            "SITE_CHUNK_SOURCE_BREADCRUMBS",
-            "SITE_CHUNK_SOURCE_AUTHOR",
-            "SITE_CHUNK_SOURCE_COOKBOOK",
-            "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA"
+            "UNKNOWN",
+            "HOST_LEVEL_V3",
+            "MARKUP_BREADCRUMBS",
+            "MARKUP_AUTHOR",
+            "COOKBOOK",
+            "CRAWLED_SELLER_DATA",
+            "FALLBACK"
           ],
           "enumDescriptions": [
             "",
-            "As of June 2021 this corresponds to HOST_LEVEL_V3 granularity.",
+            "",
+            "",
             "",
             "",
             "",
@@ -85383,11 +86096,13 @@
             "SITE_CHUNK_SOURCE_BREADCRUMBS",
             "SITE_CHUNK_SOURCE_AUTHOR",
             "SITE_CHUNK_SOURCE_COOKBOOK",
-            "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA"
+            "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA",
+            "SITE_CHUNK_SOURCE_FALLBACK"
           ],
           "enumDescriptions": [
             "",
             "As of June 2021 this actually corresponds to HOST_LEVEL_V3 granularity.",
+            "",
             "",
             "",
             "",
@@ -100790,9 +101505,11 @@
             "DOC_PREFIX",
             "BEFORE_REFS",
             "AFTER_REFS",
-            "DOC_SUFFIX"
+            "DOC_SUFFIX",
+            "ACK_SECTION"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -102621,7 +103338,7 @@
       "type": "object"
     },
     "SnippetExtraInfoSnippetCandidateInfo": {
-      "description": "Next ID: 14",
+      "description": "Next ID: 15",
       "id": "SnippetExtraInfoSnippetCandidateInfo",
       "properties": {
         "boldedRanges": {
@@ -102630,6 +103347,9 @@
             "$ref": "QualitySnippetsTruncationSnippetBoldedRange"
           },
           "type": "array"
+        },
+        "extendedSnippet": {
+          "$ref": "SnippetExtraInfoSnippetCandidateInfoExtendedSnippet"
         },
         "id": {
           "description": "Candidate identifier number, unique among all snippet candidates under each document in each request. What does this number mean: - Muppet candidates: This equals to the candidate's rank by Muppet snippets scorer. - Superroot candidates: No specific meaning, this number should be larger than that of Muppet candidates. This field is used to: - Verify whether snippet brain chooses a different snippet from Muppet (the one chosen by Muppet is always in id 0). - Print debugging information and sort candidates in debug output.",
@@ -102700,6 +103420,20 @@
             "Candidates from quality_snippets.SnippetSpansInfo.",
             "Candidates generated by SnippetFlow in SR."
           ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SnippetExtraInfoSnippetCandidateInfoExtendedSnippet": {
+      "description": "The extended version of this snippet.",
+      "id": "SnippetExtraInfoSnippetCandidateInfoExtendedSnippet",
+      "properties": {
+        "numChars": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "snippetText": {
           "type": "string"
         }
       },
@@ -108891,6 +109625,8 @@
               "INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN",
               "SUPERROOT_PDS_SHORT_DESCRIPTION_EVENT_LEVEL",
               "PGSS_SHORT_DESCRIPTION_DIFF_EVENT_LEVEL",
+              "SECOND_PASS_QUALITY_REWEIGTHING_EVENT_LEVEL",
+              "SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -109382,12 +110118,21 @@
               "APPS_LAUNCHER_CLUSTER_AT_SESSION_LEVEL",
               "SUPERROOT_PDS_SHORT_DESCRIPTION_SESSION_LEVEL",
               "PGSS_SHORT_DESCRIPTION_DIFF_SESSION_LEVEL",
+              "WEAR_AQ_SEARCH_PHONE_DEVICE_WITH_WEAR_FILTER",
+              "WEAR_AQ_SEARCH_WEAR_DEVICE",
+              "WEAR_AQ_SEARCH_COMBINED",
               "NAV_ADS_DUPLICATE_SERVED_SESSION_LEVEL",
               "NAV_ADS_NON_DUPLICATE_SERVED_SESSION_LEVEL",
               "NAV_ADS_NO_AD_SERVED_SESSION_LEVEL",
-              "PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_SHOWN",
-              "PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_RESOLVED",
+              "PAYMENTS_TOS_ACCEPTANCE_SESSION_LEVEL",
               "WEBSKY_SEARCH_THIRD_PARTY_CONTENT_ELIGIBLE_QUERY_SESSION_LEVEL",
+              "SHORTEN_COMMERCE_CACHE_TTL_SESSION_LEVEL",
+              "SKIP_CHECK_MARK_SCREEN_FOR_BACKUP_FLOW_SESSION_LEVEL",
+              "ONE_CLICK_BACKUP_FOP_SESSION_LEVEL",
+              "KIDS_LAUNCHER_USER_FEATURES_PRESENT",
+              "KIDS_LAUNCHER_USER_FEATURES_MISSING",
+              "SECOND_PASS_QUALITY_REWEIGTHING_SESSION_LEVEL",
+              "SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -109564,6 +110309,15 @@
               "MERCH_USER_JOURNEY_SPEND_USER_LEVEL",
               "MERCH_USER_JOURNEY_PUBG_NPU",
               "MERCH_USER_JOURNEY_PUBG_REPEAT_SPEND",
+              "MERCH_USER_JOURNEY_APEX_NEW_ACTIVE_USERS",
+              "MERCH_USER_JOURNEY_APEX_NEW_CHURN",
+              "MERCH_USER_JOURNEY_PUBG_NEW_USERS",
+              "MERCH_USER_JOURNEY_PUBG_ADVANCED_AND_CHURN",
+              "MERCH_USER_JOURNEY_FREE_FIRE_ADVANCED_AND_CHURN",
+              "MERCH_USER_JOURNEY_GARENA_REPEAT",
+              "MERCH_USER_JOURNEY_NIKKE_NEW_UPDATE",
+              "MERCH_USER_JOURNEY_NIKKE_ADVANCED_UPDATE",
+              "MERCH_USER_JOURNEY_POKEMON_GO_ADVANCED_AND_CHURN",
               "PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL",
               "PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL",
               "IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL1",
@@ -109806,6 +110560,8 @@
               "Event level test codes containing result of tquality lookup during market details url matching. An unknown result means the lookup found nothing.",
               "Event level test code when Short Description is populated in Superroot.",
               "Event level test code when Short Description fetched in PGSS is different from that fetched in Superroot.",
+              "Event level test code that indicates second pass quality reweigthing is triggered.",
+              "Event level test code that indicates second pass quality reweigthing is triggered.",
               "",
               "",
               "",
@@ -110297,12 +111053,21 @@
               "Session-level test code that indicates a user was served an Apps Launcher Cluster.",
               "Session level test code when Short Description is populated in Superroot.",
               "Session level test code when Short Description fetched in PGSS is different from that fetched in Superroot.",
+              "Session level test code for queries from phone device with wear filter",
+              "Session level test code for queries from wear device",
+              "Session level test code for all queries using wear aq",
               "Session-level test code indicating that the user was served a Nav Ad with a app or game that is the same as the MDP on stream.",
               "Session-level test code indicating that the user was served a Nav Ad with an app or game that differs from the MDP on stream.",
               "Session-level test code indicating that the user was not served a Nav Ad.",
               "Session-level test code for Payment Tos.",
-              "",
               "Session level test code that indicates a user's search query qualifies them to see third party content in Websky search stream.",
+              "Session-level test code for shortening Phonesky commerce cache TTL.",
+              "Session level test code for skip check mark screen for backup flow.",
+              "Session level test code for one click backup fop.",
+              "Session-level test code related to Google Kids Space PRS processor, indicating whether that the user had the required user features for ranking model.",
+              "",
+              "Session level test code that indicates second pass quality reweigthing is triggered.",
+              "Session level test code that indicates second pass quality reweigthing is triggered.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -110477,8 +111242,17 @@
               "User level test code for Play Onboarding quest, tracking users who are eligible for Play Onboarding quest in Games Home. This test code is logged on the server side.",
               "User level test code for tracking users who are being shown PersistentCartHeader through purchase flow. This test code is logged on the server side.",
               "User level test code for Merch user journey experiment. This test code is logged on the Growth Engine server side.",
-              "User level test code for slicing different cohorts for Merch user journey experiments. This test code is logged on the Growth Engine server side.",
-              "",
+              "User level test code for slicing different cohorts for Merch user journey experiments. This test code is logged on the Growth Engine server side. Testcode for cohort id 69660.",
+              "Testcode for cohort id 69659.",
+              "Testcode for cohort id 67267.",
+              "Testcode for cohort id 67268.",
+              "Testcode for cohort id 70703.",
+              "Testcode for cohort id 70704.",
+              "Testcode for cohort id 69661.",
+              "Testcode for cohort id 69662.",
+              "Testcode for cohort id 70706.",
+              "Testcode for cohort id 70708.",
+              "Testcode for cohort id 69738.",
               "User level test code for Non-Play Growth Events experiment (go/npge-prd). Logged on the server side and applied to users that visit Loyalty Home and are eligible to receive a quest with Play Games Achievement tasks, regardless of whether the quest was shown or held back.",
               "User level test code for reading progress tooltip.",
               "User level test code for tracking users who should see the IAP Sku Games Home liveops card.",
@@ -110943,7 +111717,8 @@
             "NS_CONTRIB_SERVICE_SHARED",
             "NS_CONTRIB_SERVICE_GEO_UGC",
             "NS_SEARCH_SPORTS",
-            "NS_BUSINESSMESSAGING"
+            "NS_BUSINESSMESSAGING",
+            "NS_AERIAL_VIEW"
           ],
           "enumDescriptions": [
             "Default (invalid) namespace if the field is not set.",
@@ -110985,7 +111760,8 @@
             "Namespace for shared ContribService UGC videos.",
             "Namespace for GEO UGC videos processed by ContribService.",
             "Namespace for Search Sports vertical videos.",
-            "Namespace for Business Messaging videos. Please receive approval via go/vp-newclients before adding a new namespace."
+            "Namespace for Business Messaging videos.",
+            "Namespace for Geo Aerial View Please receive approval via go/vp-newclients before adding a new namespace."
           ],
           "type": "string"
         }
@@ -111066,11 +111842,21 @@
       "type": "object"
     },
     "VideoContentSearchAnchorCommonFeatureSet": {
-      "description": "Contains anchor level features that apply to all anchor types. Next id: 18.",
+      "description": "Contains anchor level features that apply to all anchor types. Next id: 22.",
       "id": "VideoContentSearchAnchorCommonFeatureSet",
       "properties": {
         "anchorQbstDistance": {
           "description": "QBST distance between the anchor and the top navboost query of the video if exists, or the video title otherwise.",
+          "format": "float",
+          "type": "number"
+        },
+        "asrAverageBabelSimilarityScore": {
+          "description": "Average of babel similarity between the anchor and all asr sentences.",
+          "format": "float",
+          "type": "number"
+        },
+        "asrMaximumBabelSimilarityScore": {
+          "description": "Maximum babel similarity between the anchor and the asr sentences.",
           "format": "float",
           "type": "number"
         },
@@ -111085,6 +111871,16 @@
         },
         "descartesScoreWithTitle": {
           "description": "Descartes similarity score between video title and anchor label.",
+          "format": "float",
+          "type": "number"
+        },
+        "descriptionAverageBabelSimilarityScore": {
+          "description": "Average of babel similarity between the anchor and all description sentences.",
+          "format": "float",
+          "type": "number"
+        },
+        "descriptionMaximumBabelSimilarityScore": {
+          "description": "Maximum babel similarity between the anchor and the description sentences.",
           "format": "float",
           "type": "number"
         },
@@ -113986,7 +114782,8 @@
             "SUMMARY_SEGMENT",
             "OCR_EDU",
             "ASR_SPAN_EDU",
-            "GENERATIVE_ASR_I18N"
+            "GENERATIVE_ASR_I18N",
+            "YT_AUTO_CHAPTERS"
           ],
           "enumDescriptions": [
             "",
@@ -114016,7 +114813,8 @@
             "Anchors pointing to the conclusion/summary part of the video. (go/vs-find-summary-segment)",
             "OCR and ASR anchors generated for educational videos in edu Raffia Overlay.",
             "",
-            "Anchors for i18n languages"
+            "Anchors for i18n languages",
+            "Anchors derived from Youtube chapters that were auto-generated."
           ],
           "type": "string"
         },
@@ -114386,7 +115184,8 @@
             "SUMMARY_SEGMENT",
             "OCR_EDU",
             "ASR_SPAN_EDU",
-            "GENERATIVE_ASR_I18N"
+            "GENERATIVE_ASR_I18N",
+            "YT_AUTO_CHAPTERS"
           ],
           "enumDescriptions": [
             "",
@@ -114416,7 +115215,8 @@
             "Anchors pointing to the conclusion/summary part of the video. (go/vs-find-summary-segment)",
             "OCR and ASR anchors generated for educational videos in edu Raffia Overlay.",
             "",
-            "Anchors for i18n languages"
+            "Anchors for i18n languages",
+            "Anchors derived from Youtube chapters that were auto-generated."
           ],
           "type": "string"
         },
@@ -114507,7 +115307,8 @@
               "SUMMARY_SEGMENT",
               "OCR_EDU",
               "ASR_SPAN_EDU",
-              "GENERATIVE_ASR_I18N"
+              "GENERATIVE_ASR_I18N",
+              "YT_AUTO_CHAPTERS"
             ],
             "enumDescriptions": [
               "",
@@ -114537,7 +115338,8 @@
               "Anchors pointing to the conclusion/summary part of the video. (go/vs-find-summary-segment)",
               "OCR and ASR anchors generated for educational videos in edu Raffia Overlay.",
               "",
-              "Anchors for i18n languages"
+              "Anchors for i18n languages",
+              "Anchors derived from Youtube chapters that were auto-generated."
             ],
             "type": "string"
           },
