@@ -117,7 +117,7 @@
           ],
           "parameters": {
             "resource": {
-              "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}.",
+              "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for collection: projects/{project_number}/locations/{location}/collections/{collection_id}. Format for project: projects/{project_number}.",
               "location": "path",
               "pattern": "^projects/[^/]+$",
               "required": true,
@@ -145,7 +145,7 @@
           ],
           "parameters": {
             "resource": {
-              "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}.",
+              "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for collection: projects/{project_number}/locations/{location}/collections/{collection_id}. Format for project: projects/{project_number}.",
               "location": "path",
               "pattern": "^projects/[^/]+$",
               "required": true,
@@ -194,203 +194,9 @@
               "scopes": [
                 "https://www.googleapis.com/auth/cloud-platform"
               ]
-            },
-            "runPipeline": {
-              "description": "Run a predefined pipeline.",
-              "flatPath": "v1/projects/{projectsId}/locations/{locationsId}:runPipeline",
-              "httpMethod": "POST",
-              "id": "contentwarehouse.projects.locations.runPipeline",
-              "parameterOrder": [
-                "name"
-              ],
-              "parameters": {
-                "name": {
-                  "description": "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}.",
-                  "location": "path",
-                  "pattern": "^projects/[^/]+/locations/[^/]+$",
-                  "required": true,
-                  "type": "string"
-                }
-              },
-              "path": "v1/{+name}:runPipeline",
-              "request": {
-                "$ref": "GoogleCloudContentwarehouseV1RunPipelineRequest"
-              },
-              "response": {
-                "$ref": "GoogleLongrunningOperation"
-              },
-              "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
-              ]
             }
           },
           "resources": {
-            "collections": {
-              "methods": {
-                "create": {
-                  "description": "Creates a collection.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections",
-                  "httpMethod": "POST",
-                  "id": "contentwarehouse.projects.locations.collections.create",
-                  "parameterOrder": [
-                    "parent"
-                  ],
-                  "parameters": {
-                    "parent": {
-                      "description": "Required. The parent name.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+parent}/collections",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1Collection"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1Collection"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "delete": {
-                  "description": "Deletes a collection.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}",
-                  "httpMethod": "DELETE",
-                  "id": "contentwarehouse.projects.locations.collections.delete",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the collection to delete.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}",
-                  "response": {
-                    "$ref": "GoogleProtobufEmpty"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "fetchCollectionAcl": {
-                  "description": "Gets the access control policy for the collection. Returns NOT_FOUND error if the collection does not exist. Returns an empty policy if the collection exists but does not have a policy set.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}:fetchCollectionAcl",
-                  "httpMethod": "POST",
-                  "id": "contentwarehouse.projects.locations.collections.fetchCollectionAcl",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the collection. projects/{project_number}/locations/{location}/collections/{document_id}.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}:fetchCollectionAcl",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1FetchCollectionAclRequest"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1FetchCollectionAclResponse"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "get": {
-                  "description": "Gets a collection.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}",
-                  "httpMethod": "GET",
-                  "id": "contentwarehouse.projects.locations.collections.get",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the collection to retrieve.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}",
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1Collection"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "search": {
-                  "description": "Searches for collections using provided SearchCollectionsRequest. This call only returns collections that the caller has permission to search against.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections:search",
-                  "httpMethod": "POST",
-                  "id": "contentwarehouse.projects.locations.collections.search",
-                  "parameterOrder": [
-                    "parent"
-                  ],
-                  "parameters": {
-                    "parent": {
-                      "description": "Required. The parent, which owns the collections. Format: projects/{project_number}/locations/{location}.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+parent}/collections:search",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsRequest"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsResponse"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "setCollectionAcl": {
-                  "description": "Sets the access control policy for the collection. Replaces any existing policy.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/collections/{collectionsId}:setCollectionAcl",
-                  "httpMethod": "POST",
-                  "id": "contentwarehouse.projects.locations.collections.setCollectionAcl",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the collection for which the policy is being set. projects/{project_number}/locations/{location}/collections/{document_id}.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/collections/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}:setCollectionAcl",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1SetCollectionAclRequest"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1SetCollectionAclResponse"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                }
-              }
-            },
             "documentSchemas": {
               "methods": {
                 "create": {
@@ -605,7 +411,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}.",
+                      "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for collection: projects/{project_number}/locations/{location}/collections/{collection_id}. Format for project: projects/{project_number}.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/documents/[^/]+$",
                       "required": true,
@@ -801,7 +607,7 @@
                   ],
                   "parameters": {
                     "resource": {
-                      "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}.",
+                      "description": "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for collection: projects/{project_number}/locations/{location}/collections/{collection_id}. Format for project: projects/{project_number}.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/documents/[^/]+$",
                       "required": true,
@@ -968,122 +774,6 @@
                       ]
                     }
                   }
-                }
-              }
-            },
-            "links": {
-              "methods": {
-                "create": {
-                  "description": "Creates a link.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links",
-                  "httpMethod": "POST",
-                  "id": "contentwarehouse.projects.locations.links.create",
-                  "parameterOrder": [
-                    "parent"
-                  ],
-                  "parameters": {
-                    "parent": {
-                      "description": "Required. The parent name.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+parent}/links",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1Link"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1Link"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "delete": {
-                  "description": "Deletes a link between a collection and a document.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
-                  "httpMethod": "DELETE",
-                  "id": "contentwarehouse.projects.locations.links.delete",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the link to delete.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/links/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}",
-                  "response": {
-                    "$ref": "GoogleProtobufEmpty"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "get": {
-                  "description": "Gets a link.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
-                  "httpMethod": "GET",
-                  "id": "contentwarehouse.projects.locations.links.get",
-                  "parameterOrder": [
-                    "name"
-                  ],
-                  "parameters": {
-                    "name": {
-                      "description": "Required. The name of the link to retrieve.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+/links/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}",
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1Link"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
-                },
-                "patch": {
-                  "description": "Updates the link using provided UpdateLinkRequest.",
-                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/links/{linksId}",
-                  "httpMethod": "PATCH",
-                  "id": "contentwarehouse.projects.locations.links.patch",
-                  "parameterOrder": [
-                    "name",
-                    "linksId"
-                  ],
-                  "parameters": {
-                    "linksId": {
-                      "location": "path",
-                      "required": true,
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link.",
-                      "location": "path",
-                      "pattern": "^projects/[^/]+/locations/[^/]+$",
-                      "required": true,
-                      "type": "string"
-                    }
-                  },
-                  "path": "v1/{+name}/links/{linksId}",
-                  "request": {
-                    "$ref": "GoogleCloudContentwarehouseV1Link"
-                  },
-                  "response": {
-                    "$ref": "GoogleCloudContentwarehouseV1Link"
-                  },
-                  "scopes": [
-                    "https://www.googleapis.com/auth/cloud-platform"
-                  ]
                 }
               }
             },
@@ -1413,7 +1103,7 @@
       }
     }
   },
-  "revision": "20230314",
+  "revision": "20230324",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -5689,7 +5379,8 @@
               "LOUPE",
               "PEOPLE_PLAYGROUND",
               "NEWS_360",
-              "DUO"
+              "DUO",
+              "MEET"
             ],
             "enumDescriptions": [
               "Should never be stored in practice",
@@ -5708,7 +5399,8 @@
               "Aka Camera by Google Photos",
               "See go/people-playground-design.",
               "Also mdb/social-magazines",
-              "Aka Taychon"
+              "Aka Taychon",
+              "Aka Google Meet"
             ],
             "type": "string"
           },
@@ -5775,7 +5467,8 @@
             "LOUPE",
             "PEOPLE_PLAYGROUND",
             "NEWS_360",
-            "DUO"
+            "DUO",
+            "MEET"
           ],
           "enumDescriptions": [
             "Should never be stored in practice",
@@ -5794,7 +5487,8 @@
             "Aka Camera by Google Photos",
             "See go/people-playground-design.",
             "Also mdb/social-magazines",
-            "Aka Taychon"
+            "Aka Taychon",
+            "Aka Google Meet"
           ],
           "type": "string"
         },
@@ -5856,7 +5550,8 @@
             "POMEROY",
             "LOUPE",
             "NEWS_360",
-            "DUO"
+            "DUO",
+            "MEET"
           ],
           "enumDescriptions": [
             "should never be stored in practice",
@@ -5875,7 +5570,8 @@
             "aka Trusted Contacts",
             "Aka Camera by Google Photos",
             "Also mdb/social-magazines",
-            "aka Taychon"
+            "aka Taychon",
+            "Aka Google Meet"
           ],
           "type": "string"
         },
@@ -8464,6 +8160,13 @@
         "profileOwnerStats": {
           "$ref": "AppsPeopleOzExternalMergedpeopleapiProfileOwnerStats",
           "description": "Stats/counters pertaining to followers and incoming edges."
+        },
+        "unjoinedEmailCertificates": {
+          "description": "Returned only when explicitly requested in the request mask as read_only_profile_info.unjoined_email_certificates. Equivalent to fetching the Emails & the Email Certificates with the acls ignored.",
+          "items": {
+            "$ref": "AppsPeopleOzExternalMergedpeopleapiEmail"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -11022,6 +10725,80 @@
           "description": "The amount of red in the color as a value in the interval [0, 1].",
           "format": "float",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantApiCoreTypesGovernedDeviceConfig": {
+      "description": "The identification information for third party devices that integrates with the assistant. All of these fields will be populated by the third party when the query is sent from the third party device. Next Id: 5",
+      "id": "AssistantApiCoreTypesGovernedDeviceConfig",
+      "properties": {
+        "agentId": {
+          "description": "Pantheon Project ID that uniquely identifies the consumer project ID. Required",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Unique identifier for the device. Example: DBCDW098234. Required",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantApiCoreTypesGovernedDeviceId": {
+      "description": "LINT.IfChange Specifies identifier of a device AKA surface. Note there may be multiple device ids for the same physical device E.g. Allo app and Assistant app on Nexus. Note: DeviceId usage is complicated. Please do not depend on it for surface specific logic. Please use google3/assistant/api/capabilities.proto instead. IMPORTANT: When checking for equality between two `DeviceId`s, you should always use an `isSameDevice{As}` function to check for equality, as deep equality between `DeviceId`'s is not guaranteed. * C++: http://google3/assistant/assistant_server/util/device_id_util.cc;l=23;rcl=421295740 * Dart: http://google3/assistant/context/util/lib/device_id.dart;l=26;rcl=442126145 * Java: http://google3/java/com/google/assistant/assistantserver/utils/DeviceIdHelper.java;l=9;rcl=390378522 See http://go/deviceid-equality for more details. Next ID: 14",
+      "id": "AssistantApiCoreTypesGovernedDeviceId",
+      "properties": {
+        "agsaClientInstanceId": {
+          "description": "The client_instance_id on devices with GSA. See 'client_instance_field' in go/androidids.",
+          "type": "string"
+        },
+        "alloDeviceId": {
+          "description": "Allo Id. Corresponds to the GBotRequest.Sender.sender. NOTE(dychen): This may change to standard android/ios physical device ids in order to enable shared data (e.g. installed app on physical device shared between Allo and Opa apps on Nexus).",
+          "type": "string"
+        },
+        "canonicalDeviceId": {
+          "description": "A unique device ID for Assistant devices as proposed by go/ocelot-team to solve the device id fragmentation problem. The value of this id is the HomeGraph id of the device. See go/ocelot-track-0-registry-design. New surfaces should use the canonical_device_id instead of using other ids, and the registration should utilize the DeviceDataLayer (go/ddl-v0). Please contact the assistant-state-management@ team for guidance. Note: We didn't reuse |home_graph_device_id| because in Assistant code base |home_graph_device_id| is common to associate it with 3P devices. See go/project-yellowstone for more context.",
+          "type": "string"
+        },
+        "castDeviceId": {
+          "description": "If set, indicates that the device is a cast device, and contains the UUID of the cast device. Corresponds to the device_id field of the CastDevice proto.",
+          "type": "string"
+        },
+        "clientInstanceId": {
+          "description": "DUSI (go/dusi) is used as the identifier here. This identifier is unique to the user and device. This will help identify which device or application the user's request originated from. This is not to be confused with the client_instance_id that android devices provide. This is currently used by surfaces that use the assistant-legacy-nexus and assistant-legacy-clockwork pipelines. DUSI is created and set in S3. This field is only filled for GAIA requests.",
+          "type": "string"
+        },
+        "connectedDockId": {
+          "description": "A device ID produced by a connected dock, which is registered in HomeGraph.",
+          "type": "string"
+        },
+        "deviceConfig": {
+          "$ref": "AssistantApiCoreTypesGovernedDeviceConfig",
+          "description": "The unique DeviceConfig to the specific third party device. It is also used by Android Auto Embedded first party device. See go/opa-ids."
+        },
+        "deviceType": {
+          "description": "The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.",
+          "type": "string"
+        },
+        "homeGraphDeviceId": {
+          "description": "The unique device ID for HomeGraph devices. This is the HomeGraph ID, created when the device is registered into HomeGraph. It is immutable for the same device unless it is completely deleted and recreated. See go/home-graph for details.",
+          "type": "string"
+        },
+        "libassistantDeviceId": {
+          "description": "The unique ID for libassistant based devices. See go/libassistant-id for details.",
+          "type": "string"
+        },
+        "multiHotwordArbitrationDeviceId": {
+          "description": "If set, indicates that the device is participating the multi-hotword arbitration and the id is an UUID to distinguish it from other devices. It should also be consistent between requests from a single device within a session (or short duration).",
+          "type": "string"
+        },
+        "opaIosDeviceId": {
+          "description": "The unique device ID for the Assistant App on iOS. See go/opa-ios-design for details.",
+          "type": "string"
+        },
+        "quartzDeviceId": {
+          "description": "The unique ID of a Quartz device. See go/quartz-design-doc for more details. Quartz ID is a hash of (android_id + gaia).",
+          "type": "string"
         }
       },
       "type": "object"
@@ -16490,6 +16267,204 @@
       },
       "type": "object"
     },
+    "AssistantContextAppProviderId": {
+      "description": "LINT.IfChanged Identifier for an application provider. NOTE: AppProviderId contains surface-specific info, such as the Android package name of the application. This was necessary for supporting current use cases that rely on surface-specific info in feature code. Eventually we want to deprecate AppProviderId and fetch surface-specific info in some other way (e.g. in a surface-translation layer). But until then, we may continue extending AppProviderId with other surface-specific info.",
+      "id": "AssistantContextAppProviderId",
+      "properties": {
+        "activityClassName": {
+          "description": "The activity class name. E.g. com.google.android.gm.ui.MailActivityGmail",
+          "type": "string"
+        },
+        "androidPackageName": {
+          "description": "Unique package name that identifies an Android app of the provider.",
+          "type": "string"
+        },
+        "versionCode": {
+          "description": "Version code of the application.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantContextMediaProviderId": {
+      "description": "IMPORTANT: This proto is being migrated to ProviderId. If you are adding new field, please add to ProviderId as well.",
+      "id": "AssistantContextMediaProviderId",
+      "properties": {
+        "androidPackageName": {
+          "description": "Unique package name that identifies a Android app of the provider.",
+          "type": "string"
+        },
+        "castAppId": {
+          "description": "Unique app id that identifies a Cast app of the provider.",
+          "type": "string"
+        },
+        "chromeOsPackageName": {
+          "description": "Unique package name that identifies a ChromeOS app of the provider.",
+          "type": "string"
+        },
+        "homeAppPackageName": {
+          "description": "Unique package name that identifies a Home app of the provider.",
+          "type": "string"
+        },
+        "iosBundleIdentifier": {
+          "description": "Bundle identifier that identifies an iOS app of the provider.",
+          "type": "string"
+        },
+        "kaiOsPackageName": {
+          "description": "Unique package name that identifies a KaiOS app of the provider.",
+          "type": "string"
+        },
+        "kgProviderKey": {
+          "description": "Each onboarded provider has a unique provider key. KG provider keys are string identifiers used to identify a provider in some Media backends since mids, names, etc can change.",
+          "type": "string"
+        },
+        "mid": {
+          "description": "The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.",
+          "type": "string"
+        },
+        "providerVariant": {
+          "$ref": "AssistantContextProviderVariant",
+          "description": "Provider variant corresponding to the current MediaProviderId."
+        },
+        "sipProviderId": {
+          "description": "Bundle id that identifies an Session Initiation Protocol (SIP) provider.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantContextProviderId": {
+      "description": "Identifier used to represent a single application (a.k.a. provider). This model represents the surface-agnostic counterpart for assistant.api.core_types.Provider. E.g. it should avoid directly using package names for Android, bundle identifiers for iOS, etc. We require the transformation between assistant.context.ProviderId and assistant.api.core_types.Provider to either be lossless, or \"lossy yet retrievable\" (e.g. if package name is not available in ProviderId, it can still be retrieved using the ProviderMappingsModule). NOTE: 1. As of May 2021, verticals are highly fragmented in terms of how they represent/identify a provider, and so we may need to accommodate some vertical-specific representations. However, these should be generalized as much as possible so that they can be used by other verticals if needed. 2. If we need to differentiate between whether a provider is a media provider, app actions provider, timer provider, etc. we should capture this information in the context proto that contains a ProviderId field, rather than in the ProviderId message itself. 3. Any common fields across different provider identifier representations (e.g. ecosystem type) should be part of assistant.context.ProviderId directly.",
+      "id": "AssistantContextProviderId",
+      "properties": {
+        "appProviderId": {
+          "$ref": "AssistantContextAppProviderId",
+          "description": "TODO(b/241170835) Deprecate this field."
+        },
+        "ecosystemType": {
+          "description": "Ecosystem type for this provider.",
+          "enum": [
+            "ECOSYSTEM_TYPE_UNSPECIFIED",
+            "NATIVE",
+            "CAST"
+          ],
+          "enumDescriptions": [
+            "",
+            "Represents native ecosystem. E.g. Android and iOS support the native ecosystem.",
+            "Represents cast ecosystem. E.g. Google Home and Dragonglass support the cast ecosystem."
+          ],
+          "type": "string"
+        },
+        "mediaProviderId": {
+          "$ref": "AssistantContextMediaProviderId",
+          "description": "DEPRECATED. Fields in MediaProviderId have been pulled out into separate fields in ProviderId and ProviderMetadata. TODO(b/243953766) Deprecate this field."
+        },
+        "mid": {
+          "description": "The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.",
+          "type": "string"
+        },
+        "naturalProviderId": {
+          "$ref": "AssistantContextProviderIdNaturalProviderId",
+          "description": "Natural Provider Id returned from Provider Corpus. Note that feature teams should almost always use provider_corpus_id which is the canonical representation for provider. Surface-specific identiers should only be used in final surface rendering."
+        },
+        "providerCorpusId": {
+          "description": "ID issued by the Provider Corpus to uniquely identify a provider entity e.g. an Android app, a Cast app or a Cloud provider. In practice, a single partner can have multiple providers entities. For more detail, see go/se-storage-provider-id. This is the preferred/ standardized ID to use for ProviderId that all use-cases should eventually migrate to.",
+          "format": "int64",
+          "type": "string"
+        },
+        "providerVariant": {
+          "$ref": "AssistantContextProviderVariant",
+          "description": "Provider variant corresponding to the current provider. It's used together with mid to uniquely identify provider."
+        }
+      },
+      "type": "object"
+    },
+    "AssistantContextProviderIdNaturalProviderId": {
+      "description": "Represents how to naturally identify a provider. A copy of google3/assistant/serviceengine/proto/serving/natural_provider_id.proto.",
+      "id": "AssistantContextProviderIdNaturalProviderId",
+      "properties": {
+        "providerType": {
+          "description": "ProviderType is an enum to represent the category of where this id is from.",
+          "enum": [
+            "UNKNOWN",
+            "CLOUD_PROJECT",
+            "APP_ACTIONS",
+            "WEBSITE",
+            "NARRATIVE_NEWS",
+            "IOS_BUNDLE",
+            "CAST_APP",
+            "ZEROTH_PARTY",
+            "ANDROID_SYSTEM_API"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "value": {
+          "description": "String of provider_id_value is the actual value of the id.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantContextProviderVariant": {
+      "description": "Note: As of May 2021, multiple providers use the same mids (e.g. YouTube Main, YouTube Go, and YouTube Music all have the same mids). However, quite often we end up using surface specific identifiers (e.g. Android package names, iOS bundle identifiers, etc.) to differentiate amongst them. This field allows us to move away from surface specific identifiers towards a surface-agnostic enum representing the same information.",
+      "id": "AssistantContextProviderVariant",
+      "properties": {
+        "emptyMidVariant": {
+          "enum": [
+            "UNSPECIFIED_EMPTY_MID_VARIANT",
+            "BACKDROP_CAST",
+            "CAST_RECEIVER"
+          ],
+          "enumDescriptions": [
+            "",
+            "This app is used when cast device is idle and ready to cast. Cast app id is: E8C28D3C.",
+            "Cast Receiver package name. It contains Chromecast built in for Android TV. Android package name is: com.google.android.apps.mediashell."
+          ],
+          "type": "string"
+        },
+        "spotifyVariant": {
+          "enum": [
+            "UNSPECIFIED_SPOTIFY_VARIANT",
+            "SPOTIFY_MAIN",
+            "SPOTIFY_LITE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "youtubeVariant": {
+          "enum": [
+            "UNSPECIFIED_YOUTUBE_VARIANT",
+            "YOUTUBE_MAIN",
+            "YOUTUBE_MUSIC",
+            "YOUTUBE_GO"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AssistantDeviceTargetingDeviceTargetingError": {
       "description": "The information associated with an error while selecting the target device. Next ID: 2",
       "id": "AssistantDeviceTargetingDeviceTargetingError",
@@ -17406,12 +17381,26 @@
       },
       "type": "object"
     },
+    "AssistantGroundingRankerDeviceGroundingProviderFeatures": {
+      "description": "Features to be extracted from Device GP for ranking in HGR. Next ID: 2",
+      "id": "AssistantGroundingRankerDeviceGroundingProviderFeatures",
+      "properties": {
+        "deviceId": {
+          "$ref": "AssistantApiCoreTypesGovernedDeviceId",
+          "description": "ID for the device. PRR specific feature."
+        }
+      },
+      "type": "object"
+    },
     "AssistantGroundingRankerGroundingProviderFeatures": {
-      "description": "Next ID: 4",
+      "description": "Next ID: 5",
       "id": "AssistantGroundingRankerGroundingProviderFeatures",
       "properties": {
         "contactGroundingProviderFeatures": {
           "$ref": "AssistantGroundingRankerContactGroundingProviderFeatures"
+        },
+        "deviceGroundingProviderFeatures": {
+          "$ref": "AssistantGroundingRankerDeviceGroundingProviderFeatures"
         },
         "mediaGroundingProviderFeatures": {
           "$ref": "AssistantGroundingRankerMediaGroundingProviderFeatures"
@@ -17480,9 +17469,29 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 6",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 9",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
+        "albumReleaseType": {
+          "description": "Release type for an album container.",
+          "enum": [
+            "UNKNOWN",
+            "ALBUM",
+            "SINGLE",
+            "EXTENDED_PLAY"
+          ],
+          "enumDescriptions": [
+            "",
+            "An album is a collection of audio recordings issued on a compact disc, vinyl, audio tape, or another medium.",
+            "A single is a type of release, typically a song recording of fewer tracks than an LP record or an album.",
+            "An extended play record, often referred to as an EP, is a musical recording that contains more tracks than a single, but is usually not qualified to be an album or LP."
+          ],
+          "type": "string"
+        },
+        "hasTypeSemanticEdge": {
+          "description": "True if the argument's type was explicitly mentioned in the query.",
+          "type": "boolean"
+        },
         "isCastVideo": {
           "description": "Whether the candidate is YouTube CAST_VIDEO candidate. CAST_VIDEO is a deeplink platform. This signal will be used to promote YouTube Music screenful candidates with CAST_VIDEO platform for free users because free users cannot get exact entities in screenless response and can get exact entities with ads in screenful response.",
           "type": "boolean"
@@ -17504,14 +17513,87 @@
           "description": "Scubed predicted SAI value (pSAI) for music populated by a regression model that incorporates a BERT model signal as well as other Scubed signals.",
           "format": "double",
           "type": "number"
+        },
+        "type": {
+          "description": "Type of the media item.",
+          "enum": [
+            "UNKNOWN",
+            "TRACK",
+            "ALBUM",
+            "ARTIST",
+            "PLAYLIST",
+            "EPISODE",
+            "MOVIE",
+            "PHOTO",
+            "TV_SHOW_EPISODE",
+            "MUSIC_GENRE",
+            "MUSIC_STATION",
+            "AUDIO_BOOK",
+            "CHAPTER",
+            "RADIO_STATION",
+            "MUSIC_MIX",
+            "SPORTS_EVENT",
+            "TV_CHANNEL",
+            "VIDEO",
+            "YOUTUBE_CHANNEL",
+            "YOUTUBE_VIDEO_PLAYLIST",
+            "TV_SHOW",
+            "NEWS",
+            "NARRATED_WEB",
+            "NEWS_CALL_TO_ACTION",
+            "AUDIO_STORY",
+            "PODCAST_SERIES",
+            "PODCAST_EPISODE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Representing a TV show which contains multiple TV seasons.",
+            "",
+            "",
+            "Repesents a Call To Action media item. See go/newsplayer-outro-gnews. Current use case is to ask users to continue their news journey in the Google News app / web app. Future cases could include asking users to adjust their news settings.",
+            "Representing a short audio story. go/tmas-design",
+            "Represent different kinds of podcast content",
+            ""
+          ],
+          "type": "string"
         }
       },
       "type": "object"
     },
     "AssistantGroundingRankerProviderGroundingProviderFeatures": {
-      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 2",
+      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 4",
       "id": "AssistantGroundingRankerProviderGroundingProviderFeatures",
       "properties": {
+        "providerClusterId": {
+          "description": "Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "providerId": {
+          "$ref": "AssistantContextProviderId",
+          "description": "ProviderId for the provider in the binding set. PRR specific feature."
+        },
         "pslScore": {
           "description": "Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.",
           "format": "float",
@@ -19324,7 +19406,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 44",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 47",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -19399,6 +19481,10 @@
           "description": "Whether the intent is fully grounded.",
           "type": "boolean"
         },
+        "isMediaControlIntent": {
+          "description": "Whether the intent is a media control intent.",
+          "type": "boolean"
+        },
         "isPlayGenericMusic": {
           "description": "Whether the intent is a PlayGenericMusic-type intent.",
           "type": "boolean"
@@ -19424,6 +19510,11 @@
           "description": "The maximum score assigned by the Horizontal Grounding Ranker (HGR) across all of the intent's binding sets.",
           "format": "double",
           "type": "number"
+        },
+        "nspRank": {
+          "description": "Rank of the intent as reported by NSP.",
+          "format": "int32",
+          "type": "integer"
         },
         "numAlternativeHypothesis": {
           "description": "Number of alternative hypotheses from speech recognition(S3).",
@@ -19479,6 +19570,32 @@
           "description": "Intent confidence predicted by the AssistantVerticalClassifier QRewrite servlet.",
           "format": "float",
           "type": "number"
+        },
+        "rankerName": {
+          "description": "Used in HGR to modify the ranker based on input experimental flag and intent name.",
+          "enum": [
+            "RANKER_NAME_UNSPECIFIED",
+            "RANKER_NAME_PREFULFILLMENT_RANKER",
+            "RANKER_NAME_GROUNDING_RANKER",
+            "RANKER_NAME_TEST_PFR_DUMMY",
+            "RANKER_NAME_DEFER_TO_VERTICAL_SCORES",
+            "RANKER_NAME_GROUNDING_RANKER_V2",
+            "RANKER_NAME_GROUNDING_RANKER_MEDIA_EXP",
+            "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP",
+            "RANKER_NAME_CONSOLIDATED_PFR_HGR"
+          ],
+          "enumDescriptions": [
+            "Default value, when there is no ranker specified.",
+            "Name for the ranker as used by PFR.",
+            "Name for HGR v1 model.",
+            "Name for a dummy PFR model used for testing purposes.",
+            "Used for deferring to confidence scores produced by upstream GPs instead of using HGR's scorer.",
+            "Name for HGR v2 model.",
+            "Name for experimental HGR model for Media, build on top of HGR v2.",
+            "Name for experimental HGR model for Comms.",
+            "Name for consolidated PFR and HGR ranker."
+          ],
+          "type": "string"
         },
         "searchDispatch": {
           "description": "The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.",
@@ -20910,7 +21027,7 @@
             "Bot for answering FAQ about COVID-19 (go/bg-covid-faq).",
             "",
             "go/meenaplex-dd",
-            "Was: ON_DEMAND_OPENING_HOURS.",
+            "Was: .",
             "UC ID for testing ideas around a partial call delegation bot.",
             "UC ID for hardware setup prototype",
             "Experimental use case for a form of Meena+Duplex.",
@@ -29262,7 +29379,8 @@
             "PROVIDER_AMPUP",
             "PROVIDER_LOOP",
             "PROVIDER_ZEST",
-            "PROVIDER_EZVOLT"
+            "PROVIDER_EZVOLT",
+            "PROVIDER_JOLT"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -29976,7 +30094,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270C."
+            "",
+            "Note: Next available value is 0x1270D."
           ],
           "type": "string"
         },
@@ -33304,7 +33423,7 @@
       "type": "object"
     },
     "GeostoreInferredGeometryProto": {
-      "description": "Inferred geometry defines the geometry of a feature through the geometry of other features. For instance, the geometry of a timezone can be specified as the union of all the countries it applies to. See: go/inferred-geometry and go/geo-schema:composite-geometry-editor for more details.",
+      "description": "Inferred geometry defines the geometry of a feature as the union or exclusion of the geometry of other features. For instance, the geometry of a timezone can be specified as the union of all the countries it applies to. In this scenario, the timezone will can be considered a \"composite feature\", while the countries are its \"composing features\". A composite feature must have a bidirectional reference between itself and all its composing features. A composite feature refers to its composing features via `geometry_composition`, while the composing features must refer back to the composing feature via `defines_geometry_for`. See: go/inferred-geometry and go/geo-schema:composite-geometry-editor for more details.",
       "id": "GeostoreInferredGeometryProto",
       "properties": {
         "definesGeometryFor": {
@@ -33316,7 +33435,7 @@
         },
         "geometryComposition": {
           "$ref": "GeostoreGeometryComposition",
-          "description": "Features whose geometry defines the geometry of this feature."
+          "description": "Features whose geometry defines the geometry of this feature (i.e. \"composing features\")."
         }
       },
       "type": "object"
@@ -34101,7 +34220,8 @@
             "PROVIDER_AMPUP",
             "PROVIDER_LOOP",
             "PROVIDER_ZEST",
-            "PROVIDER_EZVOLT"
+            "PROVIDER_EZVOLT",
+            "PROVIDER_JOLT"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -34815,7 +34935,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270C."
+            "",
+            "Note: Next available value is 0x1270D."
           ],
           "type": "string"
         }
@@ -35226,6 +35347,10 @@
         "segment": {
           "$ref": "GeostoreFeatureIdProto",
           "description": "This reference to the other segment is weak, since strong would blow up bounds of all segments."
+        },
+        "yieldToOtherConnections": {
+          "description": "The inverse of the primary connection bit that provides a hint that this connection is part of a merge and a vehicle following this connection should yield to vehicles following other incoming connections.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -36256,7 +36381,8 @@
             "PROVIDER_AMPUP",
             "PROVIDER_LOOP",
             "PROVIDER_ZEST",
-            "PROVIDER_EZVOLT"
+            "PROVIDER_EZVOLT",
+            "PROVIDER_JOLT"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -36970,7 +37096,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270C."
+            "",
+            "Note: Next available value is 0x1270D."
           ],
           "type": "string"
         },
@@ -38719,7 +38846,8 @@
             "PROVIDER_AMPUP",
             "PROVIDER_LOOP",
             "PROVIDER_ZEST",
-            "PROVIDER_EZVOLT"
+            "PROVIDER_EZVOLT",
+            "PROVIDER_JOLT"
           ],
           "enumDescriptions": [
             "ABSTRACT The root of all provider types. This should never be present on an actual feature, but can be useful when calling InCategory.",
@@ -39433,7 +39561,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270C."
+            "",
+            "Note: Next available value is 0x1270D."
           ],
           "type": "string"
         }
@@ -41176,7 +41305,7 @@
           "type": "array"
         },
         "sourceType": {
-          "description": "RESERVED",
+          "description": "The source of the speed limit.",
           "enum": [
             "SPEED_LIMIT_SOURCE_TYPE_UNKNOWN",
             "EXPLICIT",
@@ -41209,10 +41338,12 @@
       "id": "GeostoreSpeedProto",
       "properties": {
         "speed": {
+          "description": "All speed values are stored in kilometers per hour.",
           "format": "float",
           "type": "number"
         },
         "unit": {
+          "description": "Mapfacts only allows unit to be KILOMETERS_PER_HOUR.",
           "enum": [
             "UNIT_UNKNOWN",
             "MILES_PER_HOUR",
@@ -44511,79 +44642,6 @@
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1Collection": {
-      "description": "Defines the structure for content warehouse collection proto.",
-      "id": "GoogleCloudContentwarehouseV1Collection",
-      "properties": {
-        "allowLinkDocuments": {
-          "description": "Whether allow the collection to link to documents. Cannot be updated after the collection is created.",
-          "type": "boolean"
-        },
-        "attributes": {
-          "additionalProperties": {
-            "description": "Properties of the object.",
-            "type": "any"
-          },
-          "description": "Other collection attributes for the use cases.",
-          "type": "object"
-        },
-        "collectionType": {
-          "description": "Indicate this collection\u2019s type.",
-          "enum": [
-            "COLLECTION_TYPE_UNSPECIFIED",
-            "DATASET",
-            "RECORD_SET",
-            "WORK_QUEUE",
-            "WORKFLOW",
-            "LEGAL_HOLD"
-          ],
-          "enumDescriptions": [
-            "Not specified.",
-            "Dataset collection.",
-            "Record set collection.",
-            "Queue collection. E.g. a queue for human review.",
-            "The working collection for a workflow. One workflow has one collection.",
-            "Legal hold collection."
-          ],
-          "type": "string"
-        },
-        "createTime": {
-          "description": "Output only. The time when the document is created.",
-          "format": "google-datetime",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Required. Display name of the collection given by the user.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The resource name of the collection. Format: projects/{project_number}/locations/{location}/collections/{collection}. The name is ignored when creating a collection.",
-          "type": "string"
-        },
-        "parentCollectionId": {
-          "description": "The parent collection ID of the collection. One collection only can have one parent collection, and they should be in the same project and location.",
-          "type": "string"
-        },
-        "revokeDocEditPermission": {
-          "description": "If it is true, after adding the document to the collection, the users with document edit permission will only have view permission. Can not be updated after the collection is created.",
-          "type": "boolean"
-        },
-        "updateTime": {
-          "description": "Output only. The time when the document is last updated.",
-          "format": "google-datetime",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1CollectionQuery": {
-      "description": "The query string that matches against the collections.",
-      "id": "GoogleCloudContentwarehouseV1CollectionQuery",
-      "properties": {},
-      "type": "object"
-    },
     "GoogleCloudContentwarehouseV1CreateDocumentLinkRequest": {
       "description": "Request message for DocumentLinkService.CreateDocumentLink.",
       "id": "GoogleCloudContentwarehouseV1CreateDocumentLinkRequest",
@@ -45115,33 +45173,6 @@
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1ExportToCdwPipeline": {
-      "description": "The configuration of exporting documents from the Document Warehouse to CDW pipeline.",
-      "id": "GoogleCloudContentwarehouseV1ExportToCdwPipeline",
-      "properties": {
-        "docAiDataset": {
-          "description": "The CDW dataset resource name. Format: projects/{project}/locations/{location}/processors/{processor}/dataset",
-          "type": "string"
-        },
-        "documents": {
-          "description": "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "exportFolderPath": {
-          "description": "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///.",
-          "type": "string"
-        },
-        "trainingSplitRatio": {
-          "description": "Ratio of training dataset split. When importing into Document AI Workbench, documents will be automatically split into training and test split category with the specified ratio.",
-          "format": "float",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
     "GoogleCloudContentwarehouseV1FetchAclRequest": {
       "description": "Request message for DocumentService.FetchAcl",
       "id": "GoogleCloudContentwarehouseV1FetchAclRequest",
@@ -45164,32 +45195,6 @@
         "metadata": {
           "$ref": "GoogleCloudContentwarehouseV1ResponseMetadata",
           "description": "Additional information for the API invocation, such as the request tracking id."
-        },
-        "policy": {
-          "$ref": "GoogleIamV1Policy",
-          "description": "The IAM policy."
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1FetchCollectionAclRequest": {
-      "description": "Request message for CollectionService.FetchAcl",
-      "id": "GoogleCloudContentwarehouseV1FetchCollectionAclRequest",
-      "properties": {
-        "requestMetadata": {
-          "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
-          "description": "The meta information collected about the end user, used to enforce access control for the service."
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1FetchCollectionAclResponse": {
-      "description": "Response message for CollectionService.FetchAcl.",
-      "id": "GoogleCloudContentwarehouseV1FetchCollectionAclResponse",
-      "properties": {
-        "metadata": {
-          "$ref": "GoogleCloudContentwarehouseV1ResponseMetadata",
-          "description": "Additional information for the API invocation."
         },
         "policy": {
           "$ref": "GoogleIamV1Policy",
@@ -45240,51 +45245,6 @@
       "description": "Configurations for a float property.",
       "id": "GoogleCloudContentwarehouseV1FloatTypeOptions",
       "properties": {},
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1GcsIngestPipeline": {
-      "description": "The configuration of the Cloud Storage ingestion pipeline.",
-      "id": "GoogleCloudContentwarehouseV1GcsIngestPipeline",
-      "properties": {
-        "inputPath": {
-          "description": "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///.",
-          "type": "string"
-        },
-        "processorType": {
-          "description": "The Doc AI processor type name. Only used when the format of ingested files is Doc AI Document proto format. Reference: https://source.corp.google.com/piper///depot/google3/cloud/ai/documentai/core/c/proto/processor.proto;l=21",
-          "type": "string"
-        },
-        "schemaName": {
-          "description": "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline": {
-      "description": "The configuration of the document classify/split and entity/kvp extraction pipeline.",
-      "id": "GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline",
-      "properties": {
-        "extractProcessorInfos": {
-          "description": "The extract processors information. One matched extract processor will be used to process documents based on the classify processor result. If no classify processor is specificied, the first extract processor will be used.",
-          "items": {
-            "$ref": "GoogleCloudContentwarehouseV1ProcessorInfo"
-          },
-          "type": "array"
-        },
-        "inputPath": {
-          "description": "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///.",
-          "type": "string"
-        },
-        "processorResultsFolderPath": {
-          "description": "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///.",
-          "type": "string"
-        },
-        "splitClassifyProcessorInfo": {
-          "$ref": "GoogleCloudContentwarehouseV1ProcessorInfo",
-          "description": "The split and classify processor information. The split and classify result will be used to find a matched extract processor."
-        }
-      },
       "type": "object"
     },
     "GoogleCloudContentwarehouseV1GetDocumentRequest": {
@@ -45490,44 +45450,6 @@
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1Link": {
-      "description": "Defines the structure for content warehouse link proto.",
-      "id": "GoogleCloudContentwarehouseV1Link",
-      "properties": {
-        "attributes": {
-          "additionalProperties": {
-            "description": "Properties of the object.",
-            "type": "any"
-          },
-          "description": "Other link attributes.",
-          "type": "object"
-        },
-        "collectionId": {
-          "description": "The collection the link connects to. Should have the same project and location with the link.",
-          "type": "string"
-        },
-        "createTime": {
-          "description": "Output only. The create timestamp.",
-          "format": "google-datetime",
-          "readOnly": true,
-          "type": "string"
-        },
-        "creator": {
-          "description": "Output only. Indicates who created this link.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "documentId": {
-          "description": "The document the link connects to. Should have the same project and location with the link.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "GoogleCloudContentwarehouseV1ListDocumentSchemasResponse": {
       "description": "Response message for DocumentSchemaService.ListDocumentSchemas.",
       "id": "GoogleCloudContentwarehouseV1ListDocumentSchemasResponse",
@@ -45695,51 +45617,6 @@
         "replaceRepeatedFields": {
           "description": "When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.",
           "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline": {
-      "description": "The configuration of processing documents in Document Warehouse with DocAi processors pipeline.",
-      "id": "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline",
-      "properties": {
-        "documents": {
-          "description": "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "exportFolderPath": {
-          "description": "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///.",
-          "type": "string"
-        },
-        "processorInfo": {
-          "$ref": "GoogleCloudContentwarehouseV1ProcessorInfo",
-          "description": "The CDW processor information."
-        },
-        "processorResultsFolderPath": {
-          "description": "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1ProcessorInfo": {
-      "description": "The DocAI processor information.",
-      "id": "GoogleCloudContentwarehouseV1ProcessorInfo",
-      "properties": {
-        "documentType": {
-          "description": "The processor will process the documents with this document type.",
-          "type": "string"
-        },
-        "processorName": {
-          "description": "The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`",
-          "type": "string"
-        },
-        "schemaName": {
-          "description": "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}.",
-          "type": "string"
         }
       },
       "type": "object"
@@ -46162,78 +46039,38 @@
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1RunPipelineRequest": {
-      "description": "Request message for DocumentService.RunPipeline.",
-      "id": "GoogleCloudContentwarehouseV1RunPipelineRequest",
+    "GoogleCloudContentwarehouseV1RunPipelineMetadata": {
+      "description": "Metadata message of RunPipeline method.",
+      "id": "GoogleCloudContentwarehouseV1RunPipelineMetadata",
       "properties": {
-        "exportCdwPipeline": {
-          "$ref": "GoogleCloudContentwarehouseV1ExportToCdwPipeline",
-          "description": "Export docuemnts from Document Warehouse to CDW for training purpose."
-        },
-        "gcsIngestPipeline": {
-          "$ref": "GoogleCloudContentwarehouseV1GcsIngestPipeline",
-          "description": "Cloud Storage ingestion pipeline."
-        },
-        "gcsIngestWithDocAiProcessorsPipeline": {
-          "$ref": "GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline",
-          "description": "Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse."
-        },
-        "processWithDocAiPipeline": {
-          "$ref": "GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline",
-          "description": "Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse."
-        },
-        "requestMetadata": {
-          "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
-          "description": "The meta information collected about the end user, used to enforce access control for the service."
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1SearchCollectionsRequest": {
-      "description": "Request message for CollectionService.SearchCollections.",
-      "id": "GoogleCloudContentwarehouseV1SearchCollectionsRequest",
-      "properties": {
-        "pageSize": {
-          "description": "A limit on the number of collections returned in the search results. Increasing this value above the default value of 10 can increase search response time. The value can be between 1 and 100.",
+        "failedFileCount": {
+          "description": "Number of files that have failed at some point in the pipeline.",
           "format": "int32",
           "type": "integer"
         },
-        "pageToken": {
-          "description": "The token specifying the current offset within search results. See SearchCollectionsResponse.next_page_token for an explanation of how to obtain the next set of query results.",
-          "type": "string"
+        "gcsIngestPipelineMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata",
+          "description": "The pipeline metadata for GcsIngest pipeline."
         },
-        "query": {
-          "$ref": "GoogleCloudContentwarehouseV1CollectionQuery",
-          "description": "Query used to search against collections."
+        "totalFileCount": {
+          "description": "Number of files that were processed by the pipeline.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "userInfo": {
+          "$ref": "GoogleCloudContentwarehouseV1UserInfo",
+          "description": "User unique identification and groups information."
         }
       },
       "type": "object"
     },
-    "GoogleCloudContentwarehouseV1SearchCollectionsResponse": {
-      "description": "Response message for CollectionService.SearchCollections.",
-      "id": "GoogleCloudContentwarehouseV1SearchCollectionsResponse",
+    "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata": {
+      "description": "The metadata message for GcsIngest pipeline.",
+      "id": "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata",
       "properties": {
-        "matchingCollections": {
-          "description": "The collection entities that match the specified SearchCollectionsRequest.",
-          "items": {
-            "$ref": "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection"
-          },
-          "type": "array"
-        },
-        "nextPageToken": {
-          "description": "The token that specifies the starting position of the next page of results. This field is empty if there are no more results.",
+        "inputPath": {
+          "description": "The input Cloud Storage folder in this pipeline. Format: `gs:///`.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection": {
-      "description": "Collection entry with metadata inside SearchCollectionsResponse",
-      "id": "GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection",
-      "properties": {
-        "collection": {
-          "$ref": "GoogleCloudContentwarehouseV1Collection",
-          "description": "Collection that matches the specified SearchCollectionsRequest."
         }
       },
       "type": "object"
@@ -46384,36 +46221,6 @@
         "policy": {
           "$ref": "GoogleIamV1Policy",
           "description": "The policy will be attached to a resource (e.g. projecct, document)."
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1SetCollectionAclRequest": {
-      "description": "Request message for CollectionService.SetAcl.",
-      "id": "GoogleCloudContentwarehouseV1SetCollectionAclRequest",
-      "properties": {
-        "policy": {
-          "$ref": "GoogleIamV1Policy",
-          "description": "Required. REQUIRED: The complete policy to be applied to the collection. The size of the policy is limited to a few 10s of KB."
-        },
-        "requestMetadata": {
-          "$ref": "GoogleCloudContentwarehouseV1RequestMetadata",
-          "description": "The meta information collected about the end user, used to enforce access control for the service."
-        }
-      },
-      "type": "object"
-    },
-    "GoogleCloudContentwarehouseV1SetCollectionAclResponse": {
-      "description": "Response message for CollectionService.SetAcl.",
-      "id": "GoogleCloudContentwarehouseV1SetCollectionAclResponse",
-      "properties": {
-        "metadata": {
-          "$ref": "GoogleCloudContentwarehouseV1ResponseMetadata",
-          "description": "Additional information for the API invocation, such as the request tracking id."
-        },
-        "policy": {
-          "$ref": "GoogleIamV1Policy",
-          "description": "The policy created for the Collection."
         }
       },
       "type": "object"
@@ -48041,10 +47848,6 @@
           "format": "google-datetime",
           "type": "string"
         },
-        "committedUntilIsMixed": {
-          "description": "TODO(b/265939748) To be removed, always false.",
-          "type": "boolean"
-        },
         "eventSummary": {
           "description": "The summary of the corresponding event in Calendar.",
           "type": "string"
@@ -48090,10 +47893,6 @@
           "format": "google-datetime",
           "type": "string"
         },
-        "committedUntilIsMixed": {
-          "description": "TODO(b/265939748) To be removed, always false.",
-          "type": "boolean"
-        },
         "nextAvailable": {
           "description": "The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.",
           "format": "google-datetime",
@@ -48121,10 +47920,6 @@
           "description": "The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).",
           "format": "google-datetime",
           "type": "string"
-        },
-        "committedUntilIsMixed": {
-          "description": "TODO(b/265939748) To be removed, always false.",
-          "type": "boolean"
         },
         "eventSummary": {
           "description": "The summary of the corresponding event in Calendar.",
@@ -48201,10 +47996,6 @@
           "description": "The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh). Note that if this OOO block is large (>=Xh), committed_until is not set.",
           "format": "google-datetime",
           "type": "string"
-        },
-        "committedUntilIsMixed": {
-          "description": "TODO(b/265939748) To be removed, always false.",
-          "type": "boolean"
         },
         "eventSummary": {
           "description": "The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it \"as is\" - no i18n.",
@@ -60999,7 +60790,8 @@
             "ATTENTIONAL_ENTITY",
             "AUDIO_MESSAGE_METADATA_ID",
             "BROADCAST",
-            "MESSAGE_CONTENT"
+            "MESSAGE_CONTENT",
+            "INLINE_INVENTORY"
           ],
           "enumDescriptions": [
             "",
@@ -61030,7 +60822,8 @@
             "",
             "A secondary speech id for Audio Message Metadata go/audio-message-gp.",
             "Broadcast feature identifier go/routines-broadcast-device-gp",
-            "Message content identifier for send/reply message go/message-content-grounding"
+            "Message content identifier for send/reply message go/message-content-grounding",
+            "go/aigp"
           ],
           "type": "string"
         }
@@ -82669,7 +82462,7 @@
       "type": "object"
     },
     "QualityActionsReminder": {
-      "description": "Next id: 32",
+      "description": "Next id: 33",
       "id": "QualityActionsReminder",
       "properties": {
         "archived": {
@@ -83096,6 +82889,7 @@
             "PROACTIVE_API_FASTTRACK",
             "PERSONAL_RESULTS_OPTIN",
             "HEADPHONE_PERSONAL_RESULTS_OPTIN",
+            "DISCOVERY_SPARKS",
             "UNIT_TESTING"
           ],
           "enumDescriptions": [
@@ -83507,6 +83301,7 @@
             "Notification configured through FastTrack UI: http://fasttrack.",
             "Notification for Personal Response (PR) opt-in: go/migrate-pr-notifs-tng-ma-prd",
             "Notification for Headphone Personal Response (HPR) opt-in: go/migrate-pr-notifs-tng-ma-prd",
+            "go/habits-sparks-design",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -83563,6 +83358,10 @@
         },
         "dynamiteGroupAssignmentSource": {
           "$ref": "QualityActionsReminderDynamiteGroup"
+        },
+        "extraNotificationDeviceId": {
+          "description": "OPTIONAL. Device ID for home notification which should have loud notification. See go/device-id-storage-in-tasks",
+          "type": "string"
         },
         "id": {
           "description": "DEPRECATED. Use `client_id` or `server_id` instead.",
@@ -85917,19 +85716,19 @@
           "$ref": "QualityNsrNsrChunksProto"
         },
         "siteChunkSource": {
-          "description": "These are annotated in the Goldmine NSR annotator.",
+          "description": "Annotated in the SitechunksAnnotator and copied over in NsrAnnotator.",
           "enum": [
-            "UNKNOWN",
-            "HOST_LEVEL_V3",
-            "MARKUP_BREADCRUMBS",
-            "MARKUP_AUTHOR",
-            "COOKBOOK",
-            "CRAWLED_SELLER_DATA",
-            "FALLBACK"
+            "SITE_CHUNK_SOURCE_UNKNOWN",
+            "SITE_CHUNK_SOURCE_WEBUTIL",
+            "SITE_CHUNK_SOURCE_BREADCRUMBS",
+            "SITE_CHUNK_SOURCE_AUTHOR",
+            "SITE_CHUNK_SOURCE_COOKBOOK",
+            "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA",
+            "SITE_CHUNK_SOURCE_FALLBACK"
           ],
           "enumDescriptions": [
             "",
-            "",
+            "As of June 2021 this corresponds to HOST_LEVEL_V3 granularity.",
             "",
             "",
             "",
@@ -86385,17 +86184,11 @@
       "type": "object"
     },
     "QualityOrbitAsteroidBeltDocumentIntentScores": {
+      "description": "Next ID: 7",
       "id": "QualityOrbitAsteroidBeltDocumentIntentScores",
       "properties": {
-        "imageIntentScores": {
-          "additionalProperties": {
-            "$ref": "QualityOrbitAsteroidBeltImageIntentScores"
-          },
-          "description": "Map of imageid key to ImageIntentScores, for images on cdoc.doc_images",
-          "type": "object"
-        },
-        "intents": {
-          "description": "The 'intents' and 'scores' fields are stored as parallel lists for compactness. The 'scores' field should not be accessed directly, but instead through the functions in document_intent_scores_utils.",
+        "belowThresholdIntents": {
+          "description": "Same as above, but for intents below triggering threshold. It can be assumed that any intent in this list has trigger=false. Most intents do not have below-threshold annotations.",
           "items": {
             "enum": [
               "NONE",
@@ -86465,13 +86258,13 @@
               "CRIME",
               "SHOPPING_TOPN",
               "AUTHENTICITY",
-              "RESERVED_FOR_NEW_ENUM_128",
-              "RESERVED_FOR_NEW_ENUM_129",
-              "RESERVED_FOR_NEW_ENUM_130",
-              "RESERVED_FOR_NEW_ENUM_131",
-              "RESERVED_FOR_NEW_ENUM_132",
-              "RESERVED_FOR_NEW_ENUM_133",
-              "RESERVED_FOR_NEW_ENUM_134",
+              "TANGRAM_INFORMATION_OTHER",
+              "TANGRAM_NEWS_PUBLISHER",
+              "TANGRAM_ENCYCLOPEDIA",
+              "TANGRAM_MERCHANT",
+              "TANGRAM_GOVERNMENT",
+              "TANGRAM_UGC",
+              "TANGRAM_RESEARCH_INSTITUTE",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -86485,6 +86278,13 @@
               "RESERVED_FOR_NEW_ENUM_145",
               "RESERVED_FOR_NEW_ENUM_146",
               "RESERVED_FOR_NEW_ENUM_147",
+              "RESERVED_FOR_NEW_ENUM_148",
+              "RESERVED_FOR_NEW_ENUM_149",
+              "RESERVED_FOR_NEW_ENUM_150",
+              "RESERVED_FOR_NEW_ENUM_151",
+              "RESERVED_FOR_NEW_ENUM_152",
+              "RESERVED_FOR_NEW_ENUM_153",
+              "RESERVED_FOR_NEW_ENUM_154",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
@@ -86615,6 +86415,348 @@
               "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
               "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
               "AuthenticityScore for document. see go/astar-dd.",
+              "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "========== Enums for deleted intents ==========",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "belowThresholdScores": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "imageIntentScores": {
+          "additionalProperties": {
+            "$ref": "QualityOrbitAsteroidBeltImageIntentScores"
+          },
+          "description": "Map of imageid key to ImageIntentScores, for images on cdoc.doc_images",
+          "type": "object"
+        },
+        "intents": {
+          "description": "The 'intents' and 'scores' fields are stored as parallel lists for compactness. The 'scores' field should not be accessed directly, but instead through the functions in document_intent_scores_utils.",
+          "items": {
+            "enum": [
+              "NONE",
+              "TUTORIAL",
+              "MAP",
+              "TRANSLATE",
+              "LISTEN",
+              "PROMOTION",
+              "GIF",
+              "REGISTER",
+              "EVENT_LISTING",
+              "RANKING",
+              "DISCOGRAPHY",
+              "DIRECTIONS",
+              "NEWS",
+              "SOCIAL_MEDIA",
+              "FAN_FICTION",
+              "RECIPES",
+              "HOURS_OF_OPERATION",
+              "DEFINITION",
+              "REAL_ESTATE_LISTING",
+              "PREVIEW",
+              "PURCHASE",
+              "MENU",
+              "UNBOXING",
+              "NUTRITION_FACTS",
+              "TRAVEL_GUIDE",
+              "SPECS",
+              "CALCULATOR",
+              "DOWNLOAD",
+              "SCORES",
+              "QUOTES",
+              "SHOWTIMES",
+              "CATALOG",
+              "CALENDAR",
+              "LOCATION_FINDER",
+              "RENT",
+              "STUDY_GUIDE",
+              "REVIEW",
+              "SHEET_MUSIC",
+              "LOGIN",
+              "TRIVIA",
+              "CONTACT_PAGE",
+              "RESERVATION",
+              "CUSTOMER_SUPPORT",
+              "INTERVIEW",
+              "COUPON",
+              "FLIGHT_TRACKER",
+              "COMPANY_FINANCIALS",
+              "FORUM",
+              "THESAURUS",
+              "MANUAL",
+              "JOB_POSTING",
+              "LYRICS",
+              "SYMPTOMS",
+              "REPAIR",
+              "BUYING_GUIDE",
+              "PRODUCT_EDITORIAL_REVIEW",
+              "SHOPPING_MERCHANT_PRODUCT",
+              "SHOPPING_REVIEW_OR_BUYING_GUIDE",
+              "PRODUCT_REVIEW",
+              "PRODUCT_COMPARISON",
+              "PRODUCT_BUYING_GUIDE",
+              "SHOPAHOLIC",
+              "GOOGLE_SCREENSHOT",
+              "MUGSHOT",
+              "CRIME",
+              "SHOPPING_TOPN",
+              "AUTHENTICITY",
+              "TANGRAM_INFORMATION_OTHER",
+              "TANGRAM_NEWS_PUBLISHER",
+              "TANGRAM_ENCYCLOPEDIA",
+              "TANGRAM_MERCHANT",
+              "TANGRAM_GOVERNMENT",
+              "TANGRAM_UGC",
+              "TANGRAM_RESEARCH_INSTITUTE",
+              "RESERVED_FOR_NEW_ENUM_135",
+              "RESERVED_FOR_NEW_ENUM_136",
+              "RESERVED_FOR_NEW_ENUM_137",
+              "RESERVED_FOR_NEW_ENUM_138",
+              "RESERVED_FOR_NEW_ENUM_139",
+              "RESERVED_FOR_NEW_ENUM_140",
+              "RESERVED_FOR_NEW_ENUM_141",
+              "RESERVED_FOR_NEW_ENUM_142",
+              "RESERVED_FOR_NEW_ENUM_143",
+              "RESERVED_FOR_NEW_ENUM_144",
+              "RESERVED_FOR_NEW_ENUM_145",
+              "RESERVED_FOR_NEW_ENUM_146",
+              "RESERVED_FOR_NEW_ENUM_147",
+              "RESERVED_FOR_NEW_ENUM_148",
+              "RESERVED_FOR_NEW_ENUM_149",
+              "RESERVED_FOR_NEW_ENUM_150",
+              "RESERVED_FOR_NEW_ENUM_151",
+              "RESERVED_FOR_NEW_ENUM_152",
+              "RESERVED_FOR_NEW_ENUM_153",
+              "RESERVED_FOR_NEW_ENUM_154",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_103",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_104",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_105",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_106",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_107",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_108",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_109",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_110",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_111",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_112",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_113",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_114",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_115",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_116",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_117",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_118",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_119",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_120",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_121",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_122",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_123",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_124",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_125",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_126",
+              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_127",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_2",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_5",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_8",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_10",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_17",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_18",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_21",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_23",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_24",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_39",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_40",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_46",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_50",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_52",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_54",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_56",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_57",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_59",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_60",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_63",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_67",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_71",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_75",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_78",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_81"
+            ],
+            "enumDescriptions": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "This is specifically for the buying guides carousel (go/oshop-buying-guides). Consider using PRODUCT_BUYING_GUIDE instead.",
+              "",
+              "",
+              "This is basically an \"or\" of PRODUCT_REVIEW, PRODUCT_COMPARISON, and PRODUCT_BUYING_GUIDE. Use those three intents instead.",
+              "",
+              "",
+              "",
+              "This is the unmodified http://go/shopaholic score \"forwarded\" through Orbit. Note that scores less than 0.4 are not written to cdoc and will show up as 0.0.",
+              "This is an image intent",
+              "Image intent representing whether there is a mugshot in the image (or if the image is itself a mugshot).",
+              "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
+              "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
+              "AuthenticityScore for document. see go/astar-dd.",
+              "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -86710,7 +86852,7 @@
           "type": "array"
         },
         "version": {
-          "description": "Version 0: Presence of an intent label in the 'intents' field represents our best-effort classification. The 'scores' field is not meaningful. Version 1: Values in the 'scores' field represent the estimated precision of the classifier for a threshold at that score.",
+          "description": "DEPRECATED. DO NOT USE IT FOR ANY REASON! contact orbit@ if necessary.",
           "format": "int32",
           "type": "integer"
         }
@@ -86791,13 +86933,13 @@
               "CRIME",
               "SHOPPING_TOPN",
               "AUTHENTICITY",
-              "RESERVED_FOR_NEW_ENUM_128",
-              "RESERVED_FOR_NEW_ENUM_129",
-              "RESERVED_FOR_NEW_ENUM_130",
-              "RESERVED_FOR_NEW_ENUM_131",
-              "RESERVED_FOR_NEW_ENUM_132",
-              "RESERVED_FOR_NEW_ENUM_133",
-              "RESERVED_FOR_NEW_ENUM_134",
+              "TANGRAM_INFORMATION_OTHER",
+              "TANGRAM_NEWS_PUBLISHER",
+              "TANGRAM_ENCYCLOPEDIA",
+              "TANGRAM_MERCHANT",
+              "TANGRAM_GOVERNMENT",
+              "TANGRAM_UGC",
+              "TANGRAM_RESEARCH_INSTITUTE",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -86811,6 +86953,13 @@
               "RESERVED_FOR_NEW_ENUM_145",
               "RESERVED_FOR_NEW_ENUM_146",
               "RESERVED_FOR_NEW_ENUM_147",
+              "RESERVED_FOR_NEW_ENUM_148",
+              "RESERVED_FOR_NEW_ENUM_149",
+              "RESERVED_FOR_NEW_ENUM_150",
+              "RESERVED_FOR_NEW_ENUM_151",
+              "RESERVED_FOR_NEW_ENUM_152",
+              "RESERVED_FOR_NEW_ENUM_153",
+              "RESERVED_FOR_NEW_ENUM_154",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
@@ -86941,6 +87090,13 @@
               "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
               "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
               "AuthenticityScore for document. see go/astar-dd.",
+              "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -89616,6 +89772,13 @@
           },
           "type": "array"
         },
+        "gtinValue": {
+          "description": "Global trade item number (GTIN).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "imageId": {
           "description": "image_id is sorted and distinct for efficient search during serving.",
           "items": {
@@ -89815,6 +89978,14 @@
         "pblock": {
           "$ref": "QualityShoppingShoppingAttachmentPBlock",
           "description": "Client needs to make decision on which field to use when both non_displayable_title and pblock.final_title are present."
+        },
+        "productBrowseonomyIds": {
+          "description": "Product level Browseonomy ids from shopping_annotation.product.browseonomy.",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
         },
         "productClusterMid": {
           "format": "uint64",
@@ -90244,10 +90415,10 @@
           ],
           "enumDescriptions": [
             "",
-            "",
-            "",
-            "",
-            ""
+            "Query term matched terms.",
+            "Radish bolded terms.",
+            "Snippet brain bolded terms.",
+            "User quoted query terms."
           ],
           "type": "string"
         }
@@ -98699,6 +98870,49 @@
       },
       "type": "object"
     },
+    "ResearchScamNumericRestrictNamespace": {
+      "id": "ResearchScamNumericRestrictNamespace",
+      "properties": {
+        "namespace": {
+          "description": "The name of this namespace.",
+          "type": "string"
+        },
+        "op": {
+          "description": "This MUST be specified for queries and must NOT be specified for database points.",
+          "enum": [
+            "OP_UNSPECIFIED",
+            "LESS",
+            "LESS_EQUAL",
+            "EQUAL",
+            "GREATER_EQUAL",
+            "GREATER"
+          ],
+          "enumDescriptions": [
+            "",
+            "Database points are eligible iff their value is < the query's.",
+            "Database points are eligible iff their value is <= the query's.",
+            "Database points are eligible iff their value is == the query's.",
+            "Database points are eligible iff their value is >= the query's.",
+            "Database points are eligible iff their value is > the query's."
+          ],
+          "type": "string"
+        },
+        "valueDouble": {
+          "format": "double",
+          "type": "number"
+        },
+        "valueFloat": {
+          "format": "float",
+          "type": "number"
+        },
+        "valueInt": {
+          "description": "NOTE: Integers are represented in 64 bits here, but if all integer values for a given namespace fit in a narrower integer type (e.g. int8), we use the narrower integer type internally, increasing performance.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ResearchScamOnlineSearchLatencyStats": {
       "description": "Structure to hold the response time for a node. Last used: 3",
       "id": "ResearchScamOnlineSearchLatencyStats",
@@ -98845,6 +99059,13 @@
           "description": "//////////////////////////////////////////////////////////////////////////// NAMESPACES - a repeating field, where each entry specifies the set of tokens, within a single namespace, that apply to the query, or database point, on which this V3Restrict proto is defined. Note that: * Your overall query is an AND across namespaces. * Explicitly specifying a namespace with 0 tokens is identical to omitting that namespace. ie, \"{ns:}\" == \"\". * It is an error to specify the same namespace more than once per instance of the V3Restrict proto.",
           "items": {
             "$ref": "ResearchScamTokenNamespace"
+          },
+          "type": "array"
+        },
+        "numericNamespaces": {
+          "description": "This field allows restricts to be based on numeric comparisons rather than categorical tokens. HINT: To allow a range of values in a namespace (e.g. 42 <= x < 128), specify the same namespace twice in the query, e.g.: {namespace: \"x\" op: LESS value_int: 128 } {namespace: \"x\" op: GREATER_EQUAL value_int: 42 }",
+          "items": {
+            "$ref": "ResearchScamNumericRestrictNamespace"
           },
           "type": "array"
         }
@@ -100546,13 +100767,15 @@
             "UNKNOWN_ABSTRACT_DISPLAY",
             "MAIN_ABSTRACT_DISPLAY",
             "GRAPHICAL_ABSTRACT_DISPLAY",
-            "SUMMARY_ABSTRACT_DISPLAY"
+            "SUMMARY_ABSTRACT_DISPLAY",
+            "HIGHLIGHTS_ABSTRACT_DISPLAY"
           ],
           "enumDescriptions": [
             "",
-            "",
-            "",
-            ""
+            "Main author written abstract.",
+            "Abstract in form of image or graphic explanation.",
+            "Summary for the paper. Usually not the main author written abstract.",
+            "Highlights for a paper, often bulletized."
           ],
           "type": "string"
         },
@@ -101108,13 +101331,15 @@
             "UNKNOWN_ABSTRACT_DISPLAY",
             "MAIN_ABSTRACT_DISPLAY",
             "GRAPHICAL_ABSTRACT_DISPLAY",
-            "SUMMARY_ABSTRACT_DISPLAY"
+            "SUMMARY_ABSTRACT_DISPLAY",
+            "HIGHLIGHTS_ABSTRACT_DISPLAY"
           ],
           "enumDescriptions": [
             "",
-            "",
-            "",
-            ""
+            "Main author written abstract.",
+            "Abstract in form of image or graphic explanation.",
+            "Summary for the paper. Usually not the main author written abstract.",
+            "Highlights for a paper, often bulletized."
           ],
           "type": "string"
         },
@@ -101495,6 +101720,18 @@
       "description": "Holds information about the source of the funding entry.",
       "id": "ScienceCitationFundingExtractionInfo",
       "properties": {
+        "ClearedFunding": {
+          "description": "Set when we clear all extracted funding from this citation in the parser.",
+          "enum": [
+            "UNSPECIFIED_REASON",
+            "SHORT_ARTICLE"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        },
         "DebugFundingTextBlock": {
           "description": "Text block context from which the funding entry was extracted. Optionally filled and intended to be used for offline analysis.",
           "type": "string"
@@ -102891,9 +103128,11 @@
             "INFERRED_IMAGE_TYPE_PRODUCT_BLOCKS",
             "INFERRED_IMAGE_TYPE_SCHEMA_DOT_ORG",
             "INFERRED_IMAGE_TYPE_CRAWZALL",
-            "INFERRED_IMAGE_TYPE_OPEN_GRAPH"
+            "INFERRED_IMAGE_TYPE_OPEN_GRAPH",
+            "INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -102946,9 +103185,11 @@
             "INFERRED_IMAGE_TYPE_PRODUCT_BLOCKS",
             "INFERRED_IMAGE_TYPE_SCHEMA_DOT_ORG",
             "INFERRED_IMAGE_TYPE_CRAWZALL",
-            "INFERRED_IMAGE_TYPE_OPEN_GRAPH"
+            "INFERRED_IMAGE_TYPE_OPEN_GRAPH",
+            "INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -106445,8 +106686,8 @@
             ],
             "enumDescriptions": [
               "",
-              "",
-              "not used in KE infra",
+              "WARNING for data providers: the REQUIRES_PCOUNSEL_REVIEW mechanism is outdated and has many drawbacks. Please prefer other data governance solutions (go/ke-data-governance for details) before deciding to use this field for new data onboarding. Feel free to reach out to g/ke-data-governance for any questions.",
+              "Not used in KE infra.",
               ""
             ],
             "type": "string"
@@ -109627,6 +109868,8 @@
               "PGSS_SHORT_DESCRIPTION_DIFF_EVENT_LEVEL",
               "SECOND_PASS_QUALITY_REWEIGTHING_EVENT_LEVEL",
               "SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL",
+              "PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EVENT_LEVEL",
+              "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -110133,6 +110376,8 @@
               "KIDS_LAUNCHER_USER_FEATURES_MISSING",
               "SECOND_PASS_QUALITY_REWEIGTHING_SESSION_LEVEL",
               "SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL",
+              "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_SESSION_LEVEL",
+              "ELIGIBLE_FOR_FORM_FACTOR_FILTER_ON_TOP_CHARTS",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -110251,6 +110496,7 @@
               "GE_USER_VALUE_SEGMENT_MEDIUM",
               "GE_USER_VALUE_SEGMENT_HIGH",
               "GE_USER_VALUE_SEGMENT_NEVER",
+              "GE_POINTS_BOOSTER_MODEL_LAUNCH",
               "GE_IS_SCHEDULED_UNKNOWN_SURFACE",
               "GE_IS_SCHEDULED_LEON",
               "GE_IS_SCHEDULED_NOTIFICATION",
@@ -110292,6 +110538,7 @@
               "FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL_V2",
               "FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL_V2",
               "FOP_STEERING_PROMOTION_USER_LEVEL",
+              "FOP_STEERING_PROMOTION_EXCLUDE_CUJ4_USER_LEVEL",
               "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL",
@@ -110363,6 +110610,10 @@
               "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL_V2",
               "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL_V2",
               "HAS_REINSTALL_APP_PASSING_FILTERING_USER_LEVEL",
+              "HAS_RECOMMENDED_APP_WITH_OOP_REINSTALL_ELIGIBILITY_USER_LEVEL",
+              "NOTIFICATION_PREDICTED_REV_GAIN_FILTERING_USER_LEVEL",
+              "NOTIFICATION_PUBLICITY_GAIN_DISABLED_USER_LEVEL",
+              "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -110562,6 +110813,8 @@
               "Event level test code when Short Description fetched in PGSS is different from that fetched in Superroot.",
               "Event level test code that indicates second pass quality reweigthing is triggered.",
               "Event level test code that indicates second pass quality reweigthing is triggered.",
+              "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
+              "Unack Warning Message event-level test code. Design: go/unack-warning-message-on-dp-dd",
               "",
               "",
               "",
@@ -110760,7 +111013,7 @@
               "",
               "Test codes for the feature and each early-access partners for the Play Store IAP sales project. go/play-store-iap-sales-dd",
               "",
-              "",
+              "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
               "Test codes for cross-device features. See go/play-cross-device.",
               "",
               "Test code for other devices subnav. Logged for eligible users when home subnavs are fetched.",
@@ -111068,6 +111321,8 @@
               "",
               "Session level test code that indicates second pass quality reweigthing is triggered.",
               "Session level test code that indicates second pass quality reweigthing is triggered.",
+              "Unack Warning Message session-level test code. Design: go/unack-warning-message-on-dp-dd",
+              "Session level test code that indicates this user is eligible to be shown form factor filters on top charts.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -111149,7 +111404,7 @@
               "",
               "Test codes for the feature and each early-access partners for the Play Store IAP sales project. go/play-store-iap-sales-dd",
               "",
-              "",
+              "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
               "",
               "Test code for when a user was eligible for visual preview while in motion. E.g. received a notification and had visual preview setting enabled.",
               "",
@@ -111186,6 +111441,7 @@
               "Test code GE ranker service medium user value segment.",
               "Test code GE ranker service high user value segment.",
               "Test code GE ranker service never user value segment.",
+              "Test code GE points booster model launch.",
               "Test codes for GE surfaces.",
               "",
               "",
@@ -111227,6 +111483,7 @@
               "",
               "",
               "User level test code for Fop Steering Promotion in all user journeys; Users are tagged on unredeemed fop steering promotion impression.",
+              "User level test code for Fop Steering Promotion in CUJ 1~3; excluding CUJ4. Users are tagged on unredeemed fop steering promotion impression.",
               "User level test code for Quest Platform Loyalty Stamp Card in Purchase flow.",
               "User level test code for users who have made any monetization behavior(sub, iap) before (controlled by fsUlyssesBuyerState), used for AH/GH monetization experiments.",
               "User level test code for users who have made any monetization behavior(sub, iap) for the last 180 days (controlled by ULYSSES_OOP_SPEND_PER_PURCHASE_180D), used for AH/GH monetization experiments.",
@@ -111298,6 +111555,10 @@
               "",
               "",
               "User level test code for reinstall enablement. If user has any eligible reinstall passing the per user filtering logic, testcode will be logged. Note that the filtering logics are controlled by gcl flags. Ex. Play Games Home: http://shortn/_2aGCRQqToq. This test code only knows if any app passes the filtering but not which filtering params are applied.",
+              "User level test code for tagging users who have any app which is recommended by PRS and has reinstall eligibility when is_app_with_historical_oop_purchase restriction is turned on.",
+              "User level test code for notification campaign gain filtering experiments. If GE decision changed after applying predicted revenue gain filtering on notification campaigns, log test code.",
+              "User level test code for notification campaign gain filtering experiments. If GE decision changed after disabling publicity gain in notification campaign benefit calculation, log test code.",
+              "Unack Warning Message user-level test code. Design: go/unack-warning-message-on-dp-dd Add new user-level TestCode here.",
               ""
             ],
             "type": "string"
@@ -117161,11 +117422,15 @@
             "MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_HOME",
             "MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_WATCHNEXT",
             "MODEL_RACY_WATCHPAGE_V4",
+            "MODEL_RACY_WATCHPAGE_V5",
+            "MODEL_RACY_WATCHPAGE_V5_FLAGGED",
             "MODEL_RACY_WATCHPAGE_RELEASE",
             "MODEL_RACY_SHORTS_WATCHPAGE_V1",
             "MODEL_RACY_SHORTS_WATCHPAGE_V1_FLAGGED",
             "MODEL_RACY_SHORTS_WATCHPAGE_V2",
             "MODEL_RACY_SHORTS_WATCHPAGE_V2_FLAGGED",
+            "MODEL_RACY_SHORTS_WATCHPAGE_V3",
+            "MODEL_RACY_SHORTS_WATCHPAGE_V3_FLAGGED",
             "MODEL_RACY_SHORTS_WATCHPAGE_RELEASE",
             "MODEL_RACY_THUMB_2019_04_02",
             "MODEL_RACY_THUMB_2019_08_12",
@@ -117213,10 +117478,14 @@
             "Flagged racy watchpage score v6 using racy watchpage model v3 calibrated for home.",
             "Flagged racy watchpage score v6 using racy watchpage model v3 calibrated for watchnext.",
             "Racy watchpage model v4 (go/racy-watchpage-v4).",
+            "Racy watchpage model v5.",
+            "",
             "Racy watchpage release version.",
             "LINT.IfChange Racy shorts watchpage model v1.",
             "",
             "Racy shorts watchpage model v2.",
+            "",
+            "Racy shorts watchpage model v3.",
             "",
             "Racy shorts watchpage release version.",
             "LINT.ThenChange(//depot/google3/video/thumbnails/features/util/consts.h) Racy thumb model which corresponds to https://mldash.corp.google.com/experiments/156747527161891342",
