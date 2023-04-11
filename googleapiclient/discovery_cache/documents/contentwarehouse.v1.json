@@ -1103,7 +1103,7 @@
       }
     }
   },
-  "revision": "20230324",
+  "revision": "20230404",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -17469,7 +17469,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 9",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 12",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -17488,12 +17488,32 @@
           ],
           "type": "string"
         },
+        "ambiguityClassifier": {
+          "description": "Temporary ambiguity classifier signal.",
+          "enum": [
+            "UNKNOWN",
+            "SONG_ALBUM_AMBIGUOUS",
+            "NOT_AMBIGUOUS",
+            "SINGLE_MEDIA_ITEM"
+          ],
+          "enumDescriptions": [
+            "",
+            "Entity is one of a song-album-ambiguous pair.",
+            "Entity is not ambiguous with other entities.",
+            "No ambiguous entities due to single media item."
+          ],
+          "type": "string"
+        },
         "hasTypeSemanticEdge": {
           "description": "True if the argument's type was explicitly mentioned in the query.",
           "type": "boolean"
         },
         "isCastVideo": {
           "description": "Whether the candidate is YouTube CAST_VIDEO candidate. CAST_VIDEO is a deeplink platform. This signal will be used to promote YouTube Music screenful candidates with CAST_VIDEO platform for free users because free users cannot get exact entities in screenless response and can get exact entities with ads in screenful response.",
+          "type": "boolean"
+        },
+        "isMediaSearchQuerySubsetOfEntityNameAndArtist": {
+          "description": "True if the media search query is included in the entity name and artists.",
           "type": "boolean"
         },
         "isSeedRadio": {
@@ -17575,14 +17595,22 @@
             ""
           ],
           "type": "string"
+        },
+        "youtubeConfidenceScore": {
+          "format": "double",
+          "type": "number"
         }
       },
       "type": "object"
     },
     "AssistantGroundingRankerProviderGroundingProviderFeatures": {
-      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 4",
+      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 5",
       "id": "AssistantGroundingRankerProviderGroundingProviderFeatures",
       "properties": {
+        "isInAppProvider": {
+          "description": "Indicates that fulfillment on this provider will happen within the provider app.",
+          "type": "boolean"
+        },
         "providerClusterId": {
           "description": "Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.",
           "items": {
@@ -17802,7 +17830,7 @@
           "type": "array"
         },
         "gaiaId": {
-          "description": "Contact owner's gaia id from cs/symbol::symbol:quality_qrewrite.PersonalContactData.shared_contact_owner_gaia_id. Only populated for is_shared = true and non sign-out mode and user is not the owner of the contact(shared contact from other user).",
+          "description": "Contact owner's gaia id from cs/symbol::symbol:quality_qrewrite.PersonalContactData.shared_contact_owner_gaia_id. Only populated for is_shared = true and non sign-out mode and user is not the owner of the contact(shared contact from other user). This field is not being logged in P2.",
           "format": "int64",
           "type": "string"
         },
@@ -17811,7 +17839,7 @@
           "type": "boolean"
         },
         "isShared": {
-          "description": "If this is a shared contact. This is true in 2 cases: - User is calling their own contacts that have been marked as shared. - User is calling shared contacts from some other user's contact list.",
+          "description": "If this is a shared contact. This is true in 2 cases: - User is calling their own contacts that have been marked as shared. - User is calling shared contacts from some other user's contact list. This field is not being logged in P2.",
           "type": "boolean"
         },
         "isTransliteratedMatch": {
@@ -19582,7 +19610,8 @@
             "RANKER_NAME_GROUNDING_RANKER_V2",
             "RANKER_NAME_GROUNDING_RANKER_MEDIA_EXP",
             "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP",
-            "RANKER_NAME_CONSOLIDATED_PFR_HGR"
+            "RANKER_NAME_CONSOLIDATED_PFR_HGR",
+            "RANKER_NAME_CONSOLIDATED_PFR_HGR_V2"
           ],
           "enumDescriptions": [
             "Default value, when there is no ranker specified.",
@@ -19593,7 +19622,8 @@
             "Name for HGR v2 model.",
             "Name for experimental HGR model for Media, build on top of HGR v2.",
             "Name for experimental HGR model for Comms.",
-            "Name for consolidated PFR and HGR ranker."
+            "Name for consolidated PFR and HGR ranker.",
+            "Name for consolidated PFR and HGRv2 ranker."
           ],
           "type": "string"
         },
@@ -28856,6 +28886,7 @@
             "PROVIDER_GOOGLE_GT_ALF",
             "PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE",
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
+            "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -29397,7 +29428,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B1",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B4",
             "ABSTRACT",
             "",
             "",
@@ -29563,6 +29594,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -33697,6 +33729,7 @@
             "PROVIDER_GOOGLE_GT_ALF",
             "PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE",
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
+            "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -34238,7 +34271,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B1",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B4",
             "ABSTRACT",
             "",
             "",
@@ -34404,6 +34437,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -35858,6 +35892,7 @@
             "PROVIDER_GOOGLE_GT_ALF",
             "PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE",
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
+            "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -36399,7 +36434,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B1",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B4",
             "ABSTRACT",
             "",
             "",
@@ -36565,6 +36600,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -38323,6 +38359,7 @@
             "PROVIDER_GOOGLE_GT_ALF",
             "PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE",
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
+            "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -38864,7 +38901,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B1",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B4",
             "ABSTRACT",
             "",
             "",
@@ -39030,6 +39067,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -45621,6 +45659,25 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1ProcessorInfo": {
+      "description": "The DocAI processor information.",
+      "id": "GoogleCloudContentwarehouseV1ProcessorInfo",
+      "properties": {
+        "documentType": {
+          "description": "The processor will process the documents with this document type.",
+          "type": "string"
+        },
+        "processorName": {
+          "description": "The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`",
+          "type": "string"
+        },
+        "schemaName": {
+          "description": "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1Property": {
       "description": "Property of a document.",
       "id": "GoogleCloudContentwarehouseV1Property",
@@ -46043,6 +46100,10 @@
       "description": "Metadata message of RunPipeline method.",
       "id": "GoogleCloudContentwarehouseV1RunPipelineMetadata",
       "properties": {
+        "exportToCdwPipelineMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1RunPipelineMetadataExportToCdwPipelineMetadata",
+          "description": "The pipeline metadata for Export-to-CDW pipeline."
+        },
         "failedFileCount": {
           "description": "Number of files that have failed at some point in the pipeline.",
           "format": "int32",
@@ -46051,6 +46112,17 @@
         "gcsIngestPipelineMetadata": {
           "$ref": "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata",
           "description": "The pipeline metadata for GcsIngest pipeline."
+        },
+        "individualDocumentStatuses": {
+          "description": "The list of response details of each document.",
+          "items": {
+            "$ref": "GoogleCloudContentwarehouseV1RunPipelineMetadataIndividualDocumentStatus"
+          },
+          "type": "array"
+        },
+        "processWithDocAiPipelineMetadata": {
+          "$ref": "GoogleCloudContentwarehouseV1RunPipelineMetadataProcessWithDocAiPipelineMetadata",
+          "description": "The pipeline metadata for Process-with-DocAi pipeline."
         },
         "totalFileCount": {
           "description": "Number of files that were processed by the pipeline.",
@@ -46064,6 +46136,24 @@
       },
       "type": "object"
     },
+    "GoogleCloudContentwarehouseV1RunPipelineMetadataExportToCdwPipelineMetadata": {
+      "description": "The metadata message for Export-to-CDW pipeline.",
+      "id": "GoogleCloudContentwarehouseV1RunPipelineMetadataExportToCdwPipelineMetadata",
+      "properties": {
+        "docAiDataset": {
+          "description": "The output CDW dataset resource name.",
+          "type": "string"
+        },
+        "documents": {
+          "description": "The input list of all the resource names of the documents to be exported.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata": {
       "description": "The metadata message for GcsIngest pipeline.",
       "id": "GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata",
@@ -46071,6 +46161,39 @@
         "inputPath": {
           "description": "The input Cloud Storage folder in this pipeline. Format: `gs:///`.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1RunPipelineMetadataIndividualDocumentStatus": {
+      "description": "The status of processing a document.",
+      "id": "GoogleCloudContentwarehouseV1RunPipelineMetadataIndividualDocumentStatus",
+      "properties": {
+        "documentId": {
+          "description": "Document identifier of an existing document.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "GoogleRpcStatus",
+          "description": "The status processing the document."
+        }
+      },
+      "type": "object"
+    },
+    "GoogleCloudContentwarehouseV1RunPipelineMetadataProcessWithDocAiPipelineMetadata": {
+      "description": "The metadata message for Process-with-DocAi pipeline.",
+      "id": "GoogleCloudContentwarehouseV1RunPipelineMetadataProcessWithDocAiPipelineMetadata",
+      "properties": {
+        "documents": {
+          "description": "The input list of all the resource names of the documents to be processed.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "processorInfo": {
+          "$ref": "GoogleCloudContentwarehouseV1ProcessorInfo",
+          "description": "The DocAI processor to process the documents with."
         }
       },
       "type": "object"
@@ -47822,7 +47945,7 @@
       "id": "GoogleInternalAppsWaldoV1alphaAvailabilityPeriod",
       "properties": {
         "dayOfWeek": {
-          "description": "Day of week, 0 for Sunday, 1 for Monday, ...",
+          "description": "Day of week, 1 for Monday, ..., 7 for Sunday.",
           "format": "int32",
           "type": "integer"
         },
@@ -60778,6 +60901,8 @@
             "ROOM",
             "STRUCTURE",
             "ZONE",
+            "TRAIT_ATTRIBUTE_VALUE",
+            "TRAIT_SEMANTIC_VALUE",
             "REMINDER",
             "RECIPE",
             "PERSON",
@@ -60810,6 +60935,8 @@
             "An assistant.context.RoomId aka DeviceId.home_graph_device_id",
             "An assistant.context.StructureId aka DeviceId.home_graph_device_id",
             "An identifier for a zone. See: go/zone-gp and go/smarthome-zones",
+            "An identifier for Trait attribute value or Trait semantic value. Attribute values (\"eco mode\") reference discrete entities in Home Graph; for example, \"eco mode\" for a specific device is semantically meaningful only in the context of that device's mode attributes. Semantic values (\"1000 Kelvin\") are not tied to a reference in HomeGraph and may include units. See: go/trait-gp",
+            "",
             "",
             "",
             "Comms specific id types. go/call-object-iff",
@@ -72300,7 +72427,7 @@
               "FOLLOWED_BY_SEED_RADIO"
             ],
             "enumDescriptions": [
-              "",
+              "Default value.",
               "Deeplink is for seed radio of the media content.",
               "Deeplink is for video version of the media content. NOTE: this tag is meaningful only in the context of media that has video video and other versions, e.g. a song can be played audio-only or with video. This tag is not meaningful for video content, e.g. movies, and thus should NOT be used for video-only media content.",
               "Deeplink is for top tracks for music artist.",
@@ -72471,7 +72598,7 @@
             "RECORD"
           ],
           "enumDescriptions": [
-            "",
+            "Default value.",
             "The deeplink is used to play a media. This should be the default in most cases.",
             "The deeplink is used to play a trailer.",
             "The deeplink is used to record a media."
@@ -72516,7 +72643,7 @@
               "PAY_PER_USE"
             ],
             "enumDescriptions": [
-              "",
+              "Default value.",
               "When this value is specified, it indicates that the content is available for free. An account on the providers platform is not required to play the content.",
               "When this value is specified, it indicates that the content is available for free. An account on the providers platform is required to play the content.",
               "When this value is specified, it indicates that the contents is available to all users with a subscription to that provider. This is the case, for example, with Video On Demand (VOD) or for music services such as Google Play Music All Access.",
@@ -72551,16 +72678,16 @@
               "MEDIA_3P_DEVICE"
             ],
             "enumDescriptions": [
-              "",
-              "",
-              "",
+              "Default value.",
+              "Deeplink to be used on Android.",
+              "Deeplink to be used on devices support Cast Audio.",
               "Corresponds to /m/0wf0rgl.",
-              "",
-              "",
-              "",
+              "Deeplink to be used on iOS.",
+              "Deeplink to be used on Desktop web.",
+              "Deeplink to be used on Mobile web.",
               "Corresponds to /g/11cn_9bsrr.",
-              "",
-              "",
+              "Deeplink to be used on Android TV.",
+              "Deeplink to be used on KaiOS.",
               "Deprecated. Part of the consolidation process. See go/consolidation-1p-3p for more details. Deeplinks to be used on media 3rd party device, including Smart TV apps, and other media description devices, e.g. Sonos Speaker and Telstra."
             ],
             "type": "string"
@@ -72592,7 +72719,7 @@
               "FOLLOWED_BY_SEED_RADIO"
             ],
             "enumDescriptions": [
-              "",
+              "Default value.",
               "Deeplink is for seed radio of the media content.",
               "Deeplink is for video version of the media content. NOTE: this tag is meaningful only in the context of media that has video video and other versions, e.g. a song can be played audio-only or with video. This tag is not meaningful for video content, e.g. movies, and thus should NOT be used for video-only media content.",
               "Deeplink is for top tracks for music artist.",
@@ -73271,7 +73398,7 @@
             "BUY"
           ],
           "enumDescriptions": [
-            "",
+            "Default value.",
             "When this value is specified, it indicates that the content is available to rent for a limited time period. The price for renting this content is indicated in the 'cost' field.",
             "When this value is specified, it indicates that the content can be purchased and permanently owned. The price for purchasing this content is indicated in the 'cost' field."
           ],
@@ -78454,7 +78581,7 @@
       "type": "object"
     },
     "PerDocData": {
-      "description": "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 220",
+      "description": "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 221",
       "id": "PerDocData",
       "properties": {
         "BlogData": {
@@ -82706,6 +82833,7 @@
             "ASSISTANT_SURVEY",
             "ASSISTANT_SURVEY_IMPORTANCE_MIN",
             "ASSISTANT_SURVEY_PRIORITY_LOW",
+            "ASSISTANT_SURVEY_ATV_AMATI",
             "WHEREABOUTS_CHECKIN",
             "TRAVEL_ASSISTANT_FLIGHT_CHECKIN",
             "DIALER_AUTH",
@@ -82813,6 +82941,7 @@
             "GEO_TTL_RESERVED_SOCIAL_EVENT",
             "GEO_TTL_FLIGHT_PASSENGER_DEPARTURE",
             "GEO_TTL_FLIGHT_PASSENGER_DEPARTURE_RIDESHARE",
+            "GEO_TTL_TRANSPORTATION_ROUTE_RESERVATION",
             "GEO_AAP_GROCERY_STORE",
             "GEO_AAP_BEAUTY_WELLNESS",
             "GEO_AAP_RESTAURANT",
@@ -82890,6 +83019,7 @@
             "PERSONAL_RESULTS_OPTIN",
             "HEADPHONE_PERSONAL_RESULTS_OPTIN",
             "DISCOVERY_SPARKS",
+            "SPOKEN_NOTIFICATIONS_OOBE_OPTIN",
             "UNIT_TESTING"
           ],
           "enumDescriptions": [
@@ -83118,6 +83248,7 @@
             "",
             "Deprecated! use ASSISTANT_SURVEY_PRIORITY_LOW Similar to ASSISTANT_SURVEY but used by Android TV to set android_tv_importance to IMPORTANCE_MIN.",
             "Similar to ASSISTANT_SURVEY but used by Android TV to set android_tv_notification_priority to PRIORITY_LOW.",
+            "Similar to ASSISTANT_SURVEY but used by Android TV Amati Devices to set android_tv_notification_priority to PRIORITY_DEFAULT.",
             "",
             "",
             "",
@@ -83225,6 +83356,7 @@
             "Restaurant reservation Time to leave notifications from Maps. PRD(go/ga-notifications-prd)",
             "Restaurant reservation Time to leave notifications from Maps. PRD(go/ga-notifications-prd)",
             "Flight departure Time to leave notification when \"Book a ride\" action button is triggered. This is same notification as GEO_TTL_FLIGHT_PASSENGER_DEPARTURE with the \"book a ride\" button as the only difference. PRD(go/airport-rideshare-prd)",
+            "Transporation time to leave notification such as train",
             "",
             "",
             "",
@@ -83302,6 +83434,7 @@
             "Notification for Personal Response (PR) opt-in: go/migrate-pr-notifs-tng-ma-prd",
             "Notification for Headphone Personal Response (HPR) opt-in: go/migrate-pr-notifs-tng-ma-prd",
             "go/habits-sparks-design",
+            "Notification for Spoken Notifications OOBE opt-in. go/mapa-notifications-prd",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -85724,11 +85857,13 @@
             "SITE_CHUNK_SOURCE_AUTHOR",
             "SITE_CHUNK_SOURCE_COOKBOOK",
             "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA",
-            "SITE_CHUNK_SOURCE_FALLBACK"
+            "SITE_CHUNK_SOURCE_FALLBACK",
+            "SITE_CHUNK_SOURCE_UV_CHUNK"
           ],
           "enumDescriptions": [
             "",
             "As of June 2021 this corresponds to HOST_LEVEL_V3 granularity.",
+            "",
             "",
             "",
             "",
@@ -85896,11 +86031,13 @@
             "SITE_CHUNK_SOURCE_AUTHOR",
             "SITE_CHUNK_SOURCE_COOKBOOK",
             "SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA",
-            "SITE_CHUNK_SOURCE_FALLBACK"
+            "SITE_CHUNK_SOURCE_FALLBACK",
+            "SITE_CHUNK_SOURCE_UV_CHUNK"
           ],
           "enumDescriptions": [
             "",
             "As of June 2021 this actually corresponds to HOST_LEVEL_V3 granularity.",
+            "",
             "",
             "",
             "",
@@ -92001,6 +92138,7 @@
             "TITLE",
             "ANY",
             "IMAGE_QUERY",
+            "PASSAGE_QUERY",
             "CONTEXT_ENTITY",
             "RESULT_ENTITY",
             "CONTEXT_QUERY",
@@ -92045,6 +92183,7 @@
             "The document ",
             "Special value used to represent any other tokentype.",
             "The Image Search navboost queries.",
+            "Radish Passage Queries, specifically, rankembed and generated queries. For offline use only. In offline Q2I runs we can instruct Webref to parse and annotate passge queries using the annoatate_passage_queries option in AnnotateDocjoinTuningOptions. Note that in Goldmine runs these are added to the docjoin *after* Webref has run. However,",
             "Entities added from annotation context.",
             "Represents an entity found in the results for Qref.",
             "A query used as additional context for Qref annotations.",
@@ -93945,6 +94084,7 @@
             "TITLE",
             "ANY",
             "IMAGE_QUERY",
+            "PASSAGE_QUERY",
             "CONTEXT_ENTITY",
             "RESULT_ENTITY",
             "CONTEXT_QUERY",
@@ -93989,6 +94129,7 @@
             "The document ",
             "Special value used to represent any other tokentype.",
             "The Image Search navboost queries.",
+            "Radish Passage Queries, specifically, rankembed and generated queries. For offline use only. In offline Q2I runs we can instruct Webref to parse and annotate passge queries using the annoatate_passage_queries option in AnnotateDocjoinTuningOptions. Note that in Goldmine runs these are added to the docjoin *after* Webref has run. However,",
             "Entities added from annotation context.",
             "Represents an entity found in the results for Qref.",
             "A query used as additional context for Qref annotations.",
@@ -95201,7 +95342,7 @@
         },
         "nameMetadata": {
           "$ref": "RepositoryWebrefConceptNameMetadata",
-          "description": "Metadata attatched to the name."
+          "description": "Metadata attached to the name."
         },
         "nonLocationalScore": {
           "description": "Whether the mention is a non-locational reference to a geographical entity. Ranges from 0 (locational) to 1 (non-locational).",
@@ -96477,6 +96618,7 @@
               "URL",
               "TITLE",
               "IMAGE_QUERY",
+              "PASSAGE_QUERY",
               "CONTEXT_ENTITY",
               "CONTEXT_QUERY",
               "SPORE_GRAPH",
@@ -96495,6 +96637,7 @@
               "The document URL.",
               "The title of the document.",
               "One of the image navboost queries pointing to an image in the document.",
+              "Query from passage query annotations.",
               "Contextual entity injected by an outside attachment. For details, see go/webref-priors.",
               "Contextual query that can be provided in Qref.",
               "Names and URLs from Spore GraphAnnotations.",
@@ -96678,6 +96821,7 @@
             "URL",
             "TITLE",
             "IMAGE_QUERY",
+            "PASSAGE_QUERY",
             "CONTEXT_ENTITY",
             "CONTEXT_QUERY",
             "SPORE_GRAPH",
@@ -96696,6 +96840,7 @@
             "The document URL.",
             "The title of the document.",
             "One of the image navboost queries pointing to an image in the document.",
+            "Query from passage query annotations.",
             "Contextual entity injected by an outside attachment. For details, see go/webref-priors.",
             "Contextual query that can be provided in Qref.",
             "Names and URLs from Spore GraphAnnotations.",
@@ -96731,6 +96876,7 @@
             "URL",
             "TITLE",
             "IMAGE_QUERY",
+            "PASSAGE_QUERY",
             "CONTEXT_ENTITY",
             "CONTEXT_QUERY",
             "SPORE_GRAPH",
@@ -96749,6 +96895,7 @@
             "The document URL.",
             "The title of the document.",
             "One of the image navboost queries pointing to an image in the document.",
+            "Query from passage query annotations.",
             "Contextual entity injected by an outside attachment. For details, see go/webref-priors.",
             "Contextual query that can be provided in Qref.",
             "Names and URLs from Spore GraphAnnotations.",
@@ -103387,11 +103534,6 @@
           "format": "double",
           "type": "number"
         },
-        "mobileFriendlyScore": {
-          "description": "Mobile friendliness score in the range of [0, 100]. See go/modena-ranking.",
-          "format": "int32",
-          "type": "integer"
-        },
         "violatesMobileInterstitialPolicy": {
           "description": "Indicates if the page is violating mobile interstitial policy and should be demoted. See go/interstitials-ranking-dd for details.",
           "type": "boolean"
@@ -107375,8 +107517,8 @@
       "properties": {
         "adwordsCid": {
           "description": "Populated using airlines_company_ids.csv for AdWords company map",
-          "format": "int32",
-          "type": "integer"
+          "format": "int64",
+          "type": "string"
         },
         "alliance": {
           "description": "STAR_ALLIANCE",
@@ -109870,6 +110012,10 @@
               "SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL",
               "PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EVENT_LEVEL",
               "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_EVENT_LEVEL",
+              "PACKAGE_NAME_SEARCH_EVENT_LEVEL",
+              "ZERO_COPY_NOT_SUFFICIENT_EVENT_LEVEL",
+              "ZERO_COPY_ALLOWS_INSTALL_EVENT_LEVEL",
+              "ZERO_COPY_NOT_REQUIRED_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -110378,6 +110524,13 @@
               "SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL",
               "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_SESSION_LEVEL",
               "ELIGIBLE_FOR_FORM_FACTOR_FILTER_ON_TOP_CHARTS",
+              "PACKAGE_NAME_SEARCH_SESSION_LEVEL",
+              "SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_EMAIL_SESSION_LEVEL",
+              "SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_NOTIFICATION_SESSION_LEVEL",
+              "ZERO_COPY_NOT_SUFFICIENT_SESSION_LEVEL",
+              "ZERO_COPY_ALLOWS_INSTALL_SESSION_LEVEL",
+              "ZERO_COPY_NOT_REQUIRED_SESSION_LEVEL",
+              "BOOKS_SEARCH_SERIES_EXPANSION_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -110539,6 +110692,8 @@
               "FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL_V2",
               "FOP_STEERING_PROMOTION_USER_LEVEL",
               "FOP_STEERING_PROMOTION_EXCLUDE_CUJ4_USER_LEVEL",
+              "SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_EMAIL_USER_LEVEL",
+              "SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_NOTIFICATION_USER_LEVEL",
               "LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_USER_LEVEL",
               "HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL",
@@ -110614,6 +110769,9 @@
               "NOTIFICATION_PREDICTED_REV_GAIN_FILTERING_USER_LEVEL",
               "NOTIFICATION_PUBLICITY_GAIN_DISABLED_USER_LEVEL",
               "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_USER_LEVEL",
+              "PURCHASE_READINESS_ADD_FOP_USER_LEVEL",
+              "PURCHASE_READINESS_ADD_AUTH_USER_LEVEL",
+              "PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -110815,6 +110973,10 @@
               "Event level test code that indicates second pass quality reweigthing is triggered.",
               "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
               "Unack Warning Message event-level test code. Design: go/unack-warning-message-on-dp-dd",
+              "Event level test code that indicates package name search is triggered. This test code is only added when - Package name search is triggered AND - The organic response didn't place the package name app at the top.",
+              "Event level test codes for go/zero-copy",
+              "",
+              "",
               "",
               "",
               "",
@@ -111323,6 +111485,13 @@
               "Session level test code that indicates second pass quality reweigthing is triggered.",
               "Unack Warning Message session-level test code. Design: go/unack-warning-message-on-dp-dd",
               "Session level test code that indicates this user is eligible to be shown form factor filters on top charts.",
+              "Session level test code that indicates package name search is triggered. This test code is only added when - Package name search is triggered AND - The organic response didn't place the package name app at the top.",
+              "Session level test code that indicates if a user would get an email if the pending acknowledgement email experiment was enabled.",
+              "Session level test code that indicates if a user would get a notification if the pending acknowledgement notification experiment was enabled.",
+              "Session level test codes for go/zero-copy",
+              "",
+              "",
+              "Session level test code that indicates if the user has issued a books search query that triggers ebook or audiobook series search.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -111484,6 +111653,8 @@
               "",
               "User level test code for Fop Steering Promotion in all user journeys; Users are tagged on unredeemed fop steering promotion impression.",
               "User level test code for Fop Steering Promotion in CUJ 1~3; excluding CUJ4. Users are tagged on unredeemed fop steering promotion impression.",
+              "User level test code that indicates if a user would get an email if the pending acknowledgement email experiment was enabled.",
+              "User level test code that indicates if a user would get a notification if the pending acknowledgement notification experiment was enabled.",
               "User level test code for Quest Platform Loyalty Stamp Card in Purchase flow.",
               "User level test code for users who have made any monetization behavior(sub, iap) before (controlled by fsUlyssesBuyerState), used for AH/GH monetization experiments.",
               "User level test code for users who have made any monetization behavior(sub, iap) for the last 180 days (controlled by ULYSSES_OOP_SPEND_PER_PURCHASE_180D), used for AH/GH monetization experiments.",
@@ -111558,7 +111729,10 @@
               "User level test code for tagging users who have any app which is recommended by PRS and has reinstall eligibility when is_app_with_historical_oop_purchase restriction is turned on.",
               "User level test code for notification campaign gain filtering experiments. If GE decision changed after applying predicted revenue gain filtering on notification campaigns, log test code.",
               "User level test code for notification campaign gain filtering experiments. If GE decision changed after disabling publicity gain in notification campaign benefit calculation, log test code.",
-              "Unack Warning Message user-level test code. Design: go/unack-warning-message-on-dp-dd Add new user-level TestCode here.",
+              "Unack Warning Message user-level test code. Design: go/unack-warning-message-on-dp-dd",
+              "User-level test code for user who is eligible for adding Form of Payment from Purchase Readiness Reminder.",
+              "User-level test code for user who is eligible for adding Auth Settings from Purchase Readiness Reminder.",
+              "User-level test code for user who is eligible for adding Form of Payment and then adding Auth Settings from Purchase Readiness Reminder. Add new user-level TestCode here.",
               ""
             ],
             "type": "string"
@@ -126580,7 +126754,7 @@
       "type": "object"
     },
     "WWWResultInfoSubImageDocInfo": {
-      "description": "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler).",
+      "description": "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 25",
       "id": "WWWResultInfoSubImageDocInfo",
       "properties": {
         "additionalSafesearchSignals": {
@@ -126694,6 +126868,11 @@
           "description": "Deepcrop thumbnail cropping hints.",
           "format": "byte",
           "type": "string"
+        },
+        "dimeScore": {
+          "description": "EQ* v3: Deep Image Engagingness(DImE) go/deep-image-engagingness-slides",
+          "format": "float",
+          "type": "number"
         },
         "docid": {
           "format": "uint64",
