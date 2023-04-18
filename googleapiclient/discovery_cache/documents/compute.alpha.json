@@ -41378,7 +41378,7 @@
       }
     }
   },
-  "revision": "20230327",
+  "revision": "20230403",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -45557,10 +45557,6 @@
           "format": "int64",
           "type": "string"
         },
-        "instance": {
-          "$ref": "Instance",
-          "description": "DEPRECATED: Please use instance_properties instead."
-        },
         "instanceProperties": {
           "$ref": "InstanceProperties",
           "description": "The instance properties defining the VM instances to be created. Required if sourceInstanceTemplate is not provided."
@@ -45603,6 +45599,48 @@
         "name": {
           "description": "This field is only temporary. It will be removed. Do not use it.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BulkInsertOperationStatus": {
+      "id": "BulkInsertOperationStatus",
+      "properties": {
+        "createdVmCount": {
+          "description": "[Output Only] Count of VMs successfully created so far.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "deletedVmCount": {
+          "description": "[Output Only] Count of VMs that got deleted during rollback.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "failedToCreateVmCount": {
+          "description": "[Output Only] Count of VMs that started creating but encountered an error.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "description": "[Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back.",
+          "enum": [
+            "CREATING",
+            "DONE",
+            "ROLLING_BACK",
+            "STATUS_UNSPECIFIED"
+          ],
+          "enumDescriptions": [
+            "Rolling forward - creating VMs.",
+            "Done",
+            "Rolling back - cleaning up after an error.",
+            ""
+          ],
+          "type": "string"
+        },
+        "targetVmCount": {
+          "description": "[Output Only] Count of VMs originally planned to be created.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -49378,7 +49416,7 @@
           "type": "string"
         },
         "network": {
-          "description": "This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.",
+          "description": "This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If the subnetwork is specified, the network of the subnetwork will be used. If neither subnetwork nor this field is specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.",
           "type": "string"
         },
         "networkTier": {
@@ -56860,6 +56898,19 @@
       },
       "type": "object"
     },
+    "InstancesBulkInsertOperationMetadata": {
+      "id": "InstancesBulkInsertOperationMetadata",
+      "properties": {
+        "perLocationStatus": {
+          "additionalProperties": {
+            "$ref": "BulkInsertOperationStatus"
+          },
+          "description": "Status information per location (location name is key). Example key: zones/us-central1-a",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "InstancesGetEffectiveFirewallsResponse": {
       "id": "InstancesGetEffectiveFirewallsResponse",
       "properties": {
@@ -62006,7 +62057,7 @@
           "type": "string"
         },
         "secondaryIpCidrRanges": {
-          "description": "Alias IP ranges from the same subnetwork",
+          "description": "Alias IP ranges from the same subnetwork.",
           "items": {
             "type": "string"
           },
@@ -66106,6 +66157,9 @@
         "insertTime": {
           "description": "[Output Only] The time that this operation was requested. This value is in RFC3339 text format.",
           "type": "string"
+        },
+        "instancesBulkInsertOperationMetadata": {
+          "$ref": "InstancesBulkInsertOperationMetadata"
         },
         "kind": {
           "default": "compute#operation",
@@ -72528,9 +72582,6 @@
           },
           "description": "[Output Only] Represents the status of the service integration specs defined by the user in instance.serviceIntegrationSpecs.",
           "type": "object"
-        },
-        "upcomingMaintenance": {
-          "$ref": "ResourceStatusUpcomingMaintenance"
         }
       },
       "type": "object"
@@ -72585,16 +72636,6 @@
             "Default value, should not be found on instances."
           ],
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ResourceStatusUpcomingMaintenance": {
-      "id": "ResourceStatusUpcomingMaintenance",
-      "properties": {
-        "canReschedule": {
-          "description": "Indicates if the maintenance can be customer triggered. See go/sf-ctm-design for more details",
-          "type": "boolean"
         }
       },
       "type": "object"
@@ -75271,15 +75312,15 @@
       "type": "object"
     },
     "SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig": {
-      "description": "Configuration options for L7 DDoS detection.",
+      "description": "Configuration options for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.",
       "id": "SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig",
       "properties": {
         "enable": {
-          "description": "If set to true, enables CAAP for L7 DDoS detection.",
+          "description": "If set to true, enables CAAP for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.",
           "type": "boolean"
         },
         "ruleVisibility": {
-          "description": "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules.",
+          "description": "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules. This field is only supported in Global Security Policies of type CLOUD_ARMOR.",
           "enum": [
             "PREMIUM",
             "STANDARD"
@@ -75526,7 +75567,7 @@
       "id": "SecurityPolicyRecaptchaOptionsConfig",
       "properties": {
         "redirectSiteKey": {
-          "description": "An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used.",
+          "description": "An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used. This field is only supported in Global Security Policies of type CLOUD_ARMOR.",
           "type": "string"
         }
       },
@@ -75546,7 +75587,7 @@
       "id": "SecurityPolicyRule",
       "properties": {
         "action": {
-          "description": "The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this. ",
+          "description": "The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. This action is only supported in Global Security Policies of type CLOUD_ARMOR. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this. ",
           "type": "string"
         },
         "description": {
@@ -75571,7 +75612,7 @@
         },
         "headerAction": {
           "$ref": "SecurityPolicyRuleHttpHeaderAction",
-          "description": "Optional, additional actions that are performed on headers."
+          "description": "Optional, additional actions that are performed on headers. This field is only supported in Global Security Policies of type CLOUD_ARMOR."
         },
         "kind": {
           "default": "compute#securityPolicyRule",
@@ -75605,7 +75646,7 @@
         },
         "redirectOptions": {
           "$ref": "SecurityPolicyRuleRedirectOptions",
-          "description": "Parameters defining the redirect action. Cannot be specified for any other actions."
+          "description": "Parameters defining the redirect action. Cannot be specified for any other actions. This field is only supported in Global Security Policies of type CLOUD_ARMOR."
         },
         "redirectTarget": {
           "description": "This must be specified for redirect actions. Cannot be specified for any other actions.",
@@ -75687,7 +75728,7 @@
         },
         "expr": {
           "$ref": "Expr",
-          "description": "User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header."
+          "description": "User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require Cloud Armor Managed Protection Plus tier and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor Managed Protection Plus tier and are only supported in Global Security Policies."
         },
         "versionedExpr": {
           "description": "Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.",
@@ -75993,7 +76034,7 @@
           "type": "string"
         },
         "exceedAction": {
-          "description": "Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below.",
+          "description": "Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below. The `redirect` action is only supported in Global Security Policies of type CLOUD_ARMOR.",
           "type": "string"
         },
         "exceedActionRpcStatus": {
@@ -76002,7 +76043,7 @@
         },
         "exceedRedirectOptions": {
           "$ref": "SecurityPolicyRuleRedirectOptions",
-          "description": "Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect."
+          "description": "Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect. This field is only supported in Global Security Policies of type CLOUD_ARMOR."
         },
         "rateLimitThreshold": {
           "$ref": "SecurityPolicyRuleRateLimitOptionsThreshold",
