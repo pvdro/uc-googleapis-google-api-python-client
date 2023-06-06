@@ -1103,7 +1103,7 @@
       }
     }
   },
-  "revision": "20230517",
+  "revision": "20230529",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3628,7 +3628,8 @@
             "MEET_AFFINITY",
             "PMW_TI_AFFINITY",
             "DRIVE_SEARCH_FILTER_PERSON_ONLY",
-            "ACCESSIBILITY_TRACKER_AFFINITY"
+            "ACCESSIBILITY_TRACKER_AFFINITY",
+            "PLX_DATASOURCE_AFFINITY"
           ],
           "enumDescriptions": [
             "",
@@ -3645,6 +3646,7 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
             "",
             "",
             "",
@@ -5444,8 +5446,7 @@
               "PEOPLE_PLAYGROUND",
               "NEWS_360",
               "DUO",
-              "MEET",
-              "MESSAGES"
+              "MEET"
             ],
             "enumDescriptions": [
               "Should never be stored in practice",
@@ -5465,8 +5466,7 @@
               "See go/people-playground-design.",
               "Also mdb/social-magazines",
               "Aka Taychon",
-              "Aka Google Meet",
-              "Aka Google Messages"
+              "Aka Google Meet"
             ],
             "type": "string"
           },
@@ -5534,8 +5534,7 @@
             "PEOPLE_PLAYGROUND",
             "NEWS_360",
             "DUO",
-            "MEET",
-            "MESSAGES"
+            "MEET"
           ],
           "enumDescriptions": [
             "Should never be stored in practice",
@@ -5555,8 +5554,7 @@
             "See go/people-playground-design.",
             "Also mdb/social-magazines",
             "Aka Taychon",
-            "Aka Google Meet",
-            "Aka Google Messages"
+            "Aka Google Meet"
           ],
           "type": "string"
         },
@@ -5619,8 +5617,7 @@
             "LOUPE",
             "NEWS_360",
             "DUO",
-            "MEET",
-            "MESSAGES"
+            "MEET"
           ],
           "enumDescriptions": [
             "should never be stored in practice",
@@ -5640,8 +5637,7 @@
             "Aka Camera by Google Photos",
             "Also mdb/social-magazines",
             "aka Taychon",
-            "Aka Google Meet",
-            "Aka Google Messages"
+            "Aka Google Meet"
           ],
           "type": "string"
         },
@@ -9119,6 +9115,10 @@
             "Enable app control SD-dependent capabilities."
           ],
           "type": "string"
+        },
+        "sendMessageSuppressed": {
+          "description": "If true, disable send message AppControl/SD flow. This is needed to suppress the feature for specific device. If we decide to turn down this feature for all devices, then this field will become obsolete and should be removed. See context in b/275727627.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -11625,15 +11625,20 @@
       "type": "object"
     },
     "AssistantApiCoreTypesMessageNotificationNotificationEntry": {
-      "description": "Structure of each notification in the MessageNotification Bundle. Attribute sender_name could be different in case of group messages. Next Id: 6",
+      "description": "Structure of each notification in the MessageNotification Bundle. Attribute sender_name could be different in case of group messages. Next Id: 8",
       "id": "AssistantApiCoreTypesMessageNotificationNotificationEntry",
       "properties": {
+        "charCount": {
+          "description": "Count of characters in the message body in the notification.",
+          "format": "int32",
+          "type": "integer"
+        },
         "dataUri": {
           "description": "Uri for the attachment (image, audio, video etc.).",
           "type": "string"
         },
         "messageBody": {
-          "description": "Content of the message body in the notification.",
+          "description": "Note that this is not present in production traffic. Content of the message body in the notification.",
           "type": "string"
         },
         "mimeType": {
@@ -11648,6 +11653,11 @@
         "sender": {
           "$ref": "AssistantApiCoreTypesMessageNotificationPerson",
           "description": "Sender of the message notification."
+        },
+        "wordCount": {
+          "description": "Count of words in the message body in the notification.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -12842,11 +12852,11 @@
       "type": "object"
     },
     "AssistantApiLoggingOnlyData": {
-      "description": "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 15",
+      "description": "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 16",
       "id": "AssistantApiLoggingOnlyData",
       "properties": {
         "accountIndex": {
-          "description": "The index of the account on the device. Useful when there are multiple accounts on a device such as distinguishing primary user data from secondary users. There is no guarantee that this is a stable number but is relatively stable in practice.",
+          "description": "The index of the account on the device. Useful when there are multiple accounts on a device. There is no guarantee that this is a stable number but is relatively stable in practice.",
           "format": "int32",
           "type": "integer"
         },
@@ -12920,6 +12930,10 @@
         "initialAppVersion": {
           "description": "A string recording the app version that is initially used to created this settings entry.",
           "type": "string"
+        },
+        "isPrimaryUser": {
+          "description": "Boolean field to indicate whether a certain user is the primary user of a device or not. This is useful for distinguishing the user0 from other users given user0 might have certain privileges (Eg: Hubmode on Tangor)",
+          "type": "boolean"
         },
         "mdnsDisplayName": {
           "description": "default display name of device over mdns. This is specified at the factory, not specified by the user.",
@@ -14195,6 +14209,10 @@
           "$ref": "AssistantApiSettingsDeviceLogsOptIn",
           "description": "Specifies if device logs and crashes can be captured during SendFeedback"
         },
+        "paymentsEnabled": {
+          "description": "DEPRECATED: Use DeviceCapabilities.OutputRestrictions.personal_data instead. Whether the user has enabled payments for this device.",
+          "type": "boolean"
+        },
         "personalizationMetadata": {
           "$ref": "AssistantApiSettingsPersonalizationMetadata",
           "description": "Metadata about how personalization settings were configured."
@@ -14409,7 +14427,7 @@
           "type": "boolean"
         },
         "state": {
-          "description": "The call state of the device (i.e. whether an Duo call account has been setup on the device).",
+          "description": "The call state of the device (i.e. whether a Duo call account has been setup on the device).",
           "enum": [
             "UNKNOWN_LINK_STATE",
             "NOT_LINKED",
@@ -15826,7 +15844,7 @@
       "type": "object"
     },
     "AssistantApiSupportedFeatures": {
-      "description": "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 64",
+      "description": "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 66",
       "id": "AssistantApiSupportedFeatures",
       "properties": {
         "aaeNotificationSourceSupported": {
@@ -15972,6 +15990,20 @@
           "description": "Whether the surface supports LiveCards. In cases where the user intent flow cannot be completed within the Assistant, LiveCards are used to take the user to an external app or website. These cards will be pushed to the Google Home app via the PushMessage ClientOp.",
           "type": "boolean"
         },
+        "lottieAnimationSupport": {
+          "description": "Whether the client supports the Lottie animation library for the broadcast feature.",
+          "enum": [
+            "LOTTIE_ANIMATION_UNKNOWN",
+            "LOTTIE_ANIMATION_NOT_SUPPORTED",
+            "LOTTIE_ANIMATION_SUPPORTED"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
         "mapsDialogsSupported": {
           "description": "Whether the client supports Assistant dialogs within Maps. This field will be set only when the Maps on the surface supports Assistant dialogs embedded within Maps. go/gsa-gmm.",
           "type": "boolean"
@@ -16024,6 +16056,10 @@
         },
         "privacyAwareLockscreenSupported": {
           "description": "Whether the client supports the privacy-aware lockscreen protocol (go/assistant-lockscreen-spec).",
+          "type": "boolean"
+        },
+        "readMessagesTtsTaperingSupported": {
+          "description": "Whether the client supports tts tapering for the read messages flow. If set to true the tapered tts variant would be used during the read messages flow.",
           "type": "boolean"
         },
         "remoteCloudCastingEnabled": {
@@ -16735,6 +16771,10 @@
         },
         "restrictAlarmsToNextDay": {
           "description": "Whether the client restricts alarms to ring within the next 24 hours.",
+          "type": "boolean"
+        },
+        "supportsGenericMutations": {
+          "description": "Whether the client supports mutation of any alarm attribute such as time_pattern, recurrence_pattern, etc through the MUTATE action. If this is false, MUTATE may only be used for changing the alarm's status (to e.g. disable or dismiss the alarm).",
           "type": "boolean"
         },
         "supportsStopAction": {
@@ -17788,7 +17828,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 14",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 15",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -17841,6 +17881,10 @@
         },
         "isSeedRadioRequest": {
           "description": "True if the user requests seed radio.",
+          "type": "boolean"
+        },
+        "isYoutubeMusicSeeking": {
+          "description": "Indicates whether this is youtube content seeking music.",
           "type": "boolean"
         },
         "mediaContentType": {
@@ -18041,13 +18085,6 @@
         "isInAppProvider": {
           "description": "Indicates that fulfillment on this provider will happen within the provider app.",
           "type": "boolean"
-        },
-        "providerClusterIdDeprecated": {
-          "description": "This field is deprecated in favor of the integer field below.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         },
         "providerClusterIds": {
           "description": "Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.",
@@ -18650,7 +18687,9 @@
             "SAME_NAME_DEVICE_PROMOTER",
             "PHONE_TARGETING_PROMOTER",
             "TRAITS_PROMOTER",
-            "DEVICE_TYPE_PROMOTER"
+            "DEVICE_TYPE_PROMOTER",
+            "FEATURE_EXTRACTOR",
+            "LABELER"
           ],
           "enumDescriptions": [
             "",
@@ -18676,7 +18715,9 @@
             "",
             "",
             "",
-            ""
+            "",
+            "feature extractor",
+            "labeler"
           ],
           "type": "string"
         },
@@ -19368,7 +19409,9 @@
             "SAME_NAME_DEVICE_PROMOTER",
             "PHONE_TARGETING_PROMOTER",
             "TRAITS_PROMOTER",
-            "DEVICE_TYPE_PROMOTER"
+            "DEVICE_TYPE_PROMOTER",
+            "FEATURE_EXTRACTOR",
+            "LABELER"
           ],
           "enumDescriptions": [
             "",
@@ -19394,7 +19437,9 @@
             "",
             "",
             "",
-            ""
+            "",
+            "feature extractor",
+            "labeler"
           ],
           "type": "string"
         }
@@ -19875,7 +19920,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 52",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 53",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -19969,6 +20014,10 @@
         },
         "isPodcastIntent": {
           "description": "Whether the intent is a podcast intent.",
+          "type": "boolean"
+        },
+        "isTvmIntent": {
+          "description": "Whether the intent is a media object tvm intent.",
           "type": "boolean"
         },
         "isVideoIntent": {
@@ -20101,7 +20150,10 @@
             "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED",
             "RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED",
             "RANKER_NAME_EXPERIMENTAL_PFR_SAGE_NEW_DOMAINS",
-            "RANKER_NAME_BUCKETED_PARSING_SCORE_FOR_SMARTHOME"
+            "RANKER_NAME_BUCKETED_PARSING_SCORE_FOR_SMARTHOME",
+            "RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED_V2",
+            "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED_V2",
+            "RANKER_NAME_CONSOLIDATED_PFR_HGR_PODCAST"
           ],
           "enumDescriptions": [
             "Default value, when there is no ranker specified.",
@@ -20117,7 +20169,10 @@
             "Name for experimental calibrated HGR model for Comms.",
             "Name for consolidated PFR, HGRv2 and comms ranker.",
             "Name for experimental PFR ranker for Sage and new domains.",
-            "Name for PFR ranker with bucketed parsing scores for SmartHome."
+            "Name for PFR ranker with bucketed parsing scores for SmartHome.",
+            "Name for consolidated PFR, HGRv2 and comms ranker v2.",
+            "Name for experimental calibrated HGR model for Comms V2.",
+            "Name for HGR ranker for podcast based on RANKER_NAME_CONSOLIDATED_PFR_HGR_V2."
           ],
           "type": "string"
         },
@@ -20147,11 +20202,17 @@
           "description": "sub_intent_type differentiates between intents that share the top level intent name. For eg: for TV_FALLBACK_SEARCH_INTENT, the top level intent name must be \"Find_media\" and the media_object argument within it must be of type \"Media_unspecified\".",
           "enum": [
             "SUB_INTENT_TYPE_UNKNOWN",
-            "SUB_INTENT_TYPE_TV_FALLBACK_SEARCH_INTENT"
+            "SUB_INTENT_TYPE_TV_FALLBACK_SEARCH_INTENT",
+            "SUB_INTENT_TYPE_PODCAST",
+            "SUB_INTENT_TYPE_MUSIC_INITIATION_INTENT",
+            "SUB_INTENT_TYPE_PLAY_RADIO_INTENT"
           ],
           "enumDescriptions": [
             "",
-            ""
+            "Find_media",
+            "Play_media, Play_media, Play_media, Listen_to_media, Media_entity_bare, Play_and_shuffle_media",
+            "Play_media",
+            "Play_media"
           ],
           "type": "string"
         },
@@ -29742,6 +29803,7 @@
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
+            "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -30283,7 +30345,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B5",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
             "ABSTRACT",
             "",
             "",
@@ -30449,6 +30511,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -32473,7 +32536,7 @@
             "TRANSIT_LINE_VARIANT_LINE_CONCEPT",
             "TRANSIT_LINE_VARIANT_STOP",
             "TRANSIT_LINE_VEHICLE_TYPE",
-            "TRANSIT_STATION_AGENCY",
+            "TRANSIT_STATION_AGENCY_ASSOCIATION",
             "VERTICAL_ORDERING_LEVEL",
             "WATER_REMOVED_POLYGON",
             "DEPRECATED_DO_NOT_USE_EMAIL_ADDRESS",
@@ -32519,9 +32582,11 @@
             "DEPRECATED_DO_NOT_USE_VIEWCODE_INFO",
             "DEPRECATED_DO_NOT_USE_WORKAREA",
             "DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_INCLUDES_GEOMETRY_OF",
-            "DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF"
+            "DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF",
+            "DEPRECATED_DO_NOT_USE_TRANSIT_STATION_AGENCY"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -34626,6 +34691,7 @@
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
+            "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -35167,7 +35233,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B5",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
             "ABSTRACT",
             "",
             "",
@@ -35333,6 +35399,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -36791,6 +36858,7 @@
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
+            "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -37332,7 +37400,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B5",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
             "ABSTRACT",
             "",
             "",
@@ -37498,6 +37566,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -38244,7 +38313,7 @@
           "description": "Hours in which the parking facility is open; that is, permits both arrivals and departures of the facility. Should only be set on compounds (i.e. parking lots or garages); roads are considered to always be \u201copen,\u201d though parking at certain times may be prohibited via restrictions. If unset on a compound, this suggests we don\u2019t know the opening hours, or they are the same as the hours of the entity for which this feature offers parking facilities."
         },
         "parkingAvailable": {
-          "description": "Indicates whether long-term parking is available at the feature; if true, long-term parking is available at the feature and parking allowances may be present on this feature, or parking_provider_feature may indicate defered parking feature(s). If false, this is an explicit statement that there is no long-term parking associated with this feature. If unset, we don't know whether there is long-term parking associated with this feature. If false or unset, only additional restrictions or short-term allowances will be populated.",
+          "description": "Indicates whether long-term parking is available at the feature; if true, long-term parking is available at the feature and parking allowances may be present on this feature, or parking_provider_feature may indicate deferred parking feature(s). If false, this is an explicit statement that there is no long-term parking associated with this feature. If unset, we don't know whether there is long-term parking associated with this feature. If false or unset, only additional restrictions or short-term allowances will be populated.",
           "type": "boolean"
         },
         "parkingProviderFeature": {
@@ -39260,6 +39329,7 @@
             "PROVIDER_GOOGLE_LOCAL_SERVICES_ADS",
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
+            "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -39801,7 +39871,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B5",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
             "ABSTRACT",
             "",
             "",
@@ -39967,6 +40037,7 @@
             "",
             "",
             "Shopping Attributes Discovery",
+            "",
             "",
             "",
             "",
@@ -41476,7 +41547,7 @@
           "enum": [
             "BICYCLE_FACILITY_SEPARATE_TRAIL",
             "BICYCLE_FACILITY_PEDESTRIAN_PATH",
-            "BICYCLE_FACILITY_WIDE_PEDESTRIAN_PATH",
+            "BICYCLE_FACILITY_BIKE_FRIENDLY_PEDESTRIAN_PATH",
             "BICYCLE_FACILITY_SHARED_ROAD",
             "BICYCLE_FACILITY_BIKE_LANE",
             "BICYCLE_FACILITY_BIKE_LANE_WITH_PEDESTRIAN_PATH",
@@ -41487,7 +41558,7 @@
           "enumDescriptions": [
             "This segment has a detached trail or path running alongside it, suitable for the use of cyclists. When a segment has this attribute, there should never be a distinct segment for the trail, because the road and trail are part of the same logical segment. In other words, the trail is modeled by this attribute on its associated road, rather than by a separate segment.",
             "This segment has a sidewalk or other pedestrian pathway that permits bicycles.",
-            "This segment has a wide sidewalk or other pedestrian pathway.",
+            "This segment has a bike-friendly (e.g., wide) sidewalk or other pedestrian pathway.",
             "This segment allows bicycles to share the road with motor vehicles. It may or may not provide special accommodation for cyclists.",
             "This segment has a striped bicycle lane.",
             "This segment has a striped bicycle lane, and also has a sidewalk or other pedestrian pathway that permits bicycles.",
@@ -42784,7 +42855,7 @@
       "id": "GeostoreTollClusterProto",
       "properties": {
         "intersection": {
-          "description": "The list of TYPE_INTERSECTION features that are toll points and form this toll cluster. A toll cluser can consist of either a single or a group of intersection points called toll points at the end of various road segments in MapFacts that represent one or more lanes passing through a toll fixture that all go to the same routing destination. This relationship is reciprocal, as a toll point intersection also stores a reference to the toll cluster it belongs to. A toll cluster must have reference to one or more toll points i.e. toll_cluster.intersection should always be populated.",
+          "description": "The list of TYPE_INTERSECTION features that are toll points and form this toll cluster. A toll cluster can consist of either a single or a group of intersection points called toll points at the end of various road segments in MapFacts that represent one or more lanes passing through a toll fixture that all go to the same routing destination. This relationship is reciprocal, as a toll point intersection also stores a reference to the toll cluster it belongs to. A toll cluster must have reference to one or more toll points i.e. toll_cluster.intersection should always be populated.",
           "items": {
             "$ref": "GeostoreFeatureIdProto"
           },
@@ -42914,12 +42985,27 @@
       "description": "Encapsulates information related to an individual transit station.",
       "id": "GeostoreTransitStationProto",
       "properties": {
-        "agencies": {
-          "description": "Transit agencies which service this transit station. A station can be serviced by one or more transit agencies. See go/transit-agency-relation-migration for more information.",
+        "agencyAssociations": {
+          "description": "All the transit agencies which service this station. A station can be serviced by multiple stations. There may only be one agency association per transit agency. See go/transit-agency-relation-migration for more details.",
           "items": {
-            "$ref": "GeostoreFeatureIdProto"
+            "$ref": "GeostoreTransitStationProtoTransitAgencyAssociationProto"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreTransitStationProtoTransitAgencyAssociationProto": {
+      "description": "The association between this station and the agency which services this station.",
+      "id": "GeostoreTransitStationProtoTransitAgencyAssociationProto",
+      "properties": {
+        "agency": {
+          "$ref": "GeostoreFeatureIdProto",
+          "description": "The transit agency which services this station."
+        },
+        "stationCode": {
+          "description": "A station code uniquely identifies a transit station within the transit agency's network.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -45974,6 +46060,13 @@
           },
           "type": "array"
         },
+        "documentNameFilter": {
+          "description": "Search the documents in the list. Format: projects/{project_number}/locations/{location}/documents/{document_id}.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "documentSchemaNames": {
           "description": "This filter specifies the exact document schema Document.document_schema_name of the documents to search against. If a value isn't specified, documents within the search results are associated with any schema. If multiple values are specified, documents within the search results may be associated with any of the specified schemas. At most 20 document schema names are allowed.",
           "items": {
@@ -47225,6 +47318,10 @@
         },
         "nextPageToken": {
           "description": "The token that specifies the starting position of the next page of results. This field is empty if there are no more results.",
+          "type": "string"
+        },
+        "questionAnswer": {
+          "description": "Experimental. Question answer from the query against the document.",
           "type": "string"
         },
         "totalSize": {
@@ -48960,7 +49057,7 @@
       "id": "GoogleInternalAppsWaldoV1alphaAvailabilityPeriod",
       "properties": {
         "dayOfWeek": {
-          "description": "Day of week, 1 for Monday, ..., 7 for Sunday.",
+          "description": "Day of week, 0 for Sunday, 1 for Monday, ...",
           "format": "int32",
           "type": "integer"
         },
@@ -49545,7 +49642,7 @@
       "type": "object"
     },
     "GoogleTypeColor": {
-      "description": "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...",
+      "description": "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page does not have information about the absolute color space that should be used to interpret the RGB value\u2014for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...",
       "id": "GoogleTypeColor",
       "properties": {
         "alpha": {
@@ -57112,8 +57209,17 @@
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "creator": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "discoverSource": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo",
           "description": "LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/web-version.proto)"
+        },
+        "discussion": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "documentIntent": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "instantNavboost": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
@@ -60360,6 +60466,16 @@
             "Gibberish detection ran, but failed. Consider this not gibberish."
           ],
           "type": "string"
+        },
+        "numGibberishSegments": {
+          "description": "The number of the above segments that were classified as gibberish.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numSegmentsClassified": {
+          "description": "The number of ASR segments that were sent for classification.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -87562,6 +87678,7 @@
               "INFORMATION_SOURCE_GOVERNMENT",
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
+              "QNA",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -87582,7 +87699,7 @@
               "RESERVED_FOR_NEW_ENUM_152",
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
+              "RESERVED_FOR_NEW_ENUM_155",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
@@ -87719,6 +87836,7 @@
               "",
               "",
               "",
+              "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -87739,8 +87857,8 @@
               "",
               "",
               "",
-              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
+              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
               "",
               "",
@@ -87897,6 +88015,7 @@
               "INFORMATION_SOURCE_GOVERNMENT",
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
+              "QNA",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -87917,7 +88036,7 @@
               "RESERVED_FOR_NEW_ENUM_152",
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
+              "RESERVED_FOR_NEW_ENUM_155",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
@@ -88054,6 +88173,7 @@
               "",
               "",
               "",
+              "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -88074,8 +88194,8 @@
               "",
               "",
               "",
-              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
+              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
               "",
               "",
@@ -88237,6 +88357,7 @@
               "INFORMATION_SOURCE_GOVERNMENT",
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
+              "QNA",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -88257,7 +88378,7 @@
               "RESERVED_FOR_NEW_ENUM_152",
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98",
+              "RESERVED_FOR_NEW_ENUM_155",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
@@ -88394,6 +88515,7 @@
               "",
               "",
               "",
+              "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -88414,8 +88536,8 @@
               "",
               "",
               "",
-              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
+              "========== Enums for new large intents ========== Please ask orbit@ before using these.",
               "",
               "",
               "",
@@ -91130,6 +91252,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "nonDisplayableStaleAvailability": {
+          "$ref": "ShoppingWebentityShoppingAnnotationOfferAvailabilityInfo",
+          "description": "This is experimental, not filled in yet and not intended to be used. Please contact buyable-corpus@ before considering using this field."
+        },
         "offerDocid": {
           "format": "uint64",
           "type": "string"
@@ -91761,6 +91887,7 @@
             "LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION",
             "LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG",
             "LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION",
+            "LSU_HIGH_PRECISION_CREATION_DATE_OF_UGC_PAGE",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT",
@@ -91784,6 +91911,7 @@
             "The signal comes from publication markup date supported by annotation.",
             "The signal comes from date annotation often selected as a byline.",
             "The signal comes from ContentAge that's supported by date annotation.",
+            "The signal comes from creation date of UGC page.",
             "",
             "",
             "",
@@ -91842,6 +91970,7 @@
             "LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION",
             "LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG",
             "LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION",
+            "LSU_HIGH_PRECISION_CREATION_DATE_OF_UGC_PAGE",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT",
             "LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT",
@@ -91865,6 +91994,7 @@
             "The signal comes from publication markup date supported by annotation.",
             "The signal comes from date annotation often selected as a byline.",
             "The signal comes from ContentAge that's supported by date annotation.",
+            "The signal comes from creation date of UGC page.",
             "",
             "",
             "",
@@ -100086,6 +100216,10 @@
           "format": "byte",
           "type": "string"
         },
+        "gfv": {
+          "$ref": "ResearchScamGenericFeatureVector",
+          "description": "The field isn't tpopulated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result."
+        },
         "metadata": {
           "description": "Metadata about the neighbor. This is returned under some configurations as a serialized proto. The specific proto depends on which metadata is configured to be returned.",
           "format": "byte",
@@ -104486,6 +104620,33 @@
       },
       "type": "object"
     },
+    "ShoppingWebentityShoppingAnnotationOfferAvailabilityInfo": {
+      "id": "ShoppingWebentityShoppingAnnotationOfferAvailabilityInfo",
+      "properties": {
+        "availability": {
+          "enum": [
+            "AVAILABILITY_UNKNOWN",
+            "AVAILABILITY_IN_STOCK",
+            "AVAILABILITY_LIMITED",
+            "AVAILABILITY_OUT_OF_STOCK",
+            "AVAILABILITY_BACKORDER",
+            "AVAILABILITY_PREORDER",
+            "AVAILABILITY_ON_DISPLAY_TO_ORDER"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ShoppingWebentityShoppingAnnotationProductRating": {
       "description": "Information about a rating provided for a product. This can represent an aggregated rating if count is set. Next Id: 7",
       "id": "ShoppingWebentityShoppingAnnotationProductRating",
@@ -105930,6 +106091,7 @@
       "type": "object"
     },
     "SocialGraphApiProtoPartialNameOptions": {
+      "description": "For general information about Limited Profiles, see go/limited-profiles-api. LINT.IfChange",
       "id": "SocialGraphApiProtoPartialNameOptions",
       "properties": {
         "language": {
@@ -107799,6 +107961,7 @@
             "ISOLATION_S3_CREATOR_PRESENCE",
             "ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS",
             "ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES",
+            "ISOLATION_ASTROLOGY_HOROSCOPE",
             "UMP_TESTING_ONLY",
             "INTENTJOINS_NB_SIGNALS",
             "ADS_INTEGRITY_ANNOTATION",
@@ -107983,6 +108146,7 @@
             "Access controls for Creator Channel's S-Cubed corpus data. See more in go/uro-access-required. YOU MUST CONTACT milk-tea@ before reading or writing this data",
             "For Search sustainability's food choice feature, Recipe Ingredient Insights. Assign existing KG entities feature types to classify triggering behavior and insights. Owned by salehh@ and s12y-eng@ See go/rii-kg-triggering-migration for more information.",
             "Access controls for SCOUTS Societal Context Repository entities. Please contact johnhenry-eng@ before reading or writing this data. DD: go/scouts-kg-integration-dd",
+            "Access controls for Astrology Horoscope features. Please contact search-india-verticals@ before reading or writing this data. DD: go/daily-horoscope-dd",
             "This access control is used to guard data used by the Unified Media Platform team (ke-media-actions-serving@) for testing new features. It should never be used for purposes other than testing. More context at go/fake-media-provider.",
             "Access controls for the IntentJoins Navboost data. YOU MUST CONTACT intentjoins-eng@ before reading or writing this data.",
             "Access controls for Ads Integrity annotation data. Ads Integrity annotations are only available for Ads Integrity policy enforcement. See go/ai-political-km for more details. YOU MUST CONTACT ai-pacg@ before reading or writing this data.",
@@ -108842,10 +109006,7 @@
           "type": "array"
         },
         "greenFaresInfo": {
-          "items": {
-            "$ref": "TravelFlightsAirlineConfigGreenFaresInfo"
-          },
-          "type": "array"
+          "$ref": "TravelFlightsAirlineConfigGreenFaresInfo"
         },
         "iataCode": {
           "description": "Note that some iata_codes are reused (`dup_flag` field). For details, including how to resolve collisions for airlines shown in Google Flights, see: go/controlled-duplicate go/flights-data/airlines#resolving-iata-code-collisions cs/go/controlled-duplicate U2 - some have no IATA code",
@@ -111374,12 +111535,19 @@
               "DSA_P13N_OPTED_IN_AT_EVENT_LEVEL",
               "DSA_P13N_OPTED_OUT_AT_EVENT_LEVEL",
               "USER_P13N_SETTING_UNSPECIFIED_AT_EVENT_LEVEL",
+              "BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_EVENT_LEVEL",
               "USER_P13N_SETTING_ON_AT_EVENT_LEVEL",
+              "BOOKS_USER_P13N_SETTING_ON_AT_EVENT_LEVEL",
               "USER_P13N_SETTING_OFF_AT_EVENT_LEVEL",
+              "BOOKS_USER_P13N_SETTING_OFF_AT_EVENT_LEVEL",
               "BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL",
               "REVIEW_HIGHLIGHTS_TRIGGERING_EVENT_LEVEL",
               "TRUSTED_VERTICAL_VPN_INTENT_EVENT_LEVEL",
               "TRUSTED_VERTICAL_LOAN_INTENT_EVENT_LEVEL",
+              "SERP_YOUTUBE_VIDEO_CLUSTER_POPULATED_EVENT_LEVEL",
+              "LOWQ_APPS_DEMOTION_EVENT_LEVEL",
+              "QUERY_TYPE_MDP_EVENT_LEVEL",
+              "QUERY_TYPE_NON_MDP_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -111952,8 +112120,11 @@
               "LANGUAGE_SWITCHER_SERVED_SESSION_LEVEL",
               "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_SESSION_LEVEL",
               "USER_P13N_SETTING_UNSPECIFIED_AT_SESSION_LEVEL",
+              "BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_SESSION_LEVEL",
               "USER_P13N_SETTING_ON_AT_SESSION_LEVEL",
+              "BOOKS_USER_P13N_SETTING_ON_AT_SESSION_LEVEL",
               "USER_P13N_SETTING_OFF_AT_SESSION_LEVEL",
+              "BOOKS_USER_P13N_SETTING_OFF_AT_SESSION_LEVEL",
               "BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL",
               "REVIEW_HIGHLIGHTS_SESSION_LEVEL",
               "BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL",
@@ -111962,6 +112133,13 @@
               "SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_SESSION_LEVEL",
               "TRUSTED_VERTICAL_VPN_INTENT_SESSION_LEVEL",
               "TRUSTED_VERTICAL_LOAN_INTENT_SESSION_LEVEL",
+              "FOP_PARTNER_PROMOTION_SESSION_LEVEL",
+              "SERP_YOUTUBE_VIDEO_CLUSTER_POPULATED_SESSION_LEVEL",
+              "LOWQ_APPS_DEMOTION_SESSION_LEVEL",
+              "PLANOGRAM_MERCH_TW_DYNASTY_EXTRA_FEATURING",
+              "AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_SESSION_LEVEL",
+              "QUERY_TYPE_MDP_SESSION_LEVEL",
+              "QUERY_TYPE_NON_MDP_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -112074,6 +112252,7 @@
               "PLAY_PASS_PARENT_FOCUSED_SPLASH_PAGE_USER_LEVEL",
               "PLAY_PASS_SPLASH_PAGE_FOR_UNICORN_USER_LEVEL",
               "IN_CART_EXCHANGE_OPTIONS_ELIGIBLE_USER_LEVEL",
+              "GE_STAMP_CARD_INDIVIDUALIZATION_COUNTERFACTUAL",
               "GE_USER_BUYER_STATE_UNKNOWN",
               "GE_USER_BUYER_STATE_NEVER",
               "GE_USER_BUYER_STATE_NEW",
@@ -112211,6 +112390,7 @@
               "PURCHASE_READINESS_ADD_FOP_USER_LEVEL",
               "PURCHASE_READINESS_ADD_AUTH_USER_LEVEL",
               "PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL",
+              "SUBS_PAYMENT_DECLINE_USER_LEVEL",
               "MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL",
               "MERCH_CONTENT_EXP_ACTIVE_GENSHIN_USER_LEVEL",
               "MERCH_CONTENT_EXP_ACTIVE_ROBLOX_USER_LEVEL",
@@ -112222,13 +112402,18 @@
               "DSA_P13N_OPTED_OUT_AT_USER_LEVEL",
               "LIVEOPS_INSTALL_NOTIFICATION_USER_LEVEL",
               "USER_P13N_SETTING_UNSPECIFIED_AT_USER_LEVEL",
+              "BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_USER_LEVEL",
               "USER_P13N_SETTING_ON_AT_USER_LEVEL",
+              "BOOKS_USER_P13N_SETTING_ON_AT_USER_LEVEL",
               "USER_P13N_SETTING_OFF_AT_USER_LEVEL",
+              "BOOKS_USER_P13N_SETTING_OFF_AT_USER_LEVEL",
               "LIVEOPS_CLUSTER_SERP_TRIGGERING_USER_LEVEL",
               "BOOKS_NOTIFICATION_RECEIVED_USER_LEVEL",
               "LIVEOPS_INSTALL_NOTIFICATION_CHURNED_USER_LEVEL",
               "SUBS_OFFER_ON_BUYFLOW_AT_USER_LEVEL",
               "SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_USER_LEVEL",
+              "FOP_PARTNER_PROMOTION_USER_LEVEL",
+              "BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -112475,12 +112660,19 @@
               "Event-level test code for DSA p13n opt in.",
               "Event-level test code for DSA p13n opt out.",
               "Event-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_UNSPECIFIED.",
+              "",
               "Event-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_ON.",
+              "",
               "Event-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_OFF.",
+              "",
               "Event-level test code corresponding to an MDP showing for a game also available on Battlestar.",
               "Event-level test code to track triggering of review highlights.",
               "Event-level test code to track triggering of VPN Intent trusted vertical message.",
               "Event-level test code to track triggering of LOAN Intent trusted vertical message.",
+              "Event-level test code to track triggering of SERP YouTube video cluster.",
+              "Event-level test code to track triggering of lowQ apps demotion.",
+              "Test code for MDP query event level.",
+              "Test code for non-MDP query event level.",
               "",
               "",
               "",
@@ -112743,7 +112935,7 @@
               "",
               "",
               "",
-              "Test code for tracking eligble users who are shown the cart with marketing banner.",
+              "Test code for tracking eligible users who are shown the cart with marketing banner.",
               "Test code for tracking users shown Play Pass perks icon in cart.",
               "Testcode for slicing MDP triggering queries in Play search.",
               "Testcode for slicing non-MDP triggering queries in Play search.",
@@ -113053,16 +113245,26 @@
               "Session level test code for Language Switcher indicating that the user was served with the module on cart screen.",
               "Session level test code that indicates the stored value balance is insufficient for next renewal.",
               "Session-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_UNSPECIFIED.",
+              "",
               "Session-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_ON.",
+              "",
               "Session-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_OFF.",
+              "",
               "Session-level test code corresponding to an MDP showing for a game also available on Battlestar.",
               "Session-level test code for review highlights",
               "Session level test code for users who receive a Books notification.",
               "Session level test code indicating that the user is eligible for language switcher on cart screen.",
               "Session level test code for traking the users who did see subs offer on buyflow. This is a Commerce client level test code.",
               "Session level test code for traking the users who are eligible to subs offer on buyflow. This is a P3 server level test code.",
-              "Event-level test code to track triggering of VPN Intent trusted vertical message.",
-              "Event-level test code to track triggering of LOAN Intent trusted vertical message.",
+              "Session-level test code to track triggering of VPN Intent trusted vertical message.",
+              "Session-level test code to track triggering of LOAN Intent trusted vertical message.",
+              "Session level test code for FOP Partner Promo.",
+              "Session-level test code to track triggering of SERP YouTube video cluster.",
+              "Session-level test code to track triggering of lowQ apps demotion.",
+              "Session level test code for merch run planogram experiment for extra featuring of hit2 dynasty in TW.",
+              "Session-level test code indicating that there is some Fop eligible for amplification. Amplification may or may not be visible to the user if some experiment flags are disabled.",
+              "Test code for MDP query session level.",
+              "Test code for non MDP query session level.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -113170,9 +113372,10 @@
               "",
               "",
               "",
-              "Test code for tracking banner eligble users who are shown the cart.",
+              "Test code for tracking banner eligible users who are shown the cart.",
               "Test code for tracking users shown Play Pass perks icon in cart.",
               "Test code for tracking users who see a Play Pass parent-focused splash page.",
+              "",
               "",
               "",
               "Test code GE ranker service unknown users.",
@@ -113312,6 +113515,7 @@
               "User-level test code for user who is eligible for adding Form of Payment from Purchase Readiness Reminder.",
               "User-level test code for user who is eligible for adding Auth Settings from Purchase Readiness Reminder.",
               "User-level test code for user who is eligible for adding Form of Payment and then adding Auth Settings from Purchase Readiness Reminder.",
+              "User level test code for Subscription Payment Decline Reminder.",
               "User-level test code for running content experiments for merch curated clusters.",
               "",
               "",
@@ -113323,13 +113527,18 @@
               "User-level test code for DSA p13n opt out.",
               "User level test code for live-ops install notification experiments. If GE decision changed after enabling ranking using the notification install model prediction, log test code.",
               "User-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_UNSPECIFIED.",
+              "",
               "User-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_ON.",
+              "",
               "User-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_OFF.",
+              "",
               "User level test code for cat search live ops cluster triggering.",
               "User level test code for users who have received a Books notification.",
               "User level test code for live-ops install notification Churn experiments. If GE decision changed after enabling ranking using the notification install model prediction for churned users, log test code.",
               "User level test code for traking the users who did see subs offer on buyflow. This is a Commerce client level test code.",
               "User level test code for traking the users who are eligible to subs offer on buyflow. This is a P3 server level test code.",
+              "User level test code for FOP Partner Promo.",
+              "User level test code for users who have seen a Loyalty weekly prize banner.",
               ""
             ],
             "type": "string"
@@ -128383,7 +128592,7 @@
       "type": "object"
     },
     "WWWResultInfoSubImageDocInfo": {
-      "description": "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 25",
+      "description": "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 26",
       "id": "WWWResultInfoSubImageDocInfo",
       "properties": {
         "additionalSafesearchSignals": {
@@ -128518,6 +128727,11 @@
         },
         "estRelevance": {
           "description": "Estimated Image Relevance ranging between 0.0 (Off-Topic) to 1.0 (Very Useful).",
+          "format": "float",
+          "type": "number"
+        },
+        "estSigmaU": {
+          "description": "Estimated Sigma U calculated from U*.",
           "format": "float",
           "type": "number"
         },
