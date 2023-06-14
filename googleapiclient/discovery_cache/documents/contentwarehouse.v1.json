@@ -1103,7 +1103,7 @@
       }
     }
   },
-  "revision": "20230529",
+  "revision": "20230612",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3629,7 +3629,8 @@
             "PMW_TI_AFFINITY",
             "DRIVE_SEARCH_FILTER_PERSON_ONLY",
             "ACCESSIBILITY_TRACKER_AFFINITY",
-            "PLX_DATASOURCE_AFFINITY"
+            "PLX_DATASOURCE_AFFINITY",
+            "DUCKIEWEB_AFFINITY"
           ],
           "enumDescriptions": [
             "",
@@ -3646,6 +3647,7 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
             "",
             "",
             "",
@@ -4441,6 +4443,19 @@
             ""
           ],
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo": {
+      "description": "Contact level People Prompt settings. This message is a pure wrapper of the shared ContactPromptSettings message so that it can be a top-level person field. No other fields should be added to the message.",
+      "id": "AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo",
+      "properties": {
+        "contactPromptSettings": {
+          "$ref": "SocialGraphApiProtoContactPromptSettings"
+        },
+        "metadata": {
+          "$ref": "AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         }
       },
       "type": "object"
@@ -6531,6 +6546,12 @@
           "description": "Contact groups that this person is a member of.",
           "items": {
             "$ref": "AppsPeopleOzExternalMergedpeopleapiContactGroupMembership"
+          },
+          "type": "array"
+        },
+        "contactPromptSettingsInfo": {
+          "items": {
+            "$ref": "AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo"
           },
           "type": "array"
         },
@@ -8948,30 +8969,6 @@
       },
       "type": "object"
     },
-    "AssistantApiAccessControlOutput": {
-      "description": "Access settings for providers.",
-      "id": "AssistantApiAccessControlOutput",
-      "properties": {
-        "allowNonUnicornUserAccessYoutubeKids": {
-          "description": "If true, the user consented to use YouTube Kids as a video provider for non-unicorn users(voice recognized adults or guest). Unicorn accounts shouldn\u2019t use this setting.",
-          "type": "boolean"
-        },
-        "guestAccessOnYoutube": {
-          "enum": [
-            "UNKNOWN_GUEST_ACCESS",
-            "USE_DEFAULT_ACCOUNT_FOR_GUEST",
-            "DISABLED_FOR_GUEST"
-          ],
-          "enumDescriptions": [
-            "",
-            "Guests can access content using linked users' account.",
-            "No access for guests."
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "AssistantApiActionV2SupportedFeatures": {
       "description": "The features supported by the ActionV2 protocol. Note that after we move on to ConversationProto for all surfaces we can remove this message.",
       "id": "AssistantApiActionV2SupportedFeatures",
@@ -9359,7 +9356,6 @@
           "type": "array"
         },
         "supportsDuoEmailEndpoint": {
-          "description": "Whether the surface supports Duo calling email endpoints.",
           "type": "boolean"
         }
       },
@@ -9584,6 +9580,7 @@
               "AUTO_ROTATE",
               "AUTO_ROTATE_FACE_DETECTION",
               "BACKUP",
+              "BATTERY_HEALTH",
               "BATTERY_LEVEL",
               "BATTERY_LOW",
               "BATTERY_PERCENTAGE",
@@ -9810,6 +9807,14 @@
               "TIPS_AND_SUPPORT",
               "SCREEN_ATTENTION",
               "BLUETOOTH_TETHERING",
+              "ALL_APPS",
+              "EXTEND_UNLOCK",
+              "CLEAR_CALLING",
+              "GOOGLE_SETTINGS",
+              "APP_LANGUAGES",
+              "SIM_STATUS",
+              "MICROPHONE_PERMISSIONS",
+              "GOOGLE_PLAY_UPDATE",
               "ABOUT_PHONE",
               "ACCOUNTS",
               "APPLICATION",
@@ -9898,6 +9903,7 @@
               "",
               "",
               "",
+              "Denotes if the battery health is normal / reduced / unknown.",
               "",
               "",
               "",
@@ -10123,6 +10129,14 @@
               "Settings > System > Gestures > Quick tap",
               "Settings > Tips & support",
               "Display > Screen timeout > Screen attention",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "Permission Manager > Microphone",
               "",
               "Begin of NGA proto consistence",
               "",
@@ -11334,6 +11348,158 @@
       },
       "type": "object"
     },
+    "AssistantApiCoreTypesGovernedSurfaceIdentity": {
+      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 5 LINT.IfChange",
+      "id": "AssistantApiCoreTypesGovernedSurfaceIdentity",
+      "properties": {
+        "deviceId": {
+          "$ref": "AssistantApiCoreTypesDeviceId",
+          "description": "The identifier of the device."
+        },
+        "surfaceType": {
+          "description": "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl.",
+          "enum": [
+            "UNKNOWN_TYPE",
+            "ACCL",
+            "AGSA",
+            "ANDROID",
+            "ANDROID_AUTO",
+            "ANDROID_LITE",
+            "ANDROID_PHONE",
+            "ANDROID_SCREENLESS",
+            "ANDROID_SMART_DISPLAY",
+            "ANDROID_TABLET",
+            "ANDROID_THINGS",
+            "ANDROID_THINGS_CUBE",
+            "ANDROID_THINGS_JASPER",
+            "ANDROID_TV",
+            "ANDROID_WEAR",
+            "ASSISTANT_KIT",
+            "ASSISTANT_SDK",
+            "AUTO",
+            "CAST_OS",
+            "CHROME_OS",
+            "CHROMECAST_MANHATTAN",
+            "CLOUD_DEVICE",
+            "CROS",
+            "FITBIT_OS_WATCH",
+            "FITBIT_OS_WATCH_ANDROID",
+            "FITBIT_OS_WATCH_IOS",
+            "GOOGLE_HOME",
+            "HEADPHONE",
+            "HEADPHONE_ANDROID",
+            "HEADPHONE_IOS",
+            "IOPA",
+            "IOS",
+            "IOS_SCREENLESS",
+            "IPAD",
+            "IPHONE",
+            "KAI_OS",
+            "KAI_OS_AMA",
+            "LIBASSISTANT",
+            "PHONE",
+            "PIXEL",
+            "PIXEL5",
+            "PIXEL6",
+            "PIXEL7",
+            "PIXEL_BUDS",
+            "PIXEL_TABLET",
+            "PIXEL_TABLET_HUB_MODE",
+            "PIXEL_TABLET_PERSONAL_MODE",
+            "PIXEL_WATCH",
+            "SCREENLESS",
+            "SMART_DISPLAY",
+            "SPEAKER",
+            "TABLET",
+            "TELEPHONE",
+            "THING",
+            "WATCH",
+            "WEAR_OS",
+            "WEAR_OS_WATCH"
+          ],
+          "enumDescriptions": [
+            "Unknown surface type.",
+            "Android conversation client library (go/accl) is an Android library which implements the Conversation Protocol that allows a surface to have conversations with the Assistant server. OWNERS: surfaces-infra-core@",
+            "Android Google Search App (go/agsa). OWNERS: surfaces-infra-core@",
+            "Android. OWNERS: surfaces-infra-core@",
+            "Assistant on Android Auto (go/ast-auto). OWNERS: opa-android-leads@",
+            "Assistant on Android Go (not part of AGSA). OWNERS: assistantgo-eng@",
+            "Assistant on Android phones accessed through the Google App (velvet). This surface is formerly known as OPA_AGSA. OWNERS: opa-android-leads@",
+            "Assistant on Nexus with screen off/locked. Use go/bisto device to trigger. OWNERS: opa-android-leads@",
+            "Assistant on Titan hub mode (go/titan-hubmode-surface). This is OPA Android first party Smart Display devices. The UI experience is built on Opal (Gallium and Flutter) and native Android. OWNERS: opa-android-leads@",
+            "Assistant on Android tablet. OWNERS: opa-android-leads@",
+            "Android Things (go/things). OWNERS: surfaces-infra-core@",
+            "Lenovo Smart Clock v1, a stationary smart display device with a 4-inch screen, targeted for bedroom/bedside use cases like alarm, sleep tracking. Based on Android Things. See go/cube-home. OWNERS: cube-eng@",
+            "Former codename for 3P 8-inch and 10-inch Smart Displays from Lenovo, JBL and LG, targeted for use in the kitchen. Based on Android Things. See go/jasper-home. OWNERS: jasper-eng@",
+            "The Android platform that powers smart televisions, set-top-boxes, and over-the-top devices. See go/atv-eng and go/opa-tv. OWNERS: opa-tv-eng@",
+            "Legacy Wear OS Assistant. OWNERS: wear-assistant-eng@",
+            "AssistantKit (go/assistantkit) is a collection of iOS libraries allowing first party apps to integrate Google Assistant features. OWNERS: assistantkit-eng@",
+            "Standalone gRPC based client. See go/easi. OWNERS: assistant-sdk-service-eng@",
+            "Automobile. OWNERS: surfaces-infra-core@",
+            "Cast OS (go/opal-castos-docs#what-is-castos). OWNERS: surfaces-infra-core@",
+            "Chrome OS (go/chromsos) OWNERS: surfaces-infra-core@",
+            "For chromecast with assistant + screen, e.g. Newman. OWNERS: cast-eng-platform@",
+            "Virtual device for event-based triggering, e.g. executing time scheduled routines: go/scheduled-routines. OWNERS: surfaces-infra-core@",
+            "Assistant on native Chrome OS (go/croissant). OWNERS: croissant@",
+            "Assistant on Fitbit OS Watch. OWNERS: assistant-wearable-team@",
+            "Assistant on Fitbit Watch paired with AGSA. OWNERS: assistant-wearable-team@",
+            "Assistant on Fitbit Watch paired with iOPA. OWNERS: assistant-wearable-team@",
+            "Google home speaker, i.e., Chirp devices. See go/assistant-speakers. OWNERS: assistant-speaker-leads@",
+            "Headphone. OWNERS: surfaces-infra-core@",
+            "Assistant on headphones paired with AGSA. OWNERS: assistant-wearable-team@",
+            "Assistant on headphones paired with iOPA. OWNERS: assistant-wearable-team@",
+            "Assistant on iOS devices (go/opa-ios). OWNERS: opa-ios-eng@",
+            "iOS. OWNERS: surfaces-infra-core@",
+            "Assistant on iOS with screen off/locked. Use go/bisto device to trigger. OWNERS: bisto-team@",
+            "iPad devices. OWNERS: surfaces-infra-core@",
+            "iPhone devices. OWNERS: surfaces-infra-core@",
+            "Kai OS (go/kaios). OWNERS: surfaces-infra-core@",
+            "Assistant on KaiOS (go/kaiosama). OWNERS: assistant-kaios-eng@",
+            "LibAssistant (go/libassistant) C++ SDK that powers Assistant experience on both 1P devices like Google Home and 3P devices like Sonos. OWNERS: libassistant-core@",
+            "A phone. OWNERS: surfaces-infra-core@",
+            "Pixel devices. OWNERS: surfaces-infra-core@",
+            "Pixel 5. OWNERS: surfaces-infra-core@",
+            "Pixel 6. OWNERS: surfaces-infra-core@",
+            "Pixel 7. OWNERS: surfaces-infra-core@",
+            "Assistant on Pixel Buds. OWNERS: assistant-wearable-team@",
+            "Assistant on Pixel Tablet/Tangor (a.k.a, TK). OWNERS: assistant-display-eng@",
+            "Assistant on Tangor running in Hub mode. OWNERS: assistant-display-eng@",
+            "Assistant on Tangor running in Personal mode. OWNERS: assistant-display-eng@",
+            "Assistant on Pixel Watch (a.k.a., Rohan). OWNERS: assistant-wearable-team@",
+            "Devices with screen off or locked (go/bisto). OWNERS: surfaces-infra-core@",
+            "Smart surface, such as Titan. OWNERS: surfaces-infra-core@",
+            "A speaker. OWNERS: surfaces-infra-core@",
+            "A tablet. OWNERS: surfaces-infra-core@",
+            "Assistant on a phone call (go/telephone). OWNERS: telephone-assistant-eng@",
+            "IoT device. OWNERS: surfaces-infra-core@",
+            "Watch. OWNERS: surfaces-infra-core@",
+            "Wear OS. OWNERS: surfaces-infra-core@",
+            "Assistant on Wear OS Watch (a.k.a., Edoras). OWNERS: assistant-wearable-team@"
+          ],
+          "type": "string"
+        },
+        "surfaceVersion": {
+          "$ref": "AssistantApiCoreTypesGovernedSurfaceVersion",
+          "description": "The version of the surface/client. This is different from the Conversation protocol version."
+        }
+      },
+      "type": "object"
+    },
+    "AssistantApiCoreTypesGovernedSurfaceVersion": {
+      "description": "The version of the surface/client. New surfaces are encouraged to only use the \u201cmajor\u201d field to keep track of version number. The \u201cminor\u201d field may be used for surfaces that rely on both the \u201cmajor\u201d and \u201cminor\u201d fields to define their version.",
+      "id": "AssistantApiCoreTypesGovernedSurfaceVersion",
+      "properties": {
+        "major": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minor": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "AssistantApiCoreTypesHomeAppInfo": {
       "description": "The Home app information of the provider. Next ID: 3",
       "id": "AssistantApiCoreTypesHomeAppInfo",
@@ -11528,7 +11694,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesMessageNotification": {
-      "description": "This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 20",
+      "description": "LINT.IfChange(ungoverned_message_notification) This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 20",
       "id": "AssistantApiCoreTypesMessageNotification",
       "properties": {
         "appName": {
@@ -12338,7 +12504,7 @@
         },
         "systemNotificationRestrictions": {
           "$ref": "AssistantApiSystemNotificationRestrictions",
-          "description": "Restrictions related to system-level notifications. This field is superficially similar to ProactiveNotificationOutput, but unlike that field which tracks a per-user preference on the OPA side, this field captures system level notifications restrictions. This field is not stored and is merged to capablities from conversation params. It exists mostly for logging purposes of android channel state and global app-level notification opt out."
+          "description": "Restrictions related to system-level notifications. This field is superficially similar to ProactiveNotificationOutput, but unlike that field which tracks a per-user preference on the OPA side, this field captures system level notifications restrictions. This field is not stored and is merged to capabilities from conversation params. It exists mostly for logging purposes of android channel state and global app-level notification opt out."
         },
         "thirdPartyCapabilities": {
           "$ref": "AssistantApiThirdPartyCapabilities",
@@ -12563,7 +12729,7 @@
       "type": "object"
     },
     "AssistantApiGuestAccessOutput": {
-      "description": "DEPRECATED: Use AccessControlOutput instead. Access settings for guests.",
+      "description": "Access settings for guests.",
       "id": "AssistantApiGuestAccessOutput",
       "properties": {
         "guestAccessOnYoutube": {
@@ -12823,7 +12989,7 @@
           "description": "Contains detailed provider information such as android app package name."
         },
         "providerKey": {
-          "description": "An provider enum string for OTT providers. The available key can be found in go/ump-provider-enum For Tuner provider, the provider key would be an ID the tuner app uploaded from TIF. See https://source.android.com/devices/tv",
+          "description": "A provider enum string for OTT providers. The available key can be found in go/ump-provider-enum For Tuner provider, the provider key would be an ID the tuner app uploaded from TIF. See https://source.android.com/devices/tv",
           "type": "string"
         },
         "providerType": {
@@ -12855,11 +13021,6 @@
       "description": "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 16",
       "id": "AssistantApiLoggingOnlyData",
       "properties": {
-        "accountIndex": {
-          "description": "The index of the account on the device. Useful when there are multiple accounts on a device. There is no guarantee that this is a stable number but is relatively stable in practice.",
-          "format": "int32",
-          "type": "integer"
-        },
         "acpVersion": {
           "description": "A user-readable string describing the ACP version (go/acp-version) of the client app used by the user to originate the conversation.",
           "type": "string"
@@ -13308,10 +13469,6 @@
       "description": "These are user configurable permissions representing what the device is allowed to output. Next ID: 11",
       "id": "AssistantApiOutputRestrictions",
       "properties": {
-        "accessControlOutput": {
-          "$ref": "AssistantApiAccessControlOutput",
-          "description": "Access settings for all providers."
-        },
         "googlePhotoContent": {
           "description": "The type of Google Photo content which the device can output.",
           "enum": [
@@ -13319,14 +13476,14 @@
             "NO_RESTRICTED_PHOTO_CONTENT"
           ],
           "enumDescriptions": [
-            "All content can be output, including contents from restriced categories (e.g. violent, racy).",
+            "All content can be output, including contents from restricted categories (e.g. violent, racy).",
             "Only content from non-restricted categories can be output."
           ],
           "type": "string"
         },
         "guestAccessOutput": {
           "$ref": "AssistantApiGuestAccessOutput",
-          "description": "DEPRECATED: Use access_control_output instead. Access settings for guests."
+          "description": "Access settings for guests."
         },
         "personalData": {
           "description": "The level of personal data which the device can output. See go/personal-readout for detail.",
@@ -13470,10 +13627,6 @@
             "All photos proactive content can be output. This indicates that user has explicitly enabled photos proactive settings."
           ],
           "type": "string"
-        },
-        "supportsProactiveOutput": {
-          "description": "Whether a device supports proactive output. Note that this is assumed to be true for all Smart Display devices, but surfaces that newly start supporting proactive_output should set this bit.",
-          "type": "boolean"
         },
         "userMatchProactive": {
           "description": "Settings for displaying personal data on proactive surfaces with face match capability.",
@@ -13675,7 +13828,7 @@
           "type": "array"
         },
         "visionHelpEnabled": {
-          "description": "Whether the device enabled vision help features in accessiblity settings. The settings is config in Assistant App and on-device settings, and stored in footprints. When enabled, font, color and TTS will be adjusted.",
+          "description": "Whether the device enabled vision help features in accessibility settings. The settings is config in Assistant App and on-device settings, and stored in footprints. When enabled, font, color and TTS will be adjusted.",
           "type": "boolean"
         }
       },
@@ -13789,7 +13942,7 @@
       "type": "object"
     },
     "AssistantApiSettingsAppCapabilities": {
-      "description": "These capabilties are associated with Assistant Settings on devices.",
+      "description": "These capabilities are associated with Assistant Settings on devices.",
       "id": "AssistantApiSettingsAppCapabilities",
       "properties": {
         "carSettingsCapabilities": {
@@ -14263,10 +14416,6 @@
         "truncatedLocalNetworkId": {
           "description": "Local network ID of the device (truncated to obfuscate devices and households globally). This is a temporary signal to determine proximity of Assistant devices in a house (HGS place).",
           "type": "string"
-        },
-        "trustedVoiceEnabled": {
-          "description": "DEPRECATED: Use speech_settings instead. Indicates whether the user has enabled trusted voice for this device. See go/hotword-settings-on-cloud for more info on this project.",
-          "type": "boolean"
         },
         "type": {
           "description": "The type of the device. Note: this should only be used for grouping devices for UI presentation purpose. Use |capabilities| to decide what the device can do.",
@@ -15649,7 +15798,7 @@
       "type": "object"
     },
     "AssistantApiSpeechCapabilities": {
-      "description": "DEPRECATED These capabilties are associated with speech detection on devices.",
+      "description": "DEPRECATED These capabilities are associated with speech detection on devices.",
       "id": "AssistantApiSpeechCapabilities",
       "properties": {
         "dspAvailable": {
@@ -16642,6 +16791,76 @@
       },
       "type": "object"
     },
+    "AssistantContextProviderSelectionPolicy": {
+      "description": "Identifies a business policy used for selecting a given content provider in the form of a name and a resulting scoring action.",
+      "id": "AssistantContextProviderSelectionPolicy",
+      "properties": {
+        "policyAction": {
+          "description": "Result of applying the policy.",
+          "enum": [
+            "UNSET_ACTION",
+            "BOOST_TO_WIN_ACTION",
+            "SUPPRESS_TO_INVALIDATE_ACTION"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "policyName": {
+          "description": "Name of the policy.",
+          "enum": [
+            "UNSET_POLICY",
+            "QUERY_RESTRICTED_SPOTIFY_POLICY",
+            "QUERY_RESTRICTED_PANDORA_POLICY",
+            "QUERY_RESTRICTED_NETFLIX_POLICY"
+          ],
+          "enumDescriptions": [
+            "",
+            "Candidate should win if the provider_id is Spotify, and the query specified to play the content on Spotify. See go/sp-policy-spotify.",
+            "Candidate should win if the provider_id is Pandora, and the query specified to play the content on Pandora. See go/sp-policy-pandora.",
+            "Candidate should win if the provider_id is Netflix, and the query specified to play the content on Netflix. See go/sp-policy-netflix."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssistantContextProviderSelectionResult": {
+      "description": "Message that gets returned from the Provider Selection Library (PSL). It encodes the scores, applied policies, and pruning decisions for a given provider candidate.",
+      "id": "AssistantContextProviderSelectionResult",
+      "properties": {
+        "bucketedFinalScore": {
+          "description": "Alternative bucketed score for use by downstream ranking providers. A raw numeric score is subject to semantic-drift, while a bucket is not.",
+          "enum": [
+            "DEFAULT_BUCKET"
+          ],
+          "enumDescriptions": [
+            ""
+          ],
+          "type": "string"
+        },
+        "finalScore": {
+          "description": "Final score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.",
+          "format": "float",
+          "type": "number"
+        },
+        "policyApplied": {
+          "description": "List of business policies applied to the candidate.",
+          "items": {
+            "$ref": "AssistantContextProviderSelectionPolicy"
+          },
+          "type": "array"
+        },
+        "shouldPrune": {
+          "description": "Indicates whether the candidate should be pruned.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "AssistantContextProviderVariant": {
       "description": "Note: As of May 2021, multiple providers use the same mids (e.g. YouTube Main, YouTube Go, and YouTube Music all have the same mids). However, quite often we end up using surface specific identifiers (e.g. Android package names, iOS bundle identifiers, etc.) to differentiate amongst them. This field allows us to move away from surface specific identifiers towards a surface-agnostic enum representing the same information.",
       "id": "AssistantContextProviderVariant",
@@ -16723,7 +16942,8 @@
             "MISSING_LOCAL_DEVICE_SETTING",
             "NO_DEVICE_HAS_REQUIRED_APP",
             "HYBRID_DEVICE_NOT_QUALIFIED",
-            "NO_NEARBY_DEVICES"
+            "NO_NEARBY_DEVICES",
+            "NO_MATCHING_LAST_USED_DEVICE"
           ],
           "enumDescriptions": [
             "",
@@ -16753,7 +16973,8 @@
             "AvailableDevice device setting of local device is missing.",
             "Required app is not installed",
             "All remote hybrid devices fail the propertries requirement specific (lock/unlock, etc) for hybrid devices (such as Tangor).",
-            "No nearby hearing devices"
+            "No nearby hearing devices",
+            "No matching device for the LastUsedDevice requirement found."
           ],
           "type": "string"
         }
@@ -17417,6 +17638,55 @@
       },
       "type": "object"
     },
+    "AssistantGroundingProviderProviderSignalResult": {
+      "description": "Message containing the processed provider signals. This message is consumed by systems outside of the Provider GP, such as the HGR. For use of provider signals within the Provider GP, please refer to the CTF-governed PackedProviderSignals defined in: cs/google3/assistant/context/proto/packed_provider_signals.proto;rcl=486224300;l=68",
+      "id": "AssistantGroundingProviderProviderSignalResult",
+      "properties": {
+        "isDefaultProvider": {
+          "description": "Whether the provider is the default provider for the BII and entity type. Also known as the 'preferred_provider'.",
+          "type": "boolean"
+        },
+        "isForegroundProvider": {
+          "description": "Whether the provider is currently open in the foreground on the device.",
+          "type": "boolean"
+        },
+        "isInAppProvider": {
+          "description": "Indicates that fulfillment on this provider will happen within the provider app",
+          "type": "boolean"
+        },
+        "isInstalled": {
+          "description": "Whether the provider is installed, or otherwise reachable, from the device.",
+          "type": "boolean"
+        },
+        "isLastUsedProvider": {
+          "description": "Whether the provider was the last-used provider for this intent on the device. Also known as the 'sticky_provider'.",
+          "type": "boolean"
+        },
+        "isQueryRestrictedProvider": {
+          "description": "Whether the provider was specified by the query.",
+          "type": "boolean"
+        },
+        "providerSelectionResult": {
+          "$ref": "AssistantContextProviderSelectionResult",
+          "description": "The result of running provider-selection on the provider candidate. This is populated by the Signal Extractor after the PSL has been run."
+        },
+        "providerTypeSignal": {
+          "description": "Contains the \"fulfillment type\" of provider eg whether it's 0p or System API provider.",
+          "enum": [
+            "UNKNOWN_TYPE",
+            "ZEROTH_PARTY_TYPE",
+            "ANDROID_SYSTEM_API_TYPE"
+          ],
+          "enumDescriptions": [
+            "",
+            "Provider fulfillment is through 0-party assistant app (AGSA) on mobile or 0-party libassistant on other surfaces. See go/0p-and-system-api-in-pc.",
+            "Provider fulfillment is through Android System API. See go/0p-and-system-api-in-pc."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AssistantGroundingRankerAssistantInteractionFeatures": {
       "id": "AssistantGroundingRankerAssistantInteractionFeatures",
       "properties": {
@@ -17651,6 +17921,10 @@
         "deviceTargetingLabels": {
           "$ref": "AssistantGroundingRankerDeviceTargetingLabels",
           "description": "Labels tagged by Device Targeting library (Lumos)."
+        },
+        "surfaceIdentity": {
+          "$ref": "AssistantApiCoreTypesGovernedSurfaceIdentity",
+          "description": "The set of information that helps identify the surface."
         }
       },
       "type": "object"
@@ -18058,12 +18332,22 @@
       "type": "object"
     },
     "AssistantGroundingRankerPodcastGroundingProviderFeatures": {
-      "description": "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 4",
+      "description": "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 6",
       "id": "AssistantGroundingRankerPodcastGroundingProviderFeatures",
       "properties": {
         "isExclusive": {
           "description": "Whether the podcast is exclusive to a provider a not.",
           "type": "boolean"
+        },
+        "podcastListenersCount": {
+          "description": "The count of the unique users that listened to the podcast in the last 28 days.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "popularityScore": {
+          "description": "Provider popularity score. More details are here go/ps-to-kg.",
+          "format": "double",
+          "type": "number"
         },
         "scubedNg3ModelScore": {
           "description": "The relevance score from Scubed.",
@@ -18079,13 +18363,9 @@
       "type": "object"
     },
     "AssistantGroundingRankerProviderGroundingProviderFeatures": {
-      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 6",
+      "description": "Features to be extracted from Provider GP for ranking in HGR. Next ID: 7",
       "id": "AssistantGroundingRankerProviderGroundingProviderFeatures",
       "properties": {
-        "isInAppProvider": {
-          "description": "Indicates that fulfillment on this provider will happen within the provider app.",
-          "type": "boolean"
-        },
         "providerClusterIds": {
           "description": "Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.",
           "items": {
@@ -18097,6 +18377,10 @@
         "providerId": {
           "$ref": "AssistantContextProviderId",
           "description": "ProviderId for the provider in the binding set. PRR specific feature."
+        },
+        "providerSignalResult": {
+          "$ref": "AssistantGroundingProviderProviderSignalResult",
+          "description": "Provider signals extracted from Provider GP."
         },
         "pslScore": {
           "description": "Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.",
@@ -18678,6 +18962,7 @@
             "HYBRID_DEVICE_PROPERTIES_FILTER",
             "NEARBY_DEVICE_FILTER",
             "DEVICE_ATTRIBUTES_FILTER",
+            "LAST_USED_DEVICE_FILTER",
             "DEFAULT_MEDIA_OUTPUT_PROMOTER",
             "DEVICE_GROUP_PROMOTER",
             "LOCAL_DEVICE_PROMOTER",
@@ -18694,6 +18979,7 @@
           "enumDescriptions": [
             "",
             "filters",
+            "",
             "",
             "",
             "",
@@ -19187,7 +19473,8 @@
             "MISSING_LOCAL_DEVICE_SETTING",
             "NO_DEVICE_HAS_REQUIRED_APP",
             "HYBRID_DEVICE_NOT_QUALIFIED",
-            "NO_NEARBY_DEVICES"
+            "NO_NEARBY_DEVICES",
+            "NO_MATCHING_LAST_USED_DEVICE"
           ],
           "enumDescriptions": [
             "",
@@ -19217,7 +19504,8 @@
             "AvailableDevice device setting of local device is missing.",
             "Required app is not installed",
             "All remote hybrid devices fail the propertries requirement specific (lock/unlock, etc) for hybrid devices (such as Tangor).",
-            "No nearby hearing devices"
+            "No nearby hearing devices",
+            "No matching device for the LastUsedDevice requirement found."
           ],
           "type": "string"
         },
@@ -19400,6 +19688,7 @@
             "HYBRID_DEVICE_PROPERTIES_FILTER",
             "NEARBY_DEVICE_FILTER",
             "DEVICE_ATTRIBUTES_FILTER",
+            "LAST_USED_DEVICE_FILTER",
             "DEFAULT_MEDIA_OUTPUT_PROMOTER",
             "DEVICE_GROUP_PROMOTER",
             "LOCAL_DEVICE_PROMOTER",
@@ -19416,6 +19705,7 @@
           "enumDescriptions": [
             "",
             "filters",
+            "",
             "",
             "",
             "",
@@ -19920,7 +20210,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 53",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 57",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -19928,10 +20218,38 @@
           "format": "float",
           "type": "number"
         },
+        "bindingSetInvalidReason": {
+          "description": "BindingSet level invalid reason. This is only useful when the bindingset is invalid after running the horizontal check in HGR. More details: go/gb-infeasible.",
+          "enum": [
+            "BINDING_SET_INVALID_REASON_UNKNOWN",
+            "BINDING_SET_INVALID_REASON_PROVIDER_INFEASIBLE_FOR_INTENT"
+          ],
+          "enumDescriptions": [
+            "",
+            "Currently, the only example of this is FulfillmentOptionLibrary outputs which tell us whether a provider is feasible given the entire interpretation. (Note: this is a bset-level check because it looks at the entire interpretation, which the Provider GP cannot do)."
+          ],
+          "type": "string"
+        },
         "bindingSetPauis": {
           "description": "Pauis score for the binding set",
           "format": "float",
           "type": "number"
+        },
+        "bindingSetValidity": {
+          "description": "BindingSet level validity. When one of the GPs returns invalid resolution, or the combined bindingset is invalid, this enum will indidate the validity. More details: go/gb-infeasible.",
+          "enum": [
+            "BINDING_SET_VALIDITY_UNKNOWN",
+            "BINDING_SET_VALIDITY_VALID",
+            "BINDING_SET_VALIDITY_INVALID_RESOLUTIONS",
+            "BINDING_SET_VALIDITY_INFEASIBLE_JOINT_GROUNDING"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "Means that one or more resolutions returned INVALID. See individual resolutions for more info.",
+            "Means that the combination of resolutions is infeasible for some reason. See invalid_reason for more info."
+          ],
+          "type": "string"
         },
         "calibratedParsingScore": {
           "description": "A parsing score that is independently calibrated by each parser/IG.",
@@ -20016,8 +20334,16 @@
           "description": "Whether the intent is a podcast intent.",
           "type": "boolean"
         },
+        "isSageIntent": {
+          "description": "Whether this intent was generated by Sage.",
+          "type": "boolean"
+        },
         "isTvmIntent": {
           "description": "Whether the intent is a media object tvm intent.",
+          "type": "boolean"
+        },
+        "isValidSmarthomeIntent": {
+          "description": "Whether the intent is a Smarthome-domain intent with valid device arguments.",
           "type": "boolean"
         },
         "isVideoIntent": {
@@ -21590,7 +21916,8 @@
             "DIALOGFLOW_DELEGATION",
             "AD_LEAD_VERIFICATION",
             "GET_HUMAN",
-            "CHECK_INSURANCE_ACCEPTANCE"
+            "CHECK_INSURANCE_ACCEPTANCE",
+            "FREE_TEXT"
           ],
           "enumDescriptions": [
             "// Data extraction:",
@@ -21639,7 +21966,8 @@
             "Duplex for Business - Dialogflow delegation module for CCAI integration.",
             "Duplex for Business - ad lead verification module for GLS integration.",
             "Get Human bot.",
-            "Check health insurance acceptance."
+            "Check health insurance acceptance.",
+            "Wrapper use case for creating an errand from conversational free-text. The true use case for the errand will be provided by a call to the LBT backend's task routing logic, such that this use case should NOT actually ever reach the caller."
           ],
           "type": "string"
         }
@@ -29344,6 +29672,179 @@
       },
       "type": "object"
     },
+    "GeostoreCityJsonProto": {
+      "description": "CityJsonProto is a custom proto representation of the portion of the CityJSON spec (https://www.cityjson.org/) relevant to internal projects. See go/cityjsonproto-design for more information about the modeling and design decisions implemented here.",
+      "id": "GeostoreCityJsonProto",
+      "properties": {
+        "cityObjects": {
+          "description": "City objects associated with this CityJsonProto.",
+          "items": {
+            "$ref": "GeostoreCityJsonProtoCityObject"
+          },
+          "type": "array"
+        },
+        "transform": {
+          "$ref": "GeostoreCityJsonProtoTransform",
+          "description": "Spec for converting vertices from a local coordinate system in arbitrary units to ECEF coordinates in meters (https://en.wikipedia.org/wiki/Earth-centered,_Earth-fixed_coordinate_system)."
+        },
+        "vertexXyz": {
+          "description": "Vertices as local coordinates represented as a flattened list: [x1,y1,z1,x2,y2,z2,x3,y3,z3]. Vertices are relative to a local coordinate system and rounded to their nearest integer value. See `transform` for how vertices can be transformed from a local coordinate system into an Earth-centered, Earth-fixed coordinate system. Vertices are flattened for space efficiency, memory locality, and processing performance. To access the x,y,z coordinates of vertex N, read the values at indices 3N, 3N+1, and 3N+2.",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObject": {
+      "description": "Representation of an object with geometry.",
+      "id": "GeostoreCityJsonProtoCityObject",
+      "properties": {
+        "geometries": {
+          "description": "Geometries associated with this object.",
+          "items": {
+            "$ref": "GeostoreCityJsonProtoCityObjectGeometry"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "The ID of this CityObject, which must be unique within this CityJsonProto. The ID does not have a meaning outside this CityJsonProto.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of object represented, e.g. building.",
+          "enum": [
+            "TYPE_UNSPECIFIED",
+            "BUILDING",
+            "OTHER_CONSTRUCTION"
+          ],
+          "enumDescriptions": [
+            "Should never be set in prod. If set locally and converted to CityJSON, the CityJSON will be invalid.",
+            "Building.",
+            "Unspecified other structure, e.g. storefront."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObjectGeometry": {
+      "description": "Representation of geometry. Geometries vary both in type and in level-of-detail, enabling representation of any shape at any level of granularity.",
+      "id": "GeostoreCityJsonProtoCityObjectGeometry",
+      "properties": {
+        "lod": {
+          "description": "Level-of-detail (LoD) indicates how intricate the geometric representation is. May be a single digit per CityGML standards or X.Y per TU Delft (visual depiction at https://3d.bk.tudelft.nl/lod/). `CityObject`s may have multiple geometries with the same LoD.",
+          "type": "string"
+        },
+        "multipoint": {
+          "$ref": "GeostoreCityJsonProtoCityObjectGeometryMultiPoint",
+          "description": "For geometries consisting of a single point, line, or loop."
+        },
+        "multisurface": {
+          "$ref": "GeostoreCityJsonProtoCityObjectGeometryMultiSurface",
+          "description": "For geometries consisting of a collection of surfaces."
+        },
+        "solid": {
+          "$ref": "GeostoreCityJsonProtoCityObjectGeometrySolid",
+          "description": "For geometries consisting of a watertight 3D shape."
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObjectGeometryMultiPoint": {
+      "description": "A single line, loop, or set of points.",
+      "id": "GeostoreCityJsonProtoCityObjectGeometryMultiPoint",
+      "properties": {
+        "xIndices": {
+          "description": "A collection of references to vertices in `CityJsonProto.vertex_xyz`. `CityJsonProto.vertex_xyz` is a flattened list of vertex coordinates. A value in `x_indices` should be the index of the x-coordinate of the desired vertex V; the full coordinates of vertex V can then be found at indices [V,V+1,V+2]. For example, an `x_indices` containing 3, 0, and 12 references three vertices, whose complete x,y,z coordinates can respectively be found at `CityJsonProto.vertex_xyz` indices [3,4,5], [0,1,2], and [12,13,14].",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObjectGeometryMultiSurface": {
+      "description": "A collection of arbitrary surfaces that have no prescribed topological relationship.",
+      "id": "GeostoreCityJsonProtoCityObjectGeometryMultiSurface",
+      "properties": {
+        "surfaces": {
+          "description": "All surfaces are standalone entities with no relationship to each other.",
+          "items": {
+            "$ref": "GeostoreCityJsonProtoCityObjectGeometrySurface"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObjectGeometrySolid": {
+      "description": "A 3D shape, composed of a watertight exterior shell with optional interior watertight shells.",
+      "id": "GeostoreCityJsonProtoCityObjectGeometrySolid",
+      "properties": {
+        "shells": {
+          "description": "The first shell is exterior; any additional are interior.",
+          "items": {
+            "$ref": "GeostoreCityJsonProtoCityObjectGeometryMultiSurface"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoCityObjectGeometrySurface": {
+      "description": "A polygonal surface, composed of a closed exterior loop with optional closed interior loops.",
+      "id": "GeostoreCityJsonProtoCityObjectGeometrySurface",
+      "properties": {
+        "loops": {
+          "description": "The first loop is exterior; any additional are interior.",
+          "items": {
+            "$ref": "GeostoreCityJsonProtoCityObjectGeometryMultiPoint"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoTransform": {
+      "description": "Information for transforming a point from an \"old\" to \"new\" coordinate frame. Applied as follows: vertex_new = scale * vertex_old + translate",
+      "id": "GeostoreCityJsonProtoTransform",
+      "properties": {
+        "scale": {
+          "description": "Relative scale of the vertices in the new coordinate system relative to the old coordinate system. Applies to all three x,y,z coordinates.",
+          "format": "double",
+          "type": "number"
+        },
+        "translate": {
+          "$ref": "GeostoreCityJsonProtoTransformXyzVector",
+          "description": "Offset of each vertex in the new coordinate system relative to the old coordinate system."
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCityJsonProtoTransformXyzVector": {
+      "description": "Vector of length three whose values respectively correspond to the x, y, and z axes.",
+      "id": "GeostoreCityJsonProtoTransformXyzVector",
+      "properties": {
+        "x": {
+          "format": "double",
+          "type": "number"
+        },
+        "y": {
+          "format": "double",
+          "type": "number"
+        },
+        "z": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "GeostoreComposableItemProto": {
       "description": "Generic item proto. This is intended to have only certain aspects filled (e.g. photo only, name + price). Valid combinations of properties are enforced by linters.",
       "id": "GeostoreComposableItemProto",
@@ -29494,6 +29995,19 @@
             "The crossing line has a more complex structure than just a single conceptual stripe or row of symbols."
           ],
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreCurvatureProto": {
+      "id": "GeostoreCurvatureProto",
+      "properties": {
+        "pointCurvature": {
+          "description": "Curvature values at points along the flowline. A linear interpolation between two successive points will yield the curvature value at intermediate points.",
+          "items": {
+            "$ref": "GeostorePointCurvatureProto"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -32424,6 +32938,7 @@
             "FUTURE_GEOMETRY",
             "FUTURE_GEOMETRY_FOR",
             "GCONCEPT",
+            "GEOMETRY_3D",
             "GEOMETRY_PRECISION_METERS",
             "GEOPOLITICAL_GEOMETRY_REST_OF_WORLD_POLYGON",
             "GEOPOLITICAL_GEOMETRY_SELF_POLYGON",
@@ -32538,6 +33053,7 @@
             "TRANSIT_LINE_VEHICLE_TYPE",
             "TRANSIT_STATION_AGENCY_ASSOCIATION",
             "VERTICAL_ORDERING_LEVEL",
+            "VISUALIZATION_AREA",
             "WATER_REMOVED_POLYGON",
             "DEPRECATED_DO_NOT_USE_EMAIL_ADDRESS",
             "DEPRECATED_DO_NOT_USE_RANK_GEOMETRY",
@@ -32586,6 +33102,8 @@
             "DEPRECATED_DO_NOT_USE_TRANSIT_STATION_AGENCY"
           ],
           "enumDescriptions": [
+            "",
+            "",
             "",
             "",
             "",
@@ -32915,6 +33433,10 @@
         "futureGeometryFor": {
           "$ref": "GeostoreFeatureIdProto",
           "description": "Specifies the feature that this feature's geometry will replace. If this field is populated, the referenced feature must have a future_geometry reference back to this feature. This field is only allowed (and required) for TYPE_FUTURE_GEOMETRY features."
+        },
+        "geometry3d": {
+          "$ref": "GeostoreGeometryStoreReferenceProto",
+          "description": "Geometry Store ID and materialized geometry representing the feature's physical shape in the world."
         },
         "geometryPrecisionMeters": {
           "description": "If set, the feature's actual location can be assumed to be somewhere within a circle of this radius, centered on the feature's location. More information on this field at go/gpm-definition-update. NOTE: Only applicable to features with 'point' geometry. Please contact geo-schema-team@ if you have non-point use cases for which this field would be useful.",
@@ -33938,6 +34460,10 @@
           "$ref": "GeostoreVerticalOrderingProto",
           "description": "Represents vertical ordering for this feature relative to other geometrically-overlaping features. See go/aboutgrades for more information about distinction among different levels."
         },
+        "visualizationArea": {
+          "$ref": "GeostoreGeometryStoreReferenceProto",
+          "description": "Geometry Store ID and materialized geometry representing a tight bounding box of the feature's geometry (or the building/grounds a POI occupies), e.g. for generating flyover experiences."
+        },
         "waterRemovedPolygon": {
           "$ref": "GeostorePolygonProto",
           "description": "A version of the geometry which has water removed but is not simplified (thus having equal or more vertices than polygon_for_display)."
@@ -34020,6 +34546,10 @@
       "description": "Wrapper to hold data related to a lane\u2019s track, extendable for future data.",
       "id": "GeostoreFlowLineProto",
       "properties": {
+        "curvature": {
+          "$ref": "GeostoreCurvatureProto",
+          "description": "RESERVED"
+        },
         "track": {
           "$ref": "GeostoreTrackProto"
         }
@@ -34320,6 +34850,26 @@
             "$ref": "GeostoreFeatureIdProto"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreGeometryStoreReferenceProto": {
+      "description": "A Geometry Store ID and, in some contexts, geometry materialized from the record associated with that ID.",
+      "id": "GeostoreGeometryStoreReferenceProto",
+      "properties": {
+        "footprint": {
+          "description": "Geometry (in STGeography format) materialized from the footprint field of the Geometry Store record associated with the geometry_id referenced above.",
+          "format": "byte",
+          "type": "string"
+        },
+        "geometry": {
+          "$ref": "GeostoreCityJsonProto",
+          "description": "Geometry materialized from the full_fidelity_proto field of the Geometry Store record associated with the geometry_id referenced above."
+        },
+        "geometryId": {
+          "description": "The ID of a record in the Geometry Store.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -38531,6 +39081,33 @@
       },
       "type": "object"
     },
+    "GeostorePointCurvatureProto": {
+      "id": "GeostorePointCurvatureProto",
+      "properties": {
+        "curvatureStatus": {
+          "enum": [
+            "CURVATURE_UNSPECIFIED",
+            "CURVATURE_UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "",
+            "A curvature value can be explicitly set as UNKNOWN when we do not have enough information to make a determination."
+          ],
+          "type": "string"
+        },
+        "radiansPerMeter": {
+          "description": "Curvature in radians per meter. Negative is a curve to the left and positive is a curve to the right.",
+          "format": "float",
+          "type": "number"
+        },
+        "startPointFraction": {
+          "description": "How far along the line this curvature value starts to apply, in the format of decimal between 0 and 1.",
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "GeostorePointProto": {
       "id": "GeostorePointProto",
       "properties": {
@@ -41102,12 +41679,16 @@
           "$ref": "GeostoreFeatureIdProto",
           "description": "Restriction group this restriction belongs to."
         },
+        "restrictionToken": {
+          "description": "A token that can be used to identify the version of the data about this restriction.",
+          "type": "string"
+        },
         "schedule": {
           "$ref": "GeostoreTimeScheduleProto",
           "description": "When specified, restriction applies only at particular times (operating hours or times of the year: reversing lanes, seasonal roads, no left turns from 3-5pm Mon-Fri except holidays). Otherwise, restriction is in effect at all times."
         },
         "scope": {
-          "description": "The scope that the restriction applies to. - SCOPE_DIRECTION means the segment/sibling pair is restricted in the direction of the segment that contains this RestrictionProto. For segment/sibling pairs with pedestrian facilities (and thus side-of-road routing) the RestrictionProto restricts both facilities in the direction of the segment (assuming that the restriction applies to travel mode TRAVEL_PEDESTRIAN). - SCOPE_SIDE means the RestrictionProto applies only to the side of road that the containing segment represents. That sibling's pedestrian facility is restricted in both directions. Schema constraints: - SCOPE_SIDE must be set if and only if travel_mode == [TRAVEL_PEDESTRIAN] and the segment containing the restriction has PEDESTRIAN_FACILITY_PRESENT. Such restrictions must have no subpath. - All other restrictions must have this field set to SCOPE_DIRECTION (whether explicitly or implicitly). This distinction is necessary for cases such as pedestrian facility on one-way segment/sibling roads.",
+          "description": "The scope that the restriction applies to. - SCOPE_DIRECTION means the segment/sibling pair is restricted in the direction of the segment that contains this RestrictionProto. For segment/sibling pairs with pedestrian facilities (and thus side-of-road routing) the RestrictionProto restricts both facilities in the direction of the segment (assuming that the restriction applies to travel mode TRAVEL_PEDESTRIAN). - SCOPE_SIDE means the RestrictionProto applies only to the side of road that the containing segment represents. That sibling's pedestrian facility is restricted in both directions. Schema constraints: - SCOPE_SIDE must be set if and only if travel_mode == [TRAVEL_PEDESTRIAN] and the segment containing the restriction has the pedestrian_facility field set and is not set to PEDESTRIAN_FACILITY_UNKNOWN. Such restrictions must have no subpath. - All other restrictions must have this field set to SCOPE_DIRECTION (whether explicitly or implicitly). This distinction is necessary for cases such as pedestrian facility on one-way segment/sibling roads.",
           "enum": [
             "SCOPE_DIRECTION",
             "SCOPE_SIDE"
@@ -45199,11 +45780,13 @@
           "description": "Indicates if an error occurred while fetching alarm state. If this value is missing, it can be assumed that the state fetch was successful.",
           "enum": [
             "STATE_FETCH_ERROR_UNSPECIFIED",
-            "STATE_FETCH_ERROR_TIMEOUT"
+            "STATE_FETCH_ERROR_TIMEOUT",
+            "STATE_FETCH_ERROR_UNSUPPORTED"
           ],
           "enumDescriptions": [
             "Equivalent to no errors from fetching state (i.e. success).",
-            "The time taken to fetch state exceeded the allowed maximum time."
+            "The time taken to fetch state exceeded the allowed maximum time.",
+            "State fetch is not supported in Stateless Timer/Alarm Integration. This is expected for Stateless Integration."
           ],
           "type": "string"
         }
@@ -45533,11 +46116,13 @@
           "description": "Indicates if an error occurred while fetching timer state. If this value is missing, it can be assumed that the state fetch was successful.",
           "enum": [
             "STATE_FETCH_ERROR_UNSPECIFIED",
-            "STATE_FETCH_ERROR_TIMEOUT"
+            "STATE_FETCH_ERROR_TIMEOUT",
+            "STATE_FETCH_ERROR_UNSUPPORTED"
           ],
           "enumDescriptions": [
             "Equivalent to no errors from fetching state (i.e. success).",
-            "The time taken to fetch state exceeded the allowed maximum time."
+            "The time taken to fetch state exceeded the allowed maximum time.",
+            "State fetch is not supported in Stateless Timer/Alarm Integration. This is expected for Stateless Integration."
           ],
           "type": "string"
         },
@@ -46445,6 +47030,10 @@
           ],
           "type": "string"
         },
+        "enableCalUserEmailLogging": {
+          "description": "Optional. Whether to enable CAL user email logging.",
+          "type": "boolean"
+        },
         "kmsKey": {
           "description": "Optional. The KMS key used for CMEK encryption. It is required that the kms key is in the same region as the endpoint. The same key will be used for all provisioned resources, if encryption is available. If the kms_key is left empty, no encryption will be enforced.",
           "type": "string"
@@ -47022,12 +47611,16 @@
           "enum": [
             "UNKNOWN",
             "ON_CREATE",
-            "ON_UPDATE"
+            "ON_UPDATE",
+            "ON_CREATE_LINK",
+            "ON_DELETE_LINK"
           ],
           "enumDescriptions": [
             "Trigger for unknown action.",
             "Trigger for create document action.",
-            "Trigger for update document action."
+            "Trigger for update document action.",
+            "Trigger for create link action.",
+            "Trigger for delete link action."
           ],
           "type": "string"
         }
@@ -47791,7 +48384,7 @@
           "description": "Any error that occurred while processing this document."
         },
         "mimeType": {
-          "description": "An IANA published MIME type (also referred to as media type). For more information, see https://www.iana.org/assignments/media-types/media-types.xhtml.",
+          "description": "An IANA published [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml).",
           "type": "string"
         },
         "pages": {
@@ -47994,7 +48587,7 @@
         },
         "imageQualityScores": {
           "$ref": "GoogleCloudDocumentaiV1DocumentPageImageQualityScores",
-          "description": "Image Quality Scores."
+          "description": "Image quality scores."
         },
         "layout": {
           "$ref": "GoogleCloudDocumentaiV1DocumentPageLayout",
@@ -48171,7 +48764,7 @@
           "type": "number"
         },
         "languageCode": {
-          "description": "The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.",
+          "description": "The [BCP-47 language code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier), such as `en-US` or `sr-Latn`.",
           "type": "string"
         }
       },
@@ -48258,7 +48851,7 @@
           "type": "integer"
         },
         "mimeType": {
-          "description": "Encoding mime type for the image.",
+          "description": "Encoding [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml) for the image.",
           "type": "string"
         },
         "width": {
@@ -48270,7 +48863,7 @@
       "type": "object"
     },
     "GoogleCloudDocumentaiV1DocumentPageImageQualityScores": {
-      "description": "Image Quality Scores for the page image",
+      "description": "Image quality scores for the page image.",
       "id": "GoogleCloudDocumentaiV1DocumentPageImageQualityScores",
       "properties": {
         "detectedDefects": {
@@ -48281,7 +48874,7 @@
           "type": "array"
         },
         "qualityScore": {
-          "description": "The overall quality score. Range `[0, 1]` where 1 is perfect quality.",
+          "description": "The overall quality score. Range `[0, 1]` where `1` is perfect quality.",
           "format": "float",
           "type": "number"
         }
@@ -48293,7 +48886,7 @@
       "id": "GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect",
       "properties": {
         "confidence": {
-          "description": "Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.",
+          "description": "Confidence of detected defect. Range `[0, 1]` where `1` indicates strong confidence that the defect exists.",
           "format": "float",
           "type": "number"
         },
@@ -48826,7 +49419,7 @@
           "description": "Font size."
         },
         "fontWeight": {
-          "description": "Font weight. Possible values are normal, bold, bolder, and lighter. https://www.w3schools.com/cssref/pr_font_weight.asp",
+          "description": "[Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp). Possible values are `normal`, `bold`, `bolder`, and `lighter`.",
           "type": "string"
         },
         "textAnchor": {
@@ -48834,11 +49427,11 @@
           "description": "Text anchor indexing into the Document.text."
         },
         "textDecoration": {
-          "description": "Text decoration. Follows CSS standard. https://www.w3schools.com/cssref/pr_text_text-decoration.asp",
+          "description": "[Text decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp). Follows CSS standard. ",
           "type": "string"
         },
         "textStyle": {
-          "description": "Text style. Possible values are normal, italic, and oblique. https://www.w3schools.com/cssref/pr_font_font-style.asp",
+          "description": "[Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp). Possible values are `normal`, `italic`, and `oblique`.",
           "type": "string"
         }
       },
@@ -48854,7 +49447,7 @@
           "type": "number"
         },
         "unit": {
-          "description": "Unit for the font size. Follows CSS naming (in, px, pt, etc.).",
+          "description": "Unit for the font size. Follows CSS naming (such as `in`, `px`, and `pt`).",
           "type": "string"
         }
       },
@@ -49642,7 +50235,7 @@
       "type": "object"
     },
     "GoogleTypeColor": {
-      "description": "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page does not have information about the absolute color space that should be used to interpret the RGB value\u2014for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...",
+      "description": "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't have information about the absolute color space that should be used to interpret the RGB value\u2014for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ...",
       "id": "GoogleTypeColor",
       "properties": {
         "alpha": {
@@ -54202,7 +54795,8 @@
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
-            "GENUS_AERIAL_VIEW"
+            "GENUS_AERIAL_VIEW",
+            "GENUS_DOCS_VIDEO"
           ],
           "enumDescriptions": [
             "",
@@ -54251,7 +54845,8 @@
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
-            "Genus for Geo Aerial View"
+            "Genus for Geo Aerial View",
+            "Genus for Docs Video (Flix)"
           ],
           "type": "string"
         },
@@ -55093,7 +55688,8 @@
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
-            "GENUS_AERIAL_VIEW"
+            "GENUS_AERIAL_VIEW",
+            "GENUS_DOCS_VIDEO"
           ],
           "enumDescriptions": [
             "",
@@ -55142,7 +55738,8 @@
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
-            "Genus for Geo Aerial View"
+            "Genus for Geo Aerial View",
+            "Genus for Docs Video (Flix)"
           ],
           "type": "string"
         },
@@ -57205,6 +57802,9 @@
         "acceleratedShoppingSignal": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
+        "authenticSiteRankData": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
         "chromeCounts": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
@@ -57212,13 +57812,18 @@
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "discoverSource": {
-          "$ref": "IndexingDocjoinerDataVersionVersionInfo",
-          "description": "LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/web-version.proto)"
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "discussion": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "documentIntent": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "extractedBookInfo": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "instantChromeViews": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "instantNavboost": {
@@ -57231,10 +57836,15 @@
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "navboost": {
-          "$ref": "IndexingDocjoinerDataVersionVersionInfo",
-          "description": "LINT.IfChange"
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "predictedAuthenticity": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "rankembed": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "rosettaLanguage": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "universalFacts": {
@@ -78903,6 +79513,7 @@
             "GSOX_MOCHI",
             "PMW_TI",
             "ACCESSIBILITY_TRACKER",
+            "DUCKIEWEB",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -79546,6 +80157,7 @@
             "Gsox Mochi Team contact: fintechops-eng@google.com",
             "Pmw Ti Team contact: pmw-ti",
             "Accessibility Tracker Team contact: a11y-tracker-eng@google.com",
+            "Duckieweb Team contact: workflow-horizontals-core@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -84287,6 +84899,10 @@
             "HEADPHONE_PERSONAL_RESULTS_OPTIN",
             "DISCOVERY_SPARKS",
             "SPOKEN_NOTIFICATIONS_OOBE_OPTIN",
+            "SPOKEN_NOTIFICATIONS_BNS_MIGRATION_OOBE",
+            "TRAIN_STATUS",
+            "TRAIN_DELAY",
+            "TRAIN_PLATFORM",
             "UNIT_TESTING"
           ],
           "enumDescriptions": [
@@ -84703,6 +85319,10 @@
             "Notification for Headphone Personal Response (HPR) opt-in: go/migrate-pr-notifs-tng-ma-prd",
             "go/habits-sparks-design",
             "Notification for Spoken Notifications OOBE opt-in. go/mapa-notifications-prd",
+            "Notification for Spoken Notifications BNS Migration OOBE. go/bns-mapa-migration-notifications-prd",
+            "Notifications for Train Journeys go/proactive-assistant-india-mvp",
+            "",
+            "",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -87669,7 +88289,7 @@
               "GOOGLE_SCREENSHOT",
               "MUGSHOT",
               "CRIME",
-              "SHOPPING_TOPN",
+              "PRODUCT_TOPN",
               "AUTHENTICITY",
               "INFORMATION_SOURCE_OTHER",
               "INFORMATION_SOURCE_NEWS_PUBLISHER",
@@ -87679,6 +88299,7 @@
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
               "QNA",
+              "UGC_DISCUSSION",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -87700,7 +88321,6 @@
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
               "RESERVED_FOR_NEW_ENUM_155",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102",
@@ -87827,7 +88447,7 @@
               "This is an image intent",
               "Image intent representing whether there is a mugshot in the image (or if the image is itself a mugshot).",
               "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
-              "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
+              "Document intents that provide analysis, opinions of a list of top-recommended products, and focus on multiple specific products individually. See go/sdu-shopping-page-intro#heading=h.r7a5gewp8do.",
               "AuthenticityScore for document. see go/astar-dd.",
               "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
               "",
@@ -87837,6 +88457,7 @@
               "",
               "",
               "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
+              "Document intent for whether a page is a ugc discussion. For the definition, please see the furball template go/ugc-discussion-template. Note that this is semantically the union of QNA and FORUM doc level intents. For the reason why we want it to be a single intent, see https://docs.google.com/document/d/1Ka3qcMWLvNHCZMomekHXXTumr_9g_tcgJ0BD6ev1HI4/edit?resourcekey=0-8r1KcmFaOH11GBK_yfipHA",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -87859,7 +88480,6 @@
               "",
               "",
               "========== Enums for new large intents ========== Please ask orbit@ before using these.",
-              "",
               "",
               "",
               "",
@@ -88006,7 +88626,7 @@
               "GOOGLE_SCREENSHOT",
               "MUGSHOT",
               "CRIME",
-              "SHOPPING_TOPN",
+              "PRODUCT_TOPN",
               "AUTHENTICITY",
               "INFORMATION_SOURCE_OTHER",
               "INFORMATION_SOURCE_NEWS_PUBLISHER",
@@ -88016,6 +88636,7 @@
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
               "QNA",
+              "UGC_DISCUSSION",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -88037,7 +88658,6 @@
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
               "RESERVED_FOR_NEW_ENUM_155",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102",
@@ -88164,7 +88784,7 @@
               "This is an image intent",
               "Image intent representing whether there is a mugshot in the image (or if the image is itself a mugshot).",
               "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
-              "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
+              "Document intents that provide analysis, opinions of a list of top-recommended products, and focus on multiple specific products individually. See go/sdu-shopping-page-intro#heading=h.r7a5gewp8do.",
               "AuthenticityScore for document. see go/astar-dd.",
               "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
               "",
@@ -88174,6 +88794,7 @@
               "",
               "",
               "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
+              "Document intent for whether a page is a ugc discussion. For the definition, please see the furball template go/ugc-discussion-template. Note that this is semantically the union of QNA and FORUM doc level intents. For the reason why we want it to be a single intent, see https://docs.google.com/document/d/1Ka3qcMWLvNHCZMomekHXXTumr_9g_tcgJ0BD6ev1HI4/edit?resourcekey=0-8r1KcmFaOH11GBK_yfipHA",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -88196,7 +88817,6 @@
               "",
               "",
               "========== Enums for new large intents ========== Please ask orbit@ before using these.",
-              "",
               "",
               "",
               "",
@@ -88348,7 +88968,7 @@
               "GOOGLE_SCREENSHOT",
               "MUGSHOT",
               "CRIME",
-              "SHOPPING_TOPN",
+              "PRODUCT_TOPN",
               "AUTHENTICITY",
               "INFORMATION_SOURCE_OTHER",
               "INFORMATION_SOURCE_NEWS_PUBLISHER",
@@ -88358,6 +88978,7 @@
               "INFORMATION_SOURCE_UGC",
               "INFORMATION_SOURCE_RESEARCH_INSTITUTE",
               "QNA",
+              "UGC_DISCUSSION",
               "RESERVED_FOR_NEW_ENUM_135",
               "RESERVED_FOR_NEW_ENUM_136",
               "RESERVED_FOR_NEW_ENUM_137",
@@ -88379,7 +89000,6 @@
               "RESERVED_FOR_NEW_ENUM_153",
               "RESERVED_FOR_NEW_ENUM_154",
               "RESERVED_FOR_NEW_ENUM_155",
-              "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101",
               "RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102",
@@ -88506,7 +89126,7 @@
               "This is an image intent",
               "Image intent representing whether there is a mugshot in the image (or if the image is itself a mugshot).",
               "Document intent representing whether a page is crime-related (go/crime-demotion-in-image-search-dd)",
-              "Document intent representing whether a page is recommending best shopping products fulfilling certain application (e.g. \"best laptops for students\"). See go/shopping_topn_orbit.",
+              "Document intents that provide analysis, opinions of a list of top-recommended products, and focus on multiple specific products individually. See go/sdu-shopping-page-intro#heading=h.r7a5gewp8do.",
               "AuthenticityScore for document. see go/astar-dd.",
               "Document intents for various information sources. They are used in Tangram Diversity. see tangram_diversity_annotation.proto.",
               "",
@@ -88516,6 +89136,7 @@
               "",
               "",
               "Question and Answer format discussion page. check go/orbit-doc-intents for detailed intent description.",
+              "Document intent for whether a page is a ugc discussion. For the definition, please see the furball template go/ugc-discussion-template. Note that this is semantically the union of QNA and FORUM doc level intents. For the reason why we want it to be a single intent, see https://docs.google.com/document/d/1Ka3qcMWLvNHCZMomekHXXTumr_9g_tcgJ0BD6ev1HI4/edit?resourcekey=0-8r1KcmFaOH11GBK_yfipHA",
               "========== Enums for new intents ========== Instructions: When adding a new intent, use the reserved enum number from the start of this list, and add a new reserved enum number to the end for the next person. There is a unit test that checks there are at least 20 reserved enums. See go/new-intentkeyenum for details.",
               "",
               "",
@@ -88538,7 +89159,6 @@
               "",
               "",
               "========== Enums for new large intents ========== Please ask orbit@ before using these.",
-              "",
               "",
               "",
               "",
@@ -90164,7 +90784,7 @@
           "type": "string"
         },
         "versionAndImprovInfo": {
-          "description": "First 7 bits encode the version, then each chunck of 5 bits encode the index of a potential improv query (lsb to msb) -------|-----|-----|-----|-----|----- version| id1 | id2 | id3 | id4 | id5 where id1 is the index of the first improv query in the improv debug table. As of cl/270008220, this field only contains the version info. For backward compatibility, version still only uses the first 7 bits, and is still prepended by 5 1 bits.",
+          "description": "First 7 bits encode the version, then each chunk of 5 bits encode the index of a potential improv query (lsb to msb) -------|-----|-----|-----|-----|----- version| id1 | id2 | id3 | id4 | id5 where id1 is the index of the first improv query in the improv debug table. As of cl/270008220, this field only contains the version info. For backward compatibility, version still only uses the first 7 bits, and is still prepended by 5 1 bits.",
           "format": "uint32",
           "type": "integer"
         }
@@ -93969,7 +94589,7 @@
       "type": "object"
     },
     "RepositoryWebrefDetailedEntityScores": {
-      "description": "Detailed scores about the topicality of an entity. Next available tag: 16",
+      "description": "Detailed scores about the topicality of an entity. Next available tag: 17",
       "id": "RepositoryWebrefDetailedEntityScores",
       "properties": {
         "connectedness": {
@@ -94008,6 +94628,10 @@
           "description": "Representation of the topicality score that is normalized in [0, 1] and which sum over all entities in the document is 1. It represents the \"proportion\" of the document that talks about the entity. This score is less human interpretable as the bucketized topicality score (EntityAnnotations.topicality_score), but is more suited for some usages like aggregations.",
           "format": "float",
           "type": "number"
+        },
+        "profileUrl": {
+          "description": "Contains the link to the author's profile url on the platform.",
+          "type": "string"
         },
         "referencePageScores": {
           "$ref": "RepositoryWebrefReferencePageScores",
@@ -95952,6 +96576,7 @@
             "UNKNOWN",
             "DEFINITE",
             "INDEFINITE",
+            "FEMININE_DETERMINER",
             "ABLATIVE",
             "ADESSIVE",
             "ALLATIVE",
@@ -96052,6 +96677,7 @@
             "",
             "Articles or markers that express the definitess of a noun (see go/wordgraph/definiteness).",
             "Articles or markers that express the indefiniteness of a noun (see go/wordgraph/definiteness).",
+            "Determiners that mark *unambiguously* the feminine gender of the expression (e.g.: \"*une* artiste\")",
             "Linguistic markers that express the movement from a place (like the English preposition *from* in a sentence like \"I came *from* my place\").",
             "Linguistic markers that express the location *near* a place (like in the English preposition *near* in a sentence like \"I am near the house\").",
             "Linguistic markers that express the movement towards a place (like the English preposition *to* in a sentence like \"I go *to* my house\").",
@@ -100218,7 +100844,7 @@
         },
         "gfv": {
           "$ref": "ResearchScamGenericFeatureVector",
-          "description": "The field isn't tpopulated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result."
+          "description": "The field isn't populated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result."
         },
         "metadata": {
           "description": "Metadata about the neighbor. This is returned under some configurations as a serialized proto. The specific proto depends on which metadata is configured to be returned.",
@@ -102124,7 +102750,7 @@
       "type": "object"
     },
     "SafesearchVideoClassifierOutput": {
-      "description": "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 5",
+      "description": "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 6",
       "id": "SafesearchVideoClassifierOutput",
       "properties": {},
       "type": "object"
@@ -102226,6 +102852,10 @@
         "AbstractText": {
           "type": "string"
         },
+        "AbstractTypeFromSource": {
+          "description": "The original (unnormalized) type of an abstract. AbstractDisplay holds a normalized type deduced from things like tagnames, tag-attributes, keywords in documents or the placement of the abstract in the document. This field is meant for the type of the abstract identified explicitly by the source document. E.g., the value of the 'abstract-type' attribute from a tag in XML ('primary abstract', 'summary', 'highlights' etc.).",
+          "type": "string"
+        },
         "AlternateVersionID": {
           "description": "Fingerprint of the URL after applying crawl and aggregate rewrites. Different citations with the same AlternateVersionID must have the same VersionID, but not necessarily vice versa. Omitted when identical to the VersionID.",
           "format": "uint64",
@@ -102276,6 +102906,11 @@
           "description": "citation src: dblp/crossref/paper etc",
           "format": "int32",
           "type": "integer"
+        },
+        "CitationSourceCrawlTimestamp": {
+          "description": "Seconds since the epoch, should be consistent with CitationSourceUrl.",
+          "format": "int64",
+          "type": "string"
         },
         "CitationSourceUrl": {
           "description": "url where record came from",
@@ -102765,6 +103400,10 @@
           "type": "string"
         },
         "AbstractText": {
+          "type": "string"
+        },
+        "AbstractTypeFromSource": {
+          "description": "The original (unnormalized) type of an abstract. AbstractDisplay holds a normalized type deduced from things like tagnames, tag-attributes, keywords in documents or the placement of the abstract in the document. This field is meant for the type of the abstract identified explicitly by the source document. E.g., the value of the 'abstract-type' attribute from a tag in XML ('primary abstract', 'summary', 'highlights' etc.).",
           "type": "string"
         }
       },
@@ -108014,7 +108653,7 @@
             "This is an access restriction to avoid any usage of media data from a special LiveTV data provider Youview without knowing the context. YOU MUST CONTACT go/ump before reading or writing this data.",
             "This is an access restriction to avoid any leakage of data for the testing and dogfooding of Youtube ALC data. YOU MUST CONTACT go/ump before reading or writing this data.",
             "DEPRECATED! Not set anymore. Deprecated in favor of ISOLATION_S3_CREATOR_PRESENCE.",
-            "Youtube Podcasts metadata. YOU MUST CONTACT who/kvk and g/ytm-podcasts-understanding before reading or writing this data.",
+            "Youtube Podcasts metadata. YOU MUST CONTACT who/kvk, who/mbonanni and g/ytm-podcasts-understanding before reading or writing this data.",
             "Access controls for data being injected by the Media Actions team without being reconciled against existing entities. This is an access restriction we use to insert triples into KG that improves Media Actions triggering on the Assistant, but that would otherwise cause quality issues on Search (due to the lack of proper reconciliation). While triples tagged with this access restriction will typically only be used on the Assistant, this access restriction should not be used for contractually sensitive data. In order to handle such data, see: go/ma-access-controls-prd See go/ma-launch-small-providers and go/ma-acl for context. YOU MUST CONTACT ke-media-actions@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. Audible's data is subject to simba/deal.do?cmd=view&id=417794. YOU MUST CONTACT kg-legal@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. Netflix for search data is subject to simba//#documents/list/dealId=500038. YOU MUST CONTACT knowledge-legal@ before reading or writing this data.",
@@ -111176,12 +111815,12 @@
           ],
           "enumDescriptions": [
             "MAIN_GSR is the generic search response specified in AddKnowledgePackerPreprocessors. This will normally be universal::kResponseWeb but can also be universal::kResponseQuimbyTextWeb or potentially another response depending on the search mode.",
+            "DEPRECATED",
             "",
             "",
             "",
-            "The following source is used by ContextBoostVoteAwareVoter to provide support for the selected interpretation. Note that this should not be used for any other purpose like navboost signals smearing.",
-            "This is added for temporary legacy compatibility until all interpretations that use voting have migrated to KScorer. A KScorer-eligible interpretation may not receive any direct support from a particular result, but will require a ResultSupport rank in order to participate in legacy voting.",
-            "The following source is used by the PersonalizationTwiddler"
+            "",
+            ""
           ],
           "type": "string"
         },
@@ -111541,6 +112180,7 @@
               "USER_P13N_SETTING_OFF_AT_EVENT_LEVEL",
               "BOOKS_USER_P13N_SETTING_OFF_AT_EVENT_LEVEL",
               "BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL",
+              "BATTLESTAR_PSEUDO_CREDIT_OFFER_IN_DP_EVENT_LEVEL",
               "REVIEW_HIGHLIGHTS_TRIGGERING_EVENT_LEVEL",
               "TRUSTED_VERTICAL_VPN_INTENT_EVENT_LEVEL",
               "TRUSTED_VERTICAL_LOAN_INTENT_EVENT_LEVEL",
@@ -111548,6 +112188,10 @@
               "LOWQ_APPS_DEMOTION_EVENT_LEVEL",
               "QUERY_TYPE_MDP_EVENT_LEVEL",
               "QUERY_TYPE_NON_MDP_EVENT_LEVEL",
+              "NAV_CARD_EVENT_LEVEL",
+              "MDP_WITH_LIVE_OPS_EVER_INSTALLED_USERS_EVENT_LEVEL",
+              "MDP_WITH_LIVE_OPS_NEVER_INSTALLED_USERS_EVENT_LEVEL",
+              "BROAD_RELATED_QUERIES_CLUSTER_EVENT",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -111713,6 +112357,9 @@
               "IN_APP_OFFER_APP_4_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL",
@@ -111720,6 +112367,9 @@
               "IN_APP_OFFER_ELIGIBLE_APP_4_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL",
@@ -112008,6 +112658,48 @@
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH",
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH",
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH",
+              "SHOULD_NOT_SEE_NOW_CONTENT_NH",
+              "SHOULD_SEE_NOW_CONTENT_NH_K1",
+              "SHOULD_SEE_NOW_CONTENT_NH_K2",
+              "SHOULD_SEE_NOW_CONTENT_NH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K1",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K2",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K1",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K2",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K1",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K2",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K1",
+              "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K2",
+              "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_GTE_K5",
+              "SHOULD_NOT_SEE_NOW_CLUSTER_CONTENT_NH",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K1",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K2",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K3_4",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K1",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K2",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K3_4",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K1",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K2",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K3_4",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K1",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K2",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K3_4",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_GTE_K5",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K1",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K2",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K3_4",
+              "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_GTE_K5",
               "WALLET_WELLBEING_ALERT_SESSION_LEVEL",
               "BROAD_INTENT_REWEIGHTING_SESSION_LEVEL",
               "DYNASTY_DEVICE_HANDOFF_SESSION_LEVEL",
@@ -112126,6 +112818,7 @@
               "USER_P13N_SETTING_OFF_AT_SESSION_LEVEL",
               "BOOKS_USER_P13N_SETTING_OFF_AT_SESSION_LEVEL",
               "BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL",
+              "BATTLESTAR_PSEUDO_CREDIT_OFFER_IN_DP_SESSION_LEVEL",
               "REVIEW_HIGHLIGHTS_SESSION_LEVEL",
               "BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL",
               "LANGUAGE_SWITCHER_ELIGIBLE_SESSION_LEVEL",
@@ -112140,6 +112833,12 @@
               "AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_SESSION_LEVEL",
               "QUERY_TYPE_MDP_SESSION_LEVEL",
               "QUERY_TYPE_NON_MDP_SESSION_LEVEL",
+              "NAV_CARD_SESSION_LEVEL",
+              "CART_WITH_BROKEN_FOP_SESSION_LEVEL",
+              "IS_ELIGIBLE_FOR_DYNAMIC_AUTH_SESSION_LEVEL",
+              "CLICKED_INSTALL_IN_DEEP_LINK_DETAILS",
+              "ONE_TIME_PRODUCT_VARIANT_OFFER_DARK_LAUNCH_SESSION_LEVEL",
+              "ONE_TIME_PRODUCT_VARIANT_OFFER_LAUNCH_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -112204,6 +112903,9 @@
               "IN_APP_OFFER_APP_4_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL",
@@ -112211,6 +112913,9 @@
               "IN_APP_OFFER_ELIGIBLE_APP_4_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL",
@@ -112296,6 +113001,7 @@
               "GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL",
               "LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL",
               "LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL",
+              "LOYALTY_CORPUS_WIDE_STAMP_CARD_DETAILS_PAGE_SERVER_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2",
               "SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL",
@@ -112414,6 +113120,7 @@
               "SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_USER_LEVEL",
               "FOP_PARTNER_PROMOTION_USER_LEVEL",
               "BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL",
+              "IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -112666,6 +113373,7 @@
               "Event-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_OFF.",
               "",
               "Event-level test code corresponding to an MDP showing for a game also available on Battlestar.",
+              "Event-level test code corresponding to the details page ribbon showing a pseudo credit offer promotion for Battlestar games.",
               "Event-level test code to track triggering of review highlights.",
               "Event-level test code to track triggering of VPN Intent trusted vertical message.",
               "Event-level test code to track triggering of LOAN Intent trusted vertical message.",
@@ -112673,6 +113381,10 @@
               "Event-level test code to track triggering of lowQ apps demotion.",
               "Test code for MDP query event level.",
               "Test code for non-MDP query event level.",
+              "Test code for nav card at event level.",
+              "Event-level test code for logging MDP LiveOps shown to ever-installed users on SERP",
+              "Event-level test code for logging MDP LiveOps shown to never-installed users on SERP",
+              "Broad Related Queries TestCode",
               "",
               "",
               "",
@@ -112832,6 +113544,12 @@
               "",
               "",
               "Test Codes for in-app offers at session level.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -113133,6 +113851,48 @@
               "Merch featuring Now! content on Top of Games Home.",
               "",
               "",
+              "Session level test codes for Now! Home content coverage metrics. Any Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "",
+              "New release Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Editorial Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Live Ops Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Pre-registration Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Session level test codes for Now! Cluster content coverage metrics on Now! Home Any Now! cluster content on Now! Home",
+              "",
+              "",
+              "",
+              "",
+              "New release Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Editorial Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Live Ops Now! content on NOW! Home.",
+              "",
+              "",
+              "",
+              "Pre-registration Now! content on NOW! Home.",
+              "",
+              "",
+              "",
               "TestCode for slicing the users cohorts that should have received a budget Warning alert",
               "TestCode for Broad Intent Reweighting Session Level.",
               "TestCode for Dynasty Device Handoff Session Level.",
@@ -113251,6 +114011,7 @@
               "Session-level test code corresponding to com.google.play.consent.proto.Setting.SETTING_OFF.",
               "",
               "Session-level test code corresponding to an MDP showing for a game also available on Battlestar.",
+              "Session-level test code corresponding to the details page ribbon showing a pseudo credit offer promotion for Battlestar games.",
               "Session-level test code for review highlights",
               "Session level test code for users who receive a Books notification.",
               "Session level test code indicating that the user is eligible for language switcher on cart screen.",
@@ -113265,6 +114026,12 @@
               "Session-level test code indicating that there is some Fop eligible for amplification. Amplification may or may not be visible to the user if some experiment flags are disabled.",
               "Test code for MDP query session level.",
               "Test code for non MDP query session level.",
+              "Test code for nav card at session level.",
+              "Session level test code indicating that user starts the purchase with a cart that has broken existing form of payment.",
+              "Session level test code for users who are eligible for dynamic auth.",
+              "Session level test code for users who click install in the details page for the post-install redirection experiment.",
+              "",
+              "",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -113323,6 +114090,12 @@
               "",
               "",
               "Test codes for in-app offers at user level.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -113421,6 +114194,7 @@
               "User level test code for Corpus Wide Growth Stamp Card, for tracking users who are eligible for the GSC in Games Home. This test code is logged on server side.",
               "User level test code for Loyalty Purchase Quest, for tracking users who are eligible for the LPQ in Games Home. This test code is logged on server side.",
               "User level test code for Corpus Wide Loyalty Stamp Card, for tracking users who are eligible for the LSC in Games Home. This test code is logged on server side.",
+              "User level test code for Corpus Wide Loyalty Stamp Card, for tracking users who are eligible for the LSC in Apps Details Page. This test code is logged on server side.",
               "User level test code that indicates that at least one high churn fop options is available for user when visiting add fop page for subscription purchase. Deprecated, use 20361 instead.",
               "",
               "",
@@ -113539,6 +114313,7 @@
               "User level test code for traking the users who are eligible to subs offer on buyflow. This is a P3 server level test code.",
               "User level test code for FOP Partner Promo.",
               "User level test code for users who have seen a Loyalty weekly prize banner.",
+              "User level test code for users who are eligible for dynamic auth.",
               ""
             ],
             "type": "string"
@@ -113961,7 +114736,8 @@
             "NS_CONTRIB_SERVICE_GEO_UGC",
             "NS_SEARCH_SPORTS",
             "NS_BUSINESSMESSAGING",
-            "NS_AERIAL_VIEW"
+            "NS_AERIAL_VIEW",
+            "NS_DOCS_VIDEO"
           ],
           "enumDescriptions": [
             "Default (invalid) namespace if the field is not set.",
@@ -114004,7 +114780,8 @@
             "Namespace for GEO UGC videos processed by ContribService.",
             "Namespace for Search Sports vertical videos.",
             "Namespace for Business Messaging videos.",
-            "Namespace for Geo Aerial View Please receive approval via go/vp-newclients before adding a new namespace."
+            "Namespace for Geo Aerial View",
+            "Namespace for Docs Video (Flix) Please receive approval via go/vp-newclients before adding a new namespace."
           ],
           "type": "string"
         }
@@ -115170,6 +115947,7 @@
             "ADSBURST_DISCOVERY_UNCOMFORTABLE_V1",
             "ADSBURST_DISCOVERY_NERV_SUBS_V1",
             "ADSBURST_BASIC_TEXT_TOWER_V0",
+            "ADSBURST_V2",
             "SHOPPING_IMAGE_TRANSFORMATION_UNCROP",
             "SHOPPING_IMAGE_TRANSFORMATION_V2",
             "SCREENAI_V1",
@@ -115266,6 +116044,7 @@
             "Pageburst versions.",
             "",
             "Adsburst versions.",
+            "",
             "",
             "",
             "",
