@@ -1128,7 +1128,7 @@
       }
     }
   },
-  "revision": "20230618",
+  "revision": "20230620",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -9843,6 +9843,7 @@
               "MICROPHONE_PERMISSIONS",
               "GOOGLE_PLAY_UPDATE",
               "ADD_GOOGLE_ACCOUNT",
+              "ASSISTANT_SPOKEN_NOTIFICATIONS",
               "ABOUT_PHONE",
               "ACCOUNTS",
               "APPLICATION",
@@ -10167,6 +10168,7 @@
               "Permission Manager > Microphone",
               "",
               "",
+              "Settings for assistant to announce messages/notifications",
               "Begin of NGA proto consistence",
               "",
               "",
@@ -54939,7 +54941,7 @@
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
-            "GENUS_DOCS_VIDEO"
+            "GENUS_DOCS_FLIX_RENDER"
           ],
           "enumDescriptions": [
             "",
@@ -54989,7 +54991,7 @@
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
-            "Genus for Docs Video (Flix)"
+            "Genus for Flix Render (Docs)"
           ],
           "type": "string"
         },
@@ -55832,7 +55834,7 @@
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
-            "GENUS_DOCS_VIDEO"
+            "GENUS_DOCS_FLIX_RENDER"
           ],
           "enumDescriptions": [
             "",
@@ -55882,7 +55884,7 @@
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
-            "Genus for Docs Video (Flix)"
+            "Genus for Flix Render (Docs)"
           ],
           "type": "string"
         },
@@ -114529,6 +114531,9 @@
               "AMPLIFY_FORM_OF_PAYMENT_ABANDONMENT_ELIGIBLE_SESSION_LEVEL",
               "SUBSCRIPTION_FREE_TRIAL_OFFER_HIGHLIGHT_SESSION_LEVEL",
               "SUBSCRIPTION_INTRO_PRICE_OFFER_HIGHLIGHT_SESSION_LEVEL",
+              "SUBSCRIPTION_CANCELLATION_ELIGIBLE_FOR_RENEWAL_REMINDER",
+              "SUBSCRIPTION_CANCELLATION_NOT_ELIGIBLE_FOR_RENEWAL_REMINDER",
+              "USER_HAS_SET_RENEWAL_REMINDER",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -114812,6 +114817,7 @@
               "BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL",
               "IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL",
               "GE_LIVEOPS_PSPEND_USER_LEVEL",
+              "IS_ELIGIBLE_FOR_RENEWAL_REMINDER_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDescriptions": [
@@ -115726,6 +115732,9 @@
               "Session level test code that indicates the user is eligible for an abandonment screen for a form of payment to be amplified.",
               "Session level test code for subscription with free trial offer highlight buyflow.",
               "Session level test code for subscription with intro price offer highlight buyflow.",
+              "Session level test code for users who are eligible to get a renewal reminder.",
+              "Session level test code for users who are not eligible to get a renewal reminder.",
+              "Session level test code for users who chose to set a renewal reminder.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -116009,6 +116018,7 @@
               "User level test code for users who have seen a Loyalty weekly prize banner.",
               "User level test code for users who are eligible for dynamic auth.",
               "User level test code for LiveOps pSpend uplift experiment. If GE campaign decision changed after enabling pSpend model, log test code.",
+              "User level test code for users who are eligible to see the renewal reminder button.",
               ""
             ],
             "type": "string"
@@ -116432,7 +116442,7 @@
             "NS_SEARCH_SPORTS",
             "NS_BUSINESSMESSAGING",
             "NS_AERIAL_VIEW",
-            "NS_DOCS_VIDEO"
+            "NS_DOCS_FLIX_RENDER"
           ],
           "enumDescriptions": [
             "Default (invalid) namespace if the field is not set.",
@@ -116476,7 +116486,7 @@
             "Namespace for Search Sports vertical videos.",
             "Namespace for Business Messaging videos.",
             "Namespace for Geo Aerial View",
-            "Namespace for Docs Video (Flix) Please receive approval via go/vp-newclients before adding a new namespace."
+            "Namespace for Flix Render (Docs) Please receive approval via go/vp-newclients before adding a new namespace."
           ],
           "type": "string"
         }
