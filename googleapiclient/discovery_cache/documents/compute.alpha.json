@@ -42015,7 +42015,7 @@
       }
     }
   },
-  "revision": "20230610",
+  "revision": "20230620",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -45175,7 +45175,7 @@
           "type": "array"
         },
         "serviceLbPolicy": {
-          "description": "URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED. If used with a backend service, must reference a global policy. If used with a regional backend service, must reference a regional policy.",
+          "description": "URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL, EXTERNAL_MANAGED, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.",
           "type": "string"
         },
         "sessionAffinity": {
@@ -50121,7 +50121,7 @@
           "type": "boolean"
         },
         "allowGlobalAccess": {
-          "description": "This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.",
+          "description": "This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If set to true, clients can access the Internal TCP/UDP Load Balancer, Internal HTTP(S) and TCP Proxy Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.",
           "type": "boolean"
         },
         "allowPscGlobalAccess": {
@@ -51606,6 +51606,7 @@
             "BARE_METAL_LINUX_COMPATIBLE",
             "FEATURE_TYPE_UNSPECIFIED",
             "GVNIC",
+            "IDPF",
             "MULTI_IP_SUBNET",
             "SECURE_BOOT",
             "SEV_CAPABLE",
@@ -51617,6 +51618,7 @@
             "WINDOWS"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -55165,6 +55167,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "creatingInBulk": {
+          "description": "[Output Only] The number of instances that the managed instance group will attempt to create in bulk. If the desired count of instances cannot be created, entire batch will be deleted and the group will decrease its targetSize value accordingly.",
+          "format": "int32",
+          "type": "integer"
+        },
         "creatingWithoutRetries": {
           "description": "[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create any of these instances, it decreases the group's targetSize value accordingly.",
           "format": "int32",
@@ -56161,6 +56168,13 @@
     "InstanceGroupManagersDeleteInstancesRequest": {
       "id": "InstanceGroupManagersDeleteInstancesRequest",
       "properties": {
+        "instanceNames": {
+          "description": "The list of instance names to delete. Queued instances do not have URL and can be deleted only by name. You cannot specify both URLs and names in a single request.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "instances": {
           "description": "The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME]. Queued instances do not have URL and can be deleted only by name. One cannot specify both URLs and names in a single request.",
           "items": {
@@ -57149,6 +57163,7 @@
             "ABANDONING",
             "CREATING",
             "CREATING_ATOMICALLY",
+            "CREATING_IN_BULK",
             "CREATING_WITHOUT_RETRIES",
             "DELETING",
             "NONE",
@@ -57166,6 +57181,7 @@
             "The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.",
             "The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful.",
             "The managed instance group is creating this instance atomically.",
+            "The managed instance group is creating this instance in bulk.",
             "The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased.",
             "The managed instance group is permanently deleting this instance.",
             "The managed instance group has not scheduled any actions for this instance.",
@@ -62399,6 +62415,7 @@
             "ABANDONING",
             "CREATING",
             "CREATING_ATOMICALLY",
+            "CREATING_IN_BULK",
             "CREATING_WITHOUT_RETRIES",
             "DELETING",
             "NONE",
@@ -62416,6 +62433,7 @@
             "The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.",
             "The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful.",
             "The managed instance group is creating this instance atomically.",
+            "The managed instance group is creating this instance in bulk.",
             "The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased.",
             "The managed instance group is permanently deleting this instance.",
             "The managed instance group has not scheduled any actions for this instance.",
@@ -69536,7 +69554,7 @@
           "type": "string"
         },
         "ipCidrRange": {
-          "description": "The IPv4 address range, in CIDR format, represented by this public delegated prefix.",
+          "description": "The IP address range, in CIDR format, represented by this public delegated prefix.",
           "type": "string"
         },
         "isLiveMigration": {
@@ -69867,7 +69885,7 @@
           "type": "string"
         },
         "ipCidrRange": {
-          "description": "The IPv4 address range, in CIDR format, represented by this sub public delegated prefix.",
+          "description": "The IP address range, in CIDR format, represented by this sub public delegated prefix.",
           "type": "string"
         },
         "isAddress": {
