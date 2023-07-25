@@ -21533,6 +21533,40 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "setManagedProtectionTier": {
+          "description": "Sets the Cloud Armor Managed Protection (CAMP) tier of the project. To set PLUS or above the billing account of the project must be subscribed to Managed Protection Plus. See Subscribing to Managed Protection Plus for more information.",
+          "flatPath": "projects/{project}/setManagedProtectionTier",
+          "httpMethod": "POST",
+          "id": "compute.projects.setManagedProtectionTier",
+          "parameterOrder": [
+            "project"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/setManagedProtectionTier",
+          "request": {
+            "$ref": "ProjectsSetManagedProtectionTierRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "setUsageExportBucket": {
           "description": "Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.",
           "flatPath": "projects/{project}/setUsageExportBucket",
@@ -22881,6 +22915,68 @@
           "path": "projects/{project}/regions/{region}/backendServices",
           "response": {
             "$ref": "BackendServiceList"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "listUsable": {
+          "description": "Retrieves an aggregated list of all usable backend services in the specified project in the given region.",
+          "flatPath": "projects/{project}/regions/{region}/backendServices/listUsable",
+          "httpMethod": "GET",
+          "id": "compute.regionBackendServices.listUsable",
+          "parameterOrder": [
+            "project",
+            "region"
+          ],
+          "parameters": {
+            "filter": {
+              "description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`.",
+              "location": "query",
+              "type": "string"
+            },
+            "maxResults": {
+              "default": "500",
+              "description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+              "format": "uint32",
+              "location": "query",
+              "minimum": "0",
+              "type": "integer"
+            },
+            "orderBy": {
+              "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+              "location": "query",
+              "type": "string"
+            },
+            "pageToken": {
+              "description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+              "location": "query",
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region scoping this request. It must be a string that meets the requirements in RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "returnPartialSuccess": {
+              "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+              "location": "query",
+              "type": "boolean"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/backendServices/listUsable",
+          "response": {
+            "$ref": "BackendServiceListUsable"
           },
           "scopes": [
             "https://www.googleapis.com/auth/cloud-platform",
@@ -29734,7 +29830,7 @@
           ]
         },
         "patch": {
-          "description": "Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.",
+          "description": "Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.",
           "flatPath": "projects/{project}/regions/{region}/securityPolicies/{securityPolicy}",
           "httpMethod": "PATCH",
           "id": "compute.regionSecurityPolicies.patch",
@@ -34203,7 +34299,7 @@
           ]
         },
         "patch": {
-          "description": "Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.",
+          "description": "Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.",
           "flatPath": "projects/{project}/global/securityPolicies/{securityPolicy}",
           "httpMethod": "PATCH",
           "id": "compute.securityPolicies.patch",
@@ -34256,7 +34352,7 @@
           ]
         },
         "patchRule": {
-          "description": "Patches a rule at the specified priority.",
+          "description": "Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.",
           "flatPath": "projects/{project}/global/securityPolicies/{securityPolicy}/patchRule",
           "httpMethod": "POST",
           "id": "compute.securityPolicies.patchRule",
@@ -42087,7 +42183,7 @@
       }
     }
   },
-  "revision": "20230701",
+  "revision": "20230720",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -43855,7 +43951,7 @@
           "type": "string"
         },
         "replicaZones": {
-          "description": "Required for each regional disk associated with the instance. Specify the URLs of the zones where the disk should be replicated to. You must provide exactly two replica zones, and one zone must be the same as the instance zone. You can't use this option with boot disks.",
+          "description": "Required for each regional disk associated with the instance. Specify the URLs of the zones where the disk should be replicated to. You must provide exactly two replica zones, and one zone must be the same as the instance zone.",
           "items": {
             "type": "string"
           },
@@ -44962,7 +45058,7 @@
           "type": "string"
         },
         "customResponseHeaders": {
-          "description": "Headers that the HTTP/S load balancer should add to proxied responses.",
+          "description": "Headers that the Application Load Balancer should add to proxied responses.",
           "items": {
             "type": "string"
           },
@@ -45588,6 +45684,12 @@
           "format": "int32",
           "type": "integer"
         },
+        "usedBys": {
+          "items": {
+            "$ref": "BackendServiceUsedBy"
+          },
+          "type": "array"
+        },
         "vpcNetworkScope": {
           "description": "The network scope of the backends that can be added to the backend service. This field can be either GLOBAL_VPC_NETWORK or REGIONAL_VPC_NETWORK. A backend service with the VPC scope set to GLOBAL_VPC_NETWORK is only allowed to have backends in global VPC networks. When the VPC scope is set to REGIONAL_VPC_NETWORK the backend service is only allowed to have backends in regional networks in the same scope as the backend service. Note: if not specified then GLOBAL_VPC_NETWORK will be used.",
           "enum": [
@@ -46158,6 +46260,151 @@
       },
       "type": "object"
     },
+    "BackendServiceListUsable": {
+      "description": "Contains a list of usable BackendService resources.",
+      "id": "BackendServiceListUsable",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#usableBackendServiceList",
+          "description": "[Output Only] Type of resource. Always compute#usableBackendServiceList for lists of usable backend services.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning message.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+              "enum": [
+                "CLEANUP_FAILED",
+                "DEPRECATED_RESOURCE_USED",
+                "DEPRECATED_TYPE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "EXPERIMENTAL_TYPE_USED",
+                "EXTERNAL_API_WARNING",
+                "FIELD_VALUE_OVERRIDEN",
+                "INJECTED_KERNELS_DEPRECATED",
+                "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+                "LARGE_DEPLOYMENT_WARNING",
+                "LIST_OVERHEAD_QUOTA_EXCEED",
+                "MISSING_TYPE_DEPENDENCY",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "PARTIAL_SUCCESS",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+                "RESOURCE_NOT_DELETED",
+                "SCHEMA_VALIDATION_IGNORED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNDECLARED_PROPERTIES",
+                "UNREACHABLE"
+              ],
+              "enumDeprecated": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "enumDescriptions": [
+                "Warning about failed cleanup of transient changes made by a failed operation.",
+                "A link to a deprecated resource was created.",
+                "When deploying and at least one of the resources has a type marked as deprecated",
+                "The user created a boot disk that is larger than image size.",
+                "When deploying and at least one of the resources has a type marked as experimental",
+                "Warning that is present in an external api call",
+                "Warning that value of a field has been overridden. Deprecated unused field.",
+                "The operation involved use of an injected kernel, which is deprecated.",
+                "A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+                "When deploying a deployment with a exceedingly large number of resources",
+                "Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+                "A resource depends on a missing type",
+                "The route's nextHopIp address is not assigned to an instance on the network.",
+                "The route's next hop instance cannot ip forward.",
+                "The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+                "The route's nextHopInstance URL refers to an instance that does not exist.",
+                "The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+                "The route's next hop instance does not have a status of RUNNING.",
+                "Error which is not critical. We decided to continue the process despite the mentioned error.",
+                "No results are present on a particular list page.",
+                "Success is reported, but some results may be missing due to errors",
+                "The user attempted to use a resource that requires a TOS they have not accepted.",
+                "Warning that a resource is in use.",
+                "One or more of the resources set to auto-delete could not be deleted because they were in use.",
+                "When a resource schema validation is ignored.",
+                "Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+                "When undeclared properties in the schema are present",
+                "A given scope cannot be reached."
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] A human-readable description of the warning code.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "BackendServiceLocalityLoadBalancingPolicyConfig": {
       "description": "Container for either a built-in LB policy supported by gRPC or Envoy or a custom one implemented by the end user.",
       "id": "BackendServiceLocalityLoadBalancingPolicyConfig",
@@ -46277,6 +46524,15 @@
       "id": "BackendServiceReference",
       "properties": {
         "backendService": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BackendServiceUsedBy": {
+      "id": "BackendServiceUsedBy",
+      "properties": {
+        "reference": {
           "type": "string"
         }
       },
@@ -48016,6 +48272,20 @@
       "description": "Represents a Persistent Disk resource. Google Compute Engine has two Disk resources: * [Zonal](/compute/docs/reference/rest/alpha/disks) * [Regional](/compute/docs/reference/rest/alpha/regionDisks) Persistent disks are required for running your VM instances. Create both boot and non-boot (data) persistent disks. For more information, read Persistent Disks. For more storage options, read Storage options. The disks resource represents a zonal persistent disk. For more information, read Zonal persistent disks. The regionDisks resource represents a regional persistent disk. For more information, read Regional resources.",
       "id": "Disk",
       "properties": {
+        "accessMode": {
+          "description": "The access mode of the disk. - READ_WRITE_SINGLE: The default AccessMode, means the disk can be attached to single instance in RW mode. - READ_WRITE_MANY: The AccessMode means the disk can be attached to multiple instances in RW mode. - READ_ONLY_MANY: The AccessMode means the disk can be attached to multiple instances in RO mode. The AccessMode is only valid for Hyperdisk disk types.",
+          "enum": [
+            "READ_ONLY_MANY",
+            "READ_WRITE_MANY",
+            "READ_WRITE_SINGLE"
+          ],
+          "enumDescriptions": [
+            "The AccessMode means the disk can be attached to multiple instances in RO mode.",
+            "The AccessMode means the disk can be attached to multiple instances in RW mode.",
+            "The default AccessMode, means the disk can be attached to single instance in RW mode."
+          ],
+          "type": "string"
+        },
         "architecture": {
           "description": "The architecture of the disk. Valid values are ARM64 or X86_64.",
           "enum": [
@@ -51019,6 +51289,10 @@
           "format": "uint64",
           "type": "string"
         },
+        "ipCollection": {
+          "description": "Resource reference of a PublicDelegatedPrefix. The PDP must be a sub-PDP in IPV6_FORWARDING_RULE_CREATION mode. Use one of the following formats to specify a sub-PDP when creating an IPv6 NetLB forwarding rule using BYOIP: Full resource URL, as in https://www.googleapis.com/compute/v1/projects/ project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name Partial URL, as in: - projects/project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name ",
+          "type": "string"
+        },
         "ipVersion": {
           "description": "The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.",
           "enum": [
@@ -51109,7 +51383,7 @@
           "type": "string"
         },
         "noAutomateDnsZone": {
-          "description": "This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field.",
+          "description": "This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field. Once set, this field is not mutable.",
           "type": "boolean"
         },
         "portRange": {
@@ -51187,7 +51461,7 @@
           "type": "string"
         },
         "target": {
-          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. - For load balancers, see the \"Target\" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). - For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. - For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment. ",
+          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. - For load balancers, see the \"Target\" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). - For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. - For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment. The target is not mutable once set as a service attachment. ",
           "type": "string"
         }
       },
@@ -51782,7 +52056,7 @@
       "id": "FutureReservationStatus",
       "properties": {
         "amendmentStatus": {
-          "description": "The current status of the requested amendment.",
+          "description": "[Output Only] The current status of the requested amendment.",
           "enum": [
             "AMENDMENT_APPROVED",
             "AMENDMENT_DECLINED",
@@ -51811,7 +52085,7 @@
         },
         "lastKnownGoodState": {
           "$ref": "FutureReservationStatusLastKnownGoodState",
-          "description": "This field represents the future reservation before an amendment was requested. If the amendment is declined, the Future Reservation will be reverted to the last known good state. The last known good state is not set when updating a future reservation whose Procurement Status is DRAFTING."
+          "description": "[Output Only] This field represents the future reservation before an amendment was requested. If the amendment is declined, the Future Reservation will be reverted to the last known good state. The last known good state is not set when updating a future reservation whose Procurement Status is DRAFTING."
         },
         "lockTime": {
           "description": "Time when Future Reservation would become LOCKED, after which no modifications to Future Reservation will be allowed. Applicable only after the Future Reservation is in the APPROVED state. The lock_time is an RFC3339 string. The procurement_status will transition to PROCURING state at this time.",
@@ -51862,18 +52136,22 @@
       "id": "FutureReservationStatusLastKnownGoodState",
       "properties": {
         "description": {
-          "description": "The description of the FutureReservation before an amendment was requested.",
+          "description": "[Output Only] The description of the FutureReservation before an amendment was requested.",
           "type": "string"
         },
         "futureReservationSpecs": {
           "$ref": "FutureReservationStatusLastKnownGoodStateFutureReservationSpecs"
         },
+        "lockTime": {
+          "description": "[Output Only] The lock time of the FutureReservation before an amendment was requested.",
+          "type": "string"
+        },
         "namePrefix": {
-          "description": "The name prefix of the Future Reservation before an amendment was requested.",
+          "description": "[Output Only] The name prefix of the Future Reservation before an amendment was requested.",
           "type": "string"
         },
         "procurementStatus": {
-          "description": "The status of the last known good state for the Future Reservation.",
+          "description": "[Output Only] The status of the last known good state for the Future Reservation.",
           "enum": [
             "APPROVED",
             "CANCELLED",
@@ -51915,15 +52193,15 @@
       "properties": {
         "shareSettings": {
           "$ref": "ShareSettings",
-          "description": "The previous share settings of the Future Reservation."
+          "description": "[Output Only] The previous share settings of the Future Reservation."
         },
         "specificSkuProperties": {
           "$ref": "FutureReservationSpecificSKUProperties",
-          "description": "The previous instance related properties of the Future Reservation."
+          "description": "[Output Only] The previous instance related properties of the Future Reservation."
         },
         "timeWindow": {
           "$ref": "FutureReservationTimeWindow",
-          "description": "The previous time window of the Future Reservation."
+          "description": "[Output Only] The previous time window of the Future Reservation."
         }
       },
       "type": "object"
@@ -57554,14 +57832,14 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).",
+          "description": "The type of update process. You can specify either PROACTIVE so that the MIG automatically updates VMs to the latest configurations or OPPORTUNISTIC so that you can select the VMs that you want to update.",
           "enum": [
             "OPPORTUNISTIC",
             "PROACTIVE"
           ],
           "enumDescriptions": [
-            "No action is being proactively performed in order to bring this IGM to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field).",
-            "This IGM will actively converge to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field)."
+            "MIG will apply new configurations to existing VMs only when you selectively target specific or all VMs to be updated.",
+            "MIG will automatically apply new configurations to all or a subset of existing VMs and also to new VMs that are added to the group."
           ],
           "type": "string"
         }
@@ -59176,9 +59454,31 @@
           "description": "[Output Only] Type of the resource. Always compute#instance_settings for instance settings.",
           "type": "string"
         },
+        "metadata": {
+          "$ref": "InstanceSettingsMetadata",
+          "description": "The metadata key/value pairs assigned to all the instances in the corresponding scope."
+        },
         "zone": {
           "description": "[Output Only] URL of the zone where the resource resides You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceSettingsMetadata": {
+      "id": "InstanceSettingsMetadata",
+      "properties": {
+        "kind": {
+          "default": "compute#metadata",
+          "description": "[Output Only] Type of the resource. Always compute#metadata for metadata.",
+          "type": "string"
+        },
+        "metadatas": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A metadata key/value map. The total size of all keys and values must be less than 512KB.",
+          "type": "object"
         }
       },
       "type": "object"
@@ -70423,7 +70723,8 @@
           "type": "string"
         },
         "setCommonInstanceMetadataOperationMetadata": {
-          "$ref": "SetCommonInstanceMetadataOperationMetadata"
+          "$ref": "SetCommonInstanceMetadataOperationMetadata",
+          "description": "[Output Only] If the operation is for projects.setCommonInstanceMetadata, this field will contain information on all underlying zonal actions and their state."
         },
         "startTime": {
           "description": "[Output Only] The time that this operation was started by the server. This value is in RFC3339 text format.",
@@ -70457,7 +70758,7 @@
           "type": "string"
         },
         "user": {
-          "description": "[Output Only] User who requested the operation, for example: `user@example.com`.",
+          "description": "[Output Only] User who requested the operation, for example: `user@example.com` or `alice_smith_identifier (global/workforcePools/example-com-us-employees)`.",
           "type": "string"
         },
         "warnings": {
@@ -72352,6 +72653,20 @@
           "description": "[Output Only] Type of the resource. Always compute#project for projects.",
           "type": "string"
         },
+        "managedProtectionTier": {
+          "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD.",
+          "enum": [
+            "CAMP_PLUS_ANNUAL",
+            "CAMP_PLUS_MONTHLY",
+            "CA_STANDARD"
+          ],
+          "enumDescriptions": [
+            "Plus tier protection annual.",
+            "Plus tier protection monthly.",
+            "Standard protection."
+          ],
+          "type": "string"
+        },
         "name": {
           "description": "The project ID. For example: my-example-project. Use the project ID to make requests to Compute Engine.",
           "type": "string"
@@ -72487,6 +72802,26 @@
       "properties": {
         "email": {
           "description": "Email address of the service account.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProjectsSetManagedProtectionTierRequest": {
+      "id": "ProjectsSetManagedProtectionTierRequest",
+      "properties": {
+        "managedProtectionTier": {
+          "description": "Managed protection tier to be set.",
+          "enum": [
+            "CAMP_PLUS_ANNUAL",
+            "CAMP_PLUS_MONTHLY",
+            "CA_STANDARD"
+          ],
+          "enumDescriptions": [
+            "Plus tier protection annual.",
+            "Plus tier protection monthly.",
+            "Standard protection."
+          ],
           "type": "string"
         }
       },
@@ -72781,6 +73116,11 @@
       "description": "A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.",
       "id": "PublicDelegatedPrefix",
       "properties": {
+        "allocatablePrefixLength": {
+          "description": "The allocatable prefix length supported by this public delegated prefix. This field is optional and cannot be set for prefixes in DELEGATION mode. It cannot be set for IPv4 prefixes either, and it always defaults to 32.",
+          "format": "int32",
+          "type": "integer"
+        },
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
@@ -72810,6 +73150,18 @@
         "kind": {
           "default": "compute#publicDelegatedPrefix",
           "description": "[Output Only] Type of the resource. Always compute#publicDelegatedPrefix for public delegated prefixes.",
+          "type": "string"
+        },
+        "mode": {
+          "description": "The public delegated prefix mode for IPv6 only.",
+          "enum": [
+            "DELEGATION",
+            "IPV6_FORWARDING_RULE_CREATION"
+          ],
+          "enumDescriptions": [
+            "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
+            "The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes."
+          ],
           "type": "string"
         },
         "name": {
@@ -73182,6 +73534,11 @@
       "description": "Represents a sub PublicDelegatedPrefix.",
       "id": "PublicDelegatedPrefixPublicDelegatedSubPrefix",
       "properties": {
+        "allocatablePrefixLength": {
+          "description": "The allocatable prefix length supported by this PublicDelegatedSubPrefix.",
+          "format": "int32",
+          "type": "integer"
+        },
         "delegateeProject": {
           "description": "Name of the project scoping this PublicDelegatedSubPrefix.",
           "type": "string"
@@ -73197,6 +73554,18 @@
         "isAddress": {
           "description": "Whether the sub prefix is delegated to create Address resources in the delegatee project.",
           "type": "boolean"
+        },
+        "mode": {
+          "description": "The PublicDelegatedSubPrefix mode for IPv6 only.",
+          "enum": [
+            "DELEGATION",
+            "IPV6_FORWARDING_RULE_CREATION"
+          ],
+          "enumDescriptions": [
+            "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
+            "The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes."
+          ],
+          "type": "string"
         },
         "name": {
           "description": "The name of the sub public delegated prefix.",
@@ -76258,6 +76627,7 @@
             "NO_RESERVATION",
             "SPECIFIC_RESERVATION",
             "SPECIFIC_THEN_ANY_RESERVATION",
+            "SPECIFIC_THEN_NO_RESERVATION",
             "UNSPECIFIED"
           ],
           "enumDescriptions": [
@@ -76265,6 +76635,7 @@
             "Do not consume from any allocated capacity.",
             "Must consume from a specific reservation. Must specify key value fields for specifying the reservations.",
             "Prefer to consume from a specific reservation, but still consume any reservation available if the specified reservation is not available or exhausted. Must specify key value fields for specifying the reservations.",
+            "Prefer to consume from a specific reservation, but still consume from the on-demand pool if the specified reservation is exhausted. Must specify key value fields for specifying the reservations.",
             ""
           ],
           "type": "string"
@@ -82478,16 +82849,17 @@
       "type": "object"
     },
     "SetCommonInstanceMetadataOperationMetadata": {
-      "description": "Encapsulates partial completion metadata for SetCommonInstanceMetadata. Will be propagated on Operation.metadata.",
       "id": "SetCommonInstanceMetadataOperationMetadata",
       "properties": {
         "clientOperationId": {
+          "description": "[Output Only] The client operation id.",
           "type": "string"
         },
         "perLocationOperations": {
           "additionalProperties": {
             "$ref": "SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo"
           },
+          "description": "[Output Only] Status information per location (location name is key). Example key: zones/us-central1-a",
           "type": "object"
         }
       },
@@ -82497,9 +82869,11 @@
       "id": "SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo",
       "properties": {
         "error": {
-          "$ref": "Status"
+          "$ref": "Status",
+          "description": "[Output Only] If state is `ABANDONED` or `FAILED`, this field is populated."
         },
         "state": {
+          "description": "[Output Only] Status of the action, which can be one of the following: `PROPAGATING`, `PROPAGATED`, `ABANDONED`, `FAILED`, or `DONE`.",
           "enum": [
             "ABANDONED",
             "DONE",
