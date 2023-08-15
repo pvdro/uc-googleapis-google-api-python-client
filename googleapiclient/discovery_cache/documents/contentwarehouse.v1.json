@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20230728",
+  "revision": "20230804",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3719,7 +3719,11 @@
             "MATTERSPACE_AFFINITY",
             "TRUSTED_CONTACTS_OOBE_AFFINITY",
             "REFERRALS_AFFINITY",
-            "WAYMO_TRIAGE_TOOLING_AFFINITY"
+            "WAYMO_TRIAGE_TOOLING_AFFINITY",
+            "DATA_STUDIO_GAIA_ONLY_AFFINITY",
+            "TWENTYPERCENT_JOBPOSTINGS_AFFINITY",
+            "ENGAGEMENTS_AFFINITY",
+            "TRUSTED_CONTACTS_FL_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -3979,6 +3983,10 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -3996,6 +4004,10 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -11856,7 +11868,7 @@
         },
         "deviceType": {
           "deprecated": true,
-          "description": "The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.",
+          "description": "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string. WARNING: Clients are not actually setting this field. This field will be removed once references to it within the code base have been removed.",
           "type": "string"
         },
         "homeGraphDeviceId": {
@@ -11975,7 +11987,7 @@
         },
         "deviceType": {
           "deprecated": true,
-          "description": "The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.",
+          "description": "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string. WARNING: Clients are not actually setting this field. This field will be removed once references to it within the code base have been removed.",
           "type": "string"
         },
         "homeGraphDeviceId": {
@@ -13113,7 +13125,7 @@
           "description": "The identifier of the device."
         },
         "surfaceType": {
-          "description": "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. NOTE: This is the new field that is going to replace the `surface_type_string` field above. For more details please refer to go/ontologicalize-surface-type.",
+          "description": "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. For more details, refer to go/ontologicalize-surface-type.",
           "enum": [
             "UNKNOWN_TYPE",
             "ACCL",
@@ -13237,7 +13249,8 @@
           "type": "string"
         },
         "surfaceTypeString": {
-          "description": "The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
+          "deprecated": true,
+          "description": "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
           "type": "string"
         },
         "surfaceVersion": {
@@ -13752,7 +13765,8 @@
           "description": "The set of information that helps the server identify the surface."
         },
         "surfaceTypeString": {
-          "description": "The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
+          "deprecated": true,
+          "description": "DEPRECATED. surface_identity field below already contains this information. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
           "type": "string"
         },
         "systemNotificationRestrictions": {
@@ -21911,7 +21925,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 60",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 61",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -22042,6 +22056,10 @@
         },
         "isPodcastIntent": {
           "description": "Whether the intent is a podcast intent.",
+          "type": "boolean"
+        },
+        "isSageDisabledIntent": {
+          "description": "Whether the intent is an intent marked disabled by the Sage IG.",
           "type": "boolean"
         },
         "isSageIntent": {
@@ -25063,10 +25081,6 @@
           "description": "The timestamp (the time since the Epoch, in microseconds) when the docjoin is exported from indexing. The main purpose of this field is to identify different versions of the same document.",
           "format": "int64",
           "type": "string"
-        },
-        "isSiblingDeletion": {
-          "description": "Page is deleted when indexing choice flips between different corpora (e.g. desktop, mobile, archive, scholar, etc.) for the same URL. It's only set for deletion cdocs. Downstreams using URL as key should ignore the current deletion if the field is set.",
-          "type": "boolean"
         },
         "noLongerCanonicalTimestamp": {
           "description": "If set, the timestamp in microseconds when the URL stopped being canonical. This should never be set for exported canonical documents. This field is used by dups during canonical flip, and by webmain when doc selection switched between desktop and mobile. Union respects this timestamp to prevent old doc being deleted until the new doc is picked up",
@@ -31299,12 +31313,13 @@
           "type": "integer"
         },
         "Pagerank": {
-          "description": "Pagerank for doc (if known)",
+          "deprecated": true,
+          "description": "This field is long-deprecated in favour of Pagerank_NS, it is no longer maintained and can break at any moment.",
           "format": "int32",
           "type": "integer"
         },
         "PagerankNS": {
-          "description": "Pagerank-NearestSeeds is an alternative pagerank score for the doc.",
+          "description": "Pagerank-NearestSeeds is a pagerank score for the doc, calculated using NearestSeeds method. This is the production PageRank value teams should use.",
           "format": "int32",
           "type": "integer"
         },
@@ -33524,7 +33539,8 @@
             "PROVIDER_ZEST",
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
-            "PROVIDER_CHARGESMITH"
+            "PROVIDER_CHARGESMITH",
+            "PROVIDER_PLUGO"
           ],
           "enumDeprecated": [
             false,
@@ -34234,6 +34250,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -34962,7 +34979,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270E."
+            "",
+            "Note: Next available value is 0x1270F."
           ],
           "type": "string"
         },
@@ -39762,7 +39780,8 @@
             "PROVIDER_ZEST",
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
-            "PROVIDER_CHARGESMITH"
+            "PROVIDER_CHARGESMITH",
+            "PROVIDER_PLUGO"
           ],
           "enumDeprecated": [
             false,
@@ -40472,6 +40491,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -41200,7 +41220,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270E."
+            "",
+            "Note: Next available value is 0x1270F."
           ],
           "type": "string"
         }
@@ -42692,7 +42713,8 @@
             "PROVIDER_ZEST",
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
-            "PROVIDER_CHARGESMITH"
+            "PROVIDER_CHARGESMITH",
+            "PROVIDER_PLUGO"
           ],
           "enumDeprecated": [
             false,
@@ -43402,6 +43424,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -44130,7 +44153,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270E."
+            "",
+            "Note: Next available value is 0x1270F."
           ],
           "type": "string"
         },
@@ -45915,7 +45939,8 @@
             "PROVIDER_ZEST",
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
-            "PROVIDER_CHARGESMITH"
+            "PROVIDER_CHARGESMITH",
+            "PROVIDER_PLUGO"
           ],
           "enumDeprecated": [
             false,
@@ -46625,6 +46650,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -47353,7 +47379,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1270E."
+            "",
+            "Note: Next available value is 0x1270F."
           ],
           "type": "string"
         }
@@ -47919,7 +47946,7 @@
             "e.g. \"Holiday Inn\" rebranded to \"Double Tree\". The feature representing \"Holiday Inn\" will refer to the feature representing \"Double Tree\" with this relation type. If a feature has this relation, its existence should show that the feature has closed and the close reason should be set to REBRANDED. Allowed source types: - TYPE_ESTABLISHMENT Allowed destination types: - TYPE_ESTABLISHMENT",
             "Used by specific chain stores/franchises to refer to their parent chain. e.g. an individual Walmart store is a member of the \"Walmart\" chain. Transit stations can be members of multiple chains (transit agencies). All other establishments can have at most one explicit RELATION_MEMBER_OF_CHAIN relation. Subtypes may have different requirements. TYPE_TRANSIT_AGENCY is a temporarily allowed destination type while we migrate transit stations <-> transit agencies to a new representation (b/197741661) Allowed source types: - TYPE_ESTABLISHMENT Allowed destination types: - TYPE_BUSINESS_CHAIN - TYPE_TRANSIT_AGENCY strong reference",
             "Indicates that a feature sells merchandise for a given brand chain (e.g. Honda vehicles). Source currently restricted to features with gcid:car_dealer. strong reference",
-            "Used by specific sub chain to refer to their parent chain. e.g. \"Walmart Pharmacy\" chain is a member of the \"Walmart\" chain. Currently this is only used by transit agencies. Talk to chains-eng team before using this relation type on other chains. A business chain can have at most one such relation. Allowed source types: - TYPE_BUSINESS_CHAIN Allowed destination types: - TYPE_BUSINESS_CHAIN strong reference",
+            "Used by specific sub chain to refer to their parent chain. e.g. \"Walmart Pharmacy\" chain is a member of the \"Walmart\" chain. Currently this is only used by transit agencies. Talk to chains-eng team before using this relation type on other chains. A business chain can have at most one such relation. Allowed source types: - TYPE_BUSINESS_CHAIN - TYPE_TRANSIT_AGENCY Allowed destination types: - TYPE_BUSINESS_CHAIN - TYPE_TRANSIT_AGENCY strong reference",
             "Indicates which logical entity is the main occupant of a compound. A compound can have at most one such relation, and the target feature for that relation must refer back to the compound via a RELATION_OCCUPIES relation. Allowed source types: - TYPE_COMPOUND Allowed destination types: - TYPE_ESTABLISHMENT_POI strong reference",
             "ABSTRACT, DEPRECATED",
             "DEPRECATED",
@@ -54590,6 +54617,11 @@
             "DB_INFRA_SPANNER",
             "DB_CLOUD_SQL_POSTGRES"
           ],
+          "enumDeprecated": [
+            false,
+            false,
+            true
+          ],
           "enumDescriptions": [
             "This value is required by protobuf best practices",
             "Internal Spanner",
@@ -54931,6 +54963,11 @@
             "DB_UNKNOWN",
             "DB_INFRA_SPANNER",
             "DB_CLOUD_SQL_POSTGRES"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            true
           ],
           "enumDescriptions": [
             "This value is required by protobuf best practices",
@@ -57349,7 +57386,7 @@
       "type": "object"
     },
     "GoogleIamV1Policy": {
-      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
+      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
       "id": "GoogleIamV1Policy",
       "properties": {
         "auditConfigs": {
@@ -57829,7 +57866,7 @@
             "SUPPORT_CASES_ID",
             "FITBIT_P11_ID",
             "SHORT_PHONE_NUMBER",
-            "EXTERNAL_ID"
+            "USER_HANDLE"
           ],
           "enumDescriptions": [
             "",
@@ -57871,7 +57908,7 @@
             "used by Support Cases for Realtime Media WebRtc",
             "signaling. go/cases-media-channel-dd. used by Fitbit Project 11 for messaging.",
             "Short phone number: go/shortnumbers",
-            "Used to reference external users in other domains,"
+            "Used to reference internal and users in other domains,"
           ],
           "type": "string"
         }
@@ -57932,7 +57969,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -89067,6 +89104,8 @@
             "DUCKIEWEB",
             "MATTERSPACE",
             "WAYMO_TRIAGE_TOOLING",
+            "TWENTYPERCENT_JOBPOSTINGS",
+            "ENGAGEMENTS",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -89649,6 +89688,8 @@
             false,
             true,
             true,
+            false,
+            false,
             false,
             false,
             false,
@@ -90359,6 +90400,8 @@
             "Duckieweb Team contact: workflow-horizontals-core@google.com",
             "Matterspace Team contact: legalworks-elm-eng@google.com, rajapate@google.com",
             "Waymo Triage Tooling Team contact: heathrow-eng@google.com",
+            "Twentypercent Jobpostings Team contact: 20p-wg@google.com",
+            "Engagements Team contact: engagements-eng@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -98250,6 +98293,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "valueString": {
+          "type": "string"
+        },
         "valueUint32": {
           "format": "uint32",
           "type": "integer"
@@ -99014,7 +99060,7 @@
               false,
               false,
               false,
-              false,
+              true,
               false,
               false,
               false,
@@ -99509,7 +99555,7 @@
               false,
               false,
               false,
-              false,
+              true,
               false,
               false,
               false,
@@ -100010,7 +100056,7 @@
               false,
               false,
               false,
-              false,
+              true,
               false,
               false,
               false,
@@ -106928,12 +106974,6 @@
           "type": "number"
         },
         "nameCapitalizationProb": {
-          "deprecated": true,
-          "description": "Probability that any given name of this entity is capitalized.",
-          "format": "float",
-          "type": "number"
-        },
-        "personProb": {
           "deprecated": true,
           "description": "The following fields are deprecated and should eventually be removed. They use data and rules that have not been refreshed for ~10y and KG has changed a lot in the meantime. ",
           "format": "float",
@@ -120329,6 +120369,10 @@
           ],
           "type": "string"
         },
+        "rwjPolicyMetadata": {
+          "$ref": "StorageGraphBfgRwjPolicyMetadata",
+          "description": "Policy metadata fields for Real World Journey (RWJ) data. Only expected to be used by RWJ providers -- please consult ke-data-governance@ before populating this field."
+        },
         "umpPolicyMetadata": {
           "$ref": "StorageGraphBfgUmpPolicyMetadata",
           "description": "Policy metadata fields for UMP data. Only expected to be used by UMP providers -- please consult ke-data-governance@ before populating this field."
@@ -120350,6 +120394,21 @@
           "description": "Most recent date at which 'attribution_url's were verified, as UNIX epoch time in milliseconds. This is required.",
           "format": "int64",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "StorageGraphBfgRwjPolicyMetadata": {
+      "description": "Metadata fields for Real World Journey. See go/rwj-kg-dg for details.",
+      "id": "StorageGraphBfgRwjPolicyMetadata",
+      "properties": {
+        "eligibleSurfaces": {
+          "description": "Int values correspond to the usecases used in CDS. See: google3/googlebase/verticals/model/usecase_id.proto.",
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -120526,6 +120585,7 @@
             "ISOLATION_PKG_STARLIGHT_VISIBLE_TO_GUESTS",
             "ISOLATION_PKG_STRUCTURED_MEMORY_FOOTPRINTS",
             "ISOLATION_PKG_TEACH_AND_LEARN_ENTITIES",
+            "ISOLATION_PKG_TYPED_QUERIES",
             "ISOLATION_PKG_ASSISTANT_ROUTINES",
             "ISOLATION_PKG_VANITY_COLLECTIONS",
             "ISOLATION_PKG_WEBSEARCH",
@@ -120753,6 +120813,7 @@
             false,
             false,
             false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -120828,7 +120889,7 @@
             "Access controls for web channels entities. go/webchannels-infra-prd. See go/webchannels-kg-integration for details. Please contact web-channels-infra@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. Access controls for dictionary entities. Design proposal:go/word-osrp-proposal, schema details:go/kg-dict-schema Please contact dictionary-lr@ before reading or writing this data.",
             "Access controls for Hotel Rooms entities. Please contact hotels-rooms-eng@ before reading or writing this data. DD: go/hotel-room-photos-gps",
-            "Access controls for Personal KG data source isolation. The ISOLATION_PKG data sources *DO NOT* flow through LiveGraph and must be written or read by Personal KG only. Please keep the list sorted. PKG ARs should be in the range [15001, 20000]. Next id: 15044 YOU MUST CONTACT pkg-service-team@ before using these ARs.",
+            "Access controls for Personal KG data source isolation. The ISOLATION_PKG data sources *DO NOT* flow through LiveGraph and must be written or read by Personal KG only. Please keep the list sorted. PKG ARs should be in the range [15001, 20000]. Next id: 15045 YOU MUST CONTACT pkg-service-team@ before using these ARs.",
             "",
             "",
             "",
@@ -120886,6 +120947,7 @@
             "PWG approval for client use cases for reservation data must include explicit approval for this type of traffic.",
             "PWG approval for client use cases for reservation data must include explicit approval for this type of traffic.",
             "PWG approval for client use cases for reservation data must include explicit approval for this type of traffic.",
+            "",
             "",
             "",
             "",
@@ -125190,6 +125252,8 @@
               "BOOKS_READ_NOW_DUAL_FORMAT_REQUEST_SESSION_LEVEL",
               "BOOKS_READ_NOW_WITH_HEADER_REQUEST_SESSION_LEVEL",
               "FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_SESSION_LEVEL",
+              "MERCH_NOMADS_CN_EXP_CLUSTER_TARGETED_AT_SESSION_LEVEL",
+              "MERCH_NOMADS_CN_PROD_CLUSTER_TARGETED_AT_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -125489,6 +125553,9 @@
               "GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_USER_LEVEL",
               "SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_USER_LEVEL",
               "SUBS_PAYMENT_DECLINE_V2_USER_LEVEL",
+              "MERCH_NOMADS_CN_EXP_CLUSTER_TARGETED_AT_USER_LEVEL",
+              "MERCH_NOMADS_CN_PROD_CLUSTER_TARGETED_AT_USER_LEVEL",
+              "NOTIFICATION_GUM_FINE_TUNING_MODEL_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -126615,30 +126682,35 @@
               false,
               false,
               false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
               false,
               false,
               false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
               false,
               false,
               false,
@@ -127708,6 +127780,8 @@
               "Session-level test code for Books legacy clients that request both ebook and audiobook format clusters from the Books Read PSS response.",
               "Session-level test code for legacy clients that request header placeholder clusters from the Read Now PSS response.",
               "Session-level test code for 1P fcc categorical search offers.",
+              "Session-level test code for Merch Nomads CN Exp Cluster targeting check.",
+              "Session-level test code for Merch Nomads CN Prod Cluster targeting check.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -128007,6 +128081,9 @@
               "User-level test code for Game Hub Developer Video cluster eligibility.",
               "User-level for showing 1P LiveOps subscription offer.",
               "User-level test code for Subscription Payment Decline Reminder V2.",
+              "User-level test code for Merch Nomads CN Exp Cluster targeting check.",
+              "User-level test code for Merch Nomads CN Prod Cluster targeting check.",
+              "User level test code for GUM fine tuning model study in Notification surface, tracking users who actually get different experience between control and treatment.",
               ""
             ],
             "type": "string"
