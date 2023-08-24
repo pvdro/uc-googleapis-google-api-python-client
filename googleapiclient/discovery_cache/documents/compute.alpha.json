@@ -17939,6 +17939,48 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "patchAssociation": {
+          "description": "Updates an association for the specified network firewall policy.",
+          "flatPath": "projects/{project}/global/firewallPolicies/{firewallPolicy}/patchAssociation",
+          "httpMethod": "POST",
+          "id": "compute.networkFirewallPolicies.patchAssociation",
+          "parameterOrder": [
+            "project",
+            "firewallPolicy"
+          ],
+          "parameters": {
+            "firewallPolicy": {
+              "description": "Name of the firewall policy to update.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/global/firewallPolicies/{firewallPolicy}/patchAssociation",
+          "request": {
+            "$ref": "FirewallPolicyAssociation"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "patchRule": {
           "description": "Patches a rule of the specified priority.",
           "flatPath": "projects/{project}/global/firewallPolicies/{firewallPolicy}/patchRule",
@@ -32849,6 +32891,47 @@
             "https://www.googleapis.com/auth/compute.readonly"
           ]
         },
+        "getNetworkCapacityConstraints": {
+          "description": "Returns the network capacity constraints for the specified placement policies.",
+          "flatPath": "projects/{project}/regions/{region}/resourcePolicies/getNetworkCapacityConstraints",
+          "httpMethod": "POST",
+          "id": "compute.resourcePolicies.getNetworkCapacityConstraints",
+          "parameterOrder": [
+            "project",
+            "region"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            },
+            "resourcePolicies": {
+              "description": "Partial or full URL of the resource policies for which to retrieve the network capacity constraints.",
+              "location": "query",
+              "repeated": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/resourcePolicies/getNetworkCapacityConstraints",
+          "response": {
+            "$ref": "GetNetworkCapacityConstraintsResponse"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
         "insert": {
           "description": "Creates a new resource policy.",
           "flatPath": "projects/{project}/regions/{region}/resourcePolicies",
@@ -42183,7 +42266,7 @@
       }
     }
   },
-  "revision": "20230725",
+  "revision": "20230814",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -47169,6 +47252,55 @@
       },
       "type": "object"
     },
+    "CapacityConstraint": {
+      "description": "Represents the network information between workload placements.",
+      "id": "CapacityConstraint",
+      "properties": {
+        "constraintMetadata": {
+          "enum": [
+            "CONSTRAINT_TYPE_UNSPECIFIED",
+            "OFF_CHAIN_CONSTRAINT",
+            "ON_CHAIN_CONSTRAINT"
+          ],
+          "enumDescriptions": [
+            "",
+            "Constraints for off-chain superblocks. Can be used to mark constraints for secondary workloads.",
+            "Constraints related to the capacity between the Astrophel chain superblocks."
+          ],
+          "type": "string"
+        },
+        "maxSumGbps": {
+          "description": "Weighted sum of BandwidthTerms (each term is coefficient * term) must be less than or equal to max_sum.",
+          "format": "double",
+          "type": "number"
+        },
+        "terms": {
+          "items": {
+            "$ref": "CapacityConstraintConstraintTerm"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CapacityConstraintConstraintTerm": {
+      "id": "CapacityConstraintConstraintTerm",
+      "properties": {
+        "coefficient": {
+          "description": "Coefficient of this term in the linear expression. The value of the term will be coefficient * (demand from src to dst in Gbps).",
+          "format": "double",
+          "type": "number"
+        },
+        "destinationNode": {
+          "$ref": "PlacementLocation"
+        },
+        "sourceNode": {
+          "$ref": "PlacementLocation",
+          "description": "Source and destination nodes."
+        }
+      },
+      "type": "object"
+    },
     "ChannelCredentials": {
       "description": "[Deprecated] gRPC channel credentials to access the SDS server. gRPC channel credentials to access the SDS server.",
       "id": "ChannelCredentials",
@@ -48478,7 +48610,7 @@
           "type": "string"
         },
         "sizeGb": {
-          "description": "Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk. If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are 1 to 65536, inclusive.",
+          "description": "Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk. If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are greater than 0.",
           "format": "int64",
           "type": "string"
         },
@@ -51263,6 +51395,10 @@
           "description": "This is used in PSC consumer ForwardingRule to control whether the PSC endpoint can be accessed from another region.",
           "type": "boolean"
         },
+        "allowPscPacketInjection": {
+          "description": "This is used in PSC consumer ForwardingRule to control whether the producer is allowed to inject packets into the consumer's network. If set to true, the target service attachment must have tunneling enabled and TunnelingConfig.RoutingMode set to PACKET_INJECTION Non-PSC forwarding rules should not use this field.",
+          "type": "boolean"
+        },
         "backendService": {
           "description": "Identifies the backend service to which the forwarding rule sends traffic. Required for Internal TCP/UDP Load Balancing and Network Load Balancing; must be omitted for all other load balancer types.",
           "type": "string"
@@ -51290,7 +51426,7 @@
           "type": "string"
         },
         "ipCollection": {
-          "description": "Resource reference of a PublicDelegatedPrefix. The PDP must be a sub-PDP in IPV6_FORWARDING_RULE_CREATION mode. Use one of the following formats to specify a sub-PDP when creating an IPv6 NetLB forwarding rule using BYOIP: Full resource URL, as in https://www.googleapis.com/compute/v1/projects/ project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name Partial URL, as in: - projects/project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name ",
+          "description": "Resource reference of a PublicDelegatedPrefix. The PDP must be a sub-PDP in EXTERNAL_IPV6_FORWARDING_RULE_CREATION mode. Use one of the following formats to specify a sub-PDP when creating an IPv6 NetLB forwarding rule using BYOIP: Full resource URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region /publicDelegatedPrefixes/sub-pdp-name Partial URL, as in: - projects/project_id/regions/region/publicDelegatedPrefixes/sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name ",
           "type": "string"
         },
         "ipVersion": {
@@ -52720,6 +52856,19 @@
             "For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports."
           ],
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GetNetworkCapacityConstraintsResponse": {
+      "id": "GetNetworkCapacityConstraintsResponse",
+      "properties": {
+        "capacityConstraints": {
+          "description": "Set of capacity constraints that describe network adjacency.",
+          "items": {
+            "$ref": "CapacityConstraint"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -57407,6 +57556,11 @@
           "$ref": "QueuingPolicy",
           "description": "When set, defines queing parameters for the requested deferred capacity. When unset, the request starts provisioning immediately, or fails if immediate provisioning is not possible."
         },
+        "resizeBy": {
+          "description": "The number of instances to be created by this resize request. The group's target size will be increased by this number.",
+          "format": "int32",
+          "type": "integer"
+        },
         "selfLink": {
           "description": "[Output Only] The URL for this resize request. The server defines this URL.",
           "type": "string"
@@ -57439,7 +57593,7 @@
         },
         "status": {
           "$ref": "InstanceGroupManagerResizeRequestStatus",
-          "description": "[Output only] Status of the request. The Status message is aligned with QueuedResource.status. ResizeRequest.queuing_policy contains the queuing policy as provided by the user; it could have either valid_until_time or valid_until_duration. ResizeRequest.status.queuing_policy always contains absolute time as calculated by the server when the request is queued."
+          "description": "[Output only] Status of the request."
         },
         "zone": {
           "description": "[Output Only] The URL of a zone where the resize request is located. Populated only for zonal resize requests.",
@@ -59468,17 +59622,17 @@
     "InstanceSettingsMetadata": {
       "id": "InstanceSettingsMetadata",
       "properties": {
+        "items": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A metadata key/value items map. The total size of all keys and values must be less than 512KB.",
+          "type": "object"
+        },
         "kind": {
           "default": "compute#metadata",
           "description": "[Output Only] Type of the resource. Always compute#metadata for metadata.",
           "type": "string"
-        },
-        "metadatas": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "A metadata key/value map. The total size of all keys and values must be less than 512KB.",
-          "type": "object"
         }
       },
       "type": "object"
@@ -61439,7 +61593,7 @@
           "type": "string"
         },
         "pairingKey": {
-          "description": "[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of an PARTNER attachment used to initiate provisioning with a selected partner. Of the form \"XXXXX/region/domain\"",
+          "description": "[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of a PARTNER attachment used to initiate provisioning with a selected partner. Of the form \"XXXXX/region/domain\"",
           "type": "string"
         },
         "partnerAsn": {
@@ -61449,7 +61603,7 @@
         },
         "partnerMetadata": {
           "$ref": "InterconnectAttachmentPartnerMetadata",
-          "description": "Informational metadata about Partner attachments from Partners to display to customers. Output only for for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED."
+          "description": "Informational metadata about Partner attachments from Partners to display to customers. Output only for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED."
         },
         "privateInterconnectInfo": {
           "$ref": "InterconnectAttachmentPrivateInfo",
@@ -72394,8 +72548,22 @@
       },
       "type": "object"
     },
+    "PlacementLocation": {
+      "id": "PlacementLocation",
+      "properties": {
+        "aggregationBlockId": {
+          "description": "Aggregation block id of the placement group.",
+          "type": "string"
+        },
+        "resourcePolicy": {
+          "description": "Partial or full URL of the resource policy for the placement group.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Policy": {
-      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
+      "description": "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).",
       "id": "Policy",
       "properties": {
         "auditConfigs": {
@@ -73182,7 +73350,7 @@
           "description": "The public delegated prefix mode for IPv6 only.",
           "enum": [
             "DELEGATION",
-            "IPV6_FORWARDING_RULE_CREATION"
+            "EXTERNAL_IPV6_FORWARDING_RULE_CREATION"
           ],
           "enumDescriptions": [
             "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
@@ -73585,7 +73753,7 @@
           "description": "The PublicDelegatedSubPrefix mode for IPv6 only.",
           "enum": [
             "DELEGATION",
-            "IPV6_FORWARDING_RULE_CREATION"
+            "EXTERNAL_IPV6_FORWARDING_RULE_CREATION"
           ],
           "enumDescriptions": [
             "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
@@ -77644,6 +77812,11 @@
           ],
           "type": "string"
         },
+        "sliceCount": {
+          "description": "Specifies the number of slices in a multislice workload.",
+          "format": "int32",
+          "type": "integer"
+        },
         "style": {
           "description": "Specifies instances to hosts placement relationship",
           "enum": [
@@ -78219,7 +78392,7 @@
               "compute.routes.insert"
             ]
           },
-          "description": "The destination range of outgoing packets that this route applies to. Both IPv4 and IPv6 are supported.",
+          "description": "The destination range of outgoing packets that this route applies to. Both IPv4 and IPv6 are supported. Must specify an IPv4 range (e.g. 192.0.2.0/24) or an IPv6 range in RFC 4291 format (e.g. 2001:db8::/32). IPv6 range will be displayed using RFC 5952 compressed format.",
           "type": "string"
         },
         "id": {
@@ -78284,7 +78457,7 @@
           "type": "string"
         },
         "nextHopIp": {
-          "description": "The network IP address of an instance that should handle matching packets. Only IPv4 is supported.",
+          "description": "The network IP address of an instance that should handle matching packets. Both IPv6 address and IPv4 addresses are supported. Must specify an IPv4 address in dot-decimal notation (e.g. 192.0.2.99) or an IPv6 address in RFC 4291 format (e.g. 2001:db8::2d9:51:0:0 or 2001:db8:0:0:2d9:51:0:0). IPv6 addresses will be displayed using RFC 5952 compressed format (e.g. 2001:db8::2d9:51:0:0). Should never be an IPv4-mapped IPv6 address.",
           "type": "string"
         },
         "nextHopNetwork": {
@@ -79468,7 +79641,7 @@
       "id": "RouterNat",
       "properties": {
         "autoNetworkTier": {
-          "description": "The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used.",
+          "description": "The network tier to use when automatically reserving NAT IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, then the current project-level default tier is used.",
           "enum": [
             "FIXED_STANDARD",
             "PREMIUM",
@@ -82345,6 +82518,10 @@
         "targetService": {
           "description": "The URL of a service serving the endpoint identified by this service attachment.",
           "type": "string"
+        },
+        "tunnelingConfig": {
+          "$ref": "ServiceAttachmentTunnelingConfig",
+          "description": "When a tunneling config is set on this service attachment it will encapsulate traffic between consumer and producer. When tunneling is enabled: - nat_subnets must be unset - enable_proxy_protocol must be false - producer_forwarding_rule must be a L4 ILB. - "
         }
       },
       "type": "object"
@@ -82715,6 +82892,39 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ServiceAttachmentTunnelingConfig": {
+      "description": "Use to configure this PSC connection in tunneling mode. In tunneling mode traffic from consumer to producer will be encapsulated as it crosses the VPC boundary and traffic from producer to consumer will be decapsulated in the same manner.",
+      "id": "ServiceAttachmentTunnelingConfig",
+      "properties": {
+        "encapsulationProfile": {
+          "description": "Specify the encapsulation protocol and what metadata to include in incoming encapsulated packet headers.",
+          "enum": [
+            "GENEVE_SECURITY_V1",
+            "UNSPECIFIED_ENCAPSULATION_PROFILE"
+          ],
+          "enumDescriptions": [
+            "Use GENEVE encapsulation protocol and include the SECURITY_V1 set of GENEVE headers.",
+            ""
+          ],
+          "type": "string"
+        },
+        "routingMode": {
+          "description": "How this Service Attachment will treat traffic sent to the tunnel_ip, destined for the consumer network.",
+          "enum": [
+            "PACKET_INJECTION",
+            "STANDARD_ROUTING",
+            "UNSPECIFIED_ROUTING_MODE"
+          ],
+          "enumDescriptions": [
+            "Traffic sent to this service attachment will be reinjected into the consumer network.",
+            "Response traffic, after de-encapsulation, will be returned to the client.",
+            ""
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -92846,7 +93056,7 @@
           "type": "integer"
         },
         "peerGcpGateway": {
-          "description": "URL of the peer side HA GCP VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field can be used when creating highly available VPN from VPC network to VPC network, the field is exclusive with the field peerExternalGateway. If provided, the VPN tunnel will automatically use the same vpnGatewayInterface ID in the peer GCP VPN gateway.",
+          "description": "URL of the peer side HA VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field can be used when creating highly available VPN from VPC network to VPC network, the field is exclusive with the field peerExternalGateway. If provided, the VPN tunnel will automatically use the same vpnGatewayInterface ID in the peer Google Cloud VPN gateway.",
           "type": "string"
         },
         "peerIp": {
