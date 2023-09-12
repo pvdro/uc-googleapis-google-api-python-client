@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20230828",
+  "revision": "20230901",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3725,7 +3725,9 @@
             "ENGAGEMENTS_AFFINITY",
             "TRUSTED_CONTACTS_FL_AFFINITY",
             "CALENDAR_WEB_TEAM_MEMBERS_AFFINITY",
-            "CLOUDCONNECT_AFFINITY"
+            "CLOUDCONNECT_AFFINITY",
+            "PERSONAL_AGENT_AFFINITY",
+            "MOBILE_HARNESS_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -3991,6 +3993,8 @@
             false,
             false,
             false,
+            false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4008,6 +4012,8 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
             "",
             "",
             "",
@@ -7355,11 +7361,12 @@
         },
         "profileUrl": {
           "deprecated": true,
-          "description": "DEPRECATED. (go/people-api-concepts#repeated): Use person.profile_url_repeated instead. Access to this field is restricted to a set of legacy clients. This is a Google+-only field. See go/fbs-g+-deprecation. NOTE: `Person.profile_url` is only populated for profile-centric person.",
+          "description": "DEPRECATED. No data is returned for this field anymore. (go/people-api-concepts#repeated): Use person.profile_url_repeated instead. Access to this field is restricted to a set of legacy clients. This is a Google+-only field. See go/fbs-g+-deprecation. NOTE: `Person.profile_url` is only populated for profile-centric person.",
           "type": "string"
         },
         "profileUrlRepeated": {
-          "description": "This is a Google+-only field. See go/fbs-g+-deprecation.",
+          "deprecated": true,
+          "description": "DEPRECATED. No data is returned for this field anymore. This is a Google+-only field. See go/fbs-g+-deprecation.",
           "items": {
             "$ref": "AppsPeopleOzExternalMergedpeopleapiProfileUrl"
           },
@@ -10022,27 +10029,6 @@
             "$ref": "AssistantApiCoreTypesCastAppInfo"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AssistantApiCapabilitiesHomeAppCapabilities": {
-      "description": "Information about the readiness of Home app features on the device. As of January 2023, this is only populated by Assistant on Android.",
-      "id": "AssistantApiCapabilitiesHomeAppCapabilities",
-      "properties": {
-        "setupState": {
-          "description": "The app's installation and setup state. This is most pertinent for Tangor, where lock screen Smart Home queries are fulfilled by a Home app activity that may be blocked if this value is not `SETUP_STATE_COMPLETE`.",
-          "enum": [
-            "SETUP_STATE_UNKNOWN",
-            "SETUP_STATE_INCOMPLETE",
-            "SETUP_STATE_COMPLETE"
-          ],
-          "enumDescriptions": [
-            "Setup state is not known, potentially because the installed version of the app does not have the app state service.",
-            "First-time setup has not been completed.",
-            "First-time setup is known to be complete."
-          ],
-          "type": "string"
         }
       },
       "type": "object"
@@ -14379,6 +14365,7 @@
           "type": "string"
         },
         "virtualReleaseChannel": {
+          "deprecated": true,
           "description": "A string describing device's release channel. For cast devices, the string will look like \"qa-beta-channel\", \"eng-no-update\", etc.",
           "type": "string"
         }
@@ -15586,6 +15573,7 @@
         },
         "kidsMode": {
           "$ref": "AssistantApiSettingsKidsMode",
+          "deprecated": true,
           "description": "Specifies if kids-mode is enabled for the device. See go/aff-parentalsupervision-dd."
         },
         "lastCastRegistrationTimestamp": {
@@ -15633,6 +15621,7 @@
         },
         "notificationProfile": {
           "$ref": "AssistantApiSettingsNotificationProfile",
+          "deprecated": true,
           "description": "Information about how to send the user a notification. This won't be populated for fb-conv users (allo group chat users)."
         },
         "oauthClientId": {
@@ -15665,6 +15654,7 @@
         },
         "reauthTrustedDeviceSettings": {
           "$ref": "AssistantApiSettingsReauthTrustedDeviceSettings",
+          "deprecated": true,
           "description": "Trusted device preferences Assistant reauth. go/assistant-reauth-verify-skip."
         },
         "shortenedAddress": {
@@ -17053,10 +17043,6 @@
         },
         "gcmCapabilities": {
           "$ref": "AssistantApiGcmCapabilities"
-        },
-        "homeAppCapabilities": {
-          "$ref": "AssistantApiCapabilitiesHomeAppCapabilities",
-          "description": "Google Home app features."
         },
         "liveTvChannelCapabilities": {
           "$ref": "AssistantApiLiveTvChannelCapabilities",
@@ -19069,12 +19055,14 @@
           "enum": [
             "UNKNOWN_TYPE",
             "ZEROTH_PARTY_TYPE",
-            "ANDROID_SYSTEM_API_TYPE"
+            "ANDROID_SYSTEM_API_TYPE",
+            "ANDROID_APP_TYPE"
           ],
           "enumDescriptions": [
             "",
             "Provider fulfillment is through 0-party assistant app (AGSA) on mobile or 0-party libassistant on other surfaces. See go/0p-and-system-api-in-pc.",
-            "Provider fulfillment is through Android System API. See go/0p-and-system-api-in-pc."
+            "Provider fulfillment is through Android System API. See go/0p-and-system-api-in-pc.",
+            "Provider fulfillment is through Android app fulfillment (App Actions)."
           ],
           "type": "string"
         }
@@ -19085,55 +19073,68 @@
       "id": "AssistantGroundingRankerAssistantInteractionFeatures",
       "properties": {
         "timeDecayed14dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeDecayed1dHalfLife": {
+          "deprecated": true,
           "description": "Frequency features.",
           "format": "float",
           "type": "number"
         },
         "timeDecayed7dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeDecayedAccepted14dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeDecayedAuis14dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeDecayedCanceled14dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeDecayedDeclined14dHalfLife": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastButOneCanceledActionSecs": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastButOneCompletedActionSecs": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastButTwoCanceledActionSecs": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastButTwoCompletedActionSecs": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastCanceledActionSecs": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "timeSinceLastCompletedActionSecs": {
+          "deprecated": true,
           "description": "Recency features.",
           "format": "float",
           "type": "number"
@@ -19292,14 +19293,17 @@
       "id": "AssistantGroundingRankerDeviceContactAffinityFeatures",
       "properties": {
         "aggregateAffinity": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "callAffinity": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         },
         "messageAffinity": {
+          "deprecated": true,
           "format": "float",
           "type": "number"
         }
@@ -19482,11 +19486,11 @@
       "type": "object"
     },
     "AssistantGroundingRankerDeviceTargetingFeaturesStates": {
-      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 5",
+      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 6",
       "id": "AssistantGroundingRankerDeviceTargetingFeaturesStates",
       "properties": {
         "distance": {
-          "description": "The distance of the device relative to others that hear the user's OKG. Timestamp of when the device was last used. Should correspond to when the AssistantRequestParams (in ASSISTANT_SNAPSHOT corpus) were last written for this device.",
+          "description": "The distance of the device relative to others that hear the user's OKG.",
           "enum": [
             "UNKNOWN_DISTANCE",
             "CLOSEST",
@@ -19503,6 +19507,10 @@
         },
         "isDocked": {
           "description": "Indicate whether the device is docked on a base.",
+          "type": "boolean"
+        },
+        "isLocal": {
+          "description": "Whether the device is a local device, i.e. the device that heard OKG from a user and is processed by an assistant pipeline. If multiple devices heard OKG (MDA case), each hearing device would be considered a local device in its own assistant pipeline. Example: A user says \"OKG, play music on TV\" to Google Home, and music is played on the TV. Google home is considered a local device, while TV is considered a remote device. Timestamp of when the device was last used. Should correspond to when the AssistantRequestParams (in ASSISTANT_SNAPSHOT corpus) were last written for this device.",
           "type": "boolean"
         },
         "isLocked": {
@@ -19580,13 +19588,16 @@
       "id": "AssistantGroundingRankerLaaFeatures",
       "properties": {
         "bindingSet": {
-          "$ref": "AssistantGroundingRankerLaaFeaturesBindingSet"
+          "$ref": "AssistantGroundingRankerLaaFeaturesBindingSet",
+          "deprecated": true
         },
         "communicationEndpoint": {
-          "$ref": "AssistantGroundingRankerLaaFeaturesCommunicationEndpoint"
+          "$ref": "AssistantGroundingRankerLaaFeaturesCommunicationEndpoint",
+          "deprecated": true
         },
         "contact": {
-          "$ref": "AssistantGroundingRankerLaaFeaturesContact"
+          "$ref": "AssistantGroundingRankerLaaFeaturesContact",
+          "deprecated": true
         },
         "features": {
           "items": {
@@ -19595,7 +19606,8 @@
           "type": "array"
         },
         "provider": {
-          "$ref": "AssistantGroundingRankerLaaFeaturesProvider"
+          "$ref": "AssistantGroundingRankerLaaFeaturesProvider",
+          "deprecated": true
         }
       },
       "type": "object"
@@ -19604,7 +19616,8 @@
       "id": "AssistantGroundingRankerLaaFeaturesBindingSet",
       "properties": {
         "assistantInteractionFeatures": {
-          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures"
+          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures",
+          "deprecated": true
         }
       },
       "type": "object"
@@ -19613,7 +19626,8 @@
       "id": "AssistantGroundingRankerLaaFeaturesCommunicationEndpoint",
       "properties": {
         "assistantInteractionFeatures": {
-          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures"
+          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures",
+          "deprecated": true
         }
       },
       "type": "object"
@@ -19622,10 +19636,12 @@
       "id": "AssistantGroundingRankerLaaFeaturesContact",
       "properties": {
         "assistantInteractionFeatures": {
-          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures"
+          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures",
+          "deprecated": true
         },
         "deviceContactAffinityFeatures": {
-          "$ref": "AssistantGroundingRankerDeviceContactAffinityFeatures"
+          "$ref": "AssistantGroundingRankerDeviceContactAffinityFeatures",
+          "deprecated": true
         }
       },
       "type": "object"
@@ -19634,13 +19650,14 @@
       "id": "AssistantGroundingRankerLaaFeaturesProvider",
       "properties": {
         "assistantInteractionFeatures": {
-          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures"
+          "$ref": "AssistantGroundingRankerAssistantInteractionFeatures",
+          "deprecated": true
         }
       },
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 17",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 18",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -19678,6 +19695,10 @@
         "entityMid": {
           "description": "Mid of the media item. This is currently only used in manual rules.",
           "type": "string"
+        },
+        "hasCastVideoDeeplink": {
+          "description": "True if the candidate has a CAST_VIDEO deeplink regardless of which provider was chosen.",
+          "type": "boolean"
         },
         "hasTypeSemanticEdge": {
           "description": "True if the argument's type was explicitly mentioned in the query.",
@@ -19876,6 +19897,7 @@
             "NEWS",
             "NARRATED_WEB",
             "NEWS_CALL_TO_ACTION",
+            "NEWS_OVERVIEW",
             "AUDIO_STORY",
             "PODCAST_SERIES",
             "PODCAST_EPISODE"
@@ -19906,6 +19928,7 @@
             "",
             "",
             "Repesents a Call To Action media item. See go/newsplayer-outro-gnews. Current use case is to ask users to continue their news journey in the Google News app / web app. Future cases could include asking users to adjust their news settings.",
+            "Represents a Narrative News Overview media item. This a multi-segment news media item with interactive elements. See go/gen-narrative-news-intro.",
             "Representing a short audio story. go/tmas-design",
             "Represent different kinds of podcast content",
             ""
@@ -19920,7 +19943,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerPodcastGroundingProviderFeatures": {
-      "description": "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 6",
+      "description": "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 7",
       "id": "AssistantGroundingRankerPodcastGroundingProviderFeatures",
       "properties": {
         "isExclusive": {
@@ -19944,6 +19967,11 @@
         },
         "scubedTstarScore": {
           "description": "Tstar score is a signal that indicates the quality of the entity.",
+          "format": "double",
+          "type": "number"
+        },
+        "youtubeConfidenceScore": {
+          "description": "This score is in the range [0.0, 1.0] and is used for cross-backend (e.g., YT vs another Music/Podcast service provider) ranking and scoring. 0.0 means no confidence and 1.0 means full confidence.",
           "format": "double",
           "type": "number"
         }
@@ -20888,6 +20916,7 @@
             "NEWS",
             "NARRATED_WEB",
             "NEWS_CALL_TO_ACTION",
+            "NEWS_OVERVIEW",
             "AUDIO_STORY",
             "PODCAST_SERIES",
             "PODCAST_EPISODE"
@@ -20918,6 +20947,7 @@
             "",
             "",
             "Repesents a Call To Action media item. See go/newsplayer-outro-gnews. Current use case is to ask users to continue their news journey in the Google News app / web app. Future cases could include asking users to adjust their news settings.",
+            "Represents a Narrative News Overview media item. This a multi-segment news media item with interactive elements. See go/gen-narrative-news-intro.",
             "Representing a short audio story. go/tmas-design",
             "Represent different kinds of podcast content",
             ""
@@ -21935,8 +21965,22 @@
       },
       "type": "object"
     },
+    "AssistantPfrTiebreakingMetadata": {
+      "description": "Features used by the PrefulfillmentRanker's scorer exclusively to break ties.",
+      "id": "AssistantPfrTiebreakingMetadata",
+      "properties": {
+        "fingerprint": {
+          "format": "uint64",
+          "type": "string"
+        },
+        "sortedNameString": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 62",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 65",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -22097,6 +22141,10 @@
           "description": "Whether the intent is an intent marked disabled by the Sage IG.",
           "type": "boolean"
         },
+        "isSageInNageIntent": {
+          "description": "Whether the intent is produced by the Sage IntentGenerator invoked by the NSP intent-generator (thus, Sage-in-NSP-invoking_Sage, or Sage-in-Nage).",
+          "type": "boolean"
+        },
         "isSageIntent": {
           "description": "Whether this intent was generated by Sage.",
           "type": "boolean"
@@ -22222,6 +22270,10 @@
           ],
           "type": "string"
         },
+        "platinumSource": {
+          "description": "Whether the intent comes from the Sage IntentGenerator's \"platinum\" source, signifying high-confidence in quality.",
+          "type": "boolean"
+        },
         "pq2tVsAssistantIbstCosine": {
           "description": "Cosine similarity between predicted query-to-term model and assistant intent-type-based salient terms. This is intended to be only used for ACE ranking and only populated for assistant traffic.",
           "format": "double",
@@ -22306,7 +22358,9 @@
             "SUB_INTENT_TYPE_PODCAST",
             "SUB_INTENT_TYPE_MUSIC_INITIATION_INTENT",
             "SUB_INTENT_TYPE_PLAY_RADIO_INTENT",
-            "SUB_INTENT_TYPE_PLAY_TVM_INTENT"
+            "SUB_INTENT_TYPE_PLAY_TVM_INTENT",
+            "SUB_INTENT_TYPE_PLAY_VIDEO_INTENT",
+            "SUB_INTENT_TYPE_BROWSE_VIDEO_INTENT"
           ],
           "enumDescriptions": [
             "",
@@ -22314,9 +22368,14 @@
             "Play_media, Play_media, Play_media, Listen_to_media, Media_entity_bare, Play_and_shuffle_media",
             "Play_media",
             "Play_media",
-            "Play_media"
+            "Play_media",
+            "Play media",
+            "Find_media, Media_entity_bare"
           ],
           "type": "string"
+        },
+        "tiebreakingMetadata": {
+          "$ref": "AssistantPfrTiebreakingMetadata"
         },
         "topHypothesisConfidence": {
           "description": "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256",
@@ -24605,7 +24664,7 @@
       "type": "object"
     },
     "CompositeDoc": {
-      "description": "Protocol record used for collecting together all information about a document. Please consult go/dj-explorer for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 191",
+      "description": "Protocol record used for collecting together all information about a document. Please consult go/dj-explorer for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 193",
       "id": "CompositeDoc",
       "properties": {
         "ContentChecksum96": {
@@ -24627,10 +24686,12 @@
           "type": "array"
         },
         "anchorStats": {
-          "$ref": "IndexingDocjoinerAnchorStatistics"
+          "$ref": "IndexingDocjoinerAnchorStatistics",
+          "description": "Mark as non-personal since it's an aggregation of anchors. For more details of Search personal data, see go/dma52-search-cdoc-fields."
         },
         "anchors": {
-          "$ref": "Anchors"
+          "$ref": "Anchors",
+          "description": "Mark as non-personal since no personal fields will be populated in `anchors.link_additional_info` and `anchors.additional_info`. For more details of Search personal data, see go/dma52-search-cdoc-fields."
         },
         "badSslCertificate": {
           "$ref": "IndexingBadSSLCertificate",
@@ -25125,6 +25186,10 @@
           "format": "float",
           "type": "number"
         },
+        "primaryVertical": {
+          "description": "Vertical membership of the document. - `primary_vertical` is the vertical that initiated indexing of this document (or empty if the vertical was websearch). - `verticals` is the full list of verticals that contained this document (excluding websearch) at indexing time. `primary_vertical` may or may not be an element of `verticals` because of vertical membership skew between the ingestion time and indexing time. See go/one-indexing-for-web for more background.",
+          "type": "string"
+        },
         "rawNavboost": {
           "description": "The raw navboost count for the canonical url without aggregating the navboost from dup urls. This field is used when building forwarding map.",
           "format": "int32",
@@ -25158,6 +25223,12 @@
         "urlPatternSignals": {
           "$ref": "IndexingSignalAggregatorUrlPatternSignals",
           "description": "UrlPatternSignals for this doc, used to compute document score in LTG (see indexing/signal_aggregator/proto/signal-aggregator.proto for details)."
+        },
+        "verticals": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "videoIndexingInfo": {
           "$ref": "ImageRepositoryVideoIndexingInfo",
@@ -25264,12 +25335,14 @@
           "enum": [
             "RAFFIA_WEBSEARCH",
             "RAFFIA_FASTPATH_DAILY",
-            "RAFFIA_FASTPATH_INSTANT"
+            "RAFFIA_FASTPATH_INSTANT",
+            "DOCJOINS"
           ],
           "enumDescriptions": [
             "Base Raffia corpora",
             "Fastpath Raffia corpora",
-            ""
+            "",
+            "Docjoins repository"
           ],
           "type": "string"
         },
@@ -36229,7 +36302,7 @@
       "properties": {
         "duplicateOf": {
           "$ref": "GeostoreFeatureIdProto",
-          "description": "If the feature has been marked as a DUPLICATE of another feature, this is the feature ID of that other feature. Note that the other feature may itself be removed. This field is NOT set in (1)."
+          "description": "If the feature has been marked as a DUPLICATE of another feature, this is the feature ID of that other feature. Note that the other feature may itself be removed. This field is always set."
         },
         "forwardedId": {
           "$ref": "GeostoreFeatureIdProto",
@@ -36478,6 +36551,7 @@
             "SEGMENT_PEDESTRIAN_FACILITY",
             "SEGMENT_PEDESTRIAN_GRADE",
             "SEGMENT_PRIORITY",
+            "SEGMENT_RAMP_MAX_CONNECTED_PRIORITY",
             "SEGMENT_RESTRICTION",
             "SEGMENT_ROAD_CAMERA",
             "SEGMENT_ROAD_SIGN",
@@ -36501,6 +36575,7 @@
             "STATUS_REMOVED_REASON",
             "STATUS_START_DATE",
             "STOREFRONT_GEOMETRY",
+            "STOREFRONT_GEOMETRY_MODEL",
             "SYNTHETIC_GEOMETRY",
             "THREE_DIMENSIONAL_MODEL",
             "TOLL_CLUSTER_INTERSECTION",
@@ -36724,6 +36799,8 @@
             false,
             false,
             false,
+            false,
+            false,
             true,
             true,
             true,
@@ -36771,6 +36848,8 @@
             true
           ],
           "enumDescriptions": [
+            "",
+            "",
             "",
             "",
             "",
@@ -37208,9 +37287,7 @@
           "type": "array"
         },
         "political": {
-          "$ref": "GeostorePoliticalProto",
-          "deprecated": true,
-          "description": "** DEPRECATED ** Detail discussion could be found at b/18611003."
+          "$ref": "GeostorePoliticalProto"
         },
         "polygon": {
           "items": {
@@ -37346,6 +37423,10 @@
             "$ref": "GeostoreAnchoredGeometryProto"
           },
           "type": "array"
+        },
+        "storefrontGeometryModel": {
+          "$ref": "GeostoreGeometryStoreReferenceProto",
+          "description": "Geometry Store ID and materialized geometry for a POI feature's storefront(s)."
         },
         "syntheticGeometry": {
           "description": "We prefer features that have geometry over those that do not. In some cases we synthesize geometry (e.g., polygons for postal codes). This flag is set to indicate features that have such synthetic geometry.",
@@ -38555,24 +38636,25 @@
       "type": "object"
     },
     "GeostoreFieldWithRightsProto": {
-      "description": "Proto used to represent rights for a field type. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.java instead of accessing this proto directly.",
+      "description": "Proto used to represent rights for a feature property id. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.java instead of accessing this proto directly.",
       "id": "GeostoreFieldWithRightsProto",
       "properties": {
         "attributeId": {
           "deprecated": true,
-          "description": "** DEPRECATED ** If field_type is set to FEATURE_ATTRIBUTE or KNOWLEDGE_GRAPH_PROPERTY, the attribute ID / KG property ID that makes this field with rights complete.",
+          "description": "**DEPRECATED** Never set. ",
           "type": "string"
         },
         "featurePropertyId": {
-          "$ref": "GeostoreFeaturePropertyIdProto"
+          "$ref": "GeostoreFeaturePropertyIdProto",
+          "description": "The feature property id for which this entry tracks rights."
         },
         "fieldType": {
-          "description": "The field type for which the rights level are tracked on. The default value here has to match the value of fieldtype::NONE.",
+          "description": "**DEPRECATED** The field type for which this entry tracks rights. There may be multiple entries for the same field type - prefer feature_property_id to uniquely identify a particular entry. ",
           "format": "int32",
           "type": "integer"
         },
         "minRightsLevel": {
-          "description": "The minimum rights level for all the current values on the field type.",
+          "description": "The minimum rights level among all current values for this feature property id.",
           "enum": [
             "UNKNOWN_RIGHTS",
             "GT_RIGHTS",
@@ -44692,16 +44774,19 @@
           "description": "Many political regions have a conceptual center (capitals of a country or a top-level division are examples). If set, the target feature must be a TYPE_LOCALITY feature."
         },
         "grossDomesticProductUsdMillions": {
+          "deprecated": true,
           "description": "The Gross Domestic Product of the political region measured in millions of current United States dollars. It must not be negative.",
           "format": "double",
           "type": "number"
         },
         "literacyPercent": {
+          "deprecated": true,
           "description": "Percentage of population that are literate within a political region. It must be between 0 and 100.",
           "format": "float",
           "type": "number"
         },
         "population": {
+          "deprecated": true,
           "description": "The number of people in this political region. This field is intended to store accurate population, not an estimation such as representative value for population range. It must not be negative.",
           "format": "int64",
           "type": "string"
@@ -48930,6 +49015,10 @@
           "$ref": "GeostoreFieldMetadataProto",
           "description": "Field-level metadata for the priority."
         },
+        "ramp": {
+          "$ref": "GeostoreSegmentProtoRampProto",
+          "description": "RESERVED"
+        },
         "restriction": {
           "description": "The set of restrictions that apply to this segment. Restrictions may make a single segment, turn, or more complex maneuver along a set of segments unroutable for the specified travel modes, or may only add penalties or warnings, depending on the restriction type. Turn restrictions are one example of a restriction. By default, turns are allowed onto all outgoing segments from this segment's intersection (including the sibling of this segment, i.e. U-turns are allowed by default). If any of these turns are disallowed they will be listed as \"subpath restrictions\". A subpath restriction disallows travel on given sequence of segments. In the case of a disallowed turn, the subpath simply consists of the source and destination feature ids. There may also be restrictions that apply to all travel on this segment (e.g. chains required, or closed in winter), or restrictions that just apply to certain lanes (e.g. high occupancy vehicle lanes).",
           "items": {
@@ -49095,6 +49184,41 @@
             "$ref": "GeostoreLandmarkReferenceProto"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreSegmentProtoRampProto": {
+      "description": "Encapsulates ramp-specific properties.",
+      "id": "GeostoreSegmentProtoRampProto",
+      "properties": {
+        "maxConnectedPriority": {
+          "description": "The highest priority of any TYPE_ROAD endpoint segment which is transitively connected to this ramp via other ramp segments. For instance, if we have two roads connected through a series of ramps (omitting intersections): Road(P=96)-> Ramp 1 -> Ramp 2 -> Ramp 3 -> Road(P=122) -> Road(P=144) The `max_connected_priority` of all three intermediary ramps is 122. It's not 144, since Road(P=144) is connected through another road, not a ramp. This differs from the usual `SegmentProto.priority` field, which contains the lowest priority across any connected road segment.",
+          "enum": [
+            "PRIORITY_UNKNOWN",
+            "PRIORITY_NON_TRAFFIC",
+            "PRIORITY_TERMINAL",
+            "PRIORITY_LOCAL",
+            "PRIORITY_MINOR_ARTERIAL",
+            "PRIORITY_MAJOR_ARTERIAL",
+            "PRIORITY_SECONDARY_ROAD",
+            "PRIORITY_PRIMARY_HIGHWAY",
+            "PRIORITY_LIMITED_ACCESS",
+            "PRIORITY_CONTROLLED_ACCESS"
+          ],
+          "enumDescriptions": [
+            "The priority of the segment is unknown. This is not actually allowed to be set in MapFacts, but best-practice is to have a default 0 value for enums.",
+            "A non-traffic segment is not intended for normal vehicles, e.g. a pedestrian mall. 0x10",
+            "A terminal road is not intended to carry through traffic, e.g. a narrow residential street or an access road to a point of interest. 0x20",
+            "A small city street, typically for travel in a residential neighborhood, or a small rural road. This is the lowest priority suitable for through traffic. 0x30",
+            "A moderate-capacity \"collector\" that funnels traffic from local roads towards arterial roads or business areas. 0x40",
+            "A high-capacity road that carries large volumes of traffic between different neighborhoods or towns. 0x50",
+            "Roads that act as conduits a) between primary highways (and above), or b) from major/minor arterial roads to primary highways (and above). They may be state highways, for example. 0x60",
+            "These highways are major preferred roads that connect between regions, but that do not have significant access restrictions. Most crossings are level grade (traffic light, stop sign) and there may be driveways and local roads that connect directly to the highway. NOTE: Where a dense network of limited/controlled access roads carries most of the traffic between regions, this priority may be infrequent. 0x70",
+            "Limited access highways have some access restrictions, but are not fully access controlled. Typically driveways and local roads connect to a separate \"frontage road\" that is connected to the highway via spaced traffic lights, interchanges, or stop signs. Limited access roads are sometimes called expressways. 0x80",
+            "Controlled access highways have grade-separated crossings and are accessed exclusively by ramps. They are usually called \"freeways\" or \"motorways\". 0x90"
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -60828,7 +60952,7 @@
       "type": "object"
     },
     "ImageData": {
-      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 129",
+      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 130",
       "id": "ImageData",
       "properties": {
         "adaboostImageFeaturePorn": {
@@ -61017,7 +61141,7 @@
           "type": "number"
         },
         "h2i": {
-          "description": "'Hovers to Impressions' and 'Hovers to Clicks' ratios for an image.",
+          "description": "'Hovers to Impressions' and 'Hovers to Clicks' ratios for an image. These are considered Search CPS Personal Data due to concerns that they may be used to reidentify or confirm the presence of specific singleton (unique) queries.",
           "format": "float",
           "type": "number"
         },
@@ -61117,6 +61241,11 @@
         "lineartDetectorVersion": {
           "format": "int32",
           "type": "integer"
+        },
+        "linkinfoType": {
+          "description": "Bitmask of LinkInfo enum in google3/indexing/converter/outlinks/linkinfo.h.",
+          "format": "uint64",
+          "type": "string"
         },
         "multibangKgEntities": {
           "$ref": "ImageDataMultibangEntities"
@@ -62440,7 +62569,7 @@
       "type": "object"
     },
     "ImageRepositoryAmarnaCloudSpeechSignals": {
-      "description": "Next Tag: 8",
+      "description": "Next Tag: 9",
       "id": "ImageRepositoryAmarnaCloudSpeechSignals",
       "properties": {
         "duplicateOfYtS3Asr": {
@@ -62452,7 +62581,6 @@
           "type": "string"
         },
         "modelIdentifier": {
-          "description": "Identifying which ASR models are used for the result",
           "type": "string"
         },
         "results": {
@@ -62461,6 +62589,10 @@
             "$ref": "ImageRepositorySpeechRecognitionResult"
           },
           "type": "array"
+        },
+        "s3RecognizerMetadataResponse": {
+          "$ref": "ImageRepositoryS3RecognizerMetadataResponse",
+          "description": "The metadata about the S3 recognizer used."
         },
         "transcriptAsr": {
           "$ref": "PseudoVideoData",
@@ -63220,6 +63352,22 @@
           "description": "Count the number of total frames in the audio chunk as well as the number of speech frames.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ImageRepositoryS3RecognizerMetadataResponse": {
+      "description": "This proto is trimmed down from RecognizerMetadataResponse in google3/speech/service/s3/services/recognizer/recognizer.proto",
+      "id": "ImageRepositoryS3RecognizerMetadataResponse",
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "modelInfoLabel": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -70585,6 +70733,10 @@
       "description": "Accepts any non-empty value. This is meant for special cases allowing any value or any composition to be valid in a slot. If you are thinking of using this, please contact mrf-team@.",
       "id": "KnowledgeAnswersAnyType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -70603,6 +70755,10 @@
           },
           "type": "array"
         },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "pivotEntitySlot": {
           "description": "If exist, the attribute will be applied on the given pivot slot. This helps type checking when qrewrite constructs function calls with an attribute-typed slot.",
           "type": "string"
@@ -70618,6 +70774,10 @@
       "description": "A BooleanType configures a yes/no value.",
       "id": "KnowledgeAnswersBooleanType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -70636,6 +70796,10 @@
           },
           "type": "array"
         },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -70647,6 +70811,10 @@
       "description": "A CompoundType configures a value composed of multiple answer values.",
       "id": "KnowledgeAnswersCompoundType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -70667,7 +70835,7 @@
       "type": "object"
     },
     "KnowledgeAnswersDateType": {
-      "description": "A DateType configures a value whose type is intended to be a date. LINT.IfChange Next id: 16",
+      "description": "A DateType configures a value whose type is intended to be a date. LINT.IfChange Next id: 17",
       "id": "KnowledgeAnswersDateType",
       "properties": {
         "allowAllRangeResolutions": {
@@ -70722,6 +70890,10 @@
           "description": "If true, will parse a mention to DateTime of resolution year. This allows parsing strings like \"Next year \", \"2010\";",
           "type": "boolean"
         },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -70749,6 +70921,10 @@
     "KnowledgeAnswersDependencyType": {
       "id": "KnowledgeAnswersDependencyType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "containerType": {
           "$ref": "KnowledgeAnswersContainerType"
         },
@@ -70802,6 +70978,10 @@
       "description": "A DurationType configures a value whose type is a duration.",
       "id": "KnowledgeAnswersDurationType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "rangeConstraint": {
           "$ref": "KnowledgeAnswersRangeConstraint",
           "description": "Range constraint limits the set of durations accepted. The values of the range are in milliseconds. Currently, this constraint is only enforced in Loose Parser."
@@ -70814,7 +70994,7 @@
       "type": "object"
     },
     "KnowledgeAnswersEntityType": {
-      "description": "An EntityType configures a value whose type is intended to be an entity. Entities may be specified using either the collection(s) to which they belong, or explicitly via a list of KG-ids. Both collections and ids can be specified, in which case the type will be the union of the id(s) and all mids within the collection(s). Next available tag: 9",
+      "description": "An EntityType configures a value whose type is intended to be an entity. Entities may be specified using either the collection(s) to which they belong, or explicitly via a list of KG-ids. Both collections and ids can be specified, in which case the type will be the union of the id(s) and all mids within the collection(s). Next available tag: 10",
       "id": "KnowledgeAnswersEntityType",
       "properties": {
         "collection": {
@@ -70823,6 +71003,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
         },
         "excludedCollection": {
           "description": "The entity that this value is filled with must not be any of these collections (denoted by a /collection/* id). This restriction does not affect parsing; it is used only to filter attributes in the extraction flow.",
@@ -71262,7 +71446,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryArgumentSignals": {
-      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 58 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
+      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 59 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
       "id": "KnowledgeAnswersIntentQueryArgumentSignals",
       "properties": {
         "addedByCloseAnswers": {
@@ -71404,6 +71588,1126 @@
         "locationMarkersSignals": {
           "$ref": "KnowledgeAnswersIntentQueryLocationMarkersSignals",
           "description": "The usual semantic role associated with the signal from lightweight tokens attached to this argument span."
+        },
+        "locationType": {
+          "description": "The type category for the location stored in this Argument, if it exists.",
+          "enum": [
+            "TYPE_ANY",
+            "TYPE_TRANSPORTATION",
+            "TYPE_ROUTE",
+            "TYPE_DEPRECATED_HIGHWAY_DO_NOT_USE",
+            "TYPE_HIGHWAY",
+            "TYPE_HIGHWAY_1",
+            "TYPE_HIGHWAY_2",
+            "TYPE_HIGHWAY_3",
+            "TYPE_HIGHWAY_4",
+            "TYPE_HIGHWAY_5",
+            "TYPE_HIGHWAY_6",
+            "TYPE_HIGHWAY_7",
+            "TYPE_HIGHWAY_8",
+            "TYPE_HIGHWAY_9",
+            "TYPE_BICYCLE_ROUTE",
+            "TYPE_TRAIL",
+            "TYPE_SEGMENT",
+            "TYPE_ROAD",
+            "TYPE_RAILWAY",
+            "TYPE_STANDARD_TRACK",
+            "TYPE_JR_TRACK",
+            "TYPE_NARROW_TRACK",
+            "TYPE_MONORAIL_TRACK",
+            "TYPE_SUBWAY_TRACK",
+            "TYPE_LIGHT_RAIL_TRACK",
+            "TYPE_BROAD_TRACK",
+            "TYPE_HIGH_SPEED_RAIL",
+            "TYPE_TROLLEY_TRACK",
+            "TYPE_FERRY",
+            "TYPE_FERRY_BOAT",
+            "TYPE_FERRY_TRAIN",
+            "TYPE_VIRTUAL_SEGMENT",
+            "TYPE_INTERSECTION",
+            "TYPE_TRANSIT",
+            "TYPE_TRANSIT_STATION",
+            "TYPE_BUS_STATION",
+            "TYPE_TRAMWAY_STATION",
+            "TYPE_TRAIN_STATION",
+            "TYPE_SUBWAY_STATION",
+            "TYPE_FERRY_TERMINAL",
+            "TYPE_AIRPORT",
+            "TYPE_AIRPORT_CIVIL",
+            "TYPE_AIRPORT_MILITARY",
+            "TYPE_AIRPORT_MIXED",
+            "TYPE_HELIPORT",
+            "TYPE_SEAPLANE_BASE",
+            "TYPE_AIRSTRIP",
+            "TYPE_CABLE_CAR_STATION",
+            "TYPE_GONDOLA_LIFT_STATION",
+            "TYPE_FUNICULAR_STATION",
+            "TYPE_SPECIAL_STATION",
+            "TYPE_HORSE_CARRIAGE_STATION",
+            "TYPE_MONORAIL_STATION",
+            "TYPE_SEAPORT",
+            "TYPE_TRANSIT_STOP",
+            "TYPE_TRANSIT_TRIP",
+            "TYPE_TRANSIT_DEPARTURE",
+            "TYPE_TRANSIT_LEG",
+            "TYPE_TRANSIT_LINE",
+            "TYPE_TRANSIT_AGENCY_DEPRECATED_VALUE",
+            "TYPE_TRANSIT_TRANSFER",
+            "TYPE_SEGMENT_PATH",
+            "TYPE_ROAD_SIGN",
+            "TYPE_INTERSECTION_GROUP",
+            "TYPE_PATHWAY",
+            "TYPE_RESTRICTION_GROUP",
+            "TYPE_TOLL_CLUSTER",
+            "TYPE_POLITICAL",
+            "TYPE_COUNTRY",
+            "TYPE_ADMINISTRATIVE_AREA",
+            "TYPE_ADMINISTRATIVE_AREA1",
+            "TYPE_US_STATE",
+            "TYPE_GB_COUNTRY",
+            "TYPE_JP_TODOUFUKEN",
+            "TYPE_ADMINISTRATIVE_AREA2",
+            "TYPE_GB_FORMER_POSTAL_COUNTY",
+            "TYPE_GB_TRADITIONAL_COUNTY",
+            "TYPE_ADMINISTRATIVE_AREA3",
+            "TYPE_ADMINISTRATIVE_AREA4",
+            "TYPE_ADMINISTRATIVE_AREA5",
+            "TYPE_ADMINISTRATIVE_AREA6",
+            "TYPE_ADMINISTRATIVE_AREA7",
+            "TYPE_ADMINISTRATIVE_AREA8",
+            "TYPE_ADMINISTRATIVE_AREA9",
+            "TYPE_COLLOQUIAL_AREA",
+            "TYPE_RESERVATION",
+            "TYPE_LOCALITY",
+            "TYPE_GB_POST_TOWN",
+            "TYPE_JP_GUN",
+            "TYPE_JP_SHIKUCHOUSON",
+            "TYPE_JP_SUB_SHIKUCHOUSON",
+            "TYPE_COLLOQUIAL_CITY",
+            "TYPE_SUBLOCALITY",
+            "TYPE_US_BOROUGH",
+            "TYPE_GB_DEPENDENT_LOCALITY",
+            "TYPE_JP_OOAZA",
+            "TYPE_JP_KOAZA",
+            "TYPE_JP_GAIKU",
+            "TYPE_GB_DOUBLE_DEPENDENT_LOCALITY",
+            "TYPE_JP_CHIBAN",
+            "TYPE_JP_EDABAN",
+            "TYPE_SUBLOCALITY1",
+            "TYPE_SUBLOCALITY2",
+            "TYPE_SUBLOCALITY3",
+            "TYPE_SUBLOCALITY4",
+            "TYPE_SUBLOCALITY5",
+            "TYPE_NEIGHBORHOOD",
+            "TYPE_CONSTITUENCY",
+            "TYPE_DESIGNATED_MARKET_AREA",
+            "TYPE_SCHOOL_DISTRICT",
+            "TYPE_LAND_PARCEL",
+            "TYPE_DISPUTED_AREA",
+            "TYPE_POLICE_JURISDICTION",
+            "TYPE_STATISTICAL_AREA",
+            "TYPE_CONSTITUENCY_FUTURE",
+            "TYPE_PARK",
+            "TYPE_GOLF_COURSE",
+            "TYPE_LOCAL_PARK",
+            "TYPE_NATIONAL_PARK",
+            "TYPE_US_NATIONAL_PARK",
+            "TYPE_US_NATIONAL_MONUMENT",
+            "TYPE_NATIONAL_FOREST",
+            "TYPE_PROVINCIAL_PARK",
+            "TYPE_PROVINCIAL_FOREST",
+            "TYPE_CAMPGROUNDS",
+            "TYPE_HIKING_AREA",
+            "TYPE_BUSINESS",
+            "TYPE_GOVERNMENT",
+            "TYPE_BORDER_CROSSING",
+            "TYPE_CITY_HALL",
+            "TYPE_COURTHOUSE",
+            "TYPE_EMBASSY",
+            "TYPE_LIBRARY",
+            "TYPE_SCHOOL",
+            "TYPE_UNIVERSITY",
+            "TYPE_EMERGENCY",
+            "TYPE_HOSPITAL",
+            "TYPE_PHARMACY",
+            "TYPE_POLICE",
+            "TYPE_FIRE",
+            "TYPE_DOCTOR",
+            "TYPE_DENTIST",
+            "TYPE_VETERINARIAN",
+            "TYPE_TRAVEL_SERVICE",
+            "TYPE_LODGING",
+            "TYPE_RESTAURANT",
+            "TYPE_GAS_STATION",
+            "TYPE_PARKING",
+            "TYPE_POST_OFFICE",
+            "TYPE_REST_AREA",
+            "TYPE_CASH_MACHINE",
+            "TYPE_CAR_RENTAL",
+            "TYPE_CAR_REPAIR",
+            "TYPE_SHOPPING",
+            "TYPE_GROCERY",
+            "TYPE_TOURIST_DESTINATION",
+            "TYPE_ECO_TOURIST_DESTINATION",
+            "TYPE_BIRD_WATCHING",
+            "TYPE_FISHING",
+            "TYPE_HUNTING",
+            "TYPE_NATURE_RESERVE",
+            "TYPE_TEMPLE",
+            "TYPE_CHURCH",
+            "TYPE_GURUDWARA",
+            "TYPE_HINDU_TEMPLE",
+            "TYPE_MOSQUE",
+            "TYPE_SYNAGOGUE",
+            "TYPE_STADIUM",
+            "TYPE_BAR",
+            "TYPE_MOVIE_RENTAL",
+            "TYPE_COFFEE",
+            "TYPE_GOLF",
+            "TYPE_BANK",
+            "TYPE_DOODLE",
+            "TYPE_GROUNDS",
+            "TYPE_AIRPORT_GROUNDS",
+            "TYPE_BUILDING_GROUNDS",
+            "TYPE_CEMETERY",
+            "TYPE_HOSPITAL_GROUNDS",
+            "TYPE_INDUSTRIAL",
+            "TYPE_MILITARY",
+            "TYPE_SHOPPING_CENTER",
+            "TYPE_SPORTS_COMPLEX",
+            "TYPE_UNIVERSITY_GROUNDS",
+            "TYPE_DEPRECATED_TARMAC",
+            "TYPE_ENCLOSED_TRAFFIC_AREA",
+            "TYPE_PARKING_LOT",
+            "TYPE_PARKING_GARAGE",
+            "TYPE_OFF_ROAD_AREA",
+            "TYPE_BORDER",
+            "TYPE_BUILDING",
+            "TYPE_GEOCODED_ADDRESS",
+            "TYPE_NATURAL_FEATURE",
+            "TYPE_TERRAIN",
+            "TYPE_SAND",
+            "TYPE_BEACH",
+            "TYPE_DUNE",
+            "TYPE_ROCKY",
+            "TYPE_ICE",
+            "TYPE_GLACIER",
+            "TYPE_BUILT_UP_AREA",
+            "TYPE_VEGETATION",
+            "TYPE_SHRUBBERY",
+            "TYPE_WOODS",
+            "TYPE_AGRICULTURAL",
+            "TYPE_GRASSLAND",
+            "TYPE_TUNDRA",
+            "TYPE_DESERT",
+            "TYPE_SALT_FLAT",
+            "TYPE_WATER",
+            "TYPE_OCEAN",
+            "TYPE_BAY",
+            "TYPE_BIGHT",
+            "TYPE_LAGOON",
+            "TYPE_SEA",
+            "TYPE_STRAIT",
+            "TYPE_INLET",
+            "TYPE_FJORD",
+            "TYPE_LAKE",
+            "TYPE_SEASONAL_LAKE",
+            "TYPE_RESERVOIR",
+            "TYPE_POND",
+            "TYPE_RIVER",
+            "TYPE_RAPIDS",
+            "TYPE_DISTRIBUTARY",
+            "TYPE_CONFLUENCE",
+            "TYPE_WATERFALL",
+            "TYPE_SPRING",
+            "TYPE_GEYSER",
+            "TYPE_HOT_SPRING",
+            "TYPE_SEASONAL_RIVER",
+            "TYPE_WADI",
+            "TYPE_ESTUARY",
+            "TYPE_WETLAND",
+            "TYPE_WATER_NAVIGATION",
+            "TYPE_FORD",
+            "TYPE_CANAL",
+            "TYPE_HARBOR",
+            "TYPE_CHANNEL",
+            "TYPE_REEF",
+            "TYPE_REEF_FLAT",
+            "TYPE_REEF_GROWTH",
+            "TYPE_REEF_EXTENT",
+            "TYPE_REEF_ROCK_SUBMERGED",
+            "TYPE_IRRIGATION",
+            "TYPE_DAM",
+            "TYPE_DRINKING_WATER",
+            "TYPE_CURRENT",
+            "TYPE_WATERING_HOLE",
+            "TYPE_TECTONIC",
+            "TYPE_WATERING_HOLE_DEPRECATED",
+            "TYPE_VOLCANO",
+            "TYPE_LAVA_FIELD",
+            "TYPE_FISSURE",
+            "TYPE_FAULT",
+            "TYPE_LAND_MASS",
+            "TYPE_CONTINENT",
+            "TYPE_ISLAND",
+            "TYPE_ATOLL",
+            "TYPE_OCEAN_ROCK_EXPOSED",
+            "TYPE_CAY",
+            "TYPE_PENINSULA",
+            "TYPE_ISTHMUS",
+            "TYPE_ELEVATED",
+            "TYPE_PEAK",
+            "TYPE_NUNATAK",
+            "TYPE_SPUR",
+            "TYPE_PASS",
+            "TYPE_PLATEAU",
+            "TYPE_RIDGE",
+            "TYPE_RAVINE",
+            "TYPE_CRATER",
+            "TYPE_KARST",
+            "TYPE_CLIFF",
+            "TYPE_VISTA",
+            "TYPE_DIGITAL_ELEVATION_MODEL",
+            "TYPE_UPLAND",
+            "TYPE_TERRACE",
+            "TYPE_SLOPE",
+            "TYPE_CONTOUR_LINE",
+            "TYPE_PAN",
+            "TYPE_UNSTABLE_HILLSIDE",
+            "TYPE_MOUNTAIN_RANGE",
+            "TYPE_UNDERSEA",
+            "TYPE_SUBMARINE_SEAMOUNT",
+            "TYPE_SUBMARINE_RIDGE",
+            "TYPE_SUBMARINE_GAP",
+            "TYPE_SUBMARINE_PLATEAU",
+            "TYPE_SUBMARINE_DEEP",
+            "TYPE_SUBMARINE_VALLEY",
+            "TYPE_SUBMARINE_BASIN",
+            "TYPE_SUBMARINE_SLOPE",
+            "TYPE_SUBMARINE_CLIFF",
+            "TYPE_SUBMARINE_PLAIN",
+            "TYPE_SUBMARINE_FRACTURE_ZONE",
+            "TYPE_CAVE",
+            "TYPE_ROCK",
+            "TYPE_ARCHIPELAGO",
+            "TYPE_POSTAL",
+            "TYPE_POSTAL_CODE",
+            "TYPE_POSTAL_CODE_PREFIX",
+            "TYPE_PREMISE",
+            "TYPE_SUB_PREMISE",
+            "TYPE_SUITE",
+            "TYPE_POST_TOWN",
+            "TYPE_POSTAL_ROUND",
+            "TYPE_META_FEATURE",
+            "TYPE_DATA_SOURCE",
+            "TYPE_LOCALE",
+            "TYPE_TIMEZONE",
+            "TYPE_BUSINESS_CHAIN",
+            "TYPE_PHONE_NUMBER_PREFIX",
+            "TYPE_PHONE_NUMBER_AREA_CODE",
+            "TYPE_BUSINESS_CORRIDOR",
+            "TYPE_ADDRESS_TEMPLATE",
+            "TYPE_TRANSIT_AGENCY",
+            "TYPE_FUTURE_GEOMETRY",
+            "TYPE_EVENT",
+            "TYPE_EARTHQUAKE",
+            "TYPE_HURRICANE",
+            "TYPE_WEATHER_CONDITION",
+            "TYPE_TRANSIENT",
+            "TYPE_ENTRANCE",
+            "TYPE_CARTOGRAPHIC",
+            "TYPE_HIGH_TENSION",
+            "TYPE_SKI_TRAIL",
+            "TYPE_SKI_LIFT",
+            "TYPE_SKI_BOUNDARY",
+            "TYPE_WATERSHED_BOUNDARY",
+            "TYPE_TARMAC",
+            "TYPE_WALL",
+            "TYPE_PICNIC_AREA",
+            "TYPE_PLAY_GROUND",
+            "TYPE_TRAIL_HEAD",
+            "TYPE_GOLF_TEEING_GROUND",
+            "TYPE_GOLF_PUTTING_GREEN",
+            "TYPE_GOLF_ROUGH",
+            "TYPE_GOLF_SAND_BUNKER",
+            "TYPE_GOLF_FAIRWAY",
+            "TYPE_GOLF_HOLE",
+            "TYPE_DEPRECATED_GOLF_SHOP",
+            "TYPE_CAMPING_SITE",
+            "TYPE_DESIGNATED_BARBECUE_PIT",
+            "TYPE_DESIGNATED_COOKING_AREA",
+            "TYPE_CAMPFIRE_PIT",
+            "TYPE_WATER_FOUNTAIN",
+            "TYPE_LITTER_RECEPTACLE",
+            "TYPE_LOCKER_AREA",
+            "TYPE_ANIMAL_ENCLOSURE",
+            "TYPE_CARTOGRAPHIC_LINE",
+            "TYPE_ESTABLISHMENT",
+            "TYPE_ESTABLISHMENT_GROUNDS",
+            "TYPE_ESTABLISHMENT_BUILDING",
+            "TYPE_ESTABLISHMENT_POI",
+            "TYPE_ESTABLISHMENT_SERVICE",
+            "TYPE_CELESTIAL",
+            "TYPE_ROAD_MONITOR",
+            "TYPE_PUBLIC_SPACES_AND_MONUMENTS",
+            "TYPE_STATUE",
+            "TYPE_TOWN_SQUARE",
+            "TYPE_LEVEL",
+            "TYPE_COMPOUND",
+            "TYPE_COMPOUND_GROUNDS",
+            "TYPE_COMPOUND_BUILDING",
+            "TYPE_COMPOUND_SECTION",
+            "TYPE_TERMINAL_POINT",
+            "TYPE_REGULATED_AREA",
+            "TYPE_LOGICAL_BORDER",
+            "TYPE_DO_NOT_USE_RESERVED_TO_CATCH_GENERATED_FILES",
+            "TYPE_UNKNOWN"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false
+          ],
+          "enumDescriptions": [
+            "ABSTRACT",
+            "ABSTRACT",
+            "A route is any section of road (or rails, etc.) that has a name. This includes city streets as well as highways. Road segments can belong to multiple routes (e.g. El Camino, CA-82).",
+            "DEPRECATED",
+            "ABSTRACT",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "A designated bicycle route, whose segments may consist of any combination of bicycle paths, bicycle lanes, or city streets.",
+            "A designated trail, which may consist of paved walkways, dirt paths, fire road, streets or highways, etc.",
+            "ABSTRACT",
+            "",
+            "Railroads use several different incompatible track types.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Tracks for streetcars, cable-cars, etc. Ferries are services that are part of the road network but are not roads. They typically involve fares and scheduled departure times.",
+            "ABSTRACT",
+            "The vast majority of ferries are ferry boats.",
+            "Also called a \"car transport\", a ferry train is a rail service that carries passengers and their vehicles across undrivable terrain. The Channel Tunnel (\"Chunnel\") is the most famous example, but they are also common in the Alps where they connect neighboring valleys otherwise separated by impassable mountains.",
+            "Any plausible 1-dimensional path through a 2+ dimensional space, for the purposes of making graph-search-based routing possible. Such segments can be used to model paths through parking lots, squares, floors of buildings and other areas.",
+            "An intersection consists of a collection of segments that terminate at the same location. This is topological definition: it may not match what a typical user would think of as an \"intersection\". See TYPE_INTERSECTION_GROUP, below, for more information. Each segment terminating at an intersection has an \"endpoint type\" that specifies how that segment is terminated: stop sign, yield sign, three-way light, etc.",
+            "ABSTRACT",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "A transit line is a collection of transit legs, associated with some invariant properties of the trips that run over the legs. See also transitline.proto",
+            "TYPE_TRANSIT_AGENCY was moved to 0xC91. This deprecated enum value still exists for debugging purposes only.",
+            "DEPRECATED",
+            "ABSTRACT",
+            "Road sign features have names, point geometry, etc. They also have segment_path data (see below) which lists the segments that refer to the sign. See segment.proto for the reference from the segment to the road sign.",
+            "Our TYPE_INTERSECTION feature, above, models the point where one or more segments terminate. This is topological definition: it may not match what a typical user would think of as an \"intersection\". Consider the intersections where Hayes, Market, Larkin, and 9th Street meet near (37.77765, -122.41638) in San Francisco. Most people would probably consider this a single feature, even though we model it as four separate TYPE_INTERSECTION features. This TYPE_INTERSECTION_GROUP is used to model the user's concept of a complex intersection.",
+            "RESERVED",
+            "A restriction group describes a set of segment restrictions that belong together and have a name or an associated event. See also restriction_group.proto",
+            "A toll cluster is either a single point on a segment (represented as a point at the end of the segment that has ENDPOINT_TOLL_BOOTH set) or a group of points on various road segments in MapFacts that represents one or more lanes passing through a toll fixture that all go to the same routing destination. Each toll cluster should have at most a single price per payment method. E.g. {CASH = $5, PASS = $1}. Note: If a toll fixture has different prices for multiple routing destinations, drivers need to be in the correct lane before passing through the toll fixture and hence such a fixture is represented by multiple toll clusters. A toll cluster does not necessarily represent a real-world entity, e.g. a particular plaza/structure as perceived by humans. This is because a plaza can be represented by more than one toll cluster. We require toll clusters to have names, but they might be non-unique. For example, a plaza might be represented by multiple toll clusters that may have the same plaza name. For further details, please see go/toll-cluster-schema.",
+            "ABSTRACT",
+            "",
+            "ABSTRACT",
+            "",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "",
+            "DEPRECATED",
+            "DEPRECATED",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "e.g. Silicon Valley",
+            "A reservation is a region collectively held or governed by indigenous people and officially recognized by the country\u2019s government at the federal or state level. A reservation may be fully contained within an administrative feature or partially contained within two or more. These regions are referred to by different categorical names depending on country and even by state, including but not limited to: \u201cIndian Reservations\u201d, \u201cIndian Reserves\u201d, \u201cLand Claim Settlement Lands\u201d, \u201cIndian Lands\u201d, \u201cTreaty Lands\u201d, \u201cIndigenous Territories\u201d, etc. A reservation is not a historic indigenous territory boundary or a region which has applied for land rights but has not yet received official recognition.",
+            "",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "An entity widely considered to be a city, that may itself be made up of smaller political entities, some of which are cities/towns/villages themselves. For example, the colloquial view of Sydney, Australia actually comprises many smaller cities, but is regarded as a city itself. This type is not suitable for modeling official metro-/micropolitan or other statistical areas.",
+            "ABSTRACT",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Designated Market Areas (or DMAs) are used by marketing and ratings companies (such as the Nielsen Media Research company) to describe geographical regions (such as the greater New York metropolitan area) that are covered by a set of television stations. (See http://www.schooldata.com/pdfs/DMA.pdf) In the United States, DMAs should have a DMA numeric ID name, tagged with the FLAG_DESIGNATED_MARKET_AREA_ID flag.",
+            "",
+            "",
+            "Eventually we'll have more data for disputed areas (e.g., who makes claims on the area, who has de facto control, etc.). For the moment, we just define a type so we can simply mark areas as disputed.",
+            "Boundaries representing the jurisdiction of a particular police station.",
+            "An area used for aggregating statistical data, eg, a census region. Note that TYPE_STATISTICAL_AREA has a third nibble so we can add an abstract parent above it later if need be at 0x2E1 (and rename TYPE_STATISTICAL_AREA as TYPE_STATISTICAL_AREA1).",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "A line representing the boundary between two features. See border.proto for details.",
+            "DEPRECATED",
+            "An association of a point with an address, with no other information.",
+            "ABSTRACT",
+            "Expanses of land that share common surface attributes. These areas would look more or less uniform from a high altitude.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Terrain that looks populated.",
+            "Terrain that is covered in vegetation.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "A flat expanse of salt left by the evaporation of a body of salt water.",
+            "Features can be TYPE_WATER if we don't have enough information to properly type the body of water. TYPE_WATER is also used as the type for child features that compose a TYPE_RIVER feature.",
+            "One of the large salt-water bodies that covers most of the globe.",
+            "An ocean subdivision formed by a coastal indentation. Includes coves and gulfs.",
+            "An open body of water formed by a slight coastal indentation.",
+            "",
+            "An ocean subdivision more or less confined by land and islands.",
+            "A long narrow ocean subdivision. Includes sounds.",
+            "",
+            "",
+            "An inland body of standing water.",
+            "A lake that dries up part of the year.",
+            "An artificial body of water, possibly created by a dam, often used for irrigation or house use.",
+            "",
+            "An inland body of moving water, or parts associated with it in which there is little or no current (backwater).",
+            "",
+            "A branch which flows away from the main river. Includes deltas.",
+            "A place where two or more rivers join.",
+            "",
+            "A place where ground water flows naturally out of the ground.",
+            "",
+            "",
+            "A river that dries up part of the year.",
+            "A dry riverbed that occasionally receives flashfloods.",
+            "A place at the end of a river where fresh and salt water mix. Includes tidal creeks and limans.",
+            "Land that is usually flooded. Includes bogs, marshes, flats, moors, and swamps.",
+            "",
+            "A shallow place where water may be waded through.",
+            "A narrow passage used by boats. Normally artificial.",
+            "A deep place near a shore where ships commonly drop anchor.",
+            "A deep part in a body of water that is suitable for navigation. Includes narrows.",
+            "Rocks, coral, sandbars, or other features beneath the surface of the water that pose a hazard to passing ships. Includes shoals.",
+            "A relatively shallow zone of the back reef located closest to the shore, that may be exposed at low tide.",
+            "A small section of rocks, coral, sandbars, or other features beneath the surface of the water that forms part of a reef.",
+            "The full extent of the reef complex.",
+            "A submerged rock in the water.",
+            "Man-made (and sometimes natural) channels used to move water. This type was used for both dam structures and water that is hold back by dams. We should use TYPE_COMPOUND_BUILDING for dam structures and TYPE_RESERVOIR for water.",
+            "DEPRECATED",
+            "",
+            "Includes overfalls.",
+            "A natural depression filled with water where animals come to drink.",
+            "ABSTRACT This type is incorrectly under TYPE_TECTONIC instead of TYPE_WATER. This was a mistake and is now fixed. See TYPE_WATERING_HOLE for the replacement.",
+            "DEPRECATED",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "An exposed rock in the water.",
+            "A small, low-elevation, sandy island formed on the surface of coral reefs",
+            "A stretch of land projecting into water. Includes capes and spits.",
+            "A strip of land connecting two larger land masses, such as continents.",
+            "Features that are notable for being high (or low), or for having sudden changes in elevation. These features might have an \"elevation\" extension to specify the actual elevation. See ElevationProto for more information.",
+            "Elevations that have a distinctive peak.",
+            "A peak or ridge of a mountain that extends through a glacier.",
+            "A subsidiary peak of a mountain.",
+            "A route over an otherwise difficult to traverse feature. Includes saddle.",
+            "Elevations that are flat on top. Includes mesas and buttes.",
+            "A ridge is a geographical feature consisting of a chain of mountains or hills that form a continuous elevated crest with a single ridgeline for some distance.",
+            "Steep declines usually carved by erosion. Includes valleys, canyons, ditches, and gorges.",
+            "Depressions causes by impact, explosion, and sometimes sink-holes.",
+            "Topography formed on limestone and gypsum by dissolution with sinkholes, caves, etc.",
+            "A vertical or nearly vertical slope. Includes escarpments.",
+            "An elevated place that is notable for having a good view. Raster digital elevation data. This is not a type to be used by providers or consumed by clients.",
+            "RESERVED",
+            "Land along streams higher than the alluvial plain or stream terrace.",
+            "",
+            "Land not so steep as a cliff, but changing elevation. Includes slides.",
+            "All the points on the polygon are at the same elevation.",
+            "A near-level shallow, natural depression or basin, usually containing an intermittent lake, pond, or pool.",
+            "",
+            "A series of mountains or hills ranged in a line and connected by high ground. Mountain ranges usually consist of many smaller ridges. For example, the Himalayas, the Andes. the Alps, etc.",
+            "Features that are notable for being high (or low), or for having sudden changes in elevation. These features might have an \"elevation\" extension to specify the actual elevation. See ElevationProto for more information.",
+            "includes peaks, ranges, and spurs",
+            "",
+            "includes saddles",
+            "",
+            "",
+            "includes trenches and troughs",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Don't use 0xA7. Use 8 bits for additional types under TYPE_NATURAL_FEATURE, so we don't run out of space. The following are miscellaneous natural features that don't fit any of the categories above.",
+            "",
+            "A feature representing a group or chain of islands. ",
+            "ABSTRACT",
+            "This is the type for postal codes which are complete and independent enough that there should be a feature for them (e.g. US 5-digit ZIP codes). For even more detailed suffixes that further subdivide a postal code (such as the +4 component in US ZIP codes), store the information in a TYPE_POSTAL_CODE_SUFFIX address component. When a range or set of postal codes share the same geographical area, e.g. because a precise subdivision does not exist or this subdivision is unknown, this type is used for each individual postal code.",
+            "A prefix portion of a postal code which does not meet the requirements for TYPE_POSTAL_CODE, but which is useful to search for, for example UK outcodes.",
+            "DEPRECATED",
+            "DEPRECATED This is deprecated and we want to use TYPE_COMPOUND_SECTION instead.",
+            "DEPRECATED",
+            "The term \"post town\" is used for a locality-like-entity that is only used for postal addresses.",
+            "DEPRECATED",
+            "ABSTRACT",
+            "Every data source used in constructing a data repository has a corresponding feature that provides more information about that data source. The extra information is stored in the optional data_source field below.",
+            "A locale feature provides region specific conventions such as preferred language and formatting details for time, date, and currency values. Locales aren't necessary defined by physical geographic features, so they are classified as meta-features.",
+            "A timezone feature is used to specify the region covering an international timezone. When a point is covered by multiple timezone features, the most specific one can be used to compute the local time at this point. Most specific implies a much smaller region or the one that is closer to the center. A feature's timezone can be specified in the repeated related_timezone field.",
+            "A business chain feature is used to represent a chain, e.g. Starbucks, McDonald's, etc. Other features representing specific stores/franchises of this chain may refer to one such feature via RELATION_MEMBER_OF_CHAIN. This is not strictly reserved to commercial chains but can also be used to model organizations such as the Red Cross or the United Nations.",
+            "A phone number prefix feature is used to specify the region where phone numbers (typically fixed-line numbers) must begin with a certain prefix. Any phone number prefix down to any level of granularity could be represented by this type.",
+            "A phone number area code is a prefix which also coincides with the area code, or national destination code, of a particular region.",
+            "A Business Corridor is a dense cluster of semantically similar establishments. TYPE_BUSINESS_CORRIDOR features are distinguished from TYPE_COLLOQUIAL_AREA features because the corridors are not under the political hierarchy, are allowed to be nameless, and may not correspond to well-known real world locations. For more details, see go/geo-corridors-schema.",
+            "An address template feature provides region-specific conventions for structuring addresses. These features aren't necessarily defined by physical geographic features, so they are classified as meta-features.",
+            "A transit agency operates a number of lines, typically all in the same city, region or country. See also transitagency.proto",
+            "A feature whose geometry is planned to replace the geometry on another feature.",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "DEPRECATED",
+            "RESERVED",
+            "A portal of entry or exit to another feature. Examples: - Subway station entrance. - Parking lot entrance.",
+            "Cartographic features are used to capture real-world objects for which there is no current desire to model any specific attributes. These are only useful to make the map tiles look pretty.",
+            "DEPRECATED",
+            "Also see skitrail.proto",
+            "Also see skilift.proto",
+            "Also see skiboundary.proto",
+            "",
+            "Starting with TYPE_TARMAC, we use longer IDs, so that we can expand the number of feature types under TYPE_CARTOGRAPHIC.",
+            "Use TYPE_COMPOUND_GROUND and appropriate gcids for the next two.",
+            "DEPRECATED",
+            "DEPRECATED",
+            "",
+            "Sub-types within a golf course.",
+            "",
+            "",
+            "",
+            "",
+            "Use TYPE_ESTABLISHMENT_POI and gcid:golf_shop for golf shops instead.",
+            "DEPRECATED",
+            "DEPRECATED",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Subtype within a zoo - a cage or fenced-off or otherwise delineated area containing animals.",
+            "A line for a cartographic detail. For example the international date line. Such features should have polyline geometry.",
+            "ABSTRACT This type is being replaced by TYPE_COMPOUND_GROUNDS. For further details, see go/compounds-v2",
+            "DEPRECATED This type has been replaced by TYPE_COMPOUND_BUILDING. For further details, see go/oyster-compounds",
+            "DEPRECATED",
+            "An establishment which has a address (a.k.a. location or storefront). Note that it *may* also have a service area (e.g. a restaurant that offers both dine-in and delivery). This type of business is also known as a \"hybrid\" Service Area Business. Establishment POIs can be referenced by TYPE_COMPOUND features using the RELATION_PRIMARILY_OCCUPIED_BY. This is the reciprocal relation of the RELATION_OCCUPIES.",
+            "A business without a storefront, e.g. a plumber. It would normally not have a place that a customer could visit to receive service, but it would have an area served by the business. Also known as a \"pure\" Service Area Business. NOTE(tcain): Using value 0xD441, since we could find ourselves with a need to differentiate service areas from online-only at this level in the future, but still benefit from being able to group those under a common parent, disjoint from TYPE_ESTABLISHMENT_POI.",
+            "The root of types of features that are in the sky, rather than on the earth. There will eventually be a hierarchy of types here.",
+            "Features responsible for monitoring traffic on roads (usually for speed). Includes cameras at particular points as well as monitors that cover larger spans. Features of this type should have a corresponding gcid that specifies the correct subtype (e.g. gcid:road_camera or gcid:speed_camera_zone). This type was originally named as TYPE_ROAD_CAMERA.",
+            "ABSTRACT",
+            "Note that this type does not distinguish the nature of the statue (religious, historical, memorial, tourist, ...).",
+            "Open space used for events, gathering, or as market-place.",
+            "A feature used to represent a logical level, e.g. floor.",
+            "ABSTRACT",
+            "e.g. campus, compound, parcel.",
+            "e.g. single family dwelling, office building.",
+            "e.g. suite, room, hallway, cubicle.",
+            "A terminal point represents a good location for a user to meet a taxi, ridesharing vehicle, or general driver.",
+            "An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone or an area under government sanctions. Features of this type should have one or more gcids corresponding to their specific regulation, and client handling of these features may vary based on the type of regulation.",
+            "A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.",
+            "DEPRECATED",
+            "A feature of completely unknown type. This should only be used when absolutely necessary. One example in which this type is useful is in the Chinese importer, which must heuristically segment addresses into components - it often does not know what types to make those components. Please note that the Oyster address formatter does not currently support address components of TYPE_UNKNOWN well."
+          ],
+          "type": "string"
         },
         "mediaEntitySignals": {
           "$ref": "KnowledgeAnswersIntentQueryMediaEntitySignals",
@@ -71865,7 +73169,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryFunctionCallSignals": {
-      "description": "Next ID: 37",
+      "description": "Next ID: 38",
       "id": "KnowledgeAnswersIntentQueryFunctionCallSignals",
       "properties": {
         "argumentComposingMid": {
@@ -71981,6 +73285,10 @@
         },
         "isNeuralCategoricalInterpretation": {
           "description": "Whether the interpretation was generated from the neural categorical parser.",
+          "type": "boolean"
+        },
+        "isRefinedMeaning": {
+          "description": "Whether the FunctionCall is created as a refined_meaning in resolution. Downstream code will look at this field to see if it needs to create a new refined QueryInterpretation.",
           "type": "boolean"
         },
         "isUiCompositionIntent": {
@@ -73086,6 +74394,10 @@
       "description": "A MeasurementType configures a value that consists of a measurement. The expected value should have a number and a mid representing the unit. Note: this is currently only used for attribute answer value types. Configuration intent slot as measurement is yet to be supported (or instead we should universally use SemanticType).",
       "id": "KnowledgeAnswersMeasurementType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73097,6 +74409,10 @@
       "description": "A NormalizedStringType configures a value that is one of the listed normalized_values. An arbitrary mapping from input strings to normalized_values can be specified in the local intent config. Only alphabetical strings can be used as normalized_values. This type should NOT be used for: - Mids, ids, dates, or other structured data. Use an annotator instead, and address any quality issues at the annotator level. - Simplifying grammar rules. If you are not using the normalized_values in your question semantics, you should remove the slot. Use additional query_examples instead.",
       "id": "KnowledgeAnswersNormalizedStringType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "normalizedValue": {
           "items": {
             "type": "string"
@@ -73114,6 +74430,10 @@
       "description": "A NumberType configures a value whose type is intended to be numeric.",
       "id": "KnowledgeAnswersNumberType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "keepAsString": {
           "description": "If true, the semantics of the NumberType argument are retained as a string, rather than being converted to a float-type object. This option is particularly useful in cases where leading 0s in the user input are meaningful, e.g. for zip codes or sports jersey numbers. For the user- specified value \"01\", for instance, the PathQuery semantics will be: def $Slot \"01\"",
           "type": "boolean"
@@ -73213,7 +74533,6 @@
       "type": "object"
     },
     "KnowledgeAnswersOpaqueLocationType": {
-      "description": "A LocationType configures a value whose type is a Location message, for example, the output of the Location subgrammar. Note that this location type is not the same as a \"location entity\" (an entity with a location indicating type/collection, which is annotated by QRef). The scope of a LocationType is usually broader than a location entity, it may represent - businesses, places, and POIs (location entities from QRef) - addresses (\"123 Main St., New York, NY\") or even just coordinates (latitude, longitude) - business categories (e.g., \"pharmacies\" or \"gas stations\") - SAFT locations - aliases (including \"home\" and \"work\") - contacts - combinations of a location with modifiers and constraints (e.g., \"chinese restaurant near me\" or \"cheap kid-friendly hotels\") - ungrounded locations produced by ungrounded_location model See go/location-type for the details of the location proto output by location subgrammar.",
       "id": "KnowledgeAnswersOpaqueLocationType",
       "properties": {},
       "type": "object"
@@ -73300,7 +74619,7 @@
       "type": "object"
     },
     "KnowledgeAnswersOpaqueType": {
-      "description": "Note: OpaqueType is deprecated and addition of new fields is not allowed. Refer to go/opaque_type for details. If you think this is the only way to implement your feature, attend an office hours (go/meaning-help) and discuss with the MRF team. An OpaqueType configures a value whose type is only interpretable by _specific_ clients of the intent catalog. This means horizontal 'features' like pretty printing, correct logging, intent blacklisting and signal aggregation will not work for opaque value types. It has a field for each type in IntentQuery that is not covered by a non-opaque type (specifically: protocol messages). The fields are themselves messages declared in this file. The specific opaque value types must be empty messages. If you find a need to add any fields to these messages, make them non-opaque and implement all of the code to treat them as first class types. It is allowable for a value to have more than one of the opaque types. See http://go/opaque-type-for-value-type. LINT.IfChange Next Id: 31",
+      "description": "Note: OpaqueType is deprecated and addition of new fields is not allowed. Refer to go/opaque_type for details. If you think this is the only way to implement your feature, attend an office hours (go/meaning-help) and discuss with the MRF team. An OpaqueType configures a value whose type is only interpretable by _specific_ clients of the intent catalog. This means horizontal 'features' like pretty printing, correct logging, intent blacklisting and signal aggregation will not work for opaque value types. It has a field for each type in IntentQuery that is not covered by a non-opaque type (specifically: protocol messages). The fields are themselves messages declared in this file. The specific opaque value types must be empty messages. If you find a need to add any fields to these messages, make them non-opaque and implement all of the code to treat them as first class types. It is allowable for a value to have more than one of the opaque types. See http://go/opaque-type-for-value-type. LINT.IfChange Next Id: 32",
       "id": "KnowledgeAnswersOpaqueType",
       "properties": {
         "aogType": {
@@ -73326,6 +74645,10 @@
         },
         "componentReferenceType": {
           "$ref": "KnowledgeAnswersOpaqueComponentReferenceIndexType"
+        },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
         },
         "deviceIdType": {
           "$ref": "KnowledgeAnswersOpaqueDeviceIdType"
@@ -73401,6 +74724,10 @@
       "description": "Plexity is a conceptual distinction between viewing something (a slot filler, for example) as a single individual, or as a complex concept consisting of multiple individuals or subparts. Note that plexity is not the same as (or correlated with) either grammatical number or with distributive and collective interpretations of the slot. The PlexityRequirement proto and Plexity enum are defined outside ValueType as we may move the plexity specification to a different place in the intent protos in future.",
       "id": "KnowledgeAnswersPlexityRequirement",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73428,6 +74755,10 @@
       "description": "A special type representing a polar question.",
       "id": "KnowledgeAnswersPolarQuestionType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73479,6 +74810,10 @@
           "description": "If true, is compatible with a schema whose answer_type is any semantic_type including empty (since by default schemas return themselves as semantic_types (b/211438997). This is used primarily for slot composition. Example: for the slot name: Operand type { semantic_type { allow_all: true } entity_type {} } * An entity_type or a schema with answer_type 'entity_type' can fill Operand. * A schema with either (a) no answer_type or (b) answer_type with !semantic_type.names().empty() can fill Operand * A schema with answer_type 'date' CAN NOT fill Operand. Note that when there is an explicit answer_type, the 'self' semantic_type is not considered.",
           "type": "boolean"
         },
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "includesContainingIntent": {
           "description": "Determines whether or not the meaning schema that contains this semantic_type conforms to a function call with the name and arguments taken from the meaning schema. As it refers to the \"containing_intent\", this field should only be set in a semantic_type declared in an intent's type_members field. The behavior of this field is undefined in other cases, for example, declaring the type of an intent slot. On Assistant, we use meaning schemas for argument types to represent both function call values as well as a reusable tool to host other argument values (opaque types, normalized strings, subsets of entities) across intents. Teams need this information to run conformance checks and annotate new data. Example: If the intents below are in the intent catalog, then: - Intent(slot=\"some string\") is conformant, because Type has string_type{} in its type_members. - Intent(slot=Type()) is not conformant, because Type has set semantic_type.includes_containing_intent to false. - Intent(slot=SubType()) is conformant, because type_members is not inherited. { id: \"Intent\" slot: { name: \"slot\" type: { semantic_type { name: \"Type\" }} } } { id: \"Type\" type_members { string_type{} semantic_type { includes_containing_intent: false } } } { id: \"SubType\" parent { id: \"Type\" relationship_type: SUBTYPE } }",
           "type": "boolean"
@@ -73487,6 +74822,13 @@
           "description": "Names of valid sources of the semantics (for example: a frame or an intent).",
           "items": {
             "type": "string"
+          },
+          "type": "array"
+        },
+        "nameContracts": {
+          "description": "Like `name_remodelings`, but for ComponentSpecificContracts instead of remodelings.",
+          "items": {
+            "$ref": "NlpMeaningSemanticTypeNameComponentSpecificContracts"
           },
           "type": "array"
         },
@@ -73499,7 +74841,7 @@
         },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
-          "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
+          "description": "Contains data about current schema remodelings at this ValueType lev\u00a9el. For more information see go/meaning-remodeling-framework."
         }
       },
       "type": "object"
@@ -73898,6 +75240,10 @@
       "description": "A special type representing a StateOfAffairs. Currently (as of 2021Q2) this is duplicative with semantic_type { name: \"StateOfAffairs\" } but we (mrf-team) will encourage clients to migrate to this new type.",
       "id": "KnowledgeAnswersStateOfAffairsType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73909,6 +75255,10 @@
       "description": "A StringType configures a value whose type is intended to be arbitrary text.",
       "id": "KnowledgeAnswersStringType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73924,6 +75274,10 @@
       "description": "A TimeZoneType configures a value whose type is a timezone.",
       "id": "KnowledgeAnswersTimeZoneType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -73935,6 +75289,10 @@
       "description": "A TrackingNumberType configures a value whose type is a TrackingNumber.",
       "id": "KnowledgeAnswersTrackingNumberType",
       "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts",
+          "description": "Contains data about the contracts that this ValueType level is available for. For more information see go/contract-based-conformance."
+        },
         "remodelings": {
           "$ref": "NlpMeaningMeaningRemodelings",
           "description": "Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework."
@@ -77033,6 +78391,27 @@
       },
       "type": "object"
     },
+    "NlpMeaningComponentSpecificContracts": {
+      "description": "A Component-Specific Contract is a proto message that can be placed on various elements of the MeaningCatalog (intent schemas, slots, types) that signals whether that element is part of the contract for a given component. go/contract-based-conformance",
+      "id": "NlpMeaningComponentSpecificContracts",
+      "properties": {
+        "componentSpecificContracts": {
+          "items": {
+            "enum": [
+              "UNSPECIFIED",
+              "P2_LWA"
+            ],
+            "enumDescriptions": [
+              "The unspecified contract is synonymous with LWA.",
+              ""
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "NlpMeaningMeaningRemodeling": {
       "id": "NlpMeaningMeaningRemodeling",
       "properties": {
@@ -77071,6 +78450,20 @@
             "$ref": "NlpMeaningMeaningRemodeling"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "NlpMeaningSemanticTypeNameComponentSpecificContracts": {
+      "description": "Component-Specific Contract for SemanticTypes, which are atomic string values (and thus can't have a ComponentSpecificContracts message attached to them). go/contract-based-conformance",
+      "id": "NlpMeaningSemanticTypeNameComponentSpecificContracts",
+      "properties": {
+        "componentSpecificContracts": {
+          "$ref": "NlpMeaningComponentSpecificContracts"
+        },
+        "name": {
+          "description": "Semantic type name.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -89146,6 +90539,8 @@
             "TWENTYPERCENT_JOBPOSTINGS",
             "ENGAGEMENTS",
             "CLOUDCONNECT",
+            "PERSONAL_AGENT",
+            "MOBILE_HARNESS",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -89728,6 +91123,8 @@
             false,
             true,
             true,
+            false,
+            false,
             false,
             false,
             false,
@@ -90444,6 +91841,8 @@
             "Twentypercent Jobpostings Team contact: 20p-wg@google.com",
             "Engagements Team contact: engagements-eng@google.com",
             "Cloudconnect Team contact: rev-platforms@google.com",
+            "Personal Agent Team contact: page-1-eng@google.com",
+            "Mobile Harness Team contact: omnilab-lmp@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -90634,7 +92033,7 @@
             "Pumice Team contact: pumice-team@google.com",
             "Backlight Team contact: jsuite-eng@google.com",
             "Glossary Manager Team contact: tm-team-core@google.com",
-            "Google Growth - UpgradeParty go/upgradeparty Team contact: google-growth-eng@google.com",
+            "Google Growth - UpgradeParty go/upgradeparty Team contact: google-growth-android-eng@google.com",
             "Onedev Workflow Team contact: one-developer-workflow+people-stack@google.com",
             "Avalanche Team contact: cpe-surveys-eng@google.com",
             "Kormo Team contact: kormo-eng@google.com",
@@ -92520,6 +93919,10 @@
           "$ref": "GeostorePointProto",
           "description": "lat/lng the icon is to be shown at."
         },
+        "ptoken": {
+          "$ref": "PtokenPToken",
+          "description": "Encapsulates the privacy policy relevant signals for this event. See go/kansas-embedded-ptokens for additional details. Keep the type fully qualified in case (when) we decide to make proto compiler enforce '.ptoken.PToken' as the only allowed type for the field number 9099. Hence, don't remove the leading '.'. See go/protobuf-ptoken-field for details around the 9099 field number."
+        },
         "stickerId": {
           "description": "The id of the sticker asset chosen by the user to replace the default asset for the alias.",
           "format": "uint32",
@@ -92698,6 +94101,10 @@
       "properties": {
         "adobeHdr": {
           "description": "Indicates that this image can be processed as an Adobe HDR (FlexDR) image by reading the MPF segments.",
+          "type": "boolean"
+        },
+        "appleHdr": {
+          "description": "Indicates that this image can be processed as an Apple HDR image by reading the MPF segments (if JPEG) or HEIF segments (if HEIC).",
           "type": "boolean"
         },
         "googleHdr": {
@@ -95601,6 +97008,7 @@
             "TRAIN_STATUS",
             "TRAIN_DELAY",
             "TRAIN_PLATFORM",
+            "NOTES_AND_LISTS_POST_MIGRATION",
             "UNIT_TESTING"
           ],
           "enumDeprecated": [
@@ -95829,6 +97237,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -96441,6 +97850,7 @@
             "Notifications for Train Journeys go/proactive-assistant-india-mvp",
             "",
             "",
+            "Notifications for Notes and Lists",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -98427,7 +99837,7 @@
       "type": "object"
     },
     "QualityNsrNsrData": {
-      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 53",
+      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 54",
       "id": "QualityNsrNsrData",
       "properties": {
         "articleScore": {
@@ -98445,6 +99855,11 @@
           "type": "integer"
         },
         "chardVariance": {
+          "format": "float",
+          "type": "number"
+        },
+        "chromeInTotal": {
+          "description": "Site-level Chrome views.",
           "format": "float",
           "type": "number"
         },
@@ -99081,7 +100496,7 @@
               true,
               true,
               true,
-              false,
+              true,
               true,
               false,
               false,
@@ -99576,7 +100991,7 @@
               true,
               true,
               true,
-              false,
+              true,
               true,
               false,
               false,
@@ -100077,7 +101492,7 @@
               true,
               true,
               true,
-              false,
+              true,
               true,
               false,
               false,
@@ -105900,11 +107315,6 @@
           "format": "float",
           "type": "number"
         },
-        "geoTopicNormalizedScore": {
-          "description": "If the annotation corresponds to a geo topic, this is populated with GeoTopic::normalized_score.",
-          "format": "float",
-          "type": "number"
-        },
         "isAuthor": {
           "description": "True if the entity is the author of the document. This was mainly developed and tuned for news articles (e.g. /m/02x27qn on \"www.vogue.com/article/flint-town-netflix\") but is also popluated for other content (e.g. scientific articles). Important: the semantics of this field may change in the future or it might be removed and replaced with a different API. If you want to use this field, please reach out to ke-authors@ first.",
           "type": "boolean"
@@ -105916,11 +107326,6 @@
         "isReferencePage": {
           "description": "Set to true iff the entity matches the full URL of the document, meaning that it is a reference page or related page of the entity.",
           "type": "boolean"
-        },
-        "localEntityLocationConfidence": {
-          "description": "If the annotation corresponds to a local entity, this is populated with LocalEntityAnnotations::Instance::location_confidence.",
-          "format": "float",
-          "type": "number"
         },
         "normalizedTopicality": {
           "description": "Representation of the topicality score that is normalized in [0, 1] and which sum over all entities in the document is 1. It represents the \"proportion\" of the document that talks about the entity. This score is less human interpretable as the bucketized topicality score (EntityAnnotations.topicality_score), but is more suited for some usages like aggregations.",
@@ -107136,7 +108541,7 @@
         },
         "productMetadata": {
           "$ref": "RepositoryWebrefProductMetadata",
-          "description": "Products-specific entity metadata."
+          "description": "Products-specific entity metadata. Only available in QrefMetadata output."
         },
         "specialEntityType": {
           "description": "# LINT.ThenChange( //depot/google3/repository/webref/evaluation/query/metrics/util.cc)",
@@ -107966,6 +109371,7 @@
             "DEFINITE",
             "INDEFINITE",
             "FEMININE_DETERMINER",
+            "FEMININE_ADJECTIVE",
             "ABLATIVE",
             "ADESSIVE",
             "ALLATIVE",
@@ -108067,6 +109473,7 @@
             "Articles or markers that express the definitess of a noun (see go/wordgraph/definiteness).",
             "Articles or markers that express the indefiniteness of a noun (see go/wordgraph/definiteness).",
             "Determiners that mark *unambiguously* the feminine gender of the expression (e.g.: \"*une* artiste\")",
+            "Adjective that mark *unambiguously* the feminine gender of the expression they modify. E.g.: \"les *meilleures* artistes\"",
             "Linguistic markers that express the movement from a place (like the English preposition *from* in a sentence like \"I came *from* my place\").",
             "Linguistic markers that express the location *near* a place (like in the English preposition *near* in a sentence like \"I am near the house\").",
             "Linguistic markers that express the movement towards a place (like the English preposition *to* in a sentence like \"I go *to* my house\").",
@@ -109788,7 +111195,7 @@
       "type": "object"
     },
     "RepositoryWebrefProductMetadata": {
-      "description": "Products-specific information about the entity. Next available tag: 16.",
+      "description": "Products-specific information about the entity. Only available in QrefMetadata output. Next available tag: 16.",
       "id": "RepositoryWebrefProductMetadata",
       "properties": {
         "productLineId": {
@@ -109802,27 +111209,6 @@
         "shoppingIds": {
           "$ref": "KnowledgeAnswersIntentQueryShoppingIds",
           "description": "All ShoppingIds for this MID that need to be copied to IntentQuery (FunctionCall) if this MID is used in intent generation. See go/iql-shopping-ids for details."
-        },
-        "type": {
-          "enum": [
-            "CATALOG_ENTRY",
-            "VARIANT_CLUSTER",
-            "OTHER",
-            "PRODUCT_LINE",
-            "BRAND",
-            "CATEGORY",
-            "NOT_PRODUCT"
-          ],
-          "enumDescriptions": [
-            "It's an entity that maps to a single product catalog entry.",
-            "It's an entity that maps to a product variant cluster.",
-            "Higher level product entities.",
-            "A product line entity that includes more than one similar product from the same brand.",
-            "The entity is a product brand.",
-            "The entity is a category of products.",
-            "The entity does not have a known product type. This is equivalent to not having the type field set."
-          ],
-          "type": "string"
         },
         "variantClusterId": {
           "description": "All unique variant cluster ids (shopping's GPCs) of this entity.",
@@ -110067,25 +111453,6 @@
           "format": "float",
           "type": "number"
         },
-        "firstScore": {
-          "description": "The raw topicality score of the primary entity.",
-          "format": "float",
-          "type": "number"
-        },
-        "hasSpecialLinks": {
-          "description": "Whether the primary entity has any \"special\" links. Currently a link is considered special if it has a good implication probability and has no negative disambiguation probability.",
-          "type": "boolean"
-        },
-        "medianMentionScore": {
-          "description": "The median mentions core of the primary entity.",
-          "format": "float",
-          "type": "number"
-        },
-        "navboostCoverage": {
-          "description": "The navboost token coverage ratio. All queries are taken into account.",
-          "format": "float",
-          "type": "number"
-        },
         "referencePageScore": {
           "description": "Reference page score used to select the reference page owner.",
           "format": "float",
@@ -110102,16 +111469,6 @@
         },
         "singleTopicnessV2": {
           "description": "This should have the same semantic as single_topicness, and should replace it in the long term.",
-          "format": "float",
-          "type": "number"
-        },
-        "titleCoverage": {
-          "description": "=================================== Signals for the single topicness. Only filled in for the primary (i.e., top ranked) entity. The title token coverage ratio.",
-          "format": "float",
-          "type": "number"
-        },
-        "totalSum": {
-          "description": "The sum of raw topicality scores for all entities in this page.",
           "format": "float",
           "type": "number"
         }
@@ -117619,6 +118976,10 @@
           "description": "Indicates whether the query relevance features is disabled or not in Muppet scoring.",
           "type": "boolean"
         },
+        "forceLeadingTextOrMeta": {
+          "description": "Indicates to not add any new candidates in SnippetFlow.",
+          "type": "boolean"
+        },
         "snippetBrainSelectedCandidateIndex": {
           "description": "Snippet candidate index selected by snippet brain model. This field will get populated in SnippetFlow in superroot. go/snippets-brain",
           "format": "int32",
@@ -118004,9 +119365,13 @@
             "UNKNOWN_LINK_TYPE",
             "SELF_LINK"
           ],
+          "enumDeprecated": [
+            false,
+            true
+          ],
           "enumDescriptions": [
             "No link type specified.",
-            "This indicates that the link target points to the same object related to this segment. Example: A YouTube link with text=\"0.07\" and link_target: \"https://www.youtube.com/watch?v=leHVmSqd4_w&t=0m07s\" points to the same YouTube video where this segment appears. See http://go/ignore-badwords-filtering-for-selflink for adding link_type design document."
+            "This indicates that the link target points to the same object related to this segment. Example: A YouTube link with text=\"0.07\" and link_target: \"https://www.youtube.com/watch?v=leHVmSqd4_w&t=0m07s\" points to the same YouTube video where this segment appears. See http://go/ignore-badwords-filtering-for-selflink for adding link_type design document. ====== WARNING !!! WARNING !!! WARNING !!! WARNING !!! WARNING !!! ====== For YouTube use cases only: "
           ],
           "type": "string"
         },
@@ -123879,7 +125244,7 @@
       "type": "object"
     },
     "TrawlerTrawlerPrivateFetchReplyData": {
-      "description": "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 46",
+      "description": "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 47",
       "id": "TrawlerTrawlerPrivateFetchReplyData",
       "properties": {
         "BotGroupName": {
@@ -124129,6 +125494,10 @@
         "originalClientParams": {
           "$ref": "TrawlerOriginalClientParams",
           "description": "Store the original client information."
+        },
+        "prodRegion": {
+          "description": "Log the prod region (only for regional harpoon requestor ids)",
+          "type": "string"
         },
         "resourceBucket": {
           "description": "If the requestor shares resource bucket with other requestorids, we will store the resource bucket name in these fields.",
@@ -124610,6 +125979,7 @@
               "FOP_ORDERING_RECOMMENDATION_SAME_FOP_EVENT_LEVEL",
               "FOP_ORDERING_STORED_VALUE_EVENT_LEVEL",
               "GEARHEAD_DUPLEX_COMPATIBLE_DIALER_ENABLED",
+              "CUSTOMER_UPDATE_CHALLENGE_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -124780,6 +126150,11 @@
               "IN_APP_OFFER_BATTLESTAR_APP_LAST_SURVIVOR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_TOWER_OF_GOD_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_JACKPOT_WORLD_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_LOTSA_SLOTS_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_CASH_FRENZY_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_WAR_PLANET_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_ESKYFUN_LEGENDS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL",
@@ -124792,6 +126167,11 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LAST_SURVIVOR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_TOWER_OF_GOD_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_JACKPOT_WORLD_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LOTSA_SLOTS_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_CASH_FRENZY_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_WAR_PLANET_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ESKYFUN_LEGENDS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL",
@@ -124828,6 +126208,7 @@
               "OTHER_DEVICES_SUBNAV_RETURNED_IN_SESSION",
               "GEARHEAD_FRX_SENSITIVE_PERMISSION_SCREEN_SEEN",
               "POST_PURCHASE_ITEM_UPSELL_SESSION_LEVEL",
+              "POST_PURCHASE_ITEM_UPSELL_WAVE_2_SESSION_LEVEL",
               "PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_SESSION_LEVEL",
               "FETCH_PROMOTION_BANNER_FROM_P3_SESSION_LEVEL",
               "AVP_SWOOP_10P_OFF_SESSION_LEVEL",
@@ -125309,6 +126690,10 @@
               "PLAY_PASS_SUPERHERO_CLUSTER_APP_WITH_VIDEO",
               "PLAY_PASS_SUPERHERO_CLUSTER_APP_WITH_PROMOTIONAL_DESCRIPTION",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_SESSION_LEVEL",
+              "BATTLESTAR_GAME_CENTRIC_CUJ_EMAIL_SESSION_LEVEL",
+              "PREREGISTRATION_START_PURCHASE_FLOW_ON_CLICK",
+              "CUSTOMER_UPDATE_CHALLENGE_SESSION_LEVEL",
+              "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -125378,6 +126763,11 @@
               "IN_APP_OFFER_BATTLESTAR_APP_LAST_SURVIVOR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_TOWER_OF_GOD_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_JACKPOT_WORLD_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_LOTSA_SLOTS_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_CASH_FRENZY_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_WAR_PLANET_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_ESKYFUN_LEGENDS_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL",
@@ -125390,6 +126780,11 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LAST_SURVIVOR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_TOWER_OF_GOD_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_JACKPOT_WORLD_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LOTSA_SLOTS_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_CASH_FRENZY_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_WAR_PLANET_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ESKYFUN_LEGENDS_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL",
@@ -125408,6 +126803,7 @@
               "PLAY_GROWTH_IS_SCHEDULED",
               "GEARHEAD_VISUAL_PREVIEW_UNCHAINED_ELIGIBLE",
               "POST_PURCHASE_ITEM_UPSELL_USER_LEVEL",
+              "POST_PURCHASE_ITEM_UPSELL_WAVE_2_USER_LEVEL",
               "PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_USER_LEVEL",
               "DISABLE_TOPUP_EXPERIMENT_CONTROL_GROUP_USER_LEVEL",
               "DISABLE_TOPUP_EXPERIMENT_TREATMENT_GROUP_USER_LEVEL",
@@ -125500,6 +126896,7 @@
               "HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V2",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_1",
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
@@ -125610,6 +127007,7 @@
               "IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_SUPERCELL_USER_LEVEL",
               "IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_KING_USER_LEVEL",
               "IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_MINICLIP_USER_LEVEL",
+              "IS_APP_TARGETED_REWARD_BANNER_VISIBLE_USER_LEVEL",
               "GAME_HUB_DEVELOPER_VIDEO_AT_USER_LEVEL",
               "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL",
               "GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_USER_LEVEL",
@@ -125622,6 +127020,9 @@
               "REDEEM_SAVE_BUYER_SPEND_MODEL_USER_LEVEL",
               "PURCHASE_ADD_FOP_OPTIONS_SCREEN_USER_LEVEL",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_USER_LEVEL",
+              "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_USER_LEVEL",
+              "IS_ELIGIBLE_FOR_ONE_CLICK_BAKCUP_FOP_IN_FIX_FLOW_USER_LEVEL",
+              "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -126131,6 +127532,18 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
               false,
               false,
@@ -126768,6 +128181,21 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
               false,
               false,
@@ -126792,7 +128220,12 @@
               false,
               false,
               false,
+              false,
               true,
+              false,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -127192,6 +128625,7 @@
               "",
               "",
               "Test code for sessions where a phone dialer that doesn't turn screen on during phone calls is enabled.",
+              "Event-level test code for the presence of customer update challenge.",
               "",
               "",
               "",
@@ -127381,6 +128815,16 @@
               "",
               "",
               "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "see go/reordering-subnav-tabs",
               "see go/reordering-subnav-tabs",
               "",
@@ -127408,6 +128852,7 @@
               "Test codes for cross-device features. See go/play-cross-device.",
               "",
               "Test code for other devices subnav. Logged for eligible users when home subnavs are fetched.",
+              "",
               "",
               "",
               "Test code logged on client side for users who see the Play Pass signup interstitial.",
@@ -127891,6 +129336,10 @@
               "Session-level test code for when an app is eligible to have its video and description displayed in the Play Pass superhero cluster.",
               "",
               "Session-level test code for SKU Recommendation in Cart Abandonment.",
+              "Session-level test code for Battlestar signup email with game centric personalization.",
+              "Session-level test code for preregistration release notification click triggering purchase flow.",
+              "Session-level test code for the presence of customer update challenge.",
+              "Session-level test code for displaying sub-entitlement benefits on websky.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -127979,6 +129428,16 @@
               "",
               "",
               "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "User saw/would have seen the subscription one time pass offer",
               "",
               "",
@@ -127989,6 +129448,7 @@
               "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
               "",
               "Test code for when a user was eligible for visual preview while in motion. E.g. received a notification and had visual preview setting enabled.",
+              "",
               "",
               "Test code logged on client side for users who see the Play Pass signup interstitial.",
               "Test codes for seeing the effects of disabling topup in select countries.",
@@ -128082,6 +129542,7 @@
               "User level test code for users who have any purchase card abandon behavior in the last 7 day (controlled by LAST_7D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for link biometrics with impression cap and foped user setup.",
               "User level test code for link biometrics with impression cap and foped user setup.",
+              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
               "User level test code for users who are eligible for one-click backup fop.",
@@ -128192,6 +129653,7 @@
               "",
               "",
               "",
+              "",
               "User-level test code for Game Hub Developer Video cluster.",
               "User-level for showing subscription benefits in cart abandonment.",
               "User-level test code for Game Hub Developer Video cluster eligibility.",
@@ -128204,6 +129666,9 @@
               "User level test code for Redeem Save buyer offer study, tracking users who actually get different experience between control and treatment.",
               "User-level test code marking users who have seen the add new fop option screen during purchase flow. This will be used for ranking of add fop options experiments.",
               "User level test code for SKU Recommendation in Cart Abandonment.",
+              "User level test code for stored value top-up email reminder.",
+              "User level test code for users who are eligible for one-click backup fop in fix flow",
+              "User level test code for displaying sub-entitlement benefits on websky.",
               ""
             ],
             "type": "string"
@@ -128221,7 +129686,7 @@
       "type": "object"
     },
     "VendingConsumerProtoTrustedGenomeEntity": {
-      "description": "Proto message containing the id, localized title, score, and hierarchy level of a trusted genome entity. Next ID: 10",
+      "description": "Proto message containing the id, localized title, score, and hierarchy level of a trusted genome entity. Next ID: 12",
       "id": "VendingConsumerProtoTrustedGenomeEntity",
       "properties": {
         "categoryId": {
@@ -128231,6 +129696,10 @@
         "id": {
           "description": "The identifier of a play trusted genome entity. Required.",
           "type": "string"
+        },
+        "isLocalized": {
+          "description": "Indicate whether the trusted genome entity has localized title.",
+          "type": "boolean"
         },
         "level": {
           "description": "The level of the entity. E.g. in hierarchy like Action -> Platformer > Endless Runner. Action is level 1, Platformer is level 2 and Endless Runner is level 3. Currently, only APP_TAXONOMY and GAME_TAXONOMY type may have the levels. For entity that does not have hierarchy, its level is 1. Required.",
@@ -128244,6 +129713,13 @@
         "queryText": {
           "description": "The localized query string for this trusted genome entity. This query will be used when we want to bring users to SERP on click.",
           "type": "string"
+        },
+        "recsTopicId": {
+          "description": "The corresponding recs topics created from the trusted genome entity if available.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "score": {
           "description": "The confidence score of the entity to the app.",
@@ -128318,13 +129794,14 @@
             "GAME_MONETIZATION",
             "ACCESSIBLITY",
             "ASSISTANT",
-            "CHROMEBOOK_COMPATIBILITY"
+            "CHROMEBOOK_COMPATIBILITY",
+            "GLOBAL_ATTRIBUTE"
           ],
           "enumDescriptions": [
             "",
-            "Apps taxonomy. e.g. Air travel.",
+            "============================= Apps =======================// Apps taxonomy. e.g. Air travel.",
             "Apps attribute, it can be universal, e.g. VR, or it can be category specific, e.g. Beauty type makeup.",
-            "Game taxonomy. e.g. Action.",
+            "============================= Games =======================// Game taxonomy. e.g. Action.",
             "Gameplay element. e.g. Arcade.",
             "Gameplay mode. e.g. Single player",
             "Game graphic stype. e.g. Anime",
@@ -128332,9 +129809,10 @@
             "Game connectivity. e.g. Offline",
             "Game dimensional planes. e.g. 3D",
             "Game monetization. e.g. subscription, try before you buy.",
-            "Accessiblity. e.g. Blind-Friendly",
+            "============================= General =======================// Accessiblity. e.g. Blind-Friendly",
             "Assistant tags, e.g. Assistant-Enabled",
-            "Chrome OS compatibility tags. e.g. Optimized for Chromebooks"
+            "Chrome OS compatibility tags. e.g. Optimized for Chromebooks",
+            "Global attribute shared between both App and Game. e.g. Companion App"
           ],
           "type": "string"
         }
@@ -143983,7 +145461,7 @@
           "type": "array"
         },
         "siteDisplayName": {
-          "description": "The display name of the document's domain used as the first part of VisUrl, e.g, \"Google > play > store\" is the VisUrl of \"https://play.google.com/store/\". Wherein, \"Google\" is site_display_name of the domain \"google.com\". See go/site-display-name for more details.",
+          "description": "The domain-level display name of the website, such as \"Google\" for google.com. See go/site-display-name for more details. As of Aug 2023, this field is being deprecated in favor of `info.[AlternativeTitlesResponse].site_display_name_response` field, which also contains host-level site display names with additional information.",
           "type": "string"
         },
         "snippetBylineDate": {
@@ -144039,7 +145517,7 @@
         },
         "titleRenderedToken": {
           "deprecated": true,
-          "description": "How tokens are rendered in generating title. Note: In rendering a title, the page title part and the site/host/domain title part can be flipped after initial rendering. The flip, if happend, may not be reflected in this field. That is, this field may contain the tokens in the original, pre-flip, order.",
+          "description": "How tokens are rendered in generating title. Note: In rendering a title, the page title part and the site/host/domain title part can be flipped after initial rendering. The flip, if happened, may not be reflected in this field. That is, this field may contain the tokens in the original, pre-flip, order.",
           "items": {
             "$ref": "MustangSnippetsRenderedToken"
           },
@@ -144071,11 +145549,437 @@
       },
       "type": "object"
     },
-    "WatchpageLanguageWatchPageLanguageResult": {
-      "id": "WatchpageLanguageWatchPageLanguageResult",
+    "WatchpageLanguageWatchPageLanguageModelPredictions": {
+      "description": "Next ID: 4",
+      "id": "WatchpageLanguageWatchPageLanguageModelPredictions",
       "properties": {
+        "languageScore": {
+          "description": "A list of watchpage languages predicted arranged according to their scores.",
+          "items": {
+            "$ref": "WatchpageLanguageWatchPageLanguageModelPredictionsLanguageScore"
+          },
+          "type": "array"
+        },
+        "usesSpeechSignals": {
+          "description": "Does the prediction uses speech signals like audio language.",
+          "type": "boolean"
+        },
+        "version": {
+          "description": "An identifier to recognize the model version used for this prediction.",
+          "enum": [
+            "UNKNOWN_MODEL",
+            "V2"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WatchpageLanguageWatchPageLanguageModelPredictionsLanguageScore": {
+      "description": "Next ID: 3",
+      "id": "WatchpageLanguageWatchPageLanguageModelPredictionsLanguageScore",
+      "properties": {
+        "score": {
+          "description": "Score for the predicted language by the WatchPage Language model.",
+          "format": "float",
+          "type": "number"
+        },
         "watchpageLanguage": {
           "description": "The language predicted by the WatchPage Language model.",
+          "enum": [
+            "ENGLISH",
+            "DANISH",
+            "DUTCH",
+            "FINNISH",
+            "FRENCH",
+            "GERMAN",
+            "HEBREW",
+            "ITALIAN",
+            "JAPANESE",
+            "KOREAN",
+            "NORWEGIAN",
+            "POLISH",
+            "PORTUGUESE",
+            "RUSSIAN",
+            "SPANISH",
+            "SWEDISH",
+            "CHINESE",
+            "CZECH",
+            "GREEK",
+            "ICELANDIC",
+            "LATVIAN",
+            "LITHUANIAN",
+            "ROMANIAN",
+            "HUNGARIAN",
+            "ESTONIAN",
+            "TG_UNKNOWN_LANGUAGE",
+            "UNKNOWN_LANGUAGE",
+            "BULGARIAN",
+            "CROATIAN",
+            "SERBIAN",
+            "IRISH",
+            "GALICIAN",
+            "TAGALOG",
+            "TURKISH",
+            "UKRAINIAN",
+            "HINDI",
+            "MACEDONIAN",
+            "BENGALI",
+            "INDONESIAN",
+            "LATIN",
+            "MALAY",
+            "MALAYALAM",
+            "WELSH",
+            "NEPALI",
+            "TELUGU",
+            "ALBANIAN",
+            "TAMIL",
+            "BELARUSIAN",
+            "JAVANESE",
+            "OCCITAN",
+            "URDU",
+            "BIHARI",
+            "GUJARATI",
+            "THAI",
+            "ARABIC",
+            "CATALAN",
+            "ESPERANTO",
+            "BASQUE",
+            "INTERLINGUA",
+            "KANNADA",
+            "PUNJABI",
+            "SCOTS_GAELIC",
+            "SWAHILI",
+            "SLOVENIAN",
+            "MARATHI",
+            "MALTESE",
+            "VIETNAMESE",
+            "FRISIAN",
+            "SLOVAK",
+            "CHINESE_T",
+            "FAROESE",
+            "SUNDANESE",
+            "UZBEK",
+            "AMHARIC",
+            "AZERBAIJANI",
+            "GEORGIAN",
+            "TIGRINYA",
+            "PERSIAN",
+            "BOSNIAN",
+            "SINHALESE",
+            "NORWEGIAN_N",
+            "PORTUGUESE_P",
+            "PORTUGUESE_B",
+            "XHOSA",
+            "ZULU",
+            "GUARANI",
+            "SESOTHO",
+            "TURKMEN",
+            "KYRGYZ",
+            "BRETON",
+            "TWI",
+            "YIDDISH",
+            "SERBO_CROATIAN",
+            "SOMALI",
+            "UIGHUR",
+            "KURDISH",
+            "MONGOLIAN",
+            "ARMENIAN",
+            "LAOTHIAN",
+            "SINDHI",
+            "RHAETO_ROMANCE",
+            "AFRIKAANS",
+            "LUXEMBOURGISH",
+            "BURMESE",
+            "KHMER",
+            "TIBETAN",
+            "DHIVEHI",
+            "CHEROKEE",
+            "SYRIAC",
+            "LIMBU",
+            "ORIYA",
+            "ASSAMESE",
+            "CORSICAN",
+            "INTERLINGUE",
+            "KAZAKH",
+            "LINGALA",
+            "MOLDAVIAN",
+            "PASHTO",
+            "QUECHUA",
+            "SHONA",
+            "TAJIK",
+            "TATAR",
+            "TONGA",
+            "YORUBA",
+            "CREOLES_AND_PIDGINS_ENGLISH_BASED",
+            "CREOLES_AND_PIDGINS_FRENCH_BASED",
+            "CREOLES_AND_PIDGINS_PORTUGUESE_BASED",
+            "CREOLES_AND_PIDGINS_OTHER",
+            "MAORI",
+            "WOLOF",
+            "ABKHAZIAN",
+            "AFAR",
+            "AYMARA",
+            "BASHKIR",
+            "BISLAMA",
+            "DZONGKHA",
+            "FIJIAN",
+            "GREENLANDIC",
+            "HAUSA",
+            "HAITIAN_CREOLE",
+            "INUPIAK",
+            "INUKTITUT",
+            "KASHMIRI",
+            "KINYARWANDA",
+            "MALAGASY",
+            "NAURU",
+            "OROMO",
+            "RUNDI",
+            "SAMOAN",
+            "SANGO",
+            "SANSKRIT",
+            "SISWANT",
+            "TSONGA",
+            "TSWANA",
+            "VOLAPUK",
+            "ZHUANG",
+            "KHASI",
+            "SCOTS",
+            "GANDA",
+            "MANX",
+            "MONTENEGRIN",
+            "AKAN",
+            "IGBO",
+            "MAURITIAN_CREOLE",
+            "HAWAIIAN",
+            "CEBUANO",
+            "EWE",
+            "GA",
+            "HMONG",
+            "KRIO",
+            "LOZI",
+            "LUBA_LULUA",
+            "LUO_KENYA_AND_TANZANIA",
+            "NEWARI",
+            "NYANJA",
+            "OSSETIAN",
+            "PAMPANGA",
+            "PEDI",
+            "RAJASTHANI",
+            "SESELWA_CREOLE_FRENCH",
+            "TUMBUKA",
+            "VENDA",
+            "WARAY_PHILIPPINES",
+            "NUM_LANGUAGES"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\"Norwegian\" = \"no\" normally implies Bokm\u00e5l (\"nb\"). See also NORWEGIAN_N. Consider using IsNorwegianLanguage().",
+            "",
+            "WARNING: \"Portuguese\" in the enum Language implies the Iberian variant, while Google and industry standard practice is for \"pt\" to imply Brazilian, for the much larger population. The old LanguageCode() function returns \"pt\" for legacy reasons. The III LanguageEnumLanguageCodeConverter converts it to \"pt-PT\" to preserve the semantics. Converting between this legacy enum and industry-standard language tags cannot preserve the distinction between PORTUGUESE and PORTUGUESE_P. Relying on it is a bug. Consider using IsPortugueseLanguage().",
+            "",
+            "",
+            "",
+            "\"Chinese\" normally implies simplified Han characters (\"zh-Hans\"). See also CHINESE_T. Consider using IsChineseLanguage().",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Avoid making a distinction between ROMANIAN and MOLDAVIAN. Consider using IsRomanianLanguage().",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Serbian is commonly written in two scripts. The default is Cyrillic (\"sr\" = \"sr-Cyrl\"). It is also often written with Latin letters (\"sr-Latn\"). This enum does not convey that distinction.",
+            "",
+            "",
+            "TAGALOG is used to mean both Tagalog (tl) and Filipino (fil). These are nearly the same; Filipino is the official language, and \"fil\" is normally used for UI settings etc. The old LanguageCode() function returns \"tl\".",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\"Bihari\" is not a language: There are several different languages spoken in and around the Indian state of Bihar. This is like saying \"Swiss\" to mean German+French+Italian+Romansh.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "UI only.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Chinese written in traditional Han characters (\"zh-Hant\"). See also CHINESE. Consider using IsChineseLanguage().",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "UI only.",
+            "",
+            "UI only. LangId language: CROATIAN (28)",
+            "",
+            "Norwegian Nynorsk (\"nn\"). See also NORWEGIAN. Consider using IsNorwegianLanguage(). UI only. LangId language: NORWEGIAN (10)",
+            "Portuguese in Portugal (\"pt-PT\"). See the WARNING at PORTUGUESE. Avoid a distinction between PORTUGUESE and PORTUGUESE_P. Relying on it is a bug. Consider using IsPortugueseLanguage(). UI only. LangId language: PORTUGUESE (12)",
+            "Portuguese in Brazil (\"pt-BR\"). Consider using IsPortugueseLanguage(). UI only. LangId language: PORTUGUESE (12)",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "",
+            "",
+            "UI only.",
+            "UI only.",
+            "UI only. LangId language: SERBIAN (29)",
+            "UI only.",
+            "",
+            "This has been documented as \"Kurmanji (kmr) + Sorani (ckb) + Kurdish (ku)\". There are several kinds of Kurdish languages. \"ku\" normally implies Northern Kurdish = Kurmanji (kmr) which is normally written in Latin letters. \"ckb\" is Central Kurdish (largely in Iraq) which is normally written in Arabic letters (thus right-to-left).",
+            "",
+            "",
+            "",
+            "",
+            "UI only.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "sometimes spelled Divehi; lang of Maldives",
+            "",
+            "",
+            "UI only.",
+            "",
+            "UI only.",
+            "",
+            "UI only.",
+            "",
+            "UI only.",
+            "\"Moldavian\" is the same language as Romanian. In language tags, \"ro-MD\" can be used but is not normally necessary. Avoid making a distinction between ROMANIAN and MOLDAVIAN. Consider using IsRomanianLanguage(). UI only. LangId language: ROMANIAN (22)",
+            "",
+            "",
+            "UI only.",
+            "",
+            "",
+            "",
+            "",
+            "This is a vague group of languages, not one language. UI only.",
+            "This is a vague group of languages, not one language. UI only.",
+            "This is a vague group of languages, not one language. UI only.",
+            "This is a vague group of languages, not one language. UI only.",
+            "",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "",
+            "UI only.",
+            "",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only. More commonly called Luganda.",
+            "UI only.",
+            "UI only. LangId language: SERBIAN (29)",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "UI only.",
+            "Translate only.",
+            "CLD only.",
+            "CLD only.",
+            "Translate only.",
+            "CLD only.",
+            "CLD only.",
+            "CLD only.",
+            "CLD only.",
+            "Translate only.",
+            "CLD only.",
+            "Translate only.",
+            "Translate only.",
+            "CLD only.",
+            "Translate only.",
+            "CLD only.",
+            "CLD only.",
+            "CLD only.",
+            "Translate only.",
+            "Always keep this at the end. It is not a"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WatchpageLanguageWatchPageLanguageResult": {
+      "description": "Next ID: 3",
+      "id": "WatchpageLanguageWatchPageLanguageResult",
+      "properties": {
+        "predictions": {
+          "description": "Versioned WatchPageLanguageResults. This is to experiment and launch new models. The first prediction is the latest production version.",
+          "items": {
+            "$ref": "WatchpageLanguageWatchPageLanguageModelPredictions"
+          },
+          "type": "array"
+        },
+        "watchpageLanguage": {
+          "description": "The language predicted by the V1 WatchPage Language model. For new and experimental versions use versioned_language_result.",
           "enum": [
             "ENGLISH",
             "DANISH",
