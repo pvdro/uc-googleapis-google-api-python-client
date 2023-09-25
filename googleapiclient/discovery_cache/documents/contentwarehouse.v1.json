@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20230901",
+  "revision": "20230918",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3727,7 +3727,8 @@
             "CALENDAR_WEB_TEAM_MEMBERS_AFFINITY",
             "CLOUDCONNECT_AFFINITY",
             "PERSONAL_AGENT_AFFINITY",
-            "MOBILE_HARNESS_AFFINITY"
+            "MOBILE_HARNESS_AFFINITY",
+            "LOOKER_STUDIO_PRO_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -3995,6 +3996,7 @@
             false,
             false,
             false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4012,6 +4014,7 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
             "",
             "",
             "",
@@ -9950,17 +9953,13 @@
               "UNSPECIFIED_CALL_OPTION",
               "SPEAKERPHONE",
               "BLUETOOTH",
-              "HEADSET",
-              "MIC",
-              "CAMERA"
+              "HEADSET"
             ],
             "enumDescriptions": [
               "",
               "",
               "",
-              "",
-              "Optional to set since call.CONTROL_MIC client_op infers this option.",
-              "Optional to set since video_call.CONTROL_CAMERA client_op"
+              ""
             ],
             "type": "string"
           },
@@ -10590,7 +10589,7 @@
               false,
               false,
               false,
-              true,
+              false,
               false,
               false,
               false,
@@ -10917,7 +10916,7 @@
               "",
               "",
               "A page for device gestures",
-              "Deprecated, use VIBRATION instead.",
+              "Slider that controls touch feedback vibration",
               "",
               "",
               "",
@@ -15594,6 +15593,7 @@
           "type": "array"
         },
         "linkedUsers": {
+          "deprecated": true,
           "description": "Please do NOT use this field without prior approval from PWG. Users who have signed in onto this device, go/linked-users-in-pkg.",
           "items": {
             "$ref": "AssistantApiSettingsLinkedUser"
@@ -15647,6 +15647,7 @@
         },
         "politeMode": {
           "$ref": "AssistantApiSettingsPoliteMode",
+          "deprecated": true,
           "description": "Specify whether polite mode is enabled for this device. See go/pretty-please-dd."
         },
         "postalCode": {
@@ -17323,7 +17324,7 @@
       "type": "object"
     },
     "AssistantApiSupportedFeatures": {
-      "description": "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 67",
+      "description": "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 68",
       "id": "AssistantApiSupportedFeatures",
       "properties": {
         "aaeNotificationSourceSupported": {
@@ -17371,6 +17372,10 @@
         },
         "confirmationBeforeReadingMultipleMessagesSupported": {
           "description": "Whether the client supports confirmation flow before announcement of multiple messages. If set to true the user will be prompted once and confirmation will be taken before all the messages are announced.",
+          "type": "boolean"
+        },
+        "conversationalCareSupported": {
+          "description": "Whether the client can render conversational care responses. go/conversational-care",
           "type": "boolean"
         },
         "crossDeviceBroadcastSupported": {
@@ -19486,7 +19491,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerDeviceTargetingFeaturesStates": {
-      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 6",
+      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 10",
       "id": "AssistantGroundingRankerDeviceTargetingFeaturesStates",
       "properties": {
         "distance": {
@@ -19504,6 +19509,22 @@
             ""
           ],
           "type": "string"
+        },
+        "hasBufferingMediaSession": {
+          "description": "Indicates that the device is running a media session that is currently buffering.",
+          "type": "boolean"
+        },
+        "hasPausedMediaSession": {
+          "description": "Indicates that the device is running a media session that is currently paused.",
+          "type": "boolean"
+        },
+        "hasPlayingMediaSession": {
+          "description": "Indicates that the device is running a media session that is currently playing.",
+          "type": "boolean"
+        },
+        "hasSameStructure": {
+          "description": "Indicates whether or not the device is in the same structure as any local or hearing devices.",
+          "type": "boolean"
         },
         "isDocked": {
           "description": "Indicate whether the device is docked on a base.",
@@ -19657,7 +19678,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 18",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 19",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -19706,6 +19727,10 @@
         },
         "isCastVideo": {
           "description": "Whether the candidate is YouTube CAST_VIDEO candidate. CAST_VIDEO is a deeplink platform. This signal will be used to promote YouTube Music screenful candidates with CAST_VIDEO platform for free users because free users cannot get exact entities in screenless response and can get exact entities with ads in screenful response.",
+          "type": "boolean"
+        },
+        "isExclusiveOriginalProvider": {
+          "description": "True if the media item in Binding Set is exclusively available on the provider in Binding set. Example: \"Stranger things\" is exclusive to \"Netflix\".",
           "type": "boolean"
         },
         "isMediaSearchQuerySubsetOfEntityNameAndArtist": {
@@ -22293,7 +22318,6 @@
           "description": "Used in HGR to modify the ranker based on input experimental flag and intent name.",
           "enum": [
             "RANKER_NAME_UNSPECIFIED",
-            "RANKER_NAME_PREFULFILLMENT_RANKER",
             "RANKER_NAME_GROUNDING_RANKER",
             "RANKER_NAME_DEFER_TO_VERTICAL_SCORES",
             "RANKER_NAME_GROUNDING_RANKER_V2",
@@ -22309,7 +22333,6 @@
           ],
           "enumDescriptions": [
             "Default value, when there is no ranker specified.",
-            "Name for the ranker as used by PFR.",
             "Name for HGR v1 model.",
             "Used for deferring to confidence scores produced by upstream GPs instead of using HGR's scorer.",
             "Name for HGR v2 model.",
@@ -24066,6 +24089,7 @@
           "type": "string"
         },
         "csaiRegexpHighConfidenceClassification": {
+          "deprecated": true,
           "description": "DO NOT USE: This field is temporary and should be used only for the CSAI Onebox. This field is the result of the regular expression classifier alone as opposed to a combination with Seti classifier as in csai_classification field.",
           "enum": [
             "NOT_PROTECTED",
@@ -25566,6 +25590,21 @@
           "description": "NSR for low-quality videos, converted from quality_nsr.NsrData.vlq_nsr.",
           "format": "uint32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ConceptsConceptId": {
+      "id": "ConceptsConceptId",
+      "properties": {
+        "conceptId": {
+          "type": "string"
+        },
+        "id": {
+          "deprecated": true,
+          "description": "uint64 bring lots of issues, and string a better practice.",
+          "format": "uint64",
+          "type": "string"
         }
       },
       "type": "object"
@@ -28489,13 +28528,18 @@
       "type": "object"
     },
     "DrishtiVesperEncodedThumbnail": {
-      "description": "The attributes of encoded thumbnail images. Next id: 9.",
+      "description": "The attributes of encoded thumbnail images. Next id: 10.",
       "id": "DrishtiVesperEncodedThumbnail",
       "properties": {
         "byteSize": {
           "description": "Image size in bytes. Meaningful when contents are not stored inline (e.g., via `image_blob_id`).",
           "format": "int64",
           "type": "string"
+        },
+        "crc32c": {
+          "description": "CRC-32 checksum of the image bytes. Can be used for data integrity check.",
+          "format": "uint32",
+          "type": "integer"
         },
         "encodingQuality": {
           "description": "JPEG/WEBP quality factor in range [0,100].",
@@ -31851,7 +31895,7 @@
       "id": "GeostoreAddressProto",
       "properties": {
         "addressLines": {
-          "description": "The unparsed portion (lines) of the address. An address can have multiple unparsed portions. Multiple unparsed portions sharing the same language should be modeled as one address_lines instance having multiple lines. Historically, we also supported uparsed portions in different languages, but we no longer do. Consequently, only one value is allowed for this field despite the fact that it is repeated. See go/address-lines-multi-language for information about why we made this change. If any components are filled in, this is supplemental to (i.e. disjoint from) them. Furthermore, this must be the most specific portion of the address (except for the portion, if any, stored in the name field of feature.proto). Unparsed lines are always formatted together in a block. Other address components are never formatted between the address lines. This doesn't imply that the address lines are always either the first or the last part of the formatted output.",
+          "description": "The unparsed portion (lines) of the address. An address can have multiple unparsed portions. Multiple unparsed portions sharing the same language should be modeled as one address_lines instance having multiple lines. Historically, we also supported unparsed portions in different languages, but we no longer do. Consequently, only one value is allowed for this field despite the fact that it is repeated. See go/address-lines-multi-language for information about why we made this change. If any components are filled in, this is supplemental to (i.e. disjoint from) them. Furthermore, this must be the most specific portion of the address (except for the portion, if any, stored in the name field of feature.proto). Unparsed lines are always formatted together in a block. Other address components are never formatted between the address lines. This doesn't imply that the address lines are always either the first or the last part of the formatted output.",
           "items": {
             "$ref": "GeostoreAddressLinesProto"
           },
@@ -35212,6 +35256,24 @@
       },
       "type": "object"
     },
+    "GeostoreDisputedAreaProto": {
+      "description": "This protocol buffer is used to store information about disputed areas. E.g., the political power that administers a disputed area or the countries that claim it. It should only be used for features of TYPE_DISPUTED_AREA.",
+      "id": "GeostoreDisputedAreaProto",
+      "properties": {
+        "administeredBy": {
+          "description": "If present this feature is administered by the power present in the field. In most cases this will be a two letter ISO-3166 region code, but may be a descriptive string if no region code is available.",
+          "type": "string"
+        },
+        "claimant": {
+          "description": "Feature IDs (usually a country feature ID) of all parties who claim this feature. No claimants means the claim by the country that contains it (based on country polygon) is not disputed.",
+          "items": {
+            "$ref": "GeostoreFeatureIdProto"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "GeostoreDoodleProto": {
       "description": "This protocol buffer holds the doodle-specific attributes for features of type TYPE_DOODLE.",
       "id": "GeostoreDoodleProto",
@@ -36445,6 +36507,8 @@
             "BUSINESS_HOURS",
             "DATA_SOURCE",
             "DISPLAY_DATA",
+            "DISPUTED_AREA_ADMINISTERED_BY",
+            "DISPUTED_AREA_CLAIMANT",
             "ENTRANCE_ALLOWANCE",
             "ESTABLISHMENT_OPENING_HOURS_EXCEPTION",
             "ESTABLISHMENT_OPENING_HOURS_REGULAR_HOURS",
@@ -36471,6 +36535,8 @@
             "GCONCEPT",
             "GEOMETRY_3D",
             "GEOMETRY_PRECISION_METERS",
+            "GEOPOLITICAL_CONVEYS_ATTRIBUTION_TO",
+            "GEOPOLITICAL_REGION_SPECIFIC_NAME",
             "GEOPOLITICAL_GEOMETRY_REST_OF_WORLD_POLYGON",
             "GEOPOLITICAL_GEOMETRY_SELF_POLYGON",
             "INFERRED_GEOMETRY_GEOMETRY_COMPOSITION",
@@ -36505,6 +36571,7 @@
             "PEAK_PROMINENCE",
             "PHONE_NUMBER",
             "POINT",
+            "POLITICAL_CLAIM",
             "POLYGON",
             "POLYGON_FOR_DISPLAY",
             "POLYLINE",
@@ -36635,6 +36702,11 @@
             "DEPRECATED_DO_NOT_USE_TRANSIT_STATION_AGENCY"
           ],
           "enumDeprecated": [
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -37058,6 +37130,11 @@
             "",
             "",
             "",
+            "",
+            "",
+            "",
+            "",
+            "",
             ""
           ],
           "type": "string"
@@ -37150,6 +37227,10 @@
           "$ref": "GeostoreDisplayDataProto",
           "description": "Data used to render this feature on a map."
         },
+        "disputedArea": {
+          "$ref": "GeostoreDisputedAreaProto",
+          "description": "RESERVED"
+        },
         "doodle": {
           "$ref": "GeostoreDoodleProto",
           "deprecated": true,
@@ -37192,6 +37273,10 @@
           "description": "If set, the feature's actual location can be assumed to be somewhere within a circle of this radius, centered on the feature's location. More information on this field at go/gpm-definition-update. NOTE: Only applicable to features with 'point' geometry. Please contact geo-schema-team@ if you have non-point use cases for which this field would be useful.",
           "format": "double",
           "type": "number"
+        },
+        "geopolitical": {
+          "$ref": "GeostoreGeopoliticalProto",
+          "description": "RESERVED"
         },
         "geopoliticalGeometry": {
           "$ref": "GeostoreGeopoliticalGeometryProto",
@@ -39013,6 +39098,23 @@
         "selfPolygon": {
           "$ref": "GeostorePolygonProto",
           "description": "The unsimplified, water-subtracted polygon representing the feature's geometry as viewed by the country that administers it, which may differ from its default polygon, for example by including disputed areas."
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreGeopoliticalProto": {
+      "id": "GeostoreGeopoliticalProto",
+      "properties": {
+        "conveysAttributionTo": {
+          "description": "If present, some aspect of this feature (usually name or geometry) can signify ownership of the area by the region specified. The string, if present, will be a region code. E.g., suppose a TYPE_POSTAL_CODE feature has a Russian format in Crimea (which is disputed by Ukraine), then this field would be set to \"RU\".",
+          "type": "string"
+        },
+        "regionSpecificName": {
+          "description": "Any specific handling of this feature's name from different regions' POVs.",
+          "items": {
+            "$ref": "GeostoreRegionSpecificNameProto"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -44773,6 +44875,13 @@
           "deprecated": true,
           "description": "Many political regions have a conceptual center (capitals of a country or a top-level division are examples). If set, the target feature must be a TYPE_LOCALITY feature."
         },
+        "claim": {
+          "description": "RESERVED",
+          "items": {
+            "$ref": "GeostoreFeatureIdProto"
+          },
+          "type": "array"
+        },
         "grossDomesticProductUsdMillions": {
           "deprecated": true,
           "description": "The Gross Domestic Product of the political region measured in millions of current United States dollars. It must not be negative.",
@@ -47903,6 +48012,25 @@
         },
         "lo": {
           "$ref": "GeostorePointProto"
+        }
+      },
+      "type": "object"
+    },
+    "GeostoreRegionSpecificNameProto": {
+      "description": "This protocol buffer supports a name per region per language, allowing it to represent the name of a given feature in different regions and languages. For example, the Persian Gulf has different English names in UAE versus Lebanon.",
+      "id": "GeostoreRegionSpecificNameProto",
+      "properties": {
+        "displayableAsAlternativeName": {
+          "description": "If true, this region specific name should be appended, in parentheses, to the appropriate name from FeatureProto.name, for the default rest of world behavior.",
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "GeostoreNameProto",
+          "description": "Name to be used for this feature in a specific region and language."
+        },
+        "regionCode": {
+          "description": "Region code (or other identifier) for the region.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -52636,7 +52764,7 @@
               false,
               false,
               false,
-              true,
+              false,
               false,
               false,
               false,
@@ -52963,7 +53091,7 @@
               "",
               "",
               "A page for device gestures",
-              "Deprecated, use VIBRATION instead.",
+              "Slider that controls touch feedback vibration",
               "",
               "",
               "",
@@ -54552,13 +54680,15 @@
             "FILE_TYPE_UNSPECIFIED",
             "ALL",
             "FOLDER",
-            "DOCUMENT"
+            "DOCUMENT",
+            "ROOT_FOLDER"
           ],
           "enumDescriptions": [
             "Default document type. If set, disables the filter.",
             "Returns all document types, including folders.",
             "Returns only folders.",
-            "Returns only non-folder documents."
+            "Returns only non-folder documents.",
+            "Returns only root folders"
           ],
           "type": "string"
         }
@@ -54732,6 +54862,10 @@
       "description": "The ingestion pipeline config.",
       "id": "GoogleCloudContentwarehouseV1IngestPipelineConfig",
       "properties": {
+        "cloudFunction": {
+          "description": "The Cloud Function resource name. The Cloud Function needs to live inside consumer project and is accessible to Document AI Warehouse P4SA. Only Cloud Functions V2 is supported. Cloud function execution should complete within 5 minutes or this file ingestion may fail due to timeout. Format: `https://{region}-{project_id}.cloudfunctions.net/{cloud_function}` The following keys are available the request json payload. * display_name * properties * plain_text * reference_id * document_schema_name * raw_document_path * raw_document_file_type The following keys from the cloud function json response payload will be ingested to the Document AI Warehouse as part of Document proto content and/or related information. The original values will be overridden if any key is present in the response. * display_name * properties * plain_text * document_acl_policy * folder",
+          "type": "string"
+        },
         "documentAclPolicy": {
           "$ref": "GoogleIamV1Policy",
           "description": "The document level acl policy config. This refers to an Identity and Access (IAM) policy, which specifies access controls for all documents ingested by the pipeline. The role and members under the policy needs to be specified. The following roles are supported for document level acl control: * roles/contentwarehouse.documentAdmin * roles/contentwarehouse.documentEditor * roles/contentwarehouse.documentViewer The following members are supported for document level acl control: * user:user-email@example.com * group:group-email@example.com Note that for documents searched with LLM, only single level user or group acl check is supported."
@@ -58789,7 +58923,7 @@
           "type": "string"
         },
         "value": {
-          "description": "The node value is applicable for TEXT_NODEs, DOCUMENT_TYPE_NODEs, and user input elements such as , and <option>. For DOCUMENT_TYPE_NODEs, the value contains the publicId and SystemId. For input elements, the value reflects the current value in the element at the time the snapshot was taken.",
+          "description": "The node value is applicable for TEXT_NODEs, DOCUMENT_TYPE_NODEs, COMMENT_NODEs, and user input elements such as , and <option>. For DOCUMENT_TYPE_NODEs, the value contains the publicId and SystemId. For input elements, the value reflects the current value in the element at the time the snapshot was taken.",
           "type": "string"
         }
       },
@@ -60893,9 +61027,13 @@
             "STARBURST_V4",
             "STARBURST_VISUAL_V4",
             "STARBURST_V5",
-            "STARBURST_V5_5"
+            "STARBURST_V5_5",
+            "STARBURST_V6",
+            "STARBURST_EXP"
           ],
           "enumDescriptions": [
+            "",
+            "",
             "",
             "",
             "",
@@ -60918,7 +61056,9 @@
             "V4_STRETCH_RESIZE",
             "VISUAL_V4_ORIGINAL",
             "V5_ORIGINAL",
-            "V5_5_ORIGINAL"
+            "V5_5_ORIGINAL",
+            "V6_ORIGINAL",
+            "EXP_ORIGINAL"
           ],
           "enumDescriptions": [
             "",
@@ -60930,7 +61070,9 @@
             "V4 with stretch resize, instead of cropping. See b/154565902.",
             "Minor versions for Starburst Visual V4.",
             "Minor version for Starburst V5.",
-            "Minor version for Starburst V5.5."
+            "Minor version for Starburst V5.5.",
+            "Minor version for Starburst V6.",
+            "Minor version for Starburst Experimental."
           ],
           "type": "string"
         },
@@ -60952,7 +61094,7 @@
       "type": "object"
     },
     "ImageData": {
-      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 130",
+      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 131",
       "id": "ImageData",
       "properties": {
         "adaboostImageFeaturePorn": {
@@ -61173,6 +61315,13 @@
         "imagerank": {
           "format": "int32",
           "type": "integer"
+        },
+        "indexedVerticals": {
+          "description": "Vertical indexing information for the document and associated image outlinks.",
+          "items": {
+            "$ref": "ImageDataVerticalIndexingInfoImage"
+          },
+          "type": "array"
         },
         "isIipInScope": {
           "description": "IIP in scope signal (go/iip). Set to true if the image is annotated with any iip_in_scope entities (go/iukp-trust-v2).",
@@ -61609,6 +61758,17 @@
         "width": {
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ImageDataVerticalIndexingInfoImage": {
+      "description": "Proto to store vertical indexing information for the document and associated image outlinks. The image content can be indexed to multiple verticals, including imagesearch. It can also be indexed only in verticals, not in imagesearch.",
+      "id": "ImageDataVerticalIndexingInfoImage",
+      "properties": {
+        "name": {
+          "description": "List the string representation of the vertical that this image is indexed into.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -62322,8 +62482,8 @@
             "but many other possible reasons. Roboted out.",
             "Fetch error; 5xx; truncated response; etc.",
             "Timeout while fetching.",
-            "Rejected based on capacity or permissions.",
-            "Redirects/retries-related: we crawled something",
+            "Internally Rejected (by fetcher/fetchproxy)",
+            "based on capacity or permissions. Redirects/retries-related: we crawled something",
             "*** don't forget to update."
           ],
           "type": "string"
@@ -62569,7 +62729,7 @@
       "type": "object"
     },
     "ImageRepositoryAmarnaCloudSpeechSignals": {
-      "description": "Next Tag: 9",
+      "description": "Next Tag: 10",
       "id": "ImageRepositoryAmarnaCloudSpeechSignals",
       "properties": {
         "duplicateOfYtS3Asr": {
@@ -62577,8 +62737,13 @@
           "type": "boolean"
         },
         "langWithoutLocale": {
-          "description": "The language id input for creating this ASR without regional info. Same format as in go/ytlangid. This field is populated in Kronos Amarna Cloud Speech operator and passed to Amarna, but it is cleared before stored in Amarna's metadata table.",
+          "deprecated": true,
+          "description": "DEPRECATED: Please switch to `langid_input`. The language id input for creating this ASR without regional info. Same format as in go/ytlangid. This field is populated in Kronos Amarna Cloud Speech operator and passed to Amarna, but it is cleared before stored in Amarna's metadata table.",
           "type": "string"
+        },
+        "langidInput": {
+          "$ref": "ImageRepositoryLanguageIdentificationResult",
+          "description": "The language identification input used to generate this ASR. This field is populated in Kronos Amarna Cloud Speech operator and passed to Amarna, but cleared before stored in Amarna's metadata table."
         },
         "modelIdentifier": {
           "type": "string"
@@ -62764,6 +62929,7 @@
             "GENUS_KARTO",
             "GENUS_CONTRIB_SERVICE_SHARED",
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
+            "GENUS_CONTRIB_SERVICE_BARD_STORAGE",
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
@@ -62814,6 +62980,7 @@
             "Genus for Karto videos.",
             "Shared genus for ContribService UGC videos for small clients requesting the same set of common signals. Large ContribService Video clients should have their own genera. go/user-owned-video-content-processing",
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
+            "Genus for BARD UGC videos processed by ContribService. go/venom-for-bard-ugc-videos",
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
@@ -63130,8 +63297,8 @@
             "but many other possible reasons. Roboted out.",
             "Fetch error; 5xx; truncated response; etc.",
             "Timeout while fetching.",
-            "Rejected based on capacity or permissions.",
-            "Redirects/retries-related: we crawled something",
+            "Internally Rejected (by fetcher/fetchproxy)",
+            "based on capacity or permissions. Redirects/retries-related: we crawled something",
             "*** don't forget to update."
           ],
           "type": "string"
@@ -63261,6 +63428,24 @@
             "$ref": "ImageRepositoryFramePerdoc"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ImageRepositoryLanguageIdentificationResult": {
+      "id": "ImageRepositoryLanguageIdentificationResult",
+      "properties": {
+        "localeStripped": {
+          "description": "Whether the locale got stripped from the original result before further processing.",
+          "type": "boolean"
+        },
+        "s3TopLocale": {
+          "description": "From cs/symbol:speech.s3.LanguageIdentificationResult owned by go/s3.",
+          "type": "string"
+        },
+        "ytCapsAudioLanguage": {
+          "description": "From cs/symbol:video_platform.operation.AudioLanguage owned gy go/ytcaps.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -63695,6 +63880,7 @@
             "GENUS_KARTO",
             "GENUS_CONTRIB_SERVICE_SHARED",
             "GENUS_CONTRIB_SERVICE_GEO_UGC",
+            "GENUS_CONTRIB_SERVICE_BARD_STORAGE",
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
@@ -63745,6 +63931,7 @@
             "Genus for Karto videos.",
             "Shared genus for ContribService UGC videos for small clients requesting the same set of common signals. Large ContribService Video clients should have their own genera. go/user-owned-video-content-processing",
             "Genus for GEO UGC videos processed by ContribService. go/venom-lite-for-geo-photo-videos",
+            "Genus for BARD UGC videos processed by ContribService. go/venom-for-bard-ugc-videos",
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
@@ -63940,6 +64127,13 @@
           "format": "int64",
           "type": "string"
         },
+        "indexedVerticals": {
+          "description": "Proto to store vertical indexing information for the document. The video can be indexed to multiple verticals, including video search. It can also be indexed only in verticals, not in video search.",
+          "items": {
+            "$ref": "ImageRepositoryVideoPropertiesVerticalIndexingInfoVideo"
+          },
+          "type": "array"
+        },
         "inlinePlayback": {
           "$ref": "VideoCrawlVideoInlinePlaybackMetadata",
           "deprecated": true,
@@ -63957,6 +64151,17 @@
         },
         "url": {
           "description": "This is the video url taken from the key of the Amarna references table row corresponding to this message.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImageRepositoryVideoPropertiesVerticalIndexingInfoVideo": {
+      "description": "Proto to store vertical indexing information for the document and associated video outlinks. The video content can be indexed to multiple verticals, including videosearch. It can also be indexed only in verticals, not in videosearch.",
+      "id": "ImageRepositoryVideoPropertiesVerticalIndexingInfoVideo",
+      "properties": {
+        "name": {
+          "description": "List the string representation of the vertical that this image is indexed into.",
           "type": "string"
         }
       },
@@ -64092,7 +64297,6 @@
           "type": "number"
         },
         "version": {
-          "description": "This field is an experimental one with a quite vague meaning. Please contact safesearch@ before any meaningful use of it. There is no guarantee it will preserve its behavior in the future.",
           "type": "string"
         },
         "violenceScore": {
@@ -71446,7 +71650,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryArgumentSignals": {
-      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 59 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
+      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 60 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
       "id": "KnowledgeAnswersIntentQueryArgumentSignals",
       "properties": {
         "addedByCloseAnswers": {
@@ -71584,6 +71788,11 @@
         "location": {
           "$ref": "GeostorePointProto",
           "description": "Entity location information (latitude/longitude) from freebase."
+        },
+        "locationClassificationScore": {
+          "description": "Confidence score of this argument being a location.",
+          "format": "double",
+          "type": "number"
         },
         "locationMarkersSignals": {
           "$ref": "KnowledgeAnswersIntentQueryLocationMarkersSignals",
@@ -73069,6 +73278,16 @@
       },
       "type": "object"
     },
+    "KnowledgeAnswersIntentQueryConceptInfo": {
+      "description": "Concept provides meaning semantics captured in a continuous space, as opposed to MRF. go/concepts-roofshot.",
+      "id": "KnowledgeAnswersIntentQueryConceptInfo",
+      "properties": {
+        "id": {
+          "$ref": "ConceptsConceptId"
+        }
+      },
+      "type": "object"
+    },
     "KnowledgeAnswersIntentQueryCoreference": {
       "description": "A message representing a coreferenced value defined elsewhere in the meaning struct.",
       "id": "KnowledgeAnswersIntentQueryCoreference",
@@ -73101,7 +73320,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryFunctionCall": {
-      "description": "A message representing the function call of an answers intent query. Next ID: 19 Important: If you add new fields that do not reflect signals data, but actual semantics of the FunctionCall, please also update CreateFuncallCopyWithoutSignals and CreateFuncallCopyWithArgumentSignals in function_call_utils. LINT.IfChange",
+      "description": "A message representing the function call of an answers intent query. Next ID: 21 Important: If you add new fields that do not reflect signals data, but actual semantics of the FunctionCall, please also update CreateFuncallCopyWithoutSignals and CreateFuncallCopyWithArgumentSignals in function_call_utils. LINT.IfChange",
       "id": "KnowledgeAnswersIntentQueryFunctionCall",
       "properties": {
         "argument": {
@@ -73115,6 +73334,10 @@
           "description": "The corresponding meaning catalog version that was used to generate this FunctionCall.",
           "format": "int64",
           "type": "string"
+        },
+        "conceptInfo": {
+          "$ref": "KnowledgeAnswersIntentQueryConceptInfo",
+          "description": "Information about the corresponding Concept for this MRF Expression. For more details see go/concepts-roofshot."
         },
         "contextualSensitivity": {
           "description": "Contextual Sensitivity (go/contextual-sensitivity) metadata indicating that a policy- or privacy- sensitive conversation context (previous queries, rewritten user queries, and previous system responses, like attentional entities) is used to generate this FunctionCall. This needs propagation (1) from Interp to DialogIntentState (DIS) (see b/148479837) and (2) from QRewrite/QUS down to Assistant Server's memory finalizer. One can use knowledge/answers/sensitivity/sensitivity_reader.h to parse this proto. NOTE(b/149091449): This is part of the migration of contextual sensitivity protos from Interp sensitivity extension. (nlp::semantic_parsing::sensitivity) to this proto field. See the bug to track the migration progress and for more details.",
@@ -74454,14 +74677,16 @@
               "ORDINAL",
               "NUMERIC",
               "INTEGER",
-              "FLOAT"
+              "FLOAT",
+              "NUMBER_PROTO"
             ],
             "enumDescriptions": [
               "Matches either numeric or ordinal values.",
               "Matches only ordinal numbers.",
               "Matches only numeric values (e.g. \"1\", but not \"1st\" or \"first\"). This matches either integers or floating-point numbers.",
               "This matches ONLY integers.",
-              "This matches ONLY floating-point numbers."
+              "This matches ONLY floating-point numbers.",
+              "This matches ONLY nlp_semantic_parsing.number.Number proto."
             ],
             "type": "string"
           },
@@ -75223,6 +75448,10 @@
       "properties": {
         "encryptArgumentValue": {
           "description": "The contents of the argument value should be encrypted before being written to a persistent storage (even if the storage has short time-to-live). No-op when specified at intent level.",
+          "type": "boolean"
+        },
+        "encryptFieldCandidateValueTerm": {
+          "description": "If true, triggers encryption of |value_term| [1] and move into |sensitive_value_term|. This is useful to support finer grain encryption controls for disambiguation, where the broader |encrypt_argument_value| is too restrictive. In particular, when we know that the values being disambiguated are non-sensitive (e.g. opaque event IDs), but the value_terms are sensitive (e.g. event titles), it can be helpful for debugging purposes to circulate the value unencrypted. This policy only has an effect when configured at argument-level. It has no effect in Intent or PreviousQuery stanzas. See go/delete-event-disambiguation-redaction-v2 for context and usage. [1]cs/s:quality.dialog_manager.IntentStateSignals.FieldCandidate.value_term",
           "type": "boolean"
         },
         "encryptQueryAnnotationData": {
@@ -77434,6 +77663,8 @@
           "$ref": "LogsSemanticInterpretationIntentQueryLinkKindFlags"
         },
         "kcLinkName": {
+          "deprecated": true,
+          "description": "Not set for a while.",
           "type": "string"
         },
         "topicPropertyName": {
@@ -89982,6 +90213,8 @@
             "HANDWRITTEN_FORMULA",
             "NOT_ANNOTATED",
             "SIGNATURE",
+            "DIAGRAM_2D",
+            "DIAGRAM_OTHER",
             "UNKNOWN",
             "CUSTOM"
           ],
@@ -89996,6 +90229,8 @@
             "Same as FORMULA, but handwritten.",
             "Signifies that we may not rely on annotations of this type in this region. For example, NOT_ANNOTATED paragraph means that we should ignore other entities within this region, allowing any engine results. Commonly known as 'DO NOT CARE'. See cl/244428520 for discussion.",
             "Signature or intitals.",
+            "Simple diagram that consists of points, lines, etc. that the current Diagram parser can solve.",
+            "Complex diagram that can not be parsed yet.",
             "Note that due to the fact that the default value is TEXT, parsing a ContentType with an unsupported value will result in TEXT, not UNKNOWN.",
             "This entity has content of a user defined type, for example social security number or address. The recognizer_script_id field below may be used to communicate information to mutators about how to handle this entity. If some custom entities require more information for proper handling we can add an Any field."
           ],
@@ -90541,6 +90776,7 @@
             "CLOUDCONNECT",
             "PERSONAL_AGENT",
             "MOBILE_HARNESS",
+            "LOOKER_STUDIO_PRO",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -91123,6 +91359,7 @@
             false,
             true,
             true,
+            false,
             false,
             false,
             false,
@@ -91843,6 +92080,7 @@
             "Cloudconnect Team contact: rev-platforms@google.com",
             "Personal Agent Team contact: page-1-eng@google.com",
             "Mobile Harness Team contact: omnilab-lmp@google.com",
+            "Looker Studio Pro Team contact: da-cloudbi-india-ls-adminexp@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -96780,6 +97018,7 @@
             "LIVE_CARD_FAMILY_BELL_IOS",
             "FAMILY_BELL_RING",
             "FAMILY_BELL_GET_READY",
+            "FAMILY_BELL_DEPRECATION",
             "THIRD_PARTY_ORDER_STATUS_UPDATE",
             "THIRD_PARTY_ALERT",
             "THIRD_PARTY_SUBSCRIPTION",
@@ -97012,6 +97251,7 @@
             "UNIT_TESTING"
           ],
           "enumDeprecated": [
+            false,
             false,
             false,
             false,
@@ -97622,6 +97862,7 @@
             "Family Bell Live Card notifications specifically for iOS",
             "Notification to allow family bell to ring on mobile devices.",
             "Get Ready Bell Card notification for Smart Displays",
+            "Family Bell deprecation notification for Android.",
             "3P-specific notifications. Status updates for transactions.",
             "Alerts.",
             "Subscriptions.",
@@ -100326,7 +100567,6 @@
               "DEFINITION",
               "REAL_ESTATE_LISTING",
               "PREVIEW",
-              "PURCHASE",
               "MENU",
               "UNBOXING",
               "NUTRITION_FACTS",
@@ -100443,6 +100683,7 @@
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_32",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38",
@@ -100484,7 +100725,6 @@
               true,
               false,
               true,
-              false,
               true,
               false,
               true,
@@ -100541,6 +100781,7 @@
               false,
               false,
               false,
+              true,
               true,
               true,
               true,
@@ -100675,7 +100916,6 @@
               "",
               "",
               "",
-              "",
               "This is specifically for the buying guides carousel (go/oshop-buying-guides). Consider using PRODUCT_BUYING_GUIDE instead.",
               "",
               "",
@@ -100748,6 +100988,7 @@
               "",
               "",
               "========== Enums for deleted intents ==========",
+              "",
               "",
               "",
               "",
@@ -100821,7 +101062,6 @@
               "DEFINITION",
               "REAL_ESTATE_LISTING",
               "PREVIEW",
-              "PURCHASE",
               "MENU",
               "UNBOXING",
               "NUTRITION_FACTS",
@@ -100938,6 +101178,7 @@
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_32",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38",
@@ -100979,7 +101220,6 @@
               true,
               false,
               true,
-              false,
               true,
               false,
               true,
@@ -101036,6 +101276,7 @@
               false,
               false,
               false,
+              true,
               true,
               true,
               true,
@@ -101170,7 +101411,6 @@
               "",
               "",
               "",
-              "",
               "This is specifically for the buying guides carousel (go/oshop-buying-guides). Consider using PRODUCT_BUYING_GUIDE instead.",
               "",
               "",
@@ -101243,6 +101483,7 @@
               "",
               "",
               "========== Enums for deleted intents ==========",
+              "",
               "",
               "",
               "",
@@ -101322,7 +101563,6 @@
               "DEFINITION",
               "REAL_ESTATE_LISTING",
               "PREVIEW",
-              "PURCHASE",
               "MENU",
               "UNBOXING",
               "NUTRITION_FACTS",
@@ -101439,6 +101679,7 @@
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31",
+              "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_32",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36",
               "RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38",
@@ -101480,7 +101721,6 @@
               true,
               false,
               true,
-              false,
               true,
               false,
               true,
@@ -101537,6 +101777,7 @@
               false,
               false,
               false,
+              true,
               true,
               true,
               true,
@@ -101671,7 +101912,6 @@
               "",
               "",
               "",
-              "",
               "This is specifically for the buying guides carousel (go/oshop-buying-guides). Consider using PRODUCT_BUYING_GUIDE instead.",
               "",
               "",
@@ -101744,6 +101984,7 @@
               "",
               "",
               "========== Enums for deleted intents ==========",
+              "",
               "",
               "",
               "",
@@ -103900,9 +104141,9 @@
             "V5_1",
             "V5_2",
             "V5_3",
+            "V5_4",
             "V1_BODYONLY",
             "V2_BODYONLY",
-            "RENAME_ME_TO_ADD_NEW_ENUM_17",
             "RENAME_ME_TO_ADD_NEW_ENUM_18",
             "RENAME_ME_TO_ADD_NEW_ENUM_19",
             "RENAME_ME_TO_ADD_NEW_ENUM_20",
@@ -103911,7 +104152,8 @@
             "RENAME_ME_TO_ADD_NEW_ENUM_23",
             "RENAME_ME_TO_ADD_NEW_ENUM_24",
             "RENAME_ME_TO_ADD_NEW_ENUM_25",
-            "RENAME_ME_TO_ADD_NEW_ENUM_26"
+            "RENAME_ME_TO_ADD_NEW_ENUM_26",
+            "RENAME_ME_TO_ADD_NEW_ENUM_27"
           ],
           "enumDescriptions": [
             "In case an old binary doesn't know a recently added version.",
@@ -103929,6 +104171,7 @@
             "Lyrebird V5.1: Salient Terms V5.1 (ariane/4144754)",
             "Lyrebird V5.2: Salient Terms V5.2 (ariane/4218250)",
             "Lyrebird V5.3: Salient Terms V5.3 (ariane/4246904)",
+            "Lyrebird V5.4: Salient Terms V5.4 (ariane/4242864)",
             "Lyrebird BodyOnly V1.",
             "Experimental version of Lyrebird BodyOnly V2.",
             "Dummy enum values to be renamed when a new enum value is needed. Note that this is a requirement from go/cds-schema-council. If you rename one of these enum values, be sure to add (at least one) more below.",
@@ -109750,10 +109993,6 @@
           "$ref": "RepositoryWebrefLinkKindFlags",
           "description": "The flags associated with the link kind."
         },
-        "kcLinkName": {
-          "description": "Link name extracted from Knowledge Card facts.",
-          "type": "string"
-        },
         "topicPropertyName": {
           "description": "If the link was extracted from a property, the name of the property. Can start with an exclamation mark \"!\" to indicate that the inverse relationship is specified. (e.g. \"!/tv/tv_series_episode/series\" is the inverse of \"tv/tv_program/episodes\").",
           "type": "string"
@@ -110519,10 +110758,6 @@
           "description": "The Oyster feature type, which provides a rough categorization. This is a value of the enum geostore.FeatureProto.TypeCategory.",
           "format": "int32",
           "type": "integer"
-        },
-        "gconcepts": {
-          "$ref": "GeostoreOntologyRawGConceptInstanceContainerProto",
-          "description": "Geo Ontology GConcept Instances from the FeatureProto. - Design doc linked off http://wiki/Main/GeoOntology - Use the accessor library to read this field: geostore/base/public/gconcept_instance.h"
         }
       },
       "type": "object"
@@ -114084,7 +114319,8 @@
             "LESS_EQUAL",
             "EQUAL",
             "GREATER_EQUAL",
-            "GREATER"
+            "GREATER",
+            "NOT_EQUAL"
           ],
           "enumDescriptions": [
             "",
@@ -114092,7 +114328,8 @@
             "Database points are eligible iff their value is <= the query's.",
             "Database points are eligible iff their value is == the query's.",
             "Database points are eligible iff their value is >= the query's.",
-            "Database points are eligible iff their value is > the query's."
+            "Database points are eligible iff their value is > the query's.",
+            "Database points are eligible iff their value is != the query's."
           ],
           "type": "string"
         },
@@ -115973,9 +116210,11 @@
           "enum": [
             "UNKNOWN",
             "V20220330",
-            "V20220620"
+            "V20220620",
+            "V20230910"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             ""
@@ -122023,6 +122262,7 @@
             "RIGHTS_MANAGEMENT_101",
             "RIGHTS_MANAGEMENT_102",
             "RIGHTS_MANAGEMENT_INSIDER_RISK",
+            "RIGHTS_MANAGEMENT_EBF_DATA",
             "DICTIONARY_DATA_OXFORD",
             "DICTIONARY_DATA_LE_ROBERT",
             "ENTITY_TEXT_FEATURES",
@@ -122099,6 +122339,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -122401,6 +122642,7 @@
             "Corresponding to policy id = 101.",
             "Corresponding to policy id = 102.",
             "Corresponding to IR policies (go/insider-risk-policy-scope).",
+            "Access controls for triples that are selected in entity based visibility filter.",
             "",
             "",
             "Access controls for EntityTextFeatures computed by the Enricher. YOU MUST CONTACT deepkg-infra-dev@ before reading or writing data with this ACL.",
@@ -124916,8 +125158,8 @@
             "but many other possible reasons. Roboted out.",
             "Fetch error; 5xx; truncated response; etc.",
             "Timeout while fetching.",
-            "Rejected based on capacity or permissions.",
-            "Redirects/retries-related: we crawled something",
+            "Internally Rejected (by fetcher/fetchproxy)",
+            "based on capacity or permissions. Redirects/retries-related: we crawled something",
             "*** don't forget to update."
           ],
           "type": "string"
@@ -126329,6 +126571,7 @@
               "INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL",
               "SENT_EMAIL_ENTER_GRACE_PERIOD_SESSION_LEVEL",
               "SENT_EMAIL_ENTER_SUSPENDED_PERIOD_SESSION_LEVEL",
+              "SENT_EMAIL_ENTER_SUSPENDED_PERIOD_WITHOUT_GRACE_PERIOD_SESSION_LEVEL",
               "ANALYTICS_AD_LINKING_RECOMMENDATION_ELIGIBLE_SESSION_LEVEL",
               "EDITORIAL_FCC_AT_SESSION_LEVEL",
               "FRESH_RESULTS_SEEKING_CURRENT_YEAR_SESSION_LEVEL",
@@ -126336,6 +126579,9 @@
               "EDITORIAL_CONTENT_CLUSTER_FHR_SERP_SESSION_LEVEL",
               "HAS_DECLINE_REASON_IN_PAYMENT_DECLINE_EMAIL_SESSION_LEVEL",
               "QUEST_CONTENT_CARD_IN_DEALS_HOME_SESSION_LEVEL",
+              "PRE_INSTALL_LOW_QUALITY_DEEP_LINK_DETAILS_PAGE_SESSION_LEVEL",
+              "COLLAPSED_DETAILS_PAGE_EXPANDED_BY_SHOW_MORE_SESSION_LEVEL",
+              "COLLAPSED_DETAILS_PAGE_EXPANDED_BY_INSTALL_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_TQUALITY_UNKNOWN_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_TQUALITY_FAILED_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_TQUALITY_PASSED_SESSION_LEVEL",
@@ -126364,7 +126610,6 @@
               "MDP_TRIGGERED_AND_GAME_SEEKING_SESSION_LEVEL",
               "PLAY_SEARCH_GENERAL_QUERY_MDP_PAGINATION_WITH_GAME_SEEKING_RYF_CLUSTER_SESSION_LEVEL",
               "PLAY_SEARCH_GENERAL_QUERY_NON_MDP_PAGINATION_WITH_GAME_SEEKING_RYF_CLUSTER_SESSION_LEVEL",
-              "BUY_BUTTON_WITH_AUTHENTICATION_DISABLED",
               "PSS_GENERAL_PAGINATION_SESSION_LEVEL",
               "PSS_GENERAL_PAGINATION_GAME_SEEKING_SESSION_LEVEL",
               "INLINE_ADD_PAYMENT_CREDIT_CARD_ELIGIBLE",
@@ -126694,6 +126939,11 @@
               "PREREGISTRATION_START_PURCHASE_FLOW_ON_CLICK",
               "CUSTOMER_UPDATE_CHALLENGE_SESSION_LEVEL",
               "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_SESSION_LEVEL",
+              "BATTLESTAR_BOTTOMSHEET_LARGER_LOADING_STATE",
+              "BATTLESTAR_BOTTOMSHEET_GDP_RIBBON_ONLY_CTA_CLICKABLE",
+              "PLAY_ONBOARDING_FLOW_SESSION_LEVEL",
+              "BECAUSE_YOU_PLAYED_FIRST_3_ROWS_SESSION_LEVEL",
+              "BECAUSE_YOU_INSTALLED_FIRST_3_ROWS_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -126839,6 +127089,7 @@
               "GE_USER_VALUE_SEGMENT_HIGH",
               "GE_USER_VALUE_SEGMENT_NEVER",
               "GE_POINTS_BOOSTER_MODEL_LAUNCH",
+              "GE_MULTIPLIER_EXPLORATION_WITH_ALL_NEGATIVE_GAINS",
               "GE_IS_SCHEDULED_UNKNOWN_SURFACE",
               "GE_IS_SCHEDULED_LEON",
               "GE_IS_SCHEDULED_NOTIFICATION",
@@ -126964,6 +127215,7 @@
               "PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL_V2",
               "HAS_REINSTALL_APP_PASSING_FILTERING_USER_LEVEL",
               "HAS_RECOMMENDED_APP_WITH_OOP_REINSTALL_ELIGIBILITY_USER_LEVEL",
+              "HAS_PAST_OOP_SPEND_ON_GAME_USER_LEVEL",
               "NOTIFICATION_PREDICTED_REV_GAIN_FILTERING_USER_LEVEL",
               "NOTIFICATION_PUBLICITY_GAIN_DISABLED_USER_LEVEL",
               "UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_USER_LEVEL",
@@ -127017,12 +127269,15 @@
               "MERCH_NOMADS_CN_PROD_CLUSTER_TARGETED_AT_USER_LEVEL",
               "NOTIFICATION_GUM_FINE_TUNING_MODEL_USER_LEVEL",
               "ELIGIBLE_FOR_COMICS_CLUSTER_AH_USER_LEVEL",
+              "HIGH_COMIC_APP_USAGE_USER_LEVEL",
+              "MODERATE_COMIC_APP_USAGE_USER_LEVEL",
               "REDEEM_SAVE_BUYER_SPEND_MODEL_USER_LEVEL",
               "PURCHASE_ADD_FOP_OPTIONS_SCREEN_USER_LEVEL",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_USER_LEVEL",
               "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BAKCUP_FOP_IN_FIX_FLOW_USER_LEVEL",
               "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_USER_LEVEL",
+              "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_V2_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -127676,330 +127931,11 @@
               false,
               false,
               false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
               false,
               false,
               false,
               false,
               true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
               false,
               false,
               false,
@@ -128221,7 +128157,339 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -128975,6 +129243,7 @@
               "Session level test code indicating external details URL is an inline URL.",
               "Session level test code that indicates that decline email is sent when the subscription enters grace period.",
               "Session level test code that indicates that decline email is sent when the subscription enters suspended period.",
+              "Session level test code that indicates that decline email is sent when the subscription enters suspended period without going through grace period.",
               "Session level test code that indicates that user was eligible for ad linking recommendation.",
               "Session level test code that indicates that a user was served an editorial FCC (Flexible Content Cluster).",
               "Session level test code for tracking fresh results seeking within the current year search queries.",
@@ -128982,6 +129251,9 @@
               "Session level test code for Editorial Content/Articles in SERP (FHR)",
               "Session level test code that indicates the decline reason is populated to payment decline email.",
               "Session level test code for Quest Content Card launch on Deals Home, for tracking users who made eligible purchases and are eligible for the QCC.",
+              "For low quality deep link details page. go/low-quality-deep-link-details-page Whether the details page comes from a deep link and its app is low quality.",
+              "Whether the collapsed details page expands.",
+              "",
               "The following are used by the server side.",
               "",
               "",
@@ -129010,7 +129282,6 @@
               "Session level test code for headroom experiment. It is logged when MDP is triggered and the search is categorized as game seeking.",
               "Session level test code for rfy cluster which is displayed above general query pagination for queries which are game seeking.",
               "",
-              "Testcode for logging users with authentication deactivated or set to biometric who click on \"1-tap buy\" or its alternative",
               "Session level test code that indicates the related query cluster is supposed to be displayed at the manual pagination location.",
               "Besides (10794), the query is also game seeking.",
               "Session level test code that marks eligibility of inline payment add. Eligibility bucketed based on payment method types.",
@@ -129340,6 +129611,11 @@
               "Session-level test code for preregistration release notification click triggering purchase flow.",
               "Session-level test code for the presence of customer update challenge.",
               "Session-level test code for displaying sub-entitlement benefits on websky.",
+              "Session-level test code for displaying the Battlestar signup bottomsheet more prominently while loading.",
+              "Session-level test code for making the Battlestar Games Details Page ribbon only invoke the bottomsheet when the CTA text is clicked.",
+              "Session-level test code for Play Onboarding Experience flow.",
+              "Session-level test code for Because You Played experiments.",
+              "Session-level test code for Because You Played experiments.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -129485,6 +129761,7 @@
               "Test code GE ranker service high user value segment.",
               "Test code GE ranker service never user value segment.",
               "Test code GE points booster model launch.",
+              "Test code GE multiplier model exploration due to all negative predicted gains.",
               "Test codes for GE surfaces.",
               "",
               "",
@@ -129610,6 +129887,7 @@
               "",
               "User level test code for reinstall enablement. If user has any eligible reinstall passing the per user filtering logic, testcode will be logged. Note that the filtering logics are controlled by gcl flags. Ex. Play Games Home: http://shortn/_2aGCRQqToq. This test code only knows if any app passes the filtering but not which filtering params are applied.",
               "User level test code for tagging users who have any app which is recommended by PRS and has reinstall eligibility when is_app_with_historical_oop_purchase restriction is turned on.",
+              "User-level test code for tagging users with previous OOP spend on games.",
               "User level test code for notification campaign gain filtering experiments. If GE decision changed after applying predicted revenue gain filtering on notification campaigns, log test code.",
               "User level test code for notification campaign gain filtering experiments. If GE decision changed after disabling publicity gain in notification campaign benefit calculation, log test code.",
               "Unack Warning Message user-level test code. Design: go/unack-warning-message-on-dp-dd",
@@ -129663,12 +129941,15 @@
               "User-level test code for Merch Nomads CN Prod Cluster targeting check.",
               "User level test code for GUM fine tuning model study in Notification surface, tracking users who actually get different experience between control and treatment.",
               "User-level test code for users eligible for the Comics cluster on AH.",
+              "User-level test code for users with high Comics app usage (e.g. >=15 in last 28d ays).",
+              "User-level test code for users with high Comics app usage (e.g. >=10 in last 28d ays).",
               "User level test code for Redeem Save buyer offer study, tracking users who actually get different experience between control and treatment.",
               "User-level test code marking users who have seen the add new fop option screen during purchase flow. This will be used for ranking of add fop options experiments.",
               "User level test code for SKU Recommendation in Cart Abandonment.",
               "User level test code for stored value top-up email reminder.",
               "User level test code for users who are eligible for one-click backup fop in fix flow",
               "User level test code for displaying sub-entitlement benefits on websky.",
+              "User level test code for stored value top-up email reminder (V2).",
               ""
             ],
             "type": "string"
@@ -130131,6 +130412,7 @@
             "NS_KARTO",
             "NS_CONTRIB_SERVICE_SHARED",
             "NS_CONTRIB_SERVICE_GEO_UGC",
+            "NS_CONTRIB_SERVICE_BARD_STORAGE",
             "NS_SEARCH_SPORTS",
             "NS_BUSINESSMESSAGING",
             "NS_AERIAL_VIEW",
@@ -130163,6 +130445,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -130219,6 +130502,7 @@
             "Namespace for Karto videos.",
             "Namespace for shared ContribService UGC videos.",
             "Namespace for GEO UGC videos processed by ContribService.",
+            "Namespace for BARD UGC videos processed by ContribService.",
             "Namespace for Search Sports vertical videos.",
             "Namespace for Business Messaging videos.",
             "Namespace for Geo Aerial View",
@@ -134337,9 +134621,13 @@
             "STARBURST_V4",
             "STARBURST_VISUAL_V4",
             "STARBURST_V5",
-            "STARBURST_V5_5"
+            "STARBURST_V5_5",
+            "STARBURST_V6",
+            "STARBURST_EXP"
           ],
           "enumDescriptions": [
+            "",
+            "",
             "",
             "",
             "",
@@ -136430,7 +136718,7 @@
       "type": "object"
     },
     "VideoVideoStreamInfo": {
-      "description": "Note that when a VSI is from a user video, the information reflects the info in that source. Fields like lengths, fps, etc. are not guaranteed to be the same as those of transcodes. If the relevant info in source is too broken, the corresponding fields (e.g., lengths) could be unset or with the default value, meaning VSI cannot compute them from the given info. Next id: 83",
+      "description": "Note that when a VSI is from a user video, the information reflects the info in that source. Fields like lengths, fps, etc. are not guaranteed to be the same as those of transcodes. If the relevant info in source is too broken, the corresponding fields (e.g., lengths) could be unset or with the default value, meaning VSI cannot compute them from the given info. Next id: 84",
       "id": "VideoVideoStreamInfo",
       "properties": {
         "audioBitrate": {
@@ -137716,6 +138004,8 @@
             "CONTAINER_ID_CODEC2RAW",
             "CONTAINER_ID_SBC",
             "CONTAINER_ID_SER",
+            "CONTAINER_ID_AV1",
+            "CONTAINER_ID_OBU",
             "CONTAINER_ID_GOOGLE_INDEX",
             "CONTAINER_ID_MEDIASAMPLE",
             "CONTAINER_ID_TOOTHLESS",
@@ -137770,6 +138060,8 @@
             "",
             "Note: CONTAINER_ID_DTS refers to the format for DTS audio codec. It does NOT refer to ADTS container for AAC codec.",
             "Note: CONTAINER_ID_AAC refers to the ADTS format for AAC codec.",
+            "",
+            "",
             "",
             "",
             "",
@@ -138121,6 +138413,10 @@
         },
         "parsedByFfmpeg": {
           "description": "If this field is not set, then only base video file information has been generated (and ffmpeg parsing hasn't yet been done). If this is set to 'false', then ffmpeg failed to parse the file - otherwise it will set to 'true'",
+          "type": "boolean"
+        },
+        "parsedByInHouseParsers": {
+          "description": "True if the file was successfully parsed by in-house parsers. Unset if parsing wasn't attepmted.",
           "type": "boolean"
         },
         "partialFile": {
@@ -146520,8 +146816,237 @@
       },
       "type": "object"
     },
+    "YoutubeCommentsApiCommentModeratedRestriction": {
+      "description": "Data representing a comment moderated restriction. A moderated comment is hidden from all viewers except for comment author. A comment can be moderated due to multiple moderated restrictions from multiple issuers. Each is represented by a CommentModeratedRestriction entry which is uniquely identified by the external comment id and the create time in the storage. Conceptually, there should be exactly one moderated restriction for a specific reason per issuer per reviewable value and this constraint will be enforced in the Comment API endpoints. For more context see go/yt-comment-restriction-data-model ## Next id: 11. ## Spanner primary key attributes",
+      "id": "YoutubeCommentsApiCommentModeratedRestriction",
+      "properties": {
+        "autoModEnforcements": {
+          "description": "Live chat auto moderation only. The HOLD decisions and whether they are enforced correspondingly.",
+          "items": {
+            "$ref": "YoutubeCommentsApiCommentModeratedRestrictionAutoModDecisionEnforcement"
+          },
+          "type": "array"
+        },
+        "createTime": {
+          "description": "Required. The creation time of this restriction.",
+          "format": "google-datetime",
+          "type": "string"
+        },
+        "externalCommentId": {
+          "description": "Required. The external ID of the comment that this restriction described.",
+          "type": "string"
+        },
+        "issuer": {
+          "$ref": "YoutubeCommentsApiCommentRestrictionIssuer",
+          "description": "Required. The system who moderated the comment. For CommentModeratedRestriction all issuer enums apply.\"Issuer\" is different from the grouping for permission check, which will be enforced via Boq Scaffolding RpcSecurityPolicy."
+        },
+        "reason": {
+          "$ref": "YoutubeCommentsApiCommentRestrictionReason",
+          "description": "Required. The specific restriction reason why the comment is moderated. When Automod issues multiple HOLD decisions for a chat message, they always share the same reason."
+        },
+        "reviewable": {
+          "description": "True if moderation comes from T&S, Automod, and some of channel owner settings and comments will be put into \"Held For Review\" queue for channel owner review. After any creator review, this restriction will remain in this status to capture the original restriction. True maps to ModerationState=HOLD in Stanza. False if moderation results from channel owner manual opertation or author in hidden user list, and maps to ModerationState=REJECTED in Stanza.",
+          "type": "boolean"
+        },
+        "status": {
+          "description": "Required. For moderated restriction on comment and live chat but not issued by Automod, the field should be always set to ACTIVE. For Automod moderation on live chat, the restriction is active as long as one of the HOLD decisions is enforced. Can only be changed by upcoming QPS threshold configuration changes and backfills.",
+          "enum": [
+            "STATUS_UNSPECIFIED",
+            "ACTIVE",
+            "DORMANT"
+          ],
+          "enumDescriptions": [
+            "TODO(b/272779130) Do not use for new use cases. For existing data, treat as ACTIVE before backfill.",
+            "The restriction is enforced to restrict the visibility of the chat message.",
+            "Only used for live chat auto moderation. The restriction is not enforced and dormant at this moment due to not meeting QPS requirement at creation time. This is still persisted in case the requirement is changed and needs backfill, rather than retaining restriction history. The backfill might bring dormant restrictions to active status."
+          ],
+          "type": "string"
+        },
+        "updateTime": {
+          "description": "The timestamp when this restriction is updated.",
+          "format": "google-datetime",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeCommentsApiCommentModeratedRestrictionAutoModDecisionEnforcement": {
+      "description": "Whether a HOLD decision is enforced based on the decision name and QPS requirement. For LiveChat, there could be multiple Automod moderations generated at chat message creation time. Only HOLD decisions are persisted. At most one HOLD decision can be enforced based on write QPS.",
+      "id": "YoutubeCommentsApiCommentModeratedRestrictionAutoModDecisionEnforcement",
+      "properties": {
+        "enforced": {
+          "description": "Whether or not the decision is enforced.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Current the enforcement rule depends on live chat write QPS at chat message creation time. Enforce MEDIAN when QPS<=4. Enforce HIGH_RECALL when QPS>4 AND QPS<=10. Enforce ULTRA_HIGH_RECALL when QPS>10.",
+          "enum": [
+            "UNKNOWN_DECISION_NAME",
+            "HIGH_RECALL",
+            "MEDIAN",
+            "ULTRA_HIGH_RECALL"
+          ],
+          "enumDescriptions": [
+            "",
+            "The name of a decision with high recall/low precision, used for holding more chat messages.",
+            "The name of a decision with median precision/recall. Currently it is used in auto moderation product.",
+            "The name of a decision with very high recall/very low precision. Used for very high QPS streams."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeCommentsApiCommentRestrictionIssuer": {
+      "description": "The restriction issuers here identify \"who\" issues the restriction. It represents restriction granularity at the issuer level so restrictions from different issuers will not override each other.",
+      "id": "YoutubeCommentsApiCommentRestrictionIssuer",
+      "properties": {
+        "channelModeratorDetails": {
+          "$ref": "YoutubeCommentsApiCommentRestrictionIssuerChannelModeratorDetails",
+          "description": "Only set when the issuer type is CHANNEL_MODERATOR."
+        },
+        "channelOwnerDetails": {
+          "$ref": "YoutubeCommentsApiCommentRestrictionIssuerChannelOwnerDetails",
+          "description": "Only set when the issuer type is CHANNEL_OWNER."
+        },
+        "issuer": {
+          "enum": [
+            "ISSUER_UNSPECIFIED",
+            "GLOBAL",
+            "TNS",
+            "CHANNEL_OWNER",
+            "CHANNEL_MODERATOR",
+            "CHANNEL_SETTINGS",
+            "AUTOMOD",
+            "EXPIRY_JOBS"
+          ],
+          "enumDescriptions": [
+            "",
+            "Legacy issuer. Indicates restriction can be removed by any issuer.",
+            "Restriction issued by YT TnS Ares and policy enforcement system.",
+            "Manual moderation from channel owner of comment parent entity.",
+            "Manual moderation from channel moderator of comment parent entity.",
+            "Channel settings of comment parent entity on moderating comments. e.g. Blocked links, blocked words.",
+            "A machine-learning powered tool that automatically applies moderation decisions to comments. See go/ytc-adjustable-automod",
+            "Batch job used to reject old comments in the Held for review queue. See b/161294242."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeCommentsApiCommentRestrictionIssuerChannelModeratorDetails": {
+      "description": "Channel moderator info details. Supports audit log functionality that shows moderator activity.",
+      "id": "YoutubeCommentsApiCommentRestrictionIssuerChannelModeratorDetails",
+      "properties": {
+        "externalChannelId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeCommentsApiCommentRestrictionIssuerChannelOwnerDetails": {
+      "description": "Channel owner info details. Supports audit log functionality that shows creator activity.",
+      "id": "YoutubeCommentsApiCommentRestrictionIssuerChannelOwnerDetails",
+      "properties": {
+        "externalChannelId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "YoutubeCommentsApiCommentRestrictionReason": {
+      "description": "The restriction issuers here identify \"why\" the restriction is issued. Most reasons are specific to one type of issuer but some of them are shared among multiple issuers.",
+      "id": "YoutubeCommentsApiCommentRestrictionReason",
+      "properties": {
+        "reason": {
+          "enum": [
+            "REASON_UNSPECIFIED",
+            "OTHER_ABUSE",
+            "CHILD_PORN",
+            "COPYRIGHT",
+            "COUNTERFEIT",
+            "COURT_ORDER",
+            "CTM",
+            "DEFAMATION",
+            "GOVERNMENT_ORDER",
+            "HARASSMENT",
+            "HATE",
+            "IMPERSONATION",
+            "LOCAL_LAWS",
+            "LOW_QUALITY",
+            "LOW_QUALITY_HIGH_RECALL",
+            "MALWARE",
+            "PEDOPHILIA",
+            "PHISHING",
+            "PORNOGRAPHY",
+            "PRIVACY",
+            "QUOTA_EXCEEDED",
+            "REGULATED",
+            "SPAM",
+            "TRADEMARK",
+            "UNSAFE_RACY",
+            "UNWANTED_SOFTWARE",
+            "UNWANTED_CONTENT",
+            "VIOLENCE",
+            "DANGEROUS",
+            "BLOCKED_LINKS",
+            "BLOCKED_WORDS",
+            "ENABLED_HOLD_ALL",
+            "HIDDEN_USER_LIST",
+            "VIOLENT_EXTREMISM",
+            "PRIVILEGED_USER_REJECTED",
+            "ABOVE_REJECT_INAPPROPRIATE_SCORE",
+            "TOO_MANY_BAD_CHARS",
+            "EXPIRED_FOR_REVIEW"
+          ],
+          "enumDescriptions": [
+            "",
+            "TnS specific reasons. generic abuse that isn't enumerated here.",
+            "illegal child porn images.",
+            "",
+            "Promotion of counterfeit product claims.",
+            "Third-party court orders.",
+            "Circumvention of Technological measures claims. Circumventing protection mechanisms on copyrighted work.",
+            "Defamation claims.",
+            "Government request, regardless of reason.",
+            "Consistent harassing behavior directed towards a person.",
+            "",
+            "",
+            "Other misc country-specific laws.",
+            "Reasons applies to AutoMod and TnS. go/ytc-adjustable-automod-backend-design Low quality/Annoying content. Used by TnS and AutoMod. Maps to AUTOMOD_SYSTEM_HOLD",
+            "AutoMod specific reasons. Maps to AUTOMOD_SYSTEM_HOLD_MORE",
+            "MALWARE includes viruses, worms, trojans, adware and even potentially unwanted software which may not necessarily be harmful.",
+            "Not illegal, but image or text content promoting or related to young pornography.",
+            "",
+            "",
+            "Local privacy laws.",
+            "",
+            "Contains regulated products and services, such as pharmaceuticals, alcohol, tobacco, etc. For details, https://sites.google.com/a/google.com/crt-policy-site/regulated",
+            "",
+            "Trademark violations where Google could be liable.",
+            "Content that is unsafe because it is sexually suggestive/racy.",
+            "The software is deceptive, promising a value proposition that it does not meet, or tries to trick users into installing it or it piggybacks on the installation of another program, or doesn\u2019t tell the user about all of its principal and significant functions or affects the user\u2019s system in unexpected ways, or collects or transmits private information without the user\u2019s knowledge, or bundled with other software and its presence is not disclosed.",
+            "Content includes spammy commercial content, such as links to MFA pages, affiliate links, ads or solicitation, or otherwise off-topic or irrelevant content.",
+            "",
+            "Content depicts or provides instructions to complete activities that are dangerous and/or widely illegal, e.g. prostitution, bomb-making, suicide.",
+            "Comment contains links in a list of \"blocked links\" in YouTube Studio > Settings > Community.",
+            "Creator setting specific reasons. go/ytc-nextgen-community-settings-storage Comment contains words in a list of \"blocked words\" in YouTube Studio > Settings > Community.",
+            "Held because the moderation policy is \"Hold all comments for review\".",
+            "Comment from listed hidden users.",
+            "Content that recruits or solicits terrorists; specific and detailed instructions on how to make a bomb; terrorists who document their attacks; praising acts of mass violence; content that shows captured hostages posted with the intent to solicit demands, threaten, or intimidate.",
+            "A privileged user, which can only be parent entity owner for ENTITY_COMMENT, but can be either parent entity channel owner or channel moderator for CHAT_MESSAGE CommentType, manually rejected the Comment. Their decision overrides any system flagging.",
+            "Automod rejected due to above inappropriate score rejection threshold. Maps to ModerationReason.ABOVE_REJECT_INAPPROPRIATE_SCORE.",
+            "Automod rejected due to containing more than allowed bad characters. Maps to ModerationReason.TOO_MANY_BAD_CHARS.",
+            "Batch job rejecting comments older than 60d in the Held for Review queue."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "YoutubeCommentsClusteringMiniStanza": {
-      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 78",
+      "description": "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 80",
       "id": "YoutubeCommentsClusteringMiniStanza",
       "properties": {
         "ansibleScores": {
@@ -146588,6 +147113,13 @@
           "description": "Comment classification for ranking mapping all secondary keys to values. E.g. {\"joke_v1\":0.8, \"joke_v2\":0.7, \"question_v1\":0.3}.",
           "type": "object"
         },
+        "commentModeratedRestrictions": {
+          "description": "Contains various comment moderated restrictions. Only available in the Atlas version. Extracted from http://shortn/_2LzgPEF5K3",
+          "items": {
+            "$ref": "YoutubeCommentsApiCommentModeratedRestriction"
+          },
+          "type": "array"
+        },
         "commentType": {
           "description": "Whether the comment is on a video, post, or other product.",
           "enum": [
@@ -146646,6 +147178,7 @@
             "WEB_PARENT_TOOLS",
             "WEB_PHONE_VERIFICATION",
             "WEB_EMBEDDED_PLAYER",
+            "WEB_EFFECT_MAKER",
             "WEB_UNPLUGGED",
             "WEB_UNPLUGGED_ONBOARDING",
             "WEB_UNPLUGGED_OPS",
@@ -146746,6 +147279,7 @@
             "YT Parent Tools web app (go/parent-zone-prd).",
             "YouTube Phone Verification web app",
             "(go/wexit-phone-verify).",
+            "YouTube Effect Maker web app.",
             "Unplugged web clients. Sign-in, member experience (Polymer app).",
             "Onboarding web app.",
             "Unplugged ops tools.",
@@ -146914,6 +147448,14 @@
             "type": "boolean"
           },
           "description": "Low quality decisions. Keyed by decision types corresponding to secondary keys.",
+          "type": "object"
+        },
+        "lowQualityScores": {
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          },
+          "description": "Comment low quality scores. Keyed by various model names. Rename from the old automod_scores.",
           "type": "object"
         },
         "mentionedTimestampCommentSecond": {
@@ -147346,6 +147888,7 @@
             "MUSIC_PRIMARY_RECORDING",
             "MUSIC_RECORDING_ARTIST",
             "MUSIC_FEATURED_ARTIST",
+            "MUSIC_SHUNA_REMIX_ARTIST",
             "MUSIC_COMPOSITION",
             "MUSIC_ORIGINAL_ARTIST_OF_COVER",
             "MUSIC_ORIGINAL_RECORDING_CLUSTER_OF_COVER",
@@ -147461,6 +148004,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -147528,6 +148072,7 @@
             "The entity refers to the primary_recording of the recording cluster featured on the video. This exists only for backward compatibility until WebRef, QRef and all its clients migrate to /music/recording_cluster. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster.",
             "The entity refers to the musical artist performing a recording featured on the video. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster of the featured recording, if known.",
             "The entity refers to the featured artist relationship mined from KG, featured on the video. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster of the featured recording, if known.",
+            "Original artist from a video that was AI Generated to ressemble the artist's type.",
             "The entity refers to composition of the recording featured on the video. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster of the featured recording, if known.",
             "The entity refers to the original musical artist for which the recording is a cover of. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster of the cover recording, if known.",
             "The entity refers to the original musical recording cluster for which the recording is a cover of. LegosAnnotation.LegosSemanticRelationship.Context.subject should point to the recording cluster of the cover recording, if known.",
