@@ -173,6 +173,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/acceleratorTypes",
@@ -343,6 +348,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/addresses",
@@ -748,6 +758,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/autoscalers",
@@ -1684,6 +1699,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/backendServices",
@@ -2330,6 +2350,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/diskTypes",
@@ -2550,6 +2575,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/disks",
@@ -4543,6 +4573,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/forwardingRules",
@@ -4998,6 +5033,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/futureReservations",
@@ -6274,6 +6314,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/operations",
@@ -6817,6 +6862,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/healthChecks",
@@ -8190,6 +8240,58 @@
     },
     "instanceGroupManagerResizeRequests": {
       "methods": {
+        "cancel": {
+          "description": "Cancels the specified resize request and removes it from the queue. Cancelled resize request does no longer wait for the resources to be provisioned. Cancel is only possible for requests that are accepted in the queue.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagerResizeRequests.cancel",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager",
+            "resizeRequest"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group. The name should conform to RFC1035 or be a resource ID.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "resizeRequest": {
+              "description": "The name of the resize request to cancel. The name should conform to RFC1035 or be a resource ID.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located. The name should conform to RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "delete": {
           "description": "Deletes the specified, inactive resize request. Requests that are still active cannot be deleted. Deleting request does not delete instances that were provisioned previously.",
           "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
@@ -8507,6 +8609,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceGroupManagers",
@@ -9342,6 +9449,54 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "resumeInstances": {
+          "description": "Flags the specified instances in the managed instance group to be resumed. This method increases the targetSize and decreases the targetSuspendedSize of the managed instance group by the number of instances that you resume. The resumeInstances operation is marked DONE if the resumeInstances request is successful. The underlying actions take additional time. You must separately verify the status of the RESUMING action with the listmanagedinstances method. In this request, you can only specify instances that are suspended. For example, if an instance was previously suspended using the suspendInstances method, it can be resumed using the resumeInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are resumed. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resumeInstances",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagers.resumeInstances",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resumeInstances",
+          "request": {
+            "$ref": "InstanceGroupManagersResumeInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "setAutoHealingPolicies": {
           "deprecated": true,
           "description": "Motifies the autohealing policy for the instances in this managed instance group. [Deprecated] This method is deprecated. Use instanceGroupManagers.patch instead.",
@@ -9478,6 +9633,150 @@
           "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setTargetPools",
           "request": {
             "$ref": "InstanceGroupManagersSetTargetPoolsRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "startInstances": {
+          "description": "Flags the specified instances in the managed instance group to be started. This method increases the targetSize and decreases the targetStoppedSize of the managed instance group by the number of instances that you start. The startInstances operation is marked DONE if the startInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STARTING action with the listmanagedinstances method. In this request, you can only specify instances that are stopped. For example, if an instance was previously stopped using the stopInstances method, it can be started using the startInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are started. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/startInstances",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagers.startInstances",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/startInstances",
+          "request": {
+            "$ref": "InstanceGroupManagersStartInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "stopInstances": {
+          "description": "Flags the specified instances in the managed instance group to be immediately stopped. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetStoppedSize of the managed instance group by the number of instances that you stop. The stopInstances operation is marked DONE if the stopInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STOPPING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays stopping the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is stopped. Stopped instances can be started using the startInstances method. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/stopInstances",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagers.stopInstances",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/stopInstances",
+          "request": {
+            "$ref": "InstanceGroupManagersStopInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "suspendInstances": {
+          "description": "Flags the specified instances in the managed instance group to be immediately suspended. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetSuspendedSize of the managed instance group by the number of instances that you suspend. The suspendInstances operation is marked DONE if the suspendInstances request is successful. The underlying actions take additional time. You must separately verify the status of the SUSPENDING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays suspension of the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is suspended. Suspended instances can be resumed using the resumeInstances method. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/suspendInstances",
+          "httpMethod": "POST",
+          "id": "compute.instanceGroupManagers.suspendInstances",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone where the managed instance group is located.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/suspendInstances",
+          "request": {
+            "$ref": "InstanceGroupManagersSuspendInstancesRequest"
           },
           "response": {
             "$ref": "Operation"
@@ -9729,6 +10028,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceGroups",
@@ -10282,6 +10586,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceTemplates",
@@ -10732,6 +11041,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instances",
@@ -13210,6 +13524,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instantSnapshots",
@@ -13659,6 +13978,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/interconnectAttachments",
@@ -15262,6 +15586,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/machineTypes",
@@ -15432,6 +15761,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkAttachments",
@@ -15881,6 +16215,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkEdgeSecurityServices",
@@ -16143,6 +16482,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkEndpointGroups",
@@ -17881,6 +18225,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeGroups",
@@ -18316,6 +18665,56 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "performMaintenance": {
+          "description": "Perform maintenance on a subset of nodes in the node group.",
+          "flatPath": "projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/performMaintenance",
+          "httpMethod": "POST",
+          "id": "compute.nodeGroups.performMaintenance",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "nodeGroup"
+          ],
+          "parameters": {
+            "nodeGroup": {
+              "description": "Name of the node group scoping this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/performMaintenance",
+          "request": {
+            "$ref": "NodeGroupsPerformMaintenanceRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "setIamPolicy": {
           "description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
           "flatPath": "projects/{project}/zones/{zone}/nodeGroups/{resource}/setIamPolicy",
@@ -18559,6 +18958,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeTemplates",
@@ -18958,6 +19362,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeTypes",
@@ -19648,6 +20057,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/packetMirrorings",
@@ -20718,6 +21132,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/publicDelegatedPrefixes",
@@ -21963,6 +22382,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/commitments",
@@ -24738,6 +25162,54 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "resumeInstances": {
+          "description": "Flags the specified instances in the managed instance group to be resumed. This method increases the targetSize and decreases the targetSuspendedSize of the managed instance group by the number of instances that you resume. The resumeInstances operation is marked DONE if the resumeInstances request is successful. The underlying actions take additional time. You must separately verify the status of the RESUMING action with the listmanagedinstances method. In this request, you can only specify instances that are suspended. For example, if an instance was previously suspended using the suspendInstances method, it can be resumed using the resumeInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are resumed. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resumeInstances",
+          "httpMethod": "POST",
+          "id": "compute.regionInstanceGroupManagers.resumeInstances",
+          "parameterOrder": [
+            "project",
+            "region",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "Name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region scoping this request.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resumeInstances",
+          "request": {
+            "$ref": "RegionInstanceGroupManagersResumeInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "setAutoHealingPolicies": {
           "deprecated": true,
           "description": "Modifies the autohealing policy for the instances in this managed instance group. [Deprecated] This method is deprecated. Use regionInstanceGroupManagers.patch instead.",
@@ -24874,6 +25346,150 @@
           "path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/setTargetPools",
           "request": {
             "$ref": "RegionInstanceGroupManagersSetTargetPoolsRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "startInstances": {
+          "description": "Flags the specified instances in the managed instance group to be started. This method increases the targetSize and decreases the targetStoppedSize of the managed instance group by the number of instances that you start. The startInstances operation is marked DONE if the startInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STARTING action with the listmanagedinstances method. In this request, you can only specify instances that are stopped. For example, if an instance was previously stopped using the stopInstances method, it can be started using the startInstances method. If a health check is attached to the managed instance group, the specified instances will be verified as healthy after they are started. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/startInstances",
+          "httpMethod": "POST",
+          "id": "compute.regionInstanceGroupManagers.startInstances",
+          "parameterOrder": [
+            "project",
+            "region",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "Name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region scoping this request.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/startInstances",
+          "request": {
+            "$ref": "RegionInstanceGroupManagersStartInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "stopInstances": {
+          "description": "Flags the specified instances in the managed instance group to be immediately stopped. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetStoppedSize of the managed instance group by the number of instances that you stop. The stopInstances operation is marked DONE if the stopInstances request is successful. The underlying actions take additional time. You must separately verify the status of the STOPPING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays stopping the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is stopped. Stopped instances can be started using the startInstances method. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/stopInstances",
+          "httpMethod": "POST",
+          "id": "compute.regionInstanceGroupManagers.stopInstances",
+          "parameterOrder": [
+            "project",
+            "region",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "The name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region scoping this request.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/stopInstances",
+          "request": {
+            "$ref": "RegionInstanceGroupManagersStopInstancesRequest"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "suspendInstances": {
+          "description": "Flags the specified instances in the managed instance group to be immediately suspended. You can only specify instances that are running in this request. This method reduces the targetSize and increases the targetSuspendedSize of the managed instance group by the number of instances that you suspend. The suspendInstances operation is marked DONE if the suspendInstances request is successful. The underlying actions take additional time. You must separately verify the status of the SUSPENDING action with the listmanagedinstances method. If the standbyPolicy.initialDelaySec field is set, the group delays suspension of the instances until initialDelaySec have passed from instance.creationTimestamp (that is, when the instance was created). This delay gives your application time to set itself up and initialize on the instance. If more than initialDelaySec seconds have passed since instance.creationTimestamp when this method is called, there will be zero delay. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is suspended. Suspended instances can be resumed using the resumeInstances method. You can specify a maximum of 1000 instances with this method per request.",
+          "flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/suspendInstances",
+          "httpMethod": "POST",
+          "id": "compute.regionInstanceGroupManagers.suspendInstances",
+          "parameterOrder": [
+            "project",
+            "region",
+            "instanceGroupManager"
+          ],
+          "parameters": {
+            "instanceGroupManager": {
+              "description": "Name of the managed instance group.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region scoping this request.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/suspendInstances",
+          "request": {
+            "$ref": "RegionInstanceGroupManagersSuspendInstancesRequest"
           },
           "response": {
             "$ref": "Operation"
@@ -30242,6 +30858,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/reservations",
@@ -30752,6 +31373,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/resourcePolicies",
@@ -31207,6 +31833,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/routers",
@@ -32071,6 +32702,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/securityPolicies",
@@ -32616,6 +33252,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/serviceAttachments",
@@ -33454,6 +34095,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/sslCertificates",
@@ -33719,6 +34365,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/sslPolicies",
@@ -34078,6 +34729,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/subnetworks",
@@ -34940,6 +35596,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetHttpProxies",
@@ -35289,6 +35950,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetHttpsProxies",
@@ -35803,6 +36469,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetInstances",
@@ -36257,6 +36928,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetPools",
@@ -37226,6 +37902,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetTcpProxies",
@@ -37575,6 +38256,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetVpnGateways",
@@ -37930,6 +38616,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/urlMaps",
@@ -38358,6 +39049,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/vpnGateways",
@@ -38756,6 +39452,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/vpnTunnels",
@@ -39348,7 +40049,7 @@
       }
     }
   },
-  "revision": "20230912",
+  "revision": "20230923",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -40762,10 +41463,14 @@
         "maintenanceInterval": {
           "description": "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`.",
           "enum": [
-            "PERIODIC"
+            "AS_NEEDED",
+            "PERIODIC",
+            "RECURRENT"
           ],
           "enumDescriptions": [
-            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available."
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
           ],
           "type": "string"
         },
@@ -41958,7 +42663,7 @@
           "type": "string"
         },
         "timeZone": {
-          "description": "The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: https://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of \u201cUTC\u201d if left empty.",
+          "description": "The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: https://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of \"UTC\" if left empty.",
           "type": "string"
         }
       },
@@ -42503,6 +43208,22 @@
           "format": "uint64",
           "type": "string"
         },
+        "ipAddressSelectionPolicy": {
+          "description": "Specifies preference of traffic to the backend (from the proxy and from the client for proxyless gRPC). The possible values are: - IPV4_ONLY: Only send IPv4 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv4 health-checks are used to check the health of the backends. This is the default setting. - PREFER_IPV6: Prioritize the connection to the endpoints IPv6 address over its IPv4 address (provided there is a healthy IPv6 address). - IPV6_ONLY: Only send IPv6 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv6 health-checks are used to check the health of the backends. This field is applicable to either: - Advanced Global External HTTPS Load Balancing (load balancing scheme EXTERNAL_MANAGED), - Regional External HTTPS Load Balancing, - Internal TCP Proxy (load balancing scheme INTERNAL_MANAGED), - Regional Internal HTTPS Load Balancing (load balancing scheme INTERNAL_MANAGED), - Traffic Director with Envoy proxies and proxyless gRPC (load balancing scheme INTERNAL_SELF_MANAGED). ",
+          "enum": [
+            "IPV4_ONLY",
+            "IPV6_ONLY",
+            "IP_ADDRESS_SELECTION_POLICY_UNSPECIFIED",
+            "PREFER_IPV6"
+          ],
+          "enumDescriptions": [
+            "Only send IPv4 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv4 health-checks are used to check the health of the backends. This is the default setting.",
+            "Only send IPv6 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv6 health-checks are used to check the health of the backends.",
+            "Unspecified IP address selection policy.",
+            "Prioritize the connection to the endpoints IPv6 address over its IPv4 address (provided there is a healthy IPv6 address)."
+          ],
+          "type": "string"
+        },
         "kind": {
           "default": "compute#backendService",
           "description": "[Output Only] Type of resource. Always compute#backendService for backend services.",
@@ -42536,7 +43257,7 @@
           "type": "array"
         },
         "localityLbPolicy": {
-          "description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.",
+          "description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.",
           "enum": [
             "INVALID_LB_POLICY",
             "LEAST_REQUEST",
@@ -48638,7 +49359,7 @@
           "description": "Specifies the duration of auto-created reservations. It represents relative time to future reservation start_time when auto-created reservations will be automatically deleted by GCE. Duration time unit is represented as a count of seconds and fractions of seconds at nanosecond resolution."
         },
         "autoDeleteAutoCreatedReservations": {
-          "description": "Setting for enabling or disabling automatic deletion for auto-created reservation. If omitted or set to true, auto-created reservations will be deleted at Future Reservation's end time (default) or at user's defined timestamp if any of the [auto_created_reservations_delete_time, auto_created_reservations_duration] values is specified. For keeping auto-created reservation indefinitely, this value should be set to false.",
+          "description": "Setting for enabling or disabling automatic deletion for auto-created reservation. If set to true, auto-created reservations will be deleted at Future Reservation's end time (default) or at user's defined timestamp if any of the [auto_created_reservations_delete_time, auto_created_reservations_duration] values is specified. For keeping auto-created reservation indefinitely, this value should be set to false.",
           "type": "boolean"
         },
         "creationTimestamp": {
@@ -49589,12 +50310,14 @@
             "SECURE_BOOT",
             "SEV_CAPABLE",
             "SEV_LIVE_MIGRATABLE",
+            "SEV_LIVE_MIGRATABLE_V2",
             "SEV_SNP_CAPABLE",
             "UEFI_COMPATIBLE",
             "VIRTIO_SCSI_MULTIQUEUE",
             "WINDOWS"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -49771,7 +50494,7 @@
       "type": "object"
     },
     "HealthCheck": {
-      "description": "Represents a Health Check resource. Google Compute Engine has two Health Check resources: * [Global](/compute/docs/reference/rest/beta/healthChecks) * [Regional](/compute/docs/reference/rest/beta/regionHealthChecks) Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Traffic Director must use global health checks (`compute.v1.healthChecks`). Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.healthChecks`). External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.healthChecks`). Backend service-based network load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Target pool-based network load balancers must use legacy HTTP health checks (`compute.v1.httpHealthChecks`). For more information, see Health checks overview.",
+      "description": "Represents a health check resource. Google Compute Engine has two health check resources: * [Regional](/compute/docs/reference/rest/beta/regionHealthChecks) * [Global](/compute/docs/reference/rest/beta/healthChecks) These health check resources can be used for load balancing and for autohealing VMs in a managed instance group (MIG). **Load balancing** The following load balancer can use either regional or global health check: * Internal TCP/UDP load balancer The following load balancers require regional health check: * Internal HTTP(S) load balancer * Backend service-based network load balancer Traffic Director and the following load balancers require global health check: * External HTTP(S) load balancer * TCP proxy load balancer * SSL proxy load balancer The following load balancer require [legacy HTTP health checks](/compute/docs/reference/rest/v1/httpHealthChecks): * Target pool-based network load balancer **Autohealing in MIGs** The health checks that you use for autohealing VMs in a MIG can be either regional or global. For more information, see Set up an application health check and autohealing. For more information, see Health checks overview.",
       "id": "HealthCheck",
       "properties": {
         "checkIntervalSec": {
@@ -53007,6 +53730,10 @@
           "description": "The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.",
           "type": "string"
         },
+        "standbyPolicy": {
+          "$ref": "InstanceGroupManagerStandbyPolicy",
+          "description": "Standby policy for stopped and suspended instances."
+        },
         "statefulPolicy": {
           "$ref": "StatefulPolicy",
           "description": "Stateful configuration for this Instanced Group Manager"
@@ -53030,6 +53757,16 @@
             ]
           },
           "description": "The target number of running instances for this managed instance group. You can reduce this number by using the instanceGroupManager deleteInstances or abandonInstances methods. Resizing the group also changes this number.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "targetStoppedSize": {
+          "description": "The target number of stopped instances for this managed instance group. This number changes when you: - Stop instance using the stopInstances method or start instances using the startInstances method. - Manually change the targetStoppedSize using the update method. ",
+          "format": "int32",
+          "type": "integer"
+        },
+        "targetSuspendedSize": {
+          "description": "The target number of suspended instances for this managed instance group. This number changes when you: - Suspend instance using the suspendInstances method or resume instances using the resumeInstances method. - Manually change the targetSuspendedSize using the update method. ",
           "format": "int32",
           "type": "integer"
         },
@@ -53803,6 +54540,28 @@
       },
       "type": "object"
     },
+    "InstanceGroupManagerStandbyPolicy": {
+      "id": "InstanceGroupManagerStandbyPolicy",
+      "properties": {
+        "initialDelaySec": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "mode": {
+          "description": "Defines behaviour of using instances from standby pool to resize MIG.",
+          "enum": [
+            "MANUAL",
+            "SCALE_OUT_POOL"
+          ],
+          "enumDescriptions": [
+            "MIG does not automatically stop/start or suspend/resume VMs.",
+            "MIG automatically resumes and starts VMs when it scales out, and replenishes the standby pool afterwards."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "InstanceGroupManagerStatus": {
       "id": "InstanceGroupManagerStatus",
       "properties": {
@@ -54309,6 +55068,19 @@
       },
       "type": "object"
     },
+    "InstanceGroupManagersResumeInstancesRequest": {
+      "id": "InstanceGroupManagersResumeInstancesRequest",
+      "properties": {
+        "instances": {
+          "description": "The URLs of one or more instances to resume. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "InstanceGroupManagersScopedList": {
       "id": "InstanceGroupManagersScopedList",
       "properties": {
@@ -54475,6 +55247,53 @@
         },
         "targetPools": {
           "description": "The list of target pool URLs that instances in this managed instance group belong to. The managed instance group applies these target pools to all of the instances in the group. Existing instances and new instances in the group all receive these target pool settings.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceGroupManagersStartInstancesRequest": {
+      "id": "InstanceGroupManagersStartInstancesRequest",
+      "properties": {
+        "instances": {
+          "description": "The URLs of one or more instances to start. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceGroupManagersStopInstancesRequest": {
+      "id": "InstanceGroupManagersStopInstancesRequest",
+      "properties": {
+        "forceStop": {
+          "description": "If this flag is set to true, the Instance Group Manager will proceed to stop the instances, skipping initialization on them.",
+          "type": "boolean"
+        },
+        "instances": {
+          "description": "The URLs of one or more instances to stop. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceGroupManagersSuspendInstancesRequest": {
+      "id": "InstanceGroupManagersSuspendInstancesRequest",
+      "properties": {
+        "forceSuspend": {
+          "description": "If this flag is set to true, the Instance Group Manager will proceed to suspend the instances, skipping initialization on them.",
+          "type": "boolean"
+        },
+        "instances": {
+          "description": "The URLs of one or more instances to suspend. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
           "items": {
             "type": "string"
           },
@@ -55489,7 +56308,7 @@
       "type": "object"
     },
     "InstanceTemplate": {
-      "description": "Represents an Instance Template resource. You can use instance templates to create VM instances and managed instance groups. For more information, read Instance Templates.",
+      "description": "Represents an Instance Template resource. Google Compute Engine has two Instance Template resources: * [Global](/compute/docs/reference/rest/beta/instanceTemplates) * [Regional](/compute/docs/reference/rest/beta/regionInstanceTemplates) You can reuse a global instance template in different regions whereas you can use a regional instance template in a specified region only. If you want to reduce cross-region dependency or achieve data residency, use a regional instance template. To create VMs, managed instance groups, and reservations, you can use either global or regional instance templates. For more information, read Instance Templates.",
       "id": "InstanceTemplate",
       "properties": {
         "creationTimestamp": {
@@ -57007,7 +57826,7 @@
           "type": "boolean"
         },
         "availableFeatures": {
-          "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - MACSEC If present then the interconnect was created on MACsec capable hardware ports. If not present then the interconnect is provisioned on non-MACsec capable ports and MACsec enablement will fail.",
+          "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - MACSEC If present then the Interconnect connection is provisioned on MACsec capable hardware ports. If not present then the Interconnect connection is provisioned on non-MACsec capable ports and MACsec isn't supported and enabling MACsec fails.",
           "items": {
             "enum": [
               "IF_MACSEC"
@@ -57114,7 +57933,7 @@
         },
         "macsec": {
           "$ref": "InterconnectMacsec",
-          "description": "Configuration to enable Media Access Control security (MACsec) on the Interconnect connection between Google and your on-premises router."
+          "description": "Configuration that enables Media Access Control security (MACsec) on the Cloud Interconnect connection between Google and your on-premises router."
         },
         "macsecEnabled": {
           "description": "Enable or disable MACsec on this Interconnect connection. MACsec enablement fails if the MACsec object is not specified.",
@@ -57160,7 +57979,7 @@
           "type": "string"
         },
         "requestedFeatures": {
-          "description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - MACSEC If specified then the interconnect will be created on MACsec capable hardware ports. If not specified, the default value is false, which will allocate non-MACsec capable ports first if available. This parameter can only be provided during interconnect INSERT and cannot be changed using interconnect PATCH.",
+          "description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - MACSEC If specified then the connection is created on MACsec capable hardware ports. If not specified, the default value is false, which allocates non-MACsec capable ports first if available. This parameter can be provided only with Interconnect INSERT. It isn't valid for Interconnect PATCH.",
           "items": {
             "enum": [
               "IF_MACSEC"
@@ -58670,7 +59489,7 @@
       "type": "object"
     },
     "InterconnectMacsec": {
-      "description": "Configuration information for enabling Media Access Control security (MACsec) on this Interconnect connection between Google and your on-premises router.",
+      "description": "Configuration information for enabling Media Access Control security (MACsec) on this Cloud Interconnect connection between Google and your on-premises router.",
       "id": "InterconnectMacsec",
       "properties": {
         "failOpen": {
@@ -58678,7 +59497,7 @@
           "type": "boolean"
         },
         "preSharedKeys": {
-          "description": "Required. A keychain placeholder describing a set of named key objects along with their start times. A MACsec CKN/CAK will be generated for each key in the key chain. Google router will automatically pick the key with the most recent startTime when establishing or re-establishing a MACsec secure link.",
+          "description": "Required. A keychain placeholder describing a set of named key objects along with their start times. A MACsec CKN/CAK is generated for each key in the key chain. Google router automatically picks the key with the most recent startTime when establishing or re-establishing a MACsec secure link.",
           "items": {
             "$ref": "InterconnectMacsecPreSharedKey"
           },
@@ -60536,6 +61355,11 @@
           "description": "[Output Only] The URL of the instance. The URL can exist even if the instance has not yet been created.",
           "type": "string"
         },
+        "instanceFlexibilityOverride": {
+          "$ref": "ManagedInstanceInstanceFlexibilityOverride",
+          "deprecated": true,
+          "description": "[Output Only] The overrides to instance properties resulting from InstanceFlexibilityPolicy."
+        },
         "instanceHealth": {
           "description": "[Output Only] Health state of the instance per health-check.",
           "items": {
@@ -60599,6 +61423,16 @@
       "properties": {
         "revision": {
           "description": "[Output Only] Current all-instances configuration revision. This value is in RFC3339 text format.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ManagedInstanceInstanceFlexibilityOverride": {
+      "id": "ManagedInstanceInstanceFlexibilityOverride",
+      "properties": {
+        "machineType": {
+          "description": "The machine type to be used for this instance.",
           "type": "string"
         }
       },
@@ -63399,6 +64233,20 @@
           "description": "An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.",
           "type": "string"
         },
+        "maintenanceInterval": {
+          "description": "Specifies the frequency of planned maintenance events. The accepted values are: `AS_NEEDED` and `RECURRENT`.",
+          "enum": [
+            "AS_NEEDED",
+            "PERIODIC",
+            "RECURRENT"
+          ],
+          "enumDescriptions": [
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
+          ],
+          "type": "string"
+        },
         "maintenancePolicy": {
           "description": "Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see Maintenance policies.",
           "enum": [
@@ -63908,6 +64756,10 @@
         "totalResources": {
           "$ref": "InstanceConsumptionInfo",
           "description": "Total amount of available resources on the node."
+        },
+        "upcomingMaintenance": {
+          "$ref": "UpcomingMaintenance",
+          "description": "[Output Only] The information about an upcoming maintenance event."
         }
       },
       "type": "object"
@@ -64083,6 +64935,23 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "NodeGroupsPerformMaintenanceRequest": {
+      "id": "NodeGroupsPerformMaintenanceRequest",
+      "properties": {
+        "nodes": {
+          "description": "[Required] List of nodes affected by the call.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "description": "The start time of the schedule. The timestamp is an RFC3339 string.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -69847,6 +70716,19 @@
       },
       "type": "object"
     },
+    "RegionInstanceGroupManagersResumeInstancesRequest": {
+      "id": "RegionInstanceGroupManagersResumeInstancesRequest",
+      "properties": {
+        "instances": {
+          "description": "The URLs of one or more instances to resume. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "RegionInstanceGroupManagersSetAutoHealingRequest": {
       "id": "RegionInstanceGroupManagersSetAutoHealingRequest",
       "properties": {
@@ -69883,6 +70765,53 @@
         "instanceTemplate": {
           "description": "URL of the InstanceTemplate resource from which all new instances will be created.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RegionInstanceGroupManagersStartInstancesRequest": {
+      "id": "RegionInstanceGroupManagersStartInstancesRequest",
+      "properties": {
+        "instances": {
+          "description": "The URLs of one or more instances to start. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "RegionInstanceGroupManagersStopInstancesRequest": {
+      "id": "RegionInstanceGroupManagersStopInstancesRequest",
+      "properties": {
+        "forceStop": {
+          "description": "If this flag is set to true, the Instance Group Manager will proceed to stop the instances, skipping initialization on them.",
+          "type": "boolean"
+        },
+        "instances": {
+          "description": "The URLs of one or more instances to stop. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "RegionInstanceGroupManagersSuspendInstancesRequest": {
+      "id": "RegionInstanceGroupManagersSuspendInstancesRequest",
+      "properties": {
+        "forceSuspend": {
+          "description": "If this flag is set to true, the Instance Group Manager will proceed to suspend the instances, skipping initialization on them.",
+          "type": "boolean"
+        },
+        "instances": {
+          "description": "The URLs of one or more instances to suspend. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -73121,7 +74050,7 @@
               "ENDPOINT_TYPE_VM"
             ],
             "enumDescriptions": [
-              "This is used for Regional Internal/External HTTP(S) and TCP Proxy load balancer endpoints.",
+              "This is used for regional Application Load Balancers (internal and external) and regional proxy Network Load Balancers (internal and external) endpoints.",
               "This is used for Secure Web Gateway endpoints.",
               "This is the default."
             ],
@@ -74088,10 +75017,14 @@
         "maintenanceInterval": {
           "description": "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`.",
           "enum": [
-            "PERIODIC"
+            "AS_NEEDED",
+            "PERIODIC",
+            "RECURRENT"
           ],
           "enumDescriptions": [
-            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available."
+            "VMs are eligible to receive infrastructure and hypervisor updates as they become available. This may result in more maintenance operations (live migrations or terminations) for the VM than the PERIODIC and RECURRENT options.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available.",
+            "VMs receive infrastructure and hypervisor updates on a periodic basis, minimizing the number of maintenance operations (live migrations or terminations) on an individual VM. This may mean a VM will take longer to receive an update than if it was configured for AS_NEEDED. Security updates will still be applied as soon as they are available. RECURRENT is used for GEN3 and Slice of Hardware VMs."
           ],
           "type": "string"
         },
@@ -75775,7 +76708,7 @@
           "description": "[Output Only] An 128-bit global unique ID of the PSC service attachment."
         },
         "reconcileConnections": {
-          "description": "This flag determines whether a consumer accept/reject list change can reconcile the statuses of existing ACCEPTED or REJECTED PSC endpoints. - If false, connection policy update will only affect existing PENDING PSC endpoints. Existing ACCEPTED/REJECTED endpoints will remain untouched regardless how the connection policy is modified . - If true, update will affect both PENDING and ACCEPTED/REJECTED PSC endpoints. For example, an ACCEPTED PSC endpoint will be moved to REJECTED if its project is added to the reject list. For newly created service attachment, this boolean defaults to true.",
+          "description": "This flag determines whether a consumer accept/reject list change can reconcile the statuses of existing ACCEPTED or REJECTED PSC endpoints. - If false, connection policy update will only affect existing PENDING PSC endpoints. Existing ACCEPTED/REJECTED endpoints will remain untouched regardless how the connection policy is modified . - If true, update will affect both PENDING and ACCEPTED/REJECTED PSC endpoints. For example, an ACCEPTED PSC endpoint will be moved to REJECTED if its project is added to the reject list. For newly created service attachment, this boolean defaults to false.",
           "type": "boolean"
         },
         "region": {
@@ -79665,7 +80598,7 @@
       "type": "object"
     },
     "TargetHttpProxy": {
-      "description": "Represents a Target HTTP Proxy resource. Google Compute Engine has two Target HTTP Proxy resources: * [Global](/compute/docs/reference/rest/beta/targetHttpProxies) * [Regional](/compute/docs/reference/rest/beta/regionTargetHttpProxies) A target HTTP proxy is a component of GCP HTTP load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTP proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
+      "description": "Represents a Target HTTP Proxy resource. Google Compute Engine has two Target HTTP Proxy resources: * [Global](/compute/docs/reference/rest/beta/targetHttpProxies) * [Regional](/compute/docs/reference/rest/beta/regionTargetHttpProxies) A target HTTP proxy is a component of Google Cloud HTTP load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTP proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
       "id": "TargetHttpProxy",
       "properties": {
         "creationTimestamp": {
@@ -83173,6 +84106,56 @@
         },
         "low": {
           "format": "uint64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UpcomingMaintenance": {
+      "description": "Upcoming Maintenance notification information.",
+      "id": "UpcomingMaintenance",
+      "properties": {
+        "canReschedule": {
+          "description": "Indicates if the maintenance can be customer triggered.",
+          "type": "boolean"
+        },
+        "latestWindowStartTime": {
+          "description": "The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.",
+          "type": "string"
+        },
+        "maintenanceStatus": {
+          "enum": [
+            "ONGOING",
+            "PENDING",
+            "UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "There is ongoing maintenance on this VM.",
+            "There is pending maintenance.",
+            "Unknown maintenance status. Do not use this value."
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Defines the type of maintenance.",
+          "enum": [
+            "SCHEDULED",
+            "UNKNOWN_TYPE",
+            "UNSCHEDULED"
+          ],
+          "enumDescriptions": [
+            "Scheduled maintenance (e.g. maintenance after uptime guarantee is complete).",
+            "No type specified. Do not use this value.",
+            "Unscheduled maintenance (e.g. emergency maintenance during uptime guarantee)."
+          ],
+          "type": "string"
+        },
+        "windowEndTime": {
+          "description": "The time by which the maintenance disruption will be completed. This timestamp value is in RFC3339 text format.",
+          "type": "string"
+        },
+        "windowStartTime": {
+          "description": "The current start time of the maintenance window. This timestamp value is in RFC3339 text format.",
           "type": "string"
         }
       },
