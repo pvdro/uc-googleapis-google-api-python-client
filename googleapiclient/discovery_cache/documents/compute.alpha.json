@@ -173,6 +173,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/acceleratorTypes",
@@ -343,6 +348,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/addresses",
@@ -748,6 +758,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/autoscalers",
@@ -1684,6 +1699,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/backendServices",
@@ -2417,6 +2437,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/diskTypes",
@@ -2637,6 +2662,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/disks",
@@ -4630,6 +4660,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/forwardingRules",
@@ -5085,6 +5120,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/futureReservations",
@@ -6393,6 +6433,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/operations",
@@ -6936,6 +6981,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/healthChecks",
@@ -8684,6 +8734,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceGroupManagers",
@@ -10098,6 +10153,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceGroups",
@@ -10651,6 +10711,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instanceTemplates",
@@ -11131,6 +11196,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instances",
@@ -13794,6 +13864,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/instantSnapshots",
@@ -14293,6 +14368,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/interconnectAttachments",
@@ -16222,6 +16302,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/machineTypes",
@@ -16392,6 +16477,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkAttachments",
@@ -16841,6 +16931,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkEdgeSecurityServices",
@@ -17103,6 +17198,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/networkEndpointGroups",
@@ -19047,6 +19147,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeGroups",
@@ -19775,6 +19880,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeTemplates",
@@ -20174,6 +20284,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/nodeTypes",
@@ -20864,6 +20979,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/packetMirrorings",
@@ -22044,6 +22164,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/publicDelegatedPrefixes",
@@ -23379,6 +23504,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/commitments",
@@ -24879,6 +25009,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/healthCheckServices",
@@ -29190,6 +29325,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/notificationEndpoints",
@@ -32686,6 +32826,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/reservations",
@@ -33196,6 +33341,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/resourcePolicies",
@@ -33656,6 +33806,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/routers",
@@ -34859,6 +35014,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/securityPolicies",
@@ -35409,6 +35569,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/serviceAttachments",
@@ -36247,6 +36412,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/sslCertificates",
@@ -36512,6 +36682,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/sslPolicies",
@@ -36870,6 +37045,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/storagePoolTypes",
@@ -37035,6 +37215,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/storagePools",
@@ -37610,6 +37795,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/subnetworks",
@@ -38472,6 +38662,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetHttpProxies",
@@ -38821,6 +39016,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetHttpsProxies",
@@ -39335,6 +39535,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetInstances",
@@ -39789,6 +39994,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetPools",
@@ -40758,6 +40968,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetTcpProxies",
@@ -41107,6 +41322,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/targetVpnGateways",
@@ -41462,6 +41682,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/urlMaps",
@@ -41890,6 +42115,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/vpnGateways",
@@ -42288,6 +42518,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/vpnTunnels",
@@ -42835,6 +43070,11 @@
               "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
               "location": "query",
               "type": "boolean"
+            },
+            "serviceProjectNumber": {
+              "format": "int64",
+              "location": "query",
+              "type": "string"
             }
           },
           "path": "projects/{project}/aggregated/queuedResources",
@@ -43184,7 +43424,7 @@
       }
     }
   },
-  "revision": "20230912",
+  "revision": "20230920",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -46529,7 +46769,7 @@
           "type": "array"
         },
         "localityLbPolicy": {
-          "description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.",
+          "description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.",
           "enum": [
             "INVALID_LB_POLICY",
             "LEAST_REQUEST",
@@ -53043,7 +53283,7 @@
           "description": "Specifies the duration of auto-created reservations. It represents relative time to future reservation start_time when auto-created reservations will be automatically deleted by GCE. Duration time unit is represented as a count of seconds and fractions of seconds at nanosecond resolution."
         },
         "autoDeleteAutoCreatedReservations": {
-          "description": "Setting for enabling or disabling automatic deletion for auto-created reservation. If omitted or set to true, auto-created reservations will be deleted at Future Reservation's end time (default) or at user's defined timestamp if any of the [auto_created_reservations_delete_time, auto_created_reservations_duration] values is specified. For keeping auto-created reservation indefinitely, this value should be set to false.",
+          "description": "Setting for enabling or disabling automatic deletion for auto-created reservation. If set to true, auto-created reservations will be deleted at Future Reservation's end time (default) or at user's defined timestamp if any of the [auto_created_reservations_delete_time, auto_created_reservations_duration] values is specified. For keeping auto-created reservation indefinitely, this value should be set to false.",
           "type": "boolean"
         },
         "creationTimestamp": {
@@ -54025,6 +54265,7 @@
             "SECURE_BOOT",
             "SEV_CAPABLE",
             "SEV_LIVE_MIGRATABLE",
+            "SEV_LIVE_MIGRATABLE_V2",
             "SEV_SNP_CAPABLE",
             "TDX_CAPABLE",
             "UEFI_COMPATIBLE",
@@ -54032,6 +54273,7 @@
             "WINDOWS"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -54253,7 +54495,7 @@
       "type": "object"
     },
     "HealthCheck": {
-      "description": "Represents a Health Check resource. Google Compute Engine has two Health Check resources: * [Global](/compute/docs/reference/rest/alpha/healthChecks) * [Regional](/compute/docs/reference/rest/alpha/regionHealthChecks) Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Traffic Director must use global health checks (`compute.v1.healthChecks`). Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.healthChecks`). External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.healthChecks`). Backend service-based network load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Target pool-based network load balancers must use legacy HTTP health checks (`compute.v1.httpHealthChecks`). For more information, see Health checks overview.",
+      "description": "Represents a health check resource. Google Compute Engine has two health check resources: * [Regional](/compute/docs/reference/rest/alpha/regionHealthChecks) * [Global](/compute/docs/reference/rest/alpha/healthChecks) These health check resources can be used for load balancing and for autohealing VMs in a managed instance group (MIG). **Load balancing** The following load balancer can use either regional or global health check: * Internal TCP/UDP load balancer The following load balancers require regional health check: * Internal HTTP(S) load balancer * Backend service-based network load balancer Traffic Director and the following load balancers require global health check: * External HTTP(S) load balancer * TCP proxy load balancer * SSL proxy load balancer The following load balancer require [legacy HTTP health checks](/compute/docs/reference/rest/v1/httpHealthChecks): * Target pool-based network load balancer **Autohealing in MIGs** The health checks that you use for autohealing VMs in a MIG can be either regional or global. For more information, see Set up an application health check and autohealing. For more information, see Health checks overview.",
       "id": "HealthCheck",
       "properties": {
         "checkIntervalSec": {
@@ -60573,7 +60815,7 @@
       "type": "object"
     },
     "InstanceTemplate": {
-      "description": "Represents an Instance Template resource. You can use instance templates to create VM instances and managed instance groups. For more information, read Instance Templates.",
+      "description": "Represents an Instance Template resource. Google Compute Engine has two Instance Template resources: * [Global](/compute/docs/reference/rest/alpha/instanceTemplates) * [Regional](/compute/docs/reference/rest/alpha/regionInstanceTemplates) You can reuse a global instance template in different regions whereas you can use a regional instance template in a specified region only. If you want to reduce cross-region dependency or achieve data residency, use a regional instance template. To create VMs, managed instance groups, and reservations, you can use either global or regional instance templates. For more information, read Instance Templates.",
       "id": "InstanceTemplate",
       "properties": {
         "creationTimestamp": {
@@ -62149,7 +62391,7 @@
           "type": "boolean"
         },
         "availableFeatures": {
-          "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - MACSEC If present then the interconnect was created on MACsec capable hardware ports. If not present then the interconnect is provisioned on non-MACsec capable ports and MACsec enablement will fail.",
+          "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - MACSEC If present then the Interconnect connection is provisioned on MACsec capable hardware ports. If not present then the Interconnect connection is provisioned on non-MACsec capable ports and MACsec isn't supported and enabling MACsec fails.",
           "items": {
             "enum": [
               "IF_MACSEC"
@@ -62256,7 +62498,7 @@
         },
         "macsec": {
           "$ref": "InterconnectMacsec",
-          "description": "Configuration to enable Media Access Control security (MACsec) on the Interconnect connection between Google and your on-premises router."
+          "description": "Configuration that enables Media Access Control security (MACsec) on the Cloud Interconnect connection between Google and your on-premises router."
         },
         "macsecEnabled": {
           "description": "Enable or disable MACsec on this Interconnect connection. MACsec enablement fails if the MACsec object is not specified.",
@@ -62302,7 +62544,7 @@
           "type": "string"
         },
         "requestedFeatures": {
-          "description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - MACSEC If specified then the interconnect will be created on MACsec capable hardware ports. If not specified, the default value is false, which will allocate non-MACsec capable ports first if available. This parameter can only be provided during interconnect INSERT and cannot be changed using interconnect PATCH.",
+          "description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - MACSEC If specified then the connection is created on MACsec capable hardware ports. If not specified, the default value is false, which allocates non-MACsec capable ports first if available. This parameter can be provided only with Interconnect INSERT. It isn't valid for Interconnect PATCH.",
           "items": {
             "enum": [
               "IF_MACSEC"
@@ -63824,7 +64066,7 @@
       "type": "object"
     },
     "InterconnectMacsec": {
-      "description": "Configuration information for enabling Media Access Control security (MACsec) on this Interconnect connection between Google and your on-premises router.",
+      "description": "Configuration information for enabling Media Access Control security (MACsec) on this Cloud Interconnect connection between Google and your on-premises router.",
       "id": "InterconnectMacsec",
       "properties": {
         "failOpen": {
@@ -63832,7 +64074,7 @@
           "type": "boolean"
         },
         "preSharedKeys": {
-          "description": "Required. A keychain placeholder describing a set of named key objects along with their start times. A MACsec CKN/CAK will be generated for each key in the key chain. Google router will automatically pick the key with the most recent startTime when establishing or re-establishing a MACsec secure link.",
+          "description": "Required. A keychain placeholder describing a set of named key objects along with their start times. A MACsec CKN/CAK is generated for each key in the key chain. Google router automatically picks the key with the most recent startTime when establishing or re-establishing a MACsec secure link.",
           "items": {
             "$ref": "InterconnectMacsecPreSharedKey"
           },
@@ -69074,6 +69316,18 @@
           "enum": [
             "LEGACY",
             "STANDARD"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "bgpInterRegionCost": {
+          "description": "Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD_COST_TO_MED.",
+          "enum": [
+            "ADD_COST_TO_MED",
+            "DEFAULT"
           ],
           "enumDescriptions": [
             "",
@@ -79849,7 +80103,7 @@
         },
         "priority": {
           "description": "The evaluation priority for this term, which must be between 0 (inclusive) and 2^31 (exclusive), and unique within the list.",
-          "format": "uint32",
+          "format": "int32",
           "type": "integer"
         }
       },
@@ -80707,7 +80961,7 @@
               "ENDPOINT_TYPE_VM"
             ],
             "enumDescriptions": [
-              "This is used for Regional Internal/External HTTP(S) and TCP Proxy load balancer endpoints.",
+              "This is used for regional Application Load Balancers (internal and external) and regional proxy Network Load Balancers (internal and external) endpoints.",
               "This is used for Secure Web Gateway endpoints.",
               "This is the default."
             ],
@@ -83860,12 +84114,17 @@
           "description": "The URL of a forwarding rule with loadBalancingScheme INTERNAL* that is serving the endpoint identified by this service attachment.",
           "type": "string"
         },
+        "propagatedConnectionLimit": {
+          "description": "The number of VPCs to which this endpoint is allowed to be propagated per accept list resource (project or network). For ACCEPT_AUTOMATIC service attachment, this limit is default to per project.",
+          "format": "uint32",
+          "type": "integer"
+        },
         "pscServiceAttachmentId": {
           "$ref": "Uint128",
           "description": "[Output Only] An 128-bit global unique ID of the PSC service attachment."
         },
         "reconcileConnections": {
-          "description": "This flag determines whether a consumer accept/reject list change can reconcile the statuses of existing ACCEPTED or REJECTED PSC endpoints. - If false, connection policy update will only affect existing PENDING PSC endpoints. Existing ACCEPTED/REJECTED endpoints will remain untouched regardless how the connection policy is modified . - If true, update will affect both PENDING and ACCEPTED/REJECTED PSC endpoints. For example, an ACCEPTED PSC endpoint will be moved to REJECTED if its project is added to the reject list. For newly created service attachment, this boolean defaults to true.",
+          "description": "This flag determines whether a consumer accept/reject list change can reconcile the statuses of existing ACCEPTED or REJECTED PSC endpoints. - If false, connection policy update will only affect existing PENDING PSC endpoints. Existing ACCEPTED/REJECTED endpoints will remain untouched regardless how the connection policy is modified . - If true, update will affect both PENDING and ACCEPTED/REJECTED PSC endpoints. For example, an ACCEPTED PSC endpoint will be moved to REJECTED if its project is added to the reject list. For newly created service attachment, this boolean defaults to false.",
           "type": "boolean"
         },
         "region": {
@@ -86681,6 +86940,20 @@
       "description": "Represents a zonal storage pool resource.",
       "id": "StoragePool",
       "properties": {
+        "capacityProvisioningType": {
+          "description": "Provisioning type of the byte capacity of the pool.",
+          "enum": [
+            "ADVANCED",
+            "STANDARD",
+            "UNSPECIFIED"
+          ],
+          "enumDescriptions": [
+            "Advanced provisioning \"thinly\" allocates the related resource.",
+            "Standard provisioning allocates the related resource for the pool disks' exclusive use.",
+            ""
+          ],
+          "type": "string"
+        },
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
@@ -86719,6 +86992,20 @@
           },
           "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+          "type": "string"
+        },
+        "performanceProvisioningType": {
+          "description": "Provisioning type of the performance-related parameters of the pool, such as throughput and IOPS.",
+          "enum": [
+            "ADVANCED",
+            "STANDARD",
+            "UNSPECIFIED"
+          ],
+          "enumDescriptions": [
+            "Advanced provisioning \"thinly\" allocates the related resource.",
+            "Standard provisioning allocates the related resource for the pool disks' exclusive use.",
+            ""
+          ],
           "type": "string"
         },
         "provisionedIops": {
@@ -92942,7 +93229,7 @@
         },
         "startTimeWindow": {
           "$ref": "UpcomingMaintenanceTimeWindow",
-          "description": "[Output Only] The start time window of the maintenance disruption. DEPRECATED: Use window_start_time instead."
+          "description": "[Output Only] The start time window of the maintenance disruption. DEPRECATED: Use window_start_time instead. TimeWindow is a container for two strings that represent timestamps in \"yyyy-MM-dd'T'HH:mm:ssZ\" text format."
         },
         "time": {
           "description": "[Output Only] The time when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use window_start_time instead.",
@@ -92974,7 +93261,7 @@
       "type": "object"
     },
     "UpcomingMaintenanceTimeWindow": {
-      "description": "Represents a window of time using two timestamps: `earliest` and `latest`. This timestamp values are in RFC3339 text format.",
+      "description": "Represents a window of time using two timestamps: `earliest` and `latest`.",
       "id": "UpcomingMaintenanceTimeWindow",
       "properties": {
         "earliest": {
