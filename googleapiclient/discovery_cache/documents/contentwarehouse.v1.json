@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20230918",
+  "revision": "20230925",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -19491,7 +19491,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerDeviceTargetingFeaturesStates": {
-      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 10",
+      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 13",
       "id": "AssistantGroundingRankerDeviceTargetingFeaturesStates",
       "properties": {
         "distance": {
@@ -19522,8 +19522,20 @@
           "description": "Indicates that the device is running a media session that is currently playing.",
           "type": "boolean"
         },
-        "hasSameStructure": {
-          "description": "Indicates whether or not the device is in the same structure as any local or hearing devices.",
+        "inSameRoomAsHearingDevice": {
+          "description": "Indicates whether or not the device is in the same room as any hearing devices. Does not consider the device itself or the local device as a hearing device. If no valid hearing devices, this field is not set.",
+          "type": "boolean"
+        },
+        "inSameRoomAsLocalDevice": {
+          "description": "Indicates whether or not the device is in the same room as the local device. If the device is the local device, this field is not set.",
+          "type": "boolean"
+        },
+        "inSameStructureAsHearingDevice": {
+          "description": "Indicates whether or not the device is in the same structure as any hearing devices. Does not consider the device itself or the local device as a hearing device. If no valid hearing devices, this field is not set.",
+          "type": "boolean"
+        },
+        "inSameStructureAsLocalDevice": {
+          "description": "Indicates whether or not the device is in the same structure as the local device. If the device is the local device, this field is not set.",
           "type": "boolean"
         },
         "isDocked": {
@@ -22120,9 +22132,11 @@
             "PLAY_MEDIA_VIDEO",
             "ALARMS_AND_TIMERS",
             "HEALTH_AND_FITNESS",
-            "PLAY_MEDIA_RADIO"
+            "PLAY_MEDIA_RADIO",
+            "PLAY_TVM"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -22325,7 +22339,6 @@
             "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP",
             "RANKER_NAME_CONSOLIDATED_PFR_HGR",
             "RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED",
-            "RANKER_NAME_EXPERIMENTAL_PFR_SAGE_NEW_DOMAINS",
             "RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED_V2",
             "RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED_V2",
             "RANKER_NAME_CONSOLIDATED_PFR_HGR_PODCAST",
@@ -22340,7 +22353,6 @@
             "Name for experimental HGR model for Comms.",
             "Name for consolidated PFR and HGR ranker.",
             "Name for consolidated PFR, HGRv2 and comms ranker.",
-            "Name for experimental PFR ranker for Sage and new domains.",
             "Name for consolidated PFR, HGRv2 and comms ranker v2.",
             "Name for experimental calibrated HGR model for Comms V2.",
             "Name for HGR ranker for podcast based on RANKER_NAME_CONSOLIDATED_PFR_HGR_V2.",
@@ -37544,8 +37556,7 @@
           "description": "RESERVED"
         },
         "transitStation": {
-          "$ref": "GeostoreTransitStationProto",
-          "description": "RESERVED"
+          "$ref": "GeostoreTransitStationProto"
         },
         "type": {
           "description": "The type of this feature -- see comments above.",
@@ -39227,14 +39238,14 @@
       "id": "GeostoreInternalSegmentProto",
       "properties": {
         "disallowedConnections": {
-          "description": "RESERVED",
+          "description": "A list of lane connections that are explicitly not allowed to be added. NOTE: This should never reference existing lane connections on this segment.",
           "items": {
             "$ref": "GeostoreInternalSegmentProtoLaneConnectionReference"
           },
           "type": "array"
         },
         "disallowedPrimaryConnection": {
-          "description": "RESERVED",
+          "description": "A list of lane connections which cannot have the primary_connection bit set.",
           "items": {
             "$ref": "GeostoreInternalSegmentProtoLaneConnectionReference"
           },
@@ -48355,7 +48366,7 @@
           "type": "array"
         },
         "type": {
-          "description": "clang-format on The type of restriction. This is not a condition, but rather tells you what kind of restriction it is. This field should always be set.",
+          "description": "LINT.ThenChange(//depot/google3/google/geo/entities/v1/fields/segment.proto) clang-format on The type of restriction. This is not a condition, but rather tells you what kind of restriction it is. This field should always be set.",
           "enum": [
             "RESTRICTION_TRAVEL_RESTRICTED",
             "RESTRICTION_ILLEGAL",
@@ -48371,6 +48382,7 @@
             "RESTRICTION_TOLL_BOOTH",
             "RESTRICTION_USAGE_FEE_REQUIRED",
             "RESTRICTION_ENTRANCE_FEE_REQUIRED",
+            "RESTRICTION_VIGNETTE_REQUIRED",
             "RESTRICTION_ADVISORY",
             "RESTRICTION_HIGH_CRIME",
             "RESTRICTION_POLITICALLY_SENSITIVE",
@@ -48393,6 +48405,7 @@
             "This restriction type may be used only for restrictions of STYLE_TURN, or STYLE_CONTIGUOUS with a subpath of length 2. The intersection at which the turn is restricted is the place of the toll booth.",
             "Traveling on the associated subpath requires a fee to be paid.",
             "Similar to RESTRICTION_USAGE_FEE_REQUIRED but instead of a fee for the usage, the fee is required for entering a special area (e.g. an amusement park). Also in contrast to RESTRICTION_USAGE_FEE_REQUIRED this restriction is supposed to be applied only to the segments that enter into the isolated restricted area from the outer world. Therefore there are two important points to consider when modeling data this way: 1) Every path that (exactly once) enters the restricted area should have exactly one such restriction (it does not matter whether it is a segment or subpath restriction). 2) All entrances have to be modeled consistently. It is recommended that the restriction is consistently applied to paths entering the area and not applied to paths leaving the area. NOTE: The above points are important because an additive penalty is applied for each individual restriction that appear on a path.",
+            "Similar to RESTRICTION_USAGE_FEE_REQUIRED but models a specific type of road tax called a 'vignette', used in certain European countries. Traveling on the associated subpath requires the driver or vehicle to have paid the road tax, documented by receipt of a physical or electronic vignette.",
             "Restrictions in the RESTRICTION_ADVISORY category refer to paths where travel is permitted, but may not be prudent or is cumbersome. Since this is often a matter of opinion, clients may choose not to make use of this information or not display it directly to the user.",
             "",
             "",
@@ -124899,7 +124912,7 @@
             "MS Advanced Systems Format container.",
             "For Bzip2 compressed files.",
             "For binary content",
-            "that is OK to be compressed. Equivalent to application/octet-stream but listed in net/http/gzip_rules.txt as safe to gzip.",
+            "that is OK to be compressed. Equivalent to application/octet-stream but listed in net/http/compression_content_types.textproto as safe to gzip.",
             "Calendar files.",
             "",
             "BMP image files.",
@@ -126397,6 +126410,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_CASH_FRENZY_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_WAR_PLANET_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ESKYFUN_LEGENDS_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL",
@@ -126414,6 +126428,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_CASH_FRENZY_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_WAR_PLANET_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ESKYFUN_LEGENDS_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL",
@@ -127018,6 +127033,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_CASH_FRENZY_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_WAR_PLANET_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ESKYFUN_LEGENDS_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL",
@@ -127035,6 +127051,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_CASH_FRENZY_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_WAR_PLANET_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ESKYFUN_LEGENDS_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL",
@@ -127103,8 +127120,10 @@
               "GE_IS_SCHEDULED_COFFEE_CARD",
               "GE_IS_SCHEDULED_QUEST",
               "GE_IS_SCHEDULED_LOYALTY_MULTIPLIER",
+              "GE_IS_SCHEDULED_POST_PURCHASE_OFFER",
               "GE_IS_USER_OPT_IN_P13N",
               "GE_LOYALTY_PURCHASE_QUEST_INDIVIDUALIZATION_EXPERIMENT",
+              "GE_POST_PURCHASE_OFFER_INDIVIDUALIZATION_EXPERIMENT",
               "IAP_SKU_DEALS_LIVE_OP_DEALS_HOME_USER_LEVEL",
               "IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL",
               "FEATURING_AHC_OR_FHR_TRIGGERED_USER_LEVEL",
@@ -127148,6 +127167,8 @@
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V2",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_1",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_2",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_3",
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
@@ -127799,6 +127820,8 @@
               false,
               false,
               false,
+              false,
+              false,
               true,
               false,
               false,
@@ -128460,7 +128483,13 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
               true,
+              false,
+              false,
               false,
               false,
               false,
@@ -129053,6 +129082,8 @@
               "",
               "",
               "Test Codes for in-app offers at session level.",
+              "",
+              "",
               "",
               "",
               "",
@@ -129714,6 +129745,8 @@
               "",
               "",
               "",
+              "",
+              "",
               "User saw/would have seen the subscription one time pass offer",
               "",
               "",
@@ -129775,8 +129808,10 @@
               "",
               "",
               "",
+              "",
               "Test codes for GE DSA opt-in users.",
               "Test code for the loyalty purchase quest I15n experiment",
+              "Test code for the P3-GE Post Purchase Offer integration / i15n experiment",
               "User level test code for tracking users who should see the IAP Sku Deals liveops card.",
               "User level test code for tracking users who should see the IAP Sku Games Home liveops card.",
               "User level test code for tracking users who should see the featuring AHC or FHR.",
@@ -129819,6 +129854,8 @@
               "User level test code for users who have any purchase card abandon behavior in the last 7 day (controlled by LAST_7D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for link biometrics with impression cap and foped user setup.",
               "User level test code for link biometrics with impression cap and foped user setup.",
+              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
+              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
@@ -147888,7 +147925,7 @@
             "MUSIC_PRIMARY_RECORDING",
             "MUSIC_RECORDING_ARTIST",
             "MUSIC_FEATURED_ARTIST",
-            "MUSIC_SHUNA_REMIX_ARTIST",
+            "MUSIC_GENERATED_REMIX_ARTIST",
             "MUSIC_COMPOSITION",
             "MUSIC_ORIGINAL_ARTIST_OF_COVER",
             "MUSIC_ORIGINAL_RECORDING_CLUSTER_OF_COVER",
