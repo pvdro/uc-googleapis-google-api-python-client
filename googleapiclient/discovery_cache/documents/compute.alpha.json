@@ -43424,7 +43424,7 @@
       }
     }
   },
-  "revision": "20230920",
+  "revision": "20230923",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -46171,7 +46171,7 @@
           "type": "string"
         },
         "timeZone": {
-          "description": "The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: https://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of \u201cUTC\u201d if left empty.",
+          "description": "The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: https://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of \"UTC\" if left empty.",
           "type": "string"
         }
       },
@@ -66453,6 +66453,10 @@
           "$ref": "PreservedState",
           "description": "[Output Only] Preserved state generated based on stateful policy for this instance."
         },
+        "propertiesFromFlexibilityPolicy": {
+          "$ref": "ManagedInstancePropertiesFromFlexibilityPolicy",
+          "description": "[Output Only] Instance properties selected for this instance resulting from InstanceFlexibilityPolicy."
+        },
         "tag": {
           "deprecated": true,
           "description": "[Output Only] Tag describing the version.",
@@ -66606,6 +66610,16 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ManagedInstancePropertiesFromFlexibilityPolicy": {
+      "id": "ManagedInstancePropertiesFromFlexibilityPolicy",
+      "properties": {
+        "machineType": {
+          "description": "The machine type to be used for this instance.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -89558,7 +89572,7 @@
       "type": "object"
     },
     "TargetHttpProxy": {
-      "description": "Represents a Target HTTP Proxy resource. Google Compute Engine has two Target HTTP Proxy resources: * [Global](/compute/docs/reference/rest/alpha/targetHttpProxies) * [Regional](/compute/docs/reference/rest/alpha/regionTargetHttpProxies) A target HTTP proxy is a component of GCP HTTP load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTP proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
+      "description": "Represents a Target HTTP Proxy resource. Google Compute Engine has two Target HTTP Proxy resources: * [Global](/compute/docs/reference/rest/alpha/targetHttpProxies) * [Regional](/compute/docs/reference/rest/alpha/regionTargetHttpProxies) A target HTTP proxy is a component of Google Cloud HTTP load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTP proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
       "id": "TargetHttpProxy",
       "properties": {
         "creationTimestamp": {
