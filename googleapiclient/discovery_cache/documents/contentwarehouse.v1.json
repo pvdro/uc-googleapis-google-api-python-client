@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20230929",
+  "revision": "20231006",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3729,7 +3729,10 @@
             "PERSONAL_AGENT_AFFINITY",
             "MOBILE_HARNESS_AFFINITY",
             "LOOKER_STUDIO_PRO_AFFINITY",
-            "SUPPORT_CLASSIFICATION_UI_AFFINITY"
+            "SUPPORT_CLASSIFICATION_UI_AFFINITY",
+            "NOTEBOOKLM_AFFINITY",
+            "PLAYSPACE_LABS_AFFINITY",
+            "ZOMBIE_CLOUD_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -3999,6 +4002,9 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4016,6 +4022,9 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -7087,12 +7096,14 @@
           "type": "array"
         },
         "contactCreateContextInfo": {
+          "description": "ContactCreateContextInfo has a timestamp timestamp and additional metadata (e.g. the source of the creation) for when the contact was created. See also `ContactEditContextInfo`.",
           "items": {
             "$ref": "AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo"
           },
           "type": "array"
         },
         "contactEditContextInfo": {
+          "description": "ContactEditContextInfo is a timestamp and additional metadata (e.g. the source of the edit) for the last 'human initiated edit'. See also `ContactCreateContextInfo`.",
           "items": {
             "$ref": "AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo"
           },
@@ -14692,6 +14703,7 @@
           "type": "boolean"
         },
         "isOnDeviceArbitrationSupported": {
+          "deprecated": true,
           "description": "Capabilities related to on-device arbitration(go/arbitration-on-device).",
           "type": "boolean"
         },
@@ -14700,6 +14712,7 @@
           "type": "boolean"
         },
         "isOnDeviceUnderstandingSupported": {
+          "deprecated": true,
           "description": "This may be used by NGA. E.g. if understanding happens on device, we can have more aggressive logic when fulfilling some features on the server side, like teleport.",
           "type": "boolean"
         }
@@ -15617,6 +15630,7 @@
         },
         "marketplaceDisclosure": {
           "$ref": "AssistantApiSettingsMarketplaceDisclosure",
+          "deprecated": true,
           "description": "See go/marketplace-disclosure for more info."
         },
         "masqueradeMode": {
@@ -24077,21 +24091,6 @@
       "properties": {
         "csaiClassification": {
           "description": "This field is only filled for the CSAI vertical.",
-          "enum": [
-            "NOT_PROTECTED",
-            "PROTECTED",
-            "STRONGLY_PROTECTED"
-          ],
-          "enumDescriptions": [
-            "Contract: (STRONGLY_PROTECTED & PROTECTED) == PROTECTED",
-            "",
-            ""
-          ],
-          "type": "string"
-        },
-        "csaiRegexpHighConfidenceClassification": {
-          "deprecated": true,
-          "description": "DO NOT USE: This field is temporary and should be used only for the CSAI Onebox. This field is the result of the regular expression classifier alone as opposed to a combination with Seti classifier as in csai_classification field.",
           "enum": [
             "NOT_PROTECTED",
             "PROTECTED",
@@ -32667,15 +32666,15 @@
           "type": "number"
         },
         "translate": {
-          "$ref": "GeostoreCityJsonProtoTransformXyzVector",
+          "$ref": "GeostoreCityJsonProtoTransformTranslate",
           "description": "Offset of each vertex in the new coordinate system relative to the old coordinate system."
         }
       },
       "type": "object"
     },
-    "GeostoreCityJsonProtoTransformXyzVector": {
-      "description": "Vector of length three whose values respectively correspond to the x, y, and z axes.",
-      "id": "GeostoreCityJsonProtoTransformXyzVector",
+    "GeostoreCityJsonProtoTransformTranslate": {
+      "description": "How the object will be moved along the x, y, and z axes, respectively.",
+      "id": "GeostoreCityJsonProtoTransformTranslate",
       "properties": {
         "x": {
           "format": "double",
@@ -52300,7 +52299,7 @@
       "type": "object"
     },
     "GoogleAssistantAccessoryV1DeviceState": {
-      "description": "Information about the state of the device. This contains any state that Assistant may need to know about in order to fulfill requests, for example which timers and alarms are set. Next ID: 11",
+      "description": "Information about the state of the device. This contains any state that Assistant may need to know about in order to fulfill requests, for example which timers and alarms are set. Next ID: 13",
       "id": "GoogleAssistantAccessoryV1DeviceState",
       "properties": {
         "alarmState": {
@@ -52328,6 +52327,15 @@
         "fitnessActivitiesState": {
           "$ref": "GoogleAssistantEmbeddedV1FitnessActivities",
           "description": "Information about on-device fitness activities. For devices that support fitness activities, all on-device fitness activities must be sent up with the DeviceState in order for Assistant Server to be able to perform operations on them."
+        },
+        "installedApps": {
+          "$ref": "GoogleAssistantAccessoryV1DeviceStateInstalledAppsState",
+          "description": "Information about apps currently installed on device."
+        },
+        "installedAppsZlib": {
+          "description": "This contains a zlib-compressed binary-encoded `InstalledAppsState` proto message.",
+          "format": "byte",
+          "type": "string"
         },
         "timerState": {
           "$ref": "GoogleAssistantEmbeddedV1Timers",
@@ -53318,6 +53326,20 @@
               "Assistant Spoken Notification Setting"
             ],
             "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GoogleAssistantAccessoryV1DeviceStateInstalledAppsState": {
+      "description": "State of the apps currently installed on the device.",
+      "id": "GoogleAssistantAccessoryV1DeviceStateInstalledAppsState",
+      "properties": {
+        "apps": {
+          "description": "List of apps currently installed on the device.",
+          "items": {
+            "$ref": "AssistantApiCoreTypesProvider"
           },
           "type": "array"
         }
@@ -90803,6 +90825,8 @@
             "MOBILE_HARNESS",
             "LOOKER_STUDIO_PRO",
             "SUPPORT_CLASSIFICATION_UI",
+            "NOTEBOOKLM",
+            "ZOMBIE_CLOUD",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -91385,6 +91409,8 @@
             false,
             true,
             true,
+            false,
+            false,
             false,
             false,
             false,
@@ -92109,6 +92135,8 @@
             "Mobile Harness Team contact: omnilab-lmp@google.com",
             "Looker Studio Pro Team contact: da-cloudbi-india-ls-adminexp@google.com",
             "Support Classification Ui Team contact: support-classification-eng@google.com",
+            "Notebooklm Team contact: labs-tailwind-eng-team@google.com",
+            "Zombie Cloud Team contact: zombie-cloud-eng@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -110380,6 +110408,30 @@
       },
       "type": "object"
     },
+    "RepositoryWebrefMetaTagIndices": {
+      "description": "Identifies the source of the Meta Content Tag segment in the Cdoc https://www.w3schools.com/tags/tag_meta.asp",
+      "id": "RepositoryWebrefMetaTagIndices",
+      "properties": {
+        "index": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "metaName": {
+          "enum": [
+            "OTHER",
+            "DESCRIPTION",
+            "KEYWORDS"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RepositoryWebrefNameDebugInfo": {
       "description": "Collects signals from one query used for prior learning.",
       "id": "RepositoryWebrefNameDebugInfo",
@@ -111865,6 +111917,10 @@
         "jgnIndex": {
           "$ref": "RepositoryWebrefJuggernautIndices",
           "description": "Pointer to the proto in the cdoc and index within the proto for Spore."
+        },
+        "metaTagIndex": {
+          "$ref": "RepositoryWebrefMetaTagIndices",
+          "description": "Informs about the 'name' attribute of the referenced tag."
         },
         "queryIndex": {
           "$ref": "RepositoryWebrefQueryIndices",
@@ -121019,6 +121075,22 @@
           "description": "Affinity score for the cloud contact.",
           "format": "double",
           "type": "number"
+        },
+        "suggestionConfidence": {
+          "description": "Indicator of the confidence in suggestion relevance.",
+          "enum": [
+            "CONFIDENCE_UNSPECIFIED",
+            "CONFIDENCE_LOW",
+            "CONFIDENCE_MEDIUM",
+            "CONFIDENCE_HIGH"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -121193,7 +121265,7 @@
       "type": "object"
     },
     "SocialGraphWireProtoPeopleapiExtensionPeopleStackPersonExtendedData": {
-      "description": "NEXT_ID: 5",
+      "description": "NEXT_ID: 6",
       "id": "SocialGraphWireProtoPeopleapiExtensionPeopleStackPersonExtendedData",
       "properties": {
         "birthdayStatus": {
@@ -121234,6 +121306,21 @@
             "HIDDEN"
           ],
           "enumDescriptions": [
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "suggestionConfidence": {
+          "enum": [
+            "CONFIDENCE_UNSPECIFIED",
+            "CONFIDENCE_LOW",
+            "CONFIDENCE_MEDIUM",
+            "CONFIDENCE_HIGH"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
             "",
             ""
           ],
@@ -126263,6 +126350,7 @@
               "GEARHEAD_FRX_SENSITIVE_PERMISSION_SCREEN_SEEN",
               "POST_PURCHASE_ITEM_UPSELL_SESSION_LEVEL",
               "POST_PURCHASE_ITEM_UPSELL_WAVE_2_SESSION_LEVEL",
+              "POST_PURCHASE_ITEM_UPSELL_WAVE_2_SESSION_LEVEL_2",
               "PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_SESSION_LEVEL",
               "FETCH_PROMOTION_BANNER_FROM_P3_SESSION_LEVEL",
               "AVP_SWOOP_10P_OFF_SESSION_LEVEL",
@@ -126760,6 +126848,8 @@
               "BECAUSE_YOU_PLAYED_FIRST_3_ROWS_SESSION_LEVEL",
               "BECAUSE_YOU_INSTALLED_FIRST_3_ROWS_SESSION_LEVEL",
               "LOYALTY_WEEKLY_REWARDS_ICC_FORMAT_NOW_HOME_SESSION_LEVEL",
+              "MULTILINE_SUBSCRIPTION_ADDON_TITLE_SESSION_LEVEL",
+              "PAYTM_WALLET_FAILURE_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -126876,6 +126966,7 @@
               "GEARHEAD_VISUAL_PREVIEW_UNCHAINED_ELIGIBLE",
               "POST_PURCHASE_ITEM_UPSELL_USER_LEVEL",
               "POST_PURCHASE_ITEM_UPSELL_WAVE_2_USER_LEVEL",
+              "POST_PURCHASE_ITEM_UPSELL_WAVE_2_USER_LEVEL_2",
               "PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_USER_LEVEL",
               "DISABLE_TOPUP_EXPERIMENT_CONTROL_GROUP_USER_LEVEL",
               "DISABLE_TOPUP_EXPERIMENT_TREATMENT_GROUP_USER_LEVEL",
@@ -127098,14 +127189,25 @@
               "ELIGIBLE_FOR_COMICS_CLUSTER_AH_USER_LEVEL",
               "HIGH_COMIC_APP_USAGE_USER_LEVEL",
               "MODERATE_COMIC_APP_USAGE_USER_LEVEL",
+              "COMIC_SAMPLING_PICCOMA_INSTALLED_USER_LEVEL",
+              "COMIC_SAMPLING_MANGA_ONE_INSTALLED_USER_LEVEL",
+              "COMIC_SAMPLING_MAGAPOKE_INSTALLED_USER_LEVEL",
+              "COMIC_SAMPLING_JUMP_INSTALLED_USER_LEVEL",
+              "COMIC_SAMPLING_LINE_MANGA_INSTALLED_USER_LEVEL",
+              "COMIC_SAMPLING_ANY_INSTALLED_USER_LEVEL",
               "REDEEM_SAVE_BUYER_SPEND_MODEL_USER_LEVEL",
               "PURCHASE_ADD_FOP_OPTIONS_SCREEN_USER_LEVEL",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_USER_LEVEL",
+              "CART_ABANDONMENT_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
               "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BAKCUP_FOP_IN_FIX_FLOW_USER_LEVEL",
               "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_USER_LEVEL",
               "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_V2_USER_LEVEL",
               "LOYALTY_WEEKLY_REWARDS_ICC_FORMAT_NOW_HOME_USER_LEVEL",
+              "PREREGISTRATION_SHOULD_SEE_NOTIFICATION_DIALOG_USER_LEVEL",
+              "MULTILINE_SUBSCRIPTION_ADDON_TITLE_USER_LEVEL",
+              "UNIFIED_ITEM_RECOMMENDATION_USER_LEVEL",
+              "UNIFIED_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -127635,6 +127737,7 @@
               false,
               false,
               false,
+              false,
               true,
               false,
               false,
@@ -128308,6 +128411,36 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
               false,
               false,
@@ -128320,22 +128453,6 @@
               false,
               false,
               false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
               false,
               false,
               false,
@@ -128983,6 +129100,7 @@
               "",
               "",
               "",
+              "",
               "Test code logged on client side for users who see the Play Pass signup interstitial.",
               "",
               "User eligible for 10% off for next renewal",
@@ -129480,6 +129598,8 @@
               "Session-level test code for Because You Played experiments.",
               "Session-level test code for Because You Played experiments.",
               "Session-level test code for loyalty weekly rewards in Now! home.",
+              "Session-level test code for multiline addon title.",
+              "Session-level test code for Paytm wallet failures.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -129594,6 +129714,7 @@
               "IAP Sales MDP user-level test code. Design: go/play-store-iap-sales-integration-dd",
               "",
               "Test code for when a user was eligible for visual preview while in motion. E.g. received a notification and had visual preview setting enabled.",
+              "",
               "",
               "",
               "Test code logged on client side for users who see the Play Pass signup interstitial.",
@@ -129818,14 +129939,25 @@
               "User-level test code for users eligible for the Comics cluster on AH.",
               "User-level test code for users with high Comics app usage (e.g. >=15 in last 28d ays).",
               "User-level test code for users with high Comics app usage (e.g. >=10 in last 28d ays).",
+              "User-level test code for users who had Piccoma installed for the Comics Sampling Cluster Experiment.",
+              "User-level test code for users who had Manga One installed for the Comics Sampling Cluster Experiment.",
+              "User-level test code for users who had Magapoke installed for the Comics Sampling Cluster Experiment.",
+              "User-level test code for users who had Jump+ installed for the Comics Sampling Cluster Experiment.",
+              "User-level test code for users who had Line Manga installed for the Comics Sampling Cluster Experiment.",
+              "User-level test code for users who had any of the 5 manga apps listed above installed for the Comics Sampling Cluster Experiment.",
               "User level test code for Redeem Save buyer offer study, tracking users who actually get different experience between control and treatment.",
               "User-level test code marking users who have seen the add new fop option screen during purchase flow. This will be used for ranking of add fop options experiments.",
-              "User level test code for SKU Recommendation in Cart Abandonment.",
+              "User level test code for SKU Recommendation in Cart Abandonment, currently used for popular after abandon candidates.",
+              "User level test code for SKU Recommendation in Cart Abandonment, specifically for lower-priced candidates.",
               "User level test code for stored value top-up email reminder.",
               "User level test code for users who are eligible for one-click backup fop in fix flow",
               "User level test code for displaying sub-entitlement benefits on websky.",
               "User level test code for stored value top-up email reminder (V2).",
               "User level test code for loyalty weekly rewards in Now! home.",
+              "User level test code for users who should have seen preregistration notification dialog.",
+              "User level test code for multiline addon title.",
+              "User level test code for unified SKU Recommendations. Used when user is eligible for any SKU Recommendation, currently either cart-abandonment or post-success upsell.",
+              "",
               ""
             ],
             "type": "string"
