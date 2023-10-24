@@ -20875,6 +20875,44 @@
     },
     "publicAdvertisedPrefixes": {
       "methods": {
+        "announce": {
+          "description": "Announces the specified PublicAdvertisedPrefix",
+          "flatPath": "projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/announce",
+          "httpMethod": "POST",
+          "id": "compute.publicAdvertisedPrefixes.announce",
+          "parameterOrder": [
+            "project",
+            "publicAdvertisedPrefix"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "publicAdvertisedPrefix": {
+              "description": "The name of the public advertised prefix. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/announce",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "delete": {
           "description": "Deletes the specified PublicAdvertisedPrefix",
           "flatPath": "projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}",
@@ -21079,6 +21117,44 @@
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/compute"
           ]
+        },
+        "withdraw": {
+          "description": "Withdraws the specified PublicAdvertisedPrefix",
+          "flatPath": "projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/withdraw",
+          "httpMethod": "POST",
+          "id": "compute.publicAdvertisedPrefixes.withdraw",
+          "parameterOrder": [
+            "project",
+            "publicAdvertisedPrefix"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "publicAdvertisedPrefix": {
+              "description": "The name of the public advertised prefix. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/withdraw",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
         }
       }
     },
@@ -21147,6 +21223,51 @@
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/compute",
             "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "announce": {
+          "description": "Announces the specified PublicDelegatedPrefix in the given region.",
+          "flatPath": "projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/announce",
+          "httpMethod": "POST",
+          "id": "compute.publicDelegatedPrefixes.announce",
+          "parameterOrder": [
+            "project",
+            "region",
+            "publicDelegatedPrefix"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "publicDelegatedPrefix": {
+              "description": "The name of the public delegated prefix. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "The name of the region where the public delegated prefix is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/announce",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
           ]
         },
         "delete": {
@@ -21386,6 +21507,51 @@
           "request": {
             "$ref": "PublicDelegatedPrefix"
           },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
+        "withdraw": {
+          "description": "Withdraws the specified PublicDelegatedPrefix in the given region.",
+          "flatPath": "projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/withdraw",
+          "httpMethod": "POST",
+          "id": "compute.publicDelegatedPrefixes.withdraw",
+          "parameterOrder": [
+            "project",
+            "region",
+            "publicDelegatedPrefix"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "publicDelegatedPrefix": {
+              "description": "The name of the public delegated prefix. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "The name of the region where the public delegated prefix is located. It should comply with RFC1035.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/withdraw",
           "response": {
             "$ref": "Operation"
           },
@@ -40049,7 +40215,7 @@
       }
     }
   },
-  "revision": "20231011",
+  "revision": "20231017",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -43209,7 +43375,7 @@
           "type": "string"
         },
         "ipAddressSelectionPolicy": {
-          "description": "Specifies preference of traffic to the backend (from the proxy and from the client for proxyless gRPC). The possible values are: - IPV4_ONLY: Only send IPv4 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv4 health-checks are used to check the health of the backends. This is the default setting. - PREFER_IPV6: Prioritize the connection to the endpoints IPv6 address over its IPv4 address (provided there is a healthy IPv6 address). - IPV6_ONLY: Only send IPv6 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv6 health-checks are used to check the health of the backends. This field is applicable to either: - Advanced Global External HTTPS Load Balancing (load balancing scheme EXTERNAL_MANAGED), - Regional External HTTPS Load Balancing, - Internal TCP Proxy (load balancing scheme INTERNAL_MANAGED), - Regional Internal HTTPS Load Balancing (load balancing scheme INTERNAL_MANAGED), - Traffic Director with Envoy proxies and proxyless gRPC (load balancing scheme INTERNAL_SELF_MANAGED). ",
+          "description": "Specifies a preference for traffic sent from the proxy to the backend (or from the client to the backend for proxyless gRPC). The possible values are: - IPV4_ONLY: Only send IPv4 traffic to the backends of the backend service (Instance Group, Managed Instance Group, Network Endpoint Group), regardless of traffic from the client to the proxy. Only IPv4 health checks are used to check the health of the backends. This is the default setting. - PREFER_IPV6: Prioritize the connection to the endpoint's IPv6 address over its IPv4 address (provided there is a healthy IPv6 address). - IPV6_ONLY: Only send IPv6 traffic to the backends of the backend service (Instance Group, Managed Instance Group, Network Endpoint Group), regardless of traffic from the client to the proxy. Only IPv6 health checks are used to check the health of the backends. This field is applicable to either: - Advanced Global External HTTPS Load Balancing (load balancing scheme EXTERNAL_MANAGED), - Regional External HTTPS Load Balancing, - Internal TCP Proxy (load balancing scheme INTERNAL_MANAGED), - Regional Internal HTTPS Load Balancing (load balancing scheme INTERNAL_MANAGED), - Traffic Director with Envoy proxies and proxyless gRPC (load balancing scheme INTERNAL_SELF_MANAGED). ",
           "enum": [
             "IPV4_ONLY",
             "IPV6_ONLY",
@@ -68275,7 +68441,7 @@
           "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
-            "CAMP_PLUS_MONTHLY",
+            "CAMP_PLUS_PAYGO",
             "CA_STANDARD"
           ],
           "enumDescriptions": [
@@ -68416,7 +68582,7 @@
           "description": "Managed protection tier to be set.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
-            "CAMP_PLUS_MONTHLY",
+            "CAMP_PLUS_PAYGO",
             "CA_STANDARD"
           ],
           "enumDescriptions": [
@@ -68433,6 +68599,18 @@
       "description": "A public advertised prefix represents an aggregated IP prefix or netblock which customers bring to cloud. The IP prefix is a single unit of route advertisement and is announced globally to the internet.",
       "id": "PublicAdvertisedPrefix",
       "properties": {
+        "byoipApiVersion": {
+          "description": "[Output Only] The version of BYOIP API.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "enumDescriptions": [
+            "This public advertised prefix can be used to create both regional and global public delegated prefixes. It usually takes 4 weeks to create or delete a public delegated prefix. The BGP status cannot be changed.",
+            "This public advertised prefix can only be used to create regional public delegated prefixes. Public delegated prefix creation and deletion takes minutes and the BGP status can be modified."
+          ],
+          "type": "string"
+        },
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
@@ -68474,6 +68652,20 @@
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
+        "pdpScope": {
+          "description": "Specifies how child public delegated prefix will be scoped. It could be one of following values: - `REGIONAL`: The public delegated prefix is regional only. The provisioning will take a few minutes. - `GLOBAL`: The public delegated prefix is global only. The provisioning will take ~4 weeks. - `GLOBAL_AND_REGIONAL` [output only]: The public delegated prefixes is BYOIP V1 legacy prefix. This is output only value and no longer supported in BYOIP V2. ",
+          "enum": [
+            "GLOBAL",
+            "GLOBAL_AND_REGIONAL",
+            "REGIONAL"
+          ],
+          "enumDescriptions": [
+            "The public delegated prefix is global only. The provisioning will take ~4 weeks.",
+            "The public delegated prefixes is BYOIP V1 legacy prefix. This is output only value and no longer supported in BYOIP V2.",
+            "The public delegated prefix is regional only. The provisioning will take a few minutes."
+          ],
+          "type": "string"
+        },
         "publicDelegatedPrefixs": {
           "description": "[Output Only] The list of public delegated prefixes that exist for this public advertised prefix.",
           "items": {
@@ -68492,20 +68684,24 @@
         "status": {
           "description": "The status of the public advertised prefix. Possible values include: - `INITIAL`: RPKI validation is complete. - `PTR_CONFIGURED`: User has configured the PTR. - `VALIDATED`: Reverse DNS lookup is successful. - `REVERSE_DNS_LOOKUP_FAILED`: Reverse DNS lookup failed. - `PREFIX_CONFIGURATION_IN_PROGRESS`: The prefix is being configured. - `PREFIX_CONFIGURATION_COMPLETE`: The prefix is fully configured. - `PREFIX_REMOVAL_IN_PROGRESS`: The prefix is being removed. ",
           "enum": [
+            "ANNOUNCED_TO_INTERNET",
             "INITIAL",
             "PREFIX_CONFIGURATION_COMPLETE",
             "PREFIX_CONFIGURATION_IN_PROGRESS",
             "PREFIX_REMOVAL_IN_PROGRESS",
             "PTR_CONFIGURED",
+            "READY_TO_ANNOUNCE",
             "REVERSE_DNS_LOOKUP_FAILED",
             "VALIDATED"
           ],
           "enumDescriptions": [
+            "The prefix is announced to Internet.",
             "RPKI validation is complete.",
             "The prefix is fully configured.",
             "The prefix is being configured.",
             "The prefix is being removed.",
             "User has configured the PTR.",
+            "The prefix is currently withdrawn but ready to be announced.",
             "Reverse DNS lookup failed.",
             "Reverse DNS lookup is successful."
           ],
@@ -68696,6 +68892,18 @@
       "description": "A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.",
       "id": "PublicDelegatedPrefix",
       "properties": {
+        "byoipApiVersion": {
+          "description": "[Output Only] The version of BYOIP API.",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "enumDescriptions": [
+            "This public delegated prefix usually takes 4 weeks to delete, and the BGP status cannot be changed. Announce and Withdraw APIs can not be used on this prefix.",
+            "This public delegated prefix takes minutes to delete. Announce and Withdraw APIs can be used on this prefix to change the BGP status."
+          ],
+          "type": "string"
+        },
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
@@ -68760,12 +68968,16 @@
           "description": "[Output Only] The status of the public delegated prefix, which can be one of following values: - `INITIALIZING` The public delegated prefix is being initialized and addresses cannot be created yet. - `READY_TO_ANNOUNCE` The public delegated prefix is a live migration prefix and is active. - `ANNOUNCED` The public delegated prefix is active. - `DELETING` The public delegated prefix is being deprovsioned. ",
           "enum": [
             "ANNOUNCED",
+            "ANNOUNCED_TO_GOOGLE",
+            "ANNOUNCED_TO_INTERNET",
             "DELETING",
             "INITIALIZING",
             "READY_TO_ANNOUNCE"
           ],
           "enumDescriptions": [
             "The public delegated prefix is active.",
+            "The prefix is announced within Google network.",
+            "The prefix is announced to Internet and within Google.",
             "The public delegated prefix is being deprovsioned.",
             "The public delegated prefix is being initialized and addresses cannot be created yet.",
             "The public delegated prefix is currently withdrawn but ready to be announced."
@@ -77682,6 +77894,10 @@
         "sourceDiskEncryptionKey": {
           "$ref": "CustomerEncryptionKey",
           "description": "The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key."
+        },
+        "sourceDiskForRecoveryCheckpoint": {
+          "description": "The source disk whose recovery checkpoint will be used to create this snapshot.",
+          "type": "string"
         },
         "sourceDiskId": {
           "description": "[Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name.",

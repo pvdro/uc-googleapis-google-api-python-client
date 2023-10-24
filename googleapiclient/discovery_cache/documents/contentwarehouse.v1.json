@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20231006",
+  "revision": "20231011",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3732,7 +3732,8 @@
             "SUPPORT_CLASSIFICATION_UI_AFFINITY",
             "NOTEBOOKLM_AFFINITY",
             "PLAYSPACE_LABS_AFFINITY",
-            "ZOMBIE_CLOUD_AFFINITY"
+            "ZOMBIE_CLOUD_AFFINITY",
+            "RELATIONSHIPS_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -4005,6 +4006,7 @@
             false,
             false,
             false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4022,6 +4024,7 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
             "",
             "",
             "",
@@ -6673,7 +6676,7 @@
           "description": "This field is stored in contact annotations and merged at read-time. It is available with CONTACT_ANNOTATION container type at read time."
         },
         "shortDisplayName": {
-          "description": "Read-only. A possibly shorter version of the user's name. - The purpose of this field is to address the needs of UIs where a full display name might be too large to fit. Instead of relying on `first_name`, which might not be present, `short_display_name` is preferred. - This is only available for PROFILE and DOMAIN_PROFILE container types. - About the actual content in this field: will be the first name when it's visible to the requester, or the same as `display_name`, otherwise. A sample scenario where the first name may not be visible is when the limited profile is returned. For more info, see: http://shortn/_9iV7TJ33la",
+          "description": "NOTE: this is currently NOT IMPLEMENTED due to changed priorities. Clients usually rely on \"first name\" instead, when a short name is needed. Read-only. A possibly shorter version of the user's name. - The purpose of this field is to address the needs of UIs where a full display name might be too large to fit. Instead of relying on `first_name`, which might not be present, `short_display_name` is preferred. - This is only available for PROFILE and DOMAIN_PROFILE container types. - About the actual content in this field: will be the first name when it's visible to the requester, or the same as `display_name`, otherwise. A sample scenario where the first name may not be visible is when the limited profile is returned. For more info, see: http://shortn/_9iV7TJ33la",
           "type": "string"
         },
         "unstructuredName": {
@@ -13122,12 +13125,200 @@
     },
     "AssistantApiCoreTypesSurfaceIdentity": {
       "deprecated": true,
-      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 5 IMPORTANT: The definitions of the SurfaceIdentity and SurfaceVersion protos are being moved to //assistant/api/core_types/governed/surface_identity.proto All existing references will be updated to point to the new location. If you are adding a reference, use the new SurfaceIdentity and SurfaceVersion protos instead of the protos defined here. LINT.IfChange",
+      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 6 IMPORTANT: The definitions of the SurfaceIdentity and SurfaceVersion protos are being moved to //assistant/api/core_types/governed/surface_identity.proto All existing references will be updated to point to the new location. If you are adding a reference, use the new SurfaceIdentity and SurfaceVersion protos instead of the protos defined here. LINT.IfChange",
       "id": "AssistantApiCoreTypesSurfaceIdentity",
       "properties": {
         "deviceId": {
           "$ref": "AssistantApiCoreTypesDeviceId",
           "description": "The identifier of the device."
+        },
+        "legacySurfaceType": {
+          "deprecated": true,
+          "description": "DEPRECATED: The legacy device's surface type enum. NOTE: Prefer using the ontological `surface_type` field above. If you need to access the legacy surface type, please file a bug and add it in your code to migrate to ontological surface type.",
+          "enum": [
+            "UNKNOWN",
+            "ANDROID_ALLO",
+            "ANDROID_AUTO",
+            "ANDROID_THINGS_CUBE",
+            "ANDROID_THINGS_JASPER",
+            "ANDROID_TV",
+            "ANDROID_TV_KIDS",
+            "ANDROID_WEAR",
+            "AR_GLASSES",
+            "ASSISTANT_SDK",
+            "AUDIOWEAR",
+            "BUBBLE_CHARACTERS_IOS",
+            "CAPABILITY_BASED_SURFACE",
+            "CHROMECAST_ASSISTANT",
+            "CHROMECAST_MANHATTAN",
+            "CHROMECAST_SEARCH",
+            "CLOUD_DEVICE",
+            "COMPANION_SCREEN",
+            "DYNAMITE_WEB",
+            "ENSEMBLE",
+            "EYESFREE_AGSA",
+            "EYESFREE_GMM",
+            "GBOARD",
+            "GLASS",
+            "GOOGLE_HOME",
+            "HANGOUTS_CHATBOT",
+            "IOS_ALLO",
+            "IOS_GSA",
+            "IOS_WEAR",
+            "LIBASSISTANT",
+            "LINE_CHATBOT",
+            "MULTIMODAL_AGSA",
+            "NON_ASSISTANT_SURFACE",
+            "OPA_AGSA",
+            "OPA_AGSA_CHROME_OS",
+            "OPA_ANDROID_AUTO",
+            "OPA_ANDROID_LITE",
+            "OPA_ANDROID_SCREENLESS",
+            "OPA_ANDROID_SMART_DISPLAY",
+            "OPA_ANDROID_TABLET",
+            "OPA_CROS",
+            "OPA_GACS",
+            "OPA_IOS",
+            "OPA_IOS_SCREENLESS",
+            "OPA_KAIOS",
+            "OPA_MOBILE_WEB",
+            "RTOS_PHONE",
+            "SMS_CHATBOT",
+            "TELEGRAM_CHATBOT",
+            "TELEPHONE_ASSISTANT",
+            "VERILY_ONDUO",
+            "YOUTUBE_APP",
+            "AGSA_BISTO_FOR_EVAL",
+            "COGSWORTH_FOR_EVAL",
+            "LOCKHART_MIC_FOR_EVAL",
+            "OPA_ANDROID_AUTO_EMBEDDED_FAKE",
+            "SPARK",
+            "WALLE",
+            "UNIT_TESTING"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "Deprecated (never used). Use OPA_ANDROID_AUTO instead.",
+            "Assistant on small screen stationary device.",
+            "",
+            "",
+            "",
+            "",
+            "Assistant on AR Glasses with both visual and audio experiences. Ask ar-assistant@ for details.",
+            "For Assistant SDK gRPC client.",
+            "",
+            "go/assistant-lamda-overview-characters",
+            "Surface for capability based testing.",
+            "For chrome cast assistant web app.",
+            "For chrome cast with assistant + screen (e.g., Google Nest Hub).",
+            "",
+            "Virtual device for event-based triggering, e.g. executing time",
+            "scheduled routines: go/routine-cloud-ex For Quartz.",
+            "",
+            "",
+            "Deprecated. Please use OPA_ANDROID_SCREENLESS.",
+            "",
+            "For Gboard app",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "For standalone libassistant devices.",
+            "LINE 3P messaging app",
+            "Deprecated.",
+            "Surfaces that do not speak to the Assistant, i.e. web HQ",
+            "Assistant on Android phones accessed through the Google App (velvet). This represents neither all of the assistant on android phones (ANDROID_ALLO, VERILY_ONDUO, etc.) nor all of the assistant built on top of AGSA (ANDROID_WEAR, OPA_ANDROID_SCREENLESS, OPA_AGSA_CHROME_OS, etc.).",
+            "Deprecated. Please use OPA_CROS.",
+            "",
+            "This is OPA on Android Go (not part of AGSA)",
+            "Assistant on Nexus with screen off/locked. Use go/bisto device to trigger.",
+            "Assistant on Titan hub mode (go/titan-hubmode-surface). This is OPA Android first party Smart Display devices. The UI experience is built on Opal (Gallium and Flutter) and native Android.",
+            "Assistant on Android tablet",
+            "Assistant on native Chrome OS (go/croissant).",
+            "For assistant on GACS devices (go/gacs-dd). Google Assistant Conversation Service (GACS) defines intents the device accepts. This surface serves the intents in the assistant response.",
+            "",
+            "Assistant on iOS with screen off/locked. Use go/bisto device to trigger.",
+            "Assistant on KaiOS. go/kaiosama",
+            "Assistant on Mobile Web. go/opa-spidey",
+            "Assistant on low-cost RTOS phones (go/conceRTOS).",
+            "",
+            "Telegram 3P messaging app",
+            "Assistant on a phone call (go/telephone).",
+            "",
+            "A Youtube app.",
+            "Eval-only surfaces. These surfaces are not real surfaces. They are only used in intermediate steps of eval query and request generation: 1. Eval samplers (OPA query sampler and Cannery sampler) checks logs and temporarily assigns these surface types to the logs, to put Bisto, Lockhart Mic, ... queries in the correct query pools. 2. Request builders uses these surface types to determine how TaskRequest for Bisto, Lockhart Mic, ... should be built, like whether some user user agent should be used, whether some entry source should be set. The surface types in the generated TaskRequest is still the production surface types, like OPA_ANDROID_SCREENLESS or OPA_AGSA. Temp surface for Bisto Android eval. Will be merged with OPA_ANDROID_SCREENLESS in the future.",
+            "",
+            "",
+            "OPA_ANDROID_AUTO has another sub-surface (embedded) that differs in the reported capabilities, client-ops, flags but uses the same surface_type string of OPA_ANDROID_AUTO. This fake surface would allow running turing2 tests and evals for this embedded surface. Deprecated as of Feb 2019. Please use \"OPA_ANDROID_AUTO_EMBEDDED\" client type for tests and eval. See go/client-onboarding for more details. https://cs.corp.google.com/piper///depot/google3/assistant/assistant_server/tools/util/consts.h?l=32&rcl=247481455",
+            "Unlaunched new surface prototype, ask spark-eng@.",
+            "Wall-E is an Area120 Project building assistant powered robots. The surface is an extended joplin which have same capabilities as a google home adding custom robot features. Currently in active development. Please reach out walle-software@ or bingxin@ for questions. For details see go/walle-as-pipeline-1-pager.",
+            "Surface used for unit-testing purposes. Unit-tests might still require the existence of a \"valid\" SurfaceType to succeed (eg. initialization of the CapabilityBuilder, proto matching, etc.). With the move away from SurfaceType checks, a generic \"TESTING\" SurfaceType can be used for such tests without affecting the test behavior. Unlike the CAPABILITY_BASED_SURFACE, this proto does not have any capabilities or ResponseType tied to it. It should only be used for unit-tests and should not be exposed in the ASDebugger."
+          ],
+          "type": "string"
         },
         "surfaceType": {
           "description": "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. For more details, refer to go/ontologicalize-surface-type.",
@@ -19508,7 +19699,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerDeviceTargetingFeaturesStates": {
-      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 13",
+      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 15",
       "id": "AssistantGroundingRankerDeviceTargetingFeaturesStates",
       "properties": {
         "distance": {
@@ -19570,6 +19761,34 @@
         "isTethered": {
           "description": "Indicate whether the device is tethered to another device.",
           "type": "boolean"
+        },
+        "mediaFocusStateFromHearingDevice": {
+          "description": "Indicates the state of media focus from a separate non-local hearing device.",
+          "enum": [
+            "NO_FOCUS",
+            "HARD_FOCUS",
+            "SOFT_FOCUS"
+          ],
+          "enumDescriptions": [
+            "There is no focus device available or the focus is invalid.",
+            "The focus is valid and there is a playing session on focus device.",
+            "The focus is valid however there is no playing session on focus device and might require confirmation from user (dialog) before proceeding to use focus device."
+          ],
+          "type": "string"
+        },
+        "mediaFocusStateFromLocalDevice": {
+          "description": "Indicates the state of media focus from a separate local device.",
+          "enum": [
+            "NO_FOCUS",
+            "HARD_FOCUS",
+            "SOFT_FOCUS"
+          ],
+          "enumDescriptions": [
+            "There is no focus device available or the focus is invalid.",
+            "The focus is valid and there is a playing session on focus device.",
+            "The focus is valid however there is no playing session on focus device and might require confirmation from user (dialog) before proceeding to use focus device."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -19707,7 +19926,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 19",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 20",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -19780,6 +19999,22 @@
         "isYoutubeMusicSeeking": {
           "description": "Indicates whether this is youtube content seeking music.",
           "type": "boolean"
+        },
+        "mediaAccountType": {
+          "description": "Account Type of the user for the provider",
+          "enum": [
+            "ANONYMOUS_ACCOUNT",
+            "BASIC_SUBSCRIPTION",
+            "PREMIUM_SUBSCRIPTION",
+            "FREE_CONTENT"
+          ],
+          "enumDescriptions": [
+            "User has not signed-in.",
+            "The user has signed-in for an account with basic subscription. This is the case, for example, with Video On Demand (VOD) or for music services such as Google Play Music All Access.",
+            "The user has signed-in for an account with premium subscription. This is the case, for example, with Pay TV services like Flix.",
+            "The user signed-in for free content."
+          ],
+          "type": "string"
         },
         "mediaContentType": {
           "description": "MediaAquaAction::media_content_type from interpretation. It can be used for cross-content type ranking, for example, if a candidate's content type does not match this content type from interpretation, this candidate will be slightly demoted. Also, we might avoid fetching some signals when the content type is generic music, since some content types do not need ranking.",
@@ -22034,7 +22269,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 66",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 68",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -22179,6 +22414,10 @@
         },
         "isMediaControlIntent": {
           "description": "Whether the intent is a media control intent.",
+          "type": "boolean"
+        },
+        "isNspIntent": {
+          "description": "Whether this interpretation was genearted by NSP.",
           "type": "boolean"
         },
         "isPlayGenericMusic": {
@@ -22419,6 +22658,10 @@
           "description": "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256",
           "format": "float",
           "type": "number"
+        },
+        "usesGroundingBox": {
+          "description": "Whether the interpretation should run through grounding box or not.",
+          "type": "boolean"
         },
         "verticalConfidenceScore": {
           "description": "Horizontal feature that stores information about confidence scores for each resolution within the binding set.",
@@ -33164,6 +33407,7 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -33886,6 +34130,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -34427,7 +34672,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B7",
             "ABSTRACT",
             "",
             "",
@@ -34604,6 +34849,7 @@
             "",
             "",
             "",
+            "UMBRELLA",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
             "",
@@ -38759,7 +39005,7 @@
       "properties": {
         "curvature": {
           "$ref": "GeostoreCurvatureProto",
-          "description": "Curvature of the flowline. Note that, curvature can be present even if the flowline doesn't have a track. In which case, curvature will be derived from the segment polyline."
+          "description": "RESERVED"
         },
         "track": {
           "$ref": "GeostoreTrackProto"
@@ -39470,6 +39716,7 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -40192,6 +40439,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -40733,7 +40981,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B7",
             "ABSTRACT",
             "",
             "",
@@ -40910,6 +41158,7 @@
             "",
             "",
             "",
+            "UMBRELLA",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
             "",
@@ -42134,7 +42383,7 @@
               "This name is the ISO 3166-2 country subdivision code.",
               "This name is the country specific ID. For example, China government specifies an admin code for each administrative area (province, city and district).",
               "This name is an IETF BCP 47 language code, for example \"fr-CA\". Previously used for names of locales. See locale.proto for new way of defining this information.",
-              "This name is a timezone identifier in the Olson database, for example \"Europe/Zurich\". All timezones have an Olson identifier, understood by POSIX and Google's i18n/identifiers libraries. This flag applies only to features of TYPE_TIMEZONE type and at most one name should have this flag set",
+              "This name is a timezone identifier in the Olson database, for example \"Europe/Zurich\". All timezones have an Olson identifier, understood by POSIX and Google's i18n/identifiers libraries. This flag applies only to features of TYPE_TIMEZONE type.",
               "This name is the prefix for a phone number, starting with + and followed by a country code. This flag applies only to features of TYPE_PHONE_NUMBER_PREFIX type and at most one name should have this flag set.",
               "This name is the commonly used name for the area code of a phone number, including the national prefix if applicable. This flag applies only to features of TYPE_PHONE_NUMBER_AREA_CODE type and at most one name should have this flag set.",
               "The flag used to indicate the name was transliterated from some other character set. For example, this flag would be set on names transliterated from the Cyrillic or Greek alphabets to a Latin alphabet. The correct approach is to use the Google III language code to specify the appropriate language. For example, Greek transliterated into a Latin alphabet should have a language code of \"el-Latn\".",
@@ -42403,6 +42652,7 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -43125,6 +43375,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -43666,7 +43917,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B7",
             "ABSTRACT",
             "",
             "",
@@ -43843,6 +44094,7 @@
             "",
             "",
             "",
+            "UMBRELLA",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
             "",
@@ -45639,6 +45891,7 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -46361,6 +46614,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -46902,7 +47156,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B7",
             "ABSTRACT",
             "",
             "",
@@ -47079,6 +47333,7 @@
             "",
             "",
             "",
+            "UMBRELLA",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
             "",
@@ -60622,6 +60877,168 @@
       },
       "type": "object"
     },
+    "HumanSensingFaceAttribute": {
+      "description": "Defines a generic attribute. The name field is the name of the attribute (for example beard, glasses, joy). The confidence defines how reliable the given annotation is. For binary attributes it is bounded between 0 and 1 and can be interpreted as the posterior probability. The value field can be used for continuous attributes like age. Information returned or stored in this message may be sensitive from a privacy, policy, or legal point of view. Clients should consult with their p-counsels and the privacy working group (go/pwg) to make sure their use respects Google policies.",
+      "id": "HumanSensingFaceAttribute",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "TYPE_UNKNOWN",
+            "FREE_FORM",
+            "FEMALE",
+            "MALE",
+            "AGE",
+            "NON_HUMAN",
+            "GLASSES",
+            "DARK_GLASSES",
+            "HEADWEAR",
+            "EYES_VISIBLE",
+            "LEFT_EYELID_CLOSED",
+            "RIGHT_EYELID_CLOSED",
+            "MOUTH_OPEN",
+            "FACIAL_HAIR",
+            "LONG_HAIR",
+            "FRONTAL_GAZE",
+            "SMILING",
+            "UNDER_EXPOSED",
+            "BLURRED",
+            "LEFT_EYE_VISIBLE",
+            "RIGHT_EYE_VISIBLE",
+            "LEFT_EAR_VISIBLE",
+            "RIGHT_EAR_VISIBLE",
+            "NOSE_TIP_VISIBLE",
+            "MOUTH_CENTER_VISIBLE",
+            "LOWER_FACE_COVERED",
+            "AMUSEMENT",
+            "ANGER",
+            "CONCENTRATION",
+            "CONFUSION",
+            "CONTENTMENT",
+            "DESIRE",
+            "DISAPPOINTMENT",
+            "DISGUST",
+            "ELATION",
+            "EMBARRASSMENT",
+            "INTEREST",
+            "LOVE",
+            "PAIN",
+            "PRIDE",
+            "RELIEF",
+            "SADNESS",
+            "SURPRISE",
+            "CANDID",
+            "POSED"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "Attribute types that describe the gender of a face. For an attribute if type FEMALE the confidence represent the probability of a face to be from a female person. Similarly, for an attribute of type MALE the confidence is the probability of a face to be from a male person. 4 is reserved for OTHER_GENDER.",
+            "",
+            "Attribute type that represent the age of the face. For an attribute of this type the field value represent the age. Values are assumed to be in the range [0, 95].",
+            "This attributes is used to distinguish actual human faces from other possible face detections like face of sculptures, cartoons faces, and some false detections.",
+            "Attributes types that describes face appearances/configurations (mouth open, eyes visibles and looking into the camera, smiling) and props (glasses, dark glasses, and headwear).",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Attributes for the visibility of face landmarks. The landmarks refers to a single point in the image, so the eyes are visible if their center is visible, the ears are visible if the ear tragion is visible.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "An attribute describing if the lower part of a face is covered by something like a face mask, a scarf or any other type of covering. The expectation is for both the mouth and the nose tip to be covered. This is useful for labeling faces in images captured during the Covid pandemic.",
+            "FeelNet expressions.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "value": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "I18nPhonenumbersPhoneNumber": {
       "description": "The PhoneNumber object that is used by all LibPhoneNumber API's to fully represent a phone number.",
       "id": "I18nPhonenumbersPhoneNumber",
@@ -61125,7 +61542,7 @@
       "type": "object"
     },
     "ImageData": {
-      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 131",
+      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 132",
       "id": "ImageData",
       "properties": {
         "adaboostImageFeaturePorn": {
@@ -61248,6 +61665,10 @@
         "extendedExif": {
           "$ref": "PhotosImageMetadata",
           "description": "The EXIF generated by photos backend team's (more specifically FIFE's) thumbnailer library. This exif model is more comprehensive since a dedicated team is constantly improving it and adding new fields over time. This is currently populated by moonshine for selected corpora."
+        },
+        "faceDetection": {
+          "$ref": "ReneFaceResponse",
+          "description": "Face Detection."
         },
         "featuredImageProp": {
           "$ref": "ImageMonetizationFeaturedImageProperties",
@@ -66057,7 +66478,7 @@
       "type": "object"
     },
     "IndexingDocjoinerDataVersion": {
-      "description": "DataVersion tracks the version of data in CompositeDoc. The notion of \"data\" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name for the fields already onboarded or being onboarded to FDP. Fields without annotation of signal_names or goldmine_annotator_names are not onboarded. Next ID: 538",
+      "description": "DataVersion tracks the version of data in CompositeDoc. The notion of \"data\" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name for the fields already onboarded or being onboarded to FDP. Fields without annotation of signal_names or goldmine_annotator_names are not onboarded. Next ID: 539",
       "id": "IndexingDocjoinerDataVersion",
       "properties": {
         "acceleratedShoppingSignal": {
@@ -66265,6 +66686,9 @@
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "imageembed": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "imageembedDomainNorm": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo",
           "description": "END DATA FIELDS"
         },
@@ -90827,6 +91251,7 @@
             "SUPPORT_CLASSIFICATION_UI",
             "NOTEBOOKLM",
             "ZOMBIE_CLOUD",
+            "RELATIONSHIPS",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -91409,6 +91834,7 @@
             false,
             true,
             true,
+            false,
             false,
             false,
             false,
@@ -92137,6 +92563,7 @@
             "Support Classification Ui Team contact: support-classification-eng@google.com",
             "Notebooklm Team contact: labs-tailwind-eng-team@google.com",
             "Zombie Cloud Team contact: zombie-cloud-eng@google.com",
+            "Relationships Team contact: hana-dev@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -96003,6 +96430,578 @@
       },
       "type": "object"
     },
+    "PhotosVisionServiceFaceFaceParams": {
+      "description": "FaceParams are a collection of parameters of a single face found in an image. WARNING: This message has a jspb target. If you add a new message field inside, either put its definition inside this message as well or add the js file corresponding to the new message to the js_deps and proto_js rules in the BUILD file; otherwise it will break lots of builds. The js file name is the message name all in lowercase letters. Next available id: 40.",
+      "id": "PhotosVisionServiceFaceFaceParams",
+      "properties": {
+        "age": {
+          "description": "The age of the face. Range [0.0, 120.0].",
+          "format": "float",
+          "type": "number"
+        },
+        "angerProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "attribute": {
+          "description": "Attributes for the detected face. Information returned or stored in this message may be sensitive from a privacy, policy, or legal point of view. Clients should consult with their p-counsels and the privacy working group (go/pwg) to make sure their use respects Google policies.",
+          "items": {
+            "$ref": "HumanSensingFaceAttribute"
+          },
+          "type": "array"
+        },
+        "beardProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "blurredProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "boundingBox": {
+          "$ref": "PhotosVisionServiceFaceFaceParamsBoundingBox",
+          "description": "Bounding box around the face. The coordinates of the bounding box are in the original image's scale as returned in ImageParams. The bounding box is computed to \"frame\" the face as a human would expect, and is typically used in UI (e.g. G+ to show circles around detected faces). It is based on the landmarker results."
+        },
+        "darkGlassesProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "detectionConfidence": {
+          "description": "Confidence is in the range [0,1].",
+          "format": "float",
+          "type": "number"
+        },
+        "extendedLandmarks": {
+          "items": {
+            "$ref": "PhotosVisionServiceFaceFaceParamsExtendedLandmark"
+          },
+          "type": "array"
+        },
+        "eyesClosedProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "face2cartoonResults": {
+          "$ref": "ResearchVisionFace2cartoonFace2CartoonResults",
+          "description": "Attributes of the detected face useful for generating a cartoon version of the face."
+        },
+        "faceCropV8": {
+          "$ref": "PhotosVisionServiceFaceFaceParamsFaceCropV8"
+        },
+        "fdBoundingBox": {
+          "$ref": "PhotosVisionServiceFaceFaceParamsBoundingBox",
+          "description": "This other bounding box is tighter than the previous one, and encloses only the skin part of the face. It is typically used to eliminate the face from any image analysis that looks up the \"amount of skin\" visible in an image (e.g. safesearch content score). It is not based on the landmarker results, just on the initial face detection, hence the 'fd' prefix."
+        },
+        "femaleProbability": {
+          "description": "Probability is in the range [0,1].",
+          "format": "float",
+          "type": "number"
+        },
+        "frontalGazeProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "glassesProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "headwearProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "imageParams": {
+          "$ref": "PhotosVisionServiceFaceImageParams",
+          "description": "A copy of the 'image_params' field that is also returned as part of the ExtractFacesReply. It contains the with and height of the image the face extraction was performed on and provides the original frame of reference for the bounding boxes above."
+        },
+        "joyProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "landmarkPositions": {
+          "items": {
+            "$ref": "PhotosVisionServiceFaceFaceParamsLandmarkPosition"
+          },
+          "type": "array"
+        },
+        "landmarkingConfidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "leftEyeClosedProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "longHairProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "mouthOpenProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "nonHumanProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "panAngle": {
+          "description": "Yaw angle. Indicates how much leftward/rightward the face is pointing relative to the vertical plane perpendicular to the image. Range [-180,180].",
+          "format": "float",
+          "type": "number"
+        },
+        "poseMatrix": {
+          "$ref": "PhotosVisionServiceFaceFaceParamsPoseMatrix"
+        },
+        "pretemplate": {
+          "format": "byte",
+          "type": "string"
+        },
+        "qualityScore": {
+          "description": "A score produced by the Face Quality Scoring Module that indicates overall quality of the face and its relative suitability for using it in conjunction with face recognition for instance. As such, the score predicts the likelihood to recognize a given face correctly. A face recognition client could use the score and a threshold to determine whether to use the face in a face model, or whether to even consider it for recognition.",
+          "format": "float",
+          "type": "number"
+        },
+        "rightEyeClosedProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "rollAngle": {
+          "description": "Roll angle indicates how much clockwise/anti-clockwise the face is rotated relative to the image vertical and about the axis perpendicular to the face. Range [-180,180].",
+          "format": "float",
+          "type": "number"
+        },
+        "signature": {
+          "deprecated": true,
+          "description": "Deprecated: signature will continue to be used for the pre-1.7 SDK template format typically created by the converter module CNVprec_461. All newer templates created with CNVprec_465 or later will use the repeated 'versioned_signatures' field to store the templates and version info.",
+          "format": "byte",
+          "type": "string"
+        },
+        "skinBrightnessProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "sorrowProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "surpriseProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "tiltAngle": {
+          "description": "Pitch angle. Indicates how much upwards/downwards the face is pointing relative to the image's horizontal plane. Range [-180,180].",
+          "format": "float",
+          "type": "number"
+        },
+        "underExposedProbability": {
+          "format": "float",
+          "type": "number"
+        },
+        "versionedSignatures": {
+          "items": {
+            "$ref": "PhotosVisionServiceFaceVersionedFaceSignature"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceFaceParamsBoundingBox": {
+      "id": "PhotosVisionServiceFaceFaceParamsBoundingBox",
+      "properties": {
+        "x1": {
+          "description": "These coordinates are in the same scale as the original image. 0 <= x < width, 0 <= y < height.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "x2": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "y1": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "y2": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceFaceParamsExtendedLandmark": {
+      "description": "Below is the set of extended landmarks added by LMprec_508 and 510. All future additional landmarks should be added to this message.",
+      "id": "PhotosVisionServiceFaceFaceParamsExtendedLandmark",
+      "properties": {
+        "id": {
+          "enum": [
+            "NOSE_BOTTOM_RIGHT",
+            "NOSE_BOTTOM_LEFT",
+            "NOSE_BOTTOM_CENTER",
+            "LEFT_EYE_TOP_BOUNDARY",
+            "LEFT_EYE_RIGHT_CORNER",
+            "LEFT_EYE_BOTTOM_BOUNDARY",
+            "LEFT_EYE_LEFT_CORNER",
+            "RIGHT_EYE_TOP_BOUNDARY",
+            "RIGHT_EYE_RIGHT_CORNER",
+            "RIGHT_EYE_BOTTOM_BOUNDARY",
+            "RIGHT_EYE_LEFT_CORNER",
+            "LEFT_EYEBROW_UPPER_MIDPOINT",
+            "RIGHT_EYEBROW_UPPER_MIDPOINT",
+            "LEFT_EAR_TRAGION",
+            "RIGHT_EAR_TRAGION",
+            "LEFT_EYE_PUPIL",
+            "RIGHT_EYE_PUPIL",
+            "FOREHEAD_GLABELLA",
+            "CHIN_GNATHION",
+            "CHIN_LEFT_GONION",
+            "CHIN_RIGHT_GONION",
+            "LEFT_CHEEK_CENTER",
+            "RIGHT_CHEEK_CENTER",
+            "UNKNOWN_LANDMARK"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "The following landmark is available with LMprec_508 and later",
+            "The following landmarks are extracted by LMprec_510 and later. See also documentation at www/~jsteffens/no_crawl/doc/FaceDetection/LM510.pdf",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "The following landmarks are extracted by LMprec_600 and later. See go/facesdk.",
+            "",
+            "Reserved id for an unknown landmark. This matches the id reserved by the core SDK for an external UNKNOWN landmark."
+          ],
+          "type": "string"
+        },
+        "x": {
+          "description": "NOTE that landmark positions may fall outside the bounds of the image when the face is near one or more edges of the image. That is, it is NOT guaranteed that 0 <= x < width or 0 <= y < height. Rounded version of x_f.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "xF": {
+          "format": "float",
+          "type": "number"
+        },
+        "y": {
+          "description": "Rounded version of y_f.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "yF": {
+          "format": "float",
+          "type": "number"
+        },
+        "z": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceFaceParamsFaceCropV8": {
+      "description": "Information defining a FaceCrop for a particular face. See go/on-device-face-grouping-face-crops for more details.",
+      "id": "PhotosVisionServiceFaceFaceParamsFaceCropV8",
+      "properties": {
+        "centerX": {
+          "description": "The X coordinate of the center of the face crop.",
+          "format": "float",
+          "type": "number"
+        },
+        "centerY": {
+          "description": "The Y coordinate of the center of the face crop.",
+          "format": "float",
+          "type": "number"
+        },
+        "rotation": {
+          "description": "Rotation of the face crop, in radians.",
+          "format": "float",
+          "type": "number"
+        },
+        "scale": {
+          "description": "Scale to apply to the coordinates of the face crop.",
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceFaceParamsLandmarkPosition": {
+      "id": "PhotosVisionServiceFaceFaceParamsLandmarkPosition",
+      "properties": {
+        "landmark": {
+          "description": "Some landmarks are set during face finding and some are set during landmark finding. Only after landmarking will all landmarks be set.",
+          "enum": [
+            "LEFT_EYE",
+            "RIGHT_EYE",
+            "LEFT_OF_LEFT_EYEBROW",
+            "RIGHT_OF_LEFT_EYEBROW",
+            "LEFT_OF_RIGHT_EYEBROW",
+            "RIGHT_OF_RIGHT_EYEBROW",
+            "MIDPOINT_BETWEEN_EYES",
+            "NOSE_TIP",
+            "UPPER_LIP",
+            "LOWER_LIP",
+            "MOUTH_LEFT",
+            "MOUTH_RIGHT",
+            "MOUTH_CENTER",
+            "DEPRECATED_NOSE_BOTTOM_RIGHT",
+            "DEPRECATED_NOSE_BOTTOM_LEFT",
+            "DEPRECATED_NOSE_BOTTOM_CENTER",
+            "DEPRECATED_LEFT_EYE_TOP_BOUNDARY",
+            "DEPRECATED_LEFT_EYE_RIGHT_CORNER",
+            "DEPRECATED_LEFT_EYE_BOTTOM_BOUNDARY",
+            "DEPRECATED_LEFT_EYE_LEFT_CORNER",
+            "DEPRECATED_RIGHT_EYE_TOP_BOUNDARY",
+            "DEPRECATED_RIGHT_EYE_RIGHT_CORNER",
+            "DEPRECATED_RIGHT_EYE_BOTTOM_BOUNDARY",
+            "DEPRECATED_RIGHT_EYE_LEFT_CORNER",
+            "DEPRECATED_LEFT_EYEBROW_UPPER_MIDPOINT",
+            "DEPRECATED_RIGHT_EYEBROW_UPPER_MIDPOINT",
+            "DEPRECATED_LEFT_EAR_TRAGION",
+            "DEPRECATED_RIGHT_EAR_TRAGION",
+            "DEPRECATED_FOREHEAD_GLABELLA",
+            "DEPRECATED_CHIN_GNATHION",
+            "DEPRECATED_CHIN_LEFT_GONION",
+            "DEPRECATED_CHIN_RIGHT_GONION",
+            "DEPRECATED_UNKNOWN_LANDMARK"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "enumDescriptions": [
+            "Left and right are as viewed in the image without considering mirror projection typical in photos. So LEFT_EYE is typically the person's right eye. For convenience and consistency the enum values mirror the corresponding values defined by the Neven Vision SDK. See landmark table at: wiki/twiki/bin/view/Main/FRSDKLandmarkPositions The following landmarks are extracted by LMprec_502 and later",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "All values below are deprecated. Please use ExtendedLandmark to use them.",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "x": {
+          "description": "NOTE that landmark positions may fall outside the bounds of the image when the face is near one or more edges of the image. That is, it is NOT guaranteed that 0 <= x < width or 0 <= y < height. Rounded version of x_f.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "xF": {
+          "format": "float",
+          "type": "number"
+        },
+        "y": {
+          "description": "Rounded version of y_f.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "yF": {
+          "format": "float",
+          "type": "number"
+        },
+        "z": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceFaceParamsPoseMatrix": {
+      "description": "Stores the full pose transformation matrix of the detected face. From this the roll, pan, tilt angles can be computed.",
+      "id": "PhotosVisionServiceFaceFaceParamsPoseMatrix",
+      "properties": {
+        "xx": {
+          "format": "float",
+          "type": "number"
+        },
+        "xy": {
+          "format": "float",
+          "type": "number"
+        },
+        "xz": {
+          "format": "float",
+          "type": "number"
+        },
+        "yx": {
+          "format": "float",
+          "type": "number"
+        },
+        "yy": {
+          "format": "float",
+          "type": "number"
+        },
+        "yz": {
+          "format": "float",
+          "type": "number"
+        },
+        "zx": {
+          "format": "float",
+          "type": "number"
+        },
+        "zy": {
+          "format": "float",
+          "type": "number"
+        },
+        "zz": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceImageParams": {
+      "description": "ImageParams are a collection of parameters of the image on which face detection was performed.",
+      "id": "PhotosVisionServiceFaceImageParams",
+      "properties": {
+        "height": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "width": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PhotosVisionServiceFaceVersionedFaceSignature": {
+      "description": "From newer SDK versions onward (1.7+), each face template (signature) will also store a version # derived from the converter version that created the template.",
+      "id": "PhotosVisionServiceFaceVersionedFaceSignature",
+      "properties": {
+        "confidence": {
+          "description": "Confidence score based on embedding uncertainty. This is populated if fetch_facenet_confidence has been set as true in FaceNetConfig, and FaceNet version satisfies one of the following: 1. FACENET_8. 2. FACENET_9 with confidence model enabled in FaceTemplatesConfig. If face_embedding_confidence module is requested, this will also be populated, and the signature will be empty.",
+          "format": "float",
+          "type": "number"
+        },
+        "confidenceVersion": {
+          "description": "The Confidence version that populated the confidence.",
+          "enum": [
+            "EMBEDDING_CONFIDENCE_VERSION_UNSPECIFIED",
+            "VERSION_1",
+            "VERSION_2"
+          ],
+          "enumDescriptions": [
+            "",
+            "Corresponds to VSSV1DNormTfLiteClient. Regions without an embedding confidence version should be assumed to have this version.",
+            "Corresponds to AAV2DNorm. This is an animal-aware version with scores compatible with VERSION_1."
+          ],
+          "type": "string"
+        },
+        "converterVersion": {
+          "description": "The converter version that created this template.",
+          "enum": [
+            "UNKNOWN",
+            "PREC_461",
+            "PREC_465",
+            "PREC_470",
+            "FACENET_7",
+            "FACENET_8",
+            "FACENET_CELEBRITY",
+            "FACENET_9",
+            "FACENET_9_TPU",
+            "FACENET_MOBILE_V1_8BITS"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "signature": {
+          "description": "The face template bytes.",
+          "format": "byte",
+          "type": "string"
+        },
+        "signatureSource": {
+          "description": "Specifies the source of the signature in cases where the bytes are from a lower level of the FaceNet architecture. This is useful in combination with the FaceNetClient when it returns multiple outputs and we need to keep track of their contents. For example, this could contain the string 'avgpool-0' while another instance can use the standard 'normalizing' string.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The internal version of the template. This is a copy of the version stored within the template.",
+          "format": "uint32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "PornFlagData": {
       "description": "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 51.",
       "id": "PornFlagData",
@@ -97304,6 +98303,7 @@
             "TRAIN_DELAY",
             "TRAIN_PLATFORM",
             "NOTES_AND_LISTS_POST_MIGRATION",
+            "ROUTINES_STOP_WUWA_REMINDER",
             "UNIT_TESTING"
           ],
           "enumDeprecated": [
@@ -97533,6 +98533,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -98148,6 +99149,7 @@
             "",
             "",
             "Notifications for Notes and Lists",
+            "Notifications for user to stop the WUWA.",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -106363,6 +107365,20 @@
           "description": "This is the number of days since January 1st 1995 that this domain last expired. This should always fit in 15 bits. Jan 1st 1995 was chosen by the history project as a special epoch date. Both the registrationinfo dates and the linkage dates are measured in days since this epoch.",
           "format": "int32",
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ReneFaceResponse": {
+      "description": "The output of the face recognition signal.",
+      "id": "ReneFaceResponse",
+      "properties": {
+        "faces": {
+          "description": "Recognized faces in the image.",
+          "items": {
+            "$ref": "PhotosVisionServiceFaceFaceParams"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -115487,6 +116503,961 @@
       },
       "type": "object"
     },
+    "ResearchVisionFace2cartoonAgeClassifierResults": {
+      "id": "ResearchVisionFace2cartoonAgeClassifierResults",
+      "properties": {
+        "age": {
+          "enum": [
+            "UNKNOWN",
+            "BABY",
+            "KID",
+            "ADULT",
+            "OLD"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "predictedAge": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonChinLengthClassifierResults": {
+      "id": "ResearchVisionFace2cartoonChinLengthClassifierResults",
+      "properties": {
+        "chinLength": {
+          "enum": [
+            "UNKNOWN",
+            "SHORT",
+            "AVERAGE",
+            "LONG"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyeColorClassifierResults": {
+      "id": "ResearchVisionFace2cartoonEyeColorClassifierResults",
+      "properties": {
+        "color": {
+          "enum": [
+            "UNKNOWN",
+            "BROWN_OR_BLACK",
+            "BLUE_OR_GREEN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        },
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyeEyebrowDistanceClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonEyeEyebrowDistanceClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyeEyebrowDistance": {
+          "enum": [
+            "UNKNOWN",
+            "SMALL",
+            "AVERAGE",
+            "LARGE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyeShapeClassifierResults": {
+      "id": "ResearchVisionFace2cartoonEyeShapeClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "shape": {
+          "enum": [
+            "UNKNOWN",
+            "DOUBLE_FOLD_EYELID",
+            "SINGLE_FOLD_EYELID"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyeSlantClassifierResults": {
+      "id": "ResearchVisionFace2cartoonEyeSlantClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyeSlant": {
+          "enum": [
+            "UNKNOWN",
+            "OUTWARDS",
+            "AVERAGE",
+            "INWARDS"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyeVerticalPositionClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonEyeVerticalPositionClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyeVerticalPosition": {
+          "enum": [
+            "UNKNOWN",
+            "HIGH",
+            "AVERAGE",
+            "LOW"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyebrowShapeClassifierResults": {
+      "id": "ResearchVisionFace2cartoonEyebrowShapeClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyebrowShape": {
+          "enum": [
+            "UNKNOWN",
+            "ST_BREAK",
+            "ST_BEND",
+            "HIGH_DIAGONAL",
+            "TILT",
+            "ROUND",
+            "ANGULAR",
+            "HIGH_CURVY",
+            "ROUND_UNEVEN",
+            "BUSHY_ST",
+            "UNI"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyebrowThicknessClassifierResults": {
+      "id": "ResearchVisionFace2cartoonEyebrowThicknessClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyebrowThickness": {
+          "enum": [
+            "UNKNOWN",
+            "THIN",
+            "NORMAL",
+            "THICK",
+            "VERY_THICK"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonEyebrowWidthClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonEyebrowWidthClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "eyebrowWidth": {
+          "enum": [
+            "UNKNOWN",
+            "NARROW",
+            "AVERAGE",
+            "WIDE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonFace2CartoonResults": {
+      "description": "Results of the Face2Cartoon pipeline.",
+      "id": "ResearchVisionFace2cartoonFace2CartoonResults",
+      "properties": {
+        "ageClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonAgeClassifierResults"
+          },
+          "type": "array"
+        },
+        "chinLengthClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonChinLengthClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyeColorClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyeColorClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyeEyebrowDistanceClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyeEyebrowDistanceClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyeShapeClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyeShapeClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyeSlantClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyeSlantClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyeVerticalPositionClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyeVerticalPositionClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyebrowShapeClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyebrowShapeClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyebrowThicknessClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyebrowThicknessClassifierResults"
+          },
+          "type": "array"
+        },
+        "eyebrowWidthClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonEyebrowWidthClassifierResults"
+          },
+          "type": "array"
+        },
+        "faceWidthClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonFaceWidthClassifierResults"
+          },
+          "type": "array"
+        },
+        "facialHairClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonFacialHairClassifierResults"
+          },
+          "type": "array"
+        },
+        "genderClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonGenderClassifierResults"
+          },
+          "type": "array"
+        },
+        "glassesClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonGlassesClassifierResults"
+          },
+          "type": "array"
+        },
+        "hairColorClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonHairColorClassifierResults"
+          },
+          "type": "array"
+        },
+        "hairStyleClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonHairStyleClassifierResults"
+          },
+          "type": "array"
+        },
+        "interEyeDistanceClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonInterEyeDistanceClassifierResults"
+          },
+          "type": "array"
+        },
+        "jawShapeClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonJawShapeClassifierResults"
+          },
+          "type": "array"
+        },
+        "lipThicknessClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonLipThicknessClassifierResults"
+          },
+          "type": "array"
+        },
+        "mouthVerticalPositionClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonMouthVerticalPositionClassifierResults"
+          },
+          "type": "array"
+        },
+        "mouthWidthClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonMouthWidthClassifierResults"
+          },
+          "type": "array"
+        },
+        "noseVerticalPositionClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonNoseVerticalPositionClassifierResults"
+          },
+          "type": "array"
+        },
+        "noseWidthClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonNoseWidthClassifierResults"
+          },
+          "type": "array"
+        },
+        "skinToneClassifierResults": {
+          "items": {
+            "$ref": "ResearchVisionFace2cartoonSkinToneClassifierResults"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonFaceWidthClassifierResults": {
+      "id": "ResearchVisionFace2cartoonFaceWidthClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "faceWidth": {
+          "enum": [
+            "UNKNOWN",
+            "NARROW",
+            "AVERAGE",
+            "WIDE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonFacialHairClassifierResults": {
+      "id": "ResearchVisionFace2cartoonFacialHairClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "facialHair": {
+          "enum": [
+            "UNKNOWN",
+            "NO_FACIAL_HAIR",
+            "CLOSE_SHAVE",
+            "SHORT_BEARD_2",
+            "SHORT_BEARD_1",
+            "MED_BEARD",
+            "SHORT_BEARD_5",
+            "GOATEE",
+            "MOUSTACHE",
+            "MOUSTACHE_GOATEE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonGenderClassifierResults": {
+      "id": "ResearchVisionFace2cartoonGenderClassifierResults",
+      "properties": {
+        "confidence": {
+          "description": "Uses a scaled version of the FaceSDK classifier's probability as the confidence (since the probability for the selected gender is between (0.5, 1] we scale it to be between (0, 1]).",
+          "format": "float",
+          "type": "number"
+        },
+        "gender": {
+          "enum": [
+            "UNKNOWN",
+            "FEMALE",
+            "MALE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonGlassesClassifierResults": {
+      "id": "ResearchVisionFace2cartoonGlassesClassifierResults",
+      "properties": {
+        "confidence": {
+          "description": "Uses a scaled version of the FaceSDK classifier's probability as the confidence (since the probability for the selected glasses is between (0.5, 1] we scale it to be between (0, 1]).",
+          "format": "float",
+          "type": "number"
+        },
+        "glassesType": {
+          "enum": [
+            "UNKNOWN",
+            "NO_GLASSES",
+            "GLASSES",
+            "DARK_GLASSES"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonHairColorClassifierResults": {
+      "id": "ResearchVisionFace2cartoonHairColorClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "hairColor": {
+          "enum": [
+            "UNKNOWN",
+            "BLACK",
+            "DARK_BROWN",
+            "LIGHT_BROWN",
+            "AUBURN",
+            "ORANGE",
+            "STRAWBERRY_BLONDE",
+            "DIRTY_BLONDE",
+            "BLEACHED_BLONDE",
+            "GREY",
+            "WHITE",
+            "MINT",
+            "PALE_PINK",
+            "LAVENDER",
+            "TEAL",
+            "PURPLE",
+            "PINK",
+            "BLUE",
+            "GREEN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonHairStyleClassifierResults": {
+      "id": "ResearchVisionFace2cartoonHairStyleClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "hairStyle": {
+          "enum": [
+            "UNKNOWN",
+            "BALD_1",
+            "BALD_2",
+            "BALD_3",
+            "SHAVE_1",
+            "FRONT_CREW_1",
+            "SHORT_STRAIGHT_9",
+            "SHORT_STRAIGHT_17",
+            "BUN_1",
+            "SHORT_STRAIGHT_2",
+            "SHORT_STRAIGHT_10",
+            "SHORT_STRAIGHT_1",
+            "SHORT_STRAIGHT_19",
+            "SHORT_STRAIGHT_4",
+            "SHORT_STRAIGHT_20",
+            "SHORT_STRAIGHT_18",
+            "SHORT_STRAIGHT_11",
+            "MEDIUM_STRAIGHT_5",
+            "MEDIUM_STRAIGHT_6",
+            "MEDIUM_STRAIGHT_3",
+            "LONG_STRAIGHT_6",
+            "LONG_STRAIGHT_4",
+            "LONG_STRAIGHT_2",
+            "LONG_STRAIGHT_PONYTAIL_2",
+            "LONG_STRAIGHT_PONYTAIL_1",
+            "SHORT_WAVY_2",
+            "MEDIUM_WAVY_1",
+            "MEDIUM_WAVY_4",
+            "MEDIUM_WAVY_2",
+            "LONG_WAVY_1",
+            "LONG_WAVY_3",
+            "LONG_WAVY_2",
+            "LONG_WAVY_4",
+            "LONG_WAVY_PONYTAIL_4",
+            "SHORT_CURLY_6",
+            "SHORT_CURLY_5",
+            "MEDIUM_CURLY_3",
+            "SHORT_CURLY_8",
+            "MEDIUM_CURLY_4",
+            "LONG_CURLY_3",
+            "LONG_CURLY_1",
+            "LONG_CURLY_5",
+            "LONG_CURLY_4",
+            "LONG_CURLY_2",
+            "LONG_CURLY_PONYTAIL_1",
+            "SHORT_COILY_1",
+            "SHORT_COILY_5",
+            "SHORT_COILY_4",
+            "SHORT_COILY_2",
+            "MEDIUM_COILY_1",
+            "LONG_COILY_2",
+            "LONG_COILY_PONYTAIL_1",
+            "SHORT_COILY_3",
+            "LONG_COILY_1",
+            "BOX_BRAIDS",
+            "BUN_2",
+            "COILY_PONYTAIL",
+            "LONG_COILY_3",
+            "LONG_COILY_4",
+            "LONG_COILY_5",
+            "LONG_COILY_PONYTAIL",
+            "OTT",
+            "SHORT_CORNROWS",
+            "TIGHT_BRAID",
+            "TIGHT_BRAIDS"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonInterEyeDistanceClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonInterEyeDistanceClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "interEyeDistance": {
+          "enum": [
+            "UNKNOWN",
+            "WIDE",
+            "AVERAGE",
+            "CLOSE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonJawShapeClassifierResults": {
+      "id": "ResearchVisionFace2cartoonJawShapeClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "jawShape": {
+          "enum": [
+            "UNKNOWN",
+            "TRIANGLE",
+            "OVAL",
+            "SQUARE",
+            "ROUND"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonLipThicknessClassifierResults": {
+      "id": "ResearchVisionFace2cartoonLipThicknessClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "lipThickness": {
+          "enum": [
+            "UNKNOWN",
+            "THIN",
+            "AVERAGE",
+            "THICK"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonMouthVerticalPositionClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonMouthVerticalPositionClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "mouthVerticalPosition": {
+          "enum": [
+            "UNKNOWN",
+            "HIGH",
+            "AVERAGE",
+            "LOW"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonMouthWidthClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonMouthWidthClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "mouthWidth": {
+          "enum": [
+            "UNKNOWN",
+            "NARROW",
+            "AVERAGE",
+            "WIDE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonNoseVerticalPositionClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonNoseVerticalPositionClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "noseVerticalPosition": {
+          "enum": [
+            "UNKNOWN",
+            "HIGH",
+            "AVERAGE",
+            "LOW"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonNoseWidthClassifierResults": {
+      "description": "The measurement underlying this assumes fixed ear positions, so applying this combined with the FaceWidthClassifierResults may have an unintended outcome.",
+      "id": "ResearchVisionFace2cartoonNoseWidthClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "noseWidth": {
+          "enum": [
+            "UNKNOWN",
+            "NARROW",
+            "AVERAGE",
+            "WIDE"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResearchVisionFace2cartoonSkinToneClassifierResults": {
+      "id": "ResearchVisionFace2cartoonSkinToneClassifierResults",
+      "properties": {
+        "confidence": {
+          "format": "float",
+          "type": "number"
+        },
+        "skinToneType": {
+          "enum": [
+            "UNKNOWN",
+            "TYPE_1",
+            "TYPE_2",
+            "TYPE_3",
+            "TYPE_4",
+            "TYPE_5",
+            "TYPE_6",
+            "TYPE_7",
+            "TYPE_8",
+            "TYPE_9",
+            "TYPE_10",
+            "TYPE_11"
+          ],
+          "enumDescriptions": [
+            "See the images from the links at: https://storage.googleapis.com/cc_8e814306-f840-4e2e-9415-36b06251cf8e/ skin_tone_exemplars/skin-*.png",
+            "(darkest) RGB: #603d30",
+            "RGB: #88594b",
+            "RGB: #aa7454",
+            "RGB: #c78b5d",
+            "RGB: #d9a16e",
+            "RGB: #e3b47e",
+            "RGB: #eeaf94",
+            "RGB: #f0c092",
+            "RGB: #f6d8c1",
+            "RGB: #fbcdb6",
+            "(lightest) RGB: #fbdbd1"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RichsnippetsDataObject": {
       "description": "Next ID: 11",
       "id": "RichsnippetsDataObject",
@@ -116021,6 +117992,16 @@
       },
       "type": "object"
     },
+    "SafesearchImageOffensiveAnnotation": {
+      "id": "SafesearchImageOffensiveAnnotation",
+      "properties": {
+        "hatefulDerogatoryScore": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "SafesearchInternalImageSignals": {
       "description": "A proto that stores SafeSearch internal signals that are not exported to clients.",
       "id": "SafesearchInternalImageSignals",
@@ -116028,6 +118009,9 @@
         "imageEntitiesViolenceScore": {
           "format": "float",
           "type": "number"
+        },
+        "offensiveAnnotation": {
+          "$ref": "SafesearchImageOffensiveAnnotation"
         },
         "starburstPornScore": {
           "description": "Additional SafeSearch signals that are used to compute final scores.",
@@ -122137,6 +124121,7 @@
             "ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES",
             "ISOLATION_ASTROLOGY_HOROSCOPE",
             "ISOLATION_LLM_GENERATED_TVM_SYNOPSIS",
+            "ISOLATION_GENERATED_DATA",
             "UMP_TESTING_ONLY",
             "INTENTJOINS_NB_SIGNALS",
             "ADS_INTEGRITY_ANNOTATION",
@@ -122230,6 +124215,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -122516,7 +124502,8 @@
             "For Search sustainability's food choice feature, Recipe Ingredient Insights. Assign existing KG entities feature types to classify triggering behavior and insights. Owned by salehh@ and s12y-eng@ See go/rii-kg-triggering-migration for more information.",
             "Access controls for SCOUTS Societal Context Repository entities. Please contact johnhenry-eng@ before reading or writing this data. DD: go/scouts-kg-integration-dd",
             "Access controls for Astrology Horoscope features. Please contact search-india-verticals@ before reading or writing this data. DD: go/daily-horoscope-dd",
-            "Access controls for LLM generated tvm synopsis. DD: go/i18n-tvm-descriptions Please contact dkrish-team@ before reading or writing this data.",
+            "TODO(b/304563444) Deprecate ISOLATION_LLM_GENERATED_TVM_SYNOPSIS if it's not used. Prefer using ISOLATION_GENERATED_DATA even for generated tvm synopsis. Access controls for LLM generated tvm synopsis. DD: go/i18n-tvm-descriptions Please contact dkrish-team@ before reading or writing this data.",
+            "Access controls for LLM generated data. Please contact UMP team(go/ump-contacts) before reading or writing this data.",
             "This access control is used to guard data used by the Unified Media Platform team (ke-media-actions-serving@) for testing new features. It should never be used for purposes other than testing. More context at go/fake-media-provider.",
             "Access controls for the IntentJoins Navboost data. YOU MUST CONTACT intentjoins-eng@ before reading or writing this data.",
             "Access controls for Ads Integrity annotation data. Ads Integrity annotations are only available for Ads Integrity policy enforcement. See go/ai-political-km for more details. YOU MUST CONTACT ai-pacg@ before reading or writing this data.",
@@ -125996,8 +127983,6 @@
               "PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_EVENT_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_EVENT_LEVEL",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL",
               "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS",
@@ -126043,7 +128028,6 @@
               "ZERO_COPY_NOT_SUFFICIENT_EVENT_LEVEL",
               "ZERO_COPY_ALLOWS_INSTALL_EVENT_LEVEL",
               "ZERO_COPY_NOT_REQUIRED_EVENT_LEVEL",
-              "SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "DEVICE_TIER_HIGH_EVENT_LEVEL",
@@ -126293,6 +128277,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_KR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_TW_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_GRAND_CROSS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL",
@@ -126313,6 +128298,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_KR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_TW_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GRAND_CROSS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL",
@@ -126491,8 +128477,6 @@
               "PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_SESSION_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_SESSION_LEVEL",
               "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_GAME_SESSION_LEVEL",
               "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_NON_GAME_SESSION_LEVEL",
               "QUERY_DEPENDENT_SNIPPET_SESSION_LEVEL",
@@ -126714,7 +128698,6 @@
               "ZERO_COPY_ALLOWS_INSTALL_SESSION_LEVEL",
               "ZERO_COPY_NOT_REQUIRED_SESSION_LEVEL",
               "BOOKS_SEARCH_SERIES_EXPANSION_SESSION_LEVEL",
-              "SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "DEVICE_TIER_HIGH_SESSION_LEVEL",
@@ -126819,6 +128802,7 @@
               "SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_SESSION_LEVEL",
               "SUBS_PAYMENT_DECLINE_SESSION_LEVEL",
               "CART_ABANDONMENT_REMINDER_SESSION_LEVEL",
+              "CART_ABANDONMENT_REMINDER_POPULAR_APPS_SESSION_LEVEL",
               "SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_SESSION_LEVEL",
               "BOOKS_READ_NOW_DUAL_FORMAT_REQUEST_SESSION_LEVEL",
               "BOOKS_READ_NOW_WITH_HEADER_REQUEST_SESSION_LEVEL",
@@ -126850,6 +128834,7 @@
               "LOYALTY_WEEKLY_REWARDS_ICC_FORMAT_NOW_HOME_SESSION_LEVEL",
               "MULTILINE_SUBSCRIPTION_ADDON_TITLE_SESSION_LEVEL",
               "PAYTM_WALLET_FAILURE_SESSION_LEVEL",
+              "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_SESSION_LEVEL_V2",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -126927,6 +128912,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_KR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_TW_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_GRAND_CROSS_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL",
@@ -126947,6 +128933,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_KR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_TW_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GRAND_CROSS_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL",
@@ -127065,6 +129052,7 @@
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_1",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_2",
               "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_3",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_4",
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
@@ -127142,6 +129130,7 @@
               "PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL",
               "SUBS_PAYMENT_DECLINE_USER_LEVEL",
               "CART_ABANDONMENT_REMINDER_USER_LEVEL",
+              "CART_ABANDONMENT_REMINDER_POPULAR_APPS_USER_LEVEL",
               "SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_USER_LEVEL",
               "FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_USER_LEVEL",
               "MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL",
@@ -127208,6 +129197,8 @@
               "MULTILINE_SUBSCRIPTION_ADDON_TITLE_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
+              "CART_WITH_BROKEN_FOP_USER_LEVEL",
+              "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL_V2",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -127737,207 +129728,7 @@
               false,
               false,
               false,
-              false,
               true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
               false,
               false,
               false,
@@ -128271,6 +130062,206 @@
               false,
               false,
               false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -128441,6 +130432,7 @@
               false,
               false,
               false,
+              false,
               true,
               false,
               false,
@@ -128553,6 +130545,9 @@
               false,
               false,
               false,
+              false,
+              false,
+              true,
               false,
               false,
               false,
@@ -128746,8 +130741,6 @@
               "",
               "",
               "",
-              "Indicate whether the similar apps cluster is dropped due to little recommendations generated from low quality seed app.",
-              "",
               "",
               "",
               "",
@@ -128793,7 +130786,6 @@
               "Event level test codes for go/zero-copy",
               "",
               "",
-              "Event level test codes for content forward x-sell cluster on low quality details page. Design: go/cf-xsell-dp-design",
               "",
               "",
               "Event level test code for high device tier.",
@@ -129070,6 +131062,8 @@
               "",
               "",
               "",
+              "",
+              "",
               "see go/reordering-subnav-tabs",
               "see go/reordering-subnav-tabs",
               "",
@@ -129236,8 +131230,6 @@
               "Whether the collapsed details page expands.",
               "",
               "The following are used by the server side.",
-              "",
-              "",
               "",
               "",
               "",
@@ -129464,7 +131456,6 @@
               "",
               "",
               "Session level test code that indicates if the user has issued a books search query that triggers ebook or audiobook series search.",
-              "Session level test codes for content forward x-sell cluster on low quality details page. Design: go/cf-xsell-dp-design",
               "",
               "",
               "Session level test code for high device tier.",
@@ -129564,11 +131555,12 @@
               "Session-level test code for a third-party review.",
               "Session-level test code for Game Hub Developer Video cluster.",
               "Session-level test code corresponding to game-centric email icon assets appearing in the bottom sheet for a selected list of Battlestar games.",
-              "Session-level for showing subscription benefits in cart abandonment.",
+              "Session-level for showing subscription benefits in cart abandonment. Deprecated. Use CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_SESSION_LEVEL_V2",
               "Session-level test code for Game Hub Developer Video cluster eligibility.",
               "Session-level for showing 1P LiveOps subscription offer.",
               "Session-level test code for Subscription Payment Decline Reminder.",
               "Session-level test code for Cart Abandonment Reminder.",
+              "",
               "Session-level test code for OfferSwitchData in CreateCarts",
               "Session-level test code for Books legacy clients that request both ebook and audiobook format clusters from the Books Read PSS response.",
               "Session-level test code for legacy clients that request header placeholder clusters from the Read Now PSS response.",
@@ -129600,6 +131592,7 @@
               "Session-level test code for loyalty weekly rewards in Now! home.",
               "Session-level test code for multiline addon title.",
               "Session-level test code for Paytm wallet failures.",
+              "Session-level for showing subscription benefits in cart abandonment.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -129658,6 +131651,8 @@
               "",
               "",
               "Test codes for in-app offers at user level.",
+              "",
+              "",
               "",
               "",
               "",
@@ -129815,6 +131810,7 @@
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
+              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
               "User level test code for users who are eligible for one-click backup fop.",
@@ -129892,6 +131888,7 @@
               "User-level test code for user who is eligible for adding Form of Payment and then adding Auth Settings from Purchase Readiness Reminder.",
               "User level test code for Subscription Payment Decline Reminder.",
               "User level test code for Cart Abandonment Reminder.",
+              "",
               "User level test code for OfferSwitchData in CreateCarts",
               "User level test code for 1P fcc categorical search offers.",
               "User-level test code for running content experiments for merch curated clusters.",
@@ -129929,7 +131926,7 @@
               "",
               "",
               "User-level test code for Game Hub Developer Video cluster.",
-              "User-level for showing subscription benefits in cart abandonment.",
+              "User-level for showing subscription benefits in cart abandonment. Deprecated. CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL_V2",
               "User-level test code for Game Hub Developer Video cluster eligibility.",
               "User-level for showing 1P LiveOps subscription offer.",
               "User-level test code for Subscription Payment Decline Reminder V2.",
@@ -129958,6 +131955,8 @@
               "User level test code for multiline addon title.",
               "User level test code for unified SKU Recommendations. Used when user is eligible for any SKU Recommendation, currently either cart-abandonment or post-success upsell.",
               "",
+              "User level test code indicating that user starts the purchase with a cart that has broken existing form of payment.",
+              "User-level for showing subscription benefits in cart abandonment.",
               ""
             ],
             "type": "string"
