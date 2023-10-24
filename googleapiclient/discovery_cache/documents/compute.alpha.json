@@ -15168,7 +15168,7 @@
           ]
         },
         "getDiagnostics": {
-          "description": "Returns the interconnectDiagnostics for the specified Interconnect.",
+          "description": "Returns the interconnectDiagnostics for the specified Interconnect. In the event of a global outage, do not use this API to make decisions about where to redirect your network traffic. Unlike a VLAN attachment, which is regional, a Cloud Interconnect connection is a global resource. A global outage can prevent this API from functioning properly.",
           "flatPath": "projects/{project}/global/interconnects/{interconnect}/getDiagnostics",
           "httpMethod": "GET",
           "id": "compute.interconnects.getDiagnostics",
@@ -43489,7 +43489,7 @@
       }
     }
   },
-  "revision": "20231003",
+  "revision": "20231011",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
