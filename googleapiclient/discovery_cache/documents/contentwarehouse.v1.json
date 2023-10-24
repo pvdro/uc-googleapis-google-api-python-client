@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20231006",
+  "revision": "20231020",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3732,7 +3732,9 @@
             "SUPPORT_CLASSIFICATION_UI_AFFINITY",
             "NOTEBOOKLM_AFFINITY",
             "PLAYSPACE_LABS_AFFINITY",
-            "ZOMBIE_CLOUD_AFFINITY"
+            "ZOMBIE_CLOUD_AFFINITY",
+            "RELATIONSHIPS_AFFINITY",
+            "APPS_WORKFLOW_AFFINITY"
           ],
           "enumDeprecated": [
             false,
@@ -4005,6 +4007,8 @@
             false,
             false,
             false,
+            false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4022,6 +4026,8 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
             "",
             "",
             "",
@@ -6673,7 +6679,7 @@
           "description": "This field is stored in contact annotations and merged at read-time. It is available with CONTACT_ANNOTATION container type at read time."
         },
         "shortDisplayName": {
-          "description": "Read-only. A possibly shorter version of the user's name. - The purpose of this field is to address the needs of UIs where a full display name might be too large to fit. Instead of relying on `first_name`, which might not be present, `short_display_name` is preferred. - This is only available for PROFILE and DOMAIN_PROFILE container types. - About the actual content in this field: will be the first name when it's visible to the requester, or the same as `display_name`, otherwise. A sample scenario where the first name may not be visible is when the limited profile is returned. For more info, see: http://shortn/_9iV7TJ33la",
+          "description": "NOTE: this is currently NOT IMPLEMENTED due to changed priorities. Clients usually rely on \"first name\" instead, when a short name is needed. Read-only. A possibly shorter version of the user's name. - The purpose of this field is to address the needs of UIs where a full display name might be too large to fit. Instead of relying on `first_name`, which might not be present, `short_display_name` is preferred. - This is only available for PROFILE and DOMAIN_PROFILE container types. - About the actual content in this field: will be the first name when it's visible to the requester, or the same as `display_name`, otherwise. A sample scenario where the first name may not be visible is when the limited profile is returned. For more info, see: http://shortn/_9iV7TJ33la",
           "type": "string"
         },
         "unstructuredName": {
@@ -11385,8 +11391,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesCalendarEvent": {
-      "deprecated": true,
-      "description": "This proto contains the information of a calendar event, including title, start time, end time, etc. IMPORTANT: The definition of CalendarEvent proto is being moved to //assistant/api/core_types/governed/calendar_event_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead. LINT.IfChange(CalendarEvent) NEXT_ID: 26",
+      "description": "This proto contains the information of a calendar event, including title, start time, end time, etc. LINT.IfChange(CalendarEvent) NEXT_ID: 26",
       "id": "AssistantApiCoreTypesCalendarEvent",
       "properties": {
         "attendees": {
@@ -11720,8 +11725,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesCalendarEventWrapper": {
-      "deprecated": true,
-      "description": "This empty type allows us to publish sensitive calendar events to go/attentional-entities, while maintaining BUILD visibility protection for their contents. The BUILD-visibility-protected extension to this message is defined at http://google3/assistant/verticals/calendar/proto/multi_account_calendar_event.proto IMPORTANT: The definition of CalendarEventWrapper proto is being moved to //assistant/api/core_types/governed/calendar_event_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "This empty type allows us to publish sensitive calendar events to go/attentional-entities, while maintaining BUILD visibility protection for their contents. The BUILD-visibility-protected extension to this message is defined at http://google3/assistant/verticals/calendar/proto/multi_account_calendar_event.proto",
       "id": "AssistantApiCoreTypesCalendarEventWrapper",
       "properties": {},
       "type": "object"
@@ -11823,7 +11827,6 @@
       "type": "object"
     },
     "AssistantApiCoreTypesDeviceConfig": {
-      "deprecated": true,
       "description": "The identification information for third party devices that integrates with the assistant. All of these fields will be populated by the third party when the query is sent from the third party device. Next Id: 5",
       "id": "AssistantApiCoreTypesDeviceConfig",
       "properties": {
@@ -11839,7 +11842,6 @@
       "type": "object"
     },
     "AssistantApiCoreTypesDeviceId": {
-      "deprecated": true,
       "description": "LINT.IfChange(DeviceId) Specifies identifier of a device AKA surface. Note there may be multiple device ids for the same physical device E.g. Allo app and Assistant app on Nexus. Note: DeviceId usage is complicated. Please do not depend on it for surface specific logic. Please use google3/assistant/api/capabilities.proto instead. IMPORTANT: When checking for equality between two `DeviceId`s, you should always use an `isSameDevice{As}` function to check for equality, as deep equality between `DeviceId`'s is not guaranteed. * C++: http://google3/assistant/assistant_server/util/device_id_util.cc;l=23;rcl=421295740 * Dart: http://google3/assistant/context/util/lib/device_id.dart;l=26;rcl=442126145 * Java: http://google3/java/com/google/assistant/assistantserver/utils/DeviceIdHelper.java;l=9;rcl=390378522 See http://go/deviceid-equality for more details. Next ID: 14",
       "id": "AssistantApiCoreTypesDeviceId",
       "properties": {
@@ -11900,8 +11902,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesDeviceUserIdentity": {
-      "deprecated": true,
-      "description": "IMPORTANT: The definition of DeviceUserIdentity is being moved to //assistant/api/core_types/governed/device_user_identity.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new DeviceUserIdentity instead of this one. // LINT.IfChange",
+      "description": "LINT.IfChange",
       "id": "AssistantApiCoreTypesDeviceUserIdentity",
       "properties": {
         "deviceId": {
@@ -11917,7 +11918,8 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedColor": {
-      "description": "Represents a color in the RGBA color space. This message mirrors google.type.Color.",
+      "deprecated": true,
+      "description": "LINT.IfChange Represents a color in the RGBA color space. This message mirrors google.type.Color. IMPORTANT: The definition of Color proto is being moved to //assistant/api/core_types/color_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
       "id": "AssistantApiCoreTypesGovernedColor",
       "properties": {
         "alpha": {
@@ -11944,7 +11946,8 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedDeviceConfig": {
-      "description": "The identification information for third party devices that integrates with the assistant. All of these fields will be populated by the third party when the query is sent from the third party device. Next Id: 5",
+      "deprecated": true,
+      "description": "The identification information for third party devices that integrates with the assistant. All of these fields will be populated by the third party when the query is sent from the third party device. IMPORTANT: The definition of DeviceConfig proto is being moved to //assistant/api/core_types/device_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead. Next Id: 5",
       "id": "AssistantApiCoreTypesGovernedDeviceConfig",
       "properties": {
         "agentId": {
@@ -11959,7 +11962,8 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedDeviceId": {
-      "description": "LINT.IfChange Specifies identifier of a device AKA surface. Note there may be multiple device ids for the same physical device E.g. Allo app and Assistant app on Nexus. Note: DeviceId usage is complicated. Please do not depend on it for surface specific logic. Please use google3/assistant/api/capabilities.proto instead. IMPORTANT: When checking for equality between two `DeviceId`s, you should always use an `isSameDevice{As}` function to check for equality, as deep equality between `DeviceId`'s is not guaranteed. * C++: http://google3/assistant/assistant_server/util/device_id_util.cc;l=23;rcl=421295740 * Dart: http://google3/assistant/context/util/lib/device_id.dart;l=26;rcl=442126145 * Java: http://google3/java/com/google/assistant/assistantserver/utils/DeviceIdHelper.java;l=9;rcl=390378522 See http://go/deviceid-equality for more details. Next ID: 14",
+      "deprecated": true,
+      "description": "LINT.IfChange Specifies identifier of a device AKA surface. Note there may be multiple device ids for the same physical device E.g. Allo app and Assistant app on Nexus. Note: DeviceId usage is complicated. Please do not depend on it for surface specific logic. Please use google3/assistant/api/capabilities.proto instead. IMPORTANT: When checking for equality between two `DeviceId`s, you should always use an `isSameDevice{As}` function to check for equality, as deep equality between `DeviceId`'s is not guaranteed. * C++: http://google3/assistant/assistant_server/util/device_id_util.cc;l=23;rcl=421295740 * Dart: http://google3/assistant/context/util/lib/device_id.dart;l=26;rcl=442126145 * Java: http://google3/java/com/google/assistant/assistantserver/utils/DeviceIdHelper.java;l=9;rcl=390378522 See http://go/deviceid-equality for more details. IMPORTANT: The definition of DeviceId proto is being moved to //assistant/api/core_types/device_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead. Next ID: 14",
       "id": "AssistantApiCoreTypesGovernedDeviceId",
       "properties": {
         "agsaClientInstanceId": {
@@ -12019,7 +12023,8 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedRingtoneTaskMetadata": {
-      "description": "Task metadata information describing the ringtone. Next id: 11",
+      "deprecated": true,
+      "description": "LINT.IfChange Task metadata information describing the ringtone. IMPORTANT: The definition of RingtoneTaskMetadata proto is being moved to //assistant/api/core_types/ringtone_task_metadata.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead. Next id: 11",
       "id": "AssistantApiCoreTypesGovernedRingtoneTaskMetadata",
       "properties": {
         "category": {
@@ -12337,7 +12342,8 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedSurfaceIdentity": {
-      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 6 LINT.IfChange",
+      "deprecated": true,
+      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. IMPORTANT: The partial migration to the SurfaceIdentity and SurfaceVersion protos defined here is being rolled back (b/303012824). All existing references will be updated to point back to //assistant/api/core_types/surface_identity.proto. If you are adding a reference, use the SurfaceIdentity and SurfaceVersion protos defined there. NEXT ID: 6 LINT.IfChange",
       "id": "AssistantApiCoreTypesGovernedSurfaceIdentity",
       "properties": {
         "deviceId": {
@@ -12664,6 +12670,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesGovernedSurfaceVersion": {
+      "deprecated": true,
       "description": "The version of the surface/client. New surfaces are encouraged to only use the \u201cmajor\u201d field to keep track of version number. The \u201cminor\u201d field may be used for surfaces that rely on both the \u201cmajor\u201d and \u201cminor\u201d fields to define their version.",
       "id": "AssistantApiCoreTypesGovernedSurfaceVersion",
       "properties": {
@@ -12694,8 +12701,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesImage": {
-      "deprecated": true,
-      "description": "An image represents the data about an image or a photo. IMPORTANT: The definition of the Image message is being moved to //assistant/api/core_types/governed/image_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new Image message instead of this one. LINT.IfChange NextId: 13",
+      "description": "An image represents the data about an image or a photo. LINT.IfChange NextId: 13",
       "id": "AssistantApiCoreTypesImage",
       "properties": {
         "accessibilityText": {
@@ -13121,13 +13127,200 @@
       "type": "object"
     },
     "AssistantApiCoreTypesSurfaceIdentity": {
-      "deprecated": true,
-      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 5 IMPORTANT: The definitions of the SurfaceIdentity and SurfaceVersion protos are being moved to //assistant/api/core_types/governed/surface_identity.proto All existing references will be updated to point to the new location. If you are adding a reference, use the new SurfaceIdentity and SurfaceVersion protos instead of the protos defined here. LINT.IfChange",
+      "description": "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 6 LINT.IfChange",
       "id": "AssistantApiCoreTypesSurfaceIdentity",
       "properties": {
         "deviceId": {
           "$ref": "AssistantApiCoreTypesDeviceId",
           "description": "The identifier of the device."
+        },
+        "legacySurfaceType": {
+          "deprecated": true,
+          "description": "DEPRECATED: The legacy device's surface type enum. NOTE: Prefer using the ontological `surface_type` field above. If you need to access the legacy surface type, please file a bug and add it in your code to migrate to ontological surface type.",
+          "enum": [
+            "UNKNOWN",
+            "ANDROID_ALLO",
+            "ANDROID_AUTO",
+            "ANDROID_THINGS_CUBE",
+            "ANDROID_THINGS_JASPER",
+            "ANDROID_TV",
+            "ANDROID_TV_KIDS",
+            "ANDROID_WEAR",
+            "AR_GLASSES",
+            "ASSISTANT_SDK",
+            "AUDIOWEAR",
+            "BUBBLE_CHARACTERS_IOS",
+            "CAPABILITY_BASED_SURFACE",
+            "CHROMECAST_ASSISTANT",
+            "CHROMECAST_MANHATTAN",
+            "CHROMECAST_SEARCH",
+            "CLOUD_DEVICE",
+            "COMPANION_SCREEN",
+            "DYNAMITE_WEB",
+            "ENSEMBLE",
+            "EYESFREE_AGSA",
+            "EYESFREE_GMM",
+            "GBOARD",
+            "GLASS",
+            "GOOGLE_HOME",
+            "HANGOUTS_CHATBOT",
+            "IOS_ALLO",
+            "IOS_GSA",
+            "IOS_WEAR",
+            "LIBASSISTANT",
+            "LINE_CHATBOT",
+            "MULTIMODAL_AGSA",
+            "NON_ASSISTANT_SURFACE",
+            "OPA_AGSA",
+            "OPA_AGSA_CHROME_OS",
+            "OPA_ANDROID_AUTO",
+            "OPA_ANDROID_LITE",
+            "OPA_ANDROID_SCREENLESS",
+            "OPA_ANDROID_SMART_DISPLAY",
+            "OPA_ANDROID_TABLET",
+            "OPA_CROS",
+            "OPA_GACS",
+            "OPA_IOS",
+            "OPA_IOS_SCREENLESS",
+            "OPA_KAIOS",
+            "OPA_MOBILE_WEB",
+            "RTOS_PHONE",
+            "SMS_CHATBOT",
+            "TELEGRAM_CHATBOT",
+            "TELEPHONE_ASSISTANT",
+            "VERILY_ONDUO",
+            "YOUTUBE_APP",
+            "AGSA_BISTO_FOR_EVAL",
+            "COGSWORTH_FOR_EVAL",
+            "LOCKHART_MIC_FOR_EVAL",
+            "OPA_ANDROID_AUTO_EMBEDDED_FAKE",
+            "SPARK",
+            "WALLE",
+            "UNIT_TESTING"
+          ],
+          "enumDeprecated": [
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "Deprecated (never used). Use OPA_ANDROID_AUTO instead.",
+            "Assistant on small screen stationary device.",
+            "",
+            "",
+            "",
+            "",
+            "Assistant on AR Glasses with both visual and audio experiences. Ask ar-assistant@ for details.",
+            "For Assistant SDK gRPC client.",
+            "",
+            "go/assistant-lamda-overview-characters",
+            "Surface for capability based testing.",
+            "For chrome cast assistant web app.",
+            "For chrome cast with assistant + screen (e.g., Google Nest Hub).",
+            "",
+            "Virtual device for event-based triggering, e.g. executing time",
+            "scheduled routines: go/routine-cloud-ex For Quartz.",
+            "",
+            "",
+            "Deprecated. Please use OPA_ANDROID_SCREENLESS.",
+            "",
+            "For Gboard app",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "For standalone libassistant devices.",
+            "LINE 3P messaging app",
+            "Deprecated.",
+            "Surfaces that do not speak to the Assistant, i.e. web HQ",
+            "Assistant on Android phones accessed through the Google App (velvet). This represents neither all of the assistant on android phones (ANDROID_ALLO, VERILY_ONDUO, etc.) nor all of the assistant built on top of AGSA (ANDROID_WEAR, OPA_ANDROID_SCREENLESS, OPA_AGSA_CHROME_OS, etc.).",
+            "Deprecated. Please use OPA_CROS.",
+            "",
+            "This is OPA on Android Go (not part of AGSA)",
+            "Assistant on Nexus with screen off/locked. Use go/bisto device to trigger.",
+            "Assistant on Titan hub mode (go/titan-hubmode-surface). This is OPA Android first party Smart Display devices. The UI experience is built on Opal (Gallium and Flutter) and native Android.",
+            "Assistant on Android tablet",
+            "Assistant on native Chrome OS (go/croissant).",
+            "For assistant on GACS devices (go/gacs-dd). Google Assistant Conversation Service (GACS) defines intents the device accepts. This surface serves the intents in the assistant response.",
+            "",
+            "Assistant on iOS with screen off/locked. Use go/bisto device to trigger.",
+            "Assistant on KaiOS. go/kaiosama",
+            "Assistant on Mobile Web. go/opa-spidey",
+            "Assistant on low-cost RTOS phones (go/conceRTOS).",
+            "",
+            "Telegram 3P messaging app",
+            "Assistant on a phone call (go/telephone).",
+            "",
+            "A Youtube app.",
+            "Eval-only surfaces. These surfaces are not real surfaces. They are only used in intermediate steps of eval query and request generation: 1. Eval samplers (OPA query sampler and Cannery sampler) checks logs and temporarily assigns these surface types to the logs, to put Bisto, Lockhart Mic, ... queries in the correct query pools. 2. Request builders uses these surface types to determine how TaskRequest for Bisto, Lockhart Mic, ... should be built, like whether some user user agent should be used, whether some entry source should be set. The surface types in the generated TaskRequest is still the production surface types, like OPA_ANDROID_SCREENLESS or OPA_AGSA. Temp surface for Bisto Android eval. Will be merged with OPA_ANDROID_SCREENLESS in the future.",
+            "",
+            "",
+            "OPA_ANDROID_AUTO has another sub-surface (embedded) that differs in the reported capabilities, client-ops, flags but uses the same surface_type string of OPA_ANDROID_AUTO. This fake surface would allow running turing2 tests and evals for this embedded surface. Deprecated as of Feb 2019. Please use \"OPA_ANDROID_AUTO_EMBEDDED\" client type for tests and eval. See go/client-onboarding for more details. https://cs.corp.google.com/piper///depot/google3/assistant/assistant_server/tools/util/consts.h?l=32&rcl=247481455",
+            "Unlaunched new surface prototype, ask spark-eng@.",
+            "Wall-E is an Area120 Project building assistant powered robots. The surface is an extended joplin which have same capabilities as a google home adding custom robot features. Currently in active development. Please reach out walle-software@ or bingxin@ for questions. For details see go/walle-as-pipeline-1-pager.",
+            "Surface used for unit-testing purposes. Unit-tests might still require the existence of a \"valid\" SurfaceType to succeed (eg. initialization of the CapabilityBuilder, proto matching, etc.). With the move away from SurfaceType checks, a generic \"TESTING\" SurfaceType can be used for such tests without affecting the test behavior. Unlike the CAPABILITY_BASED_SURFACE, this proto does not have any capabilities or ResponseType tied to it. It should only be used for unit-tests and should not be exposed in the ASDebugger."
+          ],
+          "type": "string"
         },
         "surfaceType": {
           "description": "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. For more details, refer to go/ontologicalize-surface-type.",
@@ -13255,7 +13448,7 @@
         },
         "surfaceTypeString": {
           "deprecated": true,
-          "description": "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
+          "description": "DEPRECATED. The legacy device's surface type string. NOTE: Prefer using the ontological `surface_type` field. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.",
           "type": "string"
         },
         "surfaceVersion": {
@@ -13266,7 +13459,6 @@
       "type": "object"
     },
     "AssistantApiCoreTypesSurfaceType": {
-      "deprecated": true,
       "description": "Specifies the types of device surfaces. LINT.IfChange When adding new surface types make sure that My Activity (https://myactivity.google.com/product/assistant) will correctly render by adding your enum to http://cs/symbol:GetAssistSurfaceName%20f:%5C.cc$ If your type doesn't fit in to any of the existing surfaces messages, add a new message in http://google3/personalization/footprints/boq/uservisible/events/intl/smh_frontend_messages.h.",
       "id": "AssistantApiCoreTypesSurfaceType",
       "properties": {
@@ -13460,7 +13652,6 @@
       "type": "object"
     },
     "AssistantApiCoreTypesSurfaceVersion": {
-      "deprecated": true,
       "description": "The version of the surface/client. New surfaces are encouraged to only use the \u201cmajor\u201d field to keep track of version number. The \u201cminor\u201d field may be used for surfaces that rely on both the \u201cmajor\u201d and \u201cminor\u201d fields to define their version.",
       "id": "AssistantApiCoreTypesSurfaceVersion",
       "properties": {
@@ -13532,8 +13723,7 @@
       "type": "object"
     },
     "AssistantApiDate": {
-      "deprecated": true,
-      "description": "A Gregorian calendar date. IMPORTANT: The definition of Date proto is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "A Gregorian calendar date.",
       "id": "AssistantApiDate",
       "properties": {
         "day": {
@@ -13555,8 +13745,7 @@
       "type": "object"
     },
     "AssistantApiDateTime": {
-      "deprecated": true,
-      "description": "A date-time specification, combining a date and civil time (relative to a given timezone). IMPORTANT: The definition of DateTime proto is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "A date-time specification, combining a date and civil time (relative to a given timezone).",
       "id": "AssistantApiDateTime",
       "properties": {
         "date": {
@@ -13570,6 +13759,21 @@
         "timeZone": {
           "$ref": "AssistantApiTimeZone",
           "description": "A time zone in IANA format."
+        }
+      },
+      "type": "object"
+    },
+    "AssistantApiDateTimeRange": {
+      "description": "A representation of a range of time with start and end datetime specified.",
+      "id": "AssistantApiDateTimeRange",
+      "properties": {
+        "endDate": {
+          "$ref": "AssistantApiDateTime",
+          "description": "End date of the range."
+        },
+        "startDate": {
+          "$ref": "AssistantApiDateTime",
+          "description": "Start date of the range."
         }
       },
       "type": "object"
@@ -14946,8 +15150,7 @@
       "type": "object"
     },
     "AssistantApiRecurrence": {
-      "deprecated": true,
-      "description": "Date-based recurrences specify repeating events. Conceptually, a recurrence is a (possibly unbounded) sequence of dates on which an event falls, described by a list of constraints. A date is in a recurrence if and only if it satisfies all of the constraints. Note that devices may support some constraints, but not all. IMPORTANT: The definition of Recurrence proto is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "Date-based recurrences specify repeating events. Conceptually, a recurrence is a (possibly unbounded) sequence of dates on which an event falls, described by a list of constraints. A date is in a recurrence if and only if it satisfies all of the constraints. Note that devices may support some constraints, but not all.",
       "id": "AssistantApiRecurrence",
       "properties": {
         "begin": {
@@ -14957,7 +15160,7 @@
         "blacklistedRanges": {
           "description": "A list of blacklisted dates to skip the alarm on.",
           "items": {
-            "$ref": "AssistantApiRecurrenceDatetimeRange"
+            "$ref": "AssistantApiDateTimeRange"
           },
           "type": "array"
         },
@@ -15006,21 +15209,6 @@
             "type": "integer"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AssistantApiRecurrenceDatetimeRange": {
-      "description": "A representation of a range of time with start and end datetime specified.",
-      "id": "AssistantApiRecurrenceDatetimeRange",
-      "properties": {
-        "endDate": {
-          "$ref": "AssistantApiDateTime",
-          "description": "End date of the range."
-        },
-        "startDate": {
-          "$ref": "AssistantApiDateTime",
-          "description": "Start date of the range."
         }
       },
       "type": "object"
@@ -17939,8 +18127,7 @@
       "type": "object"
     },
     "AssistantApiTimeOfDay": {
-      "deprecated": true,
-      "description": "A civil time relative to a timezone. IMPORTANT: The definition of TimeOfDay proto is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "A civil time relative to a timezone.",
       "id": "AssistantApiTimeOfDay",
       "properties": {
         "hour": {
@@ -17967,8 +18154,7 @@
       "type": "object"
     },
     "AssistantApiTimeZone": {
-      "deprecated": true,
-      "description": "A time zone. Conceptually, a time zone is a set of rules associated with a location that describes a UTC offset and how it changes over time (e.g. Daylight Saving Time). The offset is used to compute the local date and time. IMPORTANT: The definition of TimeZone enum is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead.",
+      "description": "A time zone. Conceptually, a time zone is a set of rules associated with a location that describes a UTC offset and how it changes over time (e.g. Daylight Saving Time). The offset is used to compute the local date and time.",
       "id": "AssistantApiTimeZone",
       "properties": {
         "ianaId": {
@@ -17979,8 +18165,7 @@
       "type": "object"
     },
     "AssistantApiTimestamp": {
-      "deprecated": true,
-      "description": "An absolute point in time independent of timezone or calendar, based on the proto3 Timestamp (//google/protobuf/timestamp.proto). IMPORTANT: The definition of Timestamp proto is being moved to //assistant/api/core_types/governed/datetime_type.proto. All existing references will be updated to point to the new location. If you are adding a reference, use the new one instead. NOTE: THIS IS NO LONGER RECOMMENDED TO BE USED. It was originally defined separately from google.protobuf.Timestamp due to incompatibility with proto2 syntax. The incompatibility issues have since been resolved and so the Google-wide standard representation of google.protobuf.Timestamp should be preferred. In fact, google.protobuf.* protos in general are now recommended to be used in new APIs.",
+      "description": "An absolute point in time independent of timezone or calendar, based on the proto3 Timestamp (//google/protobuf/timestamp.proto). NOTE: THIS IS NO LONGER RECOMMENDED TO BE USED. It was originally defined separately from google.protobuf.Timestamp due to incompatibility with proto2 syntax. The incompatibility issues have since been resolved and so the Google-wide standard representation of google.protobuf.Timestamp should be preferred. In fact, google.protobuf.* protos in general are now recommended to be used in new APIs.",
       "id": "AssistantApiTimestamp",
       "properties": {
         "nanos": {
@@ -18048,7 +18233,7 @@
       "type": "object"
     },
     "AssistantContextAppProviderId": {
-      "description": "LINT.IfChanged Identifier for an application provider. NOTE: AppProviderId contains surface-specific info, such as the Android package name of the application. This was necessary for supporting current use cases that rely on surface-specific info in feature code. Eventually we want to deprecate AppProviderId and fetch surface-specific info in some other way (e.g. in a surface-translation layer). But until then, we may continue extending AppProviderId with other surface-specific info.",
+      "description": "LINT.IfChange Identifier for an application provider. NOTE: AppProviderId contains surface-specific info, such as the Android package name of the application. This was necessary for supporting current use cases that rely on surface-specific info in feature code. Eventually we want to deprecate AppProviderId and fetch surface-specific info in some other way (e.g. in a surface-translation layer). But until then, we may continue extending AppProviderId with other surface-specific info.",
       "id": "AssistantContextAppProviderId",
       "properties": {
         "activityClassName": {
@@ -19294,7 +19479,8 @@
             "NAME_CORRECTION_LOG",
             "FUZZY_CONTACT_MATCH",
             "NEURAL_CONTACT_MATCH",
-            "NEURAL_CONTACT_MATCH_DARK_LAUNCH"
+            "NEURAL_CONTACT_MATCH_DARK_LAUNCH",
+            "PERSONALIZED_NAME_CORRECTION_LOG"
           ],
           "enumDescriptions": [
             "",
@@ -19303,7 +19489,8 @@
             "Alternate name from contact correction history.",
             "Fuzzy match with user's contacts.",
             "Neural match. See go/phonetic-contact-match.",
-            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it."
+            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it.",
+            "Personalized alternate name from Assistant User Profile that stores personalized contact name corrections under ContactAlternates profile."
           ],
           "type": "string"
         }
@@ -19508,7 +19695,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerDeviceTargetingFeaturesStates": {
-      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 13",
+      "description": "The states of the device. They are dynamic and may change based on the current context. Next ID: 15",
       "id": "AssistantGroundingRankerDeviceTargetingFeaturesStates",
       "properties": {
         "distance": {
@@ -19570,6 +19757,34 @@
         "isTethered": {
           "description": "Indicate whether the device is tethered to another device.",
           "type": "boolean"
+        },
+        "mediaFocusStateFromHearingDevice": {
+          "description": "Indicates the state of media focus from a separate non-local hearing device.",
+          "enum": [
+            "NO_FOCUS",
+            "HARD_FOCUS",
+            "SOFT_FOCUS"
+          ],
+          "enumDescriptions": [
+            "There is no focus device available or the focus is invalid.",
+            "The focus is valid and there is a playing session on focus device.",
+            "The focus is valid however there is no playing session on focus device and might require confirmation from user (dialog) before proceeding to use focus device."
+          ],
+          "type": "string"
+        },
+        "mediaFocusStateFromLocalDevice": {
+          "description": "Indicates the state of media focus from a separate local device.",
+          "enum": [
+            "NO_FOCUS",
+            "HARD_FOCUS",
+            "SOFT_FOCUS"
+          ],
+          "enumDescriptions": [
+            "There is no focus device available or the focus is invalid.",
+            "The focus is valid and there is a playing session on focus device.",
+            "The focus is valid however there is no playing session on focus device and might require confirmation from user (dialog) before proceeding to use focus device."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -19707,7 +19922,7 @@
       "type": "object"
     },
     "AssistantGroundingRankerMediaGroundingProviderFeatures": {
-      "description": "Features to be passed from Media GP to HGR. Next ID: 19",
+      "description": "Features to be passed from Media GP to HGR. Next ID: 21",
       "id": "AssistantGroundingRankerMediaGroundingProviderFeatures",
       "properties": {
         "albumReleaseType": {
@@ -19777,9 +19992,29 @@
           "description": "True if the user requests seed radio.",
           "type": "boolean"
         },
+        "isSelfReportedSvodProvider": {
+          "description": "Provider is a self(user) reported subscripted provider https://g3doc.corp.google.com/knowledge/g3doc/ump/development/GetProviderAffinity.md?cl=head",
+          "type": "boolean"
+        },
         "isYoutubeMusicSeeking": {
           "description": "Indicates whether this is youtube content seeking music.",
           "type": "boolean"
+        },
+        "mediaAccountType": {
+          "description": "Account Type of the user for the provider",
+          "enum": [
+            "ANONYMOUS_ACCOUNT",
+            "BASIC_SUBSCRIPTION",
+            "PREMIUM_SUBSCRIPTION",
+            "FREE_CONTENT"
+          ],
+          "enumDescriptions": [
+            "User has not signed-in.",
+            "The user has signed-in for an account with basic subscription. This is the case, for example, with Video On Demand (VOD) or for music services such as Google Play Music All Access.",
+            "The user has signed-in for an account with premium subscription. This is the case, for example, with Pay TV services like Flix.",
+            "The user signed-in for free content."
+          ],
+          "type": "string"
         },
         "mediaContentType": {
           "description": "MediaAquaAction::media_content_type from interpretation. It can be used for cross-content type ranking, for example, if a candidate's content type does not match this content type from interpretation, this candidate will be slightly demoted. Also, we might avoid fetching some signals when the content type is generic music, since some content types do not need ranking.",
@@ -20397,7 +20632,8 @@
             "NAME_CORRECTION_LOG",
             "FUZZY_CONTACT_MATCH",
             "NEURAL_CONTACT_MATCH",
-            "NEURAL_CONTACT_MATCH_DARK_LAUNCH"
+            "NEURAL_CONTACT_MATCH_DARK_LAUNCH",
+            "PERSONALIZED_NAME_CORRECTION_LOG"
           ],
           "enumDescriptions": [
             "",
@@ -20406,7 +20642,8 @@
             "Alternate name from contact correction history.",
             "Fuzzy match with user's contacts.",
             "Neural match. See go/phonetic-contact-match.",
-            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it."
+            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it.",
+            "Personalized alternate name from Assistant User Profile that stores personalized contact name corrections under ContactAlternates profile."
           ],
           "type": "string"
         },
@@ -22034,7 +22271,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 66",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 68",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -22179,6 +22416,10 @@
         },
         "isMediaControlIntent": {
           "description": "Whether the intent is a media control intent.",
+          "type": "boolean"
+        },
+        "isNspIntent": {
+          "description": "Whether this interpretation was genearted by NSP.",
           "type": "boolean"
         },
         "isPlayGenericMusic": {
@@ -22419,6 +22660,10 @@
           "description": "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256",
           "format": "float",
           "type": "number"
+        },
+        "usesGroundingBox": {
+          "description": "Whether the interpretation should run through grounding box or not.",
+          "type": "boolean"
         },
         "verticalConfidenceScore": {
           "description": "Horizontal feature that stores information about confidence scores for each resolution within the binding set.",
@@ -32519,7 +32764,7 @@
       "type": "object"
     },
     "GeostoreCityJsonProto": {
-      "description": "CityJsonProto is a custom proto representation of the portion of the CityJSON spec (https://www.cityjson.org/) relevant to internal projects. See go/cityjsonproto-design for more information about the modeling and design decisions implemented here.",
+      "description": "CityJsonProto is a custom proto representation of the portion of the CityJSON spec (https://www.cityjson.org/) relevant to internal projects. See go/cityjsonproto-design for more information about the modeling and design decisions implemented here. LINT.IfChange",
       "id": "GeostoreCityJsonProto",
       "properties": {
         "cityObjects": {
@@ -32577,7 +32822,7 @@
       "type": "object"
     },
     "GeostoreCityJsonProtoCityObjectGeometry": {
-      "description": "Representation of geometry. Geometries vary both in type and in level-of-detail, enabling representation of any shape at any level of granularity.",
+      "description": "Representation of geometry including geometric primitives which are used as building blocks to construct geometries of varying complexity. Geometries vary both in type and in level-of-detail, enabling representation of any shape at any level of granularity. All geometries are ultimately composed of `MultiPoint`s, which reference the actual vertices. Only linear and planar shapes are allowed, no curves or parametric surfaces.",
       "id": "GeostoreCityJsonProtoCityObjectGeometry",
       "properties": {
         "lod": {
@@ -33164,6 +33409,8 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
+            "PROVIDER_GOOGLE_GEO_ISSUE_ADMIN",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -33886,6 +34133,8 @@
             false,
             false,
             false,
+            false,
+            false,
             true,
             false,
             false,
@@ -34427,7 +34676,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B8",
             "ABSTRACT",
             "",
             "",
@@ -34603,6 +34852,8 @@
             "",
             "",
             "",
+            "",
+            "UMBRELLA",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -38759,7 +39010,7 @@
       "properties": {
         "curvature": {
           "$ref": "GeostoreCurvatureProto",
-          "description": "Curvature of the flowline. Note that, curvature can be present even if the flowline doesn't have a track. In which case, curvature will be derived from the segment polyline."
+          "description": "RESERVED"
         },
         "track": {
           "$ref": "GeostoreTrackProto"
@@ -39470,6 +39721,8 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
+            "PROVIDER_GOOGLE_GEO_ISSUE_ADMIN",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -40192,6 +40445,8 @@
             false,
             false,
             false,
+            false,
+            false,
             true,
             false,
             false,
@@ -40733,7 +40988,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B8",
             "ABSTRACT",
             "",
             "",
@@ -40909,6 +41164,8 @@
             "",
             "",
             "",
+            "",
+            "UMBRELLA",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -42134,7 +42391,7 @@
               "This name is the ISO 3166-2 country subdivision code.",
               "This name is the country specific ID. For example, China government specifies an admin code for each administrative area (province, city and district).",
               "This name is an IETF BCP 47 language code, for example \"fr-CA\". Previously used for names of locales. See locale.proto for new way of defining this information.",
-              "This name is a timezone identifier in the Olson database, for example \"Europe/Zurich\". All timezones have an Olson identifier, understood by POSIX and Google's i18n/identifiers libraries. This flag applies only to features of TYPE_TIMEZONE type and at most one name should have this flag set",
+              "This name is a timezone identifier in the Olson database, for example \"Europe/Zurich\". All timezones have an Olson identifier, understood by POSIX and Google's i18n/identifiers libraries. This flag applies only to features of TYPE_TIMEZONE type.",
               "This name is the prefix for a phone number, starting with + and followed by a country code. This flag applies only to features of TYPE_PHONE_NUMBER_PREFIX type and at most one name should have this flag set.",
               "This name is the commonly used name for the area code of a phone number, including the national prefix if applicable. This flag applies only to features of TYPE_PHONE_NUMBER_AREA_CODE type and at most one name should have this flag set.",
               "The flag used to indicate the name was transliterated from some other character set. For example, this flag would be set on names transliterated from the Cyrillic or Greek alphabets to a Latin alphabet. The correct approach is to use the Google III language code to specify the appropriate language. For example, Greek transliterated into a Latin alphabet should have a language code of \"el-Latn\".",
@@ -42403,6 +42660,8 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
+            "PROVIDER_GOOGLE_GEO_ISSUE_ADMIN",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -43125,6 +43384,8 @@
             false,
             false,
             false,
+            false,
+            false,
             true,
             false,
             false,
@@ -43666,7 +43927,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B8",
             "ABSTRACT",
             "",
             "",
@@ -43842,6 +44103,8 @@
             "",
             "",
             "",
+            "",
+            "UMBRELLA",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -45639,6 +45902,8 @@
             "PROVIDER_GOOGLE_GT_LANE_AUTOMATION",
             "PROVIDER_GOOGLE_GEO_NG_LOCAL",
             "PROVIDER_GOOGLE_MAPFACTS_CLEANUP",
+            "PROVIDER_GOOGLE_THIRD_PARTY_UGC",
+            "PROVIDER_GOOGLE_GEO_ISSUE_ADMIN",
             "PROVIDER_GOOGLE_LOCALSEARCH",
             "PROVIDER_GOOGLE_TRANSIT",
             "PROVIDER_GOOGLE_GEOWIKI",
@@ -46361,6 +46626,8 @@
             false,
             false,
             false,
+            false,
+            false,
             true,
             false,
             false,
@@ -46902,7 +47169,7 @@
             "",
             "ABSTRACT",
             "",
-            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B6",
+            "All new \"Google\" provider entries must be full ints. The next available ID is: 0x111730B8",
             "ABSTRACT",
             "",
             "",
@@ -47078,6 +47345,8 @@
             "",
             "",
             "",
+            "",
+            "UMBRELLA",
             "",
             "The next new \"Google\" provider entries should be placed above.",
             "UMBRELLA",
@@ -62964,7 +63233,8 @@
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
-            "GENUS_DOCS_FLIX_RENDER"
+            "GENUS_DOCS_FLIX_RENDER",
+            "GENUS_SHOPPING"
           ],
           "enumDescriptions": [
             "",
@@ -63015,7 +63285,8 @@
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
-            "Genus for Flix Render (Docs)"
+            "Genus for Flix Render (Docs)",
+            "Genus for CDS videos processed through Amarna."
           ],
           "type": "string"
         },
@@ -63915,7 +64186,8 @@
             "GENUS_SEARCH_SPORTS",
             "GENUS_BUSINESSMESSAGING",
             "GENUS_AERIAL_VIEW",
-            "GENUS_DOCS_FLIX_RENDER"
+            "GENUS_DOCS_FLIX_RENDER",
+            "GENUS_SHOPPING"
           ],
           "enumDescriptions": [
             "",
@@ -63966,7 +64238,8 @@
             "Genus for Search Sports vertical videos",
             "Genus for Business Messaging videos",
             "Genus for Geo Aerial View",
-            "Genus for Flix Render (Docs)"
+            "Genus for Flix Render (Docs)",
+            "Genus for CDS videos processed through Amarna."
           ],
           "type": "string"
         },
@@ -66057,7 +66330,7 @@
       "type": "object"
     },
     "IndexingDocjoinerDataVersion": {
-      "description": "DataVersion tracks the version of data in CompositeDoc. The notion of \"data\" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name for the fields already onboarded or being onboarded to FDP. Fields without annotation of signal_names or goldmine_annotator_names are not onboarded. Next ID: 538",
+      "description": "DataVersion tracks the version of data in CompositeDoc. The notion of \"data\" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name for the fields already onboarded or being onboarded to FDP. Fields without annotation of signal_names or goldmine_annotator_names are not onboarded. Next ID: 539",
       "id": "IndexingDocjoinerDataVersion",
       "properties": {
         "acceleratedShoppingSignal": {
@@ -66265,6 +66538,9 @@
           "$ref": "IndexingDocjoinerDataVersionVersionInfo"
         },
         "imageembed": {
+          "$ref": "IndexingDocjoinerDataVersionVersionInfo"
+        },
+        "imageembedDomainNorm": {
           "$ref": "IndexingDocjoinerDataVersionVersionInfo",
           "description": "END DATA FIELDS"
         },
@@ -90827,6 +91103,8 @@
             "SUPPORT_CLASSIFICATION_UI",
             "NOTEBOOKLM",
             "ZOMBIE_CLOUD",
+            "RELATIONSHIPS",
+            "APPS_WORKFLOW",
             "DEPRECATED_QUICKSTART_FLUME",
             "DUO_CLIENT",
             "ALBERT",
@@ -91409,6 +91687,8 @@
             false,
             true,
             true,
+            false,
+            false,
             false,
             false,
             false,
@@ -92137,6 +92417,8 @@
             "Support Classification Ui Team contact: support-classification-eng@google.com",
             "Notebooklm Team contact: labs-tailwind-eng-team@google.com",
             "Zombie Cloud Team contact: zombie-cloud-eng@google.com",
+            "Relationships Team contact: hana-dev@google.com",
+            "Apps Workflow Team contact: workflows-frontend-eng@google.com",
             "",
             "Duo Client Team contact: duo-eng@google.com",
             "Project albert (go/albert-frontend) Team contact: albert-eng@google.com",
@@ -97304,6 +97586,7 @@
             "TRAIN_DELAY",
             "TRAIN_PLATFORM",
             "NOTES_AND_LISTS_POST_MIGRATION",
+            "ROUTINES_STOP_WUWA_REMINDER",
             "UNIT_TESTING"
           ],
           "enumDeprecated": [
@@ -97533,6 +97816,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -98148,6 +98432,7 @@
             "",
             "",
             "Notifications for Notes and Lists",
+            "Notifications for user to stop the WUWA.",
             "NOTE: This should always stay at the bottom of the list."
           ],
           "type": "string"
@@ -99774,7 +100059,7 @@
       "type": "object"
     },
     "QualityNavboostCrapsCrapsData": {
-      "description": "NEXT TAG: 27",
+      "description": "NEXT TAG: 28",
       "id": "QualityNavboostCrapsCrapsData",
       "properties": {
         "agingCounts": {
@@ -99870,6 +100155,11 @@
         },
         "url": {
           "type": "string"
+        },
+        "voterTokenCount": {
+          "description": "The number of distinct voter tokens (a lower bound on the number of distinct users that contributed to the entry, used for privacy-related filtering).",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -99935,6 +100225,10 @@
         "signals": {
           "$ref": "QualityNavboostCrapsCrapsClickSignals",
           "description": "CRAPS Signals for the locale."
+        },
+        "voterTokenBitmap": {
+          "$ref": "QualityNavboostGlueVoterTokenBitmapMessage",
+          "description": "The set of voter tokens of the sessions that contributed to this feature's stats. Voter tokens are not unique per user, so it is a lower bound on the number of distinct users. Used for privacy-related filtering."
         }
       },
       "type": "object"
@@ -100001,6 +100295,24 @@
         "weightedN": {
           "format": "double",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "QualityNavboostGlueVoterTokenBitmapMessage": {
+      "description": "Used for aggregating query unique voter_token during merging. We use 4 uint64(s) as a 256-bit bitmap to aggregate distinct voter_tokens in Glue model pipeline. Number of elements should always be either 0 or 4. As an optimization, we store the voter_token as a single uint64 if only one bit is set. See quality/navboost/speedy_glue/util/voter_token_bitmap.h for the class that manages operations on these bitmaps.",
+      "id": "QualityNavboostGlueVoterTokenBitmapMessage",
+      "properties": {
+        "subRange": {
+          "items": {
+            "format": "uint64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "voterToken": {
+          "format": "uint64",
+          "type": "string"
         }
       },
       "type": "object"
@@ -100134,7 +100446,7 @@
       "type": "object"
     },
     "QualityNsrNsrData": {
-      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 54",
+      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 55",
       "id": "QualityNsrNsrData",
       "properties": {
         "articleScore": {
@@ -100335,6 +100647,11 @@
         },
         "siteQualityStddev": {
           "description": "Estimate of site's PQ rating stddev--spread of the page-level PQ ratings of a site. Note this is different from nsr_variance which predicts error of NSR itself from the aggregated site-level rating.",
+          "format": "float",
+          "type": "number"
+        },
+        "smallPersonalSite": {
+          "description": "Score of small personal site promotion go/promoting-personal-blogs-v1",
           "format": "float",
           "type": "number"
         },
@@ -103250,7 +103567,8 @@
             "NAME_CORRECTION_LOG",
             "FUZZY_CONTACT_MATCH",
             "NEURAL_CONTACT_MATCH",
-            "NEURAL_CONTACT_MATCH_DARK_LAUNCH"
+            "NEURAL_CONTACT_MATCH_DARK_LAUNCH",
+            "PERSONALIZED_NAME_CORRECTION_LOG"
           ],
           "enumDescriptions": [
             "",
@@ -103259,7 +103577,8 @@
             "Alternate name from contact correction history.",
             "Fuzzy match with user's contacts.",
             "Neural match. See go/phonetic-contact-match.",
-            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it."
+            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it.",
+            "Personalized alternate name from Assistant User Profile that stores personalized contact name corrections under ContactAlternates profile."
           ],
           "type": "string"
         }
@@ -103477,7 +103796,8 @@
             "NAME_CORRECTION_LOG",
             "FUZZY_CONTACT_MATCH",
             "NEURAL_CONTACT_MATCH",
-            "NEURAL_CONTACT_MATCH_DARK_LAUNCH"
+            "NEURAL_CONTACT_MATCH_DARK_LAUNCH",
+            "PERSONALIZED_NAME_CORRECTION_LOG"
           ],
           "enumDescriptions": [
             "",
@@ -103486,7 +103806,8 @@
             "Alternate name from contact correction history.",
             "Fuzzy match with user's contacts.",
             "Neural match. See go/phonetic-contact-match.",
-            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it."
+            "The dark launch for a neural match. We found a match, but we ignore it for serving and just log it.",
+            "Personalized alternate name from Assistant User Profile that stores personalized contact name corrections under ContactAlternates profile."
           ],
           "type": "string"
         },
@@ -104892,11 +105213,6 @@
         "productClusterMid": {
           "format": "uint64",
           "type": "string"
-        },
-        "productPopularity": {
-          "description": "Organic product popularity.",
-          "format": "double",
-          "type": "number"
         },
         "relevanceEmbedding": {
           "description": "Relevance embedding from ShoppingAnnotation.Product",
@@ -110144,16 +110460,6 @@
           "$ref": "RepositoryWebrefSubSegmentIndex",
           "description": "Identifies the sub-segment where the annotation occurs. See SubSegmentIndex for details. Not present in QRef, also deprecated for URL segment types."
         },
-        "timeOffsetConfidence": {
-          "description": "Confidence for the time_offset_ms annotation, quantized to values in range 0-127 (see speech::VideoASRServerUtil::ConfidenceQuantize for how the quantization was done). Confidence can be empty for special characters (e.g. spaces).",
-          "format": "int32",
-          "type": "integer"
-        },
-        "timeOffsetMs": {
-          "description": "Timestamp that this mention appeared in the video. The field is only populated for VIDEO_TRANSCRIPT when the byte offset is the same. It is extracted from cdoc.doc_videos.content_based_metadata.transcript_asr.transcript.timestamp.",
-          "format": "int32",
-          "type": "integer"
-        },
         "trustedNameConfidence": {
           "description": "Confidence that this name is a trusted name of the entity. This is set only in case the confidence is higher than an internal threshold (see ConceptProbability).",
           "format": "float",
@@ -111881,10 +112187,6 @@
         },
         "webrefOutlinkInfos": {
           "$ref": "RepositoryWebrefWebrefOutlinkInfos"
-        },
-        "webrefOutlinksLegacy": {
-          "$ref": "Proto2BridgeMessageSet",
-          "deprecated": true
         }
       },
       "type": "object"
@@ -113329,10 +113631,6 @@
         "extensions": {
           "$ref": "Proto2BridgeMessageSet",
           "description": "Optional extensions (e.g. taxonomic classifications)."
-        },
-        "outlinkInfos": {
-          "$ref": "RepositoryWebrefWebrefOutlinkInfos",
-          "description": "Information about the outlinks of this document. "
         },
         "webrefParsedContentSentence": {
           "description": "The content (CONTENT section 0) as parsed by WebrefParser. Only used by //r/w/postprocessing/idf/idf-pipeline for document ngram idf computation. Populated when the annotator is run with webref_populate_parsed_content Each webref_parsed_content_sentence represents one sentence of the context where saft annotations were used to determine the sentence boundaries. See r/w/universal/processors/saft/saft-sentence-helper.h for details.",
@@ -116021,6 +116319,16 @@
       },
       "type": "object"
     },
+    "SafesearchImageOffensiveAnnotation": {
+      "id": "SafesearchImageOffensiveAnnotation",
+      "properties": {
+        "hatefulDerogatoryScore": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "SafesearchInternalImageSignals": {
       "description": "A proto that stores SafeSearch internal signals that are not exported to clients.",
       "id": "SafesearchInternalImageSignals",
@@ -116028,6 +116336,9 @@
         "imageEntitiesViolenceScore": {
           "format": "float",
           "type": "number"
+        },
+        "offensiveAnnotation": {
+          "$ref": "SafesearchImageOffensiveAnnotation"
         },
         "starburstPornScore": {
           "description": "Additional SafeSearch signals that are used to compute final scores.",
@@ -122137,6 +122448,7 @@
             "ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES",
             "ISOLATION_ASTROLOGY_HOROSCOPE",
             "ISOLATION_LLM_GENERATED_TVM_SYNOPSIS",
+            "ISOLATION_GENERATED_DATA",
             "UMP_TESTING_ONLY",
             "INTENTJOINS_NB_SIGNALS",
             "ADS_INTEGRITY_ANNOTATION",
@@ -122230,6 +122542,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -122516,7 +122829,8 @@
             "For Search sustainability's food choice feature, Recipe Ingredient Insights. Assign existing KG entities feature types to classify triggering behavior and insights. Owned by salehh@ and s12y-eng@ See go/rii-kg-triggering-migration for more information.",
             "Access controls for SCOUTS Societal Context Repository entities. Please contact johnhenry-eng@ before reading or writing this data. DD: go/scouts-kg-integration-dd",
             "Access controls for Astrology Horoscope features. Please contact search-india-verticals@ before reading or writing this data. DD: go/daily-horoscope-dd",
-            "Access controls for LLM generated tvm synopsis. DD: go/i18n-tvm-descriptions Please contact dkrish-team@ before reading or writing this data.",
+            "TODO(b/304563444) Deprecate ISOLATION_LLM_GENERATED_TVM_SYNOPSIS if it's not used. Prefer using ISOLATION_GENERATED_DATA even for generated tvm synopsis. Access controls for LLM generated tvm synopsis. DD: go/i18n-tvm-descriptions Please contact dkrish-team@ before reading or writing this data.",
+            "Access controls for LLM generated data. Please contact UMP team(go/ump-contacts) before reading or writing this data.",
             "This access control is used to guard data used by the Unified Media Platform team (ke-media-actions-serving@) for testing new features. It should never be used for purposes other than testing. More context at go/fake-media-provider.",
             "Access controls for the IntentJoins Navboost data. YOU MUST CONTACT intentjoins-eng@ before reading or writing this data.",
             "Access controls for Ads Integrity annotation data. Ads Integrity annotations are only available for Ads Integrity policy enforcement. See go/ai-political-km for more details. YOU MUST CONTACT ai-pacg@ before reading or writing this data.",
@@ -123763,7 +124077,7 @@
       "type": "object"
     },
     "TrawlerFetchReplyData": {
-      "description": "Fetcher -> FetchClient FetchReplyData is the metadata for a reply from a FetchRequest. For metadata + document body, FetchReply is further below. NOTE: FetchReplyData (and FetchReply) is the output interface from Multiverse. Teams outside Multiverse/Trawler should not create fake FetchReplies. Trawler: When adding new fields here, it is recommended that at least the following be rebuilt and pushed: - cron_fetcher_index mapreduces: so that UrlReplyIndex, etc. retain the new fields - tlookup, tlookup_server: want to be able to return the new fields - logviewer, fetchutil: annoying to get back 'tag88:' in results -------------------------- Next Tag: 124 -----------------------",
+      "description": "Fetcher -> FetchClient FetchReplyData is the metadata for a reply from a FetchRequest. For metadata + document body, FetchReply is further below. NOTE: FetchReplyData (and FetchReply) is the output interface from Multiverse. Teams outside Multiverse/Trawler should not create fake FetchReplies. Trawler: When adding new fields here, it is recommended that at least the following be rebuilt and pushed: - cron_fetcher_index mapreduces: so that UrlReplyIndex, etc. retain the new fields - tlookup, tlookup_server: want to be able to return the new fields - logviewer, fetchutil: annoying to get back 'tag88:' in results -------------------------- Next Tag: 125 -----------------------",
       "id": "TrawlerFetchReplyData",
       "properties": {
         "BadSSLCertificate": {
@@ -124155,6 +124469,9 @@
             "The context of refresh crawl is that client needs to check the content of some URLs periodically, so they refresh those URLs regularly."
           ],
           "type": "string"
+        },
+        "webioInfo": {
+          "$ref": "TrawlerFetchReplyDataWebIOInfo"
         }
       },
       "type": "object"
@@ -125017,6 +125334,34 @@
             "Redirect derived from a Google-specific rule",
             "Redirect from meta name=fragment",
             "*** don't forget to update."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TrawlerFetchReplyDataWebIOInfo": {
+      "description": "WebIO is the new hostload model introduced in 2023. It measures the occupancy of 1 outgoing fetch connection for 1 minute.",
+      "id": "TrawlerFetchReplyDataWebIOInfo",
+      "properties": {
+        "webio": {
+          "format": "float",
+          "type": "number"
+        },
+        "webioPercentageTier": {
+          "enum": [
+            "WEBIO_TIER_1",
+            "WEBIO_TIER_2",
+            "WEBIO_TIER_3",
+            "WEBIO_TIER_4",
+            "WEBIO_NUM_TIERS"
+          ],
+          "enumDescriptions": [
+            "Utilization 90-100%",
+            "Utilization 70%-90%",
+            "Utilization 30%-70%",
+            "Utilization 0%-30%",
+            ""
           ],
           "type": "string"
         }
@@ -125996,8 +126341,6 @@
               "PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_EVENT_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_EVENT_LEVEL",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS",
               "INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL",
               "HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS",
@@ -126043,7 +126386,6 @@
               "ZERO_COPY_NOT_SUFFICIENT_EVENT_LEVEL",
               "ZERO_COPY_ALLOWS_INSTALL_EVENT_LEVEL",
               "ZERO_COPY_NOT_REQUIRED_EVENT_LEVEL",
-              "SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL",
               "DEVICE_TIER_HIGH_EVENT_LEVEL",
@@ -126293,6 +126635,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_KR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_TW_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_GRAND_CROSS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL",
@@ -126313,6 +126656,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_KR_AT_SESSION_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_TW_AT_SESSION_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GRAND_CROSS_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL",
@@ -126491,8 +126835,6 @@
               "PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL",
               "PGSS_DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_SESSION_LEVEL",
-              "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_SESSION_LEVEL",
               "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_GAME_SESSION_LEVEL",
               "PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_NON_GAME_SESSION_LEVEL",
               "QUERY_DEPENDENT_SNIPPET_SESSION_LEVEL",
@@ -126714,7 +127056,6 @@
               "ZERO_COPY_ALLOWS_INSTALL_SESSION_LEVEL",
               "ZERO_COPY_NOT_REQUIRED_SESSION_LEVEL",
               "BOOKS_SEARCH_SERIES_EXPANSION_SESSION_LEVEL",
-              "SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL",
               "DEVICE_TIER_HIGH_SESSION_LEVEL",
@@ -126819,6 +127160,7 @@
               "SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_SESSION_LEVEL",
               "SUBS_PAYMENT_DECLINE_SESSION_LEVEL",
               "CART_ABANDONMENT_REMINDER_SESSION_LEVEL",
+              "CART_ABANDONMENT_REMINDER_POPULAR_APPS_SESSION_LEVEL",
               "SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_SESSION_LEVEL",
               "BOOKS_READ_NOW_DUAL_FORMAT_REQUEST_SESSION_LEVEL",
               "BOOKS_READ_NOW_WITH_HEADER_REQUEST_SESSION_LEVEL",
@@ -126850,6 +127192,10 @@
               "LOYALTY_WEEKLY_REWARDS_ICC_FORMAT_NOW_HOME_SESSION_LEVEL",
               "MULTILINE_SUBSCRIPTION_ADDON_TITLE_SESSION_LEVEL",
               "PAYTM_WALLET_FAILURE_SESSION_LEVEL",
+              "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_SESSION_LEVEL_V2",
+              "MULTILINE_SUBSCRIPTION_BASIC_RESTORE_ENABLED_SESSION_LEVEL",
+              "DECLINE_MESSAGE_IN_SUBSCENTER_FIX_FLOW_SESSION_LEVEL_V1",
+              "SAVE_FOR_LATER_CART_ABANDONMENT_SCREEN_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -126927,6 +127273,7 @@
               "IN_APP_OFFER_BATTLESTAR_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_KR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_APP_ONE_PUNCH_MAN_TW_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_APP_GRAND_CROSS_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL",
@@ -126947,6 +127294,7 @@
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAHJONG_VILLAGE_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_KR_AT_USER_LEVEL",
               "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ONE_PUNCH_MAN_TW_AT_USER_LEVEL",
+              "IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GRAND_CROSS_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL",
               "IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL",
@@ -127060,11 +127408,7 @@
               "HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL",
               "HAS_LAST_28D_CART_ABANDONMENT_USER_LEVEL",
               "HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V2",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_1",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_2",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_3",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_5",
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
@@ -127142,6 +127486,7 @@
               "PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL",
               "SUBS_PAYMENT_DECLINE_USER_LEVEL",
               "CART_ABANDONMENT_REMINDER_USER_LEVEL",
+              "CART_ABANDONMENT_REMINDER_POPULAR_APPS_USER_LEVEL",
               "SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_USER_LEVEL",
               "FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_USER_LEVEL",
               "MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL",
@@ -127208,6 +127553,11 @@
               "MULTILINE_SUBSCRIPTION_ADDON_TITLE_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
+              "CART_WITH_BROKEN_FOP_USER_LEVEL",
+              "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL_V2",
+              "DECLINE_MESSAGE_IN_SUBSCENTER_FIX_FLOW_USER_LEVEL",
+              "MULTILINE_SUBSCRIPTION_BASIC_RESTORE_ENABLED_USER_LEVEL",
+              "SAVE_FOR_LATER_CART_ABANDONMENT_SCREEN_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -127737,207 +128087,7 @@
               false,
               false,
               false,
-              false,
               true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
               false,
               false,
               false,
@@ -128271,6 +128421,209 @@
               false,
               false,
               false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -128437,10 +128790,6 @@
               false,
               false,
               false,
-              false,
-              false,
-              false,
-              false,
               true,
               false,
               false,
@@ -128550,6 +128899,12 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
               false,
               false,
               false,
@@ -128746,8 +129101,6 @@
               "",
               "",
               "",
-              "Indicate whether the similar apps cluster is dropped due to little recommendations generated from low quality seed app.",
-              "",
               "",
               "",
               "",
@@ -128793,7 +129146,6 @@
               "Event level test codes for go/zero-copy",
               "",
               "",
-              "Event level test codes for content forward x-sell cluster on low quality details page. Design: go/cf-xsell-dp-design",
               "",
               "",
               "Event level test code for high device tier.",
@@ -129070,6 +129422,8 @@
               "",
               "",
               "",
+              "",
+              "",
               "see go/reordering-subnav-tabs",
               "see go/reordering-subnav-tabs",
               "",
@@ -129236,8 +129590,6 @@
               "Whether the collapsed details page expands.",
               "",
               "The following are used by the server side.",
-              "",
-              "",
               "",
               "",
               "",
@@ -129464,7 +129816,6 @@
               "",
               "",
               "Session level test code that indicates if the user has issued a books search query that triggers ebook or audiobook series search.",
-              "Session level test codes for content forward x-sell cluster on low quality details page. Design: go/cf-xsell-dp-design",
               "",
               "",
               "Session level test code for high device tier.",
@@ -129564,11 +129915,12 @@
               "Session-level test code for a third-party review.",
               "Session-level test code for Game Hub Developer Video cluster.",
               "Session-level test code corresponding to game-centric email icon assets appearing in the bottom sheet for a selected list of Battlestar games.",
-              "Session-level for showing subscription benefits in cart abandonment.",
+              "Session-level for showing subscription benefits in cart abandonment. Deprecated. Use CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_SESSION_LEVEL_V2",
               "Session-level test code for Game Hub Developer Video cluster eligibility.",
               "Session-level for showing 1P LiveOps subscription offer.",
               "Session-level test code for Subscription Payment Decline Reminder.",
               "Session-level test code for Cart Abandonment Reminder.",
+              "",
               "Session-level test code for OfferSwitchData in CreateCarts",
               "Session-level test code for Books legacy clients that request both ebook and audiobook format clusters from the Books Read PSS response.",
               "Session-level test code for legacy clients that request header placeholder clusters from the Read Now PSS response.",
@@ -129600,6 +129952,10 @@
               "Session-level test code for loyalty weekly rewards in Now! home.",
               "Session-level test code for multiline addon title.",
               "Session-level test code for Paytm wallet failures.",
+              "Session-level for showing subscription benefits in cart abandonment.",
+              "Session_level test code for multiline basic restore enabled.",
+              "Session-level test code thst indicates decline message is popluated in subscenter.",
+              "Session level test code for Save For Later cart abandonment screen.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -129658,6 +130014,8 @@
               "",
               "",
               "Test codes for in-app offers at user level.",
+              "",
+              "",
               "",
               "",
               "",
@@ -129810,10 +130168,6 @@
               "User level test code for users who have made any monetization behavior(sub, iap) for the last 180 days (controlled by ULYSSES_OOP_SPEND_PER_PURCHASE_180D), used for AH/GH monetization experiments.",
               "User level test code for users who have any purchase card abandon behavior in the last 28 day (controlled by LAST_28D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for users who have any purchase card abandon behavior in the last 7 day (controlled by LAST_7D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
-              "User level test code for link biometrics with impression cap and foped user setup.",
-              "User level test code for link biometrics with impression cap and foped user setup.",
-              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
-              "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
@@ -129880,7 +130234,7 @@
               "",
               "",
               "",
-              "User level test code for reinstall enablement. If user has any eligible reinstall passing the per user filtering logic, testcode will be logged. Note that the filtering logics are controlled by gcl flags. Ex. Play Games Home: http://shortn/_2aGCRQqToq. This test code only knows if any app passes the filtering but not which filtering params are applied.",
+              "User level test code for reinstall enablement. If user has any eligible reinstall passing the per user filtering logic, testcode will be logged. Note that the filtering logic are controlled by gcl flags. Ex. Play Games Home: http://shortn/_2aGCRQqToq. This test code only knows if any app passes the filtering but not which filtering params are applied.",
               "User level test code for tagging users who have any app which is recommended by PRS and has reinstall eligibility when is_app_with_historical_oop_purchase restriction is turned on.",
               "User-level test code for tagging users with previous OOP spend on games.",
               "User-level test code for tagging users with previous OOP spend on applications.",
@@ -129892,6 +130246,7 @@
               "User-level test code for user who is eligible for adding Form of Payment and then adding Auth Settings from Purchase Readiness Reminder.",
               "User level test code for Subscription Payment Decline Reminder.",
               "User level test code for Cart Abandonment Reminder.",
+              "",
               "User level test code for OfferSwitchData in CreateCarts",
               "User level test code for 1P fcc categorical search offers.",
               "User-level test code for running content experiments for merch curated clusters.",
@@ -129929,7 +130284,7 @@
               "",
               "",
               "User-level test code for Game Hub Developer Video cluster.",
-              "User-level for showing subscription benefits in cart abandonment.",
+              "User-level for showing subscription benefits in cart abandonment. Deprecated. CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL_V2",
               "User-level test code for Game Hub Developer Video cluster eligibility.",
               "User-level for showing 1P LiveOps subscription offer.",
               "User-level test code for Subscription Payment Decline Reminder V2.",
@@ -129958,6 +130313,11 @@
               "User level test code for multiline addon title.",
               "User level test code for unified SKU Recommendations. Used when user is eligible for any SKU Recommendation, currently either cart-abandonment or post-success upsell.",
               "",
+              "User level test code indicating that user starts the purchase with a cart that has broken existing form of payment.",
+              "User-level for showing subscription benefits in cart abandonment.",
+              "User-level test code for users who see the decline message in subscenter.",
+              "User level test code for multiline basic restore enabled.",
+              "User level test code for Save For Later cart abandonment screen. Add new user-level TestCode here.",
               ""
             ],
             "type": "string"
@@ -130424,7 +130784,8 @@
             "NS_SEARCH_SPORTS",
             "NS_BUSINESSMESSAGING",
             "NS_AERIAL_VIEW",
-            "NS_DOCS_FLIX_RENDER"
+            "NS_DOCS_FLIX_RENDER",
+            "NS_SHOPPING"
           ],
           "enumDeprecated": [
             false,
@@ -130453,6 +130814,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -130514,7 +130876,8 @@
             "Namespace for Search Sports vertical videos.",
             "Namespace for Business Messaging videos.",
             "Namespace for Geo Aerial View",
-            "Namespace for Flix Render (Docs) Please receive approval via go/vp-newclients before adding a new namespace."
+            "Namespace for Flix Render (Docs)",
+            "Namespace for CDS videos processed through Amarna. Please receive approval via go/vp-newclients before adding a new namespace."
           ],
           "type": "string"
         }
@@ -146988,7 +147351,9 @@
             "COUNTERFEIT",
             "COURT_ORDER",
             "CTM",
+            "DANGEROUS",
             "DEFAMATION",
+            "EATING_DISORDERS",
             "GOVERNMENT_ORDER",
             "HARASSMENT",
             "HATE",
@@ -147004,17 +147369,17 @@
             "QUOTA_EXCEEDED",
             "REGULATED",
             "SPAM",
+            "SUICIDE_AND_SELF_HARM",
             "TRADEMARK",
             "UNSAFE_RACY",
             "UNWANTED_SOFTWARE",
             "UNWANTED_CONTENT",
             "VIOLENCE",
-            "DANGEROUS",
+            "VIOLENT_EXTREMISM",
             "BLOCKED_LINKS",
             "BLOCKED_WORDS",
             "ENABLED_HOLD_ALL",
             "HIDDEN_USER_LIST",
-            "VIOLENT_EXTREMISM",
             "PRIVILEGED_USER_REJECTED",
             "ABOVE_REJECT_INAPPROPRIATE_SCORE",
             "TOO_MANY_BAD_CHARS",
@@ -147028,7 +147393,9 @@
             "Promotion of counterfeit product claims.",
             "Third-party court orders.",
             "Circumvention of Technological measures claims. Circumventing protection mechanisms on copyrighted work.",
+            "Content depicts or provides instructions to complete activities that are dangerous and/or widely illegal, e.g. prostitution, bomb-making, suicide.",
             "Defamation claims.",
+            "Content that demonstrates eating disorders",
             "Government request, regardless of reason.",
             "Consistent harassing behavior directed towards a person.",
             "",
@@ -147044,17 +147411,17 @@
             "",
             "Contains regulated products and services, such as pharmaceuticals, alcohol, tobacco, etc. For details, https://sites.google.com/a/google.com/crt-policy-site/regulated",
             "",
+            "Content that demonstrates suicide and self harm",
             "Trademark violations where Google could be liable.",
             "Content that is unsafe because it is sexually suggestive/racy.",
             "The software is deceptive, promising a value proposition that it does not meet, or tries to trick users into installing it or it piggybacks on the installation of another program, or doesn\u2019t tell the user about all of its principal and significant functions or affects the user\u2019s system in unexpected ways, or collects or transmits private information without the user\u2019s knowledge, or bundled with other software and its presence is not disclosed.",
             "Content includes spammy commercial content, such as links to MFA pages, affiliate links, ads or solicitation, or otherwise off-topic or irrelevant content.",
             "",
-            "Content depicts or provides instructions to complete activities that are dangerous and/or widely illegal, e.g. prostitution, bomb-making, suicide.",
+            "Content that recruits or solicits terrorists; specific and detailed instructions on how to make a bomb; terrorists who document their attacks; praising acts of mass violence; content that shows captured hostages posted with the intent to solicit demands, threaten, or intimidate.",
             "Comment contains links in a list of \"blocked links\" in YouTube Studio > Settings > Community.",
             "Creator setting specific reasons. go/ytc-nextgen-community-settings-storage Comment contains words in a list of \"blocked words\" in YouTube Studio > Settings > Community.",
             "Held because the moderation policy is \"Hold all comments for review\".",
             "Comment from listed hidden users.",
-            "Content that recruits or solicits terrorists; specific and detailed instructions on how to make a bomb; terrorists who document their attacks; praising acts of mass violence; content that shows captured hostages posted with the intent to solicit demands, threaten, or intimidate.",
             "A privileged user, which can only be parent entity owner for ENTITY_COMMENT, but can be either parent entity channel owner or channel moderator for CHAT_MESSAGE CommentType, manually rejected the Comment. Their decision overrides any system flagging.",
             "Automod rejected due to above inappropriate score rejection threshold. Maps to ModerationReason.ABOVE_REJECT_INAPPROPRIATE_SCORE.",
             "Automod rejected due to containing more than allowed bad characters. Maps to ModerationReason.TOO_MANY_BAD_CHARS.",
