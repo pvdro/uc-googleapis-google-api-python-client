@@ -11418,6 +11418,59 @@
             "https://www.googleapis.com/auth/compute"
           ]
         },
+        "deleteNetworkInterface": {
+          "description": "Deletes one network interface from an active instance. InstancesDeleteNetworkInterfaceRequest indicates: - instance from which to delete, using project+zone+resource_id fields; - network interface to be deleted, using network_interface_name field; Only VLAN interface deletion is supported for now.",
+          "flatPath": "projects/{project}/zones/{zone}/instances/{instance}/deleteNetworkInterface",
+          "httpMethod": "POST",
+          "id": "compute.instances.deleteNetworkInterface",
+          "parameterOrder": [
+            "project",
+            "zone",
+            "instance",
+            "networkInterfaceName"
+          ],
+          "parameters": {
+            "instance": {
+              "description": "The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.",
+              "location": "path",
+              "required": true,
+              "type": "string"
+            },
+            "networkInterfaceName": {
+              "description": "The name of the network interface to be deleted from the instance. Only VLAN network interface deletion is supported.",
+              "location": "query",
+              "required": true,
+              "type": "string"
+            },
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "zone": {
+              "description": "The name of the zone for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/zones/{zone}/instances/{instance}/deleteNetworkInterface",
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        },
         "detachDisk": {
           "description": "Detaches a disk from an instance.",
           "flatPath": "projects/{project}/zones/{zone}/instances/{instance}/detachDisk",
@@ -43489,7 +43542,7 @@
       }
     }
   },
-  "revision": "20231011",
+  "revision": "20231017",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -46786,7 +46839,7 @@
           "type": "string"
         },
         "ipAddressSelectionPolicy": {
-          "description": "Specifies preference of traffic to the backend (from the proxy and from the client for proxyless gRPC). The possible values are: - IPV4_ONLY: Only send IPv4 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv4 health-checks are used to check the health of the backends. This is the default setting. - PREFER_IPV6: Prioritize the connection to the endpoints IPv6 address over its IPv4 address (provided there is a healthy IPv6 address). - IPV6_ONLY: Only send IPv6 traffic to the backends of the Backend Service (Instance Group, Managed Instance Group, Network Endpoint Group) regardless of traffic from the client to the proxy. Only IPv6 health-checks are used to check the health of the backends. This field is applicable to either: - Advanced Global External HTTPS Load Balancing (load balancing scheme EXTERNAL_MANAGED), - Regional External HTTPS Load Balancing, - Internal TCP Proxy (load balancing scheme INTERNAL_MANAGED), - Regional Internal HTTPS Load Balancing (load balancing scheme INTERNAL_MANAGED), - Traffic Director with Envoy proxies and proxyless gRPC (load balancing scheme INTERNAL_SELF_MANAGED). ",
+          "description": "Specifies a preference for traffic sent from the proxy to the backend (or from the client to the backend for proxyless gRPC). The possible values are: - IPV4_ONLY: Only send IPv4 traffic to the backends of the backend service (Instance Group, Managed Instance Group, Network Endpoint Group), regardless of traffic from the client to the proxy. Only IPv4 health checks are used to check the health of the backends. This is the default setting. - PREFER_IPV6: Prioritize the connection to the endpoint's IPv6 address over its IPv4 address (provided there is a healthy IPv6 address). - IPV6_ONLY: Only send IPv6 traffic to the backends of the backend service (Instance Group, Managed Instance Group, Network Endpoint Group), regardless of traffic from the client to the proxy. Only IPv6 health checks are used to check the health of the backends. This field is applicable to either: - Advanced Global External HTTPS Load Balancing (load balancing scheme EXTERNAL_MANAGED), - Regional External HTTPS Load Balancing, - Internal TCP Proxy (load balancing scheme INTERNAL_MANAGED), - Regional Internal HTTPS Load Balancing (load balancing scheme INTERNAL_MANAGED), - Traffic Director with Envoy proxies and proxyless gRPC (load balancing scheme INTERNAL_SELF_MANAGED). ",
           "enum": [
             "IPV4_ONLY",
             "IPV6_ONLY",
@@ -48693,6 +48746,13 @@
         "endTimestamp": {
           "description": "[Output Only] Commitment end time in RFC3339 text format.",
           "type": "string"
+        },
+        "existingReservations": {
+          "description": "Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /reservations/reservation - projects/project/zones/zone/reservations/reservation ",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "id": {
           "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
@@ -68023,10 +68083,6 @@
           "description": "Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.",
           "format": "int32",
           "type": "integer"
-        },
-        "zone": {
-          "description": "The name of the zone where the instance hosting the network endpoint is located (valid only for regional GCE_VM_IP_PORT NEGs). It should comply with RFC1035. The zone must belong to the region of the Network Endpoint Group.",
-          "type": "string"
         }
       },
       "type": "object"
@@ -74156,7 +74212,7 @@
           "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
-            "CAMP_PLUS_MONTHLY",
+            "CAMP_PLUS_PAYGO",
             "CA_STANDARD"
           ],
           "enumDescriptions": [
@@ -74313,7 +74369,7 @@
           "description": "Managed protection tier to be set.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
-            "CAMP_PLUS_MONTHLY",
+            "CAMP_PLUS_PAYGO",
             "CA_STANDARD"
           ],
           "enumDescriptions": [
@@ -79603,6 +79659,10 @@
       "description": "Contains output only fields. Use this sub-message for actual values set on Instance attributes as compared to the value requested by the user (intent) in their instance CRUD calls.",
       "id": "ResourceStatus",
       "properties": {
+        "lastInstanceTerminationDetails": {
+          "$ref": "ResourceStatusLastInstanceTerminationDetails",
+          "description": "[Output Only] Contains last termination details why the instance was terminated."
+        },
         "physicalHost": {
           "description": "[Output Only] An opaque ID of the host on which the VM is running.",
           "type": "string"
@@ -79616,6 +79676,48 @@
           },
           "description": "[Output Only] Represents the status of the service integration specs defined by the user in instance.serviceIntegrationSpecs.",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceStatusLastInstanceTerminationDetails": {
+      "id": "ResourceStatusLastInstanceTerminationDetails",
+      "properties": {
+        "terminationReason": {
+          "description": "Reason for termination",
+          "enum": [
+            "BAD_BILLING_ACCOUNT",
+            "CLOUD_ABUSE_DETECTED",
+            "DISK_ERROR",
+            "FREE_TRIAL_EXPIRED",
+            "INSTANCE_UPDATE_REQUIRED_RESTART",
+            "INTERNAL_ERROR",
+            "KMS_REJECTION",
+            "MANAGED_INSTANCE_GROUP",
+            "OS_TERMINATED",
+            "PREEMPTED",
+            "SCHEDULED_STOP",
+            "SHUTDOWN_DUE_TO_MAINTENANCE",
+            "UNSPECIFIED_TERMINATION_REASON",
+            "USER_TERMINATED"
+          ],
+          "enumDescriptions": [
+            "Terminated due to bad billing",
+            "Terminated by Cloud Abuse team",
+            "Terminated due to disk errors",
+            "Terminated due to free trial expired",
+            "Instance.update initiated which required RESTART",
+            "Terminated due to internal error",
+            "Terminated due to Key Management Service (KMS) key failure.",
+            "Terminated by managed instance group",
+            "Terminated from the OS level",
+            "Terminated due to preemption",
+            "Terminated due to scheduled stop",
+            "Terminated due to maintenance",
+            "The termination reason is not specified",
+            "Terminated by user"
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -83415,7 +83517,7 @@
           "description": "[Output Only] The minimum managed protection tier required for this rule. [Deprecated] Use requiredManagedProtectionTiers instead.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
-            "CAMP_PLUS_MONTHLY",
+            "CAMP_PLUS_PAYGO",
             "CA_STANDARD"
           ],
           "enumDescriptions": [
