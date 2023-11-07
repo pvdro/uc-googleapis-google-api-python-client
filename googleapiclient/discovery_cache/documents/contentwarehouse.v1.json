@@ -1156,7 +1156,7 @@
       }
     }
   },
-  "revision": "20231020",
+  "revision": "20231106",
   "rootUrl": "https://contentwarehouse.googleapis.com/",
   "schemas": {
     "AbuseiamAbuseType": {
@@ -3664,6 +3664,8 @@
             "FLOURISH_AFFINITY",
             "CAMPAIGN_MANAGEMENT_TOOL_AFFINITY",
             "RECORDER_AFFINITY",
+            "PERSONAL_SUGGEST_FIRST_HOP_SOCIAL_VICINITY",
+            "PERSONAL_SUGGEST_EMAIL_AUTOCOMPLETE_SCORE",
             "CLASSROOM_SEARCH_AFFINITY",
             "HIRING_AFFINITY",
             "DATACENTER_SOFTWARE_AFFINITY",
@@ -4009,6 +4011,8 @@
             false,
             false,
             false,
+            false,
+            false,
             false
           ],
           "enumDescriptions": [
@@ -4026,6 +4030,8 @@
             "",
             "",
             "Will eventually be deprecated in favour of PHOTOS_SUGGESTED_TARGETS.",
+            "",
+            "",
             "",
             "",
             "",
@@ -9734,6 +9740,10 @@
           "description": "This provider has integrated its content with Google, and Google has enabled to serve its content as a server-side solution.",
           "type": "boolean"
         },
+        "supports3pPodcastPlayback": {
+          "description": "Indicates whether the provider supports playback of 3P(externally hosted) podcasts.",
+          "type": "boolean"
+        },
         "supportsScreenlessInitiation": {
           "description": "This provider has an app that supports starting new media playback when there is no screen (e.g. by integrating with the Bisto SDK).",
           "type": "boolean"
@@ -12881,7 +12891,7 @@
       "type": "object"
     },
     "AssistantApiCoreTypesMessageNotification": {
-      "description": "LINT.IfChange(ungoverned_message_notification) This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 20",
+      "description": "LINT.IfChange(ungoverned_message_notification) This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 21",
       "id": "AssistantApiCoreTypesMessageNotification",
       "properties": {
         "appName": {
@@ -12931,6 +12941,11 @@
             ""
           ],
           "type": "string"
+        },
+        "messageWordCount": {
+          "description": "Word count of the message",
+          "format": "int32",
+          "type": "integer"
         },
         "mimeType": {
           "description": "Mime type of the data_uri. e.g. 'audio/wav', 'video/mp4', 'image/png'.",
@@ -13722,6 +13737,16 @@
       },
       "type": "object"
     },
+    "AssistantApiDataValidateCapabilities": {
+      "id": "AssistantApiDataValidateCapabilities",
+      "properties": {
+        "fallbackToTetheredDevice": {
+          "description": "If true, data.VALIDATE should be routed to the tethered device (if present) if the tethered device supports data.VALIDATE and the primary device does not.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "AssistantApiDate": {
       "description": "A Gregorian calendar date.",
       "id": "AssistantApiDate",
@@ -13779,7 +13804,7 @@
       "type": "object"
     },
     "AssistantApiDeviceCapabilities": {
-      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 36",
+      "description": "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 37",
       "id": "AssistantApiDeviceCapabilities",
       "properties": {
         "androidIntentCapabilities": {
@@ -13850,6 +13875,9 @@
         },
         "contactLookupCapabilities": {
           "$ref": "AssistantApiContactLookupCapabilities"
+        },
+        "dataValidateCapabilities": {
+          "$ref": "AssistantApiDataValidateCapabilities"
         },
         "deviceId": {
           "$ref": "AssistantApiCoreTypesDeviceId",
@@ -22271,7 +22299,7 @@
       "type": "object"
     },
     "AssistantPrefulfillmentRankerPrefulfillmentSignals": {
-      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 68",
+      "description": "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 69",
       "id": "AssistantPrefulfillmentRankerPrefulfillmentSignals",
       "properties": {
         "bindingSetAuis": {
@@ -22401,6 +22429,9 @@
             ""
           ],
           "type": "string"
+        },
+        "isDummyIntent": {
+          "type": "boolean"
         },
         "isFeasible": {
           "description": "Feasibility of fulfilling the binding set. Eg: For PlayMedia, this is equivalent to playability. More details: go/hgr-feasibility-feature.",
@@ -33937,7 +33968,8 @@
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
             "PROVIDER_CHARGESMITH",
-            "PROVIDER_PLUGO"
+            "PROVIDER_PLUGO",
+            "PROVIDER_ELECTRIC_ERA"
           ],
           "enumDeprecated": [
             false,
@@ -34649,6 +34681,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -35381,7 +35414,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1271."
+            "",
+            "Note: Next available value is 0x1272."
           ],
           "type": "string"
         },
@@ -36506,7 +36540,7 @@
         },
         "endAsOfDate": {
           "$ref": "GeostoreDateTimeProto",
-          "description": "RESERVED"
+          "description": "The earliest known date of this feature's \"end\" (e.g. an establishment's permanent closure), if the actual date is unknown; i.e. the best known upper bound of the day end_date would represent. end_as_of_date must be in local (civil) time and of PRECISION_DAY. For example, given an establishment: * Without any end_as_of_date, the permanent closure definitely isn't now and isn't known to start at any point in the future. * With an end_as_of_date of 2023-04-05 but without any end_date, the permanent closure definitely starts at latest 2023-04-05 but may start before 2023-04-05. * With an end_as_of_date of 2023-04-05 and an end_date of 2023 (at just PRECISION_YEAR), the permanent closure definitely starts at earliest 2023-01-01 (i.e. the first day of 2023) and at latest 2023-04-05, but may start at any day between 2023-01-01 and 2023-04-05. IMPORTANT: Generally for Geo Schema-internal use only. If you believe you need to use this field directly, please go/contact-geo-schema."
         },
         "endDate": {
           "$ref": "GeostoreDateTimeProto"
@@ -36739,6 +36773,7 @@
             "ACCESS_POINT",
             "ADDRESS",
             "ANCHORED_GEOMETRY_GEOMETRY_ID",
+            "ASSOCIATED_EV_CHARGING_STATION",
             "ATTACHMENT",
             "BIZBUILDER_REFERENCE",
             "BORDER_FEATURE_ID_LEFT",
@@ -36953,6 +36988,7 @@
             "DEPRECATED_DO_NOT_USE_TRANSIT_STATION_AGENCY"
           ],
           "enumDeprecated": [
+            false,
             false,
             false,
             false,
@@ -37386,6 +37422,7 @@
             "",
             "",
             "",
+            "",
             ""
           ],
           "type": "string"
@@ -37422,6 +37459,12 @@
         "anchoredGeometry": {
           "$ref": "GeostoreAnchoredGeometryProto",
           "description": "Represents information about the feature\u2019s anchored geometry."
+        },
+        "associatedEvChargingStation": {
+          "items": {
+            "$ref": "GeostoreFeatureIdProto"
+          },
+          "type": "array"
         },
         "attachment": {
           "description": "The collection of attachments for this feature. Documentation: http://go/geo-attachments",
@@ -40249,7 +40292,8 @@
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
             "PROVIDER_CHARGESMITH",
-            "PROVIDER_PLUGO"
+            "PROVIDER_PLUGO",
+            "PROVIDER_ELECTRIC_ERA"
           ],
           "enumDeprecated": [
             false,
@@ -40961,6 +41005,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -41693,7 +41738,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1271."
+            "",
+            "Note: Next available value is 0x1272."
           ],
           "type": "string"
         }
@@ -43188,7 +43234,8 @@
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
             "PROVIDER_CHARGESMITH",
-            "PROVIDER_PLUGO"
+            "PROVIDER_PLUGO",
+            "PROVIDER_ELECTRIC_ERA"
           ],
           "enumDeprecated": [
             false,
@@ -43900,6 +43947,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -44632,7 +44680,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1271."
+            "",
+            "Note: Next available value is 0x1272."
           ],
           "type": "string"
         },
@@ -46430,7 +46479,8 @@
             "PROVIDER_EZVOLT",
             "PROVIDER_JOLT",
             "PROVIDER_CHARGESMITH",
-            "PROVIDER_PLUGO"
+            "PROVIDER_PLUGO",
+            "PROVIDER_ELECTRIC_ERA"
           ],
           "enumDeprecated": [
             false,
@@ -47142,6 +47192,7 @@
             false,
             false,
             true,
+            false,
             false,
             false,
             false,
@@ -47874,7 +47925,8 @@
             "",
             "",
             "",
-            "Note: Next available value is 0x1271."
+            "",
+            "Note: Next available value is 0x1272."
           ],
           "type": "string"
         }
@@ -61394,7 +61446,7 @@
       "type": "object"
     },
     "ImageData": {
-      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 131",
+      "description": "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 132",
       "id": "ImageData",
       "properties": {
         "adaboostImageFeaturePorn": {
@@ -61787,6 +61839,10 @@
         "onPageAlternateUrl": {
           "description": "For an image not explicitly visible on this page, the following url is the one which most closely matches it.",
           "type": "string"
+        },
+        "orbitIntents": {
+          "$ref": "QualityOrbitOrbitImageIntents",
+          "description": "Orbit intents. More details on go/orbit-in-image-indexing."
         },
         "packedFullFaceInfo": {
           "$ref": "FaceIndexing",
@@ -67940,10 +67996,16 @@
     "IndexingDocjoinerDataVersionVersionInfo": {
       "id": "IndexingDocjoinerDataVersionVersionInfo",
       "properties": {
+        "considerationTimestampMicros": {
+          "description": "Sometimes, a piece of data may not exist for a document (and we don't want to delete it), so timestamp_micros won't exist. However, consideration_timestamp_micros will be set to indicate we tried to update that piece of data for tracking purposes.",
+          "format": "int64",
+          "type": "string"
+        },
         "humanReadableVersion": {
           "type": "string"
         },
         "timestampMicros": {
+          "description": "The timestamp when a piece of data is updated (or deleted if the data doesn't exist in the update).",
           "format": "int64",
           "type": "string"
         }
@@ -71957,7 +72019,7 @@
       "type": "object"
     },
     "KnowledgeAnswersIntentQueryArgumentSignals": {
-      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 60 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
+      "description": "A message representing the signals associated with an argument. NEXT ID TO USE: 62 For //depot/google3/logs/proto/knowledge/interpretation/intent_query.proto in the \"ThenChange\", fields under Argument.signals in the serving proto are stored directly under Argument on the logging side. For example, see http://google3/nlp/semantic_parsing/data_management/logs/web_logs/semantic_logging_converters/semantic_logging_request_argument_converter.cc?l=58&rcl=322925428. LINT.IfChange",
       "id": "KnowledgeAnswersIntentQueryArgumentSignals",
       "properties": {
         "addedByCloseAnswers": {
@@ -73330,6 +73392,18 @@
           "$ref": "KnowledgeAnswersIntentQueryShoppingIds",
           "description": "Equivalent shopping ids for the argument."
         },
+        "source": {
+          "description": "What added this argument.",
+          "enum": [
+            "ARGUMENT_SOURCE_UNSPECIFIED",
+            "ARGUMENT_SOURCE_ASSISTANT_GROUNDING_BOX"
+          ],
+          "enumDescriptions": [
+            "",
+            "go/assistant-grounding. See details on when this happens at go/grounding-operation-configs#default-value"
+          ],
+          "type": "string"
+        },
         "supportTransferRules": {
           "description": "go/stbr supportthis is an",
           "items": {
@@ -73345,6 +73419,18 @@
         "ungroundedValueType": {
           "$ref": "KnowledgeAnswersValueType",
           "description": "Type of ungrounded argument. It is exclusively used when simple_value.ungrounded_value is populated."
+        },
+        "valueSource": {
+          "description": "What added the argument value.",
+          "enum": [
+            "ARGUMENT_VALUE_SOURCE_UNSPECIFIED",
+            "ARGUMENT_VALUE_SOURCE_ASSISTANT_GROUNDING_BOX"
+          ],
+          "enumDescriptions": [
+            "",
+            "go/assistant-grounding. See details on when this happens at go/grounding-operation-configs#default-value"
+          ],
+          "type": "string"
         },
         "webrefEntitiesIndex": {
           "description": "Webref entity index for this argument, necessary for interpreting the relationship structure, and the list to index into. Specifically we need this to understand qref implications since they edges are represented with entity indexes.",
@@ -73928,7 +74014,7 @@
       "id": "KnowledgeAnswersIntentQueryGroundingSignals",
       "properties": {
         "addedByGrounding": {
-          "description": "True if the argument was added during grounding. This signal is intended to be used with ArgumentSignals. Note that the added argument's value must be a FunctionCall that only contains resolutions, i.e. grounding cannot add/modify/delete any ungrounded values.",
+          "deprecated": true,
           "type": "boolean"
         },
         "groundabilityScore": {
@@ -75574,6 +75660,7 @@
             "RETURN_CALL",
             "RETURN_MISSED_CALL",
             "ROUTINE",
+            "ROUTINE_INVOCATION",
             "DIAL_INTO_MEETING",
             "SHARE_DIGITAL_OBJECT",
             "COMPOSE_EMAIL",
@@ -75604,6 +75691,7 @@
             "MAKE_BROADCAST"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -75865,7 +75953,7 @@
       "type": "object"
     },
     "KnowledgeAnswersValueType": {
-      "description": "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. Next tag id: 25 LINT.IfChange",
+      "description": "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. To enforce a component-specific contract (go/contract-based-conformance) for allowed type(s), we add a repeated field view_specific_${x} for the type ${x}. For example, if we want a slot that can hold any type by default, but can only hold an integer when checking against the P2_LWA contract, then the following should be added to MeaningCatalog: slot { name: \"integer_only_slot\" type { // The default view has no sub_type or other options. number_type {} // The P2_LWA view specifies INTEGER sub_type. view_specific_number_types { sub_type: INTEGER component_specific_contracts: P2_LWA } } } See go/view-based-options-for-valuetype for more information. Next tag id: 26 LINT.IfChange",
       "id": "KnowledgeAnswersValueType",
       "properties": {
         "anyType": {
@@ -75948,6 +76036,13 @@
         },
         "trackingNumberType": {
           "$ref": "KnowledgeAnswersTrackingNumberType"
+        },
+        "viewSpecificNumberTypes": {
+          "description": "LINT.IfChange Contract-specific typing (go/view-based-options-for-valuetype). NOTE: To facilitate writing macros for view-specific filtering, all view-specific fields should be named with the format \"view_specific_${singular_field}s\" -- e.g., for the singular field |number_type|, the view-specific repeated field is |view_specific_number_types|. LINT.ThenChange( //depot/google3/nlp/meaning/remodel/meaning_remodeling_utils.cc:ViewSpecificTypes, //depot/google3/nlp/meaning/analyzer/checks/component_specific_contracts_checks.cc:ViewSpecificTypes)",
+          "items": {
+            "$ref": "KnowledgeAnswersNumberType"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -97954,14 +98049,14 @@
             false,
             false,
             false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
             false,
             false,
             false,
@@ -98377,7 +98472,7 @@
             "Notification to ask users to complete the Morris OOBE and use Morris in their next drive.",
             "",
             "",
-            "",
+            "Driving Screen and Micro were both turned down.",
             "",
             "",
             "",
@@ -100446,7 +100541,7 @@
       "type": "object"
     },
     "QualityNsrNsrData": {
-      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 55",
+      "description": "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 56",
       "id": "QualityNsrNsrData",
       "properties": {
         "articleScore": {
@@ -100646,9 +100741,16 @@
           "type": "number"
         },
         "siteQualityStddev": {
+          "deprecated": true,
           "description": "Estimate of site's PQ rating stddev--spread of the page-level PQ ratings of a site. Note this is different from nsr_variance which predicts error of NSR itself from the aggregated site-level rating.",
           "format": "float",
           "type": "number"
+        },
+        "siteQualityStddevs": {
+          "items": {
+            "$ref": "QualityNsrVersionedFloatSignal"
+          },
+          "type": "array"
         },
         "smallPersonalSite": {
           "description": "Score of small personal site promotion go/promoting-personal-blogs-v1",
@@ -102401,6 +102503,84 @@
             "type": "integer"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "QualityOrbitOrbitImageIntent": {
+      "description": "Stores information for a single image-only orbit intent. See go/orbit-for-images-v2 for more details.",
+      "id": "QualityOrbitOrbitImageIntent",
+      "properties": {
+        "imageIntent": {
+          "description": "Intent of this proto instance.",
+          "enum": [
+            "UNSPECIFIED_INTENT",
+            "HUMAN",
+            "ANIMAL",
+            "HATEFUL_SYMBOL"
+          ],
+          "enumDescriptions": [
+            "",
+            "go/human-animal-models",
+            "",
+            "go/sensitive-symbols-orbit-model"
+          ],
+          "type": "string"
+        },
+        "missingInputs": {
+          "items": {
+            "enum": [
+              "UNSPECIFIED_INPUT",
+              "IMAGE_INPUT",
+              "IMAGE_DOC_INFO_INPUT"
+            ],
+            "enumDescriptions": [
+              "",
+              "",
+              ""
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "score": {
+          "description": "Score of the intent.",
+          "format": "float",
+          "type": "number"
+        },
+        "trigger": {
+          "description": "Whether the intent triggered with the default threshold or not.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "QualityOrbitOrbitImageIntents": {
+      "description": "Image-only orbit intents (See: go/orbit-for-images-v2)",
+      "id": "QualityOrbitOrbitImageIntents",
+      "properties": {
+        "intents": {
+          "description": "Intents with non-trivial scores.",
+          "items": {
+            "$ref": "QualityOrbitOrbitImageIntent"
+          },
+          "type": "array"
+        },
+        "isPartial": {
+          "description": "Used to control merging behavior: partial protos will always be merged with current, while full protos will completely replace older versions.",
+          "type": "boolean"
+        },
+        "version": {
+          "description": "Represents the version. Filled in Amarna (main version controller).",
+          "enum": [
+            "V_UNSPECIFIED",
+            "V_20230925"
+          ],
+          "enumDescriptions": [
+            "",
+            "Initial version."
+          ],
+          "type": "string"
         }
       },
       "type": "object"
@@ -106616,6 +106796,21 @@
           "$ref": "QualityWebanswersVideoYouTubeCaptionTimingInfoAnnotations",
           "description": "Timing information that maps sentence boundaries in the punctuated transcript with timing offsets for the start and end of those sentences."
         },
+        "transcriptSource": {
+          "enum": [
+            "VIDEO_TRANSCRIPT_SOURCE_UNKNOWN",
+            "VIDEO_TRANSCRIPT_SOURCE_YT",
+            "VIDEO_TRANSCRIPT_SOURCE_S3",
+            "VIDEO_TRANSCRIPT_SOURCE_EXPERIMENTAL"
+          ],
+          "enumDescriptions": [
+            "",
+            "ContentBasedVideoMetadata.transcript_asr",
+            "ContentBasedVideoMetadata.s3_asr",
+            ""
+          ],
+          "type": "string"
+        },
         "webrefEntities": {
           "$ref": "RepositoryWebrefWebrefEntities"
         }
@@ -110306,20 +110501,16 @@
             "CARS",
             "CVG",
             "PRODUCTS",
-            "SYMPTOMS",
             "CHAINS",
             "MOVIES",
             "SPORTS_TEAM",
             "EXAMS",
             "MOTORCYCLES",
-            "PRIMEREF",
             "SONGS",
             "EDUCATION",
             "EVENTS"
           ],
           "enumDescriptions": [
-            "",
-            "",
             "",
             "",
             "",
@@ -110423,11 +110614,6 @@
         "nameMetadata": {
           "$ref": "RepositoryWebrefConceptNameMetadata",
           "description": "Metadata attached to the name."
-        },
-        "nonLocationalScore": {
-          "description": "Whether the mention is a non-locational reference to a geographical entity. Ranges from 0 (locational) to 1 (non-locational).",
-          "format": "float",
-          "type": "number"
         },
         "perMentionLightweightToken": {
           "$ref": "RepositoryWebrefLightweightTokensPerMentionLightweightToken",
@@ -111449,54 +111635,25 @@
       "description": "Information about where the url comes from.",
       "id": "RepositoryWebrefPreprocessingUrlSourceInfo",
       "properties": {
-        "deprecatedOldSchema": {
-          "$ref": "RepositoryWebrefPreprocessingUrlSourceInfoOldSchema",
-          "deprecated": true
-        },
-        "newSchema": {
-          "$ref": "RepositoryWebrefPreprocessingUrlSourceInfoNewSchema"
-        },
         "originalUrl": {
           "type": "string"
         },
         "source": {
           "enum": [
-            "DEPRECATED_OLD_SCHEMA",
+            "SOURCE_UNKNOWN",
             "KG",
             "KG_TRUSTED",
             "WIKIJOIN",
             "PRODUCT_OFFER",
             "OYSTER_FEATURE",
-            "EXTRACTED_REFPAGE",
-            "EXPERIMENT",
-            "SOURCE_PROTO",
             "MINED_REFERENCE_PAGE",
             "WEBREF_YEAR",
-            "BOOK_REF_PAGES_MINING_PIPELINE",
             "LYRICS_REFERENCE_PAGE",
             "KG_WEAK_DATA",
             "RELATED_PAGE",
             "MINED_RELATED_PAGE",
-            "KG_SOCIAL_PROFILE"
-          ],
-          "enumDeprecated": [
-            true,
-            false,
-            false,
-            false,
-            true,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            false,
-            false
+            "KG_SOCIAL_PROFILE",
+            "DEEP_LINK"
           ],
           "enumDescriptions": [
             "",
@@ -111505,39 +111662,16 @@
             "",
             "",
             "",
-            "",
-            "",
-            "A fake reference page based on a text extracted from the source proto. For example, product clusters get such refpages based on the descriptions pulled from their source protos (catalog offers).",
             "Since cl/142284568 this field represents also book reference pages.",
             "Wikipedia URLs for webref year topic.",
-            "Pages mined by book reference pages mining pipeline.",
             "Reference pages for songs mined by matching content of lyrics pages to the known lyrics of a song. NOTE: The pipeline that produces these is maintained by the kg-music@.",
             "From kg topic and all provenances were marked as go/weak-data.",
             "The URL of a webpage related to this entity. The page should contain information about this entity, but this entity does not need to be central to it. Examples would be news stories in which this entity figures. RELATED_PAGE are provided by clients and MINED_RELATED_PAGE are mined programmatically (go/related-pages).",
             "",
-            "Url to a social profile belonging to the entity as read from KG."
+            "Url to a social profile belonging to the entity as read from KG.",
+            "Extracted from deep link triples (media entities)."
           ],
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "RepositoryWebrefPreprocessingUrlSourceInfoNewSchema": {
-      "description": "Source information for the new reference url Freebase schema.",
-      "id": "RepositoryWebrefPreprocessingUrlSourceInfoNewSchema",
-      "properties": {
-        "sourceProperty": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "RepositoryWebrefPreprocessingUrlSourceInfoOldSchema": {
-      "description": "Source information for the old reference url Freebase schema.",
-      "id": "RepositoryWebrefPreprocessingUrlSourceInfoOldSchema",
-      "properties": {
-        "isOfficial": {
-          "type": "boolean"
         }
       },
       "type": "object"
@@ -115075,12 +115209,14 @@
           "enum": [
             "UNKNOWN",
             "METADATA",
-            "WEBREF"
+            "WEBREF",
+            "NAME"
           ],
           "enumDescriptions": [
             "",
-            "When the locationthe is specified in the raw metadata",
-            "When the locationthe is not specified in the raw metadata"
+            "The location mid is retrieved from the spatial fields in metadata.",
+            "The location mid is retrieved from WebRef.",
+            "The location mid is retrieved from the dataset name."
           ],
           "type": "string"
         },
@@ -115160,7 +115296,7 @@
       "type": "object"
     },
     "ResearchScienceSearchReconciledMetadata": {
-      "description": "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 73",
+      "description": "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 74",
       "id": "ResearchScienceSearchReconciledMetadata",
       "properties": {
         "alternateName": {
@@ -115400,6 +115536,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "locationReconciledForName": {
+          "description": "Indicates if the location has been reconciled for the dataset name. This is used by LocationExtender to avoid re-annotating the dataset name.",
+          "type": "boolean"
         },
         "measurementTechnique": {
           "description": "A technique or technology used in a Dataset corresponding to the method used for measuring the corresponding variable(s) (described using variableMeasured). http://schema.org/measurementTechnique",
@@ -116382,9 +116522,11 @@
             "UNKNOWN",
             "V20220330",
             "V20220620",
-            "V20230910"
+            "V20230910",
+            "V20231030"
           ],
           "enumDescriptions": [
+            "",
             "",
             "",
             "",
@@ -122515,7 +122657,7 @@
             false,
             false,
             false,
-            false,
+            true,
             false,
             false,
             false,
@@ -122706,7 +122848,7 @@
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YOU MUST CONTACT travel-ttd-ecosystem-team@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YOU MUST CONTACT fo-partner-eng@ before reading or writing this data.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. This is an access restriction for accessing Yeti publisher image data in KG. For now it should be used ONLY for Yeti. YOU MUST CONTACT stadia-knowledge-eng@ before reading or writing this data.",
-            "In order to test BBC metadata before serving code populates them to the public",
+            "This ACL was used to evaluating UMP GetMedia API changes for the BBC exclusive provider metadata launch. The evaluation was done and we don't cover BBC provider metadata with this ACL anymore in production.",
             "WARNING! User generated data. DO NOT use without permission and understanding of usage constraints. This data is from the Janata feature and contains information that a user chose to disclose as pubilc about themselves. YOU MUST CONTACT npp-lr@ before reading or writing data with this acl.",
             "WARNING! DO NOT use without permission and understanding of usage constraints. This is data that needed to be triangulated but lacked support from three different data sources. The purpose of this ACL is to allow RefX to access even the data that lacks triangulation. More background on this can be found at go/baike-triangulation. YOU MUST CONTACT lg-composition@ before reading or writing data with this acl.",
             "WARNING! Sensitive data under strict contractual usage agreements. DO NOT use without permission and understanding of usage constraints. YouTube Red Original prerealeased shows, seasons and episodes. YOU MUST CONTACT ajithm@ before reading or writing data with this acl.",
@@ -126457,6 +126599,7 @@
               "GEARHEAD_DUPLEX_COMPATIBLE_DIALER_ENABLED",
               "CUSTOMER_UPDATE_CHALLENGE_EVENT_LEVEL",
               "EXPERIMENTAL_TG_QUERY_EVENT_LEVEL",
+              "FEATURED_PRODUCTS_LIVE_OPS_CLIENT_AT_EVENT_LEVEL",
               "EVENT_LEVEL_TEST_CODE_LIMIT",
               "ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL",
               "BEST_SELLER_CART_TAG_AT_SESSION_LEVEL",
@@ -126903,6 +127046,14 @@
               "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_K2",
               "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_K3_4",
               "SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_AH_K1",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_AH_K2",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_AH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_AH_GTE_K5",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_GH_K1",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_GH_K2",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_GH_K3_4",
+              "SHOULD_SEE_NOW_CONTENT_WEEKLY_REWARD_GH_GTE_K5",
               "SHOULD_NOT_SEE_TOP_NOW_CONTENT_AH",
               "SHOULD_SEE_TOP_NOW_CONTENT_AH_K1",
               "SHOULD_SEE_TOP_NOW_CONTENT_AH_K2",
@@ -126951,6 +127102,14 @@
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH",
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH",
               "SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_AH_K1",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_AH_K2",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_AH_K3_4",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_AH_GTE_K5",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_GH_K1",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_GH_K2",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_GH_K3_4",
+              "SHOULD_SEE_TOP_NOW_CONTENT_WEEKLY_REWARD_GH_GTE_K5",
               "SHOULD_NOT_SEE_NOW_CONTENT_NH",
               "SHOULD_SEE_NOW_CONTENT_NH_K1",
               "SHOULD_SEE_NOW_CONTENT_NH_K2",
@@ -126994,6 +127153,8 @@
               "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K3_4",
               "SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_GTE_K5",
               "FEATURED_PRODUCTS_LIVE_OPS_AT_SESSION_LEVEL",
+              "FEATURED_PRODUCTS_LIVE_OPS_CLIENT_AT_SESSION_LEVEL",
+              "BUYFLOW_AUTH_RECOVERY_CLIENT_AT_SESSION_LEVEL",
               "SUPPLEMENTAL_TG_RETRIEVAL_SESSION_LEVEL",
               "FIRST_PARTY_OFFERS_REQUEST_TRIGGER_SESSION_LEVEL",
               "WALLET_WELLBEING_ALERT_SESSION_LEVEL",
@@ -127196,6 +127357,10 @@
               "MULTILINE_SUBSCRIPTION_BASIC_RESTORE_ENABLED_SESSION_LEVEL",
               "DECLINE_MESSAGE_IN_SUBSCENTER_FIX_FLOW_SESSION_LEVEL_V1",
               "SAVE_FOR_LATER_CART_ABANDONMENT_SCREEN_SESSION_LEVEL",
+              "CROSS_FORM_FACTOR_DETAILS_PAGEN_SESSION_LEVEL",
+              "CART_ABANDONMENT_NOTIFICATION_SESSION_LEVEL",
+              "DECLINE_RECOVERY_BETTER_CTA_ELIGIBLE_SESSION_LEVEL",
+              "DECLINE_RECOVERY_SUGGEST_NEXT_FOP_ELIGIBLE_SESSION_LEVEL",
               "SESSION_LEVEL_TEST_CODE_LIMIT",
               "CART_ABANDONMENT_USER_LEVEL",
               "IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL",
@@ -127408,7 +127573,8 @@
               "HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL",
               "HAS_LAST_28D_CART_ABANDONMENT_USER_LEVEL",
               "HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL",
-              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_5",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_V3_6",
+              "LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL_BEFORE_SNOOZE_V3_7",
               "POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL",
               "SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL",
@@ -127516,6 +127682,7 @@
               "GE_LIVEOPS_PSPEND_USER_LEVEL",
               "IS_ELIGIBLE_FOR_RENEWAL_REMINDER_USER_LEVEL",
               "FEATURED_PRODUCTS_LIVE_OPS_AT_USER_LEVEL",
+              "FEATURED_PRODUCTS_LIVE_OPS_CLIENT_AT_USER_LEVEL",
               "FIRST_PARTY_OFFERS_REQUEST_TRIGGER_USER_LEVEL",
               "IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_USER_LEVEL",
               "IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_ZYNGA_USER_LEVEL",
@@ -127544,6 +127711,7 @@
               "PURCHASE_ADD_FOP_OPTIONS_SCREEN_USER_LEVEL",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_USER_LEVEL",
               "CART_ABANDONMENT_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
+              "CART_ABANDONMENT_ITEM_RECOMMENDATION_POPULAR_USER_LEVEL",
               "HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_USER_LEVEL",
               "IS_ELIGIBLE_FOR_ONE_CLICK_BAKCUP_FOP_IN_FIX_FLOW_USER_LEVEL",
               "WEBSKY_DISPLAY_SUBSCRIPTION_ENTITLEMENT_BENEFITS_USER_LEVEL",
@@ -127553,11 +127721,13 @@
               "MULTILINE_SUBSCRIPTION_ADDON_TITLE_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_USER_LEVEL",
               "UNIFIED_ITEM_RECOMMENDATION_LOWER_PRICED_USER_LEVEL",
+              "UNIFIED_ITEM_RECOMMENDATION_POPULAR_USER_LEVEL",
               "CART_WITH_BROKEN_FOP_USER_LEVEL",
               "CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL_V2",
               "DECLINE_MESSAGE_IN_SUBSCENTER_FIX_FLOW_USER_LEVEL",
               "MULTILINE_SUBSCRIPTION_BASIC_RESTORE_ENABLED_USER_LEVEL",
               "SAVE_FOR_LATER_CART_ABANDONMENT_SCREEN_USER_LEVEL",
+              "CART_ABANDONMENT_NOTIFICATION_USER_LEVEL",
               "USER_LEVEL_TEST_CODE_LIMIT"
             ],
             "enumDeprecated": [
@@ -128087,6 +128257,7 @@
               false,
               false,
               false,
+              false,
               true,
               false,
               false,
@@ -128421,6 +128592,24 @@
               false,
               false,
               false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               true,
               false,
               false,
@@ -128767,25 +128956,6 @@
               false,
               false,
               false,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
               false,
               false,
               false,
@@ -128814,6 +128984,31 @@
               false,
               false,
               false,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -128905,6 +129100,9 @@
               false,
               false,
               true,
+              false,
+              false,
+              false,
               false,
               false,
               false,
@@ -129217,6 +129415,7 @@
               "Test code for sessions where a phone dialer that doesn't turn screen on during phone calls is enabled.",
               "Event-level test code for the presence of customer update challenge.",
               "Event-level test code for experimental tg query.",
+              "Client-side event level test code for Featured Products LiveOps.",
               "",
               "",
               "",
@@ -129663,6 +129862,14 @@
               "",
               "",
               "",
+              "Weekly Reward Now! content on Apps Home.",
+              "",
+              "",
+              "",
+              "Weekly Reward Now! content on Games Home.",
+              "",
+              "",
+              "",
               "Session level test codes for top of page Now! content coverage metrics. Any Now! content on Top of Apps Home.",
               "",
               "",
@@ -129711,6 +129918,14 @@
               "Merch featuring Now! content on Top of Games Home.",
               "",
               "",
+              "Weekly Reward Now! content on Top of Apps Home.",
+              "",
+              "",
+              "",
+              "Weekly Reward Now! content on Top of Games Home.",
+              "",
+              "",
+              "",
               "Session level test codes for Now! Home content coverage metrics. Any Now! content on NOW! Home.",
               "",
               "",
@@ -129754,6 +129969,8 @@
               "",
               "",
               "Session level test code for Featured Products LiveOps.",
+              "Client-side session level test code for Featured Products LiveOps.",
+              "Client-side session-level test code for buyflow auth recovery.",
               "Session-level test code for Supplemental TG Retrieval.",
               "Session level test code for First Party Promotional Offers.",
               "TestCode for slicing the users cohorts that should have received a budget Warning alert",
@@ -129956,6 +130173,10 @@
               "Session_level test code for multiline basic restore enabled.",
               "Session-level test code thst indicates decline message is popluated in subscenter.",
               "Session level test code for Save For Later cart abandonment screen.",
+              "Test codes for form factor details page. See go/play-xff-dp-serving.",
+              "Session-level test code for generating cart abandonment notification candidates.",
+              "Session-level test code for better decline recovery cta eligibility.",
+              "Session-level test code for next ranked FOP suggestion eligibility.",
               "",
               "Cart abandonment flow for purchase flow.",
               "User saw/would have seen the in app products section in App",
@@ -130169,6 +130390,7 @@
               "User level test code for users who have any purchase card abandon behavior in the last 28 day (controlled by LAST_28D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for users who have any purchase card abandon behavior in the last 7 day (controlled by LAST_7D_CART_ABANDONMENT_BACKEND), used for AH/GH monetization experiments.",
               "User level test code for link biometrics with impression cap and foped user setup after traffic rebalancing.",
+              "User level test code for link biometrics before snooze.",
               "User level test code for post success add backup flow.",
               "User level test code for skipping ckechmark screen with backup flow.",
               "User level test code for users who are eligible for one-click backup fop.",
@@ -130276,6 +130498,7 @@
               "User level test code for LiveOps pSpend uplift experiment. If GE campaign decision changed after enabling pSpend model, log test code.",
               "User level test code for users who are eligible to see the renewal reminder button.",
               "User level test code for Featured Products LiveOps.",
+              "Client-side User level test code for Featured Products LiveOps.",
               "User level test code for first party promotional offers.",
               "User level test code for those users that are eligible for a targerted reward for an app. Test code will be logged in PGS. More info: go/growth-boosters-ptdr",
               "",
@@ -130304,6 +130527,7 @@
               "User-level test code marking users who have seen the add new fop option screen during purchase flow. This will be used for ranking of add fop options experiments.",
               "User level test code for SKU Recommendation in Cart Abandonment, currently used for popular after abandon candidates.",
               "User level test code for SKU Recommendation in Cart Abandonment, specifically for lower-priced candidates.",
+              "User level test code for SKU Recommendation in Cart Abandonment, specifically for most popular candidates.",
               "User level test code for stored value top-up email reminder.",
               "User level test code for users who are eligible for one-click backup fop in fix flow",
               "User level test code for displaying sub-entitlement benefits on websky.",
@@ -130313,11 +130537,13 @@
               "User level test code for multiline addon title.",
               "User level test code for unified SKU Recommendations. Used when user is eligible for any SKU Recommendation, currently either cart-abandonment or post-success upsell.",
               "",
+              "",
               "User level test code indicating that user starts the purchase with a cart that has broken existing form of payment.",
               "User-level for showing subscription benefits in cart abandonment.",
               "User-level test code for users who see the decline message in subscenter.",
               "User level test code for multiline basic restore enabled.",
-              "User level test code for Save For Later cart abandonment screen. Add new user-level TestCode here.",
+              "User level test code for Save For Later cart abandonment screen.",
+              "User-level test code for generating cart abandonment notification candidates. Add new user-level TestCode here.",
               ""
             ],
             "type": "string"
@@ -130626,6 +130852,7 @@
             "OBJECTIVE_INGREDIENT_GO_LIVE",
             "OBJECTIVE_INGREDIENT_VALIDATED",
             "OBJECTIVE_PRIMARY_ASSETS_DONE",
+            "OBJECTIVE_PRIMARY_TRANSCODES_DONE",
             "OBJECTIVE_PREVIEW_DONE",
             "OBJECTIVE_TRANSMUXED_DONE",
             "OBJECTIVE_MEDIA_INFO_DONE",
@@ -130660,6 +130887,7 @@
             false,
             false,
             false,
+            false,
             true,
             false,
             false,
@@ -130680,6 +130908,7 @@
             "Enough was done on the ingredient for the video to be playable.",
             "The validation asset is ready.",
             "The most important transcodes and other assets have been completed. Drives \"is_fully_processed\" in VAPI. Limited to UGC and Reels. Also used to atomically publish all latency-sensitive transcodes after an edit.",
+            "Subset of OBJECTIVE_PRIMARY_ASSETS_DONE including transcode assets only.",
             "A representation for the video in advance of all completed assets is ready.",
             "The transmuxed transcode for the video, used for faster playback in certain early GO_LIVE scenarios, is playable. This is currently limited to Photos.",
             "Basic media information is available -- a rare single-asset objective, to advertise a video's general information as quickly as possible.",
@@ -147362,6 +147591,7 @@
             "LOW_QUALITY",
             "LOW_QUALITY_HIGH_RECALL",
             "MALWARE",
+            "MISLEADING",
             "PEDOPHILIA",
             "PHISHING",
             "PORNOGRAPHY",
@@ -147404,6 +147634,7 @@
             "Reasons applies to AutoMod and TnS. go/ytc-adjustable-automod-backend-design Low quality/Annoying content. Used by TnS and AutoMod. Maps to AUTOMOD_SYSTEM_HOLD",
             "AutoMod specific reasons. Maps to AUTOMOD_SYSTEM_HOLD_MORE",
             "MALWARE includes viruses, worms, trojans, adware and even potentially unwanted software which may not necessarily be harmful.",
+            "Policy to cover specific types of misinformation that actuates real world harm in ways that are not purely digital. 1) Misleading content related to civic and democratic processes, 2) Misleading health or medical content, 3) Deceptively manipulated media.",
             "Not illegal, but image or text content promoting or related to young pornography.",
             "",
             "",
@@ -147454,6 +147685,7 @@
         },
         "blarneyStoneScore": {
           "$ref": "YoutubeDistillerBlarneyStoneScores",
+          "deprecated": true,
           "description": "The blarney stone score."
         },
         "channelDiscussionId": {
@@ -147564,6 +147796,7 @@
             "WEB_INTERNAL_ANALYTICS",
             "WEB_PARENT_TOOLS",
             "WEB_PHONE_VERIFICATION",
+            "WEB_SHOPPING_EXTENSION",
             "WEB_EMBEDDED_PLAYER",
             "WEB_EFFECT_MAKER",
             "WEB_UNPLUGGED",
@@ -147665,7 +147898,8 @@
             "YouTube Internal Analytics",
             "YT Parent Tools web app (go/parent-zone-prd).",
             "YouTube Phone Verification web app",
-            "(go/wexit-phone-verify).",
+            "(go/wexit-phone-verify). YouTube Shopping Extension Client",
+            "go/yt-shopping-chrome-extension",
             "YouTube Effect Maker web app.",
             "Unplugged web clients. Sign-in, member experience (Polymer app).",
             "Onboarding web app.",
@@ -147777,6 +148011,7 @@
           "description": "Comments empirical CTRs."
         },
         "fds": {
+          "deprecated": true,
           "description": "Fountain Discovery Score, which represents the reputation of the author.",
           "format": "double",
           "type": "number"
@@ -147900,7 +148135,8 @@
           "type": "string"
         },
         "rankingPostLanguage": {
-          "description": "The language code stored in the KV pair ranking:post_language. This should usually be the same as language_code but is not guaranteed to be identical. The KV pair is needed because ranking can't consume user_content.",
+          "deprecated": true,
+          "description": "The language code stored in the KV pair ranking:post_language. This should usually be the same as language_code but is not guaranteed to be identical. The KV pair is needed because SBE ranking can't consume user_content. Still populated, but deprecated.",
           "type": "string"
         },
         "segments": {
@@ -147976,6 +148212,7 @@
         },
         "textQualityScores2": {
           "$ref": "YoutubeCommentsRankingYouTubeCommentTextQualityAnnotation",
+          "deprecated": true,
           "description": "Predicted probability of the comment being flagged based on the text. For testing the new annotation process only."
         },
         "videoId": {
@@ -147983,6 +148220,7 @@
           "type": "string"
         },
         "videoTimestamps": {
+          "deprecated": true,
           "description": "Unique video timestamps in seconds sorted by timestamp. This is derived from text Segments, not from a KV. These may exceed the length of the video since that isn't checked at segmentation time. The segmentation rules have changed over time e.g. in the past \"10:00 PM\" was treated as a timestamp.",
           "items": {
             "format": "int32",
