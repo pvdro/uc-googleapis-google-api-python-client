@@ -40215,7 +40215,7 @@
       }
     }
   },
-  "revision": "20231024",
+  "revision": "20231031",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -48845,7 +48845,7 @@
           "type": "string"
         },
         "allPorts": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive.",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The allPorts field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, SCTP, or L3_DEFAULT. - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal and external protocol forwarding. - Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The L3_DEFAULT protocol requires allPorts be set to true. ",
           "type": "boolean"
         },
         "allowGlobalAccess": {
@@ -48978,11 +48978,11 @@
           "type": "boolean"
         },
         "portRange": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By backend service-based network load balancers, target pool-based network load balancers, internal proxy load balancers, external proxy load balancers, Traffic Director, external protocol forwarding, and Classic VPN. Some products have restrictions on what ports can be used. See port specifications for details. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The portRange field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: external passthrough Network Load Balancers, internal and external proxy Network Load Balancers, internal and external Application Load Balancers, external protocol forwarding, and Classic VPN. - Some products have restrictions on what ports can be used. See port specifications for details. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?",
           "type": "string"
         },
         "ports": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal protocol forwarding. You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. The ports, port_range, and allPorts fields are mutually exclusive. @pattern: \\\\d+(?:-\\\\d+)?",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal protocol forwarding. - You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. @pattern: \\\\d+(?:-\\\\d+)?",
           "items": {
             "type": "string"
           },
@@ -54469,6 +54469,10 @@
           "description": "The name of this resize request. The name must be 1-63 characters long, and comply with RFC1035.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
+        },
+        "requestedRunDuration": {
+          "$ref": "Duration",
+          "description": "Requested run duration for instances that will be created by this request. At the end of the run duration instance will be deleted."
         },
         "resizeBy": {
           "description": "The number of instances to be created by this resize request. The group's target size will be increased by this number.",
@@ -61591,6 +61595,10 @@
           "$ref": "PreservedState",
           "description": "[Output Only] Preserved state generated based on stateful policy for this instance."
         },
+        "propertiesFromFlexibilityPolicy": {
+          "$ref": "ManagedInstancePropertiesFromFlexibilityPolicy",
+          "description": "[Output Only] Instance properties selected for this instance resulting from InstanceFlexibilityPolicy."
+        },
         "version": {
           "$ref": "ManagedInstanceVersion",
           "description": "[Output Only] Intended version of this instance."
@@ -61696,6 +61704,16 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ManagedInstancePropertiesFromFlexibilityPolicy": {
+      "id": "ManagedInstancePropertiesFromFlexibilityPolicy",
+      "properties": {
+        "machineType": {
+          "description": "The machine type to be used for this instance.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -68433,7 +68451,7 @@
           "type": "string"
         },
         "managedProtectionTier": {
-          "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD.",
+          "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_PAYGO. If this field is not specified, it is assumed to be CA_STANDARD.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
             "CAMP_PLUS_PAYGO",
@@ -73027,6 +73045,9 @@
         },
         "scheduling": {
           "$ref": "ResourceStatusScheduling"
+        },
+        "upcomingMaintenance": {
+          "$ref": "UpcomingMaintenance"
         }
       },
       "type": "object"
