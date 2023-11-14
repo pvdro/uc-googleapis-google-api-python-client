@@ -11328,6 +11328,11 @@
               "required": true,
               "type": "string"
             },
+            "noGracefulShutdown": {
+              "description": "If true, skips Graceful Shutdown.",
+              "location": "query",
+              "type": "boolean"
+            },
             "project": {
               "description": "Project ID for this request.",
               "location": "path",
@@ -13384,6 +13389,11 @@
               "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
               "required": true,
               "type": "string"
+            },
+            "noGracefulShutdown": {
+              "description": "If true, skips Graceful Shutdown.",
+              "location": "query",
+              "type": "boolean"
             },
             "project": {
               "description": "Project ID for this request.",
@@ -43542,7 +43552,7 @@
       }
     }
   },
-  "revision": "20231024",
+  "revision": "20231031",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -52704,7 +52714,7 @@
           "type": "string"
         },
         "allPorts": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive.",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The allPorts field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, SCTP, or L3_DEFAULT. - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal and external protocol forwarding. - Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The L3_DEFAULT protocol requires allPorts be set to true. ",
           "type": "boolean"
         },
         "allowGlobalAccess": {
@@ -52843,11 +52853,11 @@
           "type": "boolean"
         },
         "portRange": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By backend service-based network load balancers, target pool-based network load balancers, internal proxy load balancers, external proxy load balancers, Traffic Director, external protocol forwarding, and Classic VPN. Some products have restrictions on what ports can be used. See port specifications for details. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The portRange field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: external passthrough Network Load Balancers, internal and external proxy Network Load Balancers, internal and external Application Load Balancers, external protocol forwarding, and Classic VPN. - Some products have restrictions on what ports can be used. See port specifications for details. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?",
           "type": "string"
         },
         "ports": {
-          "description": "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal protocol forwarding. You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. The ports, port_range, and allPorts fields are mutually exclusive. @pattern: \\\\d+(?:-\\\\d+)?",
+          "description": "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal protocol forwarding. - You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. @pattern: \\\\d+(?:-\\\\d+)?",
           "items": {
             "type": "string"
           },
@@ -58253,13 +58263,11 @@
           "description": "The unit of measure for the target size.",
           "enum": [
             "INSTANCE",
-            "VCPU",
-            "VM"
+            "VCPU"
           ],
           "enumDescriptions": [
             "[Default] TargetSize is the target number of instances.",
-            "TargetSize is the target count of vCPUs of VMs.",
-            "TargetSize is the target number of VMs. Deprecated in favor of 'INSTANCE'."
+            "TargetSize is the target count of vCPUs of VMs."
           ],
           "type": "string"
         },
@@ -58864,7 +58872,7 @@
         },
         "requestedRunDuration": {
           "$ref": "Duration",
-          "description": "Requested run duration for instances that will be created by this request. If specified, the instance termination action will be performed at the end of the run duration."
+          "description": "Requested run duration for instances that will be created by this request. At the end of the run duration instance will be deleted."
         },
         "resizeBy": {
           "description": "The number of instances to be created by this resize request. The group's target size will be increased by this number.",
@@ -74208,7 +74216,7 @@
           "type": "string"
         },
         "managedProtectionTier": {
-          "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD.",
+          "description": "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_PAYGO. If this field is not specified, it is assumed to be CA_STANDARD.",
           "enum": [
             "CAMP_PLUS_ANNUAL",
             "CAMP_PLUS_PAYGO",
@@ -79675,6 +79683,13 @@
           },
           "description": "[Output Only] Represents the status of the service integration specs defined by the user in instance.serviceIntegrationSpecs.",
           "type": "object"
+        },
+        "shutdownDetails": {
+          "$ref": "ResourceStatusShutdownDetails",
+          "description": "[Output Only] Details about stopping state of instance"
+        },
+        "upcomingMaintenance": {
+          "$ref": "UpcomingMaintenance"
         }
       },
       "type": "object"
@@ -79697,7 +79712,6 @@
             "PREEMPTED",
             "SCHEDULED_STOP",
             "SHUTDOWN_DUE_TO_MAINTENANCE",
-            "UNSPECIFIED_TERMINATION_REASON",
             "USER_TERMINATED"
           ],
           "enumDescriptions": [
@@ -79713,7 +79727,6 @@
             "Terminated due to preemption",
             "Terminated due to scheduled stop",
             "Terminated due to maintenance",
-            "The termination reason is not specified",
             "Terminated by user"
           ],
           "type": "string"
@@ -79769,6 +79782,45 @@
             "GCE is trying to remove the backup plan from the instance.",
             "The operation failed, specifying the same value in BackupDrSpec.plan again (including null for delete) will attempt to repair the integration",
             "Default value, should not be found on instances."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceStatusShutdownDetails": {
+      "description": "Specifies if the instance is in `SHUTTING_DOWN` state or there is a instance stopping scheduled.",
+      "id": "ResourceStatusShutdownDetails",
+      "properties": {
+        "maxDuration": {
+          "$ref": "Duration",
+          "description": "Duration for graceful shutdown. Only applicable when `stop_state=SHUTTING_DOWN`."
+        },
+        "requestTimestamp": {
+          "description": "Past timestamp indicating the beginning of current `stopState` in RFC3339 text format.",
+          "type": "string"
+        },
+        "stopState": {
+          "description": "Current stopping state of the instance.",
+          "enum": [
+            "SHUTTING_DOWN",
+            "STOPPING"
+          ],
+          "enumDescriptions": [
+            "The instance is gracefully shutting down.",
+            "The instance is stopping."
+          ],
+          "type": "string"
+        },
+        "targetState": {
+          "description": "Target instance state.",
+          "enum": [
+            "DELETED",
+            "STOPPED"
+          ],
+          "enumDescriptions": [
+            "The instance will be deleted.",
+            "The instance will be stopped."
           ],
           "type": "string"
         }
@@ -82488,6 +82540,9 @@
           "format": "int64",
           "type": "string"
         },
+        "gracefulShutdown": {
+          "$ref": "SchedulingGracefulShutdown"
+        },
         "hostErrorTimeoutSeconds": {
           "description": "Specify the time in seconds for host error detection, the value must be within the range of [90, 330] with the increment of 30, if unset, the default behavior of host error recovery will be used.",
           "format": "int32",
@@ -82585,6 +82640,21 @@
         "terminationTime": {
           "description": "Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SchedulingGracefulShutdown": {
+      "description": "Configuration for gracefully shutting down the instance.",
+      "id": "SchedulingGracefulShutdown",
+      "properties": {
+        "enabled": {
+          "description": "Opts-in for graceful shutdown.",
+          "type": "boolean"
+        },
+        "maxDuration": {
+          "$ref": "Duration",
+          "description": "Specifies time needed to gracefully shut down the instance. After that time, the instance goes to STOPPING even if graceful shutdown is not completed."
         }
       },
       "type": "object"
