@@ -43552,7 +43552,7 @@
       }
     }
   },
-  "revision": "20231031",
+  "revision": "20231110",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
