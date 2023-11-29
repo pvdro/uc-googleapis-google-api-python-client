@@ -92,10 +92,10 @@ h1, h2, h3 {
 <p class="firstline">Creates a message in a Google Chat space. For an example, see [Create a message](https://developers.google.com/chat/api/guides/v1/messages/create). Calling this method requires [authentication](https://developers.google.com/chat/api/guides/auth) and supports the following authentication types: - For text messages, user authentication or app authentication are supported. - For card messages, only app authentication is supported. (Only Chat apps can create card messages.)</p>
 <p class="toc_element">
   <code><a href="#delete">delete(name, force=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Deletes a message. For an example, see [Delete a message](https://developers.google.com/chat/api/guides/v1/messages/delete). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only delete messages created by the calling Chat app.</p>
+<p class="firstline">Deletes a message. For an example, see [Delete a message](https://developers.google.com/chat/api/guides/v1/messages/delete). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only delete messages created by the calling Chat app.</p>
 <p class="toc_element">
   <code><a href="#get">get(name, x__xgafv=None)</a></code></p>
-<p class="firstline">Returns details about a message. For an example, see [Read a message](https://developers.google.com/chat/api/guides/v1/messages/get). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Note: Might return a message from a blocked member or space.</p>
+<p class="firstline">Returns details about a message. For an example, see [Read a message](https://developers.google.com/chat/api/guides/v1/messages/get). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Note: Might return a message from a blocked member or space.</p>
 <p class="toc_element">
   <code><a href="#list">list(parent, filter=None, orderBy=None, pageSize=None, pageToken=None, showDeleted=None, x__xgafv=None)</a></code></p>
 <p class="firstline">Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. For an example, see [List messages](/chat/api/guides/v1/messages/list). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).</p>
@@ -104,10 +104,10 @@ h1, h2, h3 {
 <p class="firstline">Retrieves the next page of results.</p>
 <p class="toc_element">
   <code><a href="#patch">patch(name, allowMissing=None, body=None, updateMask=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Updates a message. There's a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only update messages created by the calling Chat app.</p>
+<p class="firstline">Updates a message. There's a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only update messages created by the calling Chat app.</p>
 <p class="toc_element">
   <code><a href="#update">update(name, allowMissing=None, body=None, updateMask=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Updates a message. There's a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only update messages created by the calling Chat app.</p>
+<p class="firstline">Updates a message. There's a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only update messages created by the calling Chat app.</p>
 <h3>Method Details</h3>
 <div class="method">
     <code class="details" id="close">close()</code>
@@ -125,7 +125,7 @@ Args:
 
 { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -1035,6 +1035,20 @@ Args:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -1045,7 +1059,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -1061,7 +1075,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -2188,7 +2202,7 @@ Args:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -2223,7 +2237,7 @@ Args:
     Allowed values
       MESSAGE_REPLY_OPTION_UNSPECIFIED - Default. Starts a new thread. Using this option ignores any thread ID or `thread_key` that&#x27;s included.
       REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD - Creates the message as a reply to the thread specified by thread ID or `thread_key`. If it fails, the message starts a new thread instead.
-      REPLY_MESSAGE_OR_FAIL - Creates the message as a reply to the thread specified by thread ID or `thread_key`. If it fails, a `NOT_FOUND` error is returned instead.
+      REPLY_MESSAGE_OR_FAIL - Creates the message as a reply to the thread specified by thread ID or `thread_key`. If a new `thread_key` is used, a new thread is created. If the message creation fails, a `NOT_FOUND` error is returned instead.
   requestId: string, Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
   threadKey: string, Optional. Deprecated: Use thread.thread_key instead. ID for the thread. Supports up to 4000 characters. To start or add to a thread, create a message and specify a `threadKey` or the thread.name. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/v1/messages/create#create-message-thread).
   x__xgafv: string, V1 error format.
@@ -2236,7 +2250,7 @@ Returns:
 
     { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -3146,6 +3160,20 @@ Returns:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -3156,7 +3184,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -3172,7 +3200,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -4299,7 +4327,7 @@ Returns:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -4332,11 +4360,11 @@ Returns:
 
 <div class="method">
     <code class="details" id="delete">delete(name, force=None, x__xgafv=None)</code>
-  <pre>Deletes a message. For an example, see [Delete a message](https://developers.google.com/chat/api/guides/v1/messages/delete). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only delete messages created by the calling Chat app.
+  <pre>Deletes a message. For an example, see [Delete a message](https://developers.google.com/chat/api/guides/v1/messages/delete). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only delete messages created by the calling Chat app.
 
 Args:
   name: string, Required. Resource name of the message that you want to delete, in the form `spaces/*/messages/*` Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB` (required)
-  force: boolean, When `true`, deleting a message also deletes its threaded replies. When `false`, if a message has threaded replies, deletion fails. Only applies when [authenticating as a user](https://developers.google.com/chat/api/guides/auth/users). Has no effect when [authenticating with a service account] (https://developers.google.com/chat/api/guides/auth/service-accounts).
+  force: boolean, When `true`, deleting a message also deletes its threaded replies. When `false`, if a message has threaded replies, deletion fails. Only applies when [authenticating as a user](https://developers.google.com/chat/api/guides/auth/users). Has no effect when [authenticating as a Chat app] (https://developers.google.com/chat/api/guides/auth/service-accounts).
   x__xgafv: string, V1 error format.
     Allowed values
       1 - v1 error format
@@ -4351,7 +4379,7 @@ Returns:
 
 <div class="method">
     <code class="details" id="get">get(name, x__xgafv=None)</code>
-  <pre>Returns details about a message. For an example, see [Read a message](https://developers.google.com/chat/api/guides/v1/messages/get). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Note: Might return a message from a blocked member or space.
+  <pre>Returns details about a message. For an example, see [Read a message](https://developers.google.com/chat/api/guides/v1/messages/get). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Note: Might return a message from a blocked member or space.
 
 Args:
   name: string, Required. Resource name of the message to retrieve. Format: `spaces/{space}/messages/{message}` If the message begins with `client-`, then it has a custom name assigned by a Chat app that created it with the Chat REST API. That Chat app (but not others) can pass the custom name to get, update, or delete the message. To learn more, see [create and name a message] (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message). (required)
@@ -4365,7 +4393,7 @@ Returns:
 
     { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -5275,6 +5303,20 @@ Returns:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -5285,7 +5327,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -5301,7 +5343,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -6428,7 +6470,7 @@ Returns:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -6482,7 +6524,7 @@ Returns:
   &quot;messages&quot;: [ # List of messages.
     { # A message in a Google Chat space.
       &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-        &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+        &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
           &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
             &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
             &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -7392,6 +7434,20 @@ Returns:
           },
         },
         &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+        &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+          &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+            &quot;items&quot;: [ # An array of the SelectionItem objects.
+              { # An item that users can select in a selection input, such as a checkbox or switch.
+                &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+                &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+                &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+                &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+                &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+              },
+            ],
+          },
+          &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+        },
         &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
       },
       &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -7402,7 +7458,7 @@ Returns:
               &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
               &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
               &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
               &quot;type&quot;: &quot;A String&quot;, # User type.
             },
             &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -7418,7 +7474,7 @@ Returns:
               &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
               &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
               &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
               &quot;type&quot;: &quot;A String&quot;, # User type.
             },
           },
@@ -8545,7 +8601,7 @@ Returns:
         &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
         &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
         &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-        &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+        &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
         &quot;type&quot;: &quot;A String&quot;, # User type.
       },
       &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -8595,7 +8651,7 @@ Returns:
 
 <div class="method">
     <code class="details" id="patch">patch(name, allowMissing=None, body=None, updateMask=None, x__xgafv=None)</code>
-  <pre>Updates a message. There&#x27;s a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only update messages created by the calling Chat app.
+  <pre>Updates a message. There&#x27;s a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only update messages created by the calling Chat app.
 
 Args:
   name: string, Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB` (required)
@@ -8604,7 +8660,7 @@ Args:
 
 { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -9514,6 +9570,20 @@ Args:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -9524,7 +9594,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -9540,7 +9610,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -10667,7 +10737,7 @@ Args:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -10698,7 +10768,7 @@ Args:
 }
 
   allowMissing: boolean, Optional. If `true` and the message isn&#x27;t found, a new message is created and `updateMask` is ignored. The specified message ID must be [client-assigned](https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message) or the request fails.
-  updateMask: string, Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - `text` - `attachment` - `cards` (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - `cards_v2` (Requires [service account authentication](/chat/api/guides/auth/service-accounts).)
+  updateMask: string, Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - `text` - `attachment` - `cards` (Requires [app authentication](/chat/api/guides/auth/service-accounts).) - `cards_v2` (Requires [app authentication](/chat/api/guides/auth/service-accounts).)
   x__xgafv: string, V1 error format.
     Allowed values
       1 - v1 error format
@@ -10709,7 +10779,7 @@ Returns:
 
     { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -11619,6 +11689,20 @@ Returns:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -11629,7 +11713,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -11645,7 +11729,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -12772,7 +12856,7 @@ Returns:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -12805,7 +12889,7 @@ Returns:
 
 <div class="method">
     <code class="details" id="update">update(name, allowMissing=None, body=None, updateMask=None, x__xgafv=None)</code>
-  <pre>Updates a message. There&#x27;s a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). Requests authenticated with service accounts can only update messages created by the calling Chat app.
+  <pre>Updates a message. There&#x27;s a difference between the `patch` and `update` methods. The `patch` method uses a `patch` request while the `update` method uses a `put` request. We recommend using the `patch` method. For an example, see [Update a message](https://developers.google.com/chat/api/guides/v1/messages/update). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Supports [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). When using app authentication, requests can only update messages created by the calling Chat app.
 
 Args:
   name: string, Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB` (required)
@@ -12814,7 +12898,7 @@ Args:
 
 { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -13724,6 +13808,20 @@ Args:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -13734,7 +13832,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -13750,7 +13848,7 @@ Args:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -14877,7 +14975,7 @@ Args:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
@@ -14908,7 +15006,7 @@ Args:
 }
 
   allowMissing: boolean, Optional. If `true` and the message isn&#x27;t found, a new message is created and `updateMask` is ignored. The specified message ID must be [client-assigned](https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message) or the request fails.
-  updateMask: string, Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - `text` - `attachment` - `cards` (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - `cards_v2` (Requires [service account authentication](/chat/api/guides/auth/service-accounts).)
+  updateMask: string, Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - `text` - `attachment` - `cards` (Requires [app authentication](/chat/api/guides/auth/service-accounts).) - `cards_v2` (Requires [app authentication](/chat/api/guides/auth/service-accounts).)
   x__xgafv: string, V1 error format.
     Allowed values
       1 - v1 error format
@@ -14919,7 +15017,7 @@ Returns:
 
     { # A message in a Google Chat space.
   &quot;actionResponse&quot;: { # Parameters that a Chat app can use to configure how its response is posted. # Input only. Parameters that a Chat app can use to configure how its response is posted.
-    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+    &quot;dialogAction&quot;: { # Contains a [dialog](https://developers.google.com/chat/how-tos/dialogs) and request status code. # Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
       &quot;actionStatus&quot;: { # Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). # Input only. Status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs). Displays a status and message to users, if necessary. For example, in case of an error or success.
         &quot;statusCode&quot;: &quot;A String&quot;, # The status code.
         &quot;userFacingMessage&quot;: &quot;A String&quot;, # The message to send users about the status of their request. If unset, a generic message based on the `status_code` is sent.
@@ -15829,6 +15927,20 @@ Returns:
       },
     },
     &quot;type&quot;: &quot;A String&quot;, # Input only. The type of Chat app response.
+    &quot;updatedWidget&quot;: { # The response of the updated widget. Used to provide autocomplete options for a widget. # Input only. The response of the updated widget.
+      &quot;suggestions&quot;: { # List of widget autocomplete results. # List of widget autocomplete results
+        &quot;items&quot;: [ # An array of the SelectionItem objects.
+          { # An item that users can select in a selection input, such as a checkbox or switch.
+            &quot;bottomText&quot;: &quot;A String&quot;, # For multiselect menus, a text description or label that&#x27;s displayed below the item&#x27;s `text` field.
+            &quot;selected&quot;: True or False, # Whether the item is selected by default. If the selection input only accepts one value (such as for radio buttons or a dropdown menu), only set this field for one item.
+            &quot;startIconUri&quot;: &quot;A String&quot;, # For multiselect menus, the URL for the icon displayed next to the item&#x27;s `text` field. Supports PNG and JPEG files. Must be an `HTTPS` URL. For example, `https://developers.google.com/chat/images/quickstart-app-avatar.png`.
+            &quot;text&quot;: &quot;A String&quot;, # The text that identifies or describes the item to users.
+            &quot;value&quot;: &quot;A String&quot;, # The value associated with this item. The client should use this as a form input value. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/ui/read-form-data).
+          },
+        ],
+      },
+      &quot;widget&quot;: &quot;A String&quot;, # The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+    },
     &quot;url&quot;: &quot;A String&quot;, # Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
   },
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
@@ -15839,7 +15951,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
         &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
@@ -15855,7 +15967,7 @@ Returns:
           &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
           &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
           &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+          &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
           &quot;type&quot;: &quot;A String&quot;, # User type.
         },
       },
@@ -16982,7 +17094,7 @@ Returns:
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
     &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
     &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
-    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+    &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;slashCommand&quot;: { # A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat. # Output only. Slash command information, if applicable.
