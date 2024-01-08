@@ -1459,7 +1459,7 @@
           ],
           "parameters": {
             "backendBucket": {
-              "description": "Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.",
+              "description": "Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035.",
               "location": "path",
               "required": true,
               "type": "string"
@@ -11137,7 +11137,7 @@
           },
           "path": "projects/{project}/zones/{zone}/instances/{instance}/addNetworkInterface",
           "request": {
-            "$ref": "InstancesAddNetworkInterfaceRequest"
+            "$ref": "NetworkInterface"
           },
           "response": {
             "$ref": "Operation"
@@ -30363,6 +30363,93 @@
         }
       }
     },
+    "regionSnapshotSettings": {
+      "methods": {
+        "get": {
+          "description": "Get region snapshot settings.",
+          "flatPath": "projects/{project}/regions/{region}/snapshotSettings",
+          "httpMethod": "GET",
+          "id": "compute.regionSnapshotSettings.get",
+          "parameterOrder": [
+            "project",
+            "region"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/snapshotSettings",
+          "response": {
+            "$ref": "SnapshotSettings"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute",
+            "https://www.googleapis.com/auth/compute.readonly"
+          ]
+        },
+        "patch": {
+          "description": "Patch region snapshot settings.",
+          "flatPath": "projects/{project}/regions/{region}/snapshotSettings",
+          "httpMethod": "PATCH",
+          "id": "compute.regionSnapshotSettings.patch",
+          "parameterOrder": [
+            "project",
+            "region"
+          ],
+          "parameters": {
+            "project": {
+              "description": "Project ID for this request.",
+              "location": "path",
+              "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+              "required": true,
+              "type": "string"
+            },
+            "region": {
+              "description": "Name of the region for this request.",
+              "location": "path",
+              "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+              "required": true,
+              "type": "string"
+            },
+            "requestId": {
+              "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+              "location": "query",
+              "type": "string"
+            },
+            "updateMask": {
+              "description": "update_mask indicates fields to be updated as part of this request.",
+              "format": "google-fieldmask",
+              "location": "query",
+              "type": "string"
+            }
+          },
+          "path": "projects/{project}/regions/{region}/snapshotSettings",
+          "request": {
+            "$ref": "SnapshotSettings"
+          },
+          "response": {
+            "$ref": "Operation"
+          },
+          "scopes": [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/compute"
+          ]
+        }
+      }
+    },
     "regionSnapshots": {
       "methods": {
         "delete": {
@@ -43601,7 +43688,7 @@
       }
     }
   },
-  "revision": "20231128",
+  "revision": "20231231",
   "rootUrl": "https://compute.googleapis.com/",
   "schemas": {
     "AWSV4Signature": {
@@ -48482,13 +48569,18 @@
       "id": "BgpRouteNetworkLayerReachabilityInformation",
       "properties": {
         "destination": {
-          "description": "Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16.",
+          "deprecated": true,
+          "description": "Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16. Deprecated in favor of prefix.",
           "type": "string"
         },
         "pathId": {
           "description": "If the BGP session supports multiple paths (RFC 7911), the path identifier for this route.",
           "format": "uint32",
           "type": "integer"
+        },
+        "prefix": {
+          "description": "Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -48506,7 +48598,7 @@
           "description": "The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
         },
         "members": {
-          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.",
+          "description": "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workforce identity pool. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{group_id}`: All workforce identities in a group. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All workforce identities with a specific attribute value. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*`: All identities in a workforce identity pool. * `principal://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workload identity pool. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/group/{group_id}`: A workload identity pool group. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All identities in a workload identity pool with a certain attribute. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/*`: All identities in a workload identity pool. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: Deleted single identity in a workforce identity pool. For example, `deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value`.",
           "items": {
             "type": "string"
           },
@@ -48912,7 +49004,7 @@
           "type": "string"
         },
         "reservations": {
-          "description": "List of create-on-create reseravtions for this commitment.",
+          "description": "List of create-on-create reservations for this commitment.",
           "items": {
             "$ref": "Reservation"
           },
@@ -54498,7 +54590,7 @@
       "id": "GuestOsFeature",
       "properties": {
         "type": {
-          "description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.",
+          "description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE - IDPF For more information, see Enabling guest operating system features.",
           "enum": [
             "BARE_METAL_LINUX_COMPATIBLE",
             "FEATURE_TYPE_UNSPECIFIED",
@@ -55905,6 +55997,21 @@
         },
         "ipAddress": {
           "description": "For target pool based Network Load Balancing, it indicates the forwarding rule's IP address assigned to this instance. For other types of load balancing, the field indicates VM internal ip.",
+          "type": "string"
+        },
+        "ipv6Address": {
+          "type": "string"
+        },
+        "ipv6HealthState": {
+          "description": "Health state of the IPv6 address of the instance.",
+          "enum": [
+            "HEALTHY",
+            "UNHEALTHY"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ],
           "type": "string"
         },
         "port": {
@@ -59059,7 +59166,7 @@
       "id": "InstanceGroupManagerResizeRequestStatus",
       "properties": {
         "error": {
-          "description": "Errors encountered during the queueing or provisioning phases of the ResizeRequest.",
+          "description": "[Output only] Fatal errors encountered during the queueing or provisioning phases of the ResizeRequest that caused the transition to the FAILED state. As a contrary to the last_attempt errors, this field is final and errors are never removed from here, as the RR is not going to retry.",
           "properties": {
             "errors": {
               "description": "[Output Only] The array of errors encountered while processing this operation.",
@@ -59269,6 +59376,7 @@
       "id": "InstanceGroupManagerStandbyPolicy",
       "properties": {
         "initialDelaySec": {
+          "description": "Specifies the number of seconds that the MIG should wait to suspend or stop a VM after that VM was created. The initial delay gives the initialization script the time to prepare your VM for a quick scale out. The value of initial delay must be between 0 and 3600 seconds. The default value is 0.",
           "format": "int32",
           "type": "integer"
         },
@@ -61631,16 +61739,6 @@
       },
       "type": "object"
     },
-    "InstancesAddNetworkInterfaceRequest": {
-      "id": "InstancesAddNetworkInterfaceRequest",
-      "properties": {
-        "network_interface": {
-          "$ref": "NetworkInterface",
-          "description": "The new network interface to add."
-        }
-      },
-      "type": "object"
-    },
     "InstancesAddResourcePoliciesRequest": {
       "id": "InstancesAddResourcePoliciesRequest",
       "properties": {
@@ -63040,6 +63138,10 @@
           "description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.",
           "format": "int32",
           "type": "integer"
+        },
+        "multicastEnabled": {
+          "description": "Whether or not to permit multicast traffic for this attachment. Multicast packets will be dropped if this is not enabled.",
+          "type": "boolean"
         },
         "name": {
           "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
@@ -72317,7 +72419,7 @@
       "type": "object"
     },
     "Operation": {
-      "description": "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/alpha/globalOperations) * [Regional](/compute/docs/reference/rest/alpha/regionOperations) * [Zonal](/compute/docs/reference/rest/alpha/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zoneOperations` resource. For more information, read Global, Regional, and Zonal Resources.",
+      "description": "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/alpha/globalOperations) * [Regional](/compute/docs/reference/rest/alpha/regionOperations) * [Zonal](/compute/docs/reference/rest/alpha/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zoneOperations` resource. For more information, read Global, Regional, and Zonal Resources. Note that completed Operation resources have a limited retention period.",
       "id": "Operation",
       "properties": {
         "clientOperationId": {
@@ -73450,14 +73552,14 @@
       "id": "PacketMirroringFilter",
       "properties": {
         "IPProtocols": {
-          "description": "Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.",
+          "description": "Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "cidrRanges": {
-          "description": "IP CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. Only IPv4 is supported. If no ranges are specified, all traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.",
+          "description": "One or more IPv4 or IPv6 CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use \"0.0.0.0/0,::/0\". Note: Support for IPv6 traffic is in preview.",
           "items": {
             "type": "string"
           },
@@ -76123,6 +76225,7 @@
             "COMMITTED_N2_CPUS",
             "COMMITTED_NVIDIA_A100_80GB_GPUS",
             "COMMITTED_NVIDIA_A100_GPUS",
+            "COMMITTED_NVIDIA_H100_GPUS",
             "COMMITTED_NVIDIA_K80_GPUS",
             "COMMITTED_NVIDIA_L4_GPUS",
             "COMMITTED_NVIDIA_P100_GPUS",
@@ -76199,6 +76302,7 @@
             "PREEMPTIBLE_LOCAL_SSD_GB",
             "PREEMPTIBLE_NVIDIA_A100_80GB_GPUS",
             "PREEMPTIBLE_NVIDIA_A100_GPUS",
+            "PREEMPTIBLE_NVIDIA_H100_GPUS",
             "PREEMPTIBLE_NVIDIA_K80_GPUS",
             "PREEMPTIBLE_NVIDIA_L4_GPUS",
             "PREEMPTIBLE_NVIDIA_P100_GPUS",
@@ -76294,7 +76398,9 @@
             "",
             "",
             "",
+            "",
             "Guest CPUs",
+            "",
             "",
             "",
             "",
@@ -81768,14 +81874,12 @@
             "IPV4_PEER_ON_IPV6_ONLY_CONNECTION",
             "IPV6_PEER_ON_IPV4_ONLY_CONNECTION",
             "MD5_AUTH_INTERNAL_PROBLEM",
-            "MISSING_NETWORK_CONNECTIVITY_CENTER_SPOKE",
             "STATUS_REASON_UNSPECIFIED"
           ],
           "enumDescriptions": [
             "BGP peer disabled because it requires IPv4 but the underlying connection is IPv6-only.",
             "BGP peer disabled because it requires IPv6 but the underlying connection is IPv4-only.",
             "Indicates internal problems with configuration of MD5 authentication. This particular reason can only be returned when md5AuthEnabled is true and status is DOWN.",
-            "BGP peer disabled because it is not labeled as an NCC spoke. Currently, BGP peers using SD-WAN connectivity will be disabled for this reason.",
             ""
           ],
           "type": "string"
@@ -83237,7 +83341,7 @@
           "type": "string"
         },
         "displayName": {
-          "description": "User-provided name of the Organization security plicy. The name should be unique in the organization in which the security policy is created. This should only be used when SecurityPolicyType is FIREWALL. The name must be 1-63 characters long, and comply with https://www.ietf.org/rfc/rfc1035.txt. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "description": "User-provided name of the organization security policy. The name should be unique in the organization in which the security policy is created. This should only be used when SecurityPolicyType is FIREWALL. The name must be 1-63 characters long, and comply with https://www.ietf.org/rfc/rfc1035.txt. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
@@ -83999,7 +84103,7 @@
       "properties": {
         "recaptchaOptions": {
           "$ref": "SecurityPolicyRuleMatcherExprOptionsRecaptchaOptions",
-          "description": "reCAPTCHA configuration options to be applied for the rule. If the rule does not evaluate reCAPTCHA tokens, this field will have no effect."
+          "description": "reCAPTCHA configuration options to be applied for the rule. If the rule does not evaluate reCAPTCHA tokens, this field has no effect."
         }
       },
       "type": "object"
@@ -86082,9 +86186,37 @@
     "SnapshotSettings": {
       "id": "SnapshotSettings",
       "properties": {
+        "accessLocation": {
+          "$ref": "SnapshotSettingsAccessLocation",
+          "description": "(Regional snapshots use only)Policy of which location is allowed to access snapshot."
+        },
         "storageLocation": {
           "$ref": "SnapshotSettingsStorageLocationSettings",
           "description": "Policy of which storage location is going to be resolved, and additional data that particularizes how the policy is going to be carried out."
+        }
+      },
+      "type": "object"
+    },
+    "SnapshotSettingsAccessLocation": {
+      "id": "SnapshotSettingsAccessLocation",
+      "properties": {
+        "locations": {
+          "additionalProperties": {
+            "$ref": "SnapshotSettingsAccessLocationAccessLocationPreference"
+          },
+          "description": "List of regions that can restore a regional snapshot from the current region",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "SnapshotSettingsAccessLocationAccessLocationPreference": {
+      "description": "A structure for specifying an allowed target region.",
+      "id": "SnapshotSettingsAccessLocationAccessLocationPreference",
+      "properties": {
+        "region": {
+          "description": "Accessible region name",
+          "type": "string"
         }
       },
       "type": "object"
@@ -87855,13 +87987,28 @@
           ],
           "type": "string"
         },
+        "poolProvisionedCapacityGb": {
+          "description": "Size, in GiB, of the storage pool.",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolProvisionedIops": {
+          "description": "Provsioned IOPS of the storage pool. Only relevant if the storage pool type is hyperdisk-balanced.",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolProvisionedThroughput": {
+          "description": "Provisioned throughput of the storage pool. Only relevant if the storage pool type is hyperdisk-balanced or hyperdisk-throughput.",
+          "format": "int64",
+          "type": "string"
+        },
         "provisionedIops": {
-          "description": "Provsioned IOPS of the storage pool.",
+          "description": "DEPRECATED -- use \"pool provisioned IOPS\".",
           "format": "int64",
           "type": "string"
         },
         "provisionedThroughput": {
-          "description": "Provisioned throughput of the storage pool. Only relevant if the storage pool type is hyperdisk-balanced or hyperdisk-throughput.",
+          "description": "DEPRECATED -- use \"pool provisioned throughput\".",
           "format": "int64",
           "type": "string"
         },
@@ -87878,7 +88025,7 @@
           "type": "string"
         },
         "sizeGb": {
-          "description": "Size, in GiB, of the storage pool.",
+          "description": "DEPRECATED -- use \"pool provisioned capacity gb\".",
           "format": "int64",
           "type": "string"
         },
@@ -88477,12 +88624,17 @@
       "id": "StoragePoolResourceStatus",
       "properties": {
         "aggregateDiskProvisionedIops": {
-          "description": "[Output Only] Sum of all the disks' provisioned IOPS.",
+          "description": "DEPRECATED -- use \"total_provisioned_disk_iops\".",
           "format": "int64",
           "type": "string"
         },
         "aggregateDiskSizeGb": {
-          "description": "[Output Only] Sum of all the capacity provisioned in disks in this storage pool. A disk's provisioned capacity is the same as its total capacity.",
+          "description": "DEPRECATED -- use \"total provisioned disk size gb\".",
+          "format": "int64",
+          "type": "string"
+        },
+        "diskCount": {
+          "description": "[Output Only] Number of disks used.",
           "format": "int64",
           "type": "string"
         },
@@ -88491,27 +88643,67 @@
           "type": "string"
         },
         "maxAggregateDiskSizeGb": {
+          "description": "DEPRECATED -- use \"max provisioned disk size gb\"",
+          "format": "int64",
+          "type": "string"
+        },
+        "maxTotalProvisionedDiskCapacityGb": {
           "description": "[Output Only] Maximum allowed aggregate disk size in gigabytes.",
           "format": "int64",
           "type": "string"
         },
         "numberOfDisks": {
-          "description": "[Output Only] Number of disks used.",
+          "description": "DEPRECATED -- use \"disk count\".",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolUsedCapacityBytes": {
+          "description": "[Output Only] Space used by data stored in disks within the storage pool (in bytes). This will reflect the total number of bytes written to the disks in the pool, in contrast to the capacity of those disks.",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolUsedIops": {
+          "description": "Sum of all the disks' provisioned IOPS, minus some amount that is allowed per disk that is not counted towards pool's IOPS capacity.",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolUsedThroughput": {
+          "description": "[Output Only] Sum of all the disks' provisioned throughput in MB/s.",
+          "format": "int64",
+          "type": "string"
+        },
+        "poolUserWrittenBytes": {
+          "description": "[Output Only] Amount of data written into the pool, before it is compacted.",
+          "format": "int64",
+          "type": "string"
+        },
+        "totalProvisionedDiskCapacityGb": {
+          "description": "[Output Only] Sum of all the capacity provisioned in disks in this storage pool. A disk's provisioned capacity is the same as its total capacity.",
+          "format": "int64",
+          "type": "string"
+        },
+        "totalProvisionedDiskIops": {
+          "description": "[Output Only] Sum of all the disks' provisioned IOPS.",
+          "format": "int64",
+          "type": "string"
+        },
+        "totalProvisionedDiskThroughput": {
+          "description": "[Output Only] Sum of all the disks' provisioned throughput in MB/s, minus some amount that is allowed per disk that is not counted towards pool's throughput capacity.",
           "format": "int64",
           "type": "string"
         },
         "usedBytes": {
-          "description": "[Output Only] Space used by data stored in disks within the storage pool (in bytes).",
+          "description": "DEPRECATED -- use \"pool used capacity\".",
           "format": "int64",
           "type": "string"
         },
         "usedReducedBytes": {
-          "description": "[Output Only] Space used by compressed and deduped data stored in disks within the storage pool (in bytes).",
+          "description": "DEPRECATED -- do not use, will be removed.",
           "format": "int64",
           "type": "string"
         },
         "usedThroughput": {
-          "description": "[Output Only] Sum of all the disks' provisioned throughput in MB/s.",
+          "description": "DEPRECATED -- use \"pool used throughput\".",
           "format": "int64",
           "type": "string"
         }
@@ -89330,7 +89522,7 @@
           "type": "string"
         },
         "purpose": {
-          "description": "The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.",
+          "description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
           "enum": [
             "AGGREGATE",
             "CLOUD_EXTENSION",
@@ -89346,7 +89538,7 @@
             "Subnetwork used to aggregate multiple private subnetworks.",
             "Subnetworks created for Cloud Extension Machines.",
             "Subnet reserved for Global Envoy-based Load Balancing.",
-            "Subnet reserved for Internal HTTP(S) Load Balancing.",
+            "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
             "Regular user created or automatically created subnet.",
             "Subnetwork used as source range for Private NAT Gateways.",
             "Regular user created or automatically created subnet.",
@@ -89364,7 +89556,7 @@
           "type": "string"
         },
         "role": {
-          "description": "The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.",
+          "description": "The role of subnetwork. Currently, this field is only used when purpose is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.",
           "enum": [
             "ACTIVE",
             "BACKUP"
@@ -94836,7 +95028,7 @@
           "type": "string"
         },
         "purpose": {
-          "description": "The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.",
+          "description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
           "enum": [
             "AGGREGATE",
             "CLOUD_EXTENSION",
@@ -94852,7 +95044,7 @@
             "Subnetwork used to aggregate multiple private subnetworks.",
             "Subnetworks created for Cloud Extension Machines.",
             "Subnet reserved for Global Envoy-based Load Balancing.",
-            "Subnet reserved for Internal HTTP(S) Load Balancing.",
+            "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
             "Regular user created or automatically created subnet.",
             "Subnetwork used as source range for Private NAT Gateways.",
             "Regular user created or automatically created subnet.",
@@ -94862,7 +95054,7 @@
           "type": "string"
         },
         "role": {
-          "description": "The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.",
+          "description": "The role of subnetwork. Currently, this field is only used when purpose is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.",
           "enum": [
             "ACTIVE",
             "BACKUP"
