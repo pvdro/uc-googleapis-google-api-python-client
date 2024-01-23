@@ -14040,56 +14040,6 @@
 "https://www.googleapis.com/auth/compute"
 ]
 },
-"export": {
-"description": "Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.",
-"flatPath": "projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}/export",
-"httpMethod": "POST",
-"id": "compute.instantSnapshots.export",
-"parameterOrder": [
-"project",
-"zone",
-"instantSnapshot"
-],
-"parameters": {
-"instantSnapshot": {
-"description": "Name of the instant snapshot to export.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
-},
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-},
-"requestId": {
-"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
-"location": "query",
-"type": "string"
-},
-"zone": {
-"description": "The name of the zone for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-"required": true,
-"type": "string"
-}
-},
-"path": "projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}/export",
-"request": {
-"$ref": "InstantSnapshotsExportRequest"
-},
-"response": {
-"$ref": "Operation"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute"
-]
-},
 "get": {
 "description": "Returns the specified InstantSnapshot resource in the specified zone.",
 "flatPath": "projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}",
@@ -27717,56 +27667,6 @@
 }
 },
 "path": "projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}",
-"response": {
-"$ref": "Operation"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute"
-]
-},
-"export": {
-"description": "Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.",
-"flatPath": "projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}/export",
-"httpMethod": "POST",
-"id": "compute.regionInstantSnapshots.export",
-"parameterOrder": [
-"project",
-"region",
-"instantSnapshot"
-],
-"parameters": {
-"instantSnapshot": {
-"description": "Name of the instant snapshot to export.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
-},
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-},
-"region": {
-"description": "The name of the zone for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-"required": true,
-"type": "string"
-},
-"requestId": {
-"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
-"location": "query",
-"type": "string"
-}
-},
-"path": "projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}/export",
-"request": {
-"$ref": "RegionInstantSnapshotsExportRequest"
-},
 "response": {
 "$ref": "Operation"
 },
@@ -43688,7 +43588,7 @@
 }
 }
 },
-"revision": "20231231",
+"revision": "20240109",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -52918,7 +52818,7 @@ false
 "type": "boolean"
 },
 "allowGlobalAccess": {
-"description": "This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If set to true, clients can access the internal passthrough Network Load Balancers, the regional internal Application Load Balancer, and the regional internal proxy Network Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.",
+"description": "If set to true, clients can access the internal passthrough Network Load Balancers, the regional internal Application Load Balancer, and the regional internal proxy Network Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.",
 "type": "boolean"
 },
 "allowPscGlobalAccess": {
@@ -54590,7 +54490,7 @@ false
 "id": "GuestOsFeature",
 "properties": {
 "type": {
-"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE - IDPF For more information, see Enabling guest operating system features.",
+"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF For more information, see Enabling guest operating system features.",
 "enum": [
 "BARE_METAL_LINUX_COMPATIBLE",
 "FEATURE_TYPE_UNSPECIFIED",
@@ -62409,42 +62309,6 @@ false
 },
 "type": "object"
 },
-"InstantSnapshotExportParams": {
-"id": "InstantSnapshotExportParams",
-"properties": {
-"baseInstantSnapshot": {
-"description": "An optional base instant snapshot that this resource is compared against. If not specified, all blocks of this resource are exported. The base instant snapshot and this resource must be created from the same disk. The base instant snapshot must be created earlier in time than this resource.",
-"type": "string"
-},
-"bucketName": {
-"description": "The name of an existing bucket in Cloud Storage where the changed blocks will be stored. The Google Service Account must have read and write access to this bucket. The bucket has to be in the same region as this resource.",
-"type": "string"
-},
-"encryptionKey": {
-"$ref": "CustomerEncryptionKey",
-"description": "Encryption key used to encrypt the instant snapshot."
-},
-"objectName": {
-"description": "Name of the output Bigstore object storing the changed blocks. Object name must be less than 1024 bytes in length.",
-"type": "string"
-},
-"outputType": {
-"description": "The format of the output file.",
-"enum": [
-"INVALID",
-"METADATA_AND_DATA",
-"METADATA_ONLY"
-],
-"enumDescriptions": [
-"",
-"",
-""
-],
-"type": "string"
-}
-},
-"type": "object"
-},
 "InstantSnapshotList": {
 "description": "Contains a list of InstantSnapshot resources.",
 "id": "InstantSnapshotList",
@@ -62604,16 +62468,6 @@ false
 "description": "[Output Only] The storage size of this instant snapshot.",
 "format": "int64",
 "type": "string"
-}
-},
-"type": "object"
-},
-"InstantSnapshotsExportRequest": {
-"id": "InstantSnapshotsExportRequest",
-"properties": {
-"exportParams": {
-"$ref": "InstantSnapshotExportParams",
-"description": "Parameters to export the changed blocks."
 }
 },
 "type": "object"
@@ -68328,7 +68182,7 @@ false
 "type": "string"
 },
 "instance": {
-"description": "The name for a specific VM instance that the IP address belongs to. This is required for network endpoints of type GCE_VM_IP_PORT. The instance must be in the same zone of network endpoint group. The name must be 1-63 characters long, and comply with RFC1035.",
+"description": "The name or a URL of a specific VM instance that the IP address belongs to. This is required for network endpoints of type GCE_VM_IP_PORT. The instance must be in the same zone of network endpoint group (for zonal NEGs) or in the zone within the region of the NEG (for regional NEGs). The name must be 1-63 characters long, and comply with RFC1035 or be a valid URL pointing to an existing instance.",
 "type": "string"
 },
 "ipAddress": {
@@ -78032,16 +77886,6 @@ false
 "$ref": "NamedPort"
 },
 "type": "array"
-}
-},
-"type": "object"
-},
-"RegionInstantSnapshotsExportRequest": {
-"id": "RegionInstantSnapshotsExportRequest",
-"properties": {
-"exportParams": {
-"$ref": "InstantSnapshotExportParams",
-"description": "Parameters to export the changed blocks."
 }
 },
 "type": "object"
@@ -88735,33 +88579,38 @@ false
 "description": "[Output Only] Type of the resource. Always compute#storagePoolType for storage pool types.",
 "type": "string"
 },
-"maxProvisionedIops": {
-"description": "[Output Only] Maximum provisioned IOPS.",
-"format": "int64",
-"type": "string"
-},
-"maxProvisionedThroughput": {
-"description": "[Output Only] Maximum provisioned throughput.",
-"format": "int64",
-"type": "string"
-},
-"maxSizeGb": {
+"maxPoolProvisionedCapacityGb": {
 "description": "[Output Only] Maximum storage pool size in GB.",
 "format": "int64",
 "type": "string"
 },
-"minProvisionedIops": {
+"maxPoolProvisionedIops": {
+"description": "[Output Only] Maximum provisioned IOPS.",
+"format": "int64",
+"type": "string"
+},
+"maxPoolProvisionedThroughput": {
+"description": "[Output Only] Maximum provisioned throughput.",
+"format": "int64",
+"type": "string"
+},
+"minPoolProvisionedCapacityGb": {
+"description": "[Output Only] Minimum storage pool size in GB.",
+"format": "int64",
+"type": "string"
+},
+"minPoolProvisionedIops": {
 "description": "[Output Only] Minimum provisioned IOPS.",
 "format": "int64",
 "type": "string"
 },
-"minProvisionedThroughput": {
+"minPoolProvisionedThroughput": {
 "description": "[Output Only] Minimum provisioned throughput.",
 "format": "int64",
 "type": "string"
 },
 "minSizeGb": {
-"description": "[Output Only] Minimum storage pool size in GB.",
+"description": "[Deprecated] This field is deprecated. Use minPoolProvisionedCapacityGb instead.",
 "format": "int64",
 "type": "string"
 },
