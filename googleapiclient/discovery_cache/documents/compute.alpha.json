@@ -126,7 +126,7 @@
 "acceleratorTypes": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of accelerator types.",
+"description": "Retrieves an aggregated list of accelerator types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/acceleratorTypes",
 "httpMethod": "GET",
 "id": "compute.acceleratorTypes.aggregatedList",
@@ -170,7 +170,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -275,7 +275,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -302,7 +302,7 @@
 "addresses": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of addresses.",
+"description": "Retrieves an aggregated list of addresses. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/addresses",
 "httpMethod": "GET",
 "id": "compute.addresses.aggregatedList",
@@ -346,7 +346,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -547,7 +547,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -713,7 +713,7 @@
 "autoscalers": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of autoscalers.",
+"description": "Retrieves an aggregated list of autoscalers. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/autoscalers",
 "httpMethod": "GET",
 "id": "compute.autoscalers.aggregatedList",
@@ -757,7 +757,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -951,7 +951,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -1394,7 +1394,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -1655,7 +1655,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves the list of all BackendService resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all BackendService resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/backendServices",
 "httpMethod": "GET",
 "id": "compute.backendServices.aggregatedList",
@@ -1699,7 +1699,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -1991,7 +1991,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -2046,7 +2046,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -2394,7 +2394,7 @@
 "diskTypes": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of disk types.",
+"description": "Retrieves an aggregated list of disk types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/diskTypes",
 "httpMethod": "GET",
 "id": "compute.diskTypes.aggregatedList",
@@ -2438,7 +2438,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -2543,7 +2543,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -2620,7 +2620,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves an aggregated list of persistent disks.",
+"description": "Retrieves an aggregated list of persistent disks. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/disks",
 "httpMethod": "GET",
 "id": "compute.disks.aggregatedList",
@@ -2664,7 +2664,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -3008,7 +3008,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -3623,7 +3623,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -4046,7 +4046,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -4477,7 +4477,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -4619,7 +4619,7 @@
 "forwardingRules": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of forwarding rules.",
+"description": "Retrieves an aggregated list of forwarding rules. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/forwardingRules",
 "httpMethod": "GET",
 "id": "compute.forwardingRules.aggregatedList",
@@ -4663,7 +4663,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -4864,7 +4864,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -5080,7 +5080,7 @@
 "futureReservations": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of future reservations.",
+"description": "Retrieves an aggregated list of future reservations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/futureReservations",
 "httpMethod": "GET",
 "id": "compute.futureReservations.aggregatedList",
@@ -5124,7 +5124,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -5358,7 +5358,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -5622,7 +5622,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -5906,7 +5906,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6312,7 +6312,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6374,7 +6374,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6394,7 +6394,7 @@
 "globalOperations": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of all operations.",
+"description": "Retrieves an aggregated list of all operations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/operations",
 "httpMethod": "GET",
 "id": "compute.globalOperations.aggregatedList",
@@ -6438,7 +6438,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -6565,7 +6565,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6714,7 +6714,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6881,7 +6881,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -6943,7 +6943,7 @@
 "healthChecks": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all HealthCheck resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all HealthCheck resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/healthChecks",
 "httpMethod": "GET",
 "id": "compute.healthChecks.aggregatedList",
@@ -6987,7 +6987,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -7156,7 +7156,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -7445,7 +7445,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -7734,7 +7734,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -8196,7 +8196,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -8623,7 +8623,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -8697,7 +8697,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves the list of managed instance groups and groups them by zone.",
+"description": "Retrieves the list of managed instance groups and groups them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/instanceGroupManagers",
 "httpMethod": "GET",
 "id": "compute.instanceGroupManagers.aggregatedList",
@@ -8741,7 +8741,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -9112,7 +9112,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -9181,7 +9181,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -9250,7 +9250,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -9319,7 +9319,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -10117,7 +10117,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves the list of instance groups and sorts them by zone.",
+"description": "Retrieves the list of instance groups and sorts them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/instanceGroups",
 "httpMethod": "GET",
 "id": "compute.instanceGroups.aggregatedList",
@@ -10161,7 +10161,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -10350,7 +10350,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -10419,7 +10419,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -10676,7 +10676,7 @@
 "instanceTemplates": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/instanceTemplates",
 "httpMethod": "GET",
 "id": "compute.instanceTemplates.aggregatedList",
@@ -10720,7 +10720,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -10945,7 +10945,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -11211,7 +11211,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances.",
+"description": "Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/instances",
 "httpMethod": "GET",
 "id": "compute.instances.aggregatedList",
@@ -11255,7 +11255,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -12131,7 +12131,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -12217,7 +12217,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -13943,7 +13943,7 @@
 "instantSnapshots": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of instantSnapshots.",
+"description": "Retrieves an aggregated list of instantSnapshots. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/instantSnapshots",
 "httpMethod": "GET",
 "id": "compute.instantSnapshots.aggregatedList",
@@ -13987,7 +13987,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -14230,7 +14230,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -14398,7 +14398,7 @@
 "interconnectAttachments": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of interconnect attachments.",
+"description": "Retrieves an aggregated list of interconnect attachments. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/interconnectAttachments",
 "httpMethod": "GET",
 "id": "compute.interconnectAttachments.aggregatedList",
@@ -14442,7 +14442,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -14697,7 +14697,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -14982,7 +14982,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -15114,7 +15114,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -15430,7 +15430,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -15950,7 +15950,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -16238,7 +16238,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -16333,7 +16333,7 @@
 "machineTypes": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of machine types.",
+"description": "Retrieves an aggregated list of machine types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/machineTypes",
 "httpMethod": "GET",
 "id": "compute.machineTypes.aggregatedList",
@@ -16377,7 +16377,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -16482,7 +16482,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -16509,7 +16509,7 @@
 "networkAttachments": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all NetworkAttachment resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all NetworkAttachment resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/networkAttachments",
 "httpMethod": "GET",
 "id": "compute.networkAttachments.aggregatedList",
@@ -16553,7 +16553,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -16803,7 +16803,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -16964,7 +16964,7 @@
 "networkEdgeSecurityServices": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.",
+"description": "Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/networkEdgeSecurityServices",
 "httpMethod": "GET",
 "id": "compute.networkEdgeSecurityServices.aggregatedList",
@@ -17008,7 +17008,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -17232,7 +17232,7 @@
 "networkEndpointGroups": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of network endpoint groups and sorts them by zone.",
+"description": "Retrieves the list of network endpoint groups and sorts them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/networkEndpointGroups",
 "httpMethod": "GET",
 "id": "compute.networkEndpointGroups.aggregatedList",
@@ -17276,7 +17276,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -17561,7 +17561,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -17630,7 +17630,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -18125,7 +18125,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -18665,7 +18665,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -18728,7 +18728,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -18811,7 +18811,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -18909,7 +18909,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -19182,7 +19182,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group.",
+"description": "Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/nodeGroups",
 "httpMethod": "GET",
 "id": "compute.nodeGroups.aggregatedList",
@@ -19226,7 +19226,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -19527,7 +19527,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -19598,7 +19598,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -19916,7 +19916,7 @@
 "nodeTemplates": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of node templates.",
+"description": "Retrieves an aggregated list of node templates. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/nodeTemplates",
 "httpMethod": "GET",
 "id": "compute.nodeTemplates.aggregatedList",
@@ -19960,7 +19960,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -20210,7 +20210,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -20321,7 +20321,7 @@
 "nodeTypes": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of node types.",
+"description": "Retrieves an aggregated list of node types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/nodeTypes",
 "httpMethod": "GET",
 "id": "compute.nodeTypes.aggregatedList",
@@ -20365,7 +20365,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -20470,7 +20470,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -20792,7 +20792,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -21017,7 +21017,7 @@
 "packetMirrorings": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of packetMirrorings.",
+"description": "Retrieves an aggregated list of packetMirrorings. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/packetMirrorings",
 "httpMethod": "GET",
 "id": "compute.packetMirrorings.aggregatedList",
@@ -21061,7 +21061,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -21262,7 +21262,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -21600,7 +21600,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -21654,7 +21654,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -21731,6 +21731,40 @@
 "path": "projects/{project}/moveInstance",
 "request": {
 "$ref": "InstanceMoveRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"setCloudArmorTier": {
+"description": "Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the billing account of the project must be subscribed to Cloud Armor Enterprise. See Subscribing to Cloud Armor Enterprise for more information.",
+"flatPath": "projects/{project}/setCloudArmorTier",
+"httpMethod": "POST",
+"id": "compute.projects.setCloudArmorTier",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/setCloudArmorTier",
+"request": {
+"$ref": "ProjectsSetCloudArmorTierRequest"
 },
 "response": {
 "$ref": "Operation"
@@ -22103,7 +22137,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -22203,7 +22237,7 @@
 "publicDelegatedPrefixes": {
 "methods": {
 "aggregatedList": {
-"description": "Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes.",
+"description": "Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/publicDelegatedPrefixes",
 "httpMethod": "GET",
 "id": "compute.publicDelegatedPrefixes.aggregatedList",
@@ -22247,7 +22281,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -22493,7 +22527,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -22787,7 +22821,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -23222,7 +23256,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -23284,7 +23318,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -23544,7 +23578,7 @@
 "regionCommitments": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of commitments by region.",
+"description": "Retrieves an aggregated list of commitments by region. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/commitments",
 "httpMethod": "GET",
 "id": "compute.regionCommitments.aggregatedList",
@@ -23588,7 +23622,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -23836,7 +23870,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -24190,7 +24224,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -24589,7 +24623,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -25050,7 +25084,7 @@
 "regionHealthCheckServices": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all HealthCheckService resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all HealthCheckService resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/healthCheckServices",
 "httpMethod": "GET",
 "id": "compute.regionHealthCheckServices.aggregatedList",
@@ -25094,7 +25128,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -25293,7 +25327,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -25587,7 +25621,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -26156,7 +26190,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -26225,7 +26259,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -26294,7 +26328,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -26363,7 +26397,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -27195,7 +27229,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -27264,7 +27298,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -27575,7 +27609,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -27884,7 +27918,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -28314,7 +28348,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -28383,7 +28417,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -28945,7 +28979,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -29361,7 +29395,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -29562,7 +29596,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -29757,7 +29791,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -30103,7 +30137,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -30609,7 +30643,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -30949,7 +30983,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -31192,7 +31226,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -31255,7 +31289,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -31549,7 +31583,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -31844,7 +31878,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -32239,7 +32273,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -32534,7 +32568,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -32792,7 +32826,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -32886,7 +32920,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -32906,7 +32940,7 @@
 "reservations": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of reservations.",
+"description": "Retrieves an aggregated list of reservations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/reservations",
 "httpMethod": "GET",
 "id": "compute.reservations.aggregatedList",
@@ -32950,7 +32984,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -33193,7 +33227,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -33422,7 +33456,7 @@
 "resourcePolicies": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of resource policies.",
+"description": "Retrieves an aggregated list of resource policies. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/resourcePolicies",
 "httpMethod": "GET",
 "id": "compute.resourcePolicies.aggregatedList",
@@ -33466,7 +33500,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -33716,7 +33750,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -33888,7 +33922,7 @@
 "routers": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of routers.",
+"description": "Retrieves an aggregated list of routers. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/routers",
 "httpMethod": "GET",
 "id": "compute.routers.aggregatedList",
@@ -33932,7 +33966,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -34295,7 +34329,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -34497,7 +34531,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -34593,7 +34627,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -34680,7 +34714,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -34751,7 +34785,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -35217,7 +35251,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -35317,7 +35351,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves the list of all SecurityPolicy resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all SecurityPolicy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/securityPolicies",
 "httpMethod": "GET",
 "id": "compute.securityPolicies.aggregatedList",
@@ -35361,7 +35395,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -35576,7 +35610,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -35631,7 +35665,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -35873,7 +35907,7 @@
 "serviceAttachments": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/serviceAttachments",
 "httpMethod": "GET",
 "id": "compute.serviceAttachments.aggregatedList",
@@ -35917,7 +35951,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -36167,7 +36201,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -36397,7 +36431,7 @@
 "snapshots": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of all of the snapshots in your project across all regions and global scope.",
+"description": "Retrieves an aggregated list of all of the snapshots in your project across all regions and global scope. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/snapshots",
 "httpMethod": "GET",
 "id": "compute.snapshots.aggregatedList",
@@ -36441,7 +36475,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -36651,7 +36685,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -36783,7 +36817,7 @@
 "sslCertificates": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all SslCertificate resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all SslCertificate resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/sslCertificates",
 "httpMethod": "GET",
 "id": "compute.sslCertificates.aggregatedList",
@@ -36827,7 +36861,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -36996,7 +37030,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -37054,7 +37088,7 @@
 "sslPolicies": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all SslPolicy resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all SslPolicy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/sslPolicies",
 "httpMethod": "GET",
 "id": "compute.sslPolicies.aggregatedList",
@@ -37098,7 +37132,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -37265,7 +37299,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -37320,7 +37354,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -37419,7 +37453,7 @@
 "storagePoolTypes": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of storage pool types.",
+"description": "Retrieves an aggregated list of storage pool types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/storagePoolTypes",
 "httpMethod": "GET",
 "id": "compute.storagePoolTypes.aggregatedList",
@@ -37463,7 +37497,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -37568,7 +37602,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -37595,7 +37629,7 @@
 "storagePools": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of storage pools.",
+"description": "Retrieves an aggregated list of storage pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/storagePools",
 "httpMethod": "GET",
 "id": "compute.storagePools.aggregatedList",
@@ -37639,7 +37673,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -37881,7 +37915,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -37945,7 +37979,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -38176,7 +38210,7 @@
 "subnetworks": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of subnetworks.",
+"description": "Retrieves an aggregated list of subnetworks. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/subnetworks",
 "httpMethod": "GET",
 "id": "compute.subnetworks.aggregatedList",
@@ -38220,7 +38254,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -38520,7 +38554,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -38575,7 +38609,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -38944,7 +38978,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -39044,7 +39078,7 @@
 "targetHttpProxies": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetHttpProxies",
 "httpMethod": "GET",
 "id": "compute.targetHttpProxies.aggregatedList",
@@ -39088,7 +39122,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -39257,7 +39291,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -39399,7 +39433,7 @@
 "targetHttpsProxies": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetHttpsProxies",
 "httpMethod": "GET",
 "id": "compute.targetHttpsProxies.aggregatedList",
@@ -39443,7 +39477,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -39612,7 +39646,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -39919,7 +39953,7 @@
 "targetInstances": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of target instances.",
+"description": "Retrieves an aggregated list of target instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetInstances",
 "httpMethod": "GET",
 "id": "compute.targetInstances.aggregatedList",
@@ -39963,7 +39997,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -40157,7 +40191,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -40379,7 +40413,7 @@
 ]
 },
 "aggregatedList": {
-"description": "Retrieves an aggregated list of target pools.",
+"description": "Retrieves an aggregated list of target pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetPools",
 "httpMethod": "GET",
 "id": "compute.targetPools.aggregatedList",
@@ -40423,7 +40457,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -40670,7 +40704,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -41088,7 +41122,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -41354,7 +41388,7 @@
 "targetTcpProxies": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all TargetTcpProxy resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all TargetTcpProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetTcpProxies",
 "httpMethod": "GET",
 "id": "compute.targetTcpProxies.aggregatedList",
@@ -41398,7 +41432,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -41567,7 +41601,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -41709,7 +41743,7 @@
 "targetVpnGateways": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of target VPN gateways.",
+"description": "Retrieves an aggregated list of target VPN gateways. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/targetVpnGateways",
 "httpMethod": "GET",
 "id": "compute.targetVpnGateways.aggregatedList",
@@ -41753,7 +41787,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -41954,7 +41988,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -42070,7 +42104,7 @@
 "urlMaps": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves the list of all UrlMap resources, regional and global, available to the specified project.",
+"description": "Retrieves the list of all UrlMap resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/urlMaps",
 "httpMethod": "GET",
 "id": "compute.urlMaps.aggregatedList",
@@ -42114,7 +42148,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -42325,7 +42359,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -42504,7 +42538,7 @@
 "vpnGateways": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of VPN gateways.",
+"description": "Retrieves an aggregated list of VPN gateways. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/vpnGateways",
 "httpMethod": "GET",
 "id": "compute.vpnGateways.aggregatedList",
@@ -42548,7 +42582,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -42792,7 +42826,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -42908,7 +42942,7 @@
 "vpnTunnels": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of VPN tunnels.",
+"description": "Retrieves an aggregated list of VPN tunnels. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/vpnTunnels",
 "httpMethod": "GET",
 "id": "compute.vpnTunnels.aggregatedList",
@@ -42952,7 +42986,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -43153,7 +43187,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -43391,7 +43425,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -43461,7 +43495,7 @@
 "zoneQueuedResources": {
 "methods": {
 "aggregatedList": {
-"description": "Retrieves an aggregated list of all of the queued resources in a project across all zones.",
+"description": "Retrieves an aggregated list of all of the queued resources in a project across all zones. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
 "flatPath": "projects/{project}/aggregated/queuedResources",
 "httpMethod": "GET",
 "id": "compute.zoneQueuedResources.aggregatedList",
@@ -43505,7 +43539,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -43744,7 +43778,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 },
@@ -43845,7 +43879,7 @@
 "type": "string"
 },
 "returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.",
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
 }
@@ -43863,7 +43897,7 @@
 }
 }
 },
-"revision": "20240130",
+"revision": "20240220",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -45624,7 +45658,7 @@ false
 "type": "string"
 },
 "provisionedThroughput": {
-"description": "Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.",
+"description": "Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must greater than or equal to 1.",
 "format": "int64",
 "type": "string"
 },
@@ -50273,7 +50307,7 @@ false
 "type": "string"
 },
 "provisionedThroughput": {
-"description": "Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.",
+"description": "Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be greater than or equal to 1.",
 "format": "int64",
 "type": "string"
 },
@@ -50380,14 +50414,16 @@ false
 "DELETING",
 "FAILED",
 "READY",
-"RESTORING"
+"RESTORING",
+"UNAVAILABLE"
 ],
 "enumDescriptions": [
 "Disk is provisioning",
 "Disk is deleting.",
 "Disk creation failed.",
 "Disk is ready for use.",
-"Source data is being copied into the disk."
+"Source data is being copied into the disk.",
+"Disk is currently unavailable and cannot be accessed, attached or detached."
 ],
 "type": "string"
 },
@@ -50892,12 +50928,41 @@ false
 "DiskSettings": {
 "id": "DiskSettings",
 "properties": {
+"accessLocation": {
+"$ref": "DiskSettingsAccessLocation",
+"description": "Policy of which locations are allowed to create regional snapshots."
+},
 "defaultResourcePolicies": {
 "additionalProperties": {
 "$ref": "DiskSettingsResourcePolicyDetails"
 },
 "description": "An optional parameter for storing the default resource policies that will be used for the Disks created in the given scope. The Key is a string type, provided by customers to uniquely identify the default Resource Policy entry. The Value is a Default ResourcePolicyDetails Object used to represent the detailed information of the Resource Policy entry.",
 "type": "object"
+}
+},
+"type": "object"
+},
+"DiskSettingsAccessLocation": {
+"description": "AccessLocation is only used for regional snapshot. It contains which regions are allowed to create a regional snapshot from disks located in the given region/zone. It includes key-value pairs designed to store the following structure. The keys should match their corresponding values, which must be provided: access_location: { locations { us-central1 { region: \"us-central1\" }, asia-west2 { region: \"asia-west2\" } } }",
+"id": "DiskSettingsAccessLocation",
+"properties": {
+"locations": {
+"additionalProperties": {
+"$ref": "DiskSettingsAccessLocationAccessLocationPreference"
+},
+"description": "List of regions that can create a regional snapshot from the current region",
+"type": "object"
+}
+},
+"type": "object"
+},
+"DiskSettingsAccessLocationAccessLocationPreference": {
+"description": "A structure for specifying an allowed target region to create snapshot.",
+"id": "DiskSettingsAccessLocationAccessLocationPreference",
+"properties": {
+"region": {
+"description": "Accessible region name",
+"type": "string"
 }
 },
 "type": "object"
@@ -53855,6 +53920,10 @@ false
 "shareSettings": {
 "$ref": "ShareSettings",
 "description": "List of Projects/Folders to share with."
+},
+"specificReservationRequired": {
+"description": "Indicates whether the auto-created reservation can be consumed by VMs with affinity for \"any\" reservation. If the field is set, then only VMs that target the reservation by name can consume from the delivered reservation. If set to true,the delivered resevervation will have the same name as the future reservation.",
+"type": "boolean"
 },
 "specificSkuProperties": {
 "$ref": "FutureReservationSpecificSKUProperties",
@@ -59011,6 +59080,10 @@ false
 },
 "description": "Named instance selections configuring properties that the group will use when creating new VMs.",
 "type": "object"
+},
+"provisioningModelMix": {
+"$ref": "InstanceGroupManagerInstanceFlexibilityPolicyProvisioningModelMix",
+"description": "Provisioning model configuration used by this managed instance group to create instances."
 }
 },
 "type": "object"
@@ -59027,6 +59100,22 @@ false
 },
 "rank": {
 "description": "Preference of this instance selection. Lower number means higher preference. MIG will first try to create a VM based on the machine-type with lowest rank and fallback to next rank based on availability. Machine types and instance selections with the same rank have the same preference.",
+"format": "int32",
+"type": "integer"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerInstanceFlexibilityPolicyProvisioningModelMix": {
+"id": "InstanceGroupManagerInstanceFlexibilityPolicyProvisioningModelMix",
+"properties": {
+"standardCapacityBase": {
+"description": "The base capacity that will always use Standard VMs to avoid risk of more preemption than the minimum capacity user needs. MIG will create only Standard VMs until it reaches standard_capacity_base and only then will start using standard_capacity_percent_above_base to mix Spot with Standard VMs.",
+"format": "int32",
+"type": "integer"
+},
+"standardCapacityPercentAboveBase": {
+"description": "The percentage of target capacity that should use Standard VM. The remaining percentage will use Spot VMs. The percentage applies only to the capacity above standard_capacity_base.",
 "format": "int32",
 "type": "integer"
 }
@@ -67205,6 +67294,18 @@ false
 "machineType": {
 "description": "The machine type to be used for this instance.",
 "type": "string"
+},
+"provisioningModel": {
+"description": "The provisioning model to be used for this instance.",
+"enum": [
+"SPOT",
+"STANDARD"
+],
+"enumDescriptions": [
+"Heavily discounted, no guaranteed runtime.",
+"Standard provisioning with user controlled runtime, no discounts."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -74656,6 +74757,20 @@ false
 "description": "Represents a Project resource. A project is used to organize resources in a Google Cloud Platform environment. For more information, read about the Resource Hierarchy.",
 "id": "Project",
 "properties": {
+"cloudArmorTier": {
+"description": "[Output Only] The Cloud Armor tier for this project. It can be one of the following values: CA_STANDARD, CA_ENTERPRISE_PAYGO. If this field is not specified, it is assumed to be CA_STANDARD.",
+"enum": [
+"CA_ENTERPRISE_ANNUAL",
+"CA_ENTERPRISE_PAYGO",
+"CA_STANDARD"
+],
+"enumDescriptions": [
+"Enterprise tier protection billed annually.",
+"Enterprise tier protection billed monthly.",
+"Standard protection."
+],
+"type": "string"
+},
 "commonInstanceMetadata": {
 "$ref": "Metadata",
 "description": "Metadata key/value pairs available to all instances contained in this project. See Custom metadata for more information."
@@ -74823,6 +74938,26 @@ false
 "returnPartialPage": {
 "description": "Opt-in for partial page behavior which provides a partial filled page (number of items on which may be smaller than maxResults) within the API deadline. If opt-in, then the user should rely on if nextPageToken is empty in the response to determine if there is a next page. Empty page is also valid and possible. The default value is false.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"ProjectsSetCloudArmorTierRequest": {
+"id": "ProjectsSetCloudArmorTierRequest",
+"properties": {
+"cloudArmorTier": {
+"description": "Managed protection tier to be set.",
+"enum": [
+"CA_ENTERPRISE_ANNUAL",
+"CA_ENTERPRISE_PAYGO",
+"CA_STANDARD"
+],
+"enumDescriptions": [
+"Enterprise tier protection billed annually.",
+"Enterprise tier protection billed monthly.",
+"Standard protection."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -83299,6 +83434,9 @@ false
 ],
 "type": "string"
 },
+"onInstanceStopAction": {
+"$ref": "SchedulingOnInstanceStopAction"
+},
 "preemptible": {
 "description": "Defines whether the instance is preemptible. This can only be set during instance creation or while the instance is stopped and therefore, in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states.",
 "type": "boolean"
@@ -83365,6 +83503,17 @@ false
 "type": "string"
 },
 "type": "array"
+}
+},
+"type": "object"
+},
+"SchedulingOnInstanceStopAction": {
+"description": "Defines the behaviour for instances with the instance_termination_action STOP.",
+"id": "SchedulingOnInstanceStopAction",
+"properties": {
+"discardLocalSsd": {
+"description": "If true, the contents of any attached Local SSD disks will be discarded else, the Local SSD data will be preserved when the instance is stopped at the end of the run duration/termination time.",
+"type": "boolean"
 }
 },
 "type": "object"
@@ -85166,7 +85315,7 @@ false
 "type": "string"
 },
 "propagatedConnectionLimit": {
-"description": "The number of VPCs to which this endpoint is allowed to be propagated per accept list resource (project or network). For ACCEPT_AUTOMATIC service attachment, this limit is default to per project.",
+"description": "The number of consumer Network Connectivity Center spokes that connected Private Service Connect endpoints can be propagated to. This limit lets a service producer indirectly limit how many propagated Private Service Connect connections can be established to the producer's service attachment. If the connection preference of the service attachment is ACCEPT_MANUAL, the limit applies to each project or network that is listed in the consumer accept list. If the connection preference of the service attachment is ACCEPT_AUTOMATIC, the limit applies to each project that contains a connected endpoint. If unspecified, the default propagated connection limit is 250.",
 "format": "uint32",
 "type": "integer"
 },
@@ -85368,6 +85517,11 @@ false
 "endpoint": {
 "description": "The url of a connected endpoint.",
 "type": "string"
+},
+"propagatedConnectionCount": {
+"description": "The number of consumer Network Connectivity Center spokes that the connected Private Service Connect endpoint has propagated to.",
+"format": "uint32",
+"type": "integer"
 },
 "pscConnectionId": {
 "description": "The PSC connection id of the connected endpoint.",
@@ -88689,14 +88843,16 @@ false
 "DELETING",
 "FAILED",
 "READY",
-"RESTORING"
+"RESTORING",
+"UNAVAILABLE"
 ],
 "enumDescriptions": [
 "Disk is provisioning",
 "Disk is deleting.",
 "Disk creation failed.",
 "Disk is ready for use.",
-"Source data is being copied into the disk."
+"Source data is being copied into the disk.",
+"Disk is currently unavailable and cannot be accessed, attached or detached."
 ],
 "type": "string"
 },
