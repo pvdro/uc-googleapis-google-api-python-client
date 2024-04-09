@@ -79,10 +79,10 @@ h1, h2, h3 {
 <p class="firstline">Close httplib2 connections.</p>
 <p class="toc_element">
   <code><a href="#get">get(name, x__xgafv=None)</a></code></p>
-<p class="firstline">Returns a SpaceEvent. You can request events from up to 28 days before the time of the request. The server will return the most recent version of the resource. For example, if a `google.workspace.chat.message.v1.created` event is requested and the message has since been deleted, the returned event will contain the deleted message resource in the payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).</p>
+<p class="firstline">Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).</p>
 <p class="toc_element">
   <code><a href="#list">list(parent, filter=None, pageSize=None, pageToken=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Lists SpaceEvents in a space that the caller is a member of. You can request events from up to 28 days before the time of the request. The server will return the most recent version of the resources. For example, if a `google.workspace.chat.message.v1.created` event is requested and the message has since been deleted, the returned event will contain the deleted message resource in the payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).</p>
+<p class="firstline">Lists events from a Google Chat space. For each event, the [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the Chat resource. For example, if you list events about new space members, the server returns `Membership` resources that contain the latest membership details. If new members were removed during the requested period, the event payload contains an empty `Membership` resource. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users). To list events, the authenticated user must be a member of the space. For an example, see [List events from a Google Chat space](https://developers.google.com/workspace/chat/list-space-events).</p>
 <p class="toc_element">
   <code><a href="#list_next">list_next()</a></code></p>
 <p class="firstline">Retrieves the next page of results.</p>
@@ -94,10 +94,10 @@ h1, h2, h3 {
 
 <div class="method">
     <code class="details" id="get">get(name, x__xgafv=None)</code>
-  <pre>Returns a SpaceEvent. You can request events from up to 28 days before the time of the request. The server will return the most recent version of the resource. For example, if a `google.workspace.chat.message.v1.created` event is requested and the message has since been deleted, the returned event will contain the deleted message resource in the payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
+  <pre>Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).
 
 Args:
-  name: string, Required. The resource name of the event. Format: `spaces/{space}/spaceEvents/{spaceEvent}` (required)
+  name: string, Required. The resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}` (required)
   x__xgafv: string, V1 error format.
     Allowed values
       1 - v1 error format
@@ -106,13 +106,13 @@ Args:
 Returns:
   An object of the form:
 
-    { # An event that happens in a specific space.
-  &quot;eventTime&quot;: &quot;A String&quot;, # Time of the event.
-  &quot;eventType&quot;: &quot;A String&quot;, # Type of the space event. The following event types are supported: * New membership: `google.workspace.chat.membership.v1.created` * Deleted membership: `google.workspace.chat.membership.v1.deleted` * Updated membership: `google.workspace.chat.membership.v1.updated` * New message: `google.workspace.chat.message.v1.created` * Deleted message: `google.workspace.chat.message.v1.deleted` * Updated message: `google.workspace.chat.message.v1.updated` * New reaction: `google.workspace.chat.reaction.v1.created` * Deleted reaction: `google.workspace.chat.reaction.v1.deleted` * Updated space: `google.workspace.chat.space.v1.updated` Note that requesting or subscribing to the preceding event types automatically sets up the subscription or response to also return batched versions of the event type. For example, if you subscribe to `google.workspace.chat.membership.v1.created`, you also receive events for `google.workspace.chat.membership.v1.batchCreated`. For more details see https://developers.google.com/workspace/events/guides/events-chat#output_only_event_types.
-  &quot;membershipBatchCreatedEventData&quot;: { # Payload for batch new membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchCreated`. # Payload for batch new membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchCreated`.
-    &quot;memberships&quot;: [ # A list of created memberships.
-      { # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+    { # An event that represents a change or activity in a Google Chat space. To learn more, see [Work with events from Google Chat](https://developers.google.com/workspace/chat/events-overview).
+  &quot;eventTime&quot;: &quot;A String&quot;, # Time when the event occurred.
+  &quot;eventType&quot;: &quot;A String&quot;, # Type of space event. Each event type has a batch version, which represents multiple instances of the event type that occur in a short period of time. For `spaceEvents.list()` requests, omit batch event types in your query filter. By default, the server returns both event type and its batch version. Supported event types for [messages](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages): * New message: `google.workspace.chat.message.v1.created` * Updated message: `google.workspace.chat.message.v1.updated` * Deleted message: `google.workspace.chat.message.v1.deleted` * Multiple new messages: `google.workspace.chat.message.v1.batchCreated` * Multiple updated messages: `google.workspace.chat.message.v1.batchUpdated` * Multiple deleted messages: `google.workspace.chat.message.v1.batchDeleted` Supported event types for [memberships](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members): * New membership: `google.workspace.chat.membership.v1.created` * Updated membership: `google.workspace.chat.membership.v1.updated` * Deleted membership: `google.workspace.chat.membership.v1.deleted` * Multiple new memberships: `google.workspace.chat.membership.v1.batchCreated` * Multiple updated memberships: `google.workspace.chat.membership.v1.batchUpdated` * Multiple deleted memberships: `google.workspace.chat.membership.v1.batchDeleted` Supported event types for [reactions](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.reactions): * New reaction: `google.workspace.chat.reaction.v1.created` * Deleted reaction: `google.workspace.chat.reaction.v1.deleted` * Multiple new reactions: `google.workspace.chat.reaction.v1.batchCreated` * Multiple deleted reactions: `google.workspace.chat.reaction.v1.batchDeleted` Supported event types about the [space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces): * Updated space: `google.workspace.chat.space.v1.updated` * Multiple space updates: `google.workspace.chat.space.v1.batchUpdated`
+  &quot;membershipBatchCreatedEventData&quot;: { # Event payload for multiple new memberships. Event type: `google.workspace.chat.membership.v1.batchCreated` # Event payload for multiple new memberships. Event type: `google.workspace.chat.membership.v1.batchCreated`
+    &quot;memberships&quot;: [ # A list of new memberships.
+      { # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`.
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The new membership.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -132,10 +132,10 @@ Returns:
       },
     ],
   },
-  &quot;membershipBatchDeletedEventData&quot;: { # Payload for batch deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchDeleted`. # Payload for batch deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchDeleted`.
+  &quot;membershipBatchDeletedEventData&quot;: { # Event payload for multiple deleted memberships. Event type: `google.workspace.chat.membership.v1.batchDeleted` # Event payload for multiple deleted memberships. Event type: `google.workspace.chat.membership.v1.batchDeleted`
     &quot;memberships&quot;: [ # A list of deleted memberships.
-      { # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only `name` and `state` are populated.
+      { # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted`
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only the `name` and `state` fields are populated.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -155,10 +155,10 @@ Returns:
       },
     ],
   },
-  &quot;membershipBatchUpdatedEventData&quot;: { # Payload for batch updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchUpdated`. # Payload for batch updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchUpdated`.
+  &quot;membershipBatchUpdatedEventData&quot;: { # Event payload for multiple updated memberships. Event type: `google.workspace.chat.membership.v1.batchUpdated` # Event payload for multiple updated memberships. Event type: `google.workspace.chat.membership.v1.batchUpdated`
     &quot;memberships&quot;: [ # A list of updated memberships.
-      { # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+      { # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated`
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The updated membership.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -178,8 +178,8 @@ Returns:
       },
     ],
   },
-  &quot;membershipCreatedEventData&quot;: { # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`. # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`.
-    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+  &quot;membershipCreatedEventData&quot;: { # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`. # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`
+    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The new membership.
       &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -197,8 +197,8 @@ Returns:
       &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
     },
   },
-  &quot;membershipDeletedEventData&quot;: { # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`. # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`.
-    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only `name` and `state` are populated.
+  &quot;membershipDeletedEventData&quot;: { # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted` # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted`
+    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only the `name` and `state` fields are populated.
       &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -216,8 +216,8 @@ Returns:
       &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
     },
   },
-  &quot;membershipUpdatedEventData&quot;: { # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`. # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`.
-    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+  &quot;membershipUpdatedEventData&quot;: { # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated` # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated`
+    &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The updated membership.
       &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
       &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -235,10 +235,10 @@ Returns:
       &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
     },
   },
-  &quot;messageBatchCreatedEventData&quot;: { # Payload for batch new message events where the `EventType` field is `google.workspace.chat.message.v1.batchCreated`. # Payload for batch new message events where the `EventType` field is `google.workspace.chat.message.v1.batchCreated`.
-    &quot;messages&quot;: [ # A list of created messages.
-      { # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+  &quot;messageBatchCreatedEventData&quot;: { # Event payload for multiple new messages. Event type: `google.workspace.chat.message.v1.batchCreated` # Event payload for multiple new messages. Event type: `google.workspace.chat.message.v1.batchCreated`
+    &quot;messages&quot;: [ # A list of new messages.
+      { # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created`
+        &quot;message&quot;: { # A message in a Google Chat space. # The new message.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -1993,10 +1993,10 @@ Returns:
       },
     ],
   },
-  &quot;messageBatchDeletedEventData&quot;: { # Payload for batch deleted message events where the `EventType` field is `google.workspace.chat.message.v1.batchDeleted`. # Payload for batch deleted message events where the `EventType` field is `google.workspace.chat.message.v1.batchDeleted`.
+  &quot;messageBatchDeletedEventData&quot;: { # Event payload for multiple deleted messages. Event type: `google.workspace.chat.message.v1.batchDeleted` # Event payload for multiple deleted messages. Event type: `google.workspace.chat.message.v1.batchDeleted`
     &quot;messages&quot;: [ # A list of deleted messages.
-      { # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only `name`, `createTime`, `deleteTime`, and `deletionMetadata` are populated.
+      { # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted`
+        &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only the `name`, `createTime`, `deleteTime`, and `deletionMetadata` fields are populated.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -3751,10 +3751,10 @@ Returns:
       },
     ],
   },
-  &quot;messageBatchUpdatedEventData&quot;: { # Payload for batch updated message events where the `EventType` field is `google.workspace.chat.message.v1.batchUpdated`. # Payload for batch updated message events where the `EventType` field is `google.workspace.chat.message.v1.batchUpdated`.
+  &quot;messageBatchUpdatedEventData&quot;: { # Event payload for multiple updated messages. Event type: `google.workspace.chat.message.v1.batchUpdated` # Event payload for multiple updated messages. Event type: `google.workspace.chat.message.v1.batchUpdated`
     &quot;messages&quot;: [ # A list of updated messages.
-      { # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+      { # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated`
+        &quot;message&quot;: { # A message in a Google Chat space. # The updated message.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -5509,8 +5509,8 @@ Returns:
       },
     ],
   },
-  &quot;messageCreatedEventData&quot;: { # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`. # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`.
-    &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+  &quot;messageCreatedEventData&quot;: { # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created` # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created`
+    &quot;message&quot;: { # A message in a Google Chat space. # The new message.
       &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
         { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
           &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -7263,8 +7263,8 @@ Returns:
       &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
     },
   },
-  &quot;messageDeletedEventData&quot;: { # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`. # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`.
-    &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only `name`, `createTime`, `deleteTime`, and `deletionMetadata` are populated.
+  &quot;messageDeletedEventData&quot;: { # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted` # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted`
+    &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only the `name`, `createTime`, `deleteTime`, and `deletionMetadata` fields are populated.
       &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
         { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
           &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -9017,8 +9017,8 @@ Returns:
       &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
     },
   },
-  &quot;messageUpdatedEventData&quot;: { # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`. # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`.
-    &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+  &quot;messageUpdatedEventData&quot;: { # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated` # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated`
+    &quot;message&quot;: { # A message in a Google Chat space. # The updated message.
       &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
         { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
           &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -10771,11 +10771,11 @@ Returns:
       &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
     },
   },
-  &quot;name&quot;: &quot;A String&quot;, # The resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}`
-  &quot;reactionBatchCreatedEventData&quot;: { # Payload for batch new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchCreated`. # Payload for batch new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchCreated`.
-    &quot;reactions&quot;: [ # A list of created reactions.
-      { # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`.
-        &quot;reaction&quot;: { # A reaction to a message. # The created reaction.
+  &quot;name&quot;: &quot;A String&quot;, # Resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}`
+  &quot;reactionBatchCreatedEventData&quot;: { # Event payload for multiple new reactions. Event type: `google.workspace.chat.reaction.v1.batchCreated` # Event payload for multiple new reactions. Event type: `google.workspace.chat.reaction.v1.batchCreated`
+    &quot;reactions&quot;: [ # A list of new reactions.
+      { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
+        &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
             &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Unique key for the custom emoji resource.
@@ -10794,9 +10794,9 @@ Returns:
       },
     ],
   },
-  &quot;reactionBatchDeletedEventData&quot;: { # Payload for batch deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchDeleted`. # Payload for batch deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchDeleted`.
+  &quot;reactionBatchDeletedEventData&quot;: { # Event payload for multiple deleted reactions. Event type: `google.workspace.chat.reaction.v1.batchDeleted` # Event payload for multiple deleted reactions. Event type: `google.workspace.chat.reaction.v1.batchDeleted`
     &quot;reactions&quot;: [ # A list of deleted reactions.
-      { # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`.
+      { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted`
         &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
             &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
@@ -10816,8 +10816,8 @@ Returns:
       },
     ],
   },
-  &quot;reactionCreatedEventData&quot;: { # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`. # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`.
-    &quot;reaction&quot;: { # A reaction to a message. # The created reaction.
+  &quot;reactionCreatedEventData&quot;: { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created` # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
+    &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
         &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
           &quot;uid&quot;: &quot;A String&quot;, # Unique key for the custom emoji resource.
@@ -10834,7 +10834,7 @@ Returns:
       },
     },
   },
-  &quot;reactionDeletedEventData&quot;: { # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`. # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`.
+  &quot;reactionDeletedEventData&quot;: { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted` # Event payload for a deleted reaction. Event type: `google.workspace.chat.reaction.v1.deleted`
     &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
         &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
@@ -10852,10 +10852,10 @@ Returns:
       },
     },
   },
-  &quot;spaceBatchUpdatedEventData&quot;: { # Payload for batch updated space events where the `EventType` field is `google.workspace.chat.space.v1.batchUpdated`. # Payload for batch updated space events where the `EventType` field is `google.workspace.chat.space.v1.batchUpdated`.
+  &quot;spaceBatchUpdatedEventData&quot;: { # Event payload for multiple updates to a space. Event type: `google.workspace.chat.space.v1.batchUpdated` # Event payload for multiple updates to a space. Event type: `google.workspace.chat.space.v1.batchUpdated`
     &quot;spaces&quot;: [ # A list of updated spaces.
-      { # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`.
-        &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The recent version of the space.
+      { # Event payload for an updated space. Event type: `google.workspace.chat.space.v1.updated`
+        &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The updated space.
           &quot;adminInstalled&quot;: True or False, # Output only. Whether the Chat app was installed by a Google Workspace administrator. Administrators can install a Chat app for their domain, organizational unit, or a group of users. Administrators can only install Chat apps for direct messaging between users and the app. To support admin install, your app must feature direct messaging.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. For spaces created in Chat, the time the space was created. This field is output only, except when used in import mode spaces. For import mode spaces, set this field to the historical timestamp at which the space was created in the source in order to preserve the original creation time. Only populated in the output when `spaceType` is `GROUP_CHAT` or `SPACE`.
           &quot;displayName&quot;: &quot;A String&quot;, # The space&#x27;s display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). If you receive the error message `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a different `displayName`. An existing space within the Google Workspace organization might already use this display name. For direct messages, this field might be empty. Supports up to 128 characters.
@@ -10876,8 +10876,8 @@ Returns:
       },
     ],
   },
-  &quot;spaceUpdatedEventData&quot;: { # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`. # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`.
-    &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The recent version of the space.
+  &quot;spaceUpdatedEventData&quot;: { # Event payload for an updated space. Event type: `google.workspace.chat.space.v1.updated` # Event payload for a space update. Event type: `google.workspace.chat.space.v1.updated`
+    &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The updated space.
       &quot;adminInstalled&quot;: True or False, # Output only. Whether the Chat app was installed by a Google Workspace administrator. Administrators can install a Chat app for their domain, organizational unit, or a group of users. Administrators can only install Chat apps for direct messaging between users and the app. To support admin install, your app must feature direct messaging.
       &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. For spaces created in Chat, the time the space was created. This field is output only, except when used in import mode spaces. For import mode spaces, set this field to the historical timestamp at which the space was created in the source in order to preserve the original creation time. Only populated in the output when `spaceType` is `GROUP_CHAT` or `SPACE`.
       &quot;displayName&quot;: &quot;A String&quot;, # The space&#x27;s display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). If you receive the error message `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a different `displayName`. An existing space within the Google Workspace organization might already use this display name. For direct messages, this field might be empty. Supports up to 128 characters.
@@ -10901,12 +10901,12 @@ Returns:
 
 <div class="method">
     <code class="details" id="list">list(parent, filter=None, pageSize=None, pageToken=None, x__xgafv=None)</code>
-  <pre>Lists SpaceEvents in a space that the caller is a member of. You can request events from up to 28 days before the time of the request. The server will return the most recent version of the resources. For example, if a `google.workspace.chat.message.v1.created` event is requested and the message has since been deleted, the returned event will contain the deleted message resource in the payload. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
+  <pre>Lists events from a Google Chat space. For each event, the [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the Chat resource. For example, if you list events about new space members, the server returns `Membership` resources that contain the latest membership details. If new members were removed during the requested period, the event payload contains an empty `Membership` resource. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users). To list events, the authenticated user must be a member of the space. For an example, see [List events from a Google Chat space](https://developers.google.com/workspace/chat/list-space-events).
 
 Args:
-  parent: string, Required. The resource name of the space from which to list events. Format: `spaces/{space}`. (required)
-  filter: string, Required. A query filter. This method supports filtering by: `event_types`, `start_time`, and `end_time`. `event_types`: You must specify at least one event type in your query. `event_types` supports the has `:` operator. To filter by multiple event types, use the `OR` operator. To see the list of currently supported event types, see google.chat.v1.SpaceEvent.event_type `start_time`: Exclusive timestamp from which to start listing space events. You can list events that occurred up to 28 days ago. If unspecified, lists space events from the 28 days ago up to end time. `end_time`: Inclusive timestamp up to which space events are listed. Default value is the present. `start_time` and `end_time` accept a timestamp in [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and support the equals `=` comparison operator. To filter by both `start_time` and `end_time`, use the `AND` operator. For example, the following queries are valid: ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; AND end_time=&quot;2023-08-23T19:21:54+00:00&quot; ``` ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; AND (event_types:&quot;google.workspace.chat.space.v1.updated&quot; OR event_types:&quot;google.workspace.chat.message.v1.created&quot;) ``` The following queries are invalid: ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; OR end_time=&quot;2023-08-23T19:21:54+00:00&quot; ``` ``` event_types:&quot;google.workspace.chat.space.v1.updated&quot; AND event_types:&quot;google.workspace.chat.message.v1.created&quot; ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error.
-  pageSize: integer, Optional. The maximum number of space events returned. The service may return fewer than this value. Negative values return an `INVALID_ARGUMENT` error.
+  parent: string, Required. Resource name of the [Google Chat space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces) where the events occurred. Format: `spaces/{space}`. (required)
+  filter: string, Required. A query filter. You must specify at least one event type (`event_type`) using the has `:` operator. To filter by multiple event types, use the `OR` operator. Omit batch event types in your filter. The request automatically returns any related batch events. For example, if you filter by new reactions (`google.workspace.chat.reaction.v1.created`), the server also returns batch new reactions events (`google.workspace.chat.reaction.v1.batchCreated`). For a list of supported event types, see the [`SpaceEvents` reference documentation](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.event_type). Optionally, you can also filter by start time (`start_time`) and end time (`end_time`): * `start_time`: Exclusive timestamp from which to start listing space events. You can list events that occurred up to 28 days ago. If unspecified, lists space events from the past 28 days. * `end_time`: Inclusive timestamp until which space events are listed. If unspecified, lists events up to the time of the request. To specify a start or end time, use the equals `=` operator and format in [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339). To filter by both `start_time` and `end_time`, use the `AND` operator. For example, the following queries are valid: ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; AND end_time=&quot;2023-08-23T19:21:54+00:00&quot; ``` ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; AND (event_types:&quot;google.workspace.chat.space.v1.updated&quot; OR event_types:&quot;google.workspace.chat.message.v1.created&quot;) ``` The following queries are invalid: ``` start_time=&quot;2023-08-23T19:20:33+00:00&quot; OR end_time=&quot;2023-08-23T19:21:54+00:00&quot; ``` ``` event_types:&quot;google.workspace.chat.space.v1.updated&quot; AND event_types:&quot;google.workspace.chat.message.v1.created&quot; ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error.
+  pageSize: integer, Optional. The maximum number of space events returned. The service might return fewer than this value. Negative values return an `INVALID_ARGUMENT` error.
   pageToken: string, A page token, received from a previous list space events call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to list space events must match the call that provided the page token. Passing different values to the other parameters might lead to unexpected results.
   x__xgafv: string, V1 error format.
     Allowed values
@@ -10919,13 +10919,13 @@ Returns:
     { # Response message for listing space events.
   &quot;nextPageToken&quot;: &quot;A String&quot;, # Continuation token used to fetch more events. If this field is omitted, there are no subsequent pages.
   &quot;spaceEvents&quot;: [ # Results are returned in chronological order (oldest event first).
-    { # An event that happens in a specific space.
-      &quot;eventTime&quot;: &quot;A String&quot;, # Time of the event.
-      &quot;eventType&quot;: &quot;A String&quot;, # Type of the space event. The following event types are supported: * New membership: `google.workspace.chat.membership.v1.created` * Deleted membership: `google.workspace.chat.membership.v1.deleted` * Updated membership: `google.workspace.chat.membership.v1.updated` * New message: `google.workspace.chat.message.v1.created` * Deleted message: `google.workspace.chat.message.v1.deleted` * Updated message: `google.workspace.chat.message.v1.updated` * New reaction: `google.workspace.chat.reaction.v1.created` * Deleted reaction: `google.workspace.chat.reaction.v1.deleted` * Updated space: `google.workspace.chat.space.v1.updated` Note that requesting or subscribing to the preceding event types automatically sets up the subscription or response to also return batched versions of the event type. For example, if you subscribe to `google.workspace.chat.membership.v1.created`, you also receive events for `google.workspace.chat.membership.v1.batchCreated`. For more details see https://developers.google.com/workspace/events/guides/events-chat#output_only_event_types.
-      &quot;membershipBatchCreatedEventData&quot;: { # Payload for batch new membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchCreated`. # Payload for batch new membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchCreated`.
-        &quot;memberships&quot;: [ # A list of created memberships.
-          { # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`.
-            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+    { # An event that represents a change or activity in a Google Chat space. To learn more, see [Work with events from Google Chat](https://developers.google.com/workspace/chat/events-overview).
+      &quot;eventTime&quot;: &quot;A String&quot;, # Time when the event occurred.
+      &quot;eventType&quot;: &quot;A String&quot;, # Type of space event. Each event type has a batch version, which represents multiple instances of the event type that occur in a short period of time. For `spaceEvents.list()` requests, omit batch event types in your query filter. By default, the server returns both event type and its batch version. Supported event types for [messages](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages): * New message: `google.workspace.chat.message.v1.created` * Updated message: `google.workspace.chat.message.v1.updated` * Deleted message: `google.workspace.chat.message.v1.deleted` * Multiple new messages: `google.workspace.chat.message.v1.batchCreated` * Multiple updated messages: `google.workspace.chat.message.v1.batchUpdated` * Multiple deleted messages: `google.workspace.chat.message.v1.batchDeleted` Supported event types for [memberships](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members): * New membership: `google.workspace.chat.membership.v1.created` * Updated membership: `google.workspace.chat.membership.v1.updated` * Deleted membership: `google.workspace.chat.membership.v1.deleted` * Multiple new memberships: `google.workspace.chat.membership.v1.batchCreated` * Multiple updated memberships: `google.workspace.chat.membership.v1.batchUpdated` * Multiple deleted memberships: `google.workspace.chat.membership.v1.batchDeleted` Supported event types for [reactions](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.reactions): * New reaction: `google.workspace.chat.reaction.v1.created` * Deleted reaction: `google.workspace.chat.reaction.v1.deleted` * Multiple new reactions: `google.workspace.chat.reaction.v1.batchCreated` * Multiple deleted reactions: `google.workspace.chat.reaction.v1.batchDeleted` Supported event types about the [space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces): * Updated space: `google.workspace.chat.space.v1.updated` * Multiple space updates: `google.workspace.chat.space.v1.batchUpdated`
+      &quot;membershipBatchCreatedEventData&quot;: { # Event payload for multiple new memberships. Event type: `google.workspace.chat.membership.v1.batchCreated` # Event payload for multiple new memberships. Event type: `google.workspace.chat.membership.v1.batchCreated`
+        &quot;memberships&quot;: [ # A list of new memberships.
+          { # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`.
+            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The new membership.
               &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -10945,10 +10945,10 @@ Returns:
           },
         ],
       },
-      &quot;membershipBatchDeletedEventData&quot;: { # Payload for batch deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchDeleted`. # Payload for batch deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchDeleted`.
+      &quot;membershipBatchDeletedEventData&quot;: { # Event payload for multiple deleted memberships. Event type: `google.workspace.chat.membership.v1.batchDeleted` # Event payload for multiple deleted memberships. Event type: `google.workspace.chat.membership.v1.batchDeleted`
         &quot;memberships&quot;: [ # A list of deleted memberships.
-          { # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`.
-            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only `name` and `state` are populated.
+          { # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted`
+            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only the `name` and `state` fields are populated.
               &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -10968,10 +10968,10 @@ Returns:
           },
         ],
       },
-      &quot;membershipBatchUpdatedEventData&quot;: { # Payload for batch updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchUpdated`. # Payload for batch updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.batchUpdated`.
+      &quot;membershipBatchUpdatedEventData&quot;: { # Event payload for multiple updated memberships. Event type: `google.workspace.chat.membership.v1.batchUpdated` # Event payload for multiple updated memberships. Event type: `google.workspace.chat.membership.v1.batchUpdated`
         &quot;memberships&quot;: [ # A list of updated memberships.
-          { # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`.
-            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+          { # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated`
+            &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The updated membership.
               &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
               &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -10991,8 +10991,8 @@ Returns:
           },
         ],
       },
-      &quot;membershipCreatedEventData&quot;: { # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`. # Payload for new membership events where the `EventType` field is `google.workspace.chat.membership.v1.created`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+      &quot;membershipCreatedEventData&quot;: { # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`. # Event payload for a new membership. Event type: `google.workspace.chat.membership.v1.created`
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The new membership.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -11010,8 +11010,8 @@ Returns:
           &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
         },
       },
-      &quot;membershipDeletedEventData&quot;: { # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`. # Payload for deleted membership events where the `EventType` field is `google.workspace.chat.membership.v1.deleted`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only `name` and `state` are populated.
+      &quot;membershipDeletedEventData&quot;: { # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted` # Event payload for a deleted membership. Event type: `google.workspace.chat.membership.v1.deleted`
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The deleted membership. Only the `name` and `state` fields are populated.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -11029,8 +11029,8 @@ Returns:
           &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
         },
       },
-      &quot;membershipUpdatedEventData&quot;: { # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`. # Payload for updated membership events where the `EventType` field is `google.workspace.chat.membership.v1.updated`.
-        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The most recent version of membership.
+      &quot;membershipUpdatedEventData&quot;: { # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated` # Event payload for an updated membership. Event type: `google.workspace.chat.membership.v1.updated`
+        &quot;membership&quot;: { # Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space. # The updated membership.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. The creation time of the membership, such as when a member joined or was invited to join a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;deleteTime&quot;: &quot;A String&quot;, # Optional. Immutable. The deletion time of the membership, such as when a member left or was removed from a space. This field is output only, except when used to import historical memberships in import mode spaces.
           &quot;groupMember&quot;: { # A Google Group in Google Chat. # The Google Group the membership corresponds to. Only supports read operations. Other operations, like creating or updating a membership, aren&#x27;t currently supported.
@@ -11048,10 +11048,10 @@ Returns:
           &quot;state&quot;: &quot;A String&quot;, # Output only. State of the membership.
         },
       },
-      &quot;messageBatchCreatedEventData&quot;: { # Payload for batch new message events where the `EventType` field is `google.workspace.chat.message.v1.batchCreated`. # Payload for batch new message events where the `EventType` field is `google.workspace.chat.message.v1.batchCreated`.
-        &quot;messages&quot;: [ # A list of created messages.
-          { # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`.
-            &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+      &quot;messageBatchCreatedEventData&quot;: { # Event payload for multiple new messages. Event type: `google.workspace.chat.message.v1.batchCreated` # Event payload for multiple new messages. Event type: `google.workspace.chat.message.v1.batchCreated`
+        &quot;messages&quot;: [ # A list of new messages.
+          { # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created`
+            &quot;message&quot;: { # A message in a Google Chat space. # The new message.
               &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
                 { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
                   &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -12806,10 +12806,10 @@ Returns:
           },
         ],
       },
-      &quot;messageBatchDeletedEventData&quot;: { # Payload for batch deleted message events where the `EventType` field is `google.workspace.chat.message.v1.batchDeleted`. # Payload for batch deleted message events where the `EventType` field is `google.workspace.chat.message.v1.batchDeleted`.
+      &quot;messageBatchDeletedEventData&quot;: { # Event payload for multiple deleted messages. Event type: `google.workspace.chat.message.v1.batchDeleted` # Event payload for multiple deleted messages. Event type: `google.workspace.chat.message.v1.batchDeleted`
         &quot;messages&quot;: [ # A list of deleted messages.
-          { # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`.
-            &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only `name`, `createTime`, `deleteTime`, and `deletionMetadata` are populated.
+          { # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted`
+            &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only the `name`, `createTime`, `deleteTime`, and `deletionMetadata` fields are populated.
               &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
                 { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
                   &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -14564,10 +14564,10 @@ Returns:
           },
         ],
       },
-      &quot;messageBatchUpdatedEventData&quot;: { # Payload for batch updated message events where the `EventType` field is `google.workspace.chat.message.v1.batchUpdated`. # Payload for batch updated message events where the `EventType` field is `google.workspace.chat.message.v1.batchUpdated`.
+      &quot;messageBatchUpdatedEventData&quot;: { # Event payload for multiple updated messages. Event type: `google.workspace.chat.message.v1.batchUpdated` # Event payload for multiple updated messages. Event type: `google.workspace.chat.message.v1.batchUpdated`
         &quot;messages&quot;: [ # A list of updated messages.
-          { # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`.
-            &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+          { # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated`
+            &quot;message&quot;: { # A message in a Google Chat space. # The updated message.
               &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
                 { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
                   &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -16322,8 +16322,8 @@ Returns:
           },
         ],
       },
-      &quot;messageCreatedEventData&quot;: { # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`. # Payload for new message events where the `EventType` field is `google.workspace.chat.message.v1.created`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+      &quot;messageCreatedEventData&quot;: { # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created` # Event payload for a new message. Event type: `google.workspace.chat.message.v1.created`
+        &quot;message&quot;: { # A message in a Google Chat space. # The new message.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -18076,8 +18076,8 @@ Returns:
           &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
         },
       },
-      &quot;messageDeletedEventData&quot;: { # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`. # Payload for deleted message events where the `EventType` field is `google.workspace.chat.message.v1.deleted`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only `name`, `createTime`, `deleteTime`, and `deletionMetadata` are populated.
+      &quot;messageDeletedEventData&quot;: { # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted` # Event payload for a deleted message. Event type: `google.workspace.chat.message.v1.deleted`
+        &quot;message&quot;: { # A message in a Google Chat space. # The deleted message. Only the `name`, `createTime`, `deleteTime`, and `deletionMetadata` fields are populated.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -19830,8 +19830,8 @@ Returns:
           &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
         },
       },
-      &quot;messageUpdatedEventData&quot;: { # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`. # Payload for updated message events where the `EventType` field is `google.workspace.chat.message.v1.updated`.
-        &quot;message&quot;: { # A message in a Google Chat space. # The most recent version of the message.
+      &quot;messageUpdatedEventData&quot;: { # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated` # Event payload for an updated message. Event type: `google.workspace.chat.message.v1.updated`
+        &quot;message&quot;: { # A message in a Google Chat space. # The updated message.
           &quot;accessoryWidgets&quot;: [ # One or more interactive widgets that appear at the bottom of a message. You can add accessory widgets to messages that contain text, cards, or both text and cards. Not supported for messages that contain dialogs. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets). Creating a message with accessory widgets requires [app authentication] (https://developers.google.com/chat/api/guides/auth/service-accounts).
             { # One or more interactive widgets that appear at the bottom of a message. For details, see [Add interactive widgets at the bottom of a message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
               &quot;buttonList&quot;: { # A list of buttons layed out horizontally. For an example in Google Chat apps, see [Button list](https://developers.google.com/chat/ui/widgets/button-list). [Google Workspace Add-ons and Chat apps](https://developers.google.com/workspace/extend): # A list of buttons.
@@ -21584,11 +21584,11 @@ Returns:
           &quot;threadReply&quot;: True or False, # Output only. When `true`, the message is a response in a reply thread. When `false`, the message is visible in the space&#x27;s top-level conversation as either the first message of a thread or a message with no threaded replies. If the space doesn&#x27;t support reply in threads, this field is always `false`.
         },
       },
-      &quot;name&quot;: &quot;A String&quot;, # The resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}`
-      &quot;reactionBatchCreatedEventData&quot;: { # Payload for batch new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchCreated`. # Payload for batch new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchCreated`.
-        &quot;reactions&quot;: [ # A list of created reactions.
-          { # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`.
-            &quot;reaction&quot;: { # A reaction to a message. # The created reaction.
+      &quot;name&quot;: &quot;A String&quot;, # Resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}`
+      &quot;reactionBatchCreatedEventData&quot;: { # Event payload for multiple new reactions. Event type: `google.workspace.chat.reaction.v1.batchCreated` # Event payload for multiple new reactions. Event type: `google.workspace.chat.reaction.v1.batchCreated`
+        &quot;reactions&quot;: [ # A list of new reactions.
+          { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
+            &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
                 &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Unique key for the custom emoji resource.
@@ -21607,9 +21607,9 @@ Returns:
           },
         ],
       },
-      &quot;reactionBatchDeletedEventData&quot;: { # Payload for batch deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchDeleted`. # Payload for batch deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.batchDeleted`.
+      &quot;reactionBatchDeletedEventData&quot;: { # Event payload for multiple deleted reactions. Event type: `google.workspace.chat.reaction.v1.batchDeleted` # Event payload for multiple deleted reactions. Event type: `google.workspace.chat.reaction.v1.batchDeleted`
         &quot;reactions&quot;: [ # A list of deleted reactions.
-          { # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`.
+          { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted`
             &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
                 &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
@@ -21629,8 +21629,8 @@ Returns:
           },
         ],
       },
-      &quot;reactionCreatedEventData&quot;: { # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`. # Payload for new reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.created`.
-        &quot;reaction&quot;: { # A reaction to a message. # The created reaction.
+      &quot;reactionCreatedEventData&quot;: { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created` # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
+        &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
             &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Unique key for the custom emoji resource.
@@ -21647,7 +21647,7 @@ Returns:
           },
         },
       },
-      &quot;reactionDeletedEventData&quot;: { # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`. # Payload for deleted reaction events where the `EventType` field is `google.workspace.chat.reaction.v1.deleted`.
+      &quot;reactionDeletedEventData&quot;: { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted` # Event payload for a deleted reaction. Event type: `google.workspace.chat.reaction.v1.deleted`
         &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # The emoji used in the reaction.
             &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
@@ -21665,10 +21665,10 @@ Returns:
           },
         },
       },
-      &quot;spaceBatchUpdatedEventData&quot;: { # Payload for batch updated space events where the `EventType` field is `google.workspace.chat.space.v1.batchUpdated`. # Payload for batch updated space events where the `EventType` field is `google.workspace.chat.space.v1.batchUpdated`.
+      &quot;spaceBatchUpdatedEventData&quot;: { # Event payload for multiple updates to a space. Event type: `google.workspace.chat.space.v1.batchUpdated` # Event payload for multiple updates to a space. Event type: `google.workspace.chat.space.v1.batchUpdated`
         &quot;spaces&quot;: [ # A list of updated spaces.
-          { # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`.
-            &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The recent version of the space.
+          { # Event payload for an updated space. Event type: `google.workspace.chat.space.v1.updated`
+            &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The updated space.
               &quot;adminInstalled&quot;: True or False, # Output only. Whether the Chat app was installed by a Google Workspace administrator. Administrators can install a Chat app for their domain, organizational unit, or a group of users. Administrators can only install Chat apps for direct messaging between users and the app. To support admin install, your app must feature direct messaging.
               &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. For spaces created in Chat, the time the space was created. This field is output only, except when used in import mode spaces. For import mode spaces, set this field to the historical timestamp at which the space was created in the source in order to preserve the original creation time. Only populated in the output when `spaceType` is `GROUP_CHAT` or `SPACE`.
               &quot;displayName&quot;: &quot;A String&quot;, # The space&#x27;s display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). If you receive the error message `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a different `displayName`. An existing space within the Google Workspace organization might already use this display name. For direct messages, this field might be empty. Supports up to 128 characters.
@@ -21689,8 +21689,8 @@ Returns:
           },
         ],
       },
-      &quot;spaceUpdatedEventData&quot;: { # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`. # Payload for updated space events where the `EventType` field is `google.workspace.chat.space.v1.updated`.
-        &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The recent version of the space.
+      &quot;spaceUpdatedEventData&quot;: { # Event payload for an updated space. Event type: `google.workspace.chat.space.v1.updated` # Event payload for a space update. Event type: `google.workspace.chat.space.v1.updated`
+        &quot;space&quot;: { # A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app. # The updated space.
           &quot;adminInstalled&quot;: True or False, # Output only. Whether the Chat app was installed by a Google Workspace administrator. Administrators can install a Chat app for their domain, organizational unit, or a group of users. Administrators can only install Chat apps for direct messaging between users and the app. To support admin install, your app must feature direct messaging.
           &quot;createTime&quot;: &quot;A String&quot;, # Optional. Immutable. For spaces created in Chat, the time the space was created. This field is output only, except when used in import mode spaces. For import mode spaces, set this field to the historical timestamp at which the space was created in the source in order to preserve the original creation time. Only populated in the output when `spaceType` is `GROUP_CHAT` or `SPACE`.
           &quot;displayName&quot;: &quot;A String&quot;, # The space&#x27;s display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). If you receive the error message `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a different `displayName`. An existing space within the Google Workspace organization might already use this display name. For direct messages, this field might be empty. Supports up to 128 characters.
