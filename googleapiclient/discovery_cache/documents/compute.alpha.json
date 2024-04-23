@@ -44323,7 +44323,7 @@
 }
 }
 },
-"revision": "20240326",
+"revision": "20240407",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47599,11 +47599,11 @@ false
 "type": "boolean"
 },
 "externalManagedMigrationState": {
-"description": "Specifies the canary migration state. Possible values are PREPARE, TEST, and FINALIZE. To begin the migration from EXTERNAL to EXTERNAL_MANAGED, the state must be changed to PREPARE. The state must be changed to FINALIZE before the loadBalancingScheme can be changed to EXTERNAL_MANAGED. Optionally, the TEST state can be used to migrate traffic by percentage using externalManagedMigrationTestingPercentage. Rolling back a migration requires the states to be set in reverse order. So changing the scheme from EXTERNAL_MANAGED to EXTERNAL requires the state to be set to FINALIZE at the same time. Optionally, the TEST state can be used to migrate some traffic back to EXTERNAL or PREPARE can be used to migrate all traffic back to EXTERNAL.",
+"description": "Specifies the canary migration state. Possible values are PREPARE, TEST_BY_PERCENTAGE, and TEST_ALL_TRAFFIC. To begin the migration from EXTERNAL to EXTERNAL_MANAGED, the state must be changed to PREPARE. The state must be changed to TEST_ALL_TRAFFIC before the loadBalancingScheme can be changed to EXTERNAL_MANAGED. Optionally, the TEST_BY_PERCENTAGE state can be used to migrate traffic by percentage using externalManagedMigrationTestingPercentage. Rolling back a migration requires the states to be set in reverse order. So changing the scheme from EXTERNAL_MANAGED to EXTERNAL requires the state to be set to TEST_ALL_TRAFFIC at the same time. Optionally, the TEST_BY_PERCENTAGE state can be used to migrate some traffic back to EXTERNAL or PREPARE can be used to migrate all traffic back to EXTERNAL.",
 "enum": [
-"FINALIZE",
 "PREPARE",
-"TEST"
+"TEST_ALL_TRAFFIC",
+"TEST_BY_PERCENTAGE"
 ],
 "enumDescriptions": [
 "",
@@ -47613,7 +47613,7 @@ false
 "type": "string"
 },
 "externalManagedMigrationTestingPercentage": {
-"description": "Determines the fraction of requests that should be processed by the Global external Application Load Balancer. The value of this field must be in the range [0, 100]. Session affinity options will slightly affect this routing behavior, for more details, see: Session Affinity. This value is only used if the loadBalancingScheme in the BackendService is set to EXTERNAL when using the classic Application Load Balancer.",
+"description": "Determines the fraction of requests that should be processed by the Global external Application Load Balancer. The value of this field must be in the range [0, 100]. Session affinity options will slightly affect this routing behavior, for more details, see: Session Affinity. This value can only be set if the loadBalancingScheme in the BackendService is set to EXTERNAL (when using the classic Application Load Balancer) and the migration state is TEST_BY_PERCENTAGE.",
 "format": "float",
 "type": "number"
 },
@@ -47741,6 +47741,10 @@ false
 "network": {
 "description": "The URL of the network to which this backend service belongs. This field can only be specified when the load balancing scheme is set to INTERNAL.",
 "type": "string"
+},
+"networkPassThroughLbTrafficPolicy": {
+"$ref": "BackendServiceNetworkPassThroughLbTrafficPolicy",
+"description": "Configures traffic steering properties of internal passthrough Network Load Balancers."
 },
 "outlierDetection": {
 "$ref": "OutlierDetection",
@@ -48728,6 +48732,41 @@ false
 },
 "sampleRate": {
 "description": "This field can only be specified if logging is enabled for this backend service. The value of the field must be in [0, 1]. This configures the sampling rate of requests to the load balancer where 1.0 means all logged requests are reported and 0.0 means no logged requests are reported. The default value is 1.0.",
+"format": "float",
+"type": "number"
+}
+},
+"type": "object"
+},
+"BackendServiceNetworkPassThroughLbTrafficPolicy": {
+"id": "BackendServiceNetworkPassThroughLbTrafficPolicy",
+"properties": {
+"zonalAffinity": {
+"$ref": "BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity",
+"description": "When configured, new connections are load balanced across healthy backend endpoints in the local zone."
+}
+},
+"type": "object"
+},
+"BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity": {
+"id": "BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity",
+"properties": {
+"spillover": {
+"description": "This field indicates whether zonal affinity is enabled or not. The possible values are: - ZONAL_AFFINITY_DISABLED: Default Value. Zonal Affinity is disabled. The load balancer distributes new connections to all healthy backend endpoints across all zones. - ZONAL_AFFINITY_STAY_WITHIN_ZONE: Zonal Affinity is enabled. The load balancer distributes new connections to all healthy backend endpoints in the local zone only. If there are no healthy backend endpoints in the local zone, the load balancer distributes new connections to all backend endpoints in the local zone. - ZONAL_AFFINITY_SPILL_CROSS_ZONE: Zonal Affinity is enabled. The load balancer distributes new connections to all healthy backend endpoints in the local zone only. If there aren't enough healthy backend endpoints in the local zone, the load balancer distributes new connections to all healthy backend endpoints across all zones. ",
+"enum": [
+"ZONAL_AFFINITY_DISABLED",
+"ZONAL_AFFINITY_SPILL_CROSS_ZONE",
+"ZONAL_AFFINITY_STAY_WITHIN_ZONE"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"spilloverRatio": {
+"description": "The value of the field must be in [0, 1]. When the ratio of the count of healthy backend endpoints in a zone to the count of backend endpoints in that same zone is equal to or above this threshold, the load balancer distributes new connections to all healthy endpoints in the local zone only. When the ratio of the count of healthy backend endpoints in a zone to the count of backend endpoints in that same zone is below this threshold, the load balancer distributes all new connections to all healthy endpoints across all zones.",
 "format": "float",
 "type": "number"
 }
@@ -53641,11 +53680,11 @@ false
 "type": "string"
 },
 "externalManagedBackendBucketMigrationState": {
-"description": "Specifies the canary migration state for the backend buckets attached to this forwarding rule. Possible values are PREPARE, TEST, and FINALIZE. To begin the migration from EXTERNAL to EXTERNAL_MANAGED, the state must be changed to PREPARE. The state must be changed to FINALIZE before the loadBalancingScheme can be changed to EXTERNAL_MANAGED. Optionally, the TEST state can be used to migrate traffic to backend buckets attached to this forwarding rule by percentage using externalManagedBackendBucketMigrationTestingPercentage. Rolling back a migration requires the states to be set in reverse order. So changing the scheme from EXTERNAL_MANAGED to EXTERNAL requires the state to be set to FINALIZE at the same time. Optionally, the TEST state can be used to migrate some traffic back to EXTERNAL or PREPARE can be used to migrate all traffic back to EXTERNAL.",
+"description": "Specifies the canary migration state for the backend buckets attached to this forwarding rule. Possible values are PREPARE, TEST_BY_PERCENTAGE, and TEST_ALL_TRAFFIC. To begin the migration from EXTERNAL to EXTERNAL_MANAGED, the state must be changed to PREPARE. The state must be changed to TEST_ALL_TRAFFIC before the loadBalancingScheme can be changed to EXTERNAL_MANAGED. Optionally, the TEST_BY_PERCENTAGE state can be used to migrate traffic to backend buckets attached to this forwarding rule by percentage using externalManagedBackendBucketMigrationTestingPercentage. Rolling back a migration requires the states to be set in reverse order. So changing the scheme from EXTERNAL_MANAGED to EXTERNAL requires the state to be set to TEST_ALL_TRAFFIC at the same time. Optionally, the TEST_BY_PERCENTAGE state can be used to migrate some traffic back to EXTERNAL or PREPARE can be used to migrate all traffic back to EXTERNAL.",
 "enum": [
-"FINALIZE",
 "PREPARE",
-"TEST"
+"TEST_ALL_TRAFFIC",
+"TEST_BY_PERCENTAGE"
 ],
 "enumDescriptions": [
 "",
@@ -53655,7 +53694,7 @@ false
 "type": "string"
 },
 "externalManagedBackendBucketMigrationTestingPercentage": {
-"description": "Determines the fraction of requests to backend buckets that should be processed by the Global external Application Load Balancer. The value of this field must be in the range [0, 100]. This value is only used if the loadBalancingScheme is set to EXTERNAL (when using the Classic ALB).",
+"description": "Determines the fraction of requests to backend buckets that should be processed by the global external Application Load Balancer. The value of this field must be in the range [0, 100]. This value can only be set if the loadBalancingScheme in the BackendService is set to EXTERNAL (when using the classic Application Load Balancer) and the migration state is TEST_BY_PERCENTAGE.",
 "format": "float",
 "type": "number"
 },
@@ -55666,6 +55705,7 @@ false
 "description": "Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS, HTTP2 or GRPC. Exactly one of the protocol-specific health check fields must be specified, which must match type field.",
 "enum": [
 "GRPC",
+"GRPC_WITH_TLS",
 "HTTP",
 "HTTP2",
 "HTTPS",
@@ -55675,6 +55715,7 @@ false
 "UDP"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -58483,7 +58524,7 @@ false
 },
 "upcomingMaintenance": {
 "$ref": "UpcomingMaintenance",
-"description": "[Output Only] Specifies upcoming maintenance for the instance."
+"description": "[Output Only] DEPRECATED: Please use resource_status.upcoming_maintenance instead. Specifies upcoming maintenance for the instance."
 },
 "zone": {
 "description": "[Output Only] URL of the zone where the instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.",
@@ -62647,6 +62688,11 @@ false
 "description": "[Output Only] The name of the firewall policy.",
 "type": "string"
 },
+"priority": {
+"description": "[Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.",
+"format": "int32",
+"type": "integer"
+},
 "rules": {
 "description": "The rules that apply to the network.",
 "items": {
@@ -62664,9 +62710,13 @@ false
 "HIERARCHY",
 "NETWORK",
 "NETWORK_REGIONAL",
+"SYSTEM_GLOBAL",
+"SYSTEM_REGIONAL",
 "UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
+"",
 "",
 "",
 "",
@@ -63784,10 +63834,6 @@ false
 "properties": {
 "bandwidthPercentagePolicy": {
 "$ref": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy"
-},
-"enabled": {
-"description": "Enable or disable the AAI feature on this interconnect.",
-"type": "boolean"
 },
 "profileDescription": {
 "description": "A description for the AAI profile on this interconnect.",
@@ -69243,7 +69289,13 @@ false
 "description": "Metadata defined as annotations on the network endpoint.",
 "type": "object"
 },
+"clientDestinationPort": {
+"description": "Represents the port number to which PSC consumer sends packets. Only valid for network endpoint groups created with GCE_VM_IP_PORTMAP endpoint type.",
+"format": "int32",
+"type": "integer"
+},
 "clientPort": {
+"deprecated": true,
 "description": "Represents the port number to which PSC consumer sends packets. Only valid for network endpoint groups created with CLIENT_PORT_PER_ENDPOINT mapping mode.",
 "format": "int32",
 "type": "integer"
@@ -69292,6 +69344,7 @@ false
 "description": "Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set."
 },
 "clientPortMappingMode": {
+"deprecated": true,
 "description": "Only valid when networkEndpointType is GCE_VM_IP_PORT and the NEG is regional.",
 "enum": [
 "CLIENT_PORT_PER_ENDPOINT",
@@ -69348,10 +69401,11 @@ false
 "type": "string"
 },
 "networkEndpointType": {
-"description": "Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.",
+"description": "Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT, GCE_VM_IP_PORTMAP.",
 "enum": [
 "GCE_VM_IP",
 "GCE_VM_IP_PORT",
+"GCE_VM_IP_PORTMAP",
 "INTERNET_FQDN_PORT",
 "INTERNET_IP_PORT",
 "NON_GCP_PRIVATE_IP_PORT",
@@ -69361,6 +69415,7 @@ false
 "enumDescriptions": [
 "The network endpoint is represented by an IP address.",
 "The network endpoint is represented by IP address and port pair.",
+"The network endpoint is represented by an IP, Port and Client Destination Port.",
 "The network endpoint is represented by fully qualified domain name and port.",
 "The network endpoint is represented by an internet IP address and port.",
 "The network endpoint is represented by an IP address and port. The endpoint belongs to a VM or pod running in a customer's on-premises.",
@@ -70714,11 +70769,9 @@ false
 "description": "Specifies whether auto mode subnet creation is allowed.",
 "enum": [
 "AUTO_MODE_SUBNET_ALLOWED",
-"AUTO_MODE_SUBNET_BLOCKED",
-"AUTO_MODE_SUBNET_UNSPECIFIED"
+"AUTO_MODE_SUBNET_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70728,11 +70781,9 @@ false
 "description": "Specifies whether cloud NAT creation is allowed.",
 "enum": [
 "CLOUD_NAT_ALLOWED",
-"CLOUD_NAT_BLOCKED",
-"CLOUD_NAT_UNSPECIFIED"
+"CLOUD_NAT_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70742,11 +70793,9 @@ false
 "description": "Specifies whether cloud router creation is allowed.",
 "enum": [
 "CLOUD_ROUTER_ALLOWED",
-"CLOUD_ROUTER_BLOCKED",
-"CLOUD_ROUTER_UNSPECIFIED"
+"CLOUD_ROUTER_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70756,11 +70805,9 @@ false
 "description": "Specifies whether Cloud Interconnect creation is allowed.",
 "enum": [
 "INTERCONNECT_ALLOWED",
-"INTERCONNECT_BLOCKED",
-"INTERCONNECT_UNSPECIFIED"
+"INTERCONNECT_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70770,11 +70817,9 @@ false
 "description": "Specifies whether cloud load balancing is allowed.",
 "enum": [
 "LOAD_BALANCING_ALLOWED",
-"LOAD_BALANCING_BLOCKED",
-"LOAD_BALANCING_UNSPECIFIED"
+"LOAD_BALANCING_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70784,11 +70829,9 @@ false
 "description": "Specifies whether multi-nic in the same network is allowed.",
 "enum": [
 "MULTI_NIC_IN_SAME_NETWORK_ALLOWED",
-"MULTI_NIC_IN_SAME_NETWORK_BLOCKED",
-"MULTI_NIC_IN_SAME_NETWORK_UNSPECIFIED"
+"MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70798,11 +70841,9 @@ false
 "description": "Specifies whether Packet Mirroring 1.0 is supported.",
 "enum": [
 "PACKET_MIRRORING_ALLOWED",
-"PACKET_MIRRORING_BLOCKED",
-"PACKET_MIRRORING_UNSPECIFIED"
+"PACKET_MIRRORING_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70812,11 +70853,9 @@ false
 "description": "Specifies whether private Google access is allowed.",
 "enum": [
 "PRIVATE_GOOGLE_ACCESS_ALLOWED",
-"PRIVATE_GOOGLE_ACCESS_BLOCKED",
-"PRIVATE_GOOGLE_ACCESS_UNSPECIFIED"
+"PRIVATE_GOOGLE_ACCESS_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70826,11 +70865,9 @@ false
 "description": "Specifies whether PSC creation is allowed.",
 "enum": [
 "PSC_ALLOWED",
-"PSC_BLOCKED",
-"PSC_UNSPECIFIED"
+"PSC_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70840,11 +70877,9 @@ false
 "description": "Specifies whether unicast within the same network is allowed.",
 "enum": [
 "SAME_NETWORK_UNICAST_ALLOWED",
-"SAME_NETWORK_UNICAST_BLOCKED",
-"SAME_NETWORK_UNICAST_UNSPECIFIED"
+"SAME_NETWORK_UNICAST_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70854,11 +70889,9 @@ false
 "description": "Specifies whether static route creation is allowed.",
 "enum": [
 "STATIC_ROUTES_ALLOWED",
-"STATIC_ROUTES_BLOCKED",
-"STATIC_ROUTES_UNSPECIFIED"
+"STATIC_ROUTES_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70868,11 +70901,9 @@ false
 "description": "Specifies whether VPC peering is allowed.",
 "enum": [
 "VPC_PEERING_ALLOWED",
-"VPC_PEERING_BLOCKED",
-"VPC_PEERING_UNSPECIFIED"
+"VPC_PEERING_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70882,11 +70913,9 @@ false
 "description": "Specifies whether VPN creation is allowed.",
 "enum": [
 "VPN_ALLOWED",
-"VPN_BLOCKED",
-"VPN_UNSPECIFIED"
+"VPN_BLOCKED"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70897,11 +70926,9 @@ false
 "items": {
 "enum": [
 "SUBNET_PURPOSE_CUSTOM_HARDWARE",
-"SUBNET_PURPOSE_PRIVATE",
-"SUBNET_PURPOSE_UNSPECIFIED"
+"SUBNET_PURPOSE_PRIVATE"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70915,11 +70942,9 @@ false
 "enum": [
 "SUBNET_STACK_TYPE_IPV4_IPV6",
 "SUBNET_STACK_TYPE_IPV4_ONLY",
-"SUBNET_STACK_TYPE_IPV6_ONLY",
-"SUBNET_STACK_TYPE_UNSPECIFIED"
+"SUBNET_STACK_TYPE_IPV6_ONLY"
 ],
 "enumDescriptions": [
-"",
 "",
 "",
 ""
@@ -70951,11 +70976,9 @@ false
 "description": "Specifies which type of multicast is supported.",
 "enum": [
 "MULTICAST_SDN",
-"MULTICAST_ULL",
-"MULTICAST_UNSPECIFIED"
+"MULTICAST_ULL"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -70965,11 +70988,9 @@ false
 "description": "Specifies which type of unicast is supported.",
 "enum": [
 "UNICAST_SDN",
-"UNICAST_ULL",
-"UNICAST_UNSPECIFIED"
+"UNICAST_ULL"
 ],
 "enumDescriptions": [
-"",
 "",
 ""
 ],
@@ -71261,6 +71282,11 @@ false
 "description": "[Output Only] The name of the firewall policy.",
 "type": "string"
 },
+"priority": {
+"description": "[Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.",
+"format": "int32",
+"type": "integer"
+},
 "rules": {
 "description": "The rules that apply to the network.",
 "items": {
@@ -71277,9 +71303,11 @@ false
 "enum": [
 "HIERARCHY",
 "NETWORK",
+"SYSTEM",
 "UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 ""
@@ -74982,7 +75010,7 @@ false
 "type": "array"
 },
 "cidrRanges": {
-"description": "One or more IPv4 or IPv6 CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use \"0.0.0.0/0,::/0\". Note: Support for IPv6 traffic is in preview.",
+"description": "One or more IPv4 or IPv6 CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use \"0.0.0.0/0,::/0\".",
 "items": {
 "type": "string"
 },
@@ -80994,7 +81022,7 @@ false
 "type": "object"
 },
 "ResourcePolicyGroupPlacementPolicy": {
-"description": "A GroupPlacementPolicy specifies resource placement configuration. It specifies the failure bucket separation as well as network locality",
+"description": "A GroupPlacementPolicy specifies resource placement configuration. It specifies the failure bucket separation",
 "id": "ResourcePolicyGroupPlacementPolicy",
 "properties": {
 "availabilityDomainCount": {
@@ -81007,25 +81035,13 @@ false
 "enum": [
 "CLUSTERED",
 "COLLOCATED",
+"MAX_SPREAD",
 "UNSPECIFIED_COLLOCATION"
 ],
 "enumDescriptions": [
 "Specifies collocation option that provides tight collocation with minimum network latency.",
 "",
-""
-],
-"type": "string"
-},
-"locality": {
-"description": "Specifies network locality",
-"enum": [
-"BEST_EFFORT",
-"STRICT",
-"UNSPECIFIED_LOCALITY"
-],
-"enumDescriptions": [
-"",
-"",
+"Specifies collocation option that provides spreading across clusters.",
 ""
 ],
 "type": "string"
@@ -81051,20 +81067,6 @@ false
 "description": "Specifies the number of slices in a multislice workload.",
 "format": "int32",
 "type": "integer"
-},
-"style": {
-"description": "Specifies instances to hosts placement relationship",
-"enum": [
-"COMPACT",
-"FULLY_SPREAD",
-"UNSPECIFIED_PLACEMENT_TYPE"
-],
-"enumDescriptions": [
-"VMs are placed without regard for shared hosts",
-"VMs do not share the same hosts",
-""
-],
-"type": "string"
 },
 "tpuTopology": {
 "description": "Specifies the shape of the TPU slice",
@@ -81554,6 +81556,7 @@ false
 "OS_TERMINATED",
 "PREEMPTED",
 "SCHEDULED_STOP",
+"SHUTDOWN_DUE_TO_HOST_ERROR",
 "SHUTDOWN_DUE_TO_MAINTENANCE",
 "USER_TERMINATED"
 ],
@@ -81569,6 +81572,7 @@ false
 "Terminated from the OS level",
 "Terminated due to preemption",
 "Terminated due to scheduled stop",
+"Terminated due to host error",
 "Terminated due to maintenance",
 "Terminated by user"
 ],
@@ -86465,14 +86469,14 @@ false
 "type": "string"
 },
 "consumerAcceptLists": {
-"description": "Projects that are allowed to connect to this service attachment.",
+"description": "Specifies which consumer projects or networks are allowed to connect to the service attachment. Each project or network has a connection limit. A given service attachment can manage connections at either the project or network level. Therefore, both the accept and reject lists for a given service attachment must contain either only projects or only networks.",
 "items": {
 "$ref": "ServiceAttachmentConsumerProjectLimit"
 },
 "type": "array"
 },
 "consumerRejectLists": {
-"description": "Projects that are not allowed to connect to this service attachment. The project can be specified using its id or number.",
+"description": "Specifies a list of projects or networks that are not allowed to connect to this service attachment. The project can be specified using its project ID or project number and the network can be specified using its URL. A given service attachment can manage connections at either the project or network level. Therefore, both the reject and accept lists for a given service attachment must contain either only projects or only networks.",
 "items": {
 "type": "string"
 },
