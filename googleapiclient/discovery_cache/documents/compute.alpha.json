@@ -35283,6 +35283,106 @@
 "https://www.googleapis.com/auth/compute"
 ]
 },
+"patchNamedSet": {
+"description": "Patches Named Set",
+"flatPath": "projects/{project}/regions/{region}/routers/{router}/patchNamedSet",
+"httpMethod": "POST",
+"id": "compute.routers.patchNamedSet",
+"parameterOrder": [
+"project",
+"region",
+"router"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"router": {
+"description": "Name of the Router resource where Named Set is defined.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/routers/{router}/patchNamedSet",
+"request": {
+"$ref": "NamedSet"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"patchRoutePolicy": {
+"description": "Patches Route Policy",
+"flatPath": "projects/{project}/regions/{region}/routers/{router}/patchRoutePolicy",
+"httpMethod": "POST",
+"id": "compute.routers.patchRoutePolicy",
+"parameterOrder": [
+"project",
+"region",
+"router"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"router": {
+"description": "Name of the Router resource where Route Policy is defined.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/routers/{router}/patchRoutePolicy",
+"request": {
+"$ref": "RoutePolicy"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "preview": {
 "description": "Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.",
 "flatPath": "projects/{project}/regions/{region}/routers/{router}/preview",
@@ -44323,7 +44423,7 @@
 }
 }
 },
-"revision": "20240407",
+"revision": "20240421",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -45805,7 +45905,7 @@ false
 "type": "object"
 },
 "AllocationSpecificSKUReservation": {
-"description": "This reservation type allows to pre allocate specific instance configuration. Next ID: 6",
+"description": "This reservation type allows to pre allocate specific instance configuration.",
 "id": "AllocationSpecificSKUReservation",
 "properties": {
 "assuredCount": {
@@ -49772,10 +49872,12 @@ false
 "GRAPHICS_OPTIMIZED",
 "MEMORY_OPTIMIZED",
 "MEMORY_OPTIMIZED_M3",
+"MEMORY_OPTIMIZED_X4",
 "STORAGE_OPTIMIZED_Z3",
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -63622,6 +63724,10 @@ false
 "description": "Represents an Interconnect resource. An Interconnect resource is a dedicated connection between the Google Cloud network and your on-premises network. For more information, read the Dedicated Interconnect Overview.",
 "id": "Interconnect",
 "properties": {
+"aaiEnabled": {
+"description": "Enable or disable the Application Aware Interconnect(AAI) feature on this interconnect.",
+"type": "boolean"
+},
 "adminEnabled": {
 "description": "Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.",
 "type": "boolean"
@@ -70717,7 +70823,7 @@ false
 "type": "object"
 },
 "NetworkPlacement": {
-"description": "NetworkPlacement Represents a Google managed network placement resource.",
+"description": "NetworkPlacement represents a Google managed network placement resource.",
 "id": "NetworkPlacement",
 "properties": {
 "creationTimestamp": {
@@ -74784,7 +74890,7 @@ false
 },
 "filter": {
 "$ref": "PacketMirroringFilter",
-"description": "Filter for mirrored traffic. If unspecified, all traffic is mirrored."
+"description": "Filter for mirrored traffic. If unspecified, all IPv4 traffic is mirrored."
 },
 "id": {
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
@@ -75010,7 +75116,7 @@ false
 "type": "array"
 },
 "cidrRanges": {
-"description": "One or more IPv4 or IPv6 CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use \"0.0.0.0/0,::/0\".",
+"description": "One or more IPv4 or IPv6 CIDR ranges that apply as filters on the source (ingress) or destination (egress) IP in the IP header. If no ranges are specified, all IPv4 traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all IPv4 traffic is mirrored. To mirror all IPv4 and IPv6 traffic, use \"0.0.0.0/0,::/0\".",
 "items": {
 "type": "string"
 },
@@ -77832,6 +77938,7 @@ false
 "SNAPSHOTS",
 "SSD_TOTAL_GB",
 "SSL_CERTIFICATES",
+"SSL_POLICIES",
 "STATIC_ADDRESSES",
 "STATIC_BYOIP_ADDRESSES",
 "STATIC_EXTERNAL_IPV6_ADDRESS_RANGES",
@@ -78000,6 +78107,7 @@ false
 "",
 "",
 "The total number of snapshots allowed for a single project.",
+"",
 "",
 "",
 "",
@@ -82652,18 +82760,18 @@ false
 "type": "boolean"
 },
 "enableIpv6": {
-"description": "Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.",
+"description": "Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.",
 "type": "boolean"
 },
 "exportPolicies": {
-"description": "List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type.",
+"description": "List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.",
 "items": {
 "type": "string"
 },
 "type": "array"
 },
 "importPolicies": {
-"description": "List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type.",
+"description": "List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.",
 "items": {
 "type": "string"
 },
@@ -82674,7 +82782,7 @@ false
 "type": "string"
 },
 "ipAddress": {
-"description": "IP address of the interface inside Google Cloud Platform. Only IPv4 is supported.",
+"description": "IP address of the interface inside Google Cloud Platform.",
 "type": "string"
 },
 "ipv4NexthopAddress": {
@@ -82722,7 +82830,7 @@ false
 "type": "integer"
 },
 "peerIpAddress": {
-"description": "IP address of the BGP interface outside Google Cloud Platform. Only IPv4 is supported.",
+"description": "IP address of the BGP interface outside Google Cloud Platform.",
 "type": "string"
 },
 "peerIpv4NexthopAddress": {
@@ -82820,7 +82928,7 @@ false
 "id": "RouterInterface",
 "properties": {
 "ipRange": {
-"description": "IP address and range of the interface. The IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.",
+"description": "IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose. ",
 "type": "string"
 },
 "ipVersion": {
@@ -83388,7 +83496,7 @@ false
 "type": "boolean"
 },
 "enableIpv6": {
-"description": "Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.",
+"description": "Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.",
 "type": "boolean"
 },
 "ipAddress": {
@@ -93119,7 +93227,7 @@ false
 "type": "string"
 },
 "httpFilters": {
-"description": "URLs to networkservices.HttpFilter resources enabled for xDS clients using this configuration. For example, https://networkservices.googleapis.com/beta/projects/project/locations/ locationhttpFilters/httpFilter Only filters that handle outbound connection and stream events may be specified. These filters work in conjunction with a default set of HTTP filters that may already be configured by Traffic Director. Traffic Director will determine the final location of these filters within xDS configuration based on the name of the HTTP filter. If Traffic Director positions multiple filters at the same location, those filters will be in the same order as specified in this list. httpFilters only applies for loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.",
+"description": "URLs to networkservices.HttpFilter resources enabled for xDS clients using this configuration. For example, https://networkservices.googleapis.com/beta/projects/project/locations/ location/httpFilters/httpFilter Only filters that handle outbound connection and stream events may be specified. These filters work in conjunction with a default set of HTTP filters that may already be configured by Traffic Director. Traffic Director will determine the final location of these filters within xDS configuration based on the name of the HTTP filter. If Traffic Director positions multiple filters at the same location, those filters will be in the same order as specified in this list. httpFilters only applies for loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.",
 "items": {
 "type": "string"
 },
