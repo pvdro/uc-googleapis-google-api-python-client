@@ -3322,6 +3322,33 @@ Args:
           &quot;startIndex&quot;: 42, # The start (inclusive) of the span, or not set if unbounded.
         },
       },
+      &quot;cancelDataSourceRefresh&quot;: { # Cancels one or multiple refreshes of data source objects in the spreadsheet by the specified references. # Cancels refreshes of one or multiple data sources and associated dbobjects.
+        &quot;dataSourceId&quot;: &quot;A String&quot;, # Reference to a DataSource. If specified, cancels all associated data source object refreshes for this data source.
+        &quot;isAll&quot;: True or False, # Cancels all existing data source object refreshes for all data sources in the spreadsheet.
+        &quot;references&quot;: { # A list of references to data source objects. # References to data source objects whose refreshes are to be cancelled.
+          &quot;references&quot;: [ # The references.
+            { # Reference to a data source object.
+              &quot;chartId&quot;: 42, # References to a data source chart.
+              &quot;dataSourceFormulaCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a cell containing DataSourceFormula.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;dataSourcePivotTableAnchorCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a data source PivotTable anchored at the cell.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;dataSourceTableAnchorCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a DataSourceTable anchored at the cell.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;sheetId&quot;: &quot;A String&quot;, # References to a DATA_SOURCE sheet.
+            },
+          ],
+        },
+      },
       &quot;clearBasicFilter&quot;: { # Clears the basic filter, if any exists on the sheet. # Clears the basic filter on a sheet.
         &quot;sheetId&quot;: 42, # The sheet ID on which the basic filter should be cleared.
       },
@@ -10369,6 +10396,35 @@ Returns:
             &quot;title&quot;: &quot;A String&quot;, # The title of the slicer.
           },
         },
+      },
+      &quot;cancelDataSourceRefresh&quot;: { # The response from cancelling one or multiple data source object refreshes. # A reply from cancelling data source object refreshes.
+        &quot;statuses&quot;: [ # The cancellation statuses of refreshes of all data source objects specified in the request. If is_all is specified, the field contains only those in failure status. Refreshing and canceling refresh the same data source object is also not allowed in the same `batchUpdate`.
+          { # The status of cancelling a single data source object refresh.
+            &quot;reference&quot;: { # Reference to a data source object. # Reference to the data source object whose refresh is being cancelled.
+              &quot;chartId&quot;: 42, # References to a data source chart.
+              &quot;dataSourceFormulaCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a cell containing DataSourceFormula.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;dataSourcePivotTableAnchorCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a data source PivotTable anchored at the cell.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;dataSourceTableAnchorCell&quot;: { # A coordinate in a sheet. All indexes are zero-based. # References to a DataSourceTable anchored at the cell.
+                &quot;columnIndex&quot;: 42, # The column index of the coordinate.
+                &quot;rowIndex&quot;: 42, # The row index of the coordinate.
+                &quot;sheetId&quot;: 42, # The sheet this coordinate is on.
+              },
+              &quot;sheetId&quot;: &quot;A String&quot;, # References to a DATA_SOURCE sheet.
+            },
+            &quot;refreshCancellationStatus&quot;: { # The status of a refresh cancellation. You can send cancel request to explicitly cancel one or multiple data source object refreshes. # The cancellation status.
+              &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
+              &quot;state&quot;: &quot;A String&quot;, # The state of a call to cancel a refresh in Sheets.
+            },
+          },
+        ],
       },
       &quot;createDeveloperMetadata&quot;: { # The response from creating developer metadata. # A reply from creating a developer metadata entry.
         &quot;developerMetadata&quot;: { # Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too. # The developer metadata that was created.
