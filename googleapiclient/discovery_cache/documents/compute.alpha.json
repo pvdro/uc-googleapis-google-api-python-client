@@ -19351,7 +19351,7 @@
 ]
 },
 "patch": {
-"description": "Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.",
+"description": "Patches the specified network with the data included in the request. Only routingConfig can be modified.",
 "flatPath": "projects/{project}/global/networks/{network}",
 "httpMethod": "PATCH",
 "id": "compute.networks.patch",
@@ -33307,7 +33307,7 @@
 ]
 },
 "list": {
-"description": "Retrieves the list of region resources available to the specified project. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `items.quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request.",
+"description": "Retrieves the list of region resources available to the specified project. To decrease latency for this method, you can optionally omit any unneeded information from the response by using a field mask. This practice is especially recommended for unused quota information (the `items.quotas` field). To exclude one or more fields, set your request's `fields` query parameter to only include the fields you need. For example, to only include the `id` and `selfLink` fields, add the query parameter `?fields=id,selfLink` to your request. This method fails if the quota information is unavailable for the region and if the organization policy constraint compute.requireBasicQuotaInResponse is enforced. This constraint, when enforced, disables the fail-open behaviour when quota information (the `items.quotas` field) is unavailable for the region. It is recommended to use the default setting for the constraint unless your application requires the fail-closed behaviour for this method.",
 "flatPath": "projects/{project}/regions",
 "httpMethod": "GET",
 "id": "compute.regions.list",
@@ -44423,7 +44423,7 @@
 }
 }
 },
-"revision": "20240507",
+"revision": "20240521",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -45966,7 +45966,7 @@ false
 },
 "diskEncryptionKey": {
 "$ref": "CustomerEncryptionKey",
-"description": "Encrypts or decrypts a disk using a customer-supplied encryption key. If you are creating a new disk, this field encrypts the new disk using an encryption key that you provide. If you are attaching an existing disk that is already encrypted, this field decrypts the disk using the customer-supplied encryption key. If you encrypt a disk using a customer-supplied key, you must provide the same key again when you attempt to use this resource at a later time. For example, you must provide the key when you create a snapshot or an image from the disk or when you attach the disk to a virtual machine instance. If you do not provide an encryption key, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later. Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt disks in a managed instance group."
+"description": "Encrypts or decrypts a disk using a customer-supplied encryption key. If you are creating a new disk, this field encrypts the new disk using an encryption key that you provide. If you are attaching an existing disk that is already encrypted, this field decrypts the disk using the customer-supplied encryption key. If you encrypt a disk using a customer-supplied key, you must provide the same key again when you attempt to use this resource at a later time. For example, you must provide the key when you create a snapshot or an image from the disk or when you attach the disk to a virtual machine instance. If you do not provide an encryption key, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later. Note: Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt disks in a managed instance group. You cannot create VMs that have disks with customer-supplied keys using the bulk insert method."
 },
 "diskSizeGb": {
 "description": "The size of the disk in GB.",
@@ -46052,7 +46052,7 @@ false
 "description": "[Output Only] shielded vm initial state stored on disk"
 },
 "source": {
-"description": "Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required except for local SSD. If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks. Note that for InstanceTemplate, specify the disk name for zonal disk, and the URL for regional disk.",
+"description": "Specifies a valid partial or full URL to an existing Persistent Disk resource. When creating a new instance boot disk, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required. If desired, you can also attach existing non-root persistent disks using this property. This field is only applicable for persistent disks. Note that for InstanceTemplate, specify the disk name for zonal disk, and the URL for regional disk.",
 "type": "string"
 },
 "type": {
@@ -46210,7 +46210,7 @@ false
 "type": "array"
 },
 "sourceImage": {
-"description": "The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required except for local SSD. To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-9 to use the latest Debian 9 image: projects/debian-cloud/global/images/family/debian-9 Alternatively, use a specific version of a public operating system image: projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD To create a disk with a custom image that you created, specify the image name in the following format: global/images/my-custom-image You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name: global/images/family/my-image-family If the source image is deleted later, this field will not be set.",
+"description": "The source image to create this disk. When creating a new instance boot disk, one of initializeParams.sourceImage or initializeParams.sourceSnapshot or disks.source is required. To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-9 to use the latest Debian 9 image: projects/debian-cloud/global/images/family/debian-9 Alternatively, use a specific version of a public operating system image: projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD To create a disk with a custom image that you created, specify the image name in the following format: global/images/my-custom-image You can also specify a custom image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name: global/images/family/my-image-family If the source image is deleted later, this field will not be set.",
 "type": "string"
 },
 "sourceImageEncryptionKey": {
@@ -46218,11 +46218,11 @@ false
 "description": "The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. InstanceTemplate and InstancePropertiesPatch do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys."
 },
 "sourceInstantSnapshot": {
-"description": "The source instant-snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceInstantSnapshot initializeParams.sourceImage or disks.source is required except for local SSD. To create a disk with a snapshot that you created, specify the snapshot name in the following format: us-central1-a/instantSnapshots/my-backup If the source instant-snapshot is deleted later, this field will not be set.",
+"description": "The source instant-snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceInstantSnapshot initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: us-central1-a/instantSnapshots/my-backup If the source instant-snapshot is deleted later, this field will not be set.",
 "type": "string"
 },
 "sourceSnapshot": {
-"description": "The source snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required except for local SSD. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set.",
+"description": "The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set.",
 "type": "string"
 },
 "sourceSnapshotEncryptionKey": {
@@ -53589,6 +53589,22 @@ false
 },
 "type": "array"
 },
+"destNetworkScope": {
+"description": "Network scope of the traffic destination.",
+"enum": [
+"INTERNET",
+"NON_INTERNET",
+"UNSPECIFIED",
+"VPC_NETWORKS"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
 "destRegionCodes": {
 "description": "Region codes whose IP addresses will be used to match for destination of traffic. Should be specified as 2 letter country code defined as per ISO 3166 alpha-2 country codes. ex.\"US\" Maximum number of dest region codes allowed is 5000.",
 "items": {
@@ -53626,6 +53642,29 @@ false
 },
 "srcIpRanges": {
 "description": "CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 5000.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"srcNetworkScope": {
+"description": "Network scope of the traffic source.",
+"enum": [
+"INTERNET",
+"NON_INTERNET",
+"UNSPECIFIED",
+"VPC_NETWORKS"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"srcNetworks": {
+"description": "Networks of the traffic source. It can be either a full or partial url.",
 "items": {
 "type": "string"
 },
@@ -59338,6 +59377,14 @@ false
 "description": "[Output Only] The URL of the region where the managed instance group resides (for regional resources).",
 "type": "string"
 },
+"satisfiesPzi": {
+"description": "[Output Only] Reserved for future use.",
+"type": "boolean"
+},
+"satisfiesPzs": {
+"description": "[Output Only] Reserved for future use.",
+"type": "boolean"
+},
 "selfLink": {
 "description": "[Output Only] The URL for this managed instance group. The server defines this URL.",
 "type": "string"
@@ -61989,7 +62036,7 @@ false
 "compute.instanceTemplates.insert"
 ]
 },
-"description": "The machine type to use for instances that are created from these properties.",
+"description": "The machine type to use for instances that are created from these properties. This field only accept machine types name. e.g. n2-standard-4 and does not accept machine type full or partial url. e.g. projects/my-l7ilb-project/zones/us-central1-a/machineTypes/n2-standard-4 will throw INTERNAL_ERROR.",
 "type": "string"
 },
 "metadata": {
@@ -81750,10 +81797,12 @@ false
 "stopState": {
 "description": "Current stopping state of the instance.",
 "enum": [
+"PENDING_STOP",
 "SHUTTING_DOWN",
 "STOPPING"
 ],
 "enumDescriptions": [
+"The instance is gracefully shutting down.",
 "Deprecating, please use PENDING_STOP. The instance is gracefully shutting down.",
 "The instance is stopping."
 ],
