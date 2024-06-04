@@ -44423,7 +44423,7 @@
 }
 }
 },
-"revision": "20240521",
+"revision": "20240526",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -68458,6 +68458,10 @@ false
 },
 "networkPlacement": {
 "description": "A full or partial URL of the network placement to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/alpha/projects/{project_id}/global/networkPlacements/{network_placement_name} - projects/{project_id}/global/networkPlacements/{network_placement_name} ",
+"type": "string"
+},
+"networkProfile": {
+"description": "A full or partial URL of the network profile to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/alpha/projects/{project_id}/global/networkProfiles/{network_profile_name} - projects/{project_id}/global/networkProfiles/{network_profile_name} ",
 "type": "string"
 },
 "peerings": {
@@ -99176,7 +99180,7 @@ false
 "type": "object"
 },
 "Zone": {
-"description": "Represents a Zone resource. A zone is a deployment area. These deployment areas are subsets of a region. For example the zone us-east1-a is located in the us-east1 region. For more information, read Regions and Zones.",
+"description": "Represents a Zone resource. A zone is a deployment area. These deployment areas are subsets of a region. For example the zone us-east1-b is located in the us-east1 region. For more information, read Regions and Zones.",
 "id": "Zone",
 "properties": {
 "availableCpuPlatforms": {
