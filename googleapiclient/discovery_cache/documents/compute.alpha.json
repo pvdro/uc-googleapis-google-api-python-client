@@ -18864,6 +18864,100 @@
 }
 }
 },
+"networkProfiles": {
+"methods": {
+"get": {
+"description": "Returns the specified network profile.",
+"flatPath": "projects/{project}/global/networkProfiles/{networkProfile}",
+"httpMethod": "GET",
+"id": "compute.networkProfiles.get",
+"parameterOrder": [
+"project",
+"networkProfile"
+],
+"parameters": {
+"networkProfile": {
+"description": "Name of the network profile to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/networkProfiles/{networkProfile}",
+"response": {
+"$ref": "NetworkProfile"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Retrieves a list of network profiles available to the specified project.",
+"flatPath": "projects/{project}/global/networkProfiles",
+"httpMethod": "GET",
+"id": "compute.networkProfiles.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/networkProfiles",
+"response": {
+"$ref": "NetworkProfilesListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
 "networks": {
 "methods": {
 "addPeering": {
@@ -44423,7 +44517,7 @@
 }
 }
 },
-"revision": "20240526",
+"revision": "20240604",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -45707,6 +45801,10 @@ false
 "description": "The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.",
 "format": "int32",
 "type": "integer"
+},
+"turboMode": {
+"description": "Turbo mode to use for the instance. Supported modes include: * ALL_CORE_MAX Using empty string or not setting this field will use the default turbo mode.",
+"type": "string"
 },
 "visibleCoreCount": {
 "description": "The number of physical cores to expose to an instance. Multiply by the number of threads per core to compute the total number of virtual CPUs to expose to the instance. If unset, the number of cores is inferred from the instance's nominal CPU count and the underlying platform's SMT width.",
@@ -47297,6 +47395,16 @@ false
 "kind": {
 "default": "compute#backendBucket",
 "description": "Type of the resource.",
+"type": "string"
+},
+"loadBalancingScheme": {
+"description": "The value can only be INTERNAL_MANAGED for cross-region internal layer 7 load balancer. If loadBalancingScheme is not specified, the backend bucket can be used by classic global external load balancers, or global application external load balancers, or both.",
+"enum": [
+"INTERNAL_MANAGED"
+],
+"enumDescriptions": [
+"Signifies that this will be used for internal Application Load Balancers."
+],
 "type": "string"
 },
 "name": {
@@ -53593,11 +53701,13 @@ false
 "description": "Network scope of the traffic destination.",
 "enum": [
 "INTERNET",
+"INTRA_VPC",
 "NON_INTERNET",
 "UNSPECIFIED",
 "VPC_NETWORKS"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -53651,11 +53761,13 @@ false
 "description": "Network scope of the traffic source.",
 "enum": [
 "INTERNET",
+"INTRA_VPC",
 "NON_INTERNET",
 "UNSPECIFIED",
 "VPC_NETWORKS"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -67923,6 +68035,11 @@ false
 "$ref": "ManagedInstancePropertiesFromFlexibilityPolicy",
 "description": "[Output Only] Instance properties selected for this instance resulting from InstanceFlexibilityPolicy."
 },
+"sizeInUnit": {
+"description": "[Output only] The size of the VM represented by this Managed Instance. This is how much this Managed Instance contributes to the size of the group.",
+"format": "float",
+"type": "number"
+},
 "tag": {
 "deprecated": true,
 "description": "[Output Only] Tag describing the version.",
@@ -71173,6 +71290,526 @@ false
 "kind": {
 "default": "compute#networkPlacementList",
 "description": "[Output Only] Type of resource. Always compute#networkPlacementList for network placements.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"NetworkProfile": {
+"description": "NetworkProfile represents a Google managed network profile resource.",
+"id": "NetworkProfile",
+"properties": {
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "[Output Only] An optional description of this resource.",
+"type": "string"
+},
+"features": {
+"$ref": "NetworkProfileNetworkFeatures",
+"description": "[Output Only] Features supported by the network."
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#networkProfile",
+"description": "[Output Only] Type of the resource. Always compute#networkProfile for network profiles.",
+"type": "string"
+},
+"name": {
+"description": "[Output Only] Name of the resource.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "[Output Only] Server-defined URL for this resource with the resource id.",
+"type": "string"
+},
+"zone": {
+"description": "[Output Only] Zone to which the network is restricted.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworkProfileNetworkFeatures": {
+"id": "NetworkProfileNetworkFeatures",
+"properties": {
+"addressPurposes": {
+"description": "Specifies what address purposes are supported. If empty, all address purposes are supported.",
+"items": {
+"enum": [
+"DNS_RESOLVER",
+"GCE_ENDPOINT",
+"IPSEC_INTERCONNECT",
+"NAT_AUTO",
+"PRIVATE_SERVICE_CONNECT",
+"SERVERLESS",
+"SHARED_LOADBALANCER_VIP",
+"VPC_PEERING"
+],
+"enumDescriptions": [
+"DNS resolver address in the subnetwork.",
+"VM internal/alias IP, Internal LB service IP, etc.",
+"A regional internal IP address range reserved for the VLAN attachment that is used in HA VPN over Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment\u2019s IP address range.",
+"External IP automatically reserved for Cloud NAT.",
+"A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL",
+"A regional internal IP address range reserved for Serverless.",
+"A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.",
+"IP range for peer networks."
+],
+"type": "string"
+},
+"type": "array"
+},
+"allowAliasIpRanges": {
+"description": "Specifies whether alias IP ranges (and secondary address ranges) are allowed.",
+"enum": [
+"ALIAS_IP_RANGES_ALLOWED",
+"ALIAS_IP_RANGES_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowAutoModeSubnet": {
+"description": "Specifies whether auto mode subnet creation is allowed.",
+"enum": [
+"AUTO_MODE_SUBNET_ALLOWED",
+"AUTO_MODE_SUBNET_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowClassDFirewalls": {
+"description": "Specifies whether firewalls for Class D address ranges are supported.",
+"enum": [
+"CLASS_D_FIREWALLS_ALLOWED",
+"CLASS_D_FIREWALLS_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowCloudNat": {
+"description": "Specifies whether cloud NAT creation is allowed.",
+"enum": [
+"CLOUD_NAT_ALLOWED",
+"CLOUD_NAT_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowCloudRouter": {
+"description": "Specifies whether cloud router creation is allowed.",
+"enum": [
+"CLOUD_ROUTER_ALLOWED",
+"CLOUD_ROUTER_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowExternalIpAccess": {
+"description": "Specifies whether VMs are allowed to have external IP access on network interfaces connected to this VPC.",
+"enum": [
+"EXTERNAL_IP_ACCESS_ALLOWED",
+"EXTERNAL_IP_ACCESS_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowInterconnect": {
+"description": "Specifies whether Cloud Interconnect creation is allowed.",
+"enum": [
+"INTERCONNECT_ALLOWED",
+"INTERCONNECT_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowLoadBalancing": {
+"description": "Specifies whether cloud load balancing is allowed.",
+"enum": [
+"LOAD_BALANCING_ALLOWED",
+"LOAD_BALANCING_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowMultiNicInSameNetwork": {
+"description": "Specifies whether multi-nic in the same network is allowed.",
+"enum": [
+"MULTI_NIC_IN_SAME_NETWORK_ALLOWED",
+"MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowPacketMirroring": {
+"description": "Specifies whether Packet Mirroring 1.0 is supported.",
+"enum": [
+"PACKET_MIRRORING_ALLOWED",
+"PACKET_MIRRORING_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowPrivateGoogleAccess": {
+"description": "Specifies whether private Google access is allowed.",
+"enum": [
+"PRIVATE_GOOGLE_ACCESS_ALLOWED",
+"PRIVATE_GOOGLE_ACCESS_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowPsc": {
+"description": "Specifies whether PSC creation is allowed.",
+"enum": [
+"PSC_ALLOWED",
+"PSC_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowSameNetworkUnicast": {
+"description": "Specifies whether unicast within the same network is allowed.",
+"enum": [
+"SAME_NETWORK_UNICAST_ALLOWED",
+"SAME_NETWORK_UNICAST_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowStaticRoutes": {
+"description": "Specifies whether static route creation is allowed.",
+"enum": [
+"STATIC_ROUTES_ALLOWED",
+"STATIC_ROUTES_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowSubInterfaces": {
+"description": "Specifies whether sub interfaces are allowed.",
+"enum": [
+"SUBINTERFACES_ALLOWED",
+"SUBINTERFACES_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowVpcPeering": {
+"description": "Specifies whether VPC peering is allowed.",
+"enum": [
+"VPC_PEERING_ALLOWED",
+"VPC_PEERING_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowVpn": {
+"description": "Specifies whether VPN creation is allowed.",
+"enum": [
+"VPN_ALLOWED",
+"VPN_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowedSubnetPurposes": {
+"description": "Specifies which subnetwork purposes are supported.",
+"items": {
+"enum": [
+"SUBNET_PURPOSE_CUSTOM_HARDWARE",
+"SUBNET_PURPOSE_PRIVATE"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"type": "array"
+},
+"allowedSubnetStackTypes": {
+"description": "Specifies which subnetwork stack types are supported.",
+"items": {
+"enum": [
+"SUBNET_STACK_TYPE_IPV4_IPV6",
+"SUBNET_STACK_TYPE_IPV4_ONLY",
+"SUBNET_STACK_TYPE_IPV6_ONLY"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"type": "array"
+},
+"interfaceTypes": {
+"description": "If set, limits the interface types that the network supports. If empty, all interface types are supported.",
+"items": {
+"enum": [
+"GVNIC",
+"IDPF",
+"UNSPECIFIED_NIC_TYPE",
+"VIRTIO_NET"
+],
+"enumDescriptions": [
+"GVNIC",
+"IDPF",
+"No type specified.",
+"VIRTIO"
+],
+"type": "string"
+},
+"type": "array"
+},
+"multicast": {
+"description": "Specifies which type of multicast is supported.",
+"enum": [
+"MULTICAST_SDN",
+"MULTICAST_ULL"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"unicast": {
+"description": "Specifies which type of unicast is supported.",
+"enum": [
+"UNICAST_SDN",
+"UNICAST_ULL"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworkProfilesListResponse": {
+"description": "Contains a list of network profiles.",
+"id": "NetworkProfilesListResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of NetworkProfile resources.",
+"items": {
+"$ref": "NetworkProfile"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#networkProfileList",
+"description": "[Output Only] Type of resource. Always compute#networkProfileList for network profiles.",
 "type": "string"
 },
 "nextPageToken": {
@@ -98998,7 +99635,7 @@ false
 "description": "Specifies changes to request and response headers that need to take effect for the selected backendService. headerAction specified here take effect before headerAction in the enclosing HttpRouteRule, PathMatcher and UrlMap. headerAction is not supported for load balancers that have their loadBalancingScheme set to EXTERNAL. Not supported when the URL map is bound to a target gRPC proxy that has validateForProxyless field set to true."
 },
 "weight": {
-"description": "Specifies the fraction of traffic sent to a backend service, computed as weight / (sum of all weightedBackendService weights in routeAction) . The selection of a backend service is determined only for new traffic. Once a user's request has been directed to a backend service, subsequent requests are sent to the same backend service as determined by the backend service's session affinity policy. The value must be from 0 to 1000.",
+"description": "Specifies the fraction of traffic sent to a backend service, computed as weight / (sum of all weightedBackendService weights in routeAction) . The selection of a backend service is determined only for new traffic. Once a user's request has been directed to a backend service, subsequent requests are sent to the same backend service as determined by the backend service's session affinity policy. Don't configure session affinity if you're using weighted traffic splitting. If you do, the weighted traffic splitting configuration takes precedence. The value must be from 0 to 1000.",
 "format": "uint32",
 "type": "integer"
 }
