@@ -2152,7 +2152,7 @@ Args:
           ],
         },
       },
-      &quot;addDataSource&quot;: { # Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional `bigquery.readonly` OAuth scope if you are adding a BigQuery data source. # Adds a data source.
+      &quot;addDataSource&quot;: { # Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional `bigquery.readonly` OAuth scope. # Adds a data source.
         &quot;dataSource&quot;: { # Information about an external data source in the spreadsheet. # The data source to add.
           &quot;calculatedColumns&quot;: [ # All calculated columns in the data source.
             { # A column in a data source.
@@ -3322,7 +3322,7 @@ Args:
           &quot;startIndex&quot;: 42, # The start (inclusive) of the span, or not set if unbounded.
         },
       },
-      &quot;cancelDataSourceRefresh&quot;: { # Cancels one or multiple refreshes of data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope if you are cancelling a refresh on a BigQuery data source. # Cancels refreshes of one or multiple data sources and associated dbobjects.
+      &quot;cancelDataSourceRefresh&quot;: { # Cancels one or multiple refreshes of data source objects in the spreadsheet by the specified references. # Cancels refreshes of one or multiple data sources and associated dbobjects.
         &quot;dataSourceId&quot;: &quot;A String&quot;, # Reference to a DataSource. If specified, cancels all associated data source object refreshes for this data source.
         &quot;isAll&quot;: True or False, # Cancels all existing data source object refreshes for all data sources in the spreadsheet.
         &quot;references&quot;: { # A list of references to data source objects. # References to data source objects whose refreshes are to be cancelled.
@@ -3587,7 +3587,7 @@ Args:
           &quot;startRowIndex&quot;: 42, # The start row (inclusive) of the range, or not set if unbounded.
         },
       },
-      &quot;refreshDataSource&quot;: { # Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope if you are refreshing a BigQuery data source. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly. # Refreshes one or multiple data sources and associated dbobjects.
+      &quot;refreshDataSource&quot;: { # Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional `bigquery.readonly` OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly. # Refreshes one or multiple data sources and associated dbobjects.
         &quot;dataSourceId&quot;: &quot;A String&quot;, # Reference to a DataSource. If specified, refreshes all associated data source objects for the data source.
         &quot;force&quot;: True or False, # Refreshes the data source objects regardless of the current state. If not set and a referenced data source object was in error state, the refresh will fail immediately.
         &quot;isAll&quot;: True or False, # Refreshes all existing data source objects in the spreadsheet.
@@ -7426,7 +7426,7 @@ Args:
         },
         &quot;sheetId&quot;: 42, # The sheet of the rule to move. Required if new_index is set, unused otherwise.
       },
-      &quot;updateDataSource&quot;: { # Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope if you are updating a BigQuery data source. # Updates a data source.
+      &quot;updateDataSource&quot;: { # Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional `bigquery.readonly` OAuth scope. # Updates a data source.
         &quot;dataSource&quot;: { # Information about an external data source in the spreadsheet. # The data source to update.
           &quot;calculatedColumns&quot;: [ # All calculated columns in the data source.
             { # A column in a data source.
