@@ -2176,6 +2176,11 @@ Args:
                 &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
               },
             },
+            &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+              &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+              &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+              &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
+            },
             &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
               { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
                 &quot;name&quot;: &quot;A String&quot;, # Named parameter. Must be a legitimate identifier for the DataSource that supports it. For example, [BigQuery identifier](https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers).
@@ -7450,6 +7455,11 @@ Args:
                 &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
               },
             },
+            &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+              &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+              &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+              &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
+            },
             &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
               { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
                 &quot;name&quot;: &quot;A String&quot;, # Named parameter. Must be a legitimate identifier for the DataSource that supports it. For example, [BigQuery identifier](https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers).
@@ -10000,6 +10010,11 @@ Returns:
                 &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
               },
             },
+            &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+              &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+              &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+              &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
+            },
             &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
               { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
                 &quot;name&quot;: &quot;A String&quot;, # Named parameter. Must be a legitimate identifier for the DataSource that supports it. For example, [BigQuery identifier](https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers).
@@ -11425,6 +11440,11 @@ Returns:
                 &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
               },
             },
+            &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+              &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+              &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+              &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
+            },
             &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
               { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
                 &quot;name&quot;: &quot;A String&quot;, # Named parameter. Must be a legitimate identifier for the DataSource that supports it. For example, [BigQuery identifier](https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers).
@@ -11546,6 +11566,11 @@ Returns:
               &quot;tableId&quot;: &quot;A String&quot;, # The BigQuery table id.
               &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
             },
+          },
+          &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+            &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+            &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+            &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
           },
           &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
             { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
@@ -15207,6 +15232,11 @@ Args:
             &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
           },
         },
+        &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+          &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+          &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+          &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
+        },
         &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
           { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
             &quot;name&quot;: &quot;A String&quot;, # Named parameter. Must be a legitimate identifier for the DataSource that supports it. For example, [BigQuery identifier](https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers).
@@ -18859,6 +18889,11 @@ Returns:
             &quot;tableId&quot;: &quot;A String&quot;, # The BigQuery table id.
             &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
           },
+        },
+        &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+          &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+          &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+          &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
         },
         &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
           { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
@@ -22521,6 +22556,11 @@ Returns:
             &quot;tableId&quot;: &quot;A String&quot;, # The BigQuery table id.
             &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
           },
+        },
+        &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+          &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+          &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+          &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
         },
         &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
           { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
@@ -26219,6 +26259,11 @@ Returns:
             &quot;tableId&quot;: &quot;A String&quot;, # The BigQuery table id.
             &quot;tableProjectId&quot;: &quot;A String&quot;, # The ID of a BigQuery project the table belongs to. If not specified, the project_id is assumed.
           },
+        },
+        &quot;looker&quot;: { # The specification of a Looker data source. # A LookerDatasourceSpec.
+          &quot;explore&quot;: &quot;A String&quot;, # Name of a LookerML model explore.
+          &quot;instanceUri&quot;: &quot;A String&quot;, # A Looker instance URL.
+          &quot;model&quot;: &quot;A String&quot;, # Name of a LookerML model.
         },
         &quot;parameters&quot;: [ # The parameters of the data source, used when querying the data source.
           { # A parameter in a data source&#x27;s query. The parameter allows the user to pass in values from the spreadsheet into a query.
