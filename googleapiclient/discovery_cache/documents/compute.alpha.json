@@ -28617,16 +28617,16 @@
 },
 "get": {
 "description": "returns the specified InstantSnapshotGroup resource in the specified region.",
-"flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups/{instantSnapshot}",
+"flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups/{instantSnapshotGroup}",
 "httpMethod": "GET",
 "id": "compute.regionInstantSnapshotGroups.get",
 "parameterOrder": [
 "project",
 "region",
-"instantSnapshot"
+"instantSnapshotGroup"
 ],
 "parameters": {
-"instantSnapshot": {
+"instantSnapshotGroup": {
 "description": "Name of the InstantSnapshotGroup resource to return.",
 "location": "path",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
@@ -28648,7 +28648,7 @@
 "type": "string"
 }
 },
-"path": "projects/{project}/regions/{region}/instantSnapshotGroups/{instantSnapshot}",
+"path": "projects/{project}/regions/{region}/instantSnapshotGroups/{instantSnapshotGroup}",
 "response": {
 "$ref": "InstantSnapshotGroup"
 },
@@ -45278,7 +45278,7 @@
 }
 }
 },
-"revision": "20240723",
+"revision": "20240730",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -46022,6 +46022,7 @@ false
 "PRIVATE_SERVICE_CONNECT",
 "SERVERLESS",
 "SHARED_LOADBALANCER_VIP",
+"SYSTEM_MANAGED",
 "VPC_PEERING"
 ],
 "enumDescriptions": [
@@ -46032,6 +46033,7 @@ false
 "A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL",
 "A regional internal IP address range reserved for Serverless.",
 "A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.",
+"A regional internal IP address that is reserved and managed by Google Cloud. It can not be assigned to Google Cloud compute resources such as VM and internal load balancer.",
 "IP range for peer networks."
 ],
 "type": "string"
@@ -46611,11 +46613,15 @@ false
 "vmFamily": {
 "description": "The VM family that all instances scheduled against this reservation must belong to.",
 "enum": [
+"VM_FAMILY_CLOUD_TPU_DEVICE_CT3",
 "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L",
 "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP",
+"VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
 "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P"
 ],
 "enumDescriptions": [
+"",
+"",
 "",
 "",
 ""
@@ -54630,7 +54636,7 @@ false
 "id": "FirewallPolicyRule",
 "properties": {
 "action": {
-"description": "The Action to perform when the client connection triggers the rule. Valid actions are \"allow\", \"deny\" and \"goto_next\".",
+"description": "The Action to perform when the client connection triggers the rule. Valid actions for firewall rules are: \"allow\", \"deny\", \"apply_security_profile_group\" and \"goto_next\". Valid actions for packet mirroring rules are: \"mirror\", \"do_not_mirror\" and \"goto_next\".",
 "type": "string"
 },
 "description": {
@@ -54659,7 +54665,7 @@ false
 },
 "kind": {
 "default": "compute#firewallPolicyRule",
-"description": "[Output only] Type of the resource. Always compute#firewallPolicyRule for firewall policy rules",
+"description": "[Output only] Type of the resource. Returns compute#firewallPolicyRule for firewall rules and compute#packetMirroringRule for packet mirroring rules.",
 "type": "string"
 },
 "match": {
@@ -54667,7 +54673,7 @@ false
 "description": "A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding 'action' is enforced."
 },
 "priority": {
-"description": "An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.",
+"description": "An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest priority.",
 "format": "int32",
 "type": "integer"
 },
@@ -54681,7 +54687,7 @@ false
 "type": "integer"
 },
 "securityProfileGroup": {
-"description": "A fully-qualified URL of a SecurityProfile resource instance. Example: https://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group Must be specified if action = 'apply_security_profile_group' and cannot be specified for other actions.",
+"description": "A fully-qualified URL of a SecurityProfile resource instance. Example: https://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group Must be specified if action is one of 'apply_security_profile_group' or 'mirror'. Cannot be specified for other actions.",
 "type": "string"
 },
 "targetResources": {
@@ -55794,6 +55800,10 @@ false
 },
 "type": "array"
 },
+"existingMatchingUsageInfo": {
+"$ref": "FutureReservationStatusExistingMatchingUsageInfo",
+"description": "[Output Only] Represents the existing matching usage for the future reservation."
+},
 "fulfilledCount": {
 "description": "This count indicates the fulfilled capacity so far. This is set during \"PROVISIONING\" state. This count also includes capacity delivered as part of existing matching reservations.",
 "format": "int64",
@@ -55847,6 +55857,23 @@ false
 },
 "type": "object"
 },
+"FutureReservationStatusExistingMatchingUsageInfo": {
+"description": "[Output Only] Represents the existing matching usage for the future reservation.",
+"id": "FutureReservationStatusExistingMatchingUsageInfo",
+"properties": {
+"count": {
+"description": "Count to represent min(FR total_count, matching_reserved_capacity+matching_unreserved_instances)",
+"format": "int64",
+"type": "string"
+},
+"timestamp": {
+"description": "Timestamp when the matching usage was calculated",
+"format": "google-datetime",
+"type": "string"
+}
+},
+"type": "object"
+},
 "FutureReservationStatusLastKnownGoodState": {
 "description": "The state that the future reservation will be reverted to should the amendment be declined.",
 "id": "FutureReservationStatusLastKnownGoodState",
@@ -55854,6 +55881,10 @@ false
 "description": {
 "description": "[Output Only] The description of the FutureReservation before an amendment was requested.",
 "type": "string"
+},
+"existingMatchingUsageInfo": {
+"$ref": "FutureReservationStatusExistingMatchingUsageInfo",
+"description": "[Output Only] Represents the matching usage for the future reservation before an amendment was requested."
 },
 "futureReservationSpecs": {
 "$ref": "FutureReservationStatusLastKnownGoodStateFutureReservationSpecs"
@@ -60582,6 +60613,10 @@ false
 "format": "int32",
 "type": "integer"
 },
+"targetSizePolicy": {
+"$ref": "InstanceGroupManagerTargetSizePolicy",
+"description": "Configures how target size of MIG is achieved."
+},
 "targetSizeUnit": {
 "description": "The unit of measure for the target size.",
 "enum": [
@@ -61252,7 +61287,7 @@ false
 "description": "Requested run duration for instances that will be created by this request. At the end of the run duration instance will be deleted."
 },
 "resizeBy": {
-"description": "The number of instances to be created by this resize request. The group's target size will be increased by this number.",
+"description": "The number of instances to be created by this resize request. The group's target size will be increased by this number. This field cannot be used together with 'instances'.",
 "format": "int32",
 "type": "integer"
 },
@@ -61622,6 +61657,10 @@ false
 "description": "[Output Only] The URL of the Autoscaler that targets this instance group manager.",
 "type": "string"
 },
+"bulkInstanceOperation": {
+"$ref": "InstanceGroupManagerStatusBulkInstanceOperation",
+"description": "[Output Only] Status of bulk instance operation."
+},
 "isStable": {
 "description": "[Output Only] A bit indicating whether the managed instance group is in a stable state. A stable state means that: none of the instances in the managed instance group is currently undergoing any type of change (for example, creation, restart, or deletion); no future changes are scheduled for instances in the managed instance group; and the managed instance group itself is not being modified.",
 "type": "boolean"
@@ -61647,6 +61686,79 @@ false
 "effective": {
 "description": "[Output Only] A bit indicating whether this configuration has been applied to all managed instances in the group.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerStatusBulkInstanceOperation": {
+"id": "InstanceGroupManagerStatusBulkInstanceOperation",
+"properties": {
+"inProgress": {
+"description": "[Output Only] Informs whether bulk instance operation is in progress.",
+"type": "boolean"
+},
+"lastProgressCheck": {
+"$ref": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
+"description": "[Output Only] Information from last progress check of bulk instance operation."
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck": {
+"id": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
+"properties": {
+"error": {
+"description": "[Output Only] Contains errors encountered during bulk instance operation.",
+"properties": {
+"errors": {
+"description": "[Output Only] The array of errors encountered while processing this operation.",
+"items": {
+"properties": {
+"code": {
+"description": "[Output Only] The error type identifier for this error.",
+"type": "string"
+},
+"errorDetails": {
+"description": "[Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED.",
+"items": {
+"properties": {
+"errorInfo": {
+"$ref": "ErrorInfo"
+},
+"help": {
+"$ref": "Help"
+},
+"localizedMessage": {
+"$ref": "LocalizedMessage"
+},
+"quotaInfo": {
+"$ref": "QuotaExceededInfo"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"location": {
+"description": "[Output Only] Indicates the field in the request that caused the error. This property is optional.",
+"type": "string"
+},
+"message": {
+"description": "[Output Only] An optional, human-readable error message.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"timestamp": {
+"description": "[Output Only] Timestamp of the last progress check of bulk instance operation. Timestamp is in RFC3339 text format.",
+"format": "google-datetime",
+"type": "string"
 }
 },
 "type": "object"
@@ -61686,6 +61798,26 @@ false
 "isReached": {
 "description": "[Output Only] A bit indicating whether version target has been reached in this managed instance group, i.e. all instances are in their target version. Instances' target version are specified by version field on Instance Group Manager.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerTargetSizePolicy": {
+"id": "InstanceGroupManagerTargetSizePolicy",
+"properties": {
+"mode": {
+"description": "Mode in which operations on size are processed.",
+"enum": [
+"BULK",
+"INDIVIDUAL",
+"UNSPECIFIED_MODE"
+],
+"enumDescriptions": [
+"Mode in which MIG creates and starts VMs in all-or-nothing manner. If any VM from the request cannot be provisioned, the whole request waits for conditions that allow for provisioning whole capacity in bulk.",
+"Default mode in which MIG creates and starts VMs individually without cross-dependency between VMs. This means that in case of something blocking part of VMs to be provisioned, the other part will be created.",
+"If mode is unspecified, MIG will behave as in the default `INDIVIDUAL` mode."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -65276,9 +65408,6 @@ false
 "id": "InterconnectApplicationAwareInterconnect",
 "properties": {
 "bandwidthPercentagePolicy": {
-"$ref": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy"
-},
-"egressMinBandwidthPercentagePolicy": {
 "$ref": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy"
 },
 "profileDescription": {
@@ -73095,6 +73224,7 @@ false
 "PRIVATE_SERVICE_CONNECT",
 "SERVERLESS",
 "SHARED_LOADBALANCER_VIP",
+"SYSTEM_MANAGED",
 "VPC_PEERING"
 ],
 "enumDescriptions": [
@@ -73105,6 +73235,7 @@ false
 "A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL",
 "A regional internal IP address range reserved for Serverless.",
 "A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.",
+"A regional internal IP address that is reserved and managed by Google Cloud. It can not be assigned to Google Cloud compute resources such as VM and internal load balancer.",
 "IP range for peer networks."
 ],
 "type": "string"
@@ -85554,7 +85685,7 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
-"nat64subnetworks": {
+"nat64Subnetworks": {
 "description": "List of Subnetwork resources whose traffic should be translated by NAT64 Gateway. It is used only when LIST_OF_IPV6_SUBNETWORKS is selected for the SubnetworkIpRangeToNat64Option above.",
 "items": {
 "$ref": "RouterNatSubnetworkToNat64"
@@ -93804,6 +93935,7 @@ false
 "enum": [
 "AGGREGATE",
 "CLOUD_EXTENSION",
+"CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
 "PRIVATE",
@@ -93815,6 +93947,7 @@ false
 "enumDescriptions": [
 "Subnetwork used to aggregate multiple private subnetworks.",
 "Subnetworks created for Cloud Extension Machines.",
+"Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
 "Regular user created or automatically created subnet.",
@@ -99457,6 +99590,7 @@ false
 "enum": [
 "AGGREGATE",
 "CLOUD_EXTENSION",
+"CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
 "PRIVATE",
@@ -99468,6 +99602,7 @@ false
 "enumDescriptions": [
 "Subnetwork used to aggregate multiple private subnetworks.",
 "Subnetworks created for Cloud Extension Machines.",
+"Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
 "Regular user created or automatically created subnet.",
