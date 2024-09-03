@@ -19029,100 +19029,6 @@
 }
 }
 },
-"networkPlacements": {
-"methods": {
-"get": {
-"description": "Returns the specified network placement.",
-"flatPath": "projects/{project}/global/networkPlacements/{networkPlacement}",
-"httpMethod": "GET",
-"id": "compute.networkPlacements.get",
-"parameterOrder": [
-"project",
-"networkPlacement"
-],
-"parameters": {
-"networkPlacement": {
-"description": "Name of the network placement to return.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
-},
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-}
-},
-"path": "projects/{project}/global/networkPlacements/{networkPlacement}",
-"response": {
-"$ref": "NetworkPlacement"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute",
-"https://www.googleapis.com/auth/compute.readonly"
-]
-},
-"list": {
-"description": "Retrieves a list of network placements available to the specified project.",
-"flatPath": "projects/{project}/global/networkPlacements",
-"httpMethod": "GET",
-"id": "compute.networkPlacements.list",
-"parameterOrder": [
-"project"
-],
-"parameters": {
-"filter": {
-"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
-"location": "query",
-"type": "string"
-},
-"maxResults": {
-"default": "500",
-"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
-"format": "uint32",
-"location": "query",
-"minimum": "0",
-"type": "integer"
-},
-"orderBy": {
-"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
-"location": "query",
-"type": "string"
-},
-"pageToken": {
-"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
-"location": "query",
-"type": "string"
-},
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-},
-"returnPartialSuccess": {
-"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
-"location": "query",
-"type": "boolean"
-}
-},
-"path": "projects/{project}/global/networkPlacements",
-"response": {
-"$ref": "NetworkPlacementsListResponse"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute",
-"https://www.googleapis.com/auth/compute.readonly"
-]
-}
-}
-},
 "networkProfiles": {
 "methods": {
 "get": {
@@ -26659,6 +26565,75 @@
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Retrieves a list of Resize Requests that are contained in the managed instance group.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"httpMethod": "GET",
+"id": "compute.regionInstanceGroupManagerResizeRequests.list",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"instanceGroupManager": {
+"description": "The name of the managed instance group. The name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"response": {
+"$ref": "RegionInstanceGroupManagerResizeRequestsListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
 ]
 }
 }
@@ -45080,7 +45055,7 @@
 }
 }
 },
-"revision": "20240805",
+"revision": "20240820",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47876,7 +47851,7 @@ false
 "type": "number"
 },
 "customMetrics": {
-"description": "List of custom metrics that are used for CUSTOM_METRICS BalancingMode and WEIGHTED_ROUND_ROBIN BackendService locality_lb_policy.",
+"description": "List of custom metrics that are used for CUSTOM_METRICS BalancingMode.",
 "items": {
 "$ref": "BackendCustomMetric"
 },
@@ -48480,7 +48455,7 @@ false
 "type": "object"
 },
 "BackendCustomMetric": {
-"description": "Custom Metrics are used for CUSTOM_METRICS balancing_mode and WEIGHTED_ROUND_ROBIN BackendService locality_lb_policy.",
+"description": "Custom Metrics are used for CUSTOM_METRICS balancing_mode.",
 "id": "BackendCustomMetric",
 "properties": {
 "dryRun": {
@@ -48493,7 +48468,7 @@ false
 "type": "number"
 },
 "name": {
-"description": "Name of a custom utilization signal. The name must be 1-64 characters long, and comply with relaxed RFC1035. Specifically, the name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
+"description": "Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
 "type": "string"
 }
 },
@@ -55475,17 +55450,53 @@ false
 "description": "Setting for enabling or disabling automatic deletion for auto-created reservation. If set to true, auto-created reservations will be deleted at Future Reservation's end time (default) or at user's defined timestamp if any of the [auto_created_reservations_delete_time, auto_created_reservations_duration] values is specified. For keeping auto-created reservation indefinitely, this value should be set to false.",
 "type": "boolean"
 },
+"commitmentInfo": {
+"$ref": "FutureReservationCommitmentInfo",
+"description": "If not present, then FR will not deliver a new commitment or update an existing commitment."
+},
 "creationTimestamp": {
 "description": "[Output Only] The creation timestamp for this future reservation in RFC3339 text format.",
+"type": "string"
+},
+"deploymentType": {
+"description": "Type of the deployment requested as part of future reservation.",
+"enum": [
+"DENSE",
+"DEPLOYMENT_TYPE_UNSPECIFIED",
+"FLEXIBLE"
+],
+"enumDescriptions": [
+"Number of deployment blocks, size, and topology is fixed during creation and does not change over time. Deployment will be expressed in terms of blocks.",
+"Deployment type is unspecified.",
+"Distribution of capacity in blocks is not static and can change over time. This is expected to have more obtainability over DENSE deployment. Deployment will not be expressed in terms of blocks."
+],
 "type": "string"
 },
 "description": {
 "description": "An optional description of this resource. Provide this property when you create the future reservation.",
 "type": "string"
 },
+"enableOpportunisticMaintenance": {
+"description": "Indicates if this group of VMs have opportunistic maintenance enabled. This will be set on the FR by customers, and will be used for reservation and reservation block maintenance .",
+"type": "boolean"
+},
 "id": {
 "description": "[Output Only] A unique identifier for this future reservation. The server defines this identifier.",
 "format": "uint64",
+"type": "string"
+},
+"instanceTerminationAction": {
+"description": "Action to take during reservation termination.",
+"enum": [
+"DELETE",
+"INSTANCE_TERMINATION_ACTION_UNSPECIFIED",
+"STOP"
+],
+"enumDescriptions": [
+"Delete the VM.",
+"Default value. This value is unused.",
+"Stop the VM without storing in-memory content. default action."
+],
 "type": "string"
 },
 "kind": {
@@ -55521,6 +55532,24 @@ false
 ],
 "type": "string"
 },
+"reservationName": {
+"description": "Name of reservations where the capacity is provisioned at the time of delivery of future reservations. If the reservation with the given name does not exist already, it is created automatically at the time of Approval with INACTIVE state till specified start-time. Either provide the reservation_name or a name_prefix.",
+"type": "string"
+},
+"schedulingType": {
+"description": "Indicates the maintenance type for this group of VMs. This will be set on the reservation via FR, and will be inherited for reservation blocks.",
+"enum": [
+"GROUPED",
+"GROUP_MAINTENANCE_TYPE_UNSPECIFIED",
+"INDEPENDENT"
+],
+"enumDescriptions": [
+"Synchronized maintenance. Common maintenance schedule/window is defined for this group of VMs. Not applicable for FLEXIBLE reservation",
+"Unknown maintenance type.",
+"Unsynchronized maintenance. These group of VMs do not share a common schedule for maintenance. Instead all VMs have individual windows of their own in which maintenance is scheduled."
+],
+"type": "string"
+},
 "selfLink": {
 "description": "[Output Only] Server-defined fully-qualified URL for this resource.",
 "type": "string"
@@ -55551,6 +55580,42 @@ false
 },
 "zone": {
 "description": "[Output Only] URL of the Zone where this future reservation resides.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureReservationCommitmentInfo": {
+"id": "FutureReservationCommitmentInfo",
+"properties": {
+"commitmentName": {
+"description": "name of the commitment where capacity is being delivered to. In the form of \"projects/{project-id}/locations/{region-name}/commitment/{name}\"",
+"type": "string"
+},
+"commitmentPlan": {
+"description": "Indicates if a Commitment needs to be created as part of FR delivery. If this field is not present, then no commitment needs to be created.",
+"enum": [
+"INVALID",
+"THIRTY_SIX_MONTH",
+"TWELVE_MONTH"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"previousCommitmentTerms": {
+"description": "Only applicable if FR is delivering to the same reservation. If set, all parent commitments will be extended to match the end date of the plan for this commitment.",
+"enum": [
+"EXTEND",
+"PREVIOUSCOMMITMENTTERM_UNSPECIFIED"
+],
+"enumDescriptions": [
+"All associated parent Committed Used Discount(s) end-date/term will be extended to the end-time of this future reservation. Default is to extend previous commitment(s) time to the end_time of the reservation.",
+"No changes to associated parents Committed Used Discount(s) terms."
+],
 "type": "string"
 }
 },
@@ -65215,6 +65280,13 @@ false
 "description": "A description for the AAI profile on this interconnect.",
 "type": "string"
 },
+"shapeAveragePercentages": {
+"description": "Optional field to specify a list of shape average percentages to be applied in conjunction with StrictPriorityPolicy or BandwidthPercentagePolicy.",
+"items": {
+"$ref": "InterconnectApplicationAwareInterconnectBandwidthPercentage"
+},
+"type": "array"
+},
 "strictPriorityPolicy": {
 "$ref": "InterconnectApplicationAwareInterconnectStrictPriorityPolicy"
 }
@@ -67686,6 +67758,17 @@ false
 "description": "Represents a License resource. A License represents billing and aggregate usage data for public and marketplace images. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images. ",
 "id": "License",
 "properties": {
+"allowedReplacementLicenses": {
+"description": "Specifies licenseCodes of licenses that can replace this license. Note: such replacements are allowed even if removable_from_disk is false.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"appendableToDisk": {
+"description": "If true, this license can be appended to an existing disk's set of licenses.",
+"type": "boolean"
+},
 "chargesUseFee": {
 "description": "[Output Only] Deprecated. This field no longer reflects whether a license charges a usage fee.",
 "type": "boolean"
@@ -67703,6 +67786,13 @@ false
 "format": "uint64",
 "type": "string"
 },
+"incompatibleLicenses": {
+"description": "Specifies licenseCodes of licenses that are incompatible with this license. If a license is incompatible with this license, it cannot be attached to the same disk or image.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "kind": {
 "default": "compute#license",
 "description": "[Output Only] Type of resource. Always compute#license for licenses.",
@@ -67713,6 +67803,14 @@ false
 "format": "uint64",
 "type": "string"
 },
+"minimumRetention": {
+"$ref": "Duration",
+"description": "If set, this license will be unable to be removed or replaced once attached to a disk until the minimum_retention period has passed."
+},
+"multiTenantOnly": {
+"description": "If true, this license can only be used on VMs on multi tenant nodes.",
+"type": "boolean"
+},
 "name": {
 "annotations": {
 "required": [
@@ -67722,6 +67820,21 @@ false
 "description": "Name of the resource. The name must be 1-63 characters long and comply with RFC1035.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
+},
+"osLicense": {
+"description": "If true, indicates this is an OS license. Only one OS license can be attached to a disk or image at a time.",
+"type": "boolean"
+},
+"removableFromDisk": {
+"description": "If true, this license can be removed from a disk's set of licenses, with no replacement license needed.",
+"type": "boolean"
+},
+"requiredCoattachedLicenses": {
+"description": "Specifies the set of permissible coattached licenseCodes of licenses that satisfy the coattachment requirement of this license. At least one license from the set must be attached to the same disk or image as this license.",
+"items": {
+"type": "string"
+},
+"type": "array"
 },
 "resourceRequirements": {
 "$ref": "LicenseResourceRequirements"
@@ -67734,9 +67847,17 @@ false
 "description": "[Output Only] Server-defined URL for this resource with the resource id.",
 "type": "string"
 },
+"soleTenantOnly": {
+"description": "If true, this license can only be used on VMs on sole tenant nodes.",
+"type": "boolean"
+},
 "transferable": {
 "description": "If false, licenses will not be copied from the source resource when creating an image from a disk, disk from snapshot, or snapshot from disk.",
 "type": "boolean"
+},
+"updateTimestamp": {
+"description": "[Output Only] Last update timestamp in RFC3339 text format.",
+"type": "string"
 }
 },
 "type": "object"
@@ -67745,6 +67866,17 @@ false
 "description": "Represents a License Code resource. A License Code is a unique identifier used to represent a license resource. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images. ",
 "id": "LicenseCode",
 "properties": {
+"allowedReplacementLicenses": {
+"description": "Specifies licenseCodes of licenses that can replace this license. Note: such replacements are allowed even if removable_from_disk is false.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"appendableToDisk": {
+"description": "If true, this license can be appended to an existing disk's set of licenses.",
+"type": "boolean"
+},
 "creationTimestamp": {
 "description": "[Output Only] Creation timestamp in RFC3339 text format.",
 "type": "string"
@@ -67758,6 +67890,13 @@ false
 "format": "uint64",
 "type": "string"
 },
+"incompatibleLicenses": {
+"description": "Specifies licenseCodes of licenses that are incompatible with this license. If a license is incompatible with this license, it cannot be attached to the same disk or image.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "kind": {
 "default": "compute#licenseCode",
 "description": "[Output Only] Type of resource. Always compute#licenseCode for licenses.",
@@ -67770,6 +67909,14 @@ false
 },
 "type": "array"
 },
+"minimumRetention": {
+"$ref": "Duration",
+"description": "If set, this license will be unable to be removed or replaced once attached to a disk until the minimum_retention period has passed."
+},
+"multiTenantOnly": {
+"description": "If true, this license can only be used on VMs on multi tenant nodes.",
+"type": "boolean"
+},
 "name": {
 "annotations": {
 "required": [
@@ -67780,9 +67927,28 @@ false
 "pattern": "[0-9]{0,20}?",
 "type": "string"
 },
+"osLicense": {
+"description": "If true, indicates this is an OS license. Only one OS license can be attached to a disk or image at a time.",
+"type": "boolean"
+},
+"removableFromDisk": {
+"description": "If true, this license can be removed from a disk's set of licenses, with no replacement license needed.",
+"type": "boolean"
+},
+"requiredCoattachedLicenses": {
+"description": "Specifies the set of permissible coattached licenseCodes of licenses that satisfy the coattachment requirement of this license. At least one license from the set must be attached to the same disk or image as this license.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "selfLink": {
 "description": "[Output Only] Server-defined URL for the resource.",
 "type": "string"
+},
+"soleTenantOnly": {
+"description": "If true, this license can only be used on VMs on sole tenant nodes.",
+"type": "boolean"
 },
 "state": {
 "description": "[Output Only] Current state of this License Code.",
@@ -67805,6 +67971,10 @@ false
 "transferable": {
 "description": "[Output Only] If true, the license will remain attached when creating images or snapshots from disks. Otherwise, the license is not transferred.",
 "type": "boolean"
+},
+"updateTimestamp": {
+"description": "[Output Only] Last update timestamp in RFC3339 text format.",
+"type": "string"
 }
 },
 "type": "object"
@@ -69844,10 +70014,6 @@ false
 "",
 ""
 ],
-"type": "string"
-},
-"networkPlacement": {
-"description": "A full or partial URL of the network placement to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/alpha/projects/{project_id}/global/networkPlacements/{network_placement_name} - projects/{project_id}/global/networkPlacements/{network_placement_name} ",
 "type": "string"
 },
 "networkProfile": {
@@ -72236,451 +72402,6 @@ false
 ""
 ],
 "type": "string"
-}
-},
-"type": "object"
-},
-"NetworkPlacement": {
-"description": "NetworkPlacement represents a Google managed network placement resource.",
-"id": "NetworkPlacement",
-"properties": {
-"creationTimestamp": {
-"description": "[Output Only] Creation timestamp in RFC3339 text format.",
-"type": "string"
-},
-"description": {
-"description": "[Output Only] An optional description of this resource.",
-"type": "string"
-},
-"features": {
-"$ref": "NetworkPlacementNetworkFeatures",
-"description": "[Output Only] Features supported by the network."
-},
-"id": {
-"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
-"format": "uint64",
-"type": "string"
-},
-"kind": {
-"default": "compute#networkPlacement",
-"description": "[Output Only] Type of the resource. Always compute#networkPlacement for network placements.",
-"type": "string"
-},
-"name": {
-"description": "[Output Only] Name of the resource.",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-"type": "string"
-},
-"selfLink": {
-"description": "[Output Only] Server-defined URL for the resource.",
-"type": "string"
-},
-"selfLinkWithId": {
-"description": "[Output Only] Server-defined URL for this resource with the resource id.",
-"type": "string"
-},
-"zone": {
-"description": "[Output Only] Zone to which the network is restricted.",
-"type": "string"
-}
-},
-"type": "object"
-},
-"NetworkPlacementNetworkFeatures": {
-"id": "NetworkPlacementNetworkFeatures",
-"properties": {
-"allowAutoModeSubnet": {
-"description": "Specifies whether auto mode subnet creation is allowed.",
-"enum": [
-"AUTO_MODE_SUBNET_ALLOWED",
-"AUTO_MODE_SUBNET_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowCloudNat": {
-"description": "Specifies whether cloud NAT creation is allowed.",
-"enum": [
-"CLOUD_NAT_ALLOWED",
-"CLOUD_NAT_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowCloudRouter": {
-"description": "Specifies whether cloud router creation is allowed.",
-"enum": [
-"CLOUD_ROUTER_ALLOWED",
-"CLOUD_ROUTER_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowInterconnect": {
-"description": "Specifies whether Cloud Interconnect creation is allowed.",
-"enum": [
-"INTERCONNECT_ALLOWED",
-"INTERCONNECT_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowLoadBalancing": {
-"description": "Specifies whether cloud load balancing is allowed.",
-"enum": [
-"LOAD_BALANCING_ALLOWED",
-"LOAD_BALANCING_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowMultiNicInSameNetwork": {
-"description": "Specifies whether multi-nic in the same network is allowed.",
-"enum": [
-"MULTI_NIC_IN_SAME_NETWORK_ALLOWED",
-"MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowPacketMirroring": {
-"description": "Specifies whether Packet Mirroring 1.0 is supported.",
-"enum": [
-"PACKET_MIRRORING_ALLOWED",
-"PACKET_MIRRORING_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowPrivateGoogleAccess": {
-"description": "Specifies whether private Google access is allowed.",
-"enum": [
-"PRIVATE_GOOGLE_ACCESS_ALLOWED",
-"PRIVATE_GOOGLE_ACCESS_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowPsc": {
-"description": "Specifies whether PSC creation is allowed.",
-"enum": [
-"PSC_ALLOWED",
-"PSC_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowSameNetworkUnicast": {
-"description": "Specifies whether unicast within the same network is allowed.",
-"enum": [
-"SAME_NETWORK_UNICAST_ALLOWED",
-"SAME_NETWORK_UNICAST_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowStaticRoutes": {
-"description": "Specifies whether static route creation is allowed.",
-"enum": [
-"STATIC_ROUTES_ALLOWED",
-"STATIC_ROUTES_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowVpcPeering": {
-"description": "Specifies whether VPC peering is allowed.",
-"enum": [
-"VPC_PEERING_ALLOWED",
-"VPC_PEERING_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowVpn": {
-"description": "Specifies whether VPN creation is allowed.",
-"enum": [
-"VPN_ALLOWED",
-"VPN_BLOCKED"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"allowedSubnetPurposes": {
-"description": "Specifies which subnetwork purposes are supported.",
-"items": {
-"enum": [
-"SUBNET_PURPOSE_CUSTOM_HARDWARE",
-"SUBNET_PURPOSE_PRIVATE"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"type": "array"
-},
-"allowedSubnetStackTypes": {
-"description": "Specifies which subnetwork stack types are supported.",
-"items": {
-"enum": [
-"SUBNET_STACK_TYPE_IPV4_IPV6",
-"SUBNET_STACK_TYPE_IPV4_ONLY",
-"SUBNET_STACK_TYPE_IPV6_ONLY"
-],
-"enumDescriptions": [
-"",
-"",
-""
-],
-"type": "string"
-},
-"type": "array"
-},
-"interfaceTypes": {
-"description": "If set, limits the interface types that the network supports. If empty, all interface types are supported.",
-"items": {
-"enum": [
-"GVNIC",
-"IDPF",
-"UNSPECIFIED_NIC_TYPE",
-"VIRTIO_NET"
-],
-"enumDescriptions": [
-"GVNIC",
-"IDPF",
-"No type specified.",
-"VIRTIO"
-],
-"type": "string"
-},
-"type": "array"
-},
-"multicast": {
-"description": "Specifies which type of multicast is supported.",
-"enum": [
-"MULTICAST_SDN",
-"MULTICAST_ULL"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"unicast": {
-"description": "Specifies which type of unicast is supported.",
-"enum": [
-"UNICAST_SDN",
-"UNICAST_ULL"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-}
-},
-"type": "object"
-},
-"NetworkPlacementsListResponse": {
-"description": "Contains a list of network placements.",
-"id": "NetworkPlacementsListResponse",
-"properties": {
-"etag": {
-"type": "string"
-},
-"id": {
-"description": "[Output Only] Unique identifier for the resource; defined by the server.",
-"type": "string"
-},
-"items": {
-"description": "A list of NetworkPlacement resources.",
-"items": {
-"$ref": "NetworkPlacement"
-},
-"type": "array"
-},
-"kind": {
-"default": "compute#networkPlacementList",
-"description": "[Output Only] Type of resource. Always compute#networkPlacementList for network placements.",
-"type": "string"
-},
-"nextPageToken": {
-"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
-"type": "string"
-},
-"selfLink": {
-"description": "[Output Only] Server-defined URL for this resource.",
-"type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
-"items": {
-"type": "string"
-},
-"type": "array"
-},
-"warning": {
-"description": "[Output Only] Informational warning message.",
-"properties": {
-"code": {
-"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
-"enum": [
-"CLEANUP_FAILED",
-"DEPRECATED_RESOURCE_USED",
-"DEPRECATED_TYPE_USED",
-"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
-"EXPERIMENTAL_TYPE_USED",
-"EXTERNAL_API_WARNING",
-"FIELD_VALUE_OVERRIDEN",
-"INJECTED_KERNELS_DEPRECATED",
-"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
-"LARGE_DEPLOYMENT_WARNING",
-"LIST_OVERHEAD_QUOTA_EXCEED",
-"MISSING_TYPE_DEPENDENCY",
-"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
-"NEXT_HOP_CANNOT_IP_FORWARD",
-"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
-"NEXT_HOP_INSTANCE_NOT_FOUND",
-"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
-"NEXT_HOP_NOT_RUNNING",
-"NOT_CRITICAL_ERROR",
-"NO_RESULTS_ON_PAGE",
-"PARTIAL_SUCCESS",
-"REQUIRED_TOS_AGREEMENT",
-"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
-"RESOURCE_NOT_DELETED",
-"SCHEMA_VALIDATION_IGNORED",
-"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
-"UNDECLARED_PROPERTIES",
-"UNREACHABLE"
-],
-"enumDeprecated": [
-false,
-false,
-false,
-false,
-false,
-false,
-true,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false,
-false
-],
-"enumDescriptions": [
-"Warning about failed cleanup of transient changes made by a failed operation.",
-"A link to a deprecated resource was created.",
-"When deploying and at least one of the resources has a type marked as deprecated",
-"The user created a boot disk that is larger than image size.",
-"When deploying and at least one of the resources has a type marked as experimental",
-"Warning that is present in an external api call",
-"Warning that value of a field has been overridden. Deprecated unused field.",
-"The operation involved use of an injected kernel, which is deprecated.",
-"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
-"When deploying a deployment with a exceedingly large number of resources",
-"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
-"A resource depends on a missing type",
-"The route's nextHopIp address is not assigned to an instance on the network.",
-"The route's next hop instance cannot ip forward.",
-"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
-"The route's nextHopInstance URL refers to an instance that does not exist.",
-"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
-"The route's next hop instance does not have a status of RUNNING.",
-"Error which is not critical. We decided to continue the process despite the mentioned error.",
-"No results are present on a particular list page.",
-"Success is reported, but some results may be missing due to errors",
-"The user attempted to use a resource that requires a TOS they have not accepted.",
-"Warning that a resource is in use.",
-"One or more of the resources set to auto-delete could not be deleted because they were in use.",
-"When a resource schema validation is ignored.",
-"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
-"When undeclared properties in the schema are present",
-"A given scope cannot be reached."
-],
-"type": "string"
-},
-"data": {
-"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
-"items": {
-"properties": {
-"key": {
-"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
-"type": "string"
-},
-"value": {
-"description": "[Output Only] A warning data value corresponding to the key.",
-"type": "string"
-}
-},
-"type": "object"
-},
-"type": "array"
-},
-"message": {
-"description": "[Output Only] A human-readable description of the warning code.",
-"type": "string"
-}
-},
-"type": "object"
 }
 },
 "type": "object"
@@ -81075,6 +80796,167 @@ false
 },
 "type": "object"
 },
+"RegionInstanceGroupManagerResizeRequestsListResponse": {
+"id": "RegionInstanceGroupManagerResizeRequestsListResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of Resize Request resources.",
+"items": {
+"$ref": "InstanceGroupManagerResizeRequest"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#regionInstanceGroupManagerResizeRequestList",
+"description": "[Output Only] Type of the resource. Always compute#regionInstanceGroupManagerResizeRequestList for a list of Resize Requests.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
 "RegionInstanceGroupManagerUpdateInstanceConfigReq": {
 "description": "RegionInstanceGroupManagers.updatePerInstanceConfigs",
 "id": "RegionInstanceGroupManagerUpdateInstanceConfigReq",
@@ -82005,6 +81887,11 @@ false
 "backendService": {
 "description": "The full or partial URL to the BackendService resource being mirrored to. The backend service configured for a mirroring policy must reference backends that are of the same type as the original backend service matched in the URL map. Serverless NEG backends are not currently supported as a mirrored backend service. ",
 "type": "string"
+},
+"mirrorPercent": {
+"description": "The percentage of requests to be mirrored to `backend_service`.",
+"format": "double",
+"type": "number"
 }
 },
 "type": "object"
@@ -86780,6 +86667,26 @@ false
 },
 "terminationTime": {
 "description": "Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.",
+"type": "string"
+},
+"windowsLicenseOptimizationMode": {
+"description": "Represents the Windows Server License Optimization Mode of the VM. If unspecified, the default mode is `OFF`.",
+"enum": [
+"AUTO",
+"BALANCED",
+"COST_OPTIMIZED",
+"OFF",
+"PERFORMANCE",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"\"Automatically maximize savings and minimize performance impact by matching license optimization mode to current CPU utilization.",
+"Significant license cost savings via moderate throttles (40% baseline, 10 minute maximum burst at full utilization).",
+"Maximum license cost savings via restrictive throttles (20% baseline, 3.75 minute maximum burst at full utilization).",
+"No license cost savings with maximum CPU performance.",
+"Moderate license cost savings via least restrictive throttles (60% baseline, 22.5 minute maximum burst at full utilization).",
+"Unspecified license optimization mode defaults to `OFF`."
+],
 "type": "string"
 }
 },
@@ -93459,6 +93366,7 @@ false
 "CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
+"MIGRATION",
 "PRIVATE",
 "PRIVATE_NAT",
 "PRIVATE_RFC_1918",
@@ -93471,6 +93379,7 @@ false
 "Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
+"Subnetwork will be used for Migration (a transient state of subnetwork while migrating resources from one project to another).",
 "Regular user created or automatically created subnet.",
 "Subnetwork used as source range for Private NAT Gateways.",
 "Regular user created or automatically created subnet.",
@@ -99114,6 +99023,7 @@ false
 "CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
+"MIGRATION",
 "PRIVATE",
 "PRIVATE_NAT",
 "PRIVATE_RFC_1918",
@@ -99126,6 +99036,7 @@ false
 "Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
+"Subnetwork will be used for Migration (a transient state of subnetwork while migrating resources from one project to another).",
 "Regular user created or automatically created subnet.",
 "Subnetwork used as source range for Private NAT Gateways.",
 "Regular user created or automatically created subnet.",
