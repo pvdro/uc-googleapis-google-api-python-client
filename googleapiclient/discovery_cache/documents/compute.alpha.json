@@ -26471,6 +26471,110 @@
 },
 "regionInstanceGroupManagerResizeRequests": {
 "methods": {
+"cancel": {
+"description": "Cancels the specified resize request. Cancelled resize request no longer waits for the resources to be provisioned. Cancel is only possible for requests that are in accepted state.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+"httpMethod": "POST",
+"id": "compute.regionInstanceGroupManagerResizeRequests.cancel",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager",
+"resizeRequest"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "The name of the managed instance group. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region scoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resizeRequest": {
+"description": "The name of the resize request to cancel. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"delete": {
+"description": "Deletes the specified, inactive resize request. Requests that are still active cannot be deleted. Deleting request does not delete instances that were provisioned previously.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"httpMethod": "DELETE",
+"id": "compute.regionInstanceGroupManagerResizeRequests.delete",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager",
+"resizeRequest"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "The name of the managed instance group. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region scoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resizeRequest": {
+"description": "The name of the resize request to delete. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "get": {
 "description": "Returns all of the details about the specified resize request.",
 "flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
@@ -33986,6 +34090,125 @@
 "path": "projects/{project}/regions",
 "response": {
 "$ref": "RegionList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
+"reservationBlocks": {
+"methods": {
+"get": {
+"description": "Retrieves information about the specified reservation block.",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}",
+"httpMethod": "GET",
+"id": "compute.reservationBlocks.get",
+"parameterOrder": [
+"project",
+"zone",
+"reservation",
+"reservationBlock"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservation": {
+"description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservationBlock": {
+"description": "The name of the reservation block. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}",
+"response": {
+"$ref": "ReservationBlocksGetResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Retrieves a list of reservation blocks under a single reservation.",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks",
+"httpMethod": "GET",
+"id": "compute.reservationBlocks.list",
+"parameterOrder": [
+"project",
+"zone",
+"reservation"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservation": {
+"description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks",
+"response": {
+"$ref": "ReservationBlocksListResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -45055,7 +45278,7 @@
 }
 }
 },
-"revision": "20240820",
+"revision": "20240827",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -46471,6 +46694,11 @@ false
 "description": "[Output Only] Contains output only fields.",
 "id": "AllocationResourceStatus",
 "properties": {
+"reservationBlockCount": {
+"description": "Indicates number of blocks for accelerator optimized family (applicable beyond A3 only).",
+"format": "int32",
+"type": "integer"
+},
 "specificSkuAllocation": {
 "$ref": "AllocationResourceStatusSpecificSKUAllocation",
 "description": "Allocation Properties of this reservation."
@@ -81920,6 +82148,20 @@ false
 "description": "Absolute time in future when the reservation will be auto-deleted by Compute Engine. Timestamp is represented in RFC3339 text format.",
 "type": "string"
 },
+"deploymentType": {
+"description": "Specifies the deployment strategy for this reservation.",
+"enum": [
+"DENSE",
+"DEPLOYMENT_TYPE_UNSPECIFIED",
+"FLEXIBLE"
+],
+"enumDescriptions": [
+"Number of deployment blocks, size, and topology is fixed during creation and does not change over time. Deployment will be expressed in terms of blocks.",
+"Deployment type is unspecified.",
+"Distribution of capacity in blocks is not static and can change over time. This is expected to have more obtainability over DENSE deployment. Deployment will not be expressed in terms of blocks."
+],
+"type": "string"
+},
 "description": {
 "description": "An optional description of this resource. Provide this property when you create the resource.",
 "type": "string"
@@ -81927,6 +82169,20 @@ false
 "id": {
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
 "format": "uint64",
+"type": "string"
+},
+"instanceTerminationAction": {
+"description": "Instance termination action that will be invoked when the reservation is deleted.",
+"enum": [
+"DELETE",
+"INSTANCE_TERMINATION_ACTION_UNSPECIFIED",
+"STOP"
+],
+"enumDescriptions": [
+"Delete the VM.",
+"Default value. This value is unused.",
+"Stop the VM without storing in-memory content. default action."
+],
 "type": "string"
 },
 "kind": {
@@ -82084,6 +82340,233 @@ false
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"ReservationBlock": {
+"description": "Represents a reservation block resource.",
+"id": "ReservationBlock",
+"properties": {
+"count": {
+"description": "[Output Only] Specifies the number of resources that are allocated in this block. It indicates the maximum number of VMs that a user can run on this particular block.",
+"format": "int32",
+"type": "integer"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+"format": "uint64",
+"type": "string"
+},
+"inUseCount": {
+"description": "[Output Only] Indicates how many instances are in use on this block.",
+"format": "int32",
+"type": "integer"
+},
+"kind": {
+"description": "[Output Only] Type of the resource. Always compute#reservationBlock for reservation blocks.",
+"type": "string"
+},
+"locationPrefix": {
+"description": "[Output Only] Obfuscated location where this reservation block physically resides in format /CCCC/GGGG. This matches the tripod specified in the VM topology information. Example: /USEAB1/0101/ is the location prefix in /USEAB1/0101/031/003",
+"type": "string"
+},
+"name": {
+"description": "[Output Only] The name of this reservation block generated by Google Compute Engine. The name must be 1-63 characters long, and comply with RFC1035 @pattern [a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined fully-qualified URL for this resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "[Output Only] Server-defined URL for this resource with the resource id.",
+"type": "string"
+},
+"status": {
+"description": "[Output Only] Status of the reservation block.",
+"enum": [
+"CREATING",
+"DELETING",
+"INVALID",
+"READY"
+],
+"enumDescriptions": [
+"Resources are being allocated for the reservation block.",
+"Reservation block is currently being deleted.",
+"",
+"Reservation block has allocated all its resources."
+],
+"type": "string"
+},
+"zone": {
+"description": "[Output Only] Zone in which the reservation block resides.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationBlocksGetResponse": {
+"id": "ReservationBlocksGetResponse",
+"properties": {
+"resource": {
+"$ref": "ReservationBlock"
+}
+},
+"type": "object"
+},
+"ReservationBlocksListResponse": {
+"description": "A list of reservation blocks under a single reservation.",
+"id": "ReservationBlocksListResponse",
+"properties": {
+"id": {
+"description": "Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of reservation block resources.",
+"items": {
+"$ref": "ReservationBlock"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#reservationBlock",
+"description": "Type of the resource. Always compute#reservationBlock for a list of reservation blocks.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "Server-defined URL for this resource.",
+"type": "string"
+},
+"warning": {
+"description": "Informational warning message.",
 "properties": {
 "code": {
 "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
@@ -87109,7 +87592,8 @@ false
 "type": "array"
 },
 "cloudArmorConfig": {
-"$ref": "SecurityPolicyCloudArmorConfig"
+"$ref": "SecurityPolicyCloudArmorConfig",
+"deprecated": true
 },
 "creationTimestamp": {
 "description": "[Output Only] Creation timestamp in RFC3339 text format.",
@@ -87123,6 +87607,7 @@ false
 "type": "string"
 },
 "displayName": {
+"deprecated": true,
 "description": "User-provided name of the organization security policy. The name should be unique in the organization in which the security policy is created. This should only be used when SecurityPolicyType is FIREWALL. The name must be 1-63 characters long, and comply with https://www.ietf.org/rfc/rfc1035.txt. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
@@ -87171,6 +87656,7 @@ false
 "type": "string"
 },
 "ruleTupleCount": {
+"deprecated": true,
 "description": "[Output Only] Total count of all security policy rule tuples. A security policy can not exceed a set number of tuples.",
 "format": "int32",
 "type": "integer"
@@ -87427,6 +87913,7 @@ false
 "type": "string"
 },
 "displayName": {
+"deprecated": true,
 "description": "[Output Only] The display name of the security policy of the association.",
 "type": "string"
 },
@@ -87464,6 +87951,7 @@ false
 "id": "SecurityPolicyCloudArmorConfig",
 "properties": {
 "enableMl": {
+"deprecated": true,
 "description": "If set to true, enables Cloud Armor Machine Learning.",
 "type": "boolean"
 }
@@ -87678,6 +88166,7 @@ false
 "type": "string"
 },
 "direction": {
+"deprecated": true,
 "description": "The direction in which this rule applies. This field may only be specified when versioned_expr is set to FIREWALL.",
 "enum": [
 "EGRESS",
@@ -87690,6 +88179,7 @@ false
 "type": "string"
 },
 "enableLogging": {
+"deprecated": true,
 "description": "Denotes whether to enable logging for a particular rule. If logging is enabled, logs will be exported to the configured export destination in Stackdriver. Logs may be exported to BigQuery or Pub/Sub. Note: you cannot enable logging on \"goto_next\" rules. This field may only be specified when the versioned_expr is set to FIREWALL.",
 "type": "boolean"
 },
@@ -87756,11 +88246,13 @@ false
 "type": "string"
 },
 "ruleTupleCount": {
+"deprecated": true,
 "description": "[Output Only] Calculation of the complexity of a single firewall security policy rule.",
 "format": "int32",
 "type": "integer"
 },
 "targetResources": {
+"deprecated": true,
 "description": "A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "type": "string"
@@ -87768,6 +88260,7 @@ false
 "type": "array"
 },
 "targetServiceAccounts": {
+"deprecated": true,
 "description": "A list of service accounts indicating the sets of instances that are applied with this rule.",
 "items": {
 "type": "string"
@@ -87839,6 +88332,7 @@ false
 "id": "SecurityPolicyRuleMatcherConfig",
 "properties": {
 "destIpRanges": {
+"deprecated": true,
 "description": "CIDR IP address range. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "type": "string"
@@ -87846,6 +88340,7 @@ false
 "type": "array"
 },
 "destPorts": {
+"deprecated": true,
 "description": "Pairs of IP protocols and ports that the rule should match. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "$ref": "SecurityPolicyRuleMatcherConfigDestinationPort"
@@ -87853,6 +88348,7 @@ false
 "type": "array"
 },
 "layer4Configs": {
+"deprecated": true,
 "description": "Pairs of IP protocols and ports that the rule should match. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "$ref": "SecurityPolicyRuleMatcherConfigLayer4Config"
@@ -87873,10 +88369,12 @@ false
 "id": "SecurityPolicyRuleMatcherConfigDestinationPort",
 "properties": {
 "ipProtocol": {
+"deprecated": true,
 "description": "The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.",
 "type": "string"
 },
 "ports": {
+"deprecated": true,
 "description": "An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: [\"22\"], [\"80\",\"443\"], and [\"12345-12349\"]. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "type": "string"
@@ -87890,10 +88388,12 @@ false
 "id": "SecurityPolicyRuleMatcherConfigLayer4Config",
 "properties": {
 "ipProtocol": {
+"deprecated": true,
 "description": "The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.",
 "type": "string"
 },
 "ports": {
+"deprecated": true,
 "description": "An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: [\"22\"], [\"80\",\"443\"], and [\"12345-12349\"]. This field may only be specified when versioned_expr is set to FIREWALL.",
 "items": {
 "type": "string"

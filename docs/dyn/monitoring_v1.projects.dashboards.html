@@ -449,7 +449,18 @@ Args:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -1149,7 +1160,18 @@ Args:
         &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
           &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
             { # The persistent settings for a table&#x27;s columns.
+              &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
               &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+              &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+              &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                { # Defines a threshold for categorizing time series values.
+                  &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                  &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                  &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                  &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                  &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                },
+              ],
               &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
             },
           ],
@@ -1745,7 +1767,18 @@ Args:
           &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
             &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
               { # The persistent settings for a table&#x27;s columns.
+                &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                 &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                  { # Defines a threshold for categorizing time series values.
+                    &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                    &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                    &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                    &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                    &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                  },
+                ],
                 &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
               },
             ],
@@ -2343,7 +2376,18 @@ Args:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -2966,7 +3010,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -3666,7 +3721,18 @@ Returns:
         &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
           &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
             { # The persistent settings for a table&#x27;s columns.
+              &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
               &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+              &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+              &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                { # Defines a threshold for categorizing time series values.
+                  &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                  &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                  &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                  &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                  &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                },
+              ],
               &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
             },
           ],
@@ -4262,7 +4328,18 @@ Returns:
           &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
             &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
               { # The persistent settings for a table&#x27;s columns.
+                &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                 &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                  { # Defines a threshold for categorizing time series values.
+                    &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                    &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                    &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                    &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                    &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                  },
+                ],
                 &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
               },
             ],
@@ -4860,7 +4937,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -5507,7 +5595,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -6207,7 +6306,18 @@ Returns:
         &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
           &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
             { # The persistent settings for a table&#x27;s columns.
+              &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
               &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+              &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+              &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                { # Defines a threshold for categorizing time series values.
+                  &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                  &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                  &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                  &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                  &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                },
+              ],
               &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
             },
           ],
@@ -6803,7 +6913,18 @@ Returns:
           &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
             &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
               { # The persistent settings for a table&#x27;s columns.
+                &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                 &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                  { # Defines a threshold for categorizing time series values.
+                    &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                    &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                    &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                    &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                    &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                  },
+                ],
                 &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
               },
             ],
@@ -7401,7 +7522,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -8034,7 +8166,18 @@ Returns:
                 &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
                   &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                     { # The persistent settings for a table&#x27;s columns.
+                      &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                       &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                      &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                      &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                        { # Defines a threshold for categorizing time series values.
+                          &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                          &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                          &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                          &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                          &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                        },
+                      ],
                       &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                     },
                   ],
@@ -8734,7 +8877,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -9330,7 +9484,18 @@ Returns:
               &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
                 &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                   { # The persistent settings for a table&#x27;s columns.
+                    &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                     &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                    &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                    &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                      { # Defines a threshold for categorizing time series values.
+                        &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                        &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                        &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                        &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                        &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                      },
+                    ],
                     &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                   },
                 ],
@@ -9928,7 +10093,18 @@ Returns:
                 &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
                   &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                     { # The persistent settings for a table&#x27;s columns.
+                      &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                       &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                      &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                      &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                        { # Defines a threshold for categorizing time series values.
+                          &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                          &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                          &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                          &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                          &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                        },
+                      ],
                       &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                     },
                   ],
@@ -10569,7 +10745,18 @@ Args:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -11269,7 +11456,18 @@ Args:
         &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
           &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
             { # The persistent settings for a table&#x27;s columns.
+              &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
               &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+              &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+              &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                { # Defines a threshold for categorizing time series values.
+                  &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                  &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                  &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                  &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                  &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                },
+              ],
               &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
             },
           ],
@@ -11865,7 +12063,18 @@ Args:
           &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
             &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
               { # The persistent settings for a table&#x27;s columns.
+                &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                 &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                  { # Defines a threshold for categorizing time series values.
+                    &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                    &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                    &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                    &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                    &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                  },
+                ],
                 &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
               },
             ],
@@ -12463,7 +12672,18 @@ Args:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -13086,7 +13306,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
@@ -13786,7 +14017,18 @@ Returns:
         &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
           &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
             { # The persistent settings for a table&#x27;s columns.
+              &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
               &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+              &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+              &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                { # Defines a threshold for categorizing time series values.
+                  &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                  &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                  &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                  &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                  &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                },
+              ],
               &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
             },
           ],
@@ -14382,7 +14624,18 @@ Returns:
           &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
             &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
               { # The persistent settings for a table&#x27;s columns.
+                &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                 &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                  { # Defines a threshold for categorizing time series values.
+                    &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                    &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                    &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                    &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                    &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                  },
+                ],
                 &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
               },
             ],
@@ -14980,7 +15233,18 @@ Returns:
             &quot;timeSeriesTable&quot;: { # A table that displays time series data. # A widget that displays time series data in a tabular format.
               &quot;columnSettings&quot;: [ # Optional. The list of the persistent column settings for the table.
                 { # The persistent settings for a table&#x27;s columns.
+                  &quot;alignment&quot;: &quot;A String&quot;, # Optional. Whether the column should be left / middle / right aligned
                   &quot;column&quot;: &quot;A String&quot;, # Required. The id of the column.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Optional. Display name of the column
+                  &quot;thresholds&quot;: [ # Optional. The thresholds used to determine how the table cell should be rendered given the time series&#x27; current value.
+                    { # Defines a threshold for categorizing time series values.
+                      &quot;color&quot;: &quot;A String&quot;, # The state color for this threshold. Color is not allowed in a XyChart.
+                      &quot;direction&quot;: &quot;A String&quot;, # The direction for the current threshold. Direction is not allowed in a XyChart.
+                      &quot;label&quot;: &quot;A String&quot;, # A label for the threshold.
+                      &quot;targetAxis&quot;: &quot;A String&quot;, # The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+                      &quot;value&quot;: 3.14, # The value of the threshold. The value should be defined in the native scale of the metric.
+                    },
+                  ],
                   &quot;visible&quot;: True or False, # Required. Whether the column should be visible on page load.
                 },
               ],
