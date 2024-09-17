@@ -2062,7 +2062,7 @@
 ]
 },
 "listUsable": {
-"description": "Retrieves an aggregated list of all usable backend services in the specified project.",
+"description": "Retrieves a list of all usable backend services in the specified project.",
 "flatPath": "projects/{project}/global/backendServices/listUsable",
 "httpMethod": "GET",
 "id": "compute.backendServices.listUsable",
@@ -14231,6 +14231,55 @@
 "https://www.googleapis.com/auth/compute.readonly"
 ]
 },
+"getIamPolicy": {
+"description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+"flatPath": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/getIamPolicy",
+"httpMethod": "GET",
+"id": "compute.instantSnapshotGroups.getIamPolicy",
+"parameterOrder": [
+"project",
+"zone",
+"resource"
+],
+"parameters": {
+"optionsRequestedPolicyVersion": {
+"description": "Requested IAM Policy version.",
+"format": "int32",
+"location": "query",
+"type": "integer"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/getIamPolicy",
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
 "insert": {
 "description": "inserts a Zonal InstantSnapshotGroup resource",
 "flatPath": "projects/{project}/zones/{zone}/instantSnapshotGroups",
@@ -14334,6 +14383,97 @@
 "path": "projects/{project}/zones/{zone}/instantSnapshotGroups",
 "response": {
 "$ref": "ListInstantSnapshotGroups"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"setIamPolicy": {
+"description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+"flatPath": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/setIamPolicy",
+"httpMethod": "POST",
+"id": "compute.instantSnapshotGroups.setIamPolicy",
+"parameterOrder": [
+"project",
+"zone",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/setIamPolicy",
+"request": {
+"$ref": "ZoneSetPolicyRequest"
+},
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.instantSnapshotGroups.testIamPermissions",
+"parameterOrder": [
+"project",
+"zone",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/instantSnapshotGroups/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -23957,7 +24097,7 @@
 ]
 },
 "listUsable": {
-"description": "Retrieves an aggregated list of all usable backend services in the specified project in the given region.",
+"description": "Retrieves a list of all usable backend services in the specified project in the given region.",
 "flatPath": "projects/{project}/regions/{region}/backendServices/listUsable",
 "httpMethod": "GET",
 "id": "compute.regionBackendServices.listUsable",
@@ -28737,6 +28877,55 @@
 "https://www.googleapis.com/auth/compute.readonly"
 ]
 },
+"getIamPolicy": {
+"description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+"flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/getIamPolicy",
+"httpMethod": "GET",
+"id": "compute.regionInstantSnapshotGroups.getIamPolicy",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"optionsRequestedPolicyVersion": {
+"description": "Requested IAM Policy version.",
+"format": "int32",
+"location": "query",
+"type": "integer"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/getIamPolicy",
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
 "insert": {
 "description": "creates a Regional InstantSnapshotGroup resource",
 "flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups",
@@ -28840,6 +29029,97 @@
 "path": "projects/{project}/regions/{region}/instantSnapshotGroups",
 "response": {
 "$ref": "ListInstantSnapshotGroups"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"setIamPolicy": {
+"description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+"flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/setIamPolicy",
+"httpMethod": "POST",
+"id": "compute.regionInstantSnapshotGroups.setIamPolicy",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/setIamPolicy",
+"request": {
+"$ref": "RegionSetPolicyRequest"
+},
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.regionInstantSnapshotGroups.testIamPermissions",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instantSnapshotGroups/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -45278,7 +45558,7 @@
 }
 }
 },
-"revision": "20240827",
+"revision": "20240903",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -60627,6 +60907,10 @@ false
 ],
 "type": "string"
 },
+"multiMig": {
+"description": "URL to the multi-MIG that this Managed Instance Group belongs to.",
+"type": "string"
+},
 "name": {
 "annotations": {
 "required": [
@@ -69632,6 +69916,9 @@ false
 ],
 "type": "string"
 },
+"currentActionDetails": {
+"$ref": "ManagedInstanceCurrentActionDetails"
+},
 "id": {
 "description": "[Output only] The unique identifier for this resource. This field is empty when instance does not exist.",
 "format": "uint64",
@@ -69746,6 +70033,45 @@ false
 "properties": {
 "revision": {
 "description": "[Output Only] Current all-instances configuration revision. This value is in RFC3339 text format.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ManagedInstanceCurrentActionDetails": {
+"id": "ManagedInstanceCurrentActionDetails",
+"properties": {
+"methodName": {
+"type": "string"
+},
+"trigger": {
+"description": "[Output Only] Details of the current action that the managed instance group has scheduled for the instance. Contains trigger for the current action, and methodName in case it was triggered by API call. Possible values for trigger: - API Any API call. - PROACTIVE_UPDATE Proactive updater scheduled an update on this managed instance. - AUTOSCALING Instance being deleted/created after a decision from the Autoscaler. - REDISTRIBUTION The regional managed instance group is moving instances between zones to restore balance. - STANDBY_REFILL The managed instance group is refilling the Standby Pool (stopped/suspended virtual machines) after scale up. - MAINTENANCE Manual maintenance. - FAILED_CREATION The managed instance group is handling failed instance creation. - INSTANCE_FAILURE The managed instance group is handling instance failure, according to the Instance Lifecycle Policy. - FAILED_HEALTH_CHECK The managed instance group is handling failed health check, according to the Instance Lifecycle Policy. - TERMINATION_TIMESTAMP Instance reached termination time, thus managed instance group stops/deletes it. ",
+"enum": [
+"API",
+"AUTOSCALING",
+"FAILED_CREATION",
+"FAILED_HEALTH_CHECK",
+"INSTANCE_FAILURE",
+"MAINTENANCE",
+"NONE",
+"PROACTIVE_UPDATE",
+"REDISTRIBUTION",
+"STANDBY_REFILL",
+"TERMINATION_TIMESTAMP"
+],
+"enumDescriptions": [
+"Any API call.",
+"Instance being deleted/created after a decision from the Autoscaler.",
+"The managed instance group is handling failed instance creation.",
+"The managed instance group is handling failed health check, according to the Instance Lifecycle Policy.",
+"The managed instance group is handling instance failure, according to the Instance Lifecycle Policy.",
+"Manual maintenance.",
+"Default value, not visible externally.",
+"Proactive updater scheduled an update on this managed instance.",
+"The regional managed instance group is moving instances between zones to restore balance.",
+"The managed instance group is refilling the Standby Pool (stopped/suspended virtual machines) after scale up.",
+"Instance reached termination time, thus managed instance group stops/deletes it."
+],
 "type": "string"
 }
 },
@@ -84640,6 +84966,10 @@ false
 "RoutePolicy": {
 "id": "RoutePolicy",
 "properties": {
+"description": {
+"description": "An optional description of route policy.",
+"type": "string"
+},
 "fingerprint": {
 "description": "A fingerprint for the Route Policy being applied to this Router, which is essentially a hash of the Route Policy used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update Route Policy. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make a getRoutePolicy() request to retrieve a Route Policy.",
 "format": "byte",
@@ -93787,7 +94117,7 @@ false
 "type": "string"
 },
 "internalIpv6Prefix": {
-"description": "[Output Only] The internal IPv6 address range that is assigned to this subnetwork.",
+"description": "The internal IPv6 address range that is owned by this subnetwork.",
 "type": "string"
 },
 "ipCidrRange": {
