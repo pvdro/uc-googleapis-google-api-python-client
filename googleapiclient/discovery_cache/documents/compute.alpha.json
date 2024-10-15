@@ -14988,6 +14988,337 @@
 }
 }
 },
+"interconnectAttachmentGroups": {
+"methods": {
+"delete": {
+"description": "Deletes the specified InterconnectAttachmentGroup in the given scope",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"httpMethod": "DELETE",
+"id": "compute.interconnectAttachmentGroups.delete",
+"parameterOrder": [
+"project",
+"interconnectAttachmentGroup"
+],
+"parameters": {
+"interconnectAttachmentGroup": {
+"description": "Name of the InterconnectAttachmentGroup resource to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified InterconnectAttachmentGroup resource in the given scope.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"httpMethod": "GET",
+"id": "compute.interconnectAttachmentGroups.get",
+"parameterOrder": [
+"project",
+"interconnectAttachmentGroup"
+],
+"parameters": {
+"interconnectAttachmentGroup": {
+"description": "Name of the InterconnectAttachmentGroup resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"response": {
+"$ref": "InterconnectAttachmentGroup"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getIamPolicy": {
+"description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{resource}/getIamPolicy",
+"httpMethod": "GET",
+"id": "compute.interconnectAttachmentGroups.getIamPolicy",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"optionsRequestedPolicyVersion": {
+"description": "Requested IAM Policy version.",
+"format": "int32",
+"location": "query",
+"type": "integer"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{resource}/getIamPolicy",
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a InterconnectAttachmentGroup in the specified project in the given scope using the parameters that are included in the request.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups",
+"httpMethod": "POST",
+"id": "compute.interconnectAttachmentGroups.insert",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups",
+"request": {
+"$ref": "InterconnectAttachmentGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the InterconnectAttachmentGroups for a project in the given scope.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups",
+"httpMethod": "GET",
+"id": "compute.interconnectAttachmentGroups.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups",
+"response": {
+"$ref": "InterconnectAttachmentGroupsListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Patches the specified InterconnectAttachmentGroup resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"httpMethod": "PATCH",
+"id": "compute.interconnectAttachmentGroups.patch",
+"parameterOrder": [
+"project",
+"interconnectAttachmentGroup"
+],
+"parameters": {
+"interconnectAttachmentGroup": {
+"description": "Name of the InterconnectAttachmentGroup resource to patch.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"updateMask": {
+"description": "The list of fields to update.",
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}",
+"request": {
+"$ref": "InterconnectAttachmentGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"setIamPolicy": {
+"description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{resource}/setIamPolicy",
+"httpMethod": "POST",
+"id": "compute.interconnectAttachmentGroups.setIamPolicy",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{resource}/setIamPolicy",
+"request": {
+"$ref": "GlobalSetPolicyRequest"
+},
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.interconnectAttachmentGroups.testIamPermissions",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
 "interconnectAttachments": {
 "methods": {
 "aggregatedList": {
@@ -15484,6 +15815,337 @@
 }
 },
 "path": "projects/{project}/regions/{region}/interconnectAttachments/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
+"interconnectGroups": {
+"methods": {
+"delete": {
+"description": "Deletes the specified InterconnectGroup in the given scope",
+"flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"httpMethod": "DELETE",
+"id": "compute.interconnectGroups.delete",
+"parameterOrder": [
+"project",
+"interconnectGroup"
+],
+"parameters": {
+"interconnectGroup": {
+"description": "Name of the InterconnectGroup resource to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified InterconnectGroup resource in the given scope.",
+"flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"httpMethod": "GET",
+"id": "compute.interconnectGroups.get",
+"parameterOrder": [
+"project",
+"interconnectGroup"
+],
+"parameters": {
+"interconnectGroup": {
+"description": "Name of the InterconnectGroup resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"response": {
+"$ref": "InterconnectGroup"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getIamPolicy": {
+"description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+"flatPath": "projects/{project}/global/interconnectGroups/{resource}/getIamPolicy",
+"httpMethod": "GET",
+"id": "compute.interconnectGroups.getIamPolicy",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"optionsRequestedPolicyVersion": {
+"description": "Requested IAM Policy version.",
+"format": "int32",
+"location": "query",
+"type": "integer"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{resource}/getIamPolicy",
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a InterconnectGroup in the specified project in the given scope using the parameters that are included in the request.",
+"flatPath": "projects/{project}/global/interconnectGroups",
+"httpMethod": "POST",
+"id": "compute.interconnectGroups.insert",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups",
+"request": {
+"$ref": "InterconnectGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the InterconnectGroups for a project in the given scope.",
+"flatPath": "projects/{project}/global/interconnectGroups",
+"httpMethod": "GET",
+"id": "compute.interconnectGroups.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/interconnectGroups",
+"response": {
+"$ref": "InterconnectGroupsListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Patches the specified InterconnectGroup resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.",
+"flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"httpMethod": "PATCH",
+"id": "compute.interconnectGroups.patch",
+"parameterOrder": [
+"project",
+"interconnectGroup"
+],
+"parameters": {
+"interconnectGroup": {
+"description": "Name of the InterconnectGroup resource to patch.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"updateMask": {
+"description": "The list of fields to update.",
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
+"request": {
+"$ref": "InterconnectGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"setIamPolicy": {
+"description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+"flatPath": "projects/{project}/global/interconnectGroups/{resource}/setIamPolicy",
+"httpMethod": "POST",
+"id": "compute.interconnectGroups.setIamPolicy",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{resource}/setIamPolicy",
+"request": {
+"$ref": "GlobalSetPolicyRequest"
+},
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/global/interconnectGroups/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.interconnectGroups.testIamPermissions",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{resource}/testIamPermissions",
 "request": {
 "$ref": "TestPermissionsRequest"
 },
@@ -29559,6 +30221,204 @@
 },
 "response": {
 "$ref": "TestPermissionsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
+"regionMultiMigs": {
+"methods": {
+"delete": {
+"description": "Deletes a multi-MIG in the specified project.",
+"flatPath": "projects/{project}/regions/{region}/multiMigs/{multiMig}",
+"httpMethod": "DELETE",
+"id": "compute.regionMultiMigs.delete",
+"parameterOrder": [
+"project",
+"region",
+"multiMig"
+],
+"parameters": {
+"multiMig": {
+"description": "Name of the multi-MIG to delete.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/multiMigs/{multiMig}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified multi-MIG resource.",
+"flatPath": "projects/{project}/regions/{region}/multiMigs/{multiMig}",
+"httpMethod": "GET",
+"id": "compute.regionMultiMigs.get",
+"parameterOrder": [
+"project",
+"region",
+"multiMig"
+],
+"parameters": {
+"multiMig": {
+"description": "Name of the multi-MIG resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/multiMigs/{multiMig}",
+"response": {
+"$ref": "MultiMig"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a multi-MIG in the specified project.",
+"flatPath": "projects/{project}/regions/{region}/multiMigs",
+"httpMethod": "POST",
+"id": "compute.regionMultiMigs.insert",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/multiMigs",
+"request": {
+"$ref": "MultiMig"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Retrieves a list of multi-MIGs in a project and region.",
+"flatPath": "projects/{project}/regions/{region}/multiMigs",
+"httpMethod": "GET",
+"id": "compute.regionMultiMigs.list",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/multiMigs",
+"response": {
+"$ref": "MultiMigsList"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -45608,7 +46468,7 @@
 }
 }
 },
-"revision": "20240919",
+"revision": "20241001",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47029,6 +47889,10 @@ false
 "format": "int32",
 "type": "integer"
 },
+"reservationMaintenance": {
+"$ref": "GroupMaintenanceInfo",
+"description": "Maintenance information for the group of hosts on this reservation including running VMs and unused hosts. Applicable only to accelerator optimized VM families beyond A3 only. For both DENSE or STANDARD reservation, granular maintenance information can be retried at reservation block level."
+},
 "specificSkuAllocation": {
 "$ref": "AllocationResourceStatusSpecificSKUAllocation",
 "description": "Allocation Properties of this reservation."
@@ -47475,13 +48339,6 @@ false
 },
 "type": "array"
 },
-"exemptedMembers": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"type": "string"
-},
-"type": "array"
-},
 "service": {
 "description": "Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.",
 "type": "string"
@@ -47499,10 +48356,6 @@ false
 "type": "string"
 },
 "type": "array"
-},
-"ignoreChildExemptions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "boolean"
 },
 "logType": {
 "description": "The log type that this config enables.",
@@ -49026,7 +49879,7 @@ false
 "type": "number"
 },
 "name": {
-"description": "Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
+"description": "Name of a custom utilization signal. The name must be 1-24 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
 "type": "string"
 }
 },
@@ -49722,7 +50575,7 @@ false
 "type": "boolean"
 },
 "name": {
-"description": "Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
+"description": "Name of a custom utilization signal. The name must be 1-24 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
 "type": "string"
 }
 },
@@ -51380,10 +52233,16 @@ false
 "MEMORY_OPTIMIZED",
 "MEMORY_OPTIMIZED_M3",
 "MEMORY_OPTIMIZED_X4",
+"MEMORY_OPTIMIZED_X4_16TB",
+"MEMORY_OPTIMIZED_X4_24TB",
+"MEMORY_OPTIMIZED_X4_32TB",
 "STORAGE_OPTIMIZED_Z3",
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
+"",
+"",
 "",
 "",
 "",
@@ -56143,7 +57002,7 @@ false
 "description": "List of Projects/Folders to share with."
 },
 "specificReservationRequired": {
-"description": "Indicates whether the auto-created reservation can be consumed by VMs with affinity for \"any\" reservation. If the field is set, then only VMs that target the reservation by name can consume from the delivered reservation. If set to true,the delivered resevervation will have the same name as the future reservation.",
+"description": "Indicates whether the auto-created reservation can be consumed by VMs with affinity for \"any\" reservation. If the field is set, then only VMs that target the reservation by name can consume from the delivered reservation.",
 "type": "boolean"
 },
 "specificSkuProperties": {
@@ -57054,6 +57913,45 @@ false
 "policy": {
 "$ref": "Policy",
 "description": "REQUIRED: The complete policy to be applied to the 'resource'. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them."
+}
+},
+"type": "object"
+},
+"GroupMaintenanceInfo": {
+"description": "Maintenance Info for ReservationBlocks.",
+"id": "GroupMaintenanceInfo",
+"properties": {
+"enableOpportunisticMaintenance": {
+"description": "Indicates if this group of VMs have opportunistic maintenance enabled. This will be set on the reservation, and will be inherited for reservation blocks.",
+"type": "boolean"
+},
+"maintenanceOngoingCount": {
+"description": "Progress for ongoing maintenance for this group of VMs/hosts. Describes number of hosts in the block that have ongoing maintenance.",
+"format": "int32",
+"type": "integer"
+},
+"maintenancePendingCount": {
+"description": "Progress for ongoing maintenance for this group of VMs/hosts. Describes number of hosts in the block that have pending maintenance.",
+"format": "int32",
+"type": "integer"
+},
+"schedulingType": {
+"description": "Indicates the maintenance type for this group of VMs. This will be set on the reservation, and will be inherited for reservation blocks.",
+"enum": [
+"GROUPED",
+"GROUP_MAINTENANCE_TYPE_UNSPECIFIED",
+"INDEPENDENT"
+],
+"enumDescriptions": [
+"Synchronized maintenance. Common maintenance schedule/window is defined for this group of VMs. Not applicable for FLEXIBLE reservation",
+"Unknown maintenance type.",
+"Unsynchronized maintenance. These group of VMs do not share a common schedule for maintenance. Instead all VMs have individual windows of their own in which maintenance is scheduled."
+],
+"type": "string"
+},
+"upcomingGroupMaintenance": {
+"$ref": "UpcomingMaintenance",
+"description": "Maintenance information on this group of VMs."
 }
 },
 "type": "object"
@@ -60260,6 +61158,7 @@ false
 "description": "[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.",
 "enum": [
 "DEPROVISIONING",
+"PENDING_STOP",
 "PROVISIONING",
 "REPAIRING",
 "RUNNING",
@@ -60272,6 +61171,7 @@ false
 ],
 "enumDescriptions": [
 "The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.",
+"The instance is shutting down gracefully.",
 "Resources are being allocated for the instance.",
 "The instance is in repair.",
 "The instance is running.",
@@ -61707,6 +62607,13 @@ false
 "description": "[Output Only] A unique identifier for this resource type. The server generates this identifier.",
 "format": "uint64",
 "type": "string"
+},
+"instances": {
+"description": "The list of specifications of per-instance configs to be created. This field cannot be used together with 'resize_by'.",
+"items": {
+"$ref": "PerInstanceConfig"
+},
+"type": "array"
 },
 "kind": {
 "default": "compute#instanceGroupManagerResizeRequest",
@@ -64510,6 +65417,7 @@ false
 "description": "[Output Only] The status of the instance.",
 "enum": [
 "DEPROVISIONING",
+"PENDING_STOP",
 "PROVISIONING",
 "REPAIRING",
 "RUNNING",
@@ -64522,6 +65430,7 @@ false
 ],
 "enumDescriptions": [
 "The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.",
+"The instance is shutting down gracefully.",
 "Resources are being allocated for the instance.",
 "The instance is in repair.",
 "The instance is running.",
@@ -64676,6 +65585,20 @@ false
 "InstancesReportHostAsFaultyRequest": {
 "id": "InstancesReportHostAsFaultyRequest",
 "properties": {
+"actionHint": {
+"description": "The action hint to report the host as faulty.",
+"enum": [
+"ACTION_HINT_UNSPECIFIED",
+"DIAGNOSE_AND_REPAIR",
+"EXECUTE_ALL_RECOMMENDED_SCANS"
+],
+"enumDescriptions": [
+"Default value. Euivalent to DIAGNOSE_AND_REPAIR.",
+"The action hint to diagnose and repair the host.",
+"The action hint to execute recommended scans without sending the machine through hwops."
+],
+"type": "string"
+},
 "faultReasons": {
 "items": {
 "$ref": "InstancesReportHostAsFaultyRequestFaultReason"
@@ -65750,6 +66673,13 @@ false
 },
 "type": "array"
 },
+"interconnectGroups": {
+"description": "[Output Only] URLs of InterconnectGroups that include this Interconnect. Order is arbitrary and items are unique.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "interconnectType": {
 "description": "Type of interconnect, which can take one of the following values: - PARTNER: A partner-managed interconnection shared between customers though a partner. - DEDICATED: A dedicated physical interconnection with the customer. Note that a value IT_PRIVATE has been deprecated in favor of DEDICATED.",
 "enum": [
@@ -65971,6 +66901,10 @@ false
 "adminEnabled": {
 "description": "Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.",
 "type": "boolean"
+},
+"attachmentGroup": {
+"description": "[Output Only] URL of the AttachmentGroup that includes this Attachment.",
+"type": "string"
 },
 "bandwidth": {
 "description": "Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s ",
@@ -66449,6 +67383,433 @@ false
 "min": {
 "format": "uint32",
 "type": "integer"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroup": {
+"description": "An interconnect attachment group resource allows customers to create, analyze, and expand highly available deployments.",
+"id": "InterconnectAttachmentGroup",
+"properties": {
+"attachments": {
+"additionalProperties": {
+"$ref": "InterconnectAttachmentGroupAttachment"
+},
+"description": "Attachments in the AttachmentGroup. Keys are arbitrary user-specified strings. Users are encouraged, but not required, to use their preferred format for resource links as keys. Note that there are add-members and remove-members methods in gcloud. The size of this map is limited by an \"Attachments per group\" quota.",
+"type": "object"
+},
+"configured": {
+"$ref": "InterconnectAttachmentGroupConfigured"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource. Provide this property when you create the resource.",
+"type": "string"
+},
+"etag": {
+"description": "Opaque system-generated token that uniquely identifies the configuration. If provided when patching a configuration in update mode, the provided token must match the current token or the update is rejected. This provides a reliable means of doing read-modify-write (optimistic locking) as described by AIP 154.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource type. The server generates this identifier.",
+"format": "uint64",
+"type": "string"
+},
+"intent": {
+"$ref": "InterconnectAttachmentGroupIntent"
+},
+"interconnectGroup": {
+"description": "The URL of an InterconnectGroup that groups these Attachments' Interconnects. Customers do not need to set this unless directed by Google Support.",
+"type": "string"
+},
+"kind": {
+"default": "compute#interconnectAttachmentGroup",
+"description": "[Output Only] Type of the resource. Always compute#interconnectAttachmentGroup.",
+"type": "string"
+},
+"logicalStructure": {
+"$ref": "InterconnectAttachmentGroupLogicalStructure"
+},
+"name": {
+"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupAttachment": {
+"description": "An Attachment in this AttachmentGroup.",
+"id": "InterconnectAttachmentGroupAttachment",
+"properties": {
+"attachment": {
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupConfigured": {
+"description": "[Output Only] The redundancy this group is configured to support. The way a user queries what SLA their Attachment gets is by looking at this field of the Attachment's AttachmentGroup.",
+"id": "InterconnectAttachmentGroupConfigured",
+"properties": {
+"availabilitySla": {
+"$ref": "InterconnectAttachmentGroupConfiguredAvailabilitySLA"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupConfiguredAvailabilitySLA": {
+"description": "[Output Only] Which SLA this group is configured to support, and why this group does or does not meet that SLA's requirements.",
+"id": "InterconnectAttachmentGroupConfiguredAvailabilitySLA",
+"properties": {
+"effectiveSla": {
+"enum": [
+"EFFECTIVE_SLA_UNSPECIFIED",
+"NO_SLA",
+"PRODUCTION_CRITICAL",
+"PRODUCTION_NON_CRITICAL"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"intendedSlaBlockers": {
+"items": {
+"$ref": "InterconnectAttachmentGroupConfiguredAvailabilitySLAIntendedSlaBlockers"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupConfiguredAvailabilitySLAIntendedSlaBlockers": {
+"description": "[Output Only] Reasons why configuration.availabilitySLA.sla differs from intent.availabilitySLA. This list is empty if and only if those are the same.",
+"id": "InterconnectAttachmentGroupConfiguredAvailabilitySLAIntendedSlaBlockers",
+"properties": {
+"attachments": {
+"description": "[Output Only] URLs of any particular Attachments to explain this blocker in more detail.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"blockerType": {
+"enum": [
+"BLOCKER_TYPE_UNSPECIFIED",
+"INCOMPATIBLE_METROS",
+"INCOMPATIBLE_REGIONS",
+"MISSING_GLOBAL_ROUTING",
+"NO_ATTACHMENTS",
+"NO_ATTACHMENTS_IN_METRO_AND_ZONE",
+"OTHER"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"documentationLink": {
+"description": "[Output Only] The url of Google Cloud public documentation explaining this requirement. This is set for every type of requirement.",
+"type": "string"
+},
+"explanation": {
+"description": "[Output Only] A human-readable explanation of this requirement and why it's not met. This is set for every type of requirement.",
+"type": "string"
+},
+"metros": {
+"description": "[Output Only] Metros used to explain this blocker in more detail. These are three-letter lowercase strings like \"iad\". This will be set for some blockers (like NO_ATTACHMENTS_IN_METRO_AND_ZONE) but does not apply to others.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"zones": {
+"description": "[Output Only] Zones used to explain this blocker in more detail. Format is \"zone1\" and/or \"zone2\". This will be set for some blockers (like MISSING_ZONE) but does not apply to others.",
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupIntent": {
+"description": "The user's intent for this AttachmentGroup. This is the only required field besides the name that must be specified on group creation.",
+"id": "InterconnectAttachmentGroupIntent",
+"properties": {
+"availabilitySla": {
+"enum": [
+"AVAILABILITY_SLA_UNSPECIFIED",
+"NO_SLA",
+"PRODUCTION_CRITICAL",
+"PRODUCTION_NON_CRITICAL"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupLogicalStructure": {
+"description": "[Output Only] An analysis of the logical layout of Attachments in this group. Every Attachment in the group is shown once in this structure.",
+"id": "InterconnectAttachmentGroupLogicalStructure",
+"properties": {
+"regions": {
+"items": {
+"$ref": "InterconnectAttachmentGroupLogicalStructureRegion"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupLogicalStructureRegion": {
+"description": "[Output Only] The regions Attachments in this group are in.",
+"id": "InterconnectAttachmentGroupLogicalStructureRegion",
+"properties": {
+"metros": {
+"items": {
+"$ref": "InterconnectAttachmentGroupLogicalStructureRegionMetro"
+},
+"type": "array"
+},
+"region": {
+"description": "[Output Only] The name of a region, like \"us-central1\".",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupLogicalStructureRegionMetro": {
+"description": "[Output Only] The metros of Attachments in this group in this region.",
+"id": "InterconnectAttachmentGroupLogicalStructureRegionMetro",
+"properties": {
+"facilities": {
+"items": {
+"$ref": "InterconnectAttachmentGroupLogicalStructureRegionMetroFacility"
+},
+"type": "array"
+},
+"metro": {
+"description": "[Output Only] The name of the metro, as a three-letter lowercase string like \"iad\". This is the first component of the location of an Interconnect.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupLogicalStructureRegionMetroFacility": {
+"description": "[Output Only] The facilities used for this group's Attachments' Interconnects.",
+"id": "InterconnectAttachmentGroupLogicalStructureRegionMetroFacility",
+"properties": {
+"facility": {
+"description": "[Output Only] The name of a facility, like \"iad-1234\".",
+"type": "string"
+},
+"zones": {
+"items": {
+"$ref": "InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone": {
+"description": "[Output Only] The zones that Attachments in this group are present in, in the given facilities. This is inherited from their Interconnects.",
+"id": "InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone",
+"properties": {
+"attachments": {
+"description": "[Output Only] URLs of Attachments in the given zone, to the given region, on Interconnects in the given facility and metro. Every Attachment in the AG has such an entry.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"zone": {
+"description": "[Output Only] The name of a zone, either \"zone1\" or \"zone2\".",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupsListResponse": {
+"id": "InterconnectAttachmentGroupsListResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of InterconnectAttachmentGroup resources.",
+"items": {
+"$ref": "InterconnectAttachmentGroup"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#interconnectAttachmentGroup",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -66967,6 +68328,423 @@ false
 "operational": {
 "description": "Indicates whether or not MACsec is operational on this link.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"InterconnectGroup": {
+"description": "An interconnect group resource allows customers to create, analyze, and expand their redundant connections.",
+"id": "InterconnectGroup",
+"properties": {
+"configured": {
+"$ref": "InterconnectGroupConfigured"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource. Provide this property when you create the resource.",
+"type": "string"
+},
+"etag": {
+"description": "Opaque system-generated token that uniquely identifies the configuration. If provided when patching a configuration in update mode, the provided token must match the current token or the update is rejected. This provides a reliable means of doing read-modify-write (optimistic locking) as described by API 154.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource type. The server generates this identifier.",
+"format": "uint64",
+"type": "string"
+},
+"intent": {
+"$ref": "InterconnectGroupIntent"
+},
+"interconnects": {
+"additionalProperties": {
+"$ref": "InterconnectGroupInterconnect"
+},
+"description": "Interconnects in the InterconnectGroup. Keys are arbitrary user-specified strings. Users are encouraged, but not required, to use their preferred format for resource links as keys. Note that there are add-members and remove-members methods in gcloud. The size of this map is limited by an \"Interconnects per group\" quota.",
+"type": "object"
+},
+"kind": {
+"default": "compute#InterconnectGroup",
+"description": "[Output Only] Type of the resource. Always compute#InterconnectGroup",
+"type": "string"
+},
+"name": {
+"annotations": {
+"required": [
+"compute.interconnectGroups.insert"
+]
+},
+"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"physicalStructure": {
+"$ref": "InterconnectGroupPhysicalStructure"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupConfigured": {
+"description": "[Output Only] The status of the group as configured. This has the same structure as the operational field reported by the OperationalStatus method, but does not take into account the operational status of each resource.",
+"id": "InterconnectGroupConfigured",
+"properties": {
+"topologyCapability": {
+"$ref": "InterconnectGroupConfiguredTopologyCapability"
+}
+},
+"type": "object"
+},
+"InterconnectGroupConfiguredTopologyCapability": {
+"description": "[Output Only] How reliable this topology is configured to be, and why this group does or does not meet the requirements for the intended capability.",
+"id": "InterconnectGroupConfiguredTopologyCapability",
+"properties": {
+"intendedCapabilityBlockers": {
+"items": {
+"$ref": "InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers"
+},
+"type": "array"
+},
+"supportedSla": {
+"enum": [
+"NO_SLA",
+"PRODUCTION_CRITICAL",
+"PRODUCTION_NON_CRITICAL",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers": {
+"description": "[Output Only] Reasons why configuration.topologyCapability.sla differs from intent.topologyCapability. This list is empty if and only if those are the same.",
+"id": "InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers",
+"properties": {
+"blockerType": {
+"enum": [
+"INCOMPATIBLE_METROS",
+"NOT_AVAILABLE",
+"NO_INTERCONNECTS",
+"NO_INTERCONNECTS_IN_METRO_AND_ZONE",
+"OTHER",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"documentationLink": {
+"description": "[Output Only] The url of Google Cloud public documentation explaining this requirement. This is set for every type of requirement.",
+"type": "string"
+},
+"explanation": {
+"description": "[Output Only] A human-readable explanation of this requirement and why it's not met. This is set for every type of requirement.",
+"type": "string"
+},
+"facilities": {
+"description": "[Output Only] Facilities used to explain this blocker in more detail. Like physicalStructure.metros.facilities.facility, this is a numeric string like \"5467\".",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"interconnects": {
+"description": "[Output Only] Interconnects used to explain this blocker in more detail.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"metros": {
+"description": "[Output Only] Metros used to explain this blocker in more detail. These are three-letter lowercase strings like \"iad\". A blocker like INCOMPATIBLE_METROS will specify the problematic metros in this field.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"zones": {
+"description": "[Output Only] Zones used to explain this blocker in more detail. Zone names are \"zone1\" and/or \"zone2\".",
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectGroupIntent": {
+"description": "The user's intent for this group. This is the only required field besides the name that must be specified on group creation.",
+"id": "InterconnectGroupIntent",
+"properties": {
+"topologyCapability": {
+"enum": [
+"NO_SLA",
+"PRODUCTION_CRITICAL",
+"PRODUCTION_NON_CRITICAL",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupInterconnect": {
+"description": "An Interconnect in this InterconnectGroup.",
+"id": "InterconnectGroupInterconnect",
+"properties": {
+"interconnect": {
+"description": "The URL of an Interconnect in this group. All Interconnects in the group are unique.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupPhysicalStructure": {
+"description": "[Output Only] An analysis of the physical layout of Interconnects in this group. Every Interconnect in the group is shown once in this structure.",
+"id": "InterconnectGroupPhysicalStructure",
+"properties": {
+"metros": {
+"items": {
+"$ref": "InterconnectGroupPhysicalStructureMetros"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectGroupPhysicalStructureMetros": {
+"description": "[Output Only] The metros Interconnects in this group are in.",
+"id": "InterconnectGroupPhysicalStructureMetros",
+"properties": {
+"facilities": {
+"items": {
+"$ref": "InterconnectGroupPhysicalStructureMetrosFacilities"
+},
+"type": "array"
+},
+"metro": {
+"description": "[Output Only] The name of the metro, as a three-letter lowercase string like \"iad\". This is the first component of the location of Interconnects underneath this.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupPhysicalStructureMetrosFacilities": {
+"description": "[Output Only] The facilities Interconnects in this metro are present in.",
+"id": "InterconnectGroupPhysicalStructureMetrosFacilities",
+"properties": {
+"facility": {
+"description": "[Output Only] The ID of this facility, as a numeric string like \"5467\". This is the third component of the location of Interconnects in this facility.",
+"type": "string"
+},
+"zones": {
+"items": {
+"$ref": "InterconnectGroupPhysicalStructureMetrosFacilitiesZones"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"InterconnectGroupPhysicalStructureMetrosFacilitiesZones": {
+"description": "[Output Only] The zones that Interconnects in this facility are present in.",
+"id": "InterconnectGroupPhysicalStructureMetrosFacilitiesZones",
+"properties": {
+"interconnects": {
+"description": "[Output Only] URLs of Interconnects in this redundancy group in the given metro, facility, and zone.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"zone": {
+"description": "[Output Only] The name of the zone, either \"zone1\" or \"zone2\". This is the second component of the location of Interconnects in this facility.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectGroupsListResponse": {
+"id": "InterconnectGroupsListResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of InterconnectGroup resources.",
+"items": {
+"$ref": "InterconnectGroup"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#InterconnectGroup",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -70054,6 +71832,7 @@ false
 "description": "[Output Only] The status of the instance. This field is empty when the instance does not exist.",
 "enum": [
 "DEPROVISIONING",
+"PENDING_STOP",
 "PROVISIONING",
 "REPAIRING",
 "RUNNING",
@@ -70066,6 +71845,7 @@ false
 ],
 "enumDescriptions": [
 "The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.",
+"The instance is shutting down gracefully.",
 "Resources are being allocated for the instance.",
 "The instance is in repair.",
 "The instance is running.",
@@ -70463,6 +72243,301 @@ false
 "description": "The whole units of the amount. For example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
 "format": "int64",
 "type": "string"
+}
+},
+"type": "object"
+},
+"MultiMig": {
+"description": "Multi-MIG represents a group of managed instance groups.",
+"id": "MultiMig",
+"properties": {
+"creationTimestamp": {
+"description": "[Output only] The creation timestamp of this multi-MIG in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource.",
+"type": "string"
+},
+"id": {
+"description": "[Output only] The unique identifier for this resource type. The server generates this identifier.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#multiMig",
+"description": "[Output only] Type of the resource. Always compute#multiMig for multi-MIGs.",
+"type": "string"
+},
+"locationPolicy": {
+"$ref": "MultiMigLocationPolicy"
+},
+"name": {
+"description": "The name of the multi-MIG. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"parts": {
+"additionalProperties": {
+"$ref": "MultiMigPart"
+},
+"description": "Map of user-provided names associated with their parts. Keys in the map are arbitrary names chosen by the user for parts. Keys need to be alphanumeric and not longer than 64 characters.",
+"type": "object"
+},
+"region": {
+"description": "[Output only] The URL of the region where the resource resides. You must specify this field as part of the HTTP request URL. You cannot set the region as a field in the request body.",
+"type": "string"
+},
+"resourcePolicies": {
+"$ref": "MultiMigResourcePolicies",
+"description": "Resource policies for this multi-MIG."
+},
+"schedulingPolicy": {
+"$ref": "MultiMigSchedulingPolicy",
+"description": "Policy for handling provisioning and other scheduling-related events."
+},
+"selfLink": {
+"description": "[Output only] Server-defined URL for the resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "[Output only] Server-defined URL for this resource with the resource id.",
+"type": "string"
+},
+"status": {
+"$ref": "MultiMigStatus"
+}
+},
+"type": "object"
+},
+"MultiMigLocationPolicy": {
+"description": "Policy regarding where to create managed instance groups. Initially only zonal managed instance groups in the same zone are supported.",
+"id": "MultiMigLocationPolicy",
+"properties": {
+"provisioningZones": {
+"description": "List of zones where managed instance groups will be provisioned. Should be valid RFC1035 name.",
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"MultiMigPart": {
+"description": "Part represents a single managed instance group, either as a reference to an existing one or as a structure containing properties necessary to create one. A multi-MIG can contain zero or more parts.",
+"id": "MultiMigPart",
+"properties": {
+"instanceGroupManager": {
+"description": "The URL of a managed instance group that you want to attach to the multi-MIG.",
+"type": "string"
+},
+"instanceGroupManagerProperties": {
+"$ref": "InstanceGroupManager",
+"description": "A managed instance group to be created by the multi-MIG."
+}
+},
+"type": "object"
+},
+"MultiMigResourcePolicies": {
+"description": "Resource policies message for a multi-MIG. Represents low level machine cluster behavior in several dimensions, all of which depend on the machine family and fleet.",
+"id": "MultiMigResourcePolicies",
+"properties": {
+"workloadPolicy": {
+"description": "The URL of the workload policy that is specified for this multi-MIG. It can be a full or partial URL. For example, the following are all valid URLs to a workload policy: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy ",
+"type": "string"
+}
+},
+"type": "object"
+},
+"MultiMigSchedulingPolicy": {
+"description": "Policy for handling provisioning and other scheduling-related events.",
+"id": "MultiMigSchedulingPolicy",
+"properties": {
+"provisioning": {
+"description": "How provisioning of parts (instance group managers) should be scheduled (coordinated or not).",
+"enum": [
+"ANY",
+"COOORDINATED"
+],
+"enumDescriptions": [
+"Allows idependent lifecycles of parts.",
+"Requires all parts at the same time."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"MultiMigStatus": {
+"id": "MultiMigStatus",
+"properties": {
+"memberInstanceGroupManagers": {
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"MultiMigsList": {
+"id": "MultiMigsList",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of multi-MIG resources.",
+"items": {
+"$ref": "MultiMig"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#multiMigList",
+"description": "Type of resource.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "This token allows you to get the next page of results for maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output only] Unreachable resources.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -72758,7 +74833,7 @@ false
 ],
 "enumDescriptions": [
 "The network interface can have both IPv4 and IPv6 addresses.",
-"The network interface will be assigned IPv4 address.",
+"The network interface will only be assigned IPv4 addresses.",
 "The network interface will only be assigned IPv6 addresses."
 ],
 "type": "string"
@@ -73402,18 +75477,6 @@ false
 "type": "string"
 },
 "type": "array"
-},
-"multicast": {
-"description": "Specifies which type of multicast is supported.",
-"enum": [
-"MULTICAST_SDN",
-"MULTICAST_ULL"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
 },
 "unicast": {
 "description": "Specifies which type of unicast is supported.",
@@ -76455,7 +78518,7 @@ false
 "type": "string"
 },
 "targetLink": {
-"description": "[Output Only] The URL of the resource that the operation modifies. For operations related to creating a snapshot, this points to the persistent disk that the snapshot was created from.",
+"description": "[Output Only] The URL of the resource that the operation modifies. For operations related to creating a snapshot, this points to the disk that the snapshot was created from.",
 "type": "string"
 },
 "user": {
@@ -78915,11 +80978,13 @@ false
 "description": "The public delegated prefix mode for IPv6 only.",
 "enum": [
 "DELEGATION",
-"EXTERNAL_IPV6_FORWARDING_RULE_CREATION"
+"EXTERNAL_IPV6_FORWARDING_RULE_CREATION",
+"EXTERNAL_IPV6_SUBNETWORK_CREATION"
 ],
 "enumDescriptions": [
 "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
-"The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes."
+"The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.",
+"The public delegated prefix is used for creating dual-mode subnetworks only. Such prefixes cannot set publicDelegatedSubPrefixes."
 ],
 "type": "string"
 },
@@ -79318,11 +81383,13 @@ false
 "description": "The PublicDelegatedSubPrefix mode for IPv6 only.",
 "enum": [
 "DELEGATION",
-"EXTERNAL_IPV6_FORWARDING_RULE_CREATION"
+"EXTERNAL_IPV6_FORWARDING_RULE_CREATION",
+"EXTERNAL_IPV6_SUBNETWORK_CREATION"
 ],
 "enumDescriptions": [
 "The public delegated prefix is used for further sub-delegation only. Such prefixes cannot set allocatablePrefixLength.",
-"The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes."
+"The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.",
+"The public delegated prefix is used for creating dual-mode subnetworks only. Such prefixes cannot set publicDelegatedSubPrefixes."
 ],
 "type": "string"
 },
@@ -82922,6 +84989,7 @@ false
 "type": "integer"
 },
 "kind": {
+"default": "compute#reservationBlock",
 "description": "[Output Only] Type of the resource. Always compute#reservationBlock for reservation blocks.",
 "type": "string"
 },
@@ -82932,6 +85000,10 @@ false
 "name": {
 "description": "[Output Only] The name of this reservation block generated by Google Compute Engine. The name must be 1-63 characters long, and comply with RFC1035 @pattern [a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
+},
+"reservationMaintenance": {
+"$ref": "GroupMaintenanceInfo",
+"description": "[Output Only] Maintenance information for the group of hosts on this reservation including running VMs and unused hosts. Applicable only to accelerator optimized VM families beyond A3 only. For both DENSE or STANDARD reservation, granular maintenance information can be retried at reservation block level."
 },
 "selfLink": {
 "description": "[Output Only] Server-defined fully-qualified URL for this resource.",
@@ -84386,6 +86458,13 @@ false
 "description": "Contains output only fields. Use this sub-message for actual values set on Instance attributes as compared to the value requested by the user (intent) in their instance CRUD calls.",
 "id": "ResourceStatus",
 "properties": {
+"acceleratorStatus": {
+"description": "[Output Only] Accelerators status show results of GPU scans. These scans are specialized diagnostic tests designed to uncover latent manufacturing defects or other issues that could potentially lead to data corruption or impede the customer's ability to efficiently execute GPU workloads.",
+"items": {
+"$ref": "ResourceStatusAcceleratorStatus"
+},
+"type": "array"
+},
 "lastInstanceTerminationDetails": {
 "$ref": "ResourceStatusLastInstanceTerminationDetails",
 "description": "[Output Only] Contains last termination details why the instance was terminated."
@@ -84410,6 +86489,70 @@ false
 },
 "upcomingMaintenance": {
 "$ref": "UpcomingMaintenance"
+}
+},
+"type": "object"
+},
+"ResourceStatusAcceleratorStatus": {
+"description": "The status of an individual accelerator resource.",
+"id": "ResourceStatusAcceleratorStatus",
+"properties": {
+"passedScans": {
+"description": "The details of scans that passed for an accelerator.",
+"items": {
+"$ref": "ResourceStatusAcceleratorStatusPassedScan"
+},
+"type": "array"
+},
+"recommendedScans": {
+"description": "The details of recommended scans for an accelerator.",
+"items": {
+"$ref": "ResourceStatusAcceleratorStatusRecommendedScan"
+},
+"type": "array"
+},
+"serialNumber": {
+"description": "The serial number of the accelerator.",
+"type": "string"
+},
+"uuid": {
+"description": "The UUID of the accelerator.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ResourceStatusAcceleratorStatusPassedScan": {
+"id": "ResourceStatusAcceleratorStatusPassedScan",
+"properties": {
+"endTime": {
+"description": "The end time of the passed scan in RFC3339 text format.",
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"startTime": {
+"description": "The start time of the passed scan in RFC3339 text format.",
+"type": "string"
+},
+"version": {
+"type": "string"
+}
+},
+"type": "object"
+},
+"ResourceStatusAcceleratorStatusRecommendedScan": {
+"id": "ResourceStatusAcceleratorStatusRecommendedScan",
+"properties": {
+"estimatedDuration": {
+"$ref": "Duration"
+},
+"name": {
+"type": "string"
+},
+"version": {
+"type": "string"
 }
 },
 "type": "object"
@@ -85199,6 +87342,10 @@ false
 "$ref": "RouterNat"
 },
 "type": "array"
+},
+"nccGateway": {
+"description": "URI of the ncc_gateway to which this router associated.",
+"type": "string"
 },
 "network": {
 "annotations": {
@@ -94234,6 +96381,10 @@ false
 "description": "The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.",
 "type": "string"
 },
+"ipCollection": {
+"description": "Reference to the source of IP, like a PublicDelegatedPrefix (PDP) for BYOIP. The PDP must be a sub-PDP in EXTERNAL_IPV6_SUBNETWORK_CREATION mode. Use one of the following formats to specify a sub-PDP when creating a dual stack subnetwork with external access using BYOIP: - Full resource URL, as in https://www.googleapis.com/compute/v1/projects/projectId/regions/region /publicDelegatedPrefixes/sub-pdp-name - Partial URL, as in - projects/projectId/regions/region/publicDelegatedPrefixes/ sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name ",
+"type": "string"
+},
 "ipv6AccessType": {
 "description": "The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.",
 "enum": [
@@ -94248,6 +96399,18 @@ false
 },
 "ipv6CidrRange": {
 "description": "[Output Only] This field is for internal use.",
+"type": "string"
+},
+"ipv6GceEndpoint": {
+"description": "[Output Only] Possible endpoints of this subnetwork. It can be one of the following: - VM_ONLY: The subnetwork can be used for creating instances and IPv6 addresses with VM endpoint type. Such a subnetwork gets external IPv6 ranges from a public delegated prefix and cannot be used to create NetLb. - VM_AND_FR: The subnetwork can be used for creating both VM instances and Forwarding Rules. It can also be used to reserve IPv6 addresses with both VM and FR endpoint types. Such a subnetwork gets its IPv6 range from Google IP Pool directly. ",
+"enum": [
+"VM_AND_FR",
+"VM_ONLY"
+],
+"enumDescriptions": [
+"",
+""
+],
 "type": "string"
 },
 "kind": {
@@ -94306,7 +96469,7 @@ false
 "CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
-"MIGRATION",
+"PEER_MIGRATION",
 "PRIVATE",
 "PRIVATE_NAT",
 "PRIVATE_RFC_1918",
@@ -94319,7 +96482,7 @@ false
 "Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
-"Subnetwork will be used for Migration (a transient state of subnetwork while migrating resources from one project to another).",
+"Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).",
 "Regular user created or automatically created subnet.",
 "Subnetwork used as source range for Private NAT Gateways.",
 "Regular user created or automatically created subnet.",
@@ -99241,7 +101404,7 @@ false
 "type": "object"
 },
 "UrlMap": {
-"description": "Represents a URL Map resource. Compute Engine has two URL Map resources: * [Global](/compute/docs/reference/rest/alpha/urlMaps) * [Regional](/compute/docs/reference/rest/alpha/regionUrlMaps) A URL map resource is a component of certain types of cloud load balancers and Traffic Director: * urlMaps are used by global external Application Load Balancers, classic Application Load Balancers, and cross-region internal Application Load Balancers. * regionUrlMaps are used by internal Application Load Balancers, regional external Application Load Balancers and regional internal Application Load Balancers. For a list of supported URL map features by the load balancer type, see the Load balancing features: Routing and traffic management table. For a list of supported URL map features for Traffic Director, see the Traffic Director features: Routing and traffic management table. This resource defines mappings from hostnames and URL paths to either a backend service or a backend bucket. To use the global urlMaps resource, the backend service must have a loadBalancingScheme of either EXTERNAL or INTERNAL_SELF_MANAGED. To use the regionUrlMaps resource, the backend service must have a loadBalancingScheme of INTERNAL_MANAGED. For more information, read URL Map Concepts.",
+"description": "Represents a URL Map resource. Compute Engine has two URL Map resources: * [Global](/compute/docs/reference/rest/alpha/urlMaps) * [Regional](/compute/docs/reference/rest/alpha/regionUrlMaps) A URL map resource is a component of certain types of cloud load balancers and Traffic Director: * urlMaps are used by global external Application Load Balancers, classic Application Load Balancers, and cross-region internal Application Load Balancers. * regionUrlMaps are used by internal Application Load Balancers, regional external Application Load Balancers and regional internal Application Load Balancers. For a list of supported URL map features by the load balancer type, see the Load balancing features: Routing and traffic management table. For a list of supported URL map features for Traffic Director, see the Traffic Director features: Routing and traffic management table. This resource defines mappings from hostnames and URL paths to either a backend service or a backend bucket. To use the global urlMaps resource, the backend service must have a loadBalancingScheme of either EXTERNAL, EXTERNAL_MANAGED, or INTERNAL_SELF_MANAGED. To use the regionUrlMaps resource, the backend service must have a loadBalancingScheme of INTERNAL_MANAGED. For more information, read URL Map Concepts.",
 "id": "UrlMap",
 "properties": {
 "creationTimestamp": {
@@ -99963,7 +102126,7 @@ false
 "CUSTOM_HARDWARE_LINK",
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
-"MIGRATION",
+"PEER_MIGRATION",
 "PRIVATE",
 "PRIVATE_NAT",
 "PRIVATE_RFC_1918",
@@ -99976,7 +102139,7 @@ false
 "Subnetwork used for Custom Hardware Link.",
 "Subnet reserved for Global Envoy-based Load Balancing.",
 "Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
-"Subnetwork will be used for Migration (a transient state of subnetwork while migrating resources from one project to another).",
+"Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).",
 "Regular user created or automatically created subnet.",
 "Subnetwork used as source range for Private NAT Gateways.",
 "Regular user created or automatically created subnet.",

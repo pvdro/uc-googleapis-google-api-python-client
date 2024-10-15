@@ -79,7 +79,7 @@ h1, h2, h3 {
 <p class="firstline">Close httplib2 connections.</p>
 <p class="toc_element">
   <code><a href="#get">get(name, x__xgafv=None)</a></code></p>
-<p class="firstline">Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).</p>
+<p class="firstline">Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Note: The `permissionSettings` field is not returned in the Space object of the Space event data for this request. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).</p>
 <p class="toc_element">
   <code><a href="#list">list(parent, filter=None, pageSize=None, pageToken=None, x__xgafv=None)</a></code></p>
 <p class="firstline">Lists events from a Google Chat space. For each event, the [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the Chat resource. For example, if you list events about new space members, the server returns `Membership` resources that contain the latest membership details. If new members were removed during the requested period, the event payload contains an empty `Membership` resource. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user). To list events, the authenticated user must be a member of the space. For an example, see [List events from a Google Chat space](https://developers.google.com/workspace/chat/list-space-events).</p>
@@ -94,7 +94,7 @@ h1, h2, h3 {
 
 <div class="method">
     <code class="details" id="get">get(name, x__xgafv=None)</code>
-  <pre>Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).
+  <pre>Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Note: The `permissionSettings` field is not returned in the Space object of the Space event data for this request. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user). To get an event, the authenticated user must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).
 
 Args:
   name: string, Required. The resource name of the space event. Format: `spaces/{space}/spaceEvents/{spaceEvent}` (required)
@@ -1986,7 +1986,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -2020,7 +2020,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -3794,7 +3794,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -3828,7 +3828,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -5602,7 +5602,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -5636,7 +5636,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -7408,7 +7408,7 @@ Returns:
           &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
         },
         &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
           &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
             &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -7442,7 +7442,7 @@ Returns:
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
           },
         },
-        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
         &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
         &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
           &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -9212,7 +9212,7 @@ Returns:
           &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
         },
         &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
           &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
             &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -9246,7 +9246,7 @@ Returns:
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
           },
         },
-        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
         &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
         &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
           &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -11016,7 +11016,7 @@ Returns:
           &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
         },
         &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+        &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
           &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
             &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -11050,7 +11050,7 @@ Returns:
             &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
           },
         },
-        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+        &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
         &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
         &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
           &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -11171,7 +11171,7 @@ Returns:
             &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
           },
           &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-          &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+          &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
             &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
               &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
               &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -11205,7 +11205,7 @@ Returns:
               &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
             },
           },
-          &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+          &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
           &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
           &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
             &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -11238,7 +11238,7 @@ Returns:
         &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
       },
       &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-      &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+      &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
         &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
           &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
           &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -11272,7 +11272,7 @@ Returns:
           &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
         },
       },
-      &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+      &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
       &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
       &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
         &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -11308,7 +11308,7 @@ Returns:
 
     { # Response message for listing space events.
   &quot;nextPageToken&quot;: &quot;A String&quot;, # Continuation token used to fetch more events. If this field is omitted, there are no subsequent pages.
-  &quot;spaceEvents&quot;: [ # Results are returned in chronological order (oldest event first).
+  &quot;spaceEvents&quot;: [ # Results are returned in chronological order (oldest event first). Note: The `permissionSettings` field is not returned in the Space object for list requests.
     { # An event that represents a change or activity in a Google Chat space. To learn more, see [Work with events from Google Chat](https://developers.google.com/workspace/chat/events-overview).
       &quot;eventTime&quot;: &quot;A String&quot;, # Time when the event occurred.
       &quot;eventType&quot;: &quot;A String&quot;, # Type of space event. Each event type has a batch version, which represents multiple instances of the event type that occur in a short period of time. For `spaceEvents.list()` requests, omit batch event types in your query filter. By default, the server returns both event type and its batch version. Supported event types for [messages](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages): * New message: `google.workspace.chat.message.v1.created` * Updated message: `google.workspace.chat.message.v1.updated` * Deleted message: `google.workspace.chat.message.v1.deleted` * Multiple new messages: `google.workspace.chat.message.v1.batchCreated` * Multiple updated messages: `google.workspace.chat.message.v1.batchUpdated` * Multiple deleted messages: `google.workspace.chat.message.v1.batchDeleted` Supported event types for [memberships](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members): * New membership: `google.workspace.chat.membership.v1.created` * Updated membership: `google.workspace.chat.membership.v1.updated` * Deleted membership: `google.workspace.chat.membership.v1.deleted` * Multiple new memberships: `google.workspace.chat.membership.v1.batchCreated` * Multiple updated memberships: `google.workspace.chat.membership.v1.batchUpdated` * Multiple deleted memberships: `google.workspace.chat.membership.v1.batchDeleted` Supported event types for [reactions](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.reactions): * New reaction: `google.workspace.chat.reaction.v1.created` * Deleted reaction: `google.workspace.chat.reaction.v1.deleted` * Multiple new reactions: `google.workspace.chat.reaction.v1.batchCreated` * Multiple deleted reactions: `google.workspace.chat.reaction.v1.batchDeleted` Supported event types about the [space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces): * Updated space: `google.workspace.chat.space.v1.updated` * Multiple space updates: `google.workspace.chat.space.v1.batchUpdated`
@@ -13189,7 +13189,7 @@ Returns:
                   &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
                 },
                 &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
                   &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                     &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -13223,7 +13223,7 @@ Returns:
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
                   },
                 },
-                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
                 &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
                 &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
                   &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -14997,7 +14997,7 @@ Returns:
                   &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
                 },
                 &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
                   &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                     &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -15031,7 +15031,7 @@ Returns:
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
                   },
                 },
-                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
                 &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
                 &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
                   &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -16805,7 +16805,7 @@ Returns:
                   &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
                 },
                 &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+                &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
                   &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                     &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -16839,7 +16839,7 @@ Returns:
                     &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
                   },
                 },
-                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+                &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
                 &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
                 &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
                   &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -18611,7 +18611,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -18645,7 +18645,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -20415,7 +20415,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -20449,7 +20449,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -22219,7 +22219,7 @@ Returns:
               &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
             },
             &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+            &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
               &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                 &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -22253,7 +22253,7 @@ Returns:
                 &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
               },
             },
-            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+            &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
             &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
             &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
               &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -22374,7 +22374,7 @@ Returns:
                 &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
               },
               &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-              &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+              &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
                 &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
                   &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
                   &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -22408,7 +22408,7 @@ Returns:
                   &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
                 },
               },
-              &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+              &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
               &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
               &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
                 &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
@@ -22441,7 +22441,7 @@ Returns:
             &quot;joinedGroupCount&quot;: 42, # Count of all groups that have directly joined the space.
           },
           &quot;name&quot;: &quot;A String&quot;, # Resource name of the space. Format: `spaces/{space}` Where `{space}` represents the system-assigned ID for the space. You can obtain the space ID by calling the [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list) method or from the space URL. For example, if the space URL is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID is `AAAAAAAAA`.
-          &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) for a named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Exact permission settings which can be set to update the space. Input for updating a space. Otherwise, output only. For space creation, use `predefined_permission_settings` instead.
+          &quot;permissionSettings&quot;: { # [Permission settings](https://support.google.com/chat/answer/13340792) that you can specify when updating an existing named space. To set permission settings when creating a space, specify the `PredefinedPermissionSettings` field in your request. # Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
             &quot;manageApps&quot;: { # Represents a space permission setting. # Setting for managing apps in a space.
               &quot;managersAllowed&quot;: True or False, # Whether spaces managers have this permission.
               &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
@@ -22475,7 +22475,7 @@ Returns:
               &quot;membersAllowed&quot;: True or False, # Whether non-manager members have this permission.
             },
           },
-          &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Space permission settings. Input for creating a space, a collaboration space is created if this field is not set. After you create the space, settings are populated in the `PermissionSettings` field.
+          &quot;predefinedPermissionSettings&quot;: &quot;A String&quot;, # Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the `PermissionSettings` field.
           &quot;singleUserBotDm&quot;: True or False, # Optional. Whether the space is a DM between a Chat app and a single human.
           &quot;spaceDetails&quot;: { # Details about the space including description and rules. # Details about the space including description and rules.
             &quot;description&quot;: &quot;A String&quot;, # Optional. A description of the space. For example, describe the space&#x27;s discussion topic, functional purpose, or participants. Supports up to 150 characters.
