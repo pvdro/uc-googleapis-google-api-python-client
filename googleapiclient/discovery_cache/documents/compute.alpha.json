@@ -2359,6 +2359,225 @@
 }
 }
 },
+"crossSiteNetworks": {
+"methods": {
+"delete": {
+"description": "Deletes the specified cross-site network in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"httpMethod": "DELETE",
+"id": "compute.crossSiteNetworks.delete",
+"parameterOrder": [
+"project",
+"crossSiteNetwork"
+],
+"parameters": {
+"crossSiteNetwork": {
+"description": "Name of the cross-site network to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified cross-site network in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"httpMethod": "GET",
+"id": "compute.crossSiteNetworks.get",
+"parameterOrder": [
+"project",
+"crossSiteNetwork"
+],
+"parameters": {
+"crossSiteNetwork": {
+"description": "Name of the cross-site network to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"response": {
+"$ref": "CrossSiteNetwork"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a cross-site network in the specified project in the given scope using the parameters that are included in the request.",
+"flatPath": "projects/{project}/global/crossSiteNetworks",
+"httpMethod": "POST",
+"id": "compute.crossSiteNetworks.insert",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"validateOnly": {
+"description": "[Input Only] Validate the new configuration, but don't create it. If applicable, any configuration notices are returned in the `configurationNotices` field.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks",
+"request": {
+"$ref": "CrossSiteNetwork"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the cross-site networks for a project in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks",
+"httpMethod": "GET",
+"id": "compute.crossSiteNetworks.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks",
+"response": {
+"$ref": "CrossSiteNetworkList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Updates the specified cross-site network with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"httpMethod": "PATCH",
+"id": "compute.crossSiteNetworks.patch",
+"parameterOrder": [
+"project",
+"crossSiteNetwork"
+],
+"parameters": {
+"crossSiteNetwork": {
+"description": "Name of the cross-site network to update.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"validateOnly": {
+"description": "[Input Only] Validate the new configuration, but don't update it. If applicable, any configuration notices are returned in the `configurationNotices` field.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}",
+"request": {
+"$ref": "CrossSiteNetwork"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "diskSettings": {
 "methods": {
 "get": {
@@ -2919,6 +3138,48 @@
 "path": "projects/{project}/zones/{zone}/disks/{disk}",
 "response": {
 "$ref": "Disk"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getAsyncReplicationStatus": {
+"description": "Gets the status of current async replication for a given device.",
+"flatPath": "projects/{project}/zones/{zone}/disks/{disk}/getAsyncReplicationStatus",
+"httpMethod": "GET",
+"id": "compute.disks.getAsyncReplicationStatus",
+"parameterOrder": [
+"project",
+"zone",
+"disk"
+],
+"parameters": {
+"disk": {
+"description": "Name of the Disk resource whose Async replication details are requested. Name should conform to RFC1035 or be an unsigned long integer.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/disks/{disk}/getAsyncReplicationStatus",
+"response": {
+"$ref": "GetAsyncReplicationStatusResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -3517,6 +3778,55 @@
 "path": "projects/{project}/zones/{zone}/disks/{disk}",
 "request": {
 "$ref": "Disk"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"waitForReplicationCatchUp": {
+"description": "Wait for replication to catch up on the secondary disk.",
+"flatPath": "projects/{project}/zones/{zone}/disks/{disk}/waitForReplicationCatchUp",
+"httpMethod": "POST",
+"id": "compute.disks.waitForReplicationCatchUp",
+"parameterOrder": [
+"project",
+"zone",
+"disk"
+],
+"parameters": {
+"disk": {
+"description": "The name of the persistent disk. Name should conform to RFC1035 or be an unsigned long integer.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/disks/{disk}/waitForReplicationCatchUp",
+"request": {
+"$ref": "WaitForReplicationCatchUpRequest"
 },
 "response": {
 "$ref": "Operation"
@@ -22366,6 +22676,56 @@
 "https://www.googleapis.com/auth/compute.readonly"
 ]
 },
+"listPreconfiguredExpressionSets": {
+"description": "Gets the current list of preconfigured Web Application Firewall (WAF) expressions.",
+"flatPath": "locations/global/securityPolicies/listPreconfiguredExpressionSets",
+"httpMethod": "GET",
+"id": "compute.organizationSecurityPolicies.listPreconfiguredExpressionSets",
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"parentId": {
+"description": "Parent ID for this request.",
+"location": "query",
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "locations/global/securityPolicies/listPreconfiguredExpressionSets",
+"response": {
+"$ref": "SecurityPoliciesListPreconfiguredExpressionSetsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
 "move": {
 "description": "Moves the specified security policy.",
 "flatPath": "locations/global/securityPolicies/{securityPolicy}/move",
@@ -26016,6 +26376,48 @@
 "https://www.googleapis.com/auth/compute.readonly"
 ]
 },
+"getAsyncReplicationStatus": {
+"description": "Gets the status of current async replication for a given device.",
+"flatPath": "projects/{project}/regions/{region}/disks/{disk}/getAsyncReplicationStatus",
+"httpMethod": "GET",
+"id": "compute.regionDisks.getAsyncReplicationStatus",
+"parameterOrder": [
+"project",
+"region",
+"disk"
+],
+"parameters": {
+"disk": {
+"description": "Name of the Disk resource whose Async replication details are requested. Name should conform to RFC1035 or be an unsigned long integer.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/disks/{disk}/getAsyncReplicationStatus",
+"response": {
+"$ref": "GetAsyncReplicationStatusResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
 "getIamPolicy": {
 "description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
 "flatPath": "projects/{project}/regions/{region}/disks/{resource}/getIamPolicy",
@@ -26607,6 +27009,55 @@
 "path": "projects/{project}/regions/{region}/disks/{disk}",
 "request": {
 "$ref": "Disk"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"waitForReplicationCatchUp": {
+"description": "Wait for replication to catch up on the secondary disk.",
+"flatPath": "projects/{project}/regions/{region}/disks/{disk}/waitForReplicationCatchUp",
+"httpMethod": "POST",
+"id": "compute.regionDisks.waitForReplicationCatchUp",
+"parameterOrder": [
+"project",
+"region",
+"disk"
+],
+"parameters": {
+"disk": {
+"description": "The name of the persistent disk. Name should conform to RFC1035 or be an unsigned long integer.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/disks/{disk}/waitForReplicationCatchUp",
+"request": {
+"$ref": "RegionWaitForReplicationCatchUpRequest"
 },
 "response": {
 "$ref": "Operation"
@@ -30279,7 +30730,7 @@
 ]
 },
 "get": {
-"description": "Returns the specified multi-MIG resource.",
+"description": "Returns all the details of a specific multi-MIG.",
 "flatPath": "projects/{project}/regions/{region}/multiMigs/{multiMig}",
 "httpMethod": "GET",
 "id": "compute.regionMultiMigs.get",
@@ -30346,7 +30797,7 @@
 "type": "string"
 },
 "requestId": {
-"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents you from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
 "location": "query",
 "type": "string"
 }
@@ -45871,6 +46322,266 @@
 }
 }
 },
+"wireGroups": {
+"methods": {
+"delete": {
+"description": "Deletes the specified wire group in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"httpMethod": "DELETE",
+"id": "compute.wireGroups.delete",
+"parameterOrder": [
+"project",
+"crossSiteNetwork",
+"wireGroup"
+],
+"parameters": {
+"crossSiteNetwork": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"wireGroup": {
+"description": "Name of the wire group resource to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Gets the specified wire group resource in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"httpMethod": "GET",
+"id": "compute.wireGroups.get",
+"parameterOrder": [
+"project",
+"crossSiteNetwork",
+"wireGroup"
+],
+"parameters": {
+"crossSiteNetwork": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"wireGroup": {
+"description": "Name of the wire group resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"response": {
+"$ref": "WireGroup"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a wire group in the specified project in the given scope using the parameters that are included in the request.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups",
+"httpMethod": "POST",
+"id": "compute.wireGroups.insert",
+"parameterOrder": [
+"project",
+"crossSiteNetwork"
+],
+"parameters": {
+"crossSiteNetwork": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"validateOnly": {
+"description": "[Input Only] Validate the new configuration, but don't create it. If applicable, any configuration notices are returned in the `configurationNotices` field.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups",
+"request": {
+"$ref": "WireGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the wire groups for a project in the given scope.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups",
+"httpMethod": "GET",
+"id": "compute.wireGroups.list",
+"parameterOrder": [
+"project",
+"crossSiteNetwork"
+],
+"parameters": {
+"crossSiteNetwork": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups",
+"response": {
+"$ref": "WireGroupList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Updates the specified wire group resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.",
+"flatPath": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"httpMethod": "PATCH",
+"id": "compute.wireGroups.patch",
+"parameterOrder": [
+"project",
+"crossSiteNetwork",
+"wireGroup"
+],
+"parameters": {
+"crossSiteNetwork": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"updateMask": {
+"description": "update_mask indicates fields to be updated as part of this request.",
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+},
+"validateOnly": {
+"description": "[Input Only] Validate the new configuration, but don't update it. If applicable, any configuration notices are returned in the `configurationNotices` field.",
+"location": "query",
+"type": "boolean"
+},
+"wireGroup": {
+"description": "Name of the WireGroups resource to patch.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/crossSiteNetworks/{crossSiteNetwork}/wireGroups/{wireGroup}",
+"request": {
+"$ref": "WireGroup"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "zoneOperations": {
 "methods": {
 "delete": {
@@ -46468,7 +47179,7 @@
 }
 }
 },
-"revision": "20241001",
+"revision": "20241015",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47885,13 +48596,13 @@ false
 "id": "AllocationResourceStatus",
 "properties": {
 "reservationBlockCount": {
-"description": "Indicates number of blocks for accelerator optimized family (applicable beyond A3 only).",
+"description": "The number of reservation blocks associated with this reservation.",
 "format": "int32",
 "type": "integer"
 },
 "reservationMaintenance": {
 "$ref": "GroupMaintenanceInfo",
-"description": "Maintenance information for the group of hosts on this reservation including running VMs and unused hosts. Applicable only to accelerator optimized VM families beyond A3 only. For both DENSE or STANDARD reservation, granular maintenance information can be retried at reservation block level."
+"description": "Maintenance information for this reservation"
 },
 "specificSkuAllocation": {
 "$ref": "AllocationResourceStatusSpecificSKUAllocation",
@@ -48022,6 +48733,18 @@ false
 "sourceInstanceTemplate": {
 "description": "Specifies the instance template to create the reservation. If you use this field, you must exclude the instanceProperties field. This field is optional, and it can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate ",
 "type": "string"
+}
+},
+"type": "object"
+},
+"AsyncReplicationStatus": {
+"id": "AsyncReplicationStatus",
+"properties": {
+"diskPairReplicationState": {
+"$ref": "DiskPairReplicationState"
+},
+"lastReplicationDetails": {
+"$ref": "ReplicationDetails"
 }
 },
 "type": "object"
@@ -48329,7 +49052,7 @@ false
 "type": "object"
 },
 "AuditConfig": {
-"description": "Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit_configs\": [ { \"service\": \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\", \"exempted_members\": [ \"user:jose@example.com\" ] }, { \"log_type\": \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\": [ \"user:aliya@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts jose@example.com from DATA_READ logging, and aliya@example.com from DATA_WRITE logging.",
+"description": "Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit_configs\": [ { \"service\": \"allServices\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\", \"exempted_members\": [ \"user:jose@example.com\" ] }, { \"log_type\": \"DATA_WRITE\" }, { \"log_type\": \"ADMIN_READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\" }, { \"log_type\": \"DATA_WRITE\", \"exempted_members\": [ \"user:aliya@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts `jose@example.com` from DATA_READ logging, and `aliya@example.com` from DATA_WRITE logging.",
 "id": "AuditConfig",
 "properties": {
 "auditLogConfigs": {
@@ -51733,10 +52456,6 @@ false
 "description": "Associates `members`, or principals, with a `role`.",
 "id": "Binding",
 "properties": {
-"bindingId": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-},
 "condition": {
 "$ref": "Expr",
 "description": "The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
@@ -52217,6 +52936,7 @@ false
 "ACCELERATOR_OPTIMIZED",
 "ACCELERATOR_OPTIMIZED_A3",
 "ACCELERATOR_OPTIMIZED_A3_MEGA",
+"ACCELERATOR_OPTIMIZED_A3_ULTRA",
 "COMPUTE_OPTIMIZED",
 "COMPUTE_OPTIMIZED_C2D",
 "COMPUTE_OPTIMIZED_C3",
@@ -52240,6 +52960,7 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -52756,86 +53477,6 @@ false
 },
 "type": "object"
 },
-"Condition": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "Condition",
-"properties": {
-"iam": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"APPROVER",
-"ATTRIBUTION",
-"AUTHORITY",
-"CREDENTIALS_TYPE",
-"CREDS_ASSERTION",
-"JUSTIFICATION_TYPE",
-"NO_ATTR",
-"SECURITY_REALM"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-},
-"op": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"DISCHARGED",
-"EQUALS",
-"IN",
-"NOT_EQUALS",
-"NOT_IN",
-"NO_OP"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-},
-"svc": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-},
-"sys": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"IP",
-"NAME",
-"NO_ATTR",
-"REGION",
-"SERVICE"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-},
-"values": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"type": "string"
-},
-"type": "array"
-}
-},
-"type": "object"
-},
 "ConfidentialInstanceConfig": {
 "description": "A set of Confidential Instance options.",
 "id": "ConfidentialInstanceConfig",
@@ -52965,6 +53606,206 @@ false
 "description": "Specifies how long results of a preflight request can be cached in seconds. This field translates to the Access-Control-Max-Age header.",
 "format": "int32",
 "type": "integer"
+}
+},
+"type": "object"
+},
+"CrossSiteNetwork": {
+"description": "A resource that represents a cross-site network. You can use cross-site networks to connect your on-premises networks to each other through Interconnect connections.",
+"id": "CrossSiteNetwork",
+"properties": {
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of the cross-site network.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource type. The server generates this identifier.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#crossSiteNetwork",
+"description": "[Output Only] Type of the resource. Always compute#crossSiteNetwork for cross-site networks.",
+"type": "string"
+},
+"name": {
+"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "[Output Only] Server-defined URL for this resource with the resource id.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"CrossSiteNetworkList": {
+"description": "Response to the list request that contains a list of cross-site networks.",
+"id": "CrossSiteNetworkList",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of CrossSiteNetwork resources.",
+"items": {
+"$ref": "CrossSiteNetwork"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#crossSiteNetwork",
+"description": "[Output Only] Type of the resource. Always compute#crossSiteNetwork for cross-site networks.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -53818,6 +54659,39 @@ false
 "targetDisk": {
 "description": "The URL of the target disk to move. This can be a full or partial URL. For example, the following are all valid URLs to a disk: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - projects/project/zones/zone/disks/disk - zones/zone/disks/disk ",
 "type": "string"
+}
+},
+"type": "object"
+},
+"DiskPairReplicationState": {
+"id": "DiskPairReplicationState",
+"properties": {
+"dataReplicationState": {
+"description": "[Output Only] The status of disk creation. - ASYNC_REPLICATION_STATE_INITIALIZING: The device is doing the initial replication after starting the replication. - ASYNC_REPLICATION_STATE_REPLICATING_HEALTHY: The primary disk is healthily replicating to the secondary device i.e. last_replication_time is within RPO. - ASYNC_REPLICATION_STATE_REPLICATING_BEHIND: The replication is lagging above the SLO limit due to some internal issue. - ASYNC_REPLICATION_STATE_REPLICATING_UNHEALTHY: The replication is lagging, and the RPO is not being met due to some internal issue. . - ASYNC_REPLICATION_STATE_REPLICATION_STUCK: The replication is completely stuck due to some internal error. - ASYNC_REPLICATION_STATE_STOPPING: The replication is under the process of being stopped. This is a transient state. - ASYNC_REPLICATION_STATE_STOPPED: The replication between the disk-pairs have stopped. ",
+"enum": [
+"ASYNC_REPLICATION_STATE_INITIALIZING",
+"ASYNC_REPLICATION_STATE_REPLICATING_BEHIND",
+"ASYNC_REPLICATION_STATE_REPLICATING_HEALTHY",
+"ASYNC_REPLICATION_STATE_REPLICATING_UNHEALTHY",
+"ASYNC_REPLICATION_STATE_REPLICATION_STUCK",
+"ASYNC_REPLICATION_STATE_STOPPED",
+"ASYNC_REPLICATION_STATE_STOPPING",
+"ASYNC_REPLICATION_STATE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The device is doing the initial replication after starting the replication.",
+"The replication is lagging behind (last_replication_time > RPO), because the disk's change rate is above the supported limit.",
+"The primary disk is healthily replicating to the secondary device i.e. last_replication_time is within RPO.",
+"The replication is lagging, and the RPO is not being met due to some internal issue.",
+"The replication is completely stuck due to some internal error.",
+"The replication between the disk-pairs have stopped.",
+"The replication is under the process of being stopped. This is a transient sate.",
+""
+],
+"type": "string"
+},
+"replicationDiskPair": {
+"$ref": "ReplicationDiskPair"
 }
 },
 "type": "object"
@@ -56905,9 +57779,9 @@ false
 "FLEXIBLE"
 ],
 "enumDescriptions": [
-"Number of deployment blocks, size, and topology is fixed during creation and does not change over time. Deployment will be expressed in terms of blocks.",
-"Deployment type is unspecified.",
-"Distribution of capacity in blocks is not static and can change over time. This is expected to have more obtainability over DENSE deployment. Deployment will not be expressed in terms of blocks."
+"The reserved capacity is made up of densely deployed reservation blocks.",
+"",
+"The reserved capacity is made up of highly flexible, logical reservation blocks."
 ],
 "type": "string"
 },
@@ -56976,16 +57850,16 @@ false
 "type": "string"
 },
 "schedulingType": {
-"description": "Indicates the maintenance type for this group of VMs. This will be set on the reservation via FR, and will be inherited for reservation blocks.",
+"description": "Maintenance information for this reservation",
 "enum": [
 "GROUPED",
 "GROUP_MAINTENANCE_TYPE_UNSPECIFIED",
 "INDEPENDENT"
 ],
 "enumDescriptions": [
-"Synchronized maintenance. Common maintenance schedule/window is defined for this group of VMs. Not applicable for FLEXIBLE reservation",
+"Maintenance on all reserved instances in the reservation is synchronized.",
 "Unknown maintenance type.",
-"Unsynchronized maintenance. These group of VMs do not share a common schedule for maintenance. Instead all VMs have individual windows of their own in which maintenance is scheduled."
+"Maintenance is not synchronized for this reservation. Instead, each instance has its own maintenance window."
 ],
 "type": "string"
 },
@@ -57805,6 +58679,19 @@ false
 },
 "type": "object"
 },
+"GetAsyncReplicationStatusResponse": {
+"id": "GetAsyncReplicationStatusResponse",
+"properties": {
+"asyncReplicationStatus": {
+"$ref": "AsyncReplicationStatus"
+},
+"etag": {
+"description": "end_interface: MixerGetResponseWithEtagBuilder",
+"type": "string"
+}
+},
+"type": "object"
+},
 "GetOwnerInstanceResponse": {
 "id": "GetOwnerInstanceResponse",
 "properties": {
@@ -57922,7 +58809,7 @@ false
 "id": "GroupMaintenanceInfo",
 "properties": {
 "enableOpportunisticMaintenance": {
-"description": "Indicates if this group of VMs have opportunistic maintenance enabled. This will be set on the reservation, and will be inherited for reservation blocks.",
+"description": "This setting enables or disables opportunistic maintenance. If enabled, maintenance is performed on unused reservations whenever possible.",
 "type": "boolean"
 },
 "maintenanceOngoingCount": {
@@ -57936,16 +58823,16 @@ false
 "type": "integer"
 },
 "schedulingType": {
-"description": "Indicates the maintenance type for this group of VMs. This will be set on the reservation, and will be inherited for reservation blocks.",
+"description": "The type of maintenance for the reservation.",
 "enum": [
 "GROUPED",
 "GROUP_MAINTENANCE_TYPE_UNSPECIFIED",
 "INDEPENDENT"
 ],
 "enumDescriptions": [
-"Synchronized maintenance. Common maintenance schedule/window is defined for this group of VMs. Not applicable for FLEXIBLE reservation",
+"Maintenance on all reserved instances in the reservation is synchronized.",
 "Unknown maintenance type.",
-"Unsynchronized maintenance. These group of VMs do not share a common schedule for maintenance. Instead all VMs have individual windows of their own in which maintenance is scheduled."
+"Maintenance is not synchronized for this reservation. Instead, each instance has its own maintenance window."
 ],
 "type": "string"
 },
@@ -61895,7 +62782,7 @@ false
 "type": "string"
 },
 "namedPorts": {
-"description": "Named ports configured for the Instance Groups complementary to this Instance Group Manager.",
+"description": "[Output Only] Named ports configured on the Instance Groups complementary to this Instance Group Manager.",
 "items": {
 "$ref": "NamedPort"
 },
@@ -65476,7 +66363,7 @@ false
 "id": "InstancesGetEffectiveFirewallsResponse",
 "properties": {
 "firewallPolicys": {
-"description": "Effective firewalls from firewall policies.",
+"description": "[Output Only] Effective firewalls from firewall policies.",
 "items": {
 "$ref": "InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
 },
@@ -65517,7 +66404,7 @@ false
 "type": "integer"
 },
 "rules": {
-"description": "The rules that apply to the network.",
+"description": "[Output Only] The rules that apply to the instance. Only rules that target the specific VM instance are returned if target service accounts or target secure tags are specified in the rules.",
 "items": {
 "$ref": "FirewallPolicyRule"
 },
@@ -66603,7 +67490,7 @@ false
 "id": "Interconnect",
 "properties": {
 "aaiEnabled": {
-"description": "Enable or disable the Application Aware Interconnect(AAI) feature on this interconnect.",
+"description": "Enable or disable the application awareness feature on this Cloud Interconnect.",
 "type": "boolean"
 },
 "adminEnabled": {
@@ -66612,7 +67499,7 @@ false
 },
 "applicationAwareInterconnect": {
 "$ref": "InterconnectApplicationAwareInterconnect",
-"description": "Configuration for enabling Application Aware Interconnect (AAI) on this Cloud Interconnect connection between Google and your on-premises router."
+"description": "Configuration information for application awareness on this Cloud Interconnect."
 },
 "availableFeatures": {
 "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - IF_MACSEC If present then the Interconnect connection is provisioned on MACsec capable hardware ports. If not present then the Interconnect connection is provisioned on non-MACsec capable ports and MACsec isn't supported and enabling MACsec fails.",
@@ -66820,14 +67707,14 @@ false
 "type": "object"
 },
 "InterconnectApplicationAwareInterconnect": {
-"description": "Configuration information for enabling Application Aware Interconnect (AAI) on this Cloud Interconnect connection between Google and your on-premises router.",
+"description": "Configuration information for application awareness on this Cloud Interconnect.",
 "id": "InterconnectApplicationAwareInterconnect",
 "properties": {
 "bandwidthPercentagePolicy": {
 "$ref": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy"
 },
 "profileDescription": {
-"description": "A description for the AAI profile on this interconnect.",
+"description": "Description for the application awareness profile on this Cloud Interconnect.",
 "type": "string"
 },
 "shapeAveragePercentages": {
@@ -70843,102 +71730,6 @@ false
 },
 "type": "object"
 },
-"LogConfig": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "LogConfig",
-"properties": {
-"cloudAudit": {
-"$ref": "LogConfigCloudAuditOptions",
-"description": "This is deprecated and has no effect. Do not use."
-},
-"counter": {
-"$ref": "LogConfigCounterOptions",
-"description": "This is deprecated and has no effect. Do not use."
-},
-"dataAccess": {
-"$ref": "LogConfigDataAccessOptions",
-"description": "This is deprecated and has no effect. Do not use."
-}
-},
-"type": "object"
-},
-"LogConfigCloudAuditOptions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "LogConfigCloudAuditOptions",
-"properties": {
-"logName": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"ADMIN_ACTIVITY",
-"DATA_ACCESS",
-"UNSPECIFIED_LOG_NAME"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-}
-},
-"type": "object"
-},
-"LogConfigCounterOptions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "LogConfigCounterOptions",
-"properties": {
-"customFields": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"$ref": "LogConfigCounterOptionsCustomField"
-},
-"type": "array"
-},
-"field": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-},
-"metric": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-}
-},
-"type": "object"
-},
-"LogConfigCounterOptionsCustomField": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "LogConfigCounterOptionsCustomField",
-"properties": {
-"name": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-},
-"value": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-}
-},
-"type": "object"
-},
-"LogConfigDataAccessOptions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "LogConfigDataAccessOptions",
-"properties": {
-"logMode": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"LOG_FAIL_CLOSED",
-"LOG_MODE_UNSPECIFIED"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-}
-},
-"type": "object"
-},
 "MachineImage": {
 "description": "Represents a machine image resource. A machine image is a Compute Engine resource that stores all the configuration, metadata, permissions, and data from one or more disks required to create a Virtual machine (VM) instance. For more information, see Machine images.",
 "id": "MachineImage",
@@ -72340,11 +73131,11 @@ false
 "type": "object"
 },
 "MultiMigResourcePolicies": {
-"description": "Resource policies message for a multi-MIG. Represents low level machine cluster behavior in several dimensions, all of which depend on the machine family and fleet.",
+"description": "Resource policies message for a multi-MIG. Specifies the workload policy configuration of the multi-MIG.",
 "id": "MultiMigResourcePolicies",
 "properties": {
 "workloadPolicy": {
-"description": "The URL of the workload policy that is specified for this multi-MIG. It can be a full or partial URL. For example, the following are all valid URLs to a workload policy: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy ",
+"description": "The URL of the workload policy for this multi-MIG. It can be a full or partial URL. For example, the following are all valid URLs to a workload policy: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy ",
 "type": "string"
 }
 },
@@ -72392,7 +73183,7 @@ false
 "type": "string"
 },
 "items": {
-"description": "A list of multi-MIG resources.",
+"description": "A list of multi-MIGs in the specified project and region.",
 "items": {
 "$ref": "MultiMig"
 },
@@ -75427,38 +76218,6 @@ false
 ],
 "type": "string"
 },
-"allowedSubnetPurposes": {
-"description": "Specifies which subnetwork purposes are supported.",
-"items": {
-"enum": [
-"SUBNET_PURPOSE_CUSTOM_HARDWARE",
-"SUBNET_PURPOSE_PRIVATE"
-],
-"enumDescriptions": [
-"",
-""
-],
-"type": "string"
-},
-"type": "array"
-},
-"allowedSubnetStackTypes": {
-"description": "Specifies which subnetwork stack types are supported.",
-"items": {
-"enum": [
-"SUBNET_STACK_TYPE_IPV4_IPV6",
-"SUBNET_STACK_TYPE_IPV4_ONLY",
-"SUBNET_STACK_TYPE_IPV6_ONLY"
-],
-"enumDescriptions": [
-"",
-"",
-""
-],
-"type": "string"
-},
-"type": "array"
-},
 "interfaceTypes": {
 "description": "If set, limits the interface types that the network supports. If empty, all interface types are supported.",
 "items": {
@@ -75473,6 +76232,38 @@ false
 "IDPF",
 "No type specified.",
 "VIRTIO"
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetPurposes": {
+"description": "Specifies which subnetwork purposes are supported.",
+"items": {
+"enum": [
+"SUBNET_PURPOSE_CUSTOM_HARDWARE",
+"SUBNET_PURPOSE_PRIVATE"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetStackTypes": {
+"description": "Specifies which subnetwork stack types are supported.",
+"items": {
+"enum": [
+"SUBNET_STACK_TYPE_IPV4_IPV6",
+"SUBNET_STACK_TYPE_IPV4_ONLY",
+"SUBNET_STACK_TYPE_IPV6_ONLY"
+],
+"enumDescriptions": [
+"",
+"",
+""
 ],
 "type": "string"
 },
@@ -75741,7 +76532,7 @@ false
 "id": "NetworksGetEffectiveFirewallsResponse",
 "properties": {
 "firewallPolicys": {
-"description": "Effective firewalls from firewall policy.",
+"description": "[Output Only] Effective firewalls from firewall policy. It returns Global Network Firewall Policies and Hierarchical Firewall Policies. Use regionNetworkFirewallPolicies.getEffectiveFirewalls to get Regional Network Firewall Policies as well.",
 "items": {
 "$ref": "NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
 },
@@ -75782,7 +76573,7 @@ false
 "type": "integer"
 },
 "rules": {
-"description": "The rules that apply to the network.",
+"description": "[Output Only] The rules that apply to the network.",
 "items": {
 "$ref": "FirewallPolicyRule"
 },
@@ -80155,13 +80946,6 @@ false
 "format": "byte",
 "type": "string"
 },
-"rules": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"$ref": "Rule"
-},
-"type": "array"
-},
 "version": {
 "description": "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).",
 "format": "int32",
@@ -84486,7 +85270,7 @@ false
 "id": "RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse",
 "properties": {
 "firewallPolicys": {
-"description": "Effective firewalls from firewall policy.",
+"description": "[Output only] Effective firewalls from firewall policy. It applies to Regional Network Firewall Policies in the specified region, Global Network Firewall Policies and Hierachial Firewall Policies which are associated with the network.",
 "items": {
 "$ref": "RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
 },
@@ -84519,7 +85303,7 @@ false
 "type": "integer"
 },
 "rules": {
-"description": "The rules that apply to the network.",
+"description": "[Output only] The rules that apply to the network.",
 "items": {
 "$ref": "FirewallPolicyRule"
 },
@@ -84611,6 +85395,46 @@ false
 },
 "type": "object"
 },
+"RegionWaitForReplicationCatchUpRequest": {
+"id": "RegionWaitForReplicationCatchUpRequest",
+"properties": {
+"maxWaitDuration": {
+"format": "google-duration",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReplicationDetails": {
+"id": "ReplicationDetails",
+"properties": {
+"lastReplicationTime": {
+"description": "The last sync time of the device pair.",
+"format": "google-datetime",
+"type": "string"
+},
+"secondsSinceLastReplication": {
+"description": "Replication lag in seconds. This will only be populated if device is in replicating state. Note that the value is calculated sometime during request processing and at the instant the client receives the response, the current replication_lag may have changed.",
+"format": "int64",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReplicationDiskPair": {
+"id": "ReplicationDiskPair",
+"properties": {
+"primaryDisk": {
+"description": "URL of the primary disk.",
+"type": "string"
+},
+"secondaryDisk": {
+"description": "URL of the secondary disk.",
+"type": "string"
+}
+},
+"type": "object"
+},
 "RequestMirrorPolicy": {
 "description": "A policy that specifies how requests intended for the route's backends are shadowed to a separate mirrored backend service. The load balancer doesn't wait for responses from the shadow service. Before sending traffic to the shadow service, the host or authority header is suffixed with -shadow.",
 "id": "RequestMirrorPolicy",
@@ -84659,9 +85483,9 @@ false
 "FLEXIBLE"
 ],
 "enumDescriptions": [
-"Number of deployment blocks, size, and topology is fixed during creation and does not change over time. Deployment will be expressed in terms of blocks.",
-"Deployment type is unspecified.",
-"Distribution of capacity in blocks is not static and can change over time. This is expected to have more obtainability over DENSE deployment. Deployment will not be expressed in terms of blocks."
+"The reserved capacity is made up of densely deployed reservation blocks.",
+"",
+"The reserved capacity is made up of highly flexible, logical reservation blocks."
 ],
 "type": "string"
 },
@@ -84675,7 +85499,7 @@ false
 "type": "string"
 },
 "instanceTerminationAction": {
-"description": "Instance termination action that will be invoked when the reservation is deleted.",
+"description": "Instance termination action is invoked when the reservation is deleted. This only applies to reservations with a Deployment type.",
 "enum": [
 "DELETE",
 "INSTANCE_TERMINATION_ACTION_UNSPECIFIED",
@@ -84743,7 +85567,7 @@ false
 "type": "boolean"
 },
 "status": {
-"description": "[Output Only] The status of the reservation.",
+"description": "[Output Only] The status of the reservation. - CREATING: Reservation resources are being allocated. - READY: Reservation resources have been allocated, and the reservation is ready for use. - DELETING: Reservation deletion is in progress. - UPDATING: Reservation update is in progress. ",
 "enum": [
 "CREATING",
 "DELETING",
@@ -84752,11 +85576,11 @@ false
 "UPDATING"
 ],
 "enumDescriptions": [
-"Resources are being allocated for the reservation.",
-"Reservation is currently being deleted.",
+"Reservation resources are being allocated.",
+"Reservation deletion is in progress.",
 "",
-"Reservation has allocated all its resources.",
-"Reservation is currently being resized."
+"Reservation resources have been allocated, and the reservation is ready for use.",
+"Reservation update is in progress."
 ],
 "type": "string"
 },
@@ -84970,7 +85794,7 @@ false
 "id": "ReservationBlock",
 "properties": {
 "count": {
-"description": "[Output Only] Specifies the number of resources that are allocated in this block. It indicates the maximum number of VMs that a user can run on this particular block.",
+"description": "[Output Only] The number of resources that are allocated in this reservation block.",
 "format": "int32",
 "type": "integer"
 },
@@ -84984,7 +85808,7 @@ false
 "type": "string"
 },
 "inUseCount": {
-"description": "[Output Only] Indicates how many instances are in use on this block.",
+"description": "[Output Only] The number of instances that are currently in use on this reservation block.",
 "format": "int32",
 "type": "integer"
 },
@@ -84994,6 +85818,7 @@ false
 "type": "string"
 },
 "locationPrefix": {
+"deprecated": true,
 "description": "[Output Only] Obfuscated location where this reservation block physically resides in format /CCCC/GGGG. This matches the tripod specified in the VM topology information. Example: /USEAB1/0101/ is the location prefix in /USEAB1/0101/031/003",
 "type": "string"
 },
@@ -85001,9 +85826,13 @@ false
 "description": "[Output Only] The name of this reservation block generated by Google Compute Engine. The name must be 1-63 characters long, and comply with RFC1035 @pattern [a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"physicalTopology": {
+"$ref": "ReservationBlockPhysicalTopology",
+"description": "[Output Only] The physical topology of the reservation block."
+},
 "reservationMaintenance": {
 "$ref": "GroupMaintenanceInfo",
-"description": "[Output Only] Maintenance information for the group of hosts on this reservation including running VMs and unused hosts. Applicable only to accelerator optimized VM families beyond A3 only. For both DENSE or STANDARD reservation, granular maintenance information can be retried at reservation block level."
+"description": "[Output Only] Maintenance information for this reservation block."
 },
 "selfLink": {
 "description": "[Output Only] Server-defined fully-qualified URL for this resource.",
@@ -85031,6 +85860,20 @@ false
 },
 "zone": {
 "description": "[Output Only] Zone in which the reservation block resides.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationBlockPhysicalTopology": {
+"id": "ReservationBlockPhysicalTopology",
+"properties": {
+"block": {
+"description": "The hash of the capacity block within the cluster.",
+"type": "string"
+},
+"cluster": {
+"description": "The cluster name of the reservation block.",
 "type": "string"
 }
 },
@@ -86473,6 +87316,10 @@ false
 "description": "[Output Only] An opaque ID of the host on which the VM is running.",
 "type": "string"
 },
+"physicalHostTopology": {
+"$ref": "ResourceStatusPhysicalHostTopology",
+"description": "[Output Only] The physical host topology of the host on which the VM is running."
+},
 "scheduling": {
 "$ref": "ResourceStatusScheduling"
 },
@@ -86594,6 +87441,25 @@ false
 "Terminated due to maintenance",
 "Terminated by user"
 ],
+"type": "string"
+}
+},
+"type": "object"
+},
+"ResourceStatusPhysicalHostTopology": {
+"description": "Represents the physical host topology of the host on which the VM is running.",
+"id": "ResourceStatusPhysicalHostTopology",
+"properties": {
+"block": {
+"type": "string"
+},
+"cluster": {
+"type": "string"
+},
+"host": {
+"type": "string"
+},
+"subblock": {
 "type": "string"
 }
 },
@@ -89305,72 +90171,6 @@ false
 },
 "type": "object"
 },
-"Rule": {
-"description": "This is deprecated and has no effect. Do not use.",
-"id": "Rule",
-"properties": {
-"action": {
-"description": "This is deprecated and has no effect. Do not use.",
-"enum": [
-"ALLOW",
-"ALLOW_WITH_LOG",
-"DENY",
-"DENY_WITH_LOG",
-"LOG",
-"NO_ACTION"
-],
-"enumDescriptions": [
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use.",
-"This is deprecated and has no effect. Do not use."
-],
-"type": "string"
-},
-"conditions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"$ref": "Condition"
-},
-"type": "array"
-},
-"description": {
-"description": "This is deprecated and has no effect. Do not use.",
-"type": "string"
-},
-"ins": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"type": "string"
-},
-"type": "array"
-},
-"logConfigs": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"$ref": "LogConfig"
-},
-"type": "array"
-},
-"notIns": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"type": "string"
-},
-"type": "array"
-},
-"permissions": {
-"description": "This is deprecated and has no effect. Do not use.",
-"items": {
-"type": "string"
-},
-"type": "array"
-}
-},
-"type": "object"
-},
 "SSLHealthCheck": {
 "id": "SSLHealthCheck",
 "properties": {
@@ -89734,6 +90534,10 @@ false
 "Standard provisioning with user controlled runtime, no discounts."
 ],
 "type": "string"
+},
+"shutdownTimeout": {
+"$ref": "Duration",
+"description": "Timeout between GCE ACPI G2 Soft Off and ACPI G3 Mechanical Off during shutdown operation of VM. For Standard VMs values between 0s and 120s are allowed. For Spot and Preemptible VMs supported values are between 0s and 30s. If no value is specified for shutdownDuration, default values are 90s for Standard VMs and 30s for Spot/Preemptible VMs."
 },
 "terminationTime": {
 "description": "Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.",
@@ -103936,6 +104740,16 @@ false
 },
 "type": "object"
 },
+"WaitForReplicationCatchUpRequest": {
+"id": "WaitForReplicationCatchUpRequest",
+"properties": {
+"maxWaitDuration": {
+"format": "google-duration",
+"type": "string"
+}
+},
+"type": "object"
+},
 "WeightedBackendService": {
 "description": "In contrast to a single BackendService in HttpRouteAction to which all matching traffic is directed to, WeightedBackendService allows traffic to be split across multiple backend services. The volume of traffic for each backend service is proportional to the weight specified in each WeightedBackendService",
 "id": "WeightedBackendService",
@@ -103952,6 +104766,425 @@ false
 "description": "Specifies the fraction of traffic sent to a backend service, computed as weight / (sum of all weightedBackendService weights in routeAction) . The selection of a backend service is determined only for new traffic. Once a user's request has been directed to a backend service, subsequent requests are sent to the same backend service as determined by the backend service's session affinity policy. Don't configure session affinity if you're using weighted traffic splitting. If you do, the weighted traffic splitting configuration takes precedence. The value must be from 0 to 1000.",
 "format": "uint32",
 "type": "integer"
+}
+},
+"type": "object"
+},
+"Wire": {
+"description": "A pseudowire that connects two Interconnect connections.",
+"id": "Wire",
+"properties": {
+"adminEnabled": {
+"description": "[Output Only] Indicates whether the wire is enabled. When false, the wire is disabled. When true and when the wire group of the wire is also enabled, the wire is enabled. Defaults to true.",
+"type": "boolean"
+},
+"endpoints": {
+"description": "Wire endpoints are specific Interconnect connections.",
+"items": {
+"$ref": "WireEndpoint"
+},
+"type": "array"
+},
+"label": {
+"description": "[Output Only] A label that identifies the wire. The format of this label combines the existing labels of the wire group endpoints and Interconnect connections used by this wire in alphabetical order as follows: `ENDPOINT_A+CONNECTION_A1,ENDPOINT_B+CONNECTION_B1`, where: - ENDPOINT_A and ENDPOINT_B: are the labels that you entered as map keys when you specified the wire group endpoint objects. - CONNECTION_A1 and CONNECTION_B1: are the labels that you entered as map keys when you specified the wire group Interconnect objects. ",
+"type": "string"
+},
+"wireProperties": {
+"$ref": "WireProperties",
+"description": "[Output Only] Properties of the wire."
+}
+},
+"type": "object"
+},
+"WireEndpoint": {
+"description": "Wire endpoints are specific Interconnect connections.",
+"id": "WireEndpoint",
+"properties": {
+"interconnect": {
+"type": "string"
+},
+"vlanTag": {
+"format": "int32",
+"type": "integer"
+}
+},
+"type": "object"
+},
+"WireGroup": {
+"description": "A resource that represents a group of redundant wires.",
+"id": "WireGroup",
+"properties": {
+"adminEnabled": {
+"description": "Indicates whether the wires in the wire group are enabled. When false, the wires in the wire group are disabled. When true and when there is simultaneously no wire-specific override of `adminEnabled` to false, a given wire is enabled. Defaults to true.",
+"type": "boolean"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of the wire group.",
+"type": "string"
+},
+"endpoints": {
+"additionalProperties": {
+"$ref": "WireGroupEndpoint"
+},
+"description": "A map that contains the logical endpoints of the wire group. Specify key-value pairs for the map as follows: - Key: an RFC1035 user-specified label. - Value: an Endpoint object. ",
+"type": "object"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource type. The server generates this identifier.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#wireGroup",
+"description": "[Output Only] Type of the resource. Always compute#wireGroups for wire groups.",
+"type": "string"
+},
+"name": {
+"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"type": "string"
+},
+"serviceLevel": {
+"$ref": "WireGroupServiceLevel",
+"description": "Service level details determined for the wire group configuration."
+},
+"wireGroupProperties": {
+"$ref": "WireGroupProperties",
+"description": "Properties of the wire group."
+},
+"wireInputs": {
+"additionalProperties": {
+"$ref": "WireGroupWireInputs"
+},
+"description": "A map that contains optional settings for individual wires. Specify key-value pairs for the map as follows: - Key: the label of an existing wire. To view a wire label and its format, see the wires[].label field. - Value: a WireInputs object. ",
+"type": "object"
+},
+"wireProperties": {
+"$ref": "WireProperties",
+"description": "Properties for all wires in the wire group."
+},
+"wires": {
+"description": "The single/redundant wire(s) managed by the wire group.",
+"items": {
+"$ref": "Wire"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"WireGroupEndpoint": {
+"description": "A logical endpoint for the wire group. An endpoint represents a metro that contains redundant Interconnect connections. A wire group is created between two endpoints.",
+"id": "WireGroupEndpoint",
+"properties": {
+"interconnects": {
+"additionalProperties": {
+"$ref": "WireGroupEndpointInterconnect"
+},
+"description": "A map that contains the redundant Interconnect connections. Specify key-value pairs for the map as follows: - Key: an RFC1035 user-specified label. - Value: an Interconnect object. ",
+"type": "object"
+}
+},
+"type": "object"
+},
+"WireGroupEndpointInterconnect": {
+"description": "The redundant Interconnect connections for this endpoint.",
+"id": "WireGroupEndpointInterconnect",
+"properties": {
+"interconnect": {
+"description": "An Interconnect connection. You can specify the connection as a partial or full URL. If the connection is in a different project from the cross-site network, use a format that specifies the project. See the following examples of partial and full URLs: global/interconnects/NAME projects/PROJECT_ID/global/interconnects/NAME - https://compute.googleapis.com/compute/projects/PROJECT_ID /global/interconnects/NAME ",
+"type": "string"
+},
+"vlanTags": {
+"description": "To configure the wire group for VLAN mode, enter a VLAN tag, which is a number from `2` to `4093`. You can autoallocate a tag by entering `0`. To configure the wire group for port mode, enter `-1`. Review the following guidelines: - A VLAN tag must be unique for an Interconnect connection across all attachments and wire groups. - Both endpoints of a wire must use the same VLAN tag value. - Single wire and redundant type wire groups must have only one VLAN tag. - Box and cross type wire groups must have two VLAN tags. The first is for the same-zone pseudowire, and the second is for the cross-zone pseudowire. - Port mode pseudowires must configure a value of `-1` for both endpoints. ",
+"items": {
+"format": "int32",
+"type": "integer"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"WireGroupList": {
+"description": "Response for the list request.",
+"id": "WireGroupList",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of wire group resources.",
+"items": {
+"$ref": "WireGroup"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#wireGroup",
+"description": "[Output Only] Type of the resource. Always compute#wireGroups for wire groups.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"WireGroupProperties": {
+"description": "The properties of a wire group. These properties determine how a group of redundant wires are created and managed.",
+"id": "WireGroupProperties",
+"properties": {
+"type": {
+"description": "The type of the wire group, one of the following: - WIRE: a single pseudowire over two Interconnect connections with no redundancy. - REDUNDANT: two pseudowires over four Interconnect connections, with two connections in one metro and two connections in another metro. Each redundant pair of Interconnect connections spans both edge availability domains of the metro. Each pseudowire connects Interconnect connections in matching edge availability domains of the two metros. - BOX_AND_CROSS: four pseudowires over four Interconnect connections, with two connections in one metro and two connections in another metro. Each redundant pair of Interconnect connections spans both edge availability domains of the metro. Two pseudowires connect Interconnect connections in matching edge availability domains of the two metros. Two additional pseudowires connect the non-matching edge availability domains of the two metros. ",
+"enum": [
+"BOX_AND_CROSS",
+"REDUNDANT",
+"WIRE"
+],
+"enumDescriptions": [
+"Four pseudowires over four Interconnect connections, with two connections in one metro and two connections in another metro. Each redundant pair of Interconnect connections spans both edge availability domains of the metro. Two pseudowires connect Interconnect connections in matching edge availability domains of the two metros. Two additional pseudowires connect the non-matching edge availability domains of the two metros.",
+"Two pseudowires over four Interconnect connections, with two connections in one metro and two connections in another metro. Each redundant pair of Interconnect connections spans both edge availability domains of the metro. Each pseudowire connects Interconnect connections in matching edge availability domains of the two metros.",
+"A single pseudowire over two Interconnect connections with no redundancy."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"WireGroupServiceLevel": {
+"description": "Service level details determined for the wire group configuration.",
+"id": "WireGroupServiceLevel",
+"properties": {
+"availabilityClass": {
+"description": "[Output Only] The availability SLA that the wire group qualifies for. One of the following: `NO_AVAILABILITY_SLA`, `AVAILABILITY_99`, or `AVAILABILITY_999`.",
+"enum": [
+"AVAILABILITY_99",
+"AVAILABILITY_999",
+"NO_AVAILABILITY_SLA"
+],
+"enumDescriptions": [
+"99% availability",
+"99.9% availability",
+"No SLA"
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"WireGroupWireInputs": {
+"description": "Optional settings for individual wires. Allows wire-level control that can be useful for migration purposes. If you use this field, you opt-out of the SLA for the wire group.",
+"id": "WireGroupWireInputs",
+"properties": {
+"adminEnabled": {
+"description": "Indicates whether the wire is enabled. When false, the wire is disabled. When true and when the wire group of the wire is also enabled, the wire is enabled. Defaults to true.",
+"type": "boolean"
+},
+"wirePropertyOverrides": {
+"$ref": "WireProperties",
+"description": "The overridden properties for the wire. Any properties that are not overridden are omitted from the object. Review the following guidelines: - If you apply wire overrides to a wire and its wire group bandwidth configuration is set to `SHARED_WITH_WIRE_GROUP`, the `meteredBandwidth` and `unmeteredBandwidth` properties must not differ from the wire group. - Overrides generate a `configurationNotice`. Ensure that differences in wire configuration are temporary. An example use case for wire overrides is slowly rolling out configuration changes to individual wires in a wire group. "
+}
+},
+"type": "object"
+},
+"WireProperties": {
+"description": "The properties of a wire.",
+"id": "WireProperties",
+"properties": {
+"bandwidthAllocation": {
+"description": "The configuration of the bandwidth allocation, one of the following: - ALLOCATE_PER_WIRE: configures a separate unmetered bandwidth allocation (and associated charges) for each wire in the group. - SHARED_WITH_WIRE_GROUP: configures one unmetered bandwidth allocation for the wire group. The unmetered bandwidth is divided equally across each wire in the group, but dynamic throttling reallocates unused unmetered bandwidth from unused or underused wires to other wires in the group. For example, with a four-wire box-and-cross group, when one Interconnect connection is down, the unmetered bandwidth of the two down wires is reallocated to the remaining up wires. ",
+"enum": [
+"ALLOCATE_PER_WIRE",
+"SHARED_WITH_WIRE_GROUP"
+],
+"enumDescriptions": [
+"Configures a separate unmetered bandwidth allocation (and associated charges) for each wire in the group.",
+"Configures one unmetered bandwidth allocation for the wire group. The unmetered bandwidth is divided equally across each wire in the group, but dynamic throttling reallocates unused unmetered bandwidth from unused or underused wires to other wires in the group. For example, with a four-wire box-and-cross group, when one Interconnect connection is down, the unmetered bandwidth of the two down wires is reallocated to the remaining up wires."
+],
+"type": "string"
+},
+"bandwidthMetered": {
+"description": "The metered bandwidth in Gigabits per second, using decimal units. `10` is 10 Gbps, `100` is 100 Gbps. The default value is `0`. You can specify unlimited bandwidth by entering `-1`. However, actual data transfer is limited by the port speed.",
+"format": "int64",
+"type": "string"
+},
+"bandwidthUnmetered": {
+"description": "The unmetered bandwidth in Gigabits per second, using decimal units. `10` is 10 Gbps, `100` is 100 Gbps. Must be a multiple of 10.",
+"format": "int64",
+"type": "string"
+},
+"faultResponse": {
+"description": "Response when a fault is detected in a pseudowire: - NONE: default. - DISABLE_PORT: set the port line protocol down when inline probes detect a fault. This setting is only permitted on port mode pseudowires. ",
+"enum": [
+"DISABLE_PORT",
+"NONE"
+],
+"enumDescriptions": [
+"Set the port line protocol down when inline probes detect a fault. This setting is only permitted on port mode pseudowires.",
+"Default."
+],
+"type": "string"
+},
+"networkServiceClass": {
+"description": "The network service class.",
+"enum": [
+"BRONZE",
+"GOLD"
+],
+"enumDescriptions": [
+"The default service class.",
+"A higher service class."
+],
+"type": "string"
 }
 },
 "type": "object"
