@@ -616,6 +616,12 @@ Args:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -1327,6 +1333,12 @@ Args:
               ],
               &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
               &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+              &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                { # Data structure to storing column&#x27;s sort strategy
+                  &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                  &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                },
+              ],
               &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
               &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                 &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -1934,6 +1946,12 @@ Args:
                 ],
                 &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                 &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                  { # Data structure to storing column&#x27;s sort strategy
+                    &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                    &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                  },
+                ],
                 &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                 &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                   &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -2543,6 +2561,12 @@ Args:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -3177,6 +3201,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -3888,6 +3918,12 @@ Returns:
               ],
               &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
               &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+              &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                { # Data structure to storing column&#x27;s sort strategy
+                  &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                  &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                },
+              ],
               &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
               &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                 &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -4495,6 +4531,12 @@ Returns:
                 ],
                 &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                 &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                  { # Data structure to storing column&#x27;s sort strategy
+                    &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                    &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                  },
+                ],
                 &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                 &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                   &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -5104,6 +5146,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -5762,6 +5810,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -6473,6 +6527,12 @@ Returns:
               ],
               &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
               &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+              &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                { # Data structure to storing column&#x27;s sort strategy
+                  &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                  &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                },
+              ],
               &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
               &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                 &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -7080,6 +7140,12 @@ Returns:
                 ],
                 &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                 &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                  { # Data structure to storing column&#x27;s sort strategy
+                    &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                    &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                  },
+                ],
                 &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                 &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                   &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -7689,6 +7755,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -8333,6 +8405,12 @@ Returns:
                       ],
                       &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                       &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                      &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                        { # Data structure to storing column&#x27;s sort strategy
+                          &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                          &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                        },
+                      ],
                       &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                       &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                         &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -9044,6 +9122,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -9651,6 +9735,12 @@ Returns:
                     ],
                     &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                     &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                    &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                      { # Data structure to storing column&#x27;s sort strategy
+                        &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                        &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                      },
+                    ],
                     &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                     &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                       &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -10260,6 +10350,12 @@ Returns:
                       ],
                       &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                       &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                      &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                        { # Data structure to storing column&#x27;s sort strategy
+                          &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                          &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                        },
+                      ],
                       &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                       &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                         &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -10912,6 +11008,12 @@ Args:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -11623,6 +11725,12 @@ Args:
               ],
               &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
               &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+              &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                { # Data structure to storing column&#x27;s sort strategy
+                  &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                  &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                },
+              ],
               &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
               &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                 &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -12230,6 +12338,12 @@ Args:
                 ],
                 &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                 &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                  { # Data structure to storing column&#x27;s sort strategy
+                    &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                    &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                  },
+                ],
                 &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                 &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                   &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -12839,6 +12953,12 @@ Args:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -13473,6 +13593,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -14184,6 +14310,12 @@ Returns:
               ],
               &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
               &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+              &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                { # Data structure to storing column&#x27;s sort strategy
+                  &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                  &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                },
+              ],
               &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
               &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                 &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -14791,6 +14923,12 @@ Returns:
                 ],
                 &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                 &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                  { # Data structure to storing column&#x27;s sort strategy
+                    &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                    &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                  },
+                ],
                 &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                 &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                   &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
@@ -15400,6 +15538,12 @@ Returns:
                   ],
                   &quot;minAlignmentPeriod&quot;: &quot;A String&quot;, # Optional. The lower bound on data point frequency for this data set, implemented by specifying the minimum alignment period to use in a time series query For example, if the data is published once every 10 minutes, the min_alignment_period should be at least 10 minutes. It would not make sense to fetch and align data at one minute intervals.
                   &quot;plotType&quot;: &quot;A String&quot;, # How this data should be plotted on the chart.
+                  &quot;sort&quot;: [ # Optional. A collection of sort options, affects the order of the data and legend.
+                    { # Data structure to storing column&#x27;s sort strategy
+                      &quot;column&quot;: &quot;A String&quot;, # Optional. Column name to sort data by
+                      &quot;direction&quot;: &quot;A String&quot;, # Optional. A sorting direction that determines ascending or descending order. This is a legacy field kept for backwards compatibility with table.
+                    },
+                  ],
                   &quot;targetAxis&quot;: &quot;A String&quot;, # Optional. The target axis to use for plotting the metric.
                   &quot;timeSeriesQuery&quot;: { # TimeSeriesQuery collects the set of supported methods for querying time series data from the Stackdriver metrics API. # Required. Fields for querying time series data from the Stackdriver metrics API.
                     &quot;opsAnalyticsQuery&quot;: { # Preview: A query that produces an aggregated response and supporting data. This is a preview feature and may be subject to change before final release. # Preview: A query used to fetch a time series, category series, or numeric series with SQL. This is a preview feature and may be subject to change before final release.
