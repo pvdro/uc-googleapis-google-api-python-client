@@ -710,6 +710,47 @@
 }
 }
 },
+"advice": {
+"methods": {
+"calendarMode": {
+"description": "Advise how, where and when to create the requested amount of instances with specified accelerators, within the specified time and location limits. The method recommends creating future reservations for the requested resources.",
+"flatPath": "projects/{project}/regions/{region}/advice/calendarMode",
+"httpMethod": "POST",
+"id": "compute.advice.calendarMode",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/advice/calendarMode",
+"request": {
+"$ref": "CalendarModeAdviceRequest"
+},
+"response": {
+"$ref": "CalendarModeAdviceResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "autoscalers": {
 "methods": {
 "aggregatedList": {
@@ -15456,6 +15497,41 @@
 "https://www.googleapis.com/auth/compute.readonly"
 ]
 },
+"getOperationalStatus": {
+"description": "Returns the InterconnectAttachmentStatuses for the specified InterconnectAttachmentGroup resource.",
+"flatPath": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}/getOperationalStatus",
+"httpMethod": "GET",
+"id": "compute.interconnectAttachmentGroups.getOperationalStatus",
+"parameterOrder": [
+"project",
+"interconnectAttachmentGroup"
+],
+"parameters": {
+"interconnectAttachmentGroup": {
+"description": "Name of the interconnectAttachmentGroup resource to query.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectAttachmentGroups/{interconnectAttachmentGroup}/getOperationalStatus",
+"response": {
+"$ref": "InterconnectAttachmentGroupsGetOperationalStatusResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
 "insert": {
 "description": "Creates a InterconnectAttachmentGroup in the specified project in the given scope using the parameters that are included in the request.",
 "flatPath": "projects/{project}/global/interconnectAttachmentGroups",
@@ -16290,6 +16366,41 @@
 "path": "projects/{project}/global/interconnectGroups/{resource}/getIamPolicy",
 "response": {
 "$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getOperationalStatus": {
+"description": "Returns the interconnectStatuses for the specified InterconnectGroup.",
+"flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}/getOperationalStatus",
+"httpMethod": "GET",
+"id": "compute.interconnectGroups.getOperationalStatus",
+"parameterOrder": [
+"project",
+"interconnectGroup"
+],
+"parameters": {
+"interconnectGroup": {
+"description": "Name of the interconnectGroup resource to query.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{interconnectGroup}/getOperationalStatus",
+"response": {
+"$ref": "InterconnectGroupsGetOperationalStatusResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -19517,6 +19628,72 @@
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute"
+]
+},
+"aggregatedList": {
+"description": "Retrieves an aggregated list of network firewall policies, listing network firewall policies from all applicable scopes (global and regional) and grouping the results per scope. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
+"flatPath": "projects/{project}/aggregated/firewallPolicies",
+"httpMethod": "GET",
+"id": "compute.networkFirewallPolicies.aggregatedList",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"includeAllScopes": {
+"description": "Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.",
+"location": "query",
+"type": "boolean"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+},
+"serviceProjectNumber": {
+"description": "The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.",
+"format": "int64",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/aggregated/firewallPolicies",
+"response": {
+"$ref": "NetworkFirewallPolicyAggregatedList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
 ]
 },
 "cloneRules": {
@@ -47422,7 +47599,7 @@
 }
 }
 },
-"revision": "20241201",
+"revision": "20241231",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -48022,7 +48199,7 @@ false
 "type": "string"
 },
 "securityPolicy": {
-"description": "[Output Only] The resource URL for the security policy associated with this access config.",
+"description": "The resource URL for the security policy associated with this access config.",
 "type": "string"
 },
 "setPublicDns": {
@@ -49298,7 +49475,7 @@ false
 "type": "string"
 },
 "sourceSnapshot": {
-"description": "The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set.",
+"description": "The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set. Note: You cannot create VMs in bulk using a snapshot as the source. Use an image instead when you create VMs using the bulk insert method.",
 "type": "string"
 },
 "sourceSnapshotEncryptionKey": {
@@ -52967,6 +53144,48 @@ false
 },
 "type": "object"
 },
+"CalendarModeAdviceRequest": {
+"description": "A request to recommend the best way to consume the specified resources in the future.",
+"id": "CalendarModeAdviceRequest",
+"properties": {
+"futureResourcesSpecs": {
+"additionalProperties": {
+"$ref": "FutureResourcesSpec"
+},
+"description": "Specification of resources to create in the future. The key of the map is an arbitrary string specified by the caller. Value of the map is a specification of required resources and their constraints. Currently only one value is allowed in this map.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"CalendarModeAdviceResponse": {
+"description": "A response containing the recommended way of creating the specified resources in the future. It contains (will contain) multiple recommendations that can be analyzed by the customer and the best one can be picked.",
+"id": "CalendarModeAdviceResponse",
+"properties": {
+"recommendations": {
+"description": "Recommendations where, how and when to create the requested resources in order to maximize their obtainability and minimize cost.",
+"items": {
+"$ref": "CalendarModeRecommendation"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CalendarModeRecommendation": {
+"description": "A single recommendation to create requested resources. Contains detailed recommendations for every future resources specification specified in CalendarModeAdviceRequest.",
+"id": "CalendarModeRecommendation",
+"properties": {
+"recommendationsPerSpec": {
+"additionalProperties": {
+"$ref": "FutureResourcesRecommendation"
+},
+"description": "Recommendations for every future resource specification passed in CalendarModeAdviceRequest. Keys of the map correspond to keys specified in the request.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "CallCredentials": {
 "description": "[Deprecated] gRPC call credentials to access the SDS server. gRPC call credentials to access the SDS server.",
 "id": "CallCredentials",
@@ -55941,7 +56160,7 @@ false
 "additionalProperties": {
 "type": "string"
 },
-"description": "Additional structured details about this error. Keys must match /a-z+/ but should ideally be lowerCamelCase. Also they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than {\"instanceLimit\": \"100/request\"}, should be returned as, {\"instanceLimitPerRequest\": \"100\"}, if the client exceeds the number of instances that can be created in a single (batch) request.",
+"description": "Additional structured details about this error. Keys must match a regular expression of `a-z+` but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than `{\"instanceLimit\": \"100/request\"}`, should be returned as, `{\"instanceLimitPerRequest\": \"100\"}`, if the client exceeds the number of instances that can be created in a single (batch) request.",
 "type": "object"
 },
 "reason": {
@@ -56796,6 +57015,143 @@ false
 },
 "type": "object"
 },
+"FirewallPoliciesScopedList": {
+"id": "FirewallPoliciesScopedList",
+"properties": {
+"firewallPolicies": {
+"description": "A list of firewall policies contained in this scope.",
+"items": {
+"$ref": "FirewallPolicy"
+},
+"type": "array"
+},
+"warning": {
+"description": "Informational warning which replaces the list of firewall policies when the list is empty.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g: regions.list).",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
 "FirewallPolicy": {
 "description": "Represents a Firewall Policy resource.",
 "id": "FirewallPolicy",
@@ -57356,6 +57712,37 @@ false
 "description": "Specifies a percentage of instances between 0 to 100%, inclusive. For example, specify 80 for 80%.",
 "format": "int32",
 "type": "integer"
+}
+},
+"type": "object"
+},
+"FlexibleTimeRange": {
+"description": "A flexible specification of a time range that has 3 points of flexibility: (1) a flexible start time, (2) a flexible end time, (3) a flexible duration. It is possible to specify a contradictory time range that cannot be matched by any Interval. This causes a validation error.",
+"id": "FlexibleTimeRange",
+"properties": {
+"endTimeNotEarlierThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"endTimeNotLaterThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"maxDuration": {
+"format": "google-duration",
+"type": "string"
+},
+"minDuration": {
+"format": "google-duration",
+"type": "string"
+},
+"startTimeNotEarlierThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"startTimeNotLaterThan": {
+"format": "google-datetime",
+"type": "string"
 }
 },
 "type": "object"
@@ -58267,7 +58654,7 @@ false
 "id": "FutureReservationCommitmentInfo",
 "properties": {
 "commitmentName": {
-"description": "name of the commitment where capacity is being delivered to. In the form of \"projects/{project-id}/locations/{region-name}/commitment/{name}\"",
+"description": "name of the commitment where capacity is being delivered to.",
 "type": "string"
 },
 "commitmentPlan": {
@@ -58987,6 +59374,248 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"FutureResourcesRecommendation": {
+"description": "Recommendation for single resources specification, to be created in the future.",
+"id": "FutureResourcesRecommendation",
+"properties": {
+"endTime": {
+"format": "google-datetime",
+"type": "string"
+},
+"location": {
+"description": "The advised location for resource usage. When a zone, in format 'zones/'. If not set, it means that no location is recommended - see other_locations for details.",
+"type": "string"
+},
+"otherLocations": {
+"additionalProperties": {
+"$ref": "FutureResourcesRecommendationOtherLocation"
+},
+"description": "List of locations in the request scope that were not recommended. Keys of the map are zones, in format 'zones/'. The values are status information indicating the recommendation status.",
+"type": "object"
+},
+"recommendationId": {
+"description": "Unique id of the recommendation, a UUID string generated by the API.",
+"type": "string"
+},
+"recommendationType": {
+"description": "Type of recommendation. Currently only FUTURE_RESERVATION is supported.",
+"enum": [
+"FUTURE_RESERVATION",
+"RECOMMENDATION_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"A Future Reservation is recommended.",
+"Default value, unused."
+],
+"type": "string"
+},
+"startTime": {
+"format": "google-datetime",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesRecommendationOtherLocation": {
+"description": "Information about recommendation status for locations that were allowed but not used by the response.",
+"id": "FutureResourcesRecommendationOtherLocation",
+"properties": {
+"details": {
+"description": "Details (human readable) describing the situation. For example, if status is CONDITION_NOT_MET, then details contain information about the parameters of the time window that did not meet the required conditions.",
+"type": "string"
+},
+"status": {
+"description": "Status of recommendation in this location.",
+"enum": [
+"CONDITIONS_NOT_MET",
+"NOT_SUPPORTED",
+"NO_CAPACITY",
+"OTHER_LOCATION_STATUS_UNDEFINED",
+"RECOMMENDED"
+],
+"enumDescriptions": [
+"The requested resources are offered in this location but the requested time window is does not meet the required conditions.",
+"The requested resources are not offered in this location. Retrying the request will not change this status.",
+"The requested resources are offered in this location and the requested time window is accepted but there is no capacity within the requested time window.",
+"Default value, unused.",
+"The requested resources are offered in this location and it is possible to request them. However, another location was better and was recommended."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpec": {
+"description": "Specification of resources to be created at some time in the future within an optionally specified set of locations, and within the specified time range.",
+"id": "FutureResourcesSpec",
+"properties": {
+"deploymentType": {
+"description": "Indicates if the reservation allocation strategy is static (DENSE) or dynamic (STANDARD). Defaults to DENSE.",
+"enum": [
+"DENSE",
+"DEPLOYMENT_TYPE_UNSPECIFIED",
+"FLEXIBLE"
+],
+"enumDescriptions": [
+"The reserved capacity is made up of densely deployed reservation blocks.",
+"",
+"The reserved capacity is made up of highly flexible, logical reservation blocks."
+],
+"type": "string"
+},
+"locationPolicy": {
+"$ref": "FutureResourcesSpecLocationPolicy",
+"description": "Optional location policy allowing to exclude some zone(s) in which the resources must not be created."
+},
+"targetResources": {
+"$ref": "FutureResourcesSpecTargetResources",
+"description": "Specification of the reserved resources."
+},
+"timeRangeSpec": {
+"$ref": "FlexibleTimeRange",
+"description": "Specification of a time range in which the resources may be created. The time range specifies start of resource use and planned end of resource use."
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecAggregateResources": {
+"id": "FutureResourcesSpecAggregateResources",
+"properties": {
+"acceleratorCount": {
+"description": "Size of the request, in accelerator (chip) count.",
+"format": "int64",
+"type": "string"
+},
+"vmFamily": {
+"description": "The VM family that all instances scheduled against this reservation must belong to. Use for TPU reservations.",
+"enum": [
+"VM_FAMILY_CLOUD_TPU_DEVICE_CT3",
+"VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L",
+"VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP",
+"VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
+"VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"workloadType": {
+"description": "Workload type. Use for TPU reservations.",
+"enum": [
+"BATCH",
+"SERVING",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"Reserved resources will be optimized for BATCH workloads, such as ML training.",
+"Reserved resources will be optimized for SERVING workloads, such as ML inference.",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocalSsdPartition": {
+"id": "FutureResourcesSpecLocalSsdPartition",
+"properties": {
+"diskInterface": {
+"description": "Disk interface. Defaults to SCSI.",
+"enum": [
+"NVDIMM",
+"NVME",
+"SCSI"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"diskSizeGb": {
+"description": "The size of the disk in GB.",
+"format": "int64",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocationPolicy": {
+"description": "Specification of locations to create resources in.",
+"id": "FutureResourcesSpecLocationPolicy",
+"properties": {
+"locations": {
+"additionalProperties": {
+"$ref": "FutureResourcesSpecLocationPolicyLocation"
+},
+"description": "Preferences for specified locations. Keys of the map are locations - zones, in format of 'zones/'. Values are preferences for the zones. If a zone is not specified in this map, it is ALLOWed.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocationPolicyLocation": {
+"description": "Preference for a single specified location.",
+"id": "FutureResourcesSpecLocationPolicyLocation",
+"properties": {
+"preference": {
+"description": "Preference for this location.",
+"enum": [
+"ALLOW",
+"DENY",
+"PREFERENCE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Location is allowed for use.",
+"Location is prohibited.",
+"Default value, unused."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecSpecificSKUResources": {
+"id": "FutureResourcesSpecSpecificSKUResources",
+"properties": {
+"instanceCount": {
+"description": "Size of the request, in instance count.",
+"format": "int64",
+"type": "string"
+},
+"localSsdPartitions": {
+"description": "Local SSD partitions. You do not have to include SSD partitions that are built in the machine type.",
+"items": {
+"$ref": "FutureResourcesSpecLocalSsdPartition"
+},
+"type": "array"
+},
+"machineType": {
+"description": "The machine type to use for instances that will use the reservation. This field only accepts machine type names. e.g. n2-standard-4 and does not accept machine type full or partial url. e.g. projects/my-l7ilb-project/zones/us-central1-a/machineTypes/n2-standard-4. Use for GPU reservations.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecTargetResources": {
+"description": "Specification of reserved resources.",
+"id": "FutureResourcesSpecTargetResources",
+"properties": {
+"aggregateResources": {
+"$ref": "FutureResourcesSpecAggregateResources"
+},
+"specificSkuResources": {
+"$ref": "FutureResourcesSpecSpecificSKUResources"
 }
 },
 "type": "object"
@@ -68266,7 +68895,7 @@ false
 "type": "string"
 },
 "bandwidth": {
-"description": "Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s ",
+"description": "Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s - BPS_100G: 100 Gbit/s ",
 "enum": [
 "BPS_100G",
 "BPS_100M",
@@ -68299,6 +68928,22 @@ false
 ],
 "type": "string"
 },
+"candidateCloudRouterIpAddress": {
+"description": "Single IPv4 address + prefix length to be configured on the cloud router interface for this interconnect attachment. - Both candidate_cloud_router_ip_address and candidate_customer_router_ip_address fields must be set or both must be unset. - Prefix length of both candidate_cloud_router_ip_address and candidate_customer_router_ip_address must be the same. - Max prefix length is 31. ",
+"type": "string"
+},
+"candidateCloudRouterIpv6Address": {
+"description": "Single IPv6 address + prefix length to be configured on the cloud router interface for this interconnect attachment. - Both candidate_cloud_router_ipv6_address and candidate_customer_router_ipv6_address fields must be set or both must be unset. - Prefix length of both candidate_cloud_router_ipv6_address and candidate_customer_router_ipv6_address must be the same. - Max prefix length is 126. ",
+"type": "string"
+},
+"candidateCustomerRouterIpAddress": {
+"description": "Single IPv4 address + prefix length to be configured on the customer router interface for this interconnect attachment.",
+"type": "string"
+},
+"candidateCustomerRouterIpv6Address": {
+"description": "Single IPv6 address + prefix length to be configured on the customer router interface for this interconnect attachment.",
+"type": "string"
+},
 "candidateIpv6Subnets": {
 "description": "This field is not available.",
 "items": {
@@ -68307,7 +68952,7 @@ false
 "type": "array"
 },
 "candidateSubnets": {
-"description": "Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google's edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.",
+"description": "Input only. Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google's edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.",
 "items": {
 "type": "string"
 },
@@ -68355,7 +69000,7 @@ false
 "type": "string"
 },
 "edgeAvailabilityDomain": {
-"description": "Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.",
+"description": "Input only. Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.",
 "enum": [
 "AVAILABILITY_DOMAIN_1",
 "AVAILABILITY_DOMAIN_2",
@@ -68520,7 +69165,7 @@ false
 "type": "string"
 },
 "subnetLength": {
-"description": "Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility. ",
+"description": "Input only. Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility. ",
 "format": "int32",
 "type": "integer"
 },
@@ -68902,6 +69547,13 @@ false
 },
 "type": "array"
 },
+"regions": {
+"description": "[Output Only] Regions used to explain this blocker in more detail. These are region names formatted like \"us-central1\". This will be set for some blockers (like INCOMPATIBLE_REGIONS) but does not apply to others.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "zones": {
 "description": "[Output Only] Zones used to explain this blocker in more detail. Format is \"zone1\" and/or \"zone2\". This will be set for some blockers (like MISSING_ZONE) but does not apply to others.",
 "items": {
@@ -69012,6 +69664,19 @@ false
 "zone": {
 "description": "[Output Only] The name of a zone, either \"zone1\" or \"zone2\".",
 "type": "string"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupsGetOperationalStatusResponse": {
+"description": "Response for the InterconnectAttachmentGroupsGetOperationalStatusResponse.",
+"id": "InterconnectAttachmentGroupsGetOperationalStatusResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"result": {
+"$ref": "InterconnectAttachmentGroupsOperationalStatus"
 }
 },
 "type": "object"
@@ -69175,6 +69840,28 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupsOperationalStatus": {
+"id": "InterconnectAttachmentGroupsOperationalStatus",
+"properties": {
+"groupStatus": {
+"description": "Summarizes the status of the group.",
+"enum": [
+"DEGRADED",
+"FULLY_DOWN",
+"FULLY_UP",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -69960,6 +70647,19 @@ false
 },
 "type": "object"
 },
+"InterconnectGroupsGetOperationalStatusResponse": {
+"description": "Response for the InterconnectGroupsGetOperationalStatusResponse.",
+"id": "InterconnectGroupsGetOperationalStatusResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"result": {
+"$ref": "InterconnectGroupsOperationalStatus"
+}
+},
+"type": "object"
+},
 "InterconnectGroupsListResponse": {
 "id": "InterconnectGroupsListResponse",
 "properties": {
@@ -70119,6 +70819,80 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"InterconnectGroupsOperationalStatus": {
+"description": "Request to get the status of the interconnect group with extra detail.",
+"id": "InterconnectGroupsOperationalStatus",
+"properties": {
+"configured": {
+"$ref": "InterconnectGroupConfigured",
+"description": "The configuration analysis, as returned by Get."
+},
+"groupStatus": {
+"description": "Summarizes the status of the group.",
+"enum": [
+"DEGRADED",
+"FULLY_DOWN",
+"FULLY_UP",
+"GROUPS_STATUS_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"intent": {
+"$ref": "InterconnectGroupIntent",
+"description": "The intent of the resource, as returned by Get."
+},
+"interconnectStatuses": {
+"items": {
+"$ref": "InterconnectGroupsOperationalStatusInterconnectStatus"
+},
+"type": "array"
+},
+"operational": {
+"$ref": "InterconnectGroupConfigured",
+"description": "The operational state of the group, including only active Interconnects."
+}
+},
+"type": "object"
+},
+"InterconnectGroupsOperationalStatusInterconnectStatus": {
+"description": "The status of one Interconnect in the group. The order is arbitrary.",
+"id": "InterconnectGroupsOperationalStatusInterconnectStatus",
+"properties": {
+"adminEnabled": {
+"description": "Whether the Interconnect is enabled.",
+"type": "boolean"
+},
+"diagnostics": {
+"$ref": "InterconnectDiagnostics",
+"description": "The diagnostics of the Interconnect, as returned by the existing get-diagnostics method."
+},
+"interconnect": {
+"description": "The URL of the Interconnect being described.",
+"type": "string"
+},
+"isActive": {
+"description": "Whether this interconnect is participating in the redundant configuration.",
+"enum": [
+"ACTIVE",
+"INACTIVE",
+"IS_ACTIVE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -76020,6 +76794,168 @@ false
 "networkEndpoint": {
 "$ref": "NetworkEndpoint",
 "description": "[Output only] The network endpoint;"
+}
+},
+"type": "object"
+},
+"NetworkFirewallPolicyAggregatedList": {
+"id": "NetworkFirewallPolicyAggregatedList",
+"properties": {
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"additionalProperties": {
+"$ref": "FirewallPoliciesScopedList",
+"description": "Name of the scope containing this set of addresses."
+},
+"description": "A list of FirewallPoliciesScopedList resources.",
+"type": "object"
+},
+"kind": {
+"default": "compute#networkFirewallPolicyAggregatedList",
+"description": "[Output Only] Type of resource. Always compute#networkFirewallPoliciesAggregatedList for lists of network firewall policies.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g: regions.list).",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -87563,6 +88499,10 @@ false
 "Specifies collocation option that provides spreading across clusters.",
 ""
 ],
+"type": "string"
+},
+"gpuTopology": {
+"description": "Specifies the shape of the GPU slice, in slice based GPU families eg. A4X.",
 "type": "string"
 },
 "maxDistance": {
@@ -100011,7 +100951,7 @@ false
 "type": "string"
 },
 "sslCertificates": {
-"description": "URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API. Certificate Manager Certificates are not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates. Certificate Manager Certificates accepted formats are: - //certificatemanager.googleapis.com/projects/{project}/locations/{ location}/certificates/{resourceName}. - https://certificatemanager.googleapis.com/v1alpha1/projects/{project }/locations/{location}/certificates/{resourceName}. ",
+"description": "URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API namespace. Using Certificate Manager Certificates in this field is not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates or up to 100 Certificate Manager Certificates. Certificate Manager Certificates accepted formats are: - //certificatemanager.googleapis.com/projects/{project}/locations/{ location}/certificates/{resourceName}. - https://certificatemanager.googleapis.com/v1alpha1/projects/{project }/locations/{location}/certificates/{resourceName}. ",
 "items": {
 "type": "string"
 },
@@ -103970,7 +104910,7 @@ false
 "description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results. In special cases listUsable may return 0 subnetworks and nextPageToken which still should be used to get the next page of results.",
 "type": "string"
 },
-"scoped_warnings": {
+"scopedWarnings": {
 "description": "[Output Only] Informational warning messages for failures encountered from scopes.",
 "items": {
 "$ref": "SubnetworksScopedWarning"
