@@ -1559,6 +1559,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -2399,7 +2404,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -3833,6 +3838,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -4673,7 +4683,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -6107,6 +6117,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -6947,7 +6962,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -8379,6 +8394,11 @@ Returns:
       },
       &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
         { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
           &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
           &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
             &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -9219,7 +9239,7 @@ Returns:
       &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
         { # The number of people who reacted to a message with a specific emoji.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -10649,6 +10669,11 @@ Returns:
       },
       &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
         { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
           &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
           &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
             &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -11489,7 +11514,7 @@ Returns:
       &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
         { # The number of people who reacted to a message with a specific emoji.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -12919,6 +12944,11 @@ Returns:
       },
       &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
         { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
           &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
           &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
             &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -13759,7 +13789,7 @@ Returns:
       &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
         { # The number of people who reacted to a message with a specific emoji.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -13873,7 +13903,7 @@ Returns:
       { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
         &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -13895,7 +13925,7 @@ Returns:
       { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted`
         &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -13915,7 +13945,7 @@ Returns:
   &quot;reactionCreatedEventData&quot;: { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created` # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
     &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -13933,7 +13963,7 @@ Returns:
   &quot;reactionDeletedEventData&quot;: { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted` # Event payload for a deleted reaction. Event type: `google.workspace.chat.reaction.v1.deleted`
     &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -15560,6 +15590,11 @@ Returns:
               },
               &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
                 { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+                  &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                      &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                    },
+                  },
                   &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
                   &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                     &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -16400,7 +16435,7 @@ Returns:
               &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
                 { # The number of people who reacted to a message with a specific emoji.
                   &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                    &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                       &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                     },
                     &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -17834,6 +17869,11 @@ Returns:
               },
               &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
                 { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+                  &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                      &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                    },
+                  },
                   &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
                   &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                     &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -18674,7 +18714,7 @@ Returns:
               &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
                 { # The number of people who reacted to a message with a specific emoji.
                   &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                    &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                       &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                     },
                     &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -20108,6 +20148,11 @@ Returns:
               },
               &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
                 { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+                  &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                      &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                    },
+                  },
                   &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
                   &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                     &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -20948,7 +20993,7 @@ Returns:
               &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
                 { # The number of people who reacted to a message with a specific emoji.
                   &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                    &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                    &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                       &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                     },
                     &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -22380,6 +22425,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -23220,7 +23270,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -24650,6 +24700,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -25490,7 +25545,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -26920,6 +26975,11 @@ Returns:
           },
           &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
             { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
               &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to.
               &quot;richLinkMetadata&quot;: { # A rich link to a resource. # The metadata for a rich link.
                 &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
@@ -27760,7 +27820,7 @@ Returns:
           &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
             { # The number of people who reacted to a message with a specific emoji.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -27874,7 +27934,7 @@ Returns:
           { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
             &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -27896,7 +27956,7 @@ Returns:
           { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted`
             &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
               &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-                &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+                &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
                   &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
                 },
                 &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -27916,7 +27976,7 @@ Returns:
       &quot;reactionCreatedEventData&quot;: { # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created` # Event payload for a new reaction. Event type: `google.workspace.chat.reaction.v1.created`
         &quot;reaction&quot;: { # A reaction to a message. # The new reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -27934,7 +27994,7 @@ Returns:
       &quot;reactionDeletedEventData&quot;: { # Event payload for a deleted reaction. Type: `google.workspace.chat.reaction.v1.deleted` # Event payload for a deleted reaction. Event type: `google.workspace.chat.reaction.v1.deleted`
         &quot;reaction&quot;: { # A reaction to a message. # The deleted reaction.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Required. The emoji used in the reaction.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # Output only. A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.

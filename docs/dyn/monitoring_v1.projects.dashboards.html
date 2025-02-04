@@ -297,6 +297,22 @@ Args:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -1014,6 +1030,22 @@ Args:
         &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
           &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
           },
+          &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+            { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+              &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                  { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                    &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                    &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                  },
+                ],
+                &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+              },
+              &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+              &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+              &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+            },
+          ],
           &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
             { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
               &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -1627,6 +1659,22 @@ Args:
           &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
             &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
             },
+            &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+              { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                  &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                    { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                      &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                      &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                    },
+                  ],
+                  &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                },
+                &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+              },
+            ],
             &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
               { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                 &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -2242,6 +2290,22 @@ Args:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -2882,6 +2946,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -3599,6 +3679,22 @@ Returns:
         &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
           &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
           },
+          &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+            { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+              &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                  { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                    &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                    &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                  },
+                ],
+                &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+              },
+              &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+              &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+              &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+            },
+          ],
           &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
             { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
               &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -4212,6 +4308,22 @@ Returns:
           &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
             &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
             },
+            &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+              { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                  &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                    { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                      &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                      &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                    },
+                  ],
+                  &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                },
+                &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+              },
+            ],
             &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
               { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                 &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -4827,6 +4939,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -5491,6 +5619,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -6208,6 +6352,22 @@ Returns:
         &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
           &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
           },
+          &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+            { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+              &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                  { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                    &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                    &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                  },
+                ],
+                &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+              },
+              &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+              &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+              &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+            },
+          ],
           &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
             { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
               &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -6821,6 +6981,22 @@ Returns:
           &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
             &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
             },
+            &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+              { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                  &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                    { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                      &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                      &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                    },
+                  ],
+                  &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                },
+                &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+              },
+            ],
             &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
               { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                 &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -7436,6 +7612,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -8086,6 +8278,22 @@ Returns:
                 &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
                   &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
                   },
+                  &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                    { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                      &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                        &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                          { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                            &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                            &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                          },
+                        ],
+                        &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                      },
+                      &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                      &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                      &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                    },
+                  ],
                   &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                     { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                       &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -8803,6 +9011,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -9416,6 +9640,22 @@ Returns:
               &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
                 &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
                 },
+                &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                  { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                    &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                      &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                        { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                          &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                          &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                        },
+                      ],
+                      &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                    },
+                    &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                    &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                    &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                  },
+                ],
                 &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                   { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                     &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -10031,6 +10271,22 @@ Returns:
                 &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
                   &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
                   },
+                  &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                    { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                      &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                        &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                          { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                            &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                            &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                          },
+                        ],
+                        &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                      },
+                      &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                      &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                      &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                    },
+                  ],
                   &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                     { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                       &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -10689,6 +10945,22 @@ Args:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -11406,6 +11678,22 @@ Args:
         &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
           &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
           },
+          &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+            { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+              &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                  { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                    &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                    &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                  },
+                ],
+                &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+              },
+              &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+              &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+              &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+            },
+          ],
           &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
             { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
               &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -12019,6 +12307,22 @@ Args:
           &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
             &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
             },
+            &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+              { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                  &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                    { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                      &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                      &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                    },
+                  ],
+                  &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                },
+                &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+              },
+            ],
             &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
               { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                 &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -12634,6 +12938,22 @@ Args:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -13274,6 +13594,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -13991,6 +14327,22 @@ Returns:
         &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
           &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
           },
+          &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+            { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+              &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                  { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                    &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                    &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                  },
+                ],
+                &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+              },
+              &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+              &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+              &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+            },
+          ],
           &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
             { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
               &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -14604,6 +14956,22 @@ Returns:
           &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
             &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
             },
+            &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+              { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                  &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                    { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                      &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                      &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                    },
+                  ],
+                  &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                },
+                &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+              },
+            ],
             &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
               { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                 &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
@@ -15219,6 +15587,22 @@ Returns:
             &quot;scorecard&quot;: { # A widget showing the latest value of a metric, and how this value relates to one or more thresholds. # A scorecard summarizing time series data.
               &quot;blankView&quot;: { # A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } # Will cause the Scorecard to show only the value, with no indicator to its value relative to its thresholds.
               },
+              &quot;breakdowns&quot;: [ # Optional. The collection of breakdowns to be applied to the dataset. A breakdown is a way to slice the data. For example, you can break down the data by region.
+                { # Preview: A breakdown is an aggregation applied to the measures over a specified column. A breakdown can result in multiple series across a category for the provided measure. This is a preview feature and may be subject to change before final release.
+                  &quot;aggregationFunction&quot;: { # Preview: An identifier for an aggregation function. Aggregation functions are SQL functions that group or transform data from multiple points to a single point. This is a preview feature and may be subject to change before final release. # Required. The Aggregation function is applied across all data in each breakdown created.
+                    &quot;parameters&quot;: [ # Optional. Parameters applied to the aggregation function. Only used for functions that require them.
+                      { # Preview: Parameter value applied to the aggregation function. This is a preview feature and may be subject to change before final release.
+                        &quot;doubleValue&quot;: 3.14, # A floating-point parameter value.
+                        &quot;intValue&quot;: &quot;A String&quot;, # An integer parameter value.
+                      },
+                    ],
+                    &quot;type&quot;: &quot;A String&quot;, # Required. The type of aggregation function, must be one of the following: &quot;none&quot; - no function. &quot;percentile&quot; - APPROX_QUANTILES() - 1 parameter numeric value &quot;average&quot; - AVG() &quot;count&quot; - COUNT() &quot;count-distinct&quot; - COUNT(DISTINCT) &quot;count-distinct-approx&quot; - APPROX_COUNT_DISTINCT() &quot;max&quot; - MAX() &quot;min&quot; - MIN() &quot;sum&quot; - SUM()
+                  },
+                  &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the dataset containing the breakdown values.
+                  &quot;limit&quot;: 42, # Required. A limit to the number of breakdowns. If set to zero then all possible breakdowns are applied. The list of breakdowns is dependent on the value of the sort_order field.
+                  &quot;sortOrder&quot;: &quot;A String&quot;, # Required. The sort order is applied to the values of the breakdown column.
+                },
+              ],
               &quot;dimensions&quot;: [ # Optional. A dimension is a structured label, class, or category for a set of measurements in your data.
                 { # A chart dimension. Dimensions are a structured label, class, or category for a set of measurements in your data.
                   &quot;column&quot;: &quot;A String&quot;, # Required. The name of the column in the source SQL query that is used to chart the dimension.
