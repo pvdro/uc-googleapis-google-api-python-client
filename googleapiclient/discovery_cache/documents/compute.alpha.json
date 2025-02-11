@@ -16258,6 +16258,43 @@
 },
 "interconnectGroups": {
 "methods": {
+"createMembers": {
+"description": "Create Interconnects with redundancy by creating them in a specified interconnect group.",
+"flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}/createMembers",
+"httpMethod": "POST",
+"id": "compute.interconnectGroups.createMembers",
+"parameterOrder": [
+"project",
+"interconnectGroup"
+],
+"parameters": {
+"interconnectGroup": {
+"description": "Name of the group resource to create members for.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/interconnectGroups/{interconnectGroup}/createMembers",
+"request": {
+"$ref": "InterconnectGroupsCreateMembersRequest"
+},
+"response": {
+"$ref": "InterconnectGroupsCreateMembersResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "delete": {
 "description": "Deletes the specified InterconnectGroup in the given scope",
 "flatPath": "projects/{project}/global/interconnectGroups/{interconnectGroup}",
@@ -26095,7 +26132,7 @@
 ]
 },
 "update": {
-"description": "Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.",
+"description": "Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.",
 "flatPath": "projects/{project}/regions/{region}/commitments/{commitment}",
 "httpMethod": "PATCH",
 "id": "compute.regionCommitments.update",
@@ -26106,7 +26143,7 @@
 ],
 "parameters": {
 "commitment": {
-"description": "Name of the commitment for which auto renew is being updated.",
+"description": "Name of the commitment that you want to update.",
 "location": "path",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
@@ -26156,7 +26193,7 @@
 ]
 },
 "updateReservations": {
-"description": "Transfers GPUs or local SSDs between reservations within commitments.",
+"description": "Transfers GPUs or Local SSD disks between reservations that are attached to the same commitment.",
 "flatPath": "projects/{project}/regions/{region}/commitments/{commitment}/updateReservations",
 "httpMethod": "POST",
 "id": "compute.regionCommitments.updateReservations",
@@ -26167,7 +26204,7 @@
 ],
 "parameters": {
 "commitment": {
-"description": "Name of the commitment for which the reservation is being updated.",
+"description": "Name of the commitment for which the reservations are being updated.",
 "location": "path",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
@@ -47599,7 +47636,7 @@
 }
 }
 },
-"revision": "20250107",
+"revision": "20250126",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -51136,6 +51173,10 @@ false
 "description": "An optional description of this resource. Provide this property when you create the resource.",
 "type": "string"
 },
+"dynamicForwarding": {
+"$ref": "BackendServiceDynamicForwarding",
+"description": "Dynamic forwarding configuration. This field is used to configure the backend service with dynamic forwarding feature which together with Service Extension allows customized and complex routing logic."
+},
 "edgeSecurityPolicy": {
 "description": "[Output Only] The resource URL for the edge security policy associated with this backend service.",
 "type": "string"
@@ -51758,6 +51799,28 @@ false
 "name": {
 "description": "Name of a custom utilization signal. The name must be 1-24 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"BackendServiceDynamicForwarding": {
+"description": "Defines a dynamic forwarding configuration for the backend service.",
+"id": "BackendServiceDynamicForwarding",
+"properties": {
+"ipPortSelection": {
+"$ref": "BackendServiceDynamicForwardingIpPortSelection",
+"description": "IP:PORT based dynamic forwarding configuration."
+}
+},
+"type": "object"
+},
+"BackendServiceDynamicForwardingIpPortSelection": {
+"description": "Defines a IP:PORT based dynamic forwarding configuration for the backend service. Some ranges are restricted: Restricted ranges.",
+"id": "BackendServiceDynamicForwardingIpPortSelection",
+"properties": {
+"enabled": {
+"description": "A boolean flag enabling IP:PORT based dynamic forwarding.",
+"type": "boolean"
 }
 },
 "type": "object"
@@ -53311,15 +53374,15 @@ false
 "type": "object"
 },
 "Commitment": {
-"description": "Represents a regional Commitment resource. Creating a commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.",
+"description": "Represents a regional resource-based commitment resource. Creating this commitment resource means that you are purchasing a resource-based committed use contract, with an explicit start and end time. You can purchase resource-based commitments for both hardware and software resources. For more information, read Resource-based committed use discounts",
 "id": "Commitment",
 "properties": {
 "autoRenew": {
-"description": "Specifies whether to enable automatic renewal for the commitment. The default value is false if not specified. The field can be updated until the day of the commitment expiration at 12:00am PST. If the field is set to true, the commitment will be automatically renewed for either one or three years according to the terms of the existing commitment.",
+"description": "Specifies whether to automatically renew the commitment at the end of its current term. The default value is false. If you set the field to true, each time your commitment reaches the end of its term, Compute Engine automatically renews it for another term. You can update this field anytime before the commitment expires. For example, if the commitment is set to expire at 12 AM UTC-8 on January 3, 2027, you can update this field until 11:59 PM UTC-8 on January 2, 2027.",
 "type": "boolean"
 },
 "category": {
-"description": "The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.",
+"description": "The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.",
 "enum": [
 "CATEGORY_UNSPECIFIED",
 "LICENSE",
@@ -53337,11 +53400,11 @@ false
 "type": "string"
 },
 "customEndTimestamp": {
-"description": "[Input Only] Optional, specifies the CUD end time requested by the customer in RFC3339 text format. Needed when the customer wants CUD's end date is later than the start date + term duration.",
+"description": "[Input Only] Optional, specifies the requested commitment end time in RFC3339 text format. Use this option when the desired commitment's end date is later than the start date + term duration.",
 "type": "string"
 },
 "description": {
-"description": "An optional description of this resource. Provide this property when you create the resource.",
+"description": "An optional description of the commitment. You can provide this property when you create the resource.",
 "type": "string"
 },
 "endTimestamp": {
@@ -53349,7 +53412,6 @@ false
 "type": "string"
 },
 "existingReservations": {
-"description": "Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /reservations/reservation - projects/project/zones/zone/reservations/reservation ",
 "items": {
 "type": "string"
 },
@@ -53370,19 +53432,19 @@ false
 "description": "The license specification required as part of a license commitment."
 },
 "mergeSourceCommitments": {
-"description": "List of source commitments to be merged into a new commitment.",
+"description": "The list of source commitments that you are merging to create the new merged commitment. For more information, see Merging commitments.",
 "items": {
 "type": "string"
 },
 "type": "array"
 },
 "name": {
-"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"description": "Name of the commitment. You must specify a name when you purchase the commitment. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
 "plan": {
-"description": "The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).",
+"description": "The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).",
 "enum": [
 "INVALID",
 "THIRTY_SIX_MONTH",
@@ -53396,11 +53458,11 @@ false
 "type": "string"
 },
 "region": {
-"description": "[Output Only] URL of the region where this commitment may be used.",
+"description": "[Output Only] URL of the region where the commitment and committed resources are located.",
 "type": "string"
 },
 "reservations": {
-"description": "List of create-on-create reservations for this commitment.",
+"description": "The list of new reservations that you want to create and attach to this commitment. You must attach reservations to your commitment if your commitment specifies any GPUs or Local SSD disks. For more information, see Attach reservations to resource-based commitments. Specify this property only if you want to create new reservations to attach. To attach existing reservations, specify the existingReservations property instead.",
 "items": {
 "$ref": "Reservation"
 },
@@ -53411,7 +53473,7 @@ false
 "description": "[Output Only] Status information for Commitment resource."
 },
 "resources": {
-"description": "A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.",
+"description": "The list of all the hardware resources, with their types and amounts, that you want to commit to. Specify as a separate entry in the list for each individual resource type.",
 "items": {
 "$ref": "ResourceCommitment"
 },
@@ -53426,7 +53488,7 @@ false
 "type": "string"
 },
 "splitSourceCommitment": {
-"description": "Source commitment to be split into a new commitment.",
+"description": "The source commitment from which you are transferring resources to create the new split commitment. For more information, see Split commitments.",
 "type": "string"
 },
 "startTimestamp": {
@@ -53434,7 +53496,7 @@ false
 "type": "string"
 },
 "status": {
-"description": "[Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.",
+"description": "[Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.",
 "enum": [
 "ACTIVE",
 "CANCELED_EARLY_TERMINATION",
@@ -53460,7 +53522,7 @@ false
 "type": "string"
 },
 "type": {
-"description": "The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.",
+"description": "The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.",
 "enum": [
 "ACCELERATOR_OPTIMIZED",
 "ACCELERATOR_OPTIMIZED_A3",
@@ -53517,7 +53579,7 @@ false
 "",
 "",
 "",
-""
+"Note for internal users: When adding a new enum Type for v1, make sure to also add it in the comment for the `optional Type type` definition. This ensures that the public documentation displays the new enum Type."
 ],
 "type": "string"
 }
@@ -53886,7 +53948,7 @@ false
 "id": "CommitmentsScopedList",
 "properties": {
 "commitments": {
-"description": "[Output Only] A list of commitments contained in this scope.",
+"description": "[Output Only] The list of commitments contained in this scope.",
 "items": {
 "$ref": "Commitment"
 },
@@ -64316,7 +64378,7 @@ false
 "description": "The configuration for metadata based readiness signal sent by the instance during initialization when stopping / suspending an instance. The Instance Group Manager will wait for a signal that indicates successful initialization before stopping / suspending an instance. If a successful readiness signal is not sent before timeout, the corresponding instance will not be stopped / suspended. Instead, an error will be visible in the lastAttempt.errors field of the managed instance in the listmanagedinstances method. If metadataBasedReadinessSignal.timeoutSec is unset, the Instance Group Manager will directly proceed to suspend / stop instances, skipping initialization on them."
 },
 "onFailedHealthCheck": {
-"description": "The action that a MIG performs on an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are: - DEFAULT_ACTION (default): MIG uses the same action configured for instanceLifecyclePolicy.defaultActionOnFailure field. - REPAIR: MIG automatically repairs an unhealthy VM by recreating it. - DO_NOTHING: MIG doesn't repair an unhealthy VM. For more information, see about repairing VMs in a MIG. ",
+"description": "The action that a MIG performs on an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are: - DEFAULT_ACTION (default): MIG uses the same action configured for instanceLifecyclePolicy.defaultActionOnFailure field. - REPAIR: MIG automatically repairs an unhealthy VM by recreating it. - DO_NOTHING: MIG doesn't repair an unhealthy VM. For more information, see About repairing VMs in a MIG. ",
 "enum": [
 "DEFAULT_ACTION",
 "DO_NOTHING",
@@ -68599,7 +68661,7 @@ false
 "IF_MACSEC"
 ],
 "enumDescriptions": [
-"Cross Site Networking",
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -68761,7 +68823,7 @@ false
 "IF_MACSEC"
 ],
 "enumDescriptions": [
-"Cross Site Networking",
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -69853,6 +69915,15 @@ false
 "InterconnectAttachmentGroupsOperationalStatus": {
 "id": "InterconnectAttachmentGroupsOperationalStatus",
 "properties": {
+"attachmentStatuses": {
+"items": {
+"$ref": "InterconnectAttachmentGroupsOperationalStatusAttachmentStatus"
+},
+"type": "array"
+},
+"configured": {
+"$ref": "InterconnectAttachmentGroupConfigured"
+},
 "groupStatus": {
 "description": "Summarizes the status of the group.",
 "enum": [
@@ -69862,6 +69933,80 @@ false
 "UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"intent": {
+"$ref": "InterconnectAttachmentGroupIntent"
+},
+"operational": {
+"$ref": "InterconnectAttachmentGroupConfigured",
+"description": "The operational state of the group, including only active Attachments."
+}
+},
+"type": "object"
+},
+"InterconnectAttachmentGroupsOperationalStatusAttachmentStatus": {
+"description": "The status of one Attachment in the group. List order is arbitrary.",
+"id": "InterconnectAttachmentGroupsOperationalStatusAttachmentStatus",
+"properties": {
+"adminEnabled": {
+"description": "Whether this Attachment is enabled. This becomes false when the customer drains their Attachment.",
+"type": "boolean"
+},
+"attachment": {
+"description": "The URL of the Attachment being described.",
+"type": "string"
+},
+"isActive": {
+"description": "Whether this Attachment is participating in the redundant configuration. This will be ACTIVE if and only if the status below is CONNECTION_UP. Any INACTIVE Attachments are excluded from the analysis that generates operational.availabilitySLA.",
+"enum": [
+"ACTIVE",
+"INACTIVE",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"status": {
+"description": "Whether this Attachment is active, and if so, whether BGP is up. This is based on the statuses available in the Pantheon UI here: http://google3/java/com/google/cloud/boq/clientapi/gce/hybrid/api/interconnect_models.proto",
+"enum": [
+"ATTACHMENT_STATUS_UNKNOWN",
+"CONNECTION_DISABLED",
+"CONNECTION_DOWN",
+"CONNECTION_UP",
+"DEFUNCT",
+"IPSEC_CONFIGURATION_NEEDED_STATUS",
+"IPSET_READY_TO_RESUME_FLOW_STATUS",
+"IPV4_DOWN_IPV6_UP",
+"IPV4_UP_IPV6_DOWN",
+"PARTNER_REQUEST_RECEIVED",
+"PENDING_CUSTOMER",
+"PENDING_PARTNER",
+"PROVISIONED",
+"ROUTER_CONFIGURATION_BROKEN",
+"UNPROVISIONED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
 "",
 "",
 "",
@@ -70735,6 +70880,145 @@ false
 },
 "type": "object"
 },
+"InterconnectGroupsCreateMembers": {
+"id": "InterconnectGroupsCreateMembers",
+"properties": {
+"intentMismatchBehavior": {
+"description": "How to behave when configured.topologyCapability.supportedSLA would not equal intent.topologyCapability after this call.",
+"enum": [
+"CREATE",
+"REJECT",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"interconnects": {
+"items": {
+"$ref": "InterconnectGroupsCreateMembersInterconnectInput"
+},
+"type": "array"
+},
+"templateInterconnect": {
+"$ref": "InterconnectGroupsCreateMembersInterconnectInput",
+"description": "Parameters for the Interconnects to create."
+}
+},
+"type": "object"
+},
+"InterconnectGroupsCreateMembersInterconnectInput": {
+"description": "LINT.IfChange",
+"id": "InterconnectGroupsCreateMembersInterconnectInput",
+"properties": {
+"adminEnabled": {
+"description": "Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.",
+"type": "boolean"
+},
+"customerName": {
+"description": "Customer name, to put in the Letter of Authorization as the party authorized to request a crossconnect.",
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource. Provide this property when you create the resource.",
+"type": "string"
+},
+"facility": {
+"description": "A zone-free location to use for all Interconnects created in this call, like \"iad-1234\".",
+"type": "string"
+},
+"interconnectType": {
+"description": "Type of interconnect, which can take one of the following values: - PARTNER: A partner-managed interconnection shared between customers though a partner. - DEDICATED: A dedicated physical interconnection with the customer. Note that a value IT_PRIVATE has been deprecated in favor of DEDICATED.",
+"enum": [
+"DEDICATED",
+"IT_PRIVATE",
+"PARTNER"
+],
+"enumDescriptions": [
+"A dedicated physical interconnection with the customer.",
+"[Deprecated] A private, physical interconnection with the customer.",
+"A partner-managed interconnection shared between customers via partner."
+],
+"type": "string"
+},
+"linkType": {
+"description": "Type of link requested, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics - LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.",
+"enum": [
+"LINK_TYPE_ETHERNET_100G_LR",
+"LINK_TYPE_ETHERNET_10G_LR"
+],
+"enumDescriptions": [
+"100G Ethernet, LR Optics.",
+"10G Ethernet, LR Optics. [(rate_bps) = 10000000000];"
+],
+"type": "string"
+},
+"name": {
+"annotations": {
+"required": [
+"compute.interconnects.insert"
+]
+},
+"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"nocContactEmail": {
+"description": "Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Cloud Monitoring logs alerting and Cloud Notifications. This field is required for users who sign up for Cloud Interconnect using workforce identity federation.",
+"type": "string"
+},
+"remoteLocation": {
+"description": "Indicates that this is a Cross-Cloud Interconnect. This field specifies the location outside of Google's network that the interconnect is connected to.",
+"type": "string"
+},
+"requestedFeatures": {
+"description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - IF_MACSEC If specified then the connection is created on MACsec capable hardware ports. If not specified, the default value is false, which allocates non-MACsec capable ports first if available. This parameter can be provided only with Interconnect INSERT. It isn't valid for Interconnect PATCH.",
+"items": {
+"enum": [
+"IF_CROSS_SITE_NETWORK",
+"IF_MACSEC"
+],
+"enumDescriptions": [
+"Cross-Site Networking",
+"Media Access Control security (MACsec)"
+],
+"type": "string"
+},
+"type": "array"
+},
+"requestedLinkCount": {
+"description": "Target number of physical links in the link bundle, as requested by the customer.",
+"format": "int32",
+"type": "integer"
+}
+},
+"type": "object"
+},
+"InterconnectGroupsCreateMembersRequest": {
+"id": "InterconnectGroupsCreateMembersRequest",
+"properties": {
+"request": {
+"$ref": "InterconnectGroupsCreateMembers"
+}
+},
+"type": "object"
+},
+"InterconnectGroupsCreateMembersResponse": {
+"description": "Response for the InterconnectGroupsCreateMembersRequest.",
+"id": "InterconnectGroupsCreateMembersResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"result": {
+"$ref": "InterconnectGroup"
+}
+},
+"type": "object"
+},
 "InterconnectGroupsGetOperationalStatusResponse": {
 "description": "Response for the InterconnectGroupsGetOperationalStatusResponse.",
 "id": "InterconnectGroupsGetOperationalStatusResponse",
@@ -71160,7 +71444,7 @@ false
 "IF_MACSEC"
 ],
 "enumDescriptions": [
-"Cross Site Networking",
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -72675,16 +72959,16 @@ false
 "id": "LicenseResourceCommitment",
 "properties": {
 "amount": {
-"description": "The number of licenses purchased.",
+"description": "The number of licenses you plan to purchase.",
 "format": "int64",
 "type": "string"
 },
 "coresPerLicense": {
-"description": "Specifies the core range of the instance for which this license applies.",
+"description": "The number of cores per license.",
 "type": "string"
 },
 "license": {
-"description": "Any applicable license URI.",
+"description": "The applicable license URI.",
 "type": "string"
 }
 },
@@ -73170,6 +73454,10 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"params": {
+"$ref": "MachineImageParams",
+"description": "Input only. [Input Only] Additional parameters that are passed in the request, but are not persisted in the resource."
+},
 "satisfiesPzi": {
 "description": "Output only. Reserved for future use.",
 "readOnly": true,
@@ -73393,6 +73681,27 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"MachineImageParams": {
+"description": "Machine Image parameters",
+"id": "MachineImageParams",
+"properties": {
+"excludedDisks": {
+"description": "Input only. [Input Only] Specifies the list of disk device names that must be excluded from the new machine image.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"includedDisks": {
+"description": "Input only. [Input Only] Specifies the list of disk device names that must be included with the new machine image.",
+"items": {
+"type": "string"
+},
+"type": "array"
 }
 },
 "type": "object"
@@ -77527,10 +77836,6 @@ false
 },
 "selfLinkWithId": {
 "description": "[Output Only] Server-defined URL for this resource with the resource id.",
-"type": "string"
-},
-"zone": {
-"description": "[Output Only] Zone to which the network is restricted.",
 "type": "string"
 }
 },
@@ -85468,7 +85773,7 @@ false
 "id": "RegionCommitmentsUpdateReservationsRequest",
 "properties": {
 "reservations": {
-"description": "A list of two reservations to transfer GPUs and local SSD between.",
+"description": "A list of two reservations to transfer GPUs and Local SSD disks between.",
 "items": {
 "$ref": "Reservation"
 },
@@ -88103,20 +88408,20 @@ false
 "type": "object"
 },
 "ResourceCommitment": {
-"description": "Commitment for a particular resource (a Commitment is composed of one or more of these).",
+"description": "Commitment for a particular hardware resource (a commitment is composed of one or more of these).",
 "id": "ResourceCommitment",
 "properties": {
 "acceleratorType": {
-"description": "Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.",
+"description": "Name of the accelerator type or GPU resource. Specify this field only when the type of hardware resource is ACCELERATOR.",
 "type": "string"
 },
 "amount": {
-"description": "The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.",
+"description": "The quantity of the hardware resource that you want to commit to purchasing (in a type-dependent unit). - For vCPUs, you must specify an integer value. - For memory, you specify the amount of MB that you want. The value you specify must be a multiple of 256 MB, with up to 6.5 GB of memory per every vCPU. - For GPUs, you must specify an integer value. - For Local SSD disks, you must specify the amount in GB. The size of a single Local SSD disk is 375 GB. ",
 "format": "int64",
 "type": "string"
 },
 "type": {
-"description": "Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.",
+"description": "The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.",
 "enum": [
 "ACCELERATOR",
 "LOCAL_SSD",
@@ -88962,6 +89267,10 @@ false
 "description": "Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.",
 "type": "object"
 },
+"region": {
+"description": "Region where the snapshot is scoped to.",
+"type": "string"
+},
 "storageLocations": {
 "description": "Cloud Storage bucket storage location of the auto snapshot (regional or multi-regional).",
 "items": {
@@ -89062,6 +89371,22 @@ false
 "description": "Represents the workload policy.",
 "id": "ResourcePolicyWorkloadPolicy",
 "properties": {
+"acceleratorTopology": {
+"type": "string"
+},
+"maxTopologyDistance": {
+"enum": [
+"BLOCK",
+"CLUSTER",
+"SUBBLOCK"
+],
+"enumDescriptions": [
+"VMs must be provisioned in the same block.",
+"VMs must be provisioned in the same cluster.",
+"VMs must be provisioned in the same subblock."
+],
+"type": "string"
+},
 "type": {
 "enum": [
 "HIGH_AVAILABILITY",
@@ -90504,7 +90829,7 @@ false
 "id": "RouterInterface",
 "properties": {
 "ipRange": {
-"description": "IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose. ",
+"description": "IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fdff:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose. ",
 "type": "string"
 },
 "ipVersion": {
@@ -95763,6 +96088,20 @@ false
 },
 "description": "List of regions that can restore a regional snapshot from the current region",
 "type": "object"
+},
+"policy": {
+"description": "Policy of which location is allowed to access snapshot.",
+"enum": [
+"ALL_REGIONS",
+"POLICY_UNSPECIFIED",
+"SPECIFIC_REGIONS"
+],
+"enumDescriptions": [
+"Any regions will be able to access the source location.",
+"",
+"Only allowlisted regions will be able to restore region scoped snapshots"
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -106090,6 +106429,10 @@ false
 "description": "Represents a Cloud VPN Tunnel resource. For more information about VPN, read the the Cloud VPN Overview.",
 "id": "VpnTunnel",
 "properties": {
+"cipherSuite": {
+"$ref": "VpnTunnelCipherSuite",
+"description": "User specified list of ciphers to use for the phase 1 and phase 2 of the IKE protocol."
+},
 "creationTimestamp": {
 "description": "[Output Only] Creation timestamp in RFC3339 text format.",
 "type": "string"
@@ -106402,6 +106745,18 @@ false
 },
 "type": "object"
 },
+"VpnTunnelCipherSuite": {
+"id": "VpnTunnelCipherSuite",
+"properties": {
+"phase1": {
+"$ref": "VpnTunnelPhase1Algorithms"
+},
+"phase2": {
+"$ref": "VpnTunnelPhase2Algorithms"
+}
+},
+"type": "object"
+},
 "VpnTunnelList": {
 "description": "Contains a list of VpnTunnel resources.",
 "id": "VpnTunnelList",
@@ -106553,6 +106908,60 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"VpnTunnelPhase1Algorithms": {
+"id": "VpnTunnelPhase1Algorithms",
+"properties": {
+"dh": {
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"encryption": {
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"integrity": {
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"prf": {
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"VpnTunnelPhase2Algorithms": {
+"id": "VpnTunnelPhase2Algorithms",
+"properties": {
+"encryption": {
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"integrity": {
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"pfs": {
+"items": {
+"type": "string"
+},
+"type": "array"
 }
 },
 "type": "object"

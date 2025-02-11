@@ -580,6 +580,13 @@ Args:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -1313,6 +1320,13 @@ Args:
           &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
         },
         &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+        &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+          &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+            &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+            &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+            &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+          },
+        },
         &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
           &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
             &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -1942,6 +1956,13 @@ Args:
             &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
           },
           &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+          &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+            &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+              &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+              &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+              &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+            },
+          },
           &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
             &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
               &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -2573,6 +2594,13 @@ Args:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -3229,6 +3257,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -3962,6 +3997,13 @@ Returns:
           &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
         },
         &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+        &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+          &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+            &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+            &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+            &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+          },
+        },
         &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
           &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
             &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -4591,6 +4633,13 @@ Returns:
             &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
           },
           &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+          &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+            &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+              &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+              &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+              &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+            },
+          },
           &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
             &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
               &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -5222,6 +5271,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -5902,6 +5958,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -6635,6 +6698,13 @@ Returns:
           &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
         },
         &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+        &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+          &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+            &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+            &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+            &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+          },
+        },
         &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
           &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
             &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -7264,6 +7334,13 @@ Returns:
             &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
           },
           &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+          &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+            &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+              &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+              &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+              &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+            },
+          },
           &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
             &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
               &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -7895,6 +7972,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -8561,6 +8645,13 @@ Returns:
                   &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
                 },
                 &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+                &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+                  &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                    &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                    &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                    &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+                  },
+                },
                 &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
                   &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                     &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -9294,6 +9385,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -9923,6 +10021,13 @@ Returns:
                 &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
               },
               &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+              &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+                &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                  &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                  &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                  &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+                },
+              },
               &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
                 &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                   &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -10554,6 +10659,13 @@ Returns:
                   &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
                 },
                 &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+                &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+                  &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                    &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                    &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                    &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+                  },
+                },
                 &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
                   &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                     &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -11228,6 +11340,13 @@ Args:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -11961,6 +12080,13 @@ Args:
           &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
         },
         &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+        &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+          &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+            &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+            &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+            &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+          },
+        },
         &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
           &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
             &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -12590,6 +12716,13 @@ Args:
             &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
           },
           &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+          &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+            &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+              &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+              &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+              &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+            },
+          },
           &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
             &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
               &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -13221,6 +13354,13 @@ Args:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -13877,6 +14017,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -14610,6 +14757,13 @@ Returns:
           &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
         },
         &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+        &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+          &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+            &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+            &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+            &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+          },
+        },
         &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
           &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
             &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -15239,6 +15393,13 @@ Returns:
             &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
           },
           &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+          &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+            &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+              &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+              &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+              &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+            },
+          },
           &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
             &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
               &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.
@@ -15870,6 +16031,13 @@ Returns:
               &quot;metricVisualization&quot;: &quot;A String&quot;, # Optional. Store rendering strategy
             },
             &quot;title&quot;: &quot;A String&quot;, # Optional. The title of the widget.
+            &quot;visibilityCondition&quot;: { # Condition that determines whether the widget should be displayed. # Optional. If set, this widget is rendered only when the condition is evaluated to true.
+              &quot;templateVariableCondition&quot;: { # A condition whose evaluation is based on the value of a template variable. # A condition whose evaluation is based on the value of a template variable.
+                &quot;comparator&quot;: &quot;A String&quot;, # Comparator to use to evaluate whether the value of the template variable matches the template_variable_value. For example, if the comparator is REGEX_FULL_MATCH, template_variable_value would contain a regex that is matched against the value of the template variable.
+                &quot;templateVariable&quot;: &quot;A String&quot;, # The template variable whose value is evaluated.
+                &quot;templateVariableValue&quot;: &quot;A String&quot;, # The value to compare the template variable to. For example, if the comparator is REGEX_FULL_MATCH, this field should contain a regex.
+              },
+            },
             &quot;xyChart&quot;: { # A chart that displays data on a 2D (X and Y axes) plane. # A chart of time series data.
               &quot;chartOptions&quot;: { # Options to control visual rendering of a chart. # Display options for the chart.
                 &quot;displayHorizontal&quot;: True or False, # Preview: Configures whether the charted values are shown on the horizontal or vertical axis. By default, values are represented the vertical axis. This is a preview feature and may be subject to change before final release.

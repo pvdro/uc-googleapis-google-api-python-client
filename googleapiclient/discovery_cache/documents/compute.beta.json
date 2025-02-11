@@ -710,6 +710,47 @@
 }
 }
 },
+"advice": {
+"methods": {
+"calendarMode": {
+"description": "Advise how, where and when to create the requested amount of instances with specified accelerators, within the specified time and location limits. The method recommends creating future reservations for the requested resources.",
+"flatPath": "projects/{project}/regions/{region}/advice/calendarMode",
+"httpMethod": "POST",
+"id": "compute.advice.calendarMode",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/advice/calendarMode",
+"request": {
+"$ref": "CalendarModeAdviceRequest"
+},
+"response": {
+"$ref": "CalendarModeAdviceResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "autoscalers": {
 "methods": {
 "aggregatedList": {
@@ -23618,7 +23659,7 @@
 ]
 },
 "update": {
-"description": "Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.",
+"description": "Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.",
 "flatPath": "projects/{project}/regions/{region}/commitments/{commitment}",
 "httpMethod": "PATCH",
 "id": "compute.regionCommitments.update",
@@ -23629,7 +23670,7 @@
 ],
 "parameters": {
 "commitment": {
-"description": "Name of the commitment for which auto renew is being updated.",
+"description": "Name of the commitment that you want to update.",
 "location": "path",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
@@ -23679,7 +23720,7 @@
 ]
 },
 "updateReservations": {
-"description": "Transfers GPUs or local SSDs between reservations within commitments.",
+"description": "Transfers GPUs or Local SSD disks between reservations that are attached to the same commitment.",
 "flatPath": "projects/{project}/regions/{region}/commitments/{commitment}/updateReservations",
 "httpMethod": "POST",
 "id": "compute.regionCommitments.updateReservations",
@@ -23690,7 +23731,7 @@
 ],
 "parameters": {
 "commitment": {
-"description": "Name of the commitment for which the reservation is being updated.",
+"description": "Name of the commitment for which the reservations are being updated.",
 "location": "path",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
@@ -32499,6 +32540,62 @@
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
 ]
+},
+"performMaintenance": {
+"description": "Allows customers to perform maintenance on a reservation block",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}/performMaintenance",
+"httpMethod": "POST",
+"id": "compute.reservationBlocks.performMaintenance",
+"parameterOrder": [
+"project",
+"zone",
+"reservation",
+"reservationBlock"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"reservation": {
+"description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"reservationBlock": {
+"description": "The name of the reservation block. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}/performMaintenance",
+"request": {
+"$ref": "ReservationsBlocksPerformMaintenanceRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
 }
 }
 },
@@ -32812,6 +32909,54 @@
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"performMaintenance": {
+"description": "Perform maintenance on an extended reservation",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservation}/performMaintenance",
+"httpMethod": "POST",
+"id": "compute.reservations.performMaintenance",
+"parameterOrder": [
+"project",
+"zone",
+"reservation"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"reservation": {
+"description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/reservations/{reservation}/performMaintenance",
+"request": {
+"$ref": "ReservationsPerformMaintenanceRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
 ]
 },
 "resize": {
@@ -42856,7 +43001,7 @@
 }
 }
 },
-"revision": "20250119",
+"revision": "20250126",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47937,6 +48082,48 @@ false
 },
 "type": "object"
 },
+"CalendarModeAdviceRequest": {
+"description": "A request to recommend the best way to consume the specified resources in the future.",
+"id": "CalendarModeAdviceRequest",
+"properties": {
+"futureResourcesSpecs": {
+"additionalProperties": {
+"$ref": "FutureResourcesSpec"
+},
+"description": "Specification of resources to create in the future. The key of the map is an arbitrary string specified by the caller. Value of the map is a specification of required resources and their constraints. Currently only one value is allowed in this map.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"CalendarModeAdviceResponse": {
+"description": "A response containing the recommended way of creating the specified resources in the future. It contains (will contain) multiple recommendations that can be analyzed by the customer and the best one can be picked.",
+"id": "CalendarModeAdviceResponse",
+"properties": {
+"recommendations": {
+"description": "Recommendations where, how and when to create the requested resources in order to maximize their obtainability and minimize cost.",
+"items": {
+"$ref": "CalendarModeRecommendation"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CalendarModeRecommendation": {
+"description": "A single recommendation to create requested resources. Contains detailed recommendations for every future resources specification specified in CalendarModeAdviceRequest.",
+"id": "CalendarModeRecommendation",
+"properties": {
+"recommendationsPerSpec": {
+"additionalProperties": {
+"$ref": "FutureResourcesRecommendation"
+},
+"description": "Recommendations for every future resource specification passed in CalendarModeAdviceRequest. Keys of the map correspond to keys specified in the request.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "CircuitBreakers": {
 "description": "Settings controlling the volume of requests, connections and retries to this backend service.",
 "id": "CircuitBreakers",
@@ -47974,15 +48161,15 @@ false
 "type": "object"
 },
 "Commitment": {
-"description": "Represents a regional Commitment resource. Creating a commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.",
+"description": "Represents a regional resource-based commitment resource. Creating this commitment resource means that you are purchasing a resource-based committed use contract, with an explicit start and end time. You can purchase resource-based commitments for both hardware and software resources. For more information, read Resource-based committed use discounts",
 "id": "Commitment",
 "properties": {
 "autoRenew": {
-"description": "Specifies whether to enable automatic renewal for the commitment. The default value is false if not specified. The field can be updated until the day of the commitment expiration at 12:00am PST. If the field is set to true, the commitment will be automatically renewed for either one or three years according to the terms of the existing commitment.",
+"description": "Specifies whether to automatically renew the commitment at the end of its current term. The default value is false. If you set the field to true, each time your commitment reaches the end of its term, Compute Engine automatically renews it for another term. You can update this field anytime before the commitment expires. For example, if the commitment is set to expire at 12 AM UTC-8 on January 3, 2027, you can update this field until 11:59 PM UTC-8 on January 2, 2027.",
 "type": "boolean"
 },
 "category": {
-"description": "The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.",
+"description": "The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.",
 "enum": [
 "CATEGORY_UNSPECIFIED",
 "LICENSE",
@@ -48000,11 +48187,11 @@ false
 "type": "string"
 },
 "customEndTimestamp": {
-"description": "[Input Only] Optional, specifies the CUD end time requested by the customer in RFC3339 text format. Needed when the customer wants CUD's end date is later than the start date + term duration.",
+"description": "[Input Only] Optional, specifies the requested commitment end time in RFC3339 text format. Use this option when the desired commitment's end date is later than the start date + term duration.",
 "type": "string"
 },
 "description": {
-"description": "An optional description of this resource. Provide this property when you create the resource.",
+"description": "An optional description of the commitment. You can provide this property when you create the resource.",
 "type": "string"
 },
 "endTimestamp": {
@@ -48012,7 +48199,6 @@ false
 "type": "string"
 },
 "existingReservations": {
-"description": "Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /reservations/reservation - projects/project/zones/zone/reservations/reservation ",
 "items": {
 "type": "string"
 },
@@ -48033,19 +48219,19 @@ false
 "description": "The license specification required as part of a license commitment."
 },
 "mergeSourceCommitments": {
-"description": "List of source commitments to be merged into a new commitment.",
+"description": "The list of source commitments that you are merging to create the new merged commitment. For more information, see Merging commitments.",
 "items": {
 "type": "string"
 },
 "type": "array"
 },
 "name": {
-"description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+"description": "Name of the commitment. You must specify a name when you purchase the commitment. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
 "plan": {
-"description": "The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).",
+"description": "The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).",
 "enum": [
 "INVALID",
 "THIRTY_SIX_MONTH",
@@ -48059,11 +48245,11 @@ false
 "type": "string"
 },
 "region": {
-"description": "[Output Only] URL of the region where this commitment may be used.",
+"description": "[Output Only] URL of the region where the commitment and committed resources are located.",
 "type": "string"
 },
 "reservations": {
-"description": "List of create-on-create reservations for this commitment.",
+"description": "The list of new reservations that you want to create and attach to this commitment. You must attach reservations to your commitment if your commitment specifies any GPUs or Local SSD disks. For more information, see Attach reservations to resource-based commitments. Specify this property only if you want to create new reservations to attach. To attach existing reservations, specify the existingReservations property instead.",
 "items": {
 "$ref": "Reservation"
 },
@@ -48074,7 +48260,7 @@ false
 "description": "[Output Only] Status information for Commitment resource."
 },
 "resources": {
-"description": "A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.",
+"description": "The list of all the hardware resources, with their types and amounts, that you want to commit to. Specify as a separate entry in the list for each individual resource type.",
 "items": {
 "$ref": "ResourceCommitment"
 },
@@ -48085,7 +48271,7 @@ false
 "type": "string"
 },
 "splitSourceCommitment": {
-"description": "Source commitment to be split into a new commitment.",
+"description": "The source commitment from which you are transferring resources to create the new split commitment. For more information, see Split commitments.",
 "type": "string"
 },
 "startTimestamp": {
@@ -48093,7 +48279,7 @@ false
 "type": "string"
 },
 "status": {
-"description": "[Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.",
+"description": "[Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.",
 "enum": [
 "ACTIVE",
 "CANCELLED",
@@ -48115,7 +48301,7 @@ false
 "type": "string"
 },
 "type": {
-"description": "The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.",
+"description": "The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.",
 "enum": [
 "ACCELERATOR_OPTIMIZED",
 "ACCELERATOR_OPTIMIZED_A3",
@@ -48168,7 +48354,7 @@ false
 "",
 "",
 "",
-""
+"Note for internal users: When adding a new enum Type for v1, make sure to also add it in the comment for the `optional Type type` definition. This ensures that the public documentation displays the new enum Type."
 ],
 "type": "string"
 }
@@ -48507,7 +48693,7 @@ false
 "id": "CommitmentsScopedList",
 "properties": {
 "commitments": {
-"description": "[Output Only] A list of commitments contained in this scope.",
+"description": "[Output Only] The list of commitments contained in this scope.",
 "items": {
 "$ref": "Commitment"
 },
@@ -52007,6 +52193,37 @@ false
 },
 "type": "object"
 },
+"FlexibleTimeRange": {
+"description": "A flexible specification of a time range that has 3 points of flexibility: (1) a flexible start time, (2) a flexible end time, (3) a flexible duration. It is possible to specify a contradictory time range that cannot be matched by any Interval. This causes a validation error.",
+"id": "FlexibleTimeRange",
+"properties": {
+"endTimeNotEarlierThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"endTimeNotLaterThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"maxDuration": {
+"format": "google-duration",
+"type": "string"
+},
+"minDuration": {
+"format": "google-duration",
+"type": "string"
+},
+"startTimeNotEarlierThan": {
+"format": "google-datetime",
+"type": "string"
+},
+"startTimeNotLaterThan": {
+"format": "google-datetime",
+"type": "string"
+}
+},
+"type": "object"
+},
 "ForwardingRule": {
 "description": "Represents a Forwarding Rule resource. Forwarding rule resources in Google Cloud can be either regional or global in scope: * [Global](https://cloud.google.com/compute/docs/reference/rest/beta/globalForwardingRules) * [Regional](https://cloud.google.com/compute/docs/reference/rest/beta/forwardingRules) A forwarding rule and its corresponding IP address represent the frontend configuration of a Google Cloud load balancer. Forwarding rules can also reference target instances and Cloud VPN Classic gateways (targetVpnGateway). For more information, read Forwarding rule concepts and Using protocol forwarding.",
 "id": "ForwardingRule",
@@ -53608,6 +53825,246 @@ false
 }
 },
 "type": "object"
+}
+},
+"type": "object"
+},
+"FutureResourcesRecommendation": {
+"description": "Recommendation for single resources specification, to be created in the future.",
+"id": "FutureResourcesRecommendation",
+"properties": {
+"endTime": {
+"format": "google-datetime",
+"type": "string"
+},
+"location": {
+"description": "The advised location for resource usage. When a zone, in format 'zones/'. If not set, it means that no location is recommended - see other_locations for details.",
+"type": "string"
+},
+"otherLocations": {
+"additionalProperties": {
+"$ref": "FutureResourcesRecommendationOtherLocation"
+},
+"description": "List of locations in the request scope that were not recommended. Keys of the map are zones, in format 'zones/'. The values are status information indicating the recommendation status.",
+"type": "object"
+},
+"recommendationId": {
+"description": "Unique id of the recommendation, a UUID string generated by the API.",
+"type": "string"
+},
+"recommendationType": {
+"description": "Type of recommendation. Currently only FUTURE_RESERVATION is supported.",
+"enum": [
+"FUTURE_RESERVATION",
+"RECOMMENDATION_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"A Future Reservation is recommended.",
+"Default value, unused."
+],
+"type": "string"
+},
+"startTime": {
+"format": "google-datetime",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesRecommendationOtherLocation": {
+"description": "Information about recommendation status for locations that were allowed but not used by the response.",
+"id": "FutureResourcesRecommendationOtherLocation",
+"properties": {
+"details": {
+"description": "Details (human readable) describing the situation. For example, if status is CONDITION_NOT_MET, then details contain information about the parameters of the time window that did not meet the required conditions.",
+"type": "string"
+},
+"status": {
+"description": "Status of recommendation in this location.",
+"enum": [
+"CONDITIONS_NOT_MET",
+"NOT_SUPPORTED",
+"NO_CAPACITY",
+"OTHER_LOCATION_STATUS_UNDEFINED",
+"RECOMMENDED"
+],
+"enumDescriptions": [
+"The requested resources are offered in this location but the requested time window is does not meet the required conditions.",
+"The requested resources are not offered in this location. Retrying the request will not change this status.",
+"The requested resources are offered in this location and the requested time window is accepted but there is no capacity within the requested time window.",
+"Default value, unused.",
+"The requested resources are offered in this location and it is possible to request them. However, another location was better and was recommended."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpec": {
+"description": "Specification of resources to be created at some time in the future within an optionally specified set of locations, and within the specified time range.",
+"id": "FutureResourcesSpec",
+"properties": {
+"deploymentType": {
+"description": "Indicates if the reservation allocation strategy is static (DENSE) or dynamic (STANDARD). Defaults to DENSE.",
+"enum": [
+"DENSE",
+"DEPLOYMENT_TYPE_UNSPECIFIED",
+"FLEXIBLE"
+],
+"enumDescriptions": [
+"The reserved capacity is made up of densely deployed reservation blocks.",
+"",
+"The reserved capacity is made up of highly flexible, logical reservation blocks."
+],
+"type": "string"
+},
+"locationPolicy": {
+"$ref": "FutureResourcesSpecLocationPolicy",
+"description": "Optional location policy allowing to exclude some zone(s) in which the resources must not be created."
+},
+"targetResources": {
+"$ref": "FutureResourcesSpecTargetResources",
+"description": "Specification of the reserved resources."
+},
+"timeRangeSpec": {
+"$ref": "FlexibleTimeRange",
+"description": "Specification of a time range in which the resources may be created. The time range specifies start of resource use and planned end of resource use."
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecAggregateResources": {
+"id": "FutureResourcesSpecAggregateResources",
+"properties": {
+"acceleratorCount": {
+"description": "Size of the request, in accelerator (chip) count.",
+"format": "int64",
+"type": "string"
+},
+"vmFamily": {
+"description": "The VM family that all instances scheduled against this reservation must belong to. Use for TPU reservations.",
+"enum": [
+"VM_FAMILY_CLOUD_TPU_DEVICE_CT3",
+"VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L",
+"VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP",
+"VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
+"VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"workloadType": {
+"description": "Workload type. Use for TPU reservations.",
+"enum": [
+"BATCH",
+"SERVING",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"Reserved resources will be optimized for BATCH workloads, such as ML training.",
+"Reserved resources will be optimized for SERVING workloads, such as ML inference.",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocalSsdPartition": {
+"id": "FutureResourcesSpecLocalSsdPartition",
+"properties": {
+"diskInterface": {
+"description": "Disk interface. Defaults to SCSI.",
+"enum": [
+"NVME",
+"SCSI"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"diskSizeGb": {
+"description": "The size of the disk in GB.",
+"format": "int64",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocationPolicy": {
+"description": "Specification of locations to create resources in.",
+"id": "FutureResourcesSpecLocationPolicy",
+"properties": {
+"locations": {
+"additionalProperties": {
+"$ref": "FutureResourcesSpecLocationPolicyLocation"
+},
+"description": "Preferences for specified locations. Keys of the map are locations - zones, in format of 'zones/'. Values are preferences for the zones. If a zone is not specified in this map, it is ALLOWed.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecLocationPolicyLocation": {
+"description": "Preference for a single specified location.",
+"id": "FutureResourcesSpecLocationPolicyLocation",
+"properties": {
+"preference": {
+"description": "Preference for this location.",
+"enum": [
+"ALLOW",
+"DENY",
+"PREFERENCE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Location is allowed for use.",
+"Location is prohibited.",
+"Default value, unused."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecSpecificSKUResources": {
+"id": "FutureResourcesSpecSpecificSKUResources",
+"properties": {
+"instanceCount": {
+"description": "Size of the request, in instance count.",
+"format": "int64",
+"type": "string"
+},
+"localSsdPartitions": {
+"description": "Local SSD partitions. You do not have to include SSD partitions that are built in the machine type.",
+"items": {
+"$ref": "FutureResourcesSpecLocalSsdPartition"
+},
+"type": "array"
+},
+"machineType": {
+"description": "The machine type to use for instances that will use the reservation. This field only accepts machine type names. e.g. n2-standard-4 and does not accept machine type full or partial url. e.g. projects/my-l7ilb-project/zones/us-central1-a/machineTypes/n2-standard-4. Use for GPU reservations.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureResourcesSpecTargetResources": {
+"description": "Specification of reserved resources.",
+"id": "FutureResourcesSpecTargetResources",
+"properties": {
+"aggregateResources": {
+"$ref": "FutureResourcesSpecAggregateResources"
+},
+"specificSkuResources": {
+"$ref": "FutureResourcesSpecSpecificSKUResources"
 }
 },
 "type": "object"
@@ -57762,6 +58219,20 @@ false
 ""
 ],
 "type": "string"
+},
+"onFailedHealthCheck": {
+"description": "The action that a MIG performs on an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are: - DEFAULT_ACTION (default): MIG uses the same action configured for instanceLifecyclePolicy.defaultActionOnFailure field. - REPAIR: MIG automatically repairs an unhealthy VM by recreating it. - DO_NOTHING: MIG doesn't repair an unhealthy VM. For more information, see About repairing VMs in a MIG. ",
+"enum": [
+"DEFAULT_ACTION",
+"DO_NOTHING",
+"REPAIR"
+],
+"enumDescriptions": [
+"(Default) MIG uses the same action configured for instanceLifecyclePolicy.defaultActionOnFailure field.",
+"MIG doesn't repair an unhealthy VM.",
+"MIG automatically repairs an unhealthy VM by recreating it."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -61682,9 +62153,11 @@ false
 "description": "[Output only] List of features available for this Interconnect connection, which can take one of the following values: - IF_MACSEC If present then the Interconnect connection is provisioned on MACsec capable hardware ports. If not present then the Interconnect connection is provisioned on non-MACsec capable ports and MACsec isn't supported and enabling MACsec fails.",
 "items": {
 "enum": [
+"IF_CROSS_SITE_NETWORK",
 "IF_MACSEC"
 ],
 "enumDescriptions": [
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -61835,9 +62308,11 @@ false
 "description": "Optional. List of features requested for this Interconnect connection, which can take one of the following values: - IF_MACSEC If specified then the connection is created on MACsec capable hardware ports. If not specified, the default value is false, which allocates non-MACsec capable ports first if available. This parameter can be provided only with Interconnect INSERT. It isn't valid for Interconnect PATCH.",
 "items": {
 "enum": [
+"IF_CROSS_SITE_NETWORK",
 "IF_MACSEC"
 ],
 "enumDescriptions": [
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -61868,6 +62343,13 @@ false
 "The interconnect has not completed turnup. No attachments may be provisioned on this interconnect."
 ],
 "type": "string"
+},
+"wireGroups": {
+"description": "[Output Only] A list of the URLs of all CrossSiteNetwork WireGroups configured to use this Interconnect. The Interconnect cannot be deleted if this list is non-empty.",
+"items": {
+"type": "string"
+},
+"type": "array"
 }
 },
 "type": "object"
@@ -63126,9 +63608,11 @@ false
 "description": "[Output only] List of features available at this InterconnectLocation, which can take one of the following values: - IF_MACSEC ",
 "items": {
 "enum": [
+"IF_CROSS_SITE_NETWORK",
 "IF_MACSEC"
 ],
 "enumDescriptions": [
+"Cross-Site Networking",
 "Media Access Control security (MACsec)"
 ],
 "type": "string"
@@ -64085,16 +64569,16 @@ false
 "id": "LicenseResourceCommitment",
 "properties": {
 "amount": {
-"description": "The number of licenses purchased.",
+"description": "The number of licenses you plan to purchase.",
 "format": "int64",
 "type": "string"
 },
 "coresPerLicense": {
-"description": "Specifies the core range of the instance for which this license applies.",
+"description": "The number of cores per license.",
 "type": "string"
 },
 "license": {
-"description": "Any applicable license URI.",
+"description": "The applicable license URI.",
 "type": "string"
 }
 },
@@ -68448,10 +68932,6 @@ false
 "selfLinkWithId": {
 "description": "[Output Only] Server-defined URL for this resource with the resource id.",
 "type": "string"
-},
-"zone": {
-"description": "[Output Only] Zone to which the network is restricted.",
-"type": "string"
 }
 },
 "type": "object"
@@ -70688,6 +71168,11 @@ false
 },
 "localSsdGb": {
 "description": "[Output Only] Local SSD available to the node type, defined in GB.",
+"format": "int32",
+"type": "integer"
+},
+"maxVms": {
+"description": "[Output Only] Maximum number of VMs that can be created for this node type.",
 "format": "int32",
 "type": "integer"
 },
@@ -75177,7 +75662,7 @@ false
 "id": "RegionCommitmentsUpdateReservationsRequest",
 "properties": {
 "reservations": {
-"description": "A list of two reservations to transfer GPUs and local SSD between.",
+"description": "A list of two reservations to transfer GPUs and Local SSD disks between.",
 "items": {
 "$ref": "Reservation"
 },
@@ -77554,6 +78039,50 @@ false
 },
 "type": "object"
 },
+"ReservationsBlocksPerformMaintenanceRequest": {
+"id": "ReservationsBlocksPerformMaintenanceRequest",
+"properties": {
+"maintenanceScope": {
+"description": "Specifies if all, running or unused hosts are in scope for this request.",
+"enum": [
+"ALL",
+"MAINTENANCE_SCOPE_UNSPECIFIED",
+"RUNNING_VMS",
+"UNUSED_CAPACITY"
+],
+"enumDescriptions": [
+"Trigger maintenance for all hosts belonging to this reservation irrespective of whether VMs are running on them or not.",
+"Internal only",
+"Trigger maintenance only on the hosts belonging to this reservation which have VMs running on them.",
+"Trigger maintenance only on the hosts belonging to this reservation which do not have any VMs running on them. This is not allowed for Standard ExR"
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationsPerformMaintenanceRequest": {
+"id": "ReservationsPerformMaintenanceRequest",
+"properties": {
+"maintenanceScope": {
+"description": "Specifies if all, running or unused hosts are in scope for this request.",
+"enum": [
+"ALL",
+"MAINTENANCE_SCOPE_UNSPECIFIED",
+"RUNNING_VMS",
+"UNUSED_CAPACITY"
+],
+"enumDescriptions": [
+"Trigger maintenance for all hosts belonging to this reservation irrespective of whether VMs are running on them or not.",
+"Internal only",
+"Trigger maintenance only on the hosts belonging to this reservation which have VMs running on them.",
+"Trigger maintenance only on the hosts belonging to this reservation which do not have any VMs running on them. This is not allowed for Standard ExR"
+],
+"type": "string"
+}
+},
+"type": "object"
+},
 "ReservationsResizeRequest": {
 "id": "ReservationsResizeRequest",
 "properties": {
@@ -77703,20 +78232,20 @@ false
 "type": "object"
 },
 "ResourceCommitment": {
-"description": "Commitment for a particular resource (a Commitment is composed of one or more of these).",
+"description": "Commitment for a particular hardware resource (a commitment is composed of one or more of these).",
 "id": "ResourceCommitment",
 "properties": {
 "acceleratorType": {
-"description": "Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.",
+"description": "Name of the accelerator type or GPU resource. Specify this field only when the type of hardware resource is ACCELERATOR.",
 "type": "string"
 },
 "amount": {
-"description": "The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.",
+"description": "The quantity of the hardware resource that you want to commit to purchasing (in a type-dependent unit). - For vCPUs, you must specify an integer value. - For memory, you specify the amount of MB that you want. The value you specify must be a multiple of 256 MB, with up to 6.5 GB of memory per every vCPU. - For GPUs, you must specify an integer value. - For Local SSD disks, you must specify the amount in GB. The size of a single Local SSD disk is 375 GB. ",
 "format": "int64",
 "type": "string"
 },
 "type": {
-"description": "Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.",
+"description": "The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.",
 "enum": [
 "ACCELERATOR",
 "LOCAL_SSD",
@@ -79793,7 +80322,7 @@ false
 "id": "RouterInterface",
 "properties": {
 "ipRange": {
-"description": "IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose. ",
+"description": "IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fdff:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose. ",
 "type": "string"
 },
 "ipVersion": {
