@@ -43001,7 +43001,7 @@
 }
 }
 },
-"revision": "20250126",
+"revision": "20250211",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -48025,6 +48025,13 @@ false
 "CacheInvalidationRule": {
 "id": "CacheInvalidationRule",
 "properties": {
+"cacheTags": {
+"description": "Not implemented.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "host": {
 "description": "If set, this invalidation rule will only apply to requests with a Host header matching host.",
 "type": "string"
