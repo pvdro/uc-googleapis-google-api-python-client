@@ -48859,7 +48859,7 @@
 }
 }
 },
-"revision": "20250224",
+"revision": "20250304",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -54804,6 +54804,7 @@ false
 "ACCELERATOR_OPTIMIZED_A3",
 "ACCELERATOR_OPTIMIZED_A3_MEGA",
 "ACCELERATOR_OPTIMIZED_A3_ULTRA",
+"ACCELERATOR_OPTIMIZED_A4",
 "COMPUTE_OPTIMIZED",
 "COMPUTE_OPTIMIZED_C2D",
 "COMPUTE_OPTIMIZED_C3",
@@ -54829,6 +54830,7 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
