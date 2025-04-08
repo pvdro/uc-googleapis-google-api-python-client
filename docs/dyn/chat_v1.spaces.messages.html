@@ -1445,7 +1445,14 @@ Args:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -2289,7 +2296,14 @@ Args:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -3735,7 +3749,14 @@ Returns:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -4579,7 +4600,14 @@ Returns:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -6043,7 +6071,14 @@ Returns:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -6887,7 +6922,14 @@ Returns:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -8339,7 +8381,14 @@ Returns:
       &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
         { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
           &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
           },
@@ -9183,7 +9232,14 @@ Returns:
       &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
         { # The number of people who reacted to a message with a specific emoji.
           &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-            &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
               &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
             },
             &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -10640,7 +10696,14 @@ Args:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -11484,7 +11547,14 @@ Args:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -12924,7 +12994,14 @@ Returns:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -13768,7 +13845,14 @@ Returns:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -15208,7 +15292,14 @@ Args:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -16052,7 +16143,14 @@ Args:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.
@@ -17492,7 +17590,14 @@ Returns:
   &quot;annotations&quot;: [ # Output only. Annotations associated with the `text` in this message.
     { # Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
       &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # The custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
       },
@@ -18336,7 +18441,14 @@ Returns:
   &quot;emojiReactionSummaries&quot;: [ # Output only. The list of emoji reaction summaries on the message.
     { # The number of people who reacted to a message with a specific emoji.
       &quot;emoji&quot;: { # An emoji that is used as a reaction to a message. # Output only. Emoji associated with the reactions.
-        &quot;customEmoji&quot;: { # Represents a custom emoji. # A custom emoji.
+        &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # A custom emoji.
+          &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+          &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+            &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+            &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+          },
+          &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
           &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
         },
         &quot;unicode&quot;: &quot;A String&quot;, # Optional. A basic emoji represented by a unicode string.

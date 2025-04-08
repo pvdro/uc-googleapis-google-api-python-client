@@ -100,10 +100,10 @@ h1, h2, h3 {
 <p class="firstline">Creates a spreadsheet, returning the newly created spreadsheet.</p>
 <p class="toc_element">
   <code><a href="#get">get(spreadsheetId, includeGridData=None, ranges=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.</p>
+<p class="firstline">Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](https://developers.google.com/workspace/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.</p>
 <p class="toc_element">
   <code><a href="#getByDataFilter">getByDataFilter(spreadsheetId, body=None, x__xgafv=None)</a></code></p>
-<p class="firstline">Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.</p>
+<p class="firstline">Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.</p>
 <h3>Method Details</h3>
 <div class="method">
     <code class="details" id="batchUpdate">batchUpdate(spreadsheetId, body=None, x__xgafv=None)</code>
@@ -2038,7 +2038,7 @@ Args:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -2805,7 +2805,7 @@ Args:
                   &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                   &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                   &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                     &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                   },
                   &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -3226,7 +3226,7 @@ Args:
                   &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                   &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                   &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                     &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                   },
                   &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -3849,7 +3849,7 @@ Args:
             &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
             &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
             &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
               &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
             },
             &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -4270,7 +4270,7 @@ Args:
             &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
             &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
             &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
               &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
             },
             &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -5082,7 +5082,7 @@ Args:
                   &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                   &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                   &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                     &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                   },
                   &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -5503,7 +5503,7 @@ Args:
                   &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                   &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                   &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                    &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                     &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                   },
                   &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -7317,7 +7317,7 @@ Args:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -8082,7 +8082,7 @@ Args:
             &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
             &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
             &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+              &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
               &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
             },
             &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -10570,7 +10570,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -11075,7 +11075,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -11297,7 +11297,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -11720,7 +11720,7 @@ Returns:
         &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
         &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
         &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-          &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+          &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
           &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
         },
         &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -13868,7 +13868,7 @@ Returns:
                 &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                 &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                 &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                  &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                  &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                   &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                 },
                 &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -14244,7 +14244,7 @@ Returns:
                       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                       },
                       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -14665,7 +14665,7 @@ Returns:
                       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                       },
                       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -15385,7 +15385,7 @@ Args:
       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
       },
       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -17533,7 +17533,7 @@ Args:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -17909,7 +17909,7 @@ Args:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -18330,7 +18330,7 @@ Args:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -19043,7 +19043,7 @@ Returns:
       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
       },
       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -21191,7 +21191,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -21567,7 +21567,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -21988,7 +21988,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -22479,7 +22479,7 @@ Returns:
 
 <div class="method">
     <code class="details" id="get">get(spreadsheetId, includeGridData=None, ranges=None, x__xgafv=None)</code>
-  <pre>Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&amp;ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.
+  <pre>Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](https://developers.google.com/workspace/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&amp;ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.
 
 Args:
   spreadsheetId: string, The spreadsheet to request. (required)
@@ -22710,7 +22710,7 @@ Returns:
       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
       },
       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -24858,7 +24858,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -25234,7 +25234,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -25655,7 +25655,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -26146,7 +26146,7 @@ Returns:
 
 <div class="method">
     <code class="details" id="getByDataFilter">getByDataFilter(spreadsheetId, body=None, x__xgafv=None)</code>
-  <pre>Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.
+  <pre>Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.
 
 Args:
   spreadsheetId: string, The spreadsheet to request. (required)
@@ -26413,7 +26413,7 @@ Returns:
       &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
       &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
       &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+        &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
         &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
       },
       &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -28561,7 +28561,7 @@ Returns:
               &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
               &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
               &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                 &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
               },
               &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -28937,7 +28937,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.
@@ -29358,7 +29358,7 @@ Returns:
                     &quot;horizontalAlignment&quot;: &quot;A String&quot;, # The horizontal alignment of the value in the cell.
                     &quot;hyperlinkDisplayType&quot;: &quot;A String&quot;, # If one exists, how a hyperlink should be displayed in the cell.
                     &quot;numberFormat&quot;: { # The number format of a cell. # A format describing how number values should be represented to the user.
-                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](/sheets/api/guides/formats) for more information about the supported patterns.
+                      &quot;pattern&quot;: &quot;A String&quot;, # Pattern string used for formatting. If not set, a default pattern based on the user&#x27;s locale will be used if necessary for the given type. See the [Date and Number Formats guide](https://developers.google.com/workspace/sheets/api/guides/formats) for more information about the supported patterns.
                       &quot;type&quot;: &quot;A String&quot;, # The type of the number format. When writing, this field must be set.
                     },
                     &quot;padding&quot;: { # The amount of padding around the cell, in pixels. When updating padding, every field must be specified. # The padding of the cell.

@@ -323,6 +323,7 @@ Args:
       &quot;replaceAllText&quot;: { # Replaces all instances of text matching a criteria with replace text. # Replaces all instances of the specified text.
         &quot;containsText&quot;: { # A criteria that matches a specific string of text in the document. # Finds text in the document matching this substring.
           &quot;matchCase&quot;: True or False, # Indicates whether the search should respect case: - `True`: the search is case sensitive. - `False`: the search is case insensitive.
+          &quot;searchByRegex&quot;: True or False, # Optional. True if the find value should be treated as a regular expression. Any backslashes in the pattern should be escaped. - `True`: the search text is treated as a regular expressions. - `False`: the search text is treated as a substring for matching.
           &quot;text&quot;: &quot;A String&quot;, # The text to search for in the document.
         },
         &quot;replaceText&quot;: &quot;A String&quot;, # The text that will replace the matched text.
