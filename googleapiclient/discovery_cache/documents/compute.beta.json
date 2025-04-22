@@ -16472,6 +16472,43 @@
 "https://www.googleapis.com/auth/compute"
 ]
 },
+"setLabels": {
+"description": "Sets the labels on a machine image. To learn more about labels, read the Labeling Resources documentation.",
+"flatPath": "projects/{project}/global/machineImages/{resource}/setLabels",
+"httpMethod": "POST",
+"id": "compute.machineImages.setLabels",
+"parameterOrder": [
+"project",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/machineImages/{resource}/setLabels",
+"request": {
+"$ref": "GlobalSetLabelsRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "testIamPermissions": {
 "description": "Returns permissions that a caller has on the specified resource.",
 "flatPath": "projects/{project}/global/machineImages/{resource}/testIamPermissions",
@@ -29093,6 +29130,12 @@
 "firewallPolicy"
 ],
 "parameters": {
+"associatedPolicyToBeReplaced": {
+"description": "Name of the firewall policy associated with the target network to swap association with. This field is mutually exclusive with 'replace_existing_association'.",
+"location": "query",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"type": "string"
+},
 "firewallPolicy": {
 "description": "Name of the firewall policy to update.",
 "location": "path",
@@ -29675,6 +29718,56 @@
 "path": "projects/{project}/regions/{region}/firewallPolicies/{firewallPolicy}",
 "request": {
 "$ref": "FirewallPolicy"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"patchAssociation": {
+"description": "Updates an association for the specified network firewall policy.",
+"flatPath": "projects/{project}/regions/{region}/firewallPolicies/{firewallPolicy}/patchAssociation",
+"httpMethod": "POST",
+"id": "compute.regionNetworkFirewallPolicies.patchAssociation",
+"parameterOrder": [
+"project",
+"region",
+"firewallPolicy"
+],
+"parameters": {
+"firewallPolicy": {
+"description": "Name of the firewall policy to update.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/firewallPolicies/{firewallPolicy}/patchAssociation",
+"request": {
+"$ref": "FirewallPolicyAssociation"
 },
 "response": {
 "$ref": "Operation"
@@ -33649,14 +33742,12 @@
 "reservation": {
 "description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
 "reservationBlock": {
 "description": "The name of the reservation block. Name should conform to RFC1035 or be a resource ID.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -43877,7 +43968,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -43896,7 +43986,6 @@
 "wireGroup": {
 "description": "Name of the wire group resource to delete.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -43923,7 +44012,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -43937,7 +44025,6 @@
 "wireGroup": {
 "description": "Name of the wire group resource to return.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -43964,7 +44051,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -44010,7 +44096,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -44073,7 +44158,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -44103,7 +44187,6 @@
 "wireGroup": {
 "description": "Name of the WireGroups resource to patch.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -44409,7 +44492,7 @@
 }
 }
 },
-"revision": "20250320",
+"revision": "20250415",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -47308,7 +47391,7 @@ false
 "type": "integer"
 },
 "defaultTtl": {
-"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
+"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-maxage). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
 "format": "int32",
 "type": "integer"
 },
@@ -47333,7 +47416,7 @@ false
 "type": "boolean"
 },
 "serveWhileStale": {
-"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
+"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-maxage) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
 "format": "int32",
 "type": "integer"
 },
@@ -48298,7 +48381,7 @@ false
 "type": "integer"
 },
 "defaultTtl": {
-"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
+"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-maxage). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
 "format": "int32",
 "type": "integer"
 },
@@ -48323,7 +48406,7 @@ false
 "type": "boolean"
 },
 "serveWhileStale": {
-"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
+"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-maxage) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
 "format": "int32",
 "type": "integer"
 },
@@ -48500,7 +48583,7 @@ false
 "id": "BackendServiceHAPolicy",
 "properties": {
 "fastIPMove": {
-"description": "Specifies whether fast IP move is enabled, and if so, the mechanism to achieve it. Supported values are: - DISABLED: Fast IP Move is disabled. You can only use the haPolicy.leader API to update the leader. - >GARP_RA: Provides a method to very quickly define a new network endpoint as the leader. This method is faster than updating the leader using the haPolicy.leader API. Fast IP move works as follows: The VM hosting the network endpoint that should become the new leader sends either a Gratuitous ARP (GARP) packet (IPv4) or an ICMPv6 Router Advertisement(RA) packet (IPv6). Google Cloud immediately but temporarily associates the forwarding rule IP address with that VM, and both new and in-flight packets are quickly delivered to that VM. Note the important properties of the Fast IP Move functionality: - The GARP/RA-initiated re-routing stays active for approximately 20 minutes. After triggering fast failover, you must also appropriately set the haPolicy.leader. - The new leader instance should continue to send GARP/RA packets periodically every 10 seconds until at least 10 minutes after updating the haPolicy.leader (but stop immediately if it is no longer the leader). - After triggering a fast failover, we recommend that you wait at least 3 seconds before sending another GARP/RA packet from a different VM instance to avoid race conditions. - Don't send GARP/RA packets from different VM instances at the same time. If multiple instances continue to send GARP/RA packets, traffic might be routed to different destinations in an alternating order. This condition ceases when a single instance issues a GARP/RA packet. - The GARP/RA request always takes priority over the leader API. Using the haPolicy.leader API to change the leader to a different instance will have no effect until the GARP/RA request becomes inactive. - The GARP/RA packets should follow the GARP/RA Packet Specifications.. - When multiple forwarding rules refer to a regional backend service, you need only send a GARP or RA packet for a single forwarding rule virtual IP. The virtual IPs for all forwarding rules targeting the same backend service will also be moved to the sender of the GARP or RA packet. The following are the Fast IP Move limitations (that is, when fastIPMove is not DISABLED): - Multiple forwarding rules cannot use the same IP address if one of them refers to a regional backend service with fastIPMove. - The regional backend service must set the network field, and all NEGs must belong to that network. However, individual NEGs can belong to different subnetworks of that network. - The maximum number of network endpoints across all backends of a backend service with fastIPMove is 64. - The maximum number of backend services with fastIPMove that can have the same network endpoint attached to one of its backends is 64. - The maximum number of backend services with fastIPMove in a VPC in a region is 64. - The network endpoints that are attached to a backend of a backend service with fastIPMove cannot resolve to C3 machines. - Traffic directed to the leader by a static route next hop will not be redirected to a new leader by fast failover. Such traffic will only be redirected once an haPolicy.leader update has taken effect. Only traffic to the forwarding rule's virtual IP will be redirected to a new leader by fast failover. haPolicy.fastIPMove can be set only at backend service creation time. Once set, it cannot be updated. By default, fastIpMove is set to DISABLED.",
+"description": "Specifies whether fast IP move is enabled, and if so, the mechanism to achieve it. Supported values are: - DISABLED: Fast IP Move is disabled. You can only use the haPolicy.leader API to update the leader. - >GARP_RA: Provides a method to very quickly define a new network endpoint as the leader. This method is faster than updating the leader using the haPolicy.leader API. Fast IP move works as follows: The VM hosting the network endpoint that should become the new leader sends either a Gratuitous ARP (GARP) packet (IPv4) or an ICMPv6 Router Advertisement(RA) packet (IPv6). Google Cloud immediately but temporarily associates the forwarding rule IP address with that VM, and both new and in-flight packets are quickly delivered to that VM. Note the important properties of the Fast IP Move functionality: - The GARP/RA-initiated re-routing stays active for approximately 20 minutes. After triggering fast failover, you must also appropriately set the haPolicy.leader. - The new leader instance should continue to send GARP/RA packets periodically every 10 seconds until at least 10 minutes after updating the haPolicy.leader (but stop immediately if it is no longer the leader). - After triggering a fast failover, we recommend that you wait at least 3 seconds before sending another GARP/RA packet from a different VM instance to avoid race conditions. - Don't send GARP/RA packets from different VM instances at the same time. If multiple instances continue to send GARP/RA packets, traffic might be routed to different destinations in an alternating order. This condition ceases when a single instance issues a GARP/RA packet. - The GARP/RA request always takes priority over the leader API. Using the haPolicy.leader API to change the leader to a different instance will have no effect until the GARP/RA request becomes inactive. - The GARP/RA packets should follow the GARP/RA Packet Specifications.. - When multiple forwarding rules refer to a regional backend service, you need only send a GARP or RA packet for a single forwarding rule virtual IP. The virtual IPs for all forwarding rules targeting the same backend service will also be moved to the sender of the GARP or RA packet. The following are the Fast IP Move limitations (that is, when fastIPMove is not DISABLED): - Multiple forwarding rules cannot use the same IP address if one of them refers to a regional backend service with fastIPMove. - The regional backend service must set the network field, and all NEGs must belong to that network. However, individual NEGs can belong to different subnetworks of that network. - The maximum number of network endpoints across all backends of a backend service with fastIPMove is 64. - The maximum number of backend services with fastIPMove that can have the same network endpoint attached to one of its backends is 64. - The maximum number of backend services with fastIPMove in a VPC in a region is 64. - The network endpoints that are attached to a backend of a backend service with fastIPMove cannot resolve to Gen3+ machines for IPv6. - Traffic directed to the leader by a static route next hop will not be redirected to a new leader by fast failover. Such traffic will only be redirected once an haPolicy.leader update has taken effect. Only traffic to the forwarding rule's virtual IP will be redirected to a new leader by fast failover. haPolicy.fastIPMove can be set only at backend service creation time. Once set, it cannot be updated. By default, fastIpMove is set to DISABLED.",
 "enum": [
 "DISABLED",
 "GARP_RA"
@@ -49681,7 +49764,7 @@ false
 "id": "CacheInvalidationRule",
 "properties": {
 "cacheTags": {
-"description": "[Preview] A list of cache tags used to identify cached objects. - Cache tags are specified when the response is first cached, by setting the `Cache-Tag` response header at the origin. - Multiple cache tags in the same invalidation request are treated as Boolean `OR` - for example, `tag1 OR tag2 OR tag3`. - If other fields are also specified, these are treated as Boolean `AND` with any tags. Up to 10 tags can be specified in a single invalidation request.",
+"description": "A list of cache tags used to identify cached objects. - Cache tags are specified when the response is first cached, by setting the `Cache-Tag` response header at the origin. - Multiple cache tags in the same invalidation request are treated as Boolean `OR` - for example, `tag1 OR tag2 OR tag3`. - If other fields are also specified, these are treated as Boolean `AND` with any tags. Up to 10 tags can be specified in a single invalidation request.",
 "items": {
 "type": "string"
 },
@@ -49969,6 +50052,7 @@ false
 "ACCELERATOR_OPTIMIZED_A3",
 "ACCELERATOR_OPTIMIZED_A3_MEGA",
 "ACCELERATOR_OPTIMIZED_A3_ULTRA",
+"ACCELERATOR_OPTIMIZED_A4",
 "COMPUTE_OPTIMIZED",
 "COMPUTE_OPTIMIZED_C2D",
 "COMPUTE_OPTIMIZED_C3",
@@ -49993,6 +50077,7 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -50652,10 +50737,6 @@ false
 },
 "selfLink": {
 "description": "[Output Only] Server-defined URL for the resource.",
-"type": "string"
-},
-"selfLinkWithId": {
-"description": "[Output Only] Server-defined URL for this resource with the resource id.",
 "type": "string"
 }
 },
@@ -53177,6 +53258,10 @@ false
 "description": "URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: global/networks/default If you choose to specify this field, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network - projects/myproject/global/networks/my-network - global/networks/default ",
 "type": "string"
 },
+"params": {
+"$ref": "FirewallParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
+},
 "priority": {
 "description": "Priority for this rule. This is an integer between `0` and `65535`, both inclusive. The default value is `1000`. Relative priorities determine which rule takes effect if multiple rules apply. Lower values indicate higher priority. For example, a rule with priority `0` has higher precedence than a rule with priority `1`. DENY rules take precedence over ALLOW rules if they have equal priority. Note that VPC networks have implied rules with a priority of `65535`. To avoid conflicts with the implied rules, use a priority number less than `65535`.",
 "format": "int32",
@@ -53398,6 +53483,20 @@ false
 ""
 ],
 "type": "string"
+}
+},
+"type": "object"
+},
+"FirewallParams": {
+"description": "Additional firewall parameters.",
+"id": "FirewallParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
 }
 },
 "type": "object"
@@ -53663,6 +53762,11 @@ false
 "name": {
 "description": "The name for an association.",
 "type": "string"
+},
+"priority": {
+"description": "An integer indicating the priority of an association. The priority must be a positive value between 1 and 2147483647. Firewall Policies are evaluated from highest to lowest priority where 1 is the highest priority and 2147483647 is the lowest priority. The default value is `1000`. If two associations have the same priority then lexicographical order on association names is applied.",
+"format": "int32",
+"type": "integer"
 },
 "shortName": {
 "description": "[Output Only] The short name of the firewall policy of the association.",
@@ -56035,6 +56139,35 @@ false
 },
 "type": "object"
 },
+"GRPCTLSHealthCheck": {
+"id": "GRPCTLSHealthCheck",
+"properties": {
+"grpcServiceName": {
+"description": "The gRPC service name for the health check. This field is optional. The value of grpc_service_name has the following meanings by convention: - Empty service_name means the overall status of all services at the backend. - Non-empty service_name means the health of that gRPC service, as defined by the owner of the service. The grpc_service_name can only be ASCII.",
+"type": "string"
+},
+"port": {
+"description": "The TCP port number to which the health check prober sends packets. Valid values are 1 through 65535.",
+"format": "int32",
+"type": "integer"
+},
+"portSpecification": {
+"description": "Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for passthrough load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for passthrough load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.",
+"enum": [
+"USE_FIXED_PORT",
+"USE_NAMED_PORT",
+"USE_SERVING_PORT"
+],
+"enumDescriptions": [
+"The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.",
+"Not supported.",
+"For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
 "GlobalAddressesMoveRequest": {
 "id": "GlobalAddressesMoveRequest",
 "properties": {
@@ -56241,7 +56374,7 @@ false
 "id": "GuestOsFeature",
 "properties": {
 "type": {
-"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE_V2 - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF For more information, see Enabling guest operating system features.",
+"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE_V2 - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF - SNP_SVSM_CAPABLE For more information, see Enabling guest operating system features.",
 "enum": [
 "FEATURE_TYPE_UNSPECIFIED",
 "GVNIC",
@@ -56456,6 +56589,9 @@ false
 "grpcHealthCheck": {
 "$ref": "GRPCHealthCheck"
 },
+"grpcTlsHealthCheck": {
+"$ref": "GRPCTLSHealthCheck"
+},
 "healthyThreshold": {
 "description": "A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.",
 "format": "int32",
@@ -56519,6 +56655,7 @@ false
 "description": "Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS, HTTP2 or GRPC. Exactly one of the protocol-specific health check fields must be specified, which must match type field.",
 "enum": [
 "GRPC",
+"GRPC_WITH_TLS",
 "HTTP",
 "HTTP2",
 "HTTPS",
@@ -56527,6 +56664,7 @@ false
 "TCP"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -60128,7 +60266,7 @@ false
 "id": "InstanceGroupManagerInstanceLifecyclePolicy",
 "properties": {
 "defaultActionOnFailure": {
-"description": "The action that a MIG performs on a failed or an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are - REPAIR (default): MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG. - DO_NOTHING: MIG does not repair a failed or an unhealthy VM. ",
+"description": "The action that a MIG performs on a failed VM. If the value of the onFailedHealthCheck field is `DEFAULT_ACTION`, then the same action also applies to the VMs on which your application fails a health check. Valid values are - REPAIR (default): MIG automatically repairs a failed VM by recreating it. For more information, see About repairing VMs in a MIG. - DO_NOTHING: MIG does not repair a failed VM.",
 "enum": [
 "DELETE",
 "DO_NOTHING",
@@ -60136,8 +60274,8 @@ false
 ],
 "enumDescriptions": [
 "MIG deletes a failed or an unhealthy VM. Deleting the VM decreases the target size of the MIG.",
-"MIG does not repair a failed or an unhealthy VM.",
-"(Default) MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG."
+"MIG does not repair a failed VM.",
+"(default): MIG automatically repairs a failed VM by recreating it. For more information, see About repairing VMs in a MIG."
 ],
 "type": "string"
 },
@@ -60361,6 +60499,13 @@ false
 "description": "[Output Only] A unique identifier for this resource type. The server generates this identifier.",
 "format": "uint64",
 "type": "string"
+},
+"instances": {
+"description": "The names of instances to be created by this resize request. The number of names specified determines the number of instances to create. The group's target size will be increased by this number. This field cannot be used together with 'resize_by'.",
+"items": {
+"$ref": "PerInstanceConfig"
+},
+"type": "array"
 },
 "kind": {
 "default": "compute#instanceGroupManagerResizeRequest",
@@ -63207,7 +63352,7 @@ false
 "id": "InstancesReportHostAsFaultyRequest",
 "properties": {
 "disruptionSchedule": {
-"description": "The disruption schedule for the VM. Default to IMMEDIATE.",
+"description": "The disruption schedule for the VM. Required field, only allows IMMEDIATE.",
 "enum": [
 "DISRUPTION_SCHEDULE_UNSPECIFIED",
 "FUTURE",
@@ -65605,7 +65750,7 @@ false
 "type": "array"
 },
 "availableLinkTypes": {
-"description": "[Output only] List of link types available at this InterconnectLocation, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR - LINK_TYPE_ETHERNET_100G_LR ",
+"description": "[Output only] List of link types available at this InterconnectLocation, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR - LINK_TYPE_ETHERNET_100G_LR - LINK_TYPE_ETHERNET_400G_LR4 ",
 "items": {
 "enum": [
 "LINK_TYPE_ETHERNET_100G_LR",
@@ -66882,6 +67027,18 @@ false
 "default": "compute#machineImage",
 "description": "[Output Only] The resource type, which is always compute#machineImage for machine image.",
 "type": "string"
+},
+"labelFingerprint": {
+"description": "A fingerprint for the labels being applied to this machine image, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make get() request to the machine image.",
+"format": "byte",
+"type": "string"
+},
+"labels": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Labels to apply to this machine image. These can be later modified by the setLabels method.",
+"type": "object"
 },
 "machineImageEncryptionKey": {
 "$ref": "CustomerEncryptionKey",
@@ -68410,6 +68567,10 @@ false
 "networkProfile": {
 "description": "A full or partial URL of the network profile to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/{api_version}/projects/{project_id}/global/networkProfiles/{network_profile_name} - projects/{project_id}/global/networkProfiles/{network_profile_name} ",
 "type": "string"
+},
+"params": {
+"$ref": "NetworkParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
 },
 "peerings": {
 "description": "[Output Only] A list of network peerings for the resource.",
@@ -70817,6 +70978,20 @@ false
 },
 "type": "object"
 },
+"NetworkParams": {
+"description": "Additional network parameters.",
+"id": "NetworkParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "NetworkPeering": {
 "description": "A network peering attached to a network resource. The message includes the peering name, peer network, peering state, and a flag indicating whether Google Compute Engine should automatically create routes for the peering.",
 "id": "NetworkPeering",
@@ -70854,7 +71029,7 @@ false
 "type": "string"
 },
 "peerMtu": {
-"description": "Maximum Transmission Unit in bytes.",
+"description": "[Output Only] Maximum Transmission Unit in bytes of the peer network.",
 "format": "int32",
 "type": "integer"
 },
@@ -71062,6 +71237,18 @@ false
 ],
 "type": "string"
 },
+"allowDefaultNicAttachment": {
+"description": "Specifies whether default NIC attachment is allowed.",
+"enum": [
+"DEFAULT_NIC_ATTACHMENT_ALLOWED",
+"DEFAULT_NIC_ATTACHMENT_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
 "allowExternalIpAccess": {
 "description": "Specifies whether VMs are allowed to have external IP access on network interfaces connected to this VPC.",
 "enum": [
@@ -71086,6 +71273,18 @@ false
 ],
 "type": "string"
 },
+"allowIpForwarding": {
+"description": "Specifies whether IP forwarding is allowed.",
+"enum": [
+"IP_FORWARDING_ALLOWED",
+"IP_FORWARDING_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
 "allowLoadBalancing": {
 "description": "Specifies whether cloud load balancing is allowed.",
 "enum": [
@@ -71103,6 +71302,30 @@ false
 "enum": [
 "MULTI_NIC_IN_SAME_NETWORK_ALLOWED",
 "MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowNcc": {
+"description": "Specifies whether NCC is allowed.",
+"enum": [
+"NCC_ALLOWED",
+"NCC_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowNetworkMigration": {
+"description": "Specifies whether VM network migration is allowed.",
+"enum": [
+"NETWORK_MIGRATION_ALLOWED",
+"NETWORK_MIGRATION_BLOCKED"
 ],
 "enumDescriptions": [
 "",
@@ -71256,6 +71479,50 @@ false
 "",
 "",
 ""
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetworkPurposes": {
+"description": "Specifies which subnetwork purposes are supported.",
+"items": {
+"enum": [
+"GLOBAL_MANAGED_PROXY",
+"INTERNAL_HTTPS_LOAD_BALANCER",
+"PEER_MIGRATION",
+"PRIVATE",
+"PRIVATE_NAT",
+"PRIVATE_RFC_1918",
+"PRIVATE_SERVICE_CONNECT",
+"REGIONAL_MANAGED_PROXY"
+],
+"enumDescriptions": [
+"Subnet reserved for Global Envoy-based Load Balancing.",
+"Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
+"Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).",
+"Regular user created or automatically created subnet.",
+"Subnetwork used as source range for Private NAT Gateways.",
+"Regular user created or automatically created subnet.",
+"Subnetworks created for Private Service Connect in the producer network.",
+"Subnetwork used for Regional Envoy-based Load Balancing."
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetworkStackTypes": {
+"description": "Specifies which subnetwork stack types are supported.",
+"items": {
+"enum": [
+"IPV4_IPV6",
+"IPV4_ONLY",
+"IPV6_ONLY"
+],
+"enumDescriptions": [
+"New VMs in this subnet can have both IPv4 and IPv6 addresses.",
+"New VMs in this subnet will only be assigned IPv4 addresses.",
+"New VMs in this subnet will only be assigned IPv6 addresses."
 ],
 "type": "string"
 },
@@ -79381,6 +79648,13 @@ false
 "description": "[Output Only] Type of the resource. Always compute#reservations for reservations.",
 "type": "string"
 },
+"linkedCommitments": {
+"description": "[Output Only] Full or partial URL to parent commitments. This field displays for reservations that are tied to multiple commitments.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "name": {
 "annotations": {
 "required": [
@@ -81083,6 +81357,10 @@ false
 "description": "Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.",
 "type": "object"
 },
+"region": {
+"description": "Region where the snapshot is scoped to.",
+"type": "string"
+},
 "storageLocations": {
 "description": "Cloud Storage bucket storage location of the auto snapshot (regional or multi-regional).",
 "items": {
@@ -81373,7 +81651,7 @@ false
 "type": "integer"
 },
 "nextHopInterconnectAttachment": {
-"description": "[Output Only] The URL to an InterconnectAttachment which is the next hop for the route. This field will only be populated for the dynamic routes generated by Cloud Router with a linked interconnectAttachment.",
+"description": "[Output Only] The URL to an InterconnectAttachment which is the next hop for the route. This field will only be populated for dynamic routes generated by Cloud Router with a linked interconnectAttachment or the static route generated by each L2 Interconnect Attachment.",
 "type": "string"
 },
 "nextHopIp": {
@@ -81410,6 +81688,10 @@ false
 "nextHopVpnTunnel": {
 "description": "The URL to a VpnTunnel that should handle matching packets.",
 "type": "string"
+},
+"params": {
+"$ref": "RouteParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
 },
 "priority": {
 "annotations": {
@@ -81779,6 +82061,20 @@ false
 "type": "string"
 }
 },
+"type": "object"
+}
+},
+"type": "object"
+},
+"RouteParams": {
+"description": "Additional route parameters.",
+"id": "RouteParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
 "type": "object"
 }
 },
@@ -86609,7 +86905,7 @@ false
 "type": "object"
 },
 "Snapshot": {
-"description": "Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots.",
+"description": "Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots. LINT.IfChange",
 "id": "Snapshot",
 "properties": {
 "architecture": {
@@ -90464,6 +90760,10 @@ false
 "description": "The URL of the network to which this subnetwork belongs, provided by the client when initially creating the subnetwork. This field can be set only at resource creation time.",
 "type": "string"
 },
+"params": {
+"$ref": "SubnetworkParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
+},
 "privateIpGoogleAccess": {
 "description": "Whether the VMs in this subnet can access Google services without assigned external IP addresses. This field can be both set at resource creation time and updated using setPrivateIpGoogleAccess.",
 "type": "boolean"
@@ -90483,7 +90783,6 @@ false
 "type": "string"
 },
 "purpose": {
-"description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
 "enum": [
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
@@ -90940,6 +91239,20 @@ false
 "type": "string"
 },
 "type": "array"
+}
+},
+"type": "object"
+},
+"SubnetworkParams": {
+"description": "Additional subnetwork parameters.",
+"id": "SubnetworkParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
 }
 },
 "type": "object"
@@ -95156,6 +95469,10 @@ false
 "description": "The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.",
 "type": "string"
 },
+"maintenanceOnShutdown": {
+"description": "Indicates whether the UpcomingMaintenance will be triggered on VM shutdown.",
+"type": "boolean"
+},
 "maintenanceStatus": {
 "enum": [
 "ONGOING",
@@ -95910,7 +96227,6 @@ false
 "type": "string"
 },
 "purpose": {
-"description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
 "enum": [
 "GLOBAL_MANAGED_PROXY",
 "INTERNAL_HTTPS_LOAD_BALANCER",
@@ -97831,9 +98147,6 @@ false
 },
 "selfLink": {
 "description": "[Output Only] Server-defined URL for the resource.",
-"type": "string"
-},
-"selfLinkWithId": {
 "type": "string"
 },
 "topology": {

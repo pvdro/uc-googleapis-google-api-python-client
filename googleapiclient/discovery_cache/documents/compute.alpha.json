@@ -16835,44 +16835,6 @@
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
 ]
-},
-"testIamPermissions": {
-"description": "Returns permissions that a caller has on the specified resource.",
-"flatPath": "projects/{project}/global/interconnectLocations/{resource}/testIamPermissions",
-"httpMethod": "POST",
-"id": "compute.interconnectLocations.testIamPermissions",
-"parameterOrder": [
-"project",
-"resource"
-],
-"parameters": {
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-},
-"resource": {
-"description": "Name or id of the resource for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
-}
-},
-"path": "projects/{project}/global/interconnectLocations/{resource}/testIamPermissions",
-"request": {
-"$ref": "TestPermissionsRequest"
-},
-"response": {
-"$ref": "TestPermissionsResponse"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute",
-"https://www.googleapis.com/auth/compute.readonly"
-]
 }
 }
 },
@@ -16961,44 +16923,6 @@
 "path": "projects/{project}/global/interconnectRemoteLocations",
 "response": {
 "$ref": "InterconnectRemoteLocationList"
-},
-"scopes": [
-"https://www.googleapis.com/auth/cloud-platform",
-"https://www.googleapis.com/auth/compute",
-"https://www.googleapis.com/auth/compute.readonly"
-]
-},
-"testIamPermissions": {
-"description": "Returns permissions that a caller has on the specified resource.",
-"flatPath": "projects/{project}/global/interconnectRemoteLocations/{resource}/testIamPermissions",
-"httpMethod": "POST",
-"id": "compute.interconnectRemoteLocations.testIamPermissions",
-"parameterOrder": [
-"project",
-"resource"
-],
-"parameters": {
-"project": {
-"description": "Project ID for this request.",
-"location": "path",
-"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
-"required": true,
-"type": "string"
-},
-"resource": {
-"description": "Name or id of the resource for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9_]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
-}
-},
-"path": "projects/{project}/global/interconnectRemoteLocations/{resource}/testIamPermissions",
-"request": {
-"$ref": "TestPermissionsRequest"
-},
-"response": {
-"$ref": "TestPermissionsResponse"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -21280,6 +21204,48 @@
 "https://www.googleapis.com/auth/compute"
 ]
 },
+"requestRemovePeering": {
+"description": "Requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.",
+"flatPath": "projects/{project}/global/networks/{network}/requestRemovePeering",
+"httpMethod": "POST",
+"id": "compute.networks.requestRemovePeering",
+"parameterOrder": [
+"project",
+"network"
+],
+"parameters": {
+"network": {
+"description": "Name of the network resource to remove peering from.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/networks/{network}/requestRemovePeering",
+"request": {
+"$ref": "NetworksRequestRemovePeeringRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "switchToCustomMode": {
 "description": "Switches the network mode from auto subnet mode to custom subnet mode.",
 "flatPath": "projects/{project}/global/networks/{network}/switchToCustomMode",
@@ -23693,6 +23659,142 @@
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
+"previewFeatures": {
+"methods": {
+"get": {
+"description": "Returns the details of the given PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures/{resourceId}",
+"httpMethod": "GET",
+"id": "compute.previewFeatures.get",
+"parameterOrder": [
+"project",
+"resourceId"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"resourceId": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/previewFeatures/{resourceId}",
+"response": {
+"$ref": "PreviewFeature"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Returns the details of the given PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures",
+"httpMethod": "GET",
+"id": "compute.previewFeatures.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/previewFeatures",
+"response": {
+"$ref": "PreviewFeatureList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"update": {
+"description": "Patches the given PreviewFeature. This method is used to enable or disable a PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures/{resourceId}",
+"httpMethod": "PATCH",
+"id": "compute.previewFeatures.update",
+"parameterOrder": [
+"project",
+"resourceId"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resourceId": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/previewFeatures/{resourceId}",
+"request": {
+"$ref": "PreviewFeature"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
 ]
 }
 }
@@ -37590,14 +37692,12 @@
 "reservation": {
 "description": "The name of the reservation. Name should conform to RFC1035 or be a resource ID.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
 "reservationBlock": {
 "description": "The name of the reservation block. Name should conform to RFC1035 or be a resource ID.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -37618,6 +37718,125 @@
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
+"reservationSubBlocks": {
+"methods": {
+"get": {
+"description": "Retrieves information about the specified reservation subBlock.",
+"flatPath": "projects/{project}/zones/{zone}/{parentName}/reservationSubBlocks/{reservationSubBlock}",
+"httpMethod": "GET",
+"id": "compute.reservationSubBlocks.get",
+"parameterOrder": [
+"project",
+"zone",
+"parentName",
+"reservationSubBlock"
+],
+"parameters": {
+"parentName": {
+"description": "The name of the parent reservation and parent block. In the format of reservations/{reservation_name}/reservationBlocks/{reservation_block_name}",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservationSubBlock": {
+"description": "The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/{parentName}/reservationSubBlocks/{reservationSubBlock}",
+"response": {
+"$ref": "ReservationSubBlocksGetResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Retrieves a list of reservation subBlocks under a single reservation.",
+"flatPath": "projects/{project}/zones/{zone}/{parentName}/reservationSubBlocks",
+"httpMethod": "GET",
+"id": "compute.reservationSubBlocks.list",
+"parameterOrder": [
+"project",
+"zone",
+"parentName"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"parentName": {
+"description": "The name of the parent reservation and parent block. In the format of reservations/{reservation_name}/reservationBlocks/{reservation_block_name}",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+},
+"zone": {
+"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/{parentName}/reservationSubBlocks",
+"response": {
+"$ref": "ReservationSubBlocksListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
 ]
 }
 }
@@ -40883,6 +41102,11 @@
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
+},
+"showNatIps": {
+"description": "Indicates whether NAT IPs should be included in the response.",
+"location": "query",
+"type": "boolean"
 }
 },
 "path": "projects/{project}/regions/{region}/serviceAttachments/{serviceAttachment}",
@@ -43519,6 +43743,20 @@
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
+},
+"views": {
+"description": "Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response. ",
+"enum": [
+"DEFAULT",
+"WITH_UTILIZATION"
+],
+"enumDescriptions": [
+"",
+"Utilization data is included in the response."
+],
+"location": "query",
+"repeated": true,
+"type": "string"
 }
 },
 "path": "projects/{project}/regions/{region}/subnetworks/{subnetwork}",
@@ -43673,6 +43911,20 @@
 "description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
 "location": "query",
 "type": "boolean"
+},
+"views": {
+"description": "Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response. ",
+"enum": [
+"DEFAULT",
+"WITH_UTILIZATION"
+],
+"enumDescriptions": [
+"",
+"Utilization data is included in the response."
+],
+"location": "query",
+"repeated": true,
+"type": "string"
 }
 },
 "path": "projects/{project}/regions/{region}/subnetworks",
@@ -48431,7 +48683,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -48450,7 +48701,6 @@
 "wireGroup": {
 "description": "Name of the wire group resource to delete.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -48477,7 +48727,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -48491,7 +48740,6 @@
 "wireGroup": {
 "description": "Name of the wire group resource to return.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -48518,7 +48766,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -48564,7 +48811,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -48627,7 +48873,6 @@
 "parameters": {
 "crossSiteNetwork": {
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 },
@@ -48657,7 +48902,6 @@
 "wireGroup": {
 "description": "Name of the WireGroups resource to patch.",
 "location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
 "required": true,
 "type": "string"
 }
@@ -49273,7 +49517,7 @@
 }
 }
 },
-"revision": "20250320",
+"revision": "20250415",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -52326,7 +52570,7 @@ false
 "type": "integer"
 },
 "defaultTtl": {
-"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
+"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-maxage). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
 "format": "int32",
 "type": "integer"
 },
@@ -52351,7 +52595,7 @@ false
 "type": "boolean"
 },
 "serveWhileStale": {
-"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
+"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-maxage) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
 "format": "int32",
 "type": "integer"
 },
@@ -53334,7 +53578,7 @@ false
 "type": "integer"
 },
 "defaultTtl": {
-"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
+"description": "Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-maxage). Setting a TTL of \"0\" means \"always revalidate\". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.",
 "format": "int32",
 "type": "integer"
 },
@@ -53359,7 +53603,7 @@ false
 "type": "boolean"
 },
 "serveWhileStale": {
-"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
+"description": "Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default \"max-stale\" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-maxage) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.",
 "format": "int32",
 "type": "integer"
 },
@@ -53536,7 +53780,7 @@ false
 "id": "BackendServiceHAPolicy",
 "properties": {
 "fastIPMove": {
-"description": "Specifies whether fast IP move is enabled, and if so, the mechanism to achieve it. Supported values are: - DISABLED: Fast IP Move is disabled. You can only use the haPolicy.leader API to update the leader. - >GARP_RA: Provides a method to very quickly define a new network endpoint as the leader. This method is faster than updating the leader using the haPolicy.leader API. Fast IP move works as follows: The VM hosting the network endpoint that should become the new leader sends either a Gratuitous ARP (GARP) packet (IPv4) or an ICMPv6 Router Advertisement(RA) packet (IPv6). Google Cloud immediately but temporarily associates the forwarding rule IP address with that VM, and both new and in-flight packets are quickly delivered to that VM. Note the important properties of the Fast IP Move functionality: - The GARP/RA-initiated re-routing stays active for approximately 20 minutes. After triggering fast failover, you must also appropriately set the haPolicy.leader. - The new leader instance should continue to send GARP/RA packets periodically every 10 seconds until at least 10 minutes after updating the haPolicy.leader (but stop immediately if it is no longer the leader). - After triggering a fast failover, we recommend that you wait at least 3 seconds before sending another GARP/RA packet from a different VM instance to avoid race conditions. - Don't send GARP/RA packets from different VM instances at the same time. If multiple instances continue to send GARP/RA packets, traffic might be routed to different destinations in an alternating order. This condition ceases when a single instance issues a GARP/RA packet. - The GARP/RA request always takes priority over the leader API. Using the haPolicy.leader API to change the leader to a different instance will have no effect until the GARP/RA request becomes inactive. - The GARP/RA packets should follow the GARP/RA Packet Specifications.. - When multiple forwarding rules refer to a regional backend service, you need only send a GARP or RA packet for a single forwarding rule virtual IP. The virtual IPs for all forwarding rules targeting the same backend service will also be moved to the sender of the GARP or RA packet. The following are the Fast IP Move limitations (that is, when fastIPMove is not DISABLED): - Multiple forwarding rules cannot use the same IP address if one of them refers to a regional backend service with fastIPMove. - The regional backend service must set the network field, and all NEGs must belong to that network. However, individual NEGs can belong to different subnetworks of that network. - The maximum number of network endpoints across all backends of a backend service with fastIPMove is 64. - The maximum number of backend services with fastIPMove that can have the same network endpoint attached to one of its backends is 64. - The maximum number of backend services with fastIPMove in a VPC in a region is 64. - The network endpoints that are attached to a backend of a backend service with fastIPMove cannot resolve to C3 machines. - Traffic directed to the leader by a static route next hop will not be redirected to a new leader by fast failover. Such traffic will only be redirected once an haPolicy.leader update has taken effect. Only traffic to the forwarding rule's virtual IP will be redirected to a new leader by fast failover. haPolicy.fastIPMove can be set only at backend service creation time. Once set, it cannot be updated. By default, fastIpMove is set to DISABLED.",
+"description": "Specifies whether fast IP move is enabled, and if so, the mechanism to achieve it. Supported values are: - DISABLED: Fast IP Move is disabled. You can only use the haPolicy.leader API to update the leader. - >GARP_RA: Provides a method to very quickly define a new network endpoint as the leader. This method is faster than updating the leader using the haPolicy.leader API. Fast IP move works as follows: The VM hosting the network endpoint that should become the new leader sends either a Gratuitous ARP (GARP) packet (IPv4) or an ICMPv6 Router Advertisement(RA) packet (IPv6). Google Cloud immediately but temporarily associates the forwarding rule IP address with that VM, and both new and in-flight packets are quickly delivered to that VM. Note the important properties of the Fast IP Move functionality: - The GARP/RA-initiated re-routing stays active for approximately 20 minutes. After triggering fast failover, you must also appropriately set the haPolicy.leader. - The new leader instance should continue to send GARP/RA packets periodically every 10 seconds until at least 10 minutes after updating the haPolicy.leader (but stop immediately if it is no longer the leader). - After triggering a fast failover, we recommend that you wait at least 3 seconds before sending another GARP/RA packet from a different VM instance to avoid race conditions. - Don't send GARP/RA packets from different VM instances at the same time. If multiple instances continue to send GARP/RA packets, traffic might be routed to different destinations in an alternating order. This condition ceases when a single instance issues a GARP/RA packet. - The GARP/RA request always takes priority over the leader API. Using the haPolicy.leader API to change the leader to a different instance will have no effect until the GARP/RA request becomes inactive. - The GARP/RA packets should follow the GARP/RA Packet Specifications.. - When multiple forwarding rules refer to a regional backend service, you need only send a GARP or RA packet for a single forwarding rule virtual IP. The virtual IPs for all forwarding rules targeting the same backend service will also be moved to the sender of the GARP or RA packet. The following are the Fast IP Move limitations (that is, when fastIPMove is not DISABLED): - Multiple forwarding rules cannot use the same IP address if one of them refers to a regional backend service with fastIPMove. - The regional backend service must set the network field, and all NEGs must belong to that network. However, individual NEGs can belong to different subnetworks of that network. - The maximum number of network endpoints across all backends of a backend service with fastIPMove is 64. - The maximum number of backend services with fastIPMove that can have the same network endpoint attached to one of its backends is 64. - The maximum number of backend services with fastIPMove in a VPC in a region is 64. - The network endpoints that are attached to a backend of a backend service with fastIPMove cannot resolve to Gen3+ machines for IPv6. - Traffic directed to the leader by a static route next hop will not be redirected to a new leader by fast failover. Such traffic will only be redirected once an haPolicy.leader update has taken effect. Only traffic to the forwarding rule's virtual IP will be redirected to a new leader by fast failover. haPolicy.fastIPMove can be set only at backend service creation time. Once set, it cannot be updated. By default, fastIpMove is set to DISABLED.",
 "enum": [
 "DISABLED",
 "GARP_RA"
@@ -54683,6 +54927,14 @@ false
 "description": "A transient resource used in compute.disks.bulkInsert and compute.regionDisks.bulkInsert. It is only used to process requests and is not persisted.",
 "id": "BulkInsertDiskResource",
 "properties": {
+"instantSnapshotGroupParameters": {
+"$ref": "InstantSnapshotGroupParameters",
+"description": "The parameters for the instant snapshot group."
+},
+"snapshotGroupParameters": {
+"$ref": "SnapshotGroupParameters",
+"description": "The parameters for the snapshot group."
+},
 "sourceConsistencyGroupPolicy": {
 "description": "The URL of the DiskConsistencyGroupPolicy for the group of disks to clone. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy ",
 "type": "string"
@@ -54836,7 +55088,7 @@ false
 "id": "CacheInvalidationRule",
 "properties": {
 "cacheTags": {
-"description": "[Preview] A list of cache tags used to identify cached objects. - Cache tags are specified when the response is first cached, by setting the `Cache-Tag` response header at the origin. - Multiple cache tags in the same invalidation request are treated as Boolean `OR` - for example, `tag1 OR tag2 OR tag3`. - If other fields are also specified, these are treated as Boolean `AND` with any tags. Up to 10 tags can be specified in a single invalidation request.",
+"description": "A list of cache tags used to identify cached objects. - Cache tags are specified when the response is first cached, by setting the `Cache-Tag` response header at the origin. - Multiple cache tags in the same invalidation request are treated as Boolean `OR` - for example, `tag1 OR tag2 OR tag3`. - If other fields are also specified, these are treated as Boolean `AND` with any tags. Up to 10 tags can be specified in a single invalidation request.",
 "items": {
 "type": "string"
 },
@@ -55221,6 +55473,7 @@ false
 "ACCELERATOR_OPTIMIZED_A3_MEGA",
 "ACCELERATOR_OPTIMIZED_A3_ULTRA",
 "ACCELERATOR_OPTIMIZED_A4",
+"ACCELERATOR_OPTIMIZED_A4X",
 "COMPUTE_OPTIMIZED",
 "COMPUTE_OPTIMIZED_C2D",
 "COMPUTE_OPTIMIZED_C3",
@@ -55238,6 +55491,7 @@ false
 "MEMORY_OPTIMIZED",
 "MEMORY_OPTIMIZED_M3",
 "MEMORY_OPTIMIZED_M4",
+"MEMORY_OPTIMIZED_M4_6TB",
 "MEMORY_OPTIMIZED_X4",
 "MEMORY_OPTIMIZED_X4_16TB",
 "MEMORY_OPTIMIZED_X4_24TB",
@@ -55246,6 +55500,8 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
+"",
 "",
 "",
 "",
@@ -56750,6 +57006,28 @@ false
 "source": {
 "description": "Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. For example: \"source\": \"/compute/v1/projects/project_id/zones/zone/disks/ disk_name ",
 "type": "string"
+}
+},
+"type": "object"
+},
+"Date": {
+"description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp",
+"id": "Date",
+"properties": {
+"day": {
+"description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
+"format": "int32",
+"type": "integer"
+},
+"month": {
+"description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
+"format": "int32",
+"type": "integer"
+},
+"year": {
+"description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
@@ -59102,6 +59380,10 @@ false
 "description": "URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: global/networks/default If you choose to specify this field, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network - projects/myproject/global/networks/my-network - global/networks/default ",
 "type": "string"
 },
+"params": {
+"$ref": "FirewallParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
+},
 "priority": {
 "description": "Priority for this rule. This is an integer between `0` and `65535`, both inclusive. The default value is `1000`. Relative priorities determine which rule takes effect if multiple rules apply. Lower values indicate higher priority. For example, a rule with priority `0` has higher precedence than a rule with priority `1`. DENY rules take precedence over ALLOW rules if they have equal priority. Note that VPC networks have implied rules with a priority of `65535`. To avoid conflicts with the implied rules, use a priority number less than `65535`.",
 "format": "int32",
@@ -59331,6 +59613,20 @@ false
 },
 "type": "object"
 },
+"FirewallParams": {
+"description": "Additional firewall parameters.",
+"id": "FirewallParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "FirewallPoliciesListAssociationsResponse": {
 "id": "FirewallPoliciesListAssociationsResponse",
 "properties": {
@@ -59539,6 +59835,18 @@ false
 },
 "parent": {
 "description": "[Output Only] The parent of the firewall policy. This field is not applicable to network firewall policies.",
+"type": "string"
+},
+"policyType": {
+"description": "The type of the firewall policy. This field can be either VPC_POLICY or RDMA_ROCE_POLICY. Note: if not specified then VPC_POLICY will be used.",
+"enum": [
+"RDMA_ROCE_POLICY",
+"VPC_POLICY"
+],
+"enumDescriptions": [
+"",
+""
+],
 "type": "string"
 },
 "region": {
@@ -59826,6 +60134,13 @@ false
 "description": "A fully-qualified URL of a SecurityProfile resource instance. Example: https://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group Must be specified if action is one of 'apply_security_profile_group' or 'mirror'. Cannot be specified for other actions.",
 "type": "string"
 },
+"targetForwardingRules": {
+"description": "A list of forwarding rules to which this rule applies. This field allows you to control which load balancers get this rule. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project /global/forwardingRules/forwardingRule - https://www.googleapis.com/compute/v1/projects/project/regions/region /forwardingRules/forwardingRule - projects/project/global/ forwardingRules/forwardingRule - projects/project/regions/region/forwardingRules/ forwardingRule ",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "targetResources": {
 "description": "A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.",
 "items": {
@@ -59846,6 +60161,18 @@ false
 "type": "string"
 },
 "type": "array"
+},
+"targetType": {
+"description": "Target types of the firewall policy rule. Default value is INSTANCES.",
+"enum": [
+"INSTANCES",
+"INTERNAL_MANAGED_LB"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
 },
 "tlsInspect": {
 "description": "Boolean flag indicating if the traffic should be TLS decrypted. Can be set only if action = 'apply_security_profile_group' and cannot be set for other actions.",
@@ -60878,6 +61205,10 @@ false
 "description": {
 "description": "An optional description of this resource. Provide this property when you create the future reservation.",
 "type": "string"
+},
+"enableEmergentMaintenance": {
+"description": "Indicates if this group of VMs have emergent maintenance enabled.",
+"type": "boolean"
 },
 "id": {
 "description": "[Output Only] A unique identifier for this future reservation. The server defines this identifier.",
@@ -62268,7 +62599,7 @@ false
 "id": "GuestOsFeature",
 "properties": {
 "type": {
-"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE_V2 - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF For more information, see Enabling guest operating system features.",
+"description": "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE_V2 - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF - SNP_SVSM_CAPABLE For more information, see Enabling guest operating system features.",
 "enum": [
 "BARE_METAL_LINUX_COMPATIBLE",
 "FEATURE_TYPE_UNSPECIFIED",
@@ -62280,12 +62611,14 @@ false
 "SEV_LIVE_MIGRATABLE",
 "SEV_LIVE_MIGRATABLE_V2",
 "SEV_SNP_CAPABLE",
+"SNP_SVSM_CAPABLE",
 "TDX_CAPABLE",
 "UEFI_COMPATIBLE",
 "VIRTIO_SCSI_MULTIQUEUE",
 "WINDOWS"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -67643,7 +67976,7 @@ false
 "type": "string"
 },
 "instances": {
-"description": "The list of specifications of per-instance configs to be created. This field cannot be used together with 'resize_by'.",
+"description": "The names of instances to be created by this resize request. The number of names specified determines the number of instances to create. The group's target size will be increased by this number. This field cannot be used together with 'resize_by'.",
 "items": {
 "$ref": "PerInstanceConfig"
 },
@@ -70671,7 +71004,7 @@ false
 "type": "string"
 },
 "disruptionSchedule": {
-"description": "The disruption schedule for the VM. Default to IMMEDIATE.",
+"description": "The disruption schedule for the VM. Required field, only allows IMMEDIATE.",
 "enum": [
 "DISRUPTION_SCHEDULE_UNSPECIFIED",
 "FUTURE",
@@ -71343,6 +71676,16 @@ false
 },
 "zone": {
 "description": "[Output Only] URL of the zone where the instant snapshot group resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"InstantSnapshotGroupParameters": {
+"id": "InstantSnapshotGroupParameters",
+"properties": {
+"sourceInstantSnapshotGroup": {
+"description": "The source instant snapshot group used to create disks. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshotGroups/instantSnapshotGroup - projects/project/zones/zone/instantSnapshotGroups/instantSnapshotGroup - zones/zone/instantSnapshotGroups/instantSnapshotGroup ",
 "type": "string"
 }
 },
@@ -73286,7 +73629,7 @@ false
 "CONNECTION_UP",
 "DEFUNCT",
 "IPSEC_CONFIGURATION_NEEDED_STATUS",
-"IPSET_READY_TO_RESUME_FLOW_STATUS",
+"IPSEC_READY_TO_RESUME_FLOW_STATUS",
 "IPV4_DOWN_IPV6_UP",
 "IPV4_UP_IPV6_DOWN",
 "PARTNER_REQUEST_RECEIVED",
@@ -74742,7 +75085,7 @@ false
 "type": "array"
 },
 "availableLinkTypes": {
-"description": "[Output only] List of link types available at this InterconnectLocation, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR - LINK_TYPE_ETHERNET_100G_LR ",
+"description": "[Output only] List of link types available at this InterconnectLocation, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR - LINK_TYPE_ETHERNET_100G_LR - LINK_TYPE_ETHERNET_400G_LR4 ",
 "items": {
 "enum": [
 "LINK_TYPE_ETHERNET_100G_LR",
@@ -75827,6 +76170,13 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources.",
+"items": {
+"type": "string"
+},
+"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -77860,6 +78210,10 @@ false
 "$ref": "ManagedInstancePropertiesFromFlexibilityPolicy",
 "description": "[Output Only] Instance properties selected for this instance resulting from InstanceFlexibilityPolicy."
 },
+"scheduling": {
+"$ref": "ManagedInstanceScheduling",
+"description": "[Output Only] Information about the termination timestamp of the instance, if applicable."
+},
 "sizeInUnit": {
 "description": "[Output only] The size of the VM represented by this Managed Instance. This is how much this Managed Instance contributes to the size of the group.",
 "format": "float",
@@ -78086,6 +78440,17 @@ false
 "Heavily discounted, no guaranteed runtime.",
 "Standard provisioning with user controlled runtime, no discounts."
 ],
+"type": "string"
+}
+},
+"type": "object"
+},
+"ManagedInstanceScheduling": {
+"id": "ManagedInstanceScheduling",
+"properties": {
+"terminationTimestamp": {
+"description": "[Output Only] The timestamp when the MIG will automatically terminate the instance. The value is in RFC3339 text format.",
+"format": "google-datetime",
 "type": "string"
 }
 },
@@ -78509,6 +78874,11 @@ false
 "type": "string"
 },
 "type": "array"
+},
+"membersCount": {
+"description": "[Output Only] The number of instance group manager members in this multi-MIG.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
@@ -78893,6 +79263,10 @@ false
 "networkProfile": {
 "description": "A full or partial URL of the network profile to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/{api_version}/projects/{project_id}/global/networkProfiles/{network_profile_name} - projects/{project_id}/global/networkProfiles/{network_profile_name} ",
 "type": "string"
+},
+"params": {
+"$ref": "NetworkParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
 },
 "peerings": {
 "description": "[Output Only] A list of network peerings for the resource.",
@@ -81369,6 +81743,20 @@ false
 },
 "type": "object"
 },
+"NetworkParams": {
+"description": "Additional network parameters.",
+"id": "NetworkParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "NetworkPeering": {
 "description": "A network peering attached to a network resource. The message includes the peering name, peer network, peering state, and a flag indicating whether Google Compute Engine should automatically create routes for the peering.",
 "id": "NetworkPeering",
@@ -81380,6 +81768,10 @@ false
 "autoCreateRoutes": {
 "description": "This field will be deprecated soon. Use the exchange_subnet_routes field instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.",
 "type": "boolean"
+},
+"connectionStatus": {
+"$ref": "NetworkPeeringConnectionStatus",
+"description": "[Output Only] The effective state of the peering connection as a whole."
 },
 "exchangeSubnetRoutes": {
 "description": "Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.",
@@ -81410,7 +81802,7 @@ false
 "type": "string"
 },
 "peerMtu": {
-"description": "Maximum Transmission Unit in bytes.",
+"description": "[Output Only] Maximum Transmission Unit in bytes of the peer network.",
 "format": "int32",
 "type": "integer"
 },
@@ -81440,6 +81832,122 @@ false
 },
 "stateDetails": {
 "description": "[Output Only] Details about the current state of the peering.",
+"type": "string"
+},
+"updateStrategy": {
+"description": "The update strategy determines the semantics for updates and deletes to the peering connection configuration.",
+"enum": [
+"CONSENSUS",
+"INDEPENDENT",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"Updates are reflected in the local peering but aren't applied to the peering connection until a complementary change is made to the matching peering. To delete a peering with the consensus update strategy, both the peerings must request the deletion of the peering before the peering can be deleted.",
+"In this mode changes to the peering configuration can be unilaterally altered by changing a single network peering. This is the default value if the field is unspecified.",
+"Peerings with update strategy UNSPECIFIED are created with update strategy INDEPENDENT."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworkPeeringConnectionStatus": {
+"description": "[Output Only] Describes the state of a peering connection, not just the local peering. This field provides information about the effective settings for the connection as a whole, including pending delete/update requests for CONSENSUS peerings.",
+"id": "NetworkPeeringConnectionStatus",
+"properties": {
+"consensusState": {
+"$ref": "NetworkPeeringConnectionStatusConsensusState",
+"description": "The consensus state contains the information about the status of update and delete for a consensus peering connection."
+},
+"trafficConfiguration": {
+"$ref": "NetworkPeeringConnectionStatusTrafficConfiguration",
+"description": "The active connectivity settings for the peering connection based on the settings of the network peerings."
+},
+"updateStrategy": {
+"description": "The update strategy determines the update/delete semantics for this peering connection.",
+"enum": [
+"CONSENSUS",
+"INDEPENDENT",
+"UNSPECIFIED"
+],
+"enumDescriptions": [
+"Updates are reflected in the local peering but aren't applied to the peering connection until a complementary change is made to the matching peering. To delete a peering with the consensus update strategy, both the peerings must request the deletion of the peering before the peering can be deleted.",
+"In this mode changes to the peering configuration can be unilaterally altered by changing a single network peering. This is the default value if the field is unspecified.",
+"Peerings with update strategy UNSPECIFIED are created with update strategy INDEPENDENT."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworkPeeringConnectionStatusConsensusState": {
+"description": "Surfaces relevant state for a consensus peering connection update/delete semantics. Only set when connection_status.update_strategy is CONSENSUS or one network peering is proposing upgrading to CONSENSUS.",
+"id": "NetworkPeeringConnectionStatusConsensusState",
+"properties": {
+"deleteStatus": {
+"description": "The status of the delete request.",
+"enum": [
+"DELETE_ACKNOWLEDGED",
+"DELETE_STATUS_UNSPECIFIED",
+"LOCAL_DELETE_REQUESTED",
+"PEER_DELETE_REQUESTED"
+],
+"enumDescriptions": [
+"Both network admins have agreed this consensus peering connection can be deleted.",
+"",
+"Network admin has requested deletion of this peering connection.",
+"The peer network admin has requested deletion of this peering connection."
+],
+"type": "string"
+},
+"updateStatus": {
+"description": "The status of the update request.",
+"enum": [
+"IN_SYNC",
+"PENDING_LOCAL_ACKNOWLEDMENT",
+"PENDING_PEER_ACKNOWLEDGEMENT",
+"UPDATE_STATUS_UNSPECIFIED"
+],
+"enumDescriptions": [
+"No pending configuration update proposals to the peering connection.",
+"The peer network admin has made an updatePeering call. The change are awaiting acknowledgment from this peering's network admin.",
+"The local network admin has made an updatePeering call. The change are awaiting acknowledgment from the peer network admin.",
+""
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworkPeeringConnectionStatusTrafficConfiguration": {
+"id": "NetworkPeeringConnectionStatusTrafficConfiguration",
+"properties": {
+"exportCustomRoutesToPeer": {
+"description": "Whether custom routes are being exported to the peer network.",
+"type": "boolean"
+},
+"exportSubnetRoutesWithPublicIpToPeer": {
+"description": "Whether subnet routes with public IP range are being exported to the peer network.",
+"type": "boolean"
+},
+"importCustomRoutesFromPeer": {
+"description": "Whether custom routes is being imported from the peer network.",
+"type": "boolean"
+},
+"importSubnetRoutesWithPublicIpFromPeer": {
+"description": "Whether subnet routes with public IP range are being imported from the peer network.",
+"type": "boolean"
+},
+"stackType": {
+"description": "Which IP version(s) of traffic and routes are being imported or exported between peer networks.",
+"enum": [
+"IPV4_IPV6",
+"IPV4_ONLY"
+],
+"enumDescriptions": [
+"This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is IPV4_IPV6, IPv6 traffic and routes will be exchanged as well.",
+"This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is IPV4_IPV6."
+],
 "type": "string"
 }
 },
@@ -81631,6 +82139,18 @@ false
 ],
 "type": "string"
 },
+"allowDefaultNicAttachment": {
+"description": "Specifies whether default NIC attachment is allowed.",
+"enum": [
+"DEFAULT_NIC_ATTACHMENT_ALLOWED",
+"DEFAULT_NIC_ATTACHMENT_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
 "allowExternalIpAccess": {
 "description": "Specifies whether VMs are allowed to have external IP access on network interfaces connected to this VPC.",
 "enum": [
@@ -81655,6 +82175,18 @@ false
 ],
 "type": "string"
 },
+"allowIpForwarding": {
+"description": "Specifies whether IP forwarding is allowed.",
+"enum": [
+"IP_FORWARDING_ALLOWED",
+"IP_FORWARDING_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
 "allowLoadBalancing": {
 "description": "Specifies whether cloud load balancing is allowed.",
 "enum": [
@@ -81672,6 +82204,30 @@ false
 "enum": [
 "MULTI_NIC_IN_SAME_NETWORK_ALLOWED",
 "MULTI_NIC_IN_SAME_NETWORK_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowNcc": {
+"description": "Specifies whether NCC is allowed.",
+"enum": [
+"NCC_ALLOWED",
+"NCC_BLOCKED"
+],
+"enumDescriptions": [
+"",
+""
+],
+"type": "string"
+},
+"allowNetworkMigration": {
+"description": "Specifies whether VM network migration is allowed.",
+"enum": [
+"NETWORK_MIGRATION_ALLOWED",
+"NETWORK_MIGRATION_BLOCKED"
 ],
 "enumDescriptions": [
 "",
@@ -81825,6 +82381,56 @@ false
 "",
 "",
 ""
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetworkPurposes": {
+"description": "Specifies which subnetwork purposes are supported.",
+"items": {
+"enum": [
+"AGGREGATE",
+"CLOUD_EXTENSION",
+"CUSTOM_HARDWARE_LINK",
+"GLOBAL_MANAGED_PROXY",
+"INTERNAL_HTTPS_LOAD_BALANCER",
+"PEER_MIGRATION",
+"PRIVATE",
+"PRIVATE_NAT",
+"PRIVATE_RFC_1918",
+"PRIVATE_SERVICE_CONNECT",
+"REGIONAL_MANAGED_PROXY"
+],
+"enumDescriptions": [
+"Subnetwork used to aggregate multiple private subnetworks.",
+"Subnetworks created for Cloud Extension Machines.",
+"Subnetwork used for Custom Hardware Link.",
+"Subnet reserved for Global Envoy-based Load Balancing.",
+"Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.",
+"Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).",
+"Regular user created or automatically created subnet.",
+"Subnetwork used as source range for Private NAT Gateways.",
+"Regular user created or automatically created subnet.",
+"Subnetworks created for Private Service Connect in the producer network.",
+"Subnetwork used for Regional Envoy-based Load Balancing."
+],
+"type": "string"
+},
+"type": "array"
+},
+"subnetworkStackTypes": {
+"description": "Specifies which subnetwork stack types are supported.",
+"items": {
+"enum": [
+"IPV4_IPV6",
+"IPV4_ONLY",
+"IPV6_ONLY"
+],
+"enumDescriptions": [
+"New VMs in this subnet can have both IPv4 and IPv6 addresses.",
+"New VMs in this subnet will only be assigned IPv4 addresses.",
+"New VMs in this subnet will only be assigned IPv6 addresses."
 ],
 "type": "string"
 },
@@ -82210,6 +82816,16 @@ false
 },
 "NetworksRemovePeeringRequest": {
 "id": "NetworksRemovePeeringRequest",
+"properties": {
+"name": {
+"description": "Name of the peering, which should conform to RFC1035.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"NetworksRequestRemovePeeringRequest": {
+"id": "NetworksRequestRemovePeeringRequest",
 "properties": {
 "name": {
 "description": "Name of the peering, which should conform to RFC1035.",
@@ -86720,6 +87336,346 @@ false
 "literal": {
 "description": "An IPv4 internal network address to assign to the instance for this network interface.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"PreviewFeature": {
+"description": "Represents a single Google Compute Engine preview feature.",
+"id": "PreviewFeature",
+"properties": {
+"activationStatus": {
+"description": "Specifies whether the feature is enabled or disabled.",
+"enum": [
+"ACTIVATION_STATE_UNSPECIFIED",
+"DISABLED",
+"ENABLED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "[Output Only] Description of the feature.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#previewFeature",
+"description": "[Output only] The type of the feature. Always \"compute#previewFeature\" for preview features.",
+"type": "string"
+},
+"name": {
+"description": "Name of the feature.",
+"type": "string"
+},
+"rolloutOperation": {
+"$ref": "PreviewFeatureRolloutOperation",
+"description": "Rollout operation of the feature."
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+},
+"status": {
+"$ref": "PreviewFeatureStatus",
+"description": "[Output only] Status of the feature."
+}
+},
+"type": "object"
+},
+"PreviewFeatureList": {
+"id": "PreviewFeatureList",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of PreviewFeature resources.",
+"items": {
+"$ref": "PreviewFeature"
+},
+"type": "array"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g: regions.list).",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperation": {
+"description": "Represents the rollout operation",
+"id": "PreviewFeatureRolloutOperation",
+"properties": {
+"rolloutInput": {
+"$ref": "PreviewFeatureRolloutOperationRolloutInput"
+},
+"rolloutStatus": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatus",
+"readOnly": true
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutInput": {
+"id": "PreviewFeatureRolloutOperationRolloutInput",
+"properties": {
+"name": {
+"description": "The name of the rollout plan Ex. organizations//locations/global/rolloutPlans/ Ex. folders//locations/global/rolloutPlans/ Ex. projects//locations/global/rolloutPlans/.",
+"type": "string"
+},
+"predefinedRolloutPlan": {
+"description": "Predefined rollout plan.",
+"enum": [
+"ROLLOUT_PLAN_FAST_ROLLOUT",
+"ROLLOUT_PLAN_TWO_DAY_ROLLOUT",
+"ROLLOUT_PLAN_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"retryUuid": {
+"description": "The UUID of the retry action. Only needed if this is a retry for an existing rollout. This can be used after the user canceled a rollout and want to retry it with no changes.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutStatus": {
+"id": "PreviewFeatureRolloutOperationRolloutStatus",
+"properties": {
+"ongoingRollouts": {
+"description": "Output only. The ongoing rollout resources. There can be multiple ongoing rollouts for a resource.",
+"items": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata"
+},
+"readOnly": true,
+"type": "array"
+},
+"previousRollout": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
+"description": "Output only. The last completed rollout resource. This field will not be populated until the first rollout is completed.",
+"readOnly": true
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata": {
+"id": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
+"properties": {
+"rollout": {
+"description": "The name of the rollout Ex. organizations//locations/global/rollouts/ Ex. folders//locations/global/rollouts/ Ex. projects//locations/global/rollouts/.",
+"type": "string"
+},
+"rolloutPlan": {
+"description": "The name of the rollout plan Ex. organizations//locations/global/rolloutPlans/ Ex. folders//locations/global/rolloutPlans/ Ex. projects//locations/global/rolloutPlans/.",
+"type": "string"
+},
+"status": {
+"$ref": "PreviewFeatureStatus",
+"description": "The status of the rollout."
+}
+},
+"type": "object"
+},
+"PreviewFeatureStatus": {
+"description": "[Output Only] The status of the feature.",
+"id": "PreviewFeatureStatus",
+"properties": {
+"description": {
+"description": "[Output Only] The description of the feature.",
+"type": "string"
+},
+"helpLink": {
+"description": "[Output Only] Link to the public documentation for the feature.",
+"type": "string"
+},
+"releaseStatus": {
+"$ref": "PreviewFeatureStatusReleaseStatus"
+}
+},
+"type": "object"
+},
+"PreviewFeatureStatusReleaseStatus": {
+"id": "PreviewFeatureStatusReleaseStatus",
+"properties": {
+"stage": {
+"description": "[Output Only] The stage of the feature.",
+"enum": [
+"DEPRECATED",
+"GA",
+"INTERNAL",
+"PREVIEW",
+"STAGE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"Exclude until there's product requirements.",
+"",
+""
+],
+"type": "string"
+},
+"updateDate": {
+"$ref": "Date",
+"description": "Output only. The last date when a feature transitioned between ReleaseStatuses.",
+"readOnly": true
 }
 },
 "type": "object"
@@ -91405,6 +92361,10 @@ false
 "description": "An optional description of this resource. Provide this property when you create the resource.",
 "type": "string"
 },
+"enableEmergentMaintenance": {
+"description": "Indicates if this group of VMs have emergent maintenance enabled.",
+"type": "boolean"
+},
 "id": {
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
 "format": "uint64",
@@ -91414,6 +92374,13 @@ false
 "default": "compute#reservation",
 "description": "[Output Only] Type of the resource. Always compute#reservations for reservations.",
 "type": "string"
+},
+"linkedCommitments": {
+"description": "[Output Only] Full or partial URL to parent commitments. This field displays for reservations that are tied to multiple commitments.",
+"items": {
+"type": "string"
+},
+"type": "array"
 },
 "name": {
 "annotations": {
@@ -91749,6 +92716,16 @@ false
 "$ref": "GroupMaintenanceInfo",
 "description": "[Output Only] Maintenance information for this reservation block."
 },
+"reservationSubBlockCount": {
+"description": "[Output Only] The number of reservation subBlocks associated with this reservation block.",
+"format": "int32",
+"type": "integer"
+},
+"reservationSubBlockInUseCount": {
+"description": "[Output Only] The number of in-use reservation subBlocks associated with this reservation block. If at least one VM is running on a subBlock, it is considered in-use.",
+"format": "int32",
+"type": "integer"
+},
 "selfLink": {
 "description": "[Output Only] Server-defined fully-qualified URL for this resource.",
 "type": "string"
@@ -91987,6 +92964,255 @@ false
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g: regions.list).",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"ReservationSubBlock": {
+"description": "Represents a reservation subBlock resource.",
+"id": "ReservationSubBlock",
+"properties": {
+"count": {
+"description": "[Output Only] The number of hosts that are allocated in this reservation subBlock.",
+"format": "int32",
+"type": "integer"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+"format": "uint64",
+"type": "string"
+},
+"inUseCount": {
+"description": "[Output Only] The number of instances that are currently in use on this reservation subBlock.",
+"format": "int32",
+"type": "integer"
+},
+"kind": {
+"default": "compute#reservationSubBlock",
+"description": "[Output Only] Type of the resource. Always compute#reservationSubBlock for reservation subBlocks.",
+"type": "string"
+},
+"name": {
+"description": "[Output Only] The name of this reservation subBlock generated by Google Compute Engine. The name must be 1-63 characters long, and comply with RFC1035 @pattern [a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"physicalTopology": {
+"$ref": "ReservationSubBlockPhysicalTopology",
+"description": "[Output Only] The physical topology of the reservation subBlock."
+},
+"selfLink": {
+"description": "[Output Only] Server-defined fully-qualified URL for this resource.",
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "[Output Only] Server-defined URL for this resource with the resource id.",
+"type": "string"
+},
+"status": {
+"description": "[Output Only] Status of the reservation subBlock.",
+"enum": [
+"CREATING",
+"DELETING",
+"INVALID",
+"READY"
+],
+"enumDescriptions": [
+"Resources are being allocated for the reservation subBlock.",
+"Reservation subBlock is currently being deleted.",
+"",
+"Reservation subBlock has allocated all its resources."
+],
+"type": "string"
+},
+"zone": {
+"description": "[Output Only] Zone in which the reservation subBlock resides.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationSubBlockPhysicalTopology": {
+"id": "ReservationSubBlockPhysicalTopology",
+"properties": {
+"block": {
+"description": "The hash of the capacity block within the cluster.",
+"type": "string"
+},
+"cluster": {
+"description": "The cluster name of the reservation subBlock.",
+"type": "string"
+},
+"subBlock": {
+"description": "The hash of the capacity sub-block within the capacity block.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationSubBlocksGetResponse": {
+"id": "ReservationSubBlocksGetResponse",
+"properties": {
+"resource": {
+"$ref": "ReservationSubBlock"
+}
+},
+"type": "object"
+},
+"ReservationSubBlocksListResponse": {
+"description": "A list of reservation subBlocks under a single reservation.",
+"id": "ReservationSubBlocksListResponse",
+"properties": {
+"id": {
+"description": "Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of reservation subBlock resources.",
+"items": {
+"$ref": "ReservationSubBlock"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#reservationSubBlock",
+"description": "Type of the resource. Always compute#reservationSubBlock for a list of reservation subBlocks.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "Server-defined URL for this resource.",
+"type": "string"
+},
+"warning": {
+"description": "Informational warning message.",
 "properties": {
 "code": {
 "description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
@@ -93785,7 +95011,7 @@ false
 "type": "integer"
 },
 "nextHopInterconnectAttachment": {
-"description": "[Output Only] The URL to an InterconnectAttachment which is the next hop for the route. This field will only be populated for the dynamic routes generated by Cloud Router with a linked interconnectAttachment.",
+"description": "[Output Only] The URL to an InterconnectAttachment which is the next hop for the route. This field will only be populated for dynamic routes generated by Cloud Router with a linked interconnectAttachment or the static route generated by each L2 Interconnect Attachment.",
 "type": "string"
 },
 "nextHopIp": {
@@ -93822,6 +95048,10 @@ false
 "nextHopVpnTunnel": {
 "description": "The URL to a VpnTunnel that should handle matching packets.",
 "type": "string"
+},
+"params": {
+"$ref": "RouteParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
 },
 "priority": {
 "annotations": {
@@ -94195,6 +95425,20 @@ false
 "type": "string"
 }
 },
+"type": "object"
+}
+},
+"type": "object"
+},
+"RouteParams": {
+"description": "Additional route parameters.",
+"id": "RouteParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
 "type": "object"
 }
 },
@@ -96681,7 +97925,8 @@ false
 },
 "shutdownTimeout": {
 "$ref": "Duration",
-"description": "Timeout between GCE ACPI G2 Soft Off and ACPI G3 Mechanical Off during shutdown operation of VM. For Standard VMs values between 0s and 120s are allowed. For Spot and Preemptible VMs supported values are between 0s and 30s. If no value is specified for shutdownDuration, default values are 90s for Standard VMs and 30s for Spot/Preemptible VMs."
+"deprecated": true,
+"description": "DEPRECATED: please use skipGuestOsShutdown. Timeout between GCE ACPI G2 Soft Off and ACPI G3 Mechanical Off during shutdown operation of VM. For Standard VMs values between 0s and 120s are allowed. For Spot and Preemptible VMs supported values are between 0s and 30s. If no value is specified for shutdownDuration, default values are 90s for Standard VMs and 30s for Spot/Preemptible VMs."
 },
 "terminationTime": {
 "description": "Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.",
@@ -98830,6 +100075,13 @@ false
 "description": "The url of a connected endpoint.",
 "type": "string"
 },
+"natIps": {
+"description": "NAT IPs of the connected PSC endpoint and those of other endpoints propagated from it.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
 "propagatedConnectionCount": {
 "description": "The number of consumer Network Connectivity Center spokes that the connected Private Service Connect endpoint has propagated to.",
 "format": "uint32",
@@ -99497,7 +100749,7 @@ false
 "type": "object"
 },
 "Snapshot": {
-"description": "Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots.",
+"description": "Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots. LINT.IfChange",
 "id": "Snapshot",
 "properties": {
 "architecture": {
@@ -99986,6 +101238,27 @@ false
 "",
 ""
 ],
+"type": "string"
+}
+},
+"type": "object"
+},
+"SnapshotGroupParameters": {
+"id": "SnapshotGroupParameters",
+"properties": {
+"replicaZones": {
+"description": "URLs of the zones where disks should be replicated to. Only applicable for regional resources.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"sourceSnapshotGroup": {
+"description": "The source snapshot group used to create disks. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project /global/snapshotGroups/snapshotGroup - projects/project/global/snapshotGroups/snapshotGroup - global/snapshotGroups/snapshotGroup ",
+"type": "string"
+},
+"type": {
+"description": "URL of the disk type resource describing which disk type to use to create disks. Provide this when creating the disk. For example: projects/project /zones/zone/diskTypes/pd-ssd . See Persistent disk types.",
 "type": "string"
 }
 },
@@ -103588,6 +104861,10 @@ false
 "description": "The URL of the network to which this subnetwork belongs, provided by the client when initially creating the subnetwork. This field can be set only at resource creation time.",
 "type": "string"
 },
+"params": {
+"$ref": "SubnetworkParams",
+"description": "Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload."
+},
 "privateIpGoogleAccess": {
 "description": "Whether the VMs in this subnet can access Google services without assigned external IP addresses. This field can be both set at resource creation time and updated using setPrivateIpGoogleAccess.",
 "type": "boolean"
@@ -103607,7 +104884,6 @@ false
 "type": "string"
 },
 "purpose": {
-"description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
 "enum": [
 "AGGREGATE",
 "CLOUD_EXTENSION",
@@ -103696,6 +104972,11 @@ false
 "Subnetwork is ready for use."
 ],
 "type": "string"
+},
+"utilizationDetails": {
+"$ref": "SubnetworkUtilizationDetails",
+"description": "Output only. [Output Only] The current IP utilization of all subnetwork ranges. Contains the total number of allocated and free IPs in each range.",
+"readOnly": true
 },
 "vlans": {
 "description": "A repeated field indicating the VLAN IDs supported on this subnetwork. During Subnet creation, specifying vlan is valid only if enable_l2 is true. During Subnet Update, specifying vlan is allowed only for l2 enabled subnets. Restricted to only one VLAN.",
@@ -104086,6 +105367,20 @@ false
 },
 "type": "object"
 },
+"SubnetworkParams": {
+"description": "Additional subnetwork parameters.",
+"id": "SubnetworkParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * {\"tagKeys/333\" : \"tagValues/444\", \"tagKeys/123\" : \"tagValues/456\"} * {\"123/environment\" : \"production\", \"345/abc\" : \"xyz\"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: {\"123/environment\" : \"tagValues/444\"} is invalid.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "SubnetworkSecondaryRange": {
 "description": "Represents a secondary IP range of a subnetwork.",
 "id": "SubnetworkSecondaryRange",
@@ -104101,6 +105396,64 @@ false
 "reservedInternalRange": {
 "description": "The URL of the reserved internal range.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"SubnetworkUtilizationDetails": {
+"description": "The current IP utilization of all subnetwork ranges. Contains the total number of allocated and free IPs in each range.",
+"id": "SubnetworkUtilizationDetails",
+"properties": {
+"externalIpv6InstanceUtilization": {
+"$ref": "SubnetworkUtilizationDetailsIPV6Utilization",
+"description": "Utilizations of external IPV6 IP range."
+},
+"externalIpv6LbUtilization": {
+"$ref": "SubnetworkUtilizationDetailsIPV6Utilization",
+"description": "Utilizations of external IPV6 IP range for NetLB."
+},
+"internalIpv6Utilization": {
+"$ref": "SubnetworkUtilizationDetailsIPV6Utilization",
+"description": "Utilizations of internal IPV6 IP range."
+},
+"ipv4Utilizations": {
+"description": "Utilizations of all IPV4 IP ranges. For primary ranges, the range name will be empty.",
+"items": {
+"$ref": "SubnetworkUtilizationDetailsIPV4Utilization"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"SubnetworkUtilizationDetailsIPV4Utilization": {
+"description": "The IPV4 utilization of a single IP range.",
+"id": "SubnetworkUtilizationDetailsIPV4Utilization",
+"properties": {
+"rangeName": {
+"description": "Will be set for secondary range. Empty for primary IPv4 range.",
+"type": "string"
+},
+"totalAllocatedIp": {
+"format": "int64",
+"type": "string"
+},
+"totalFreeIp": {
+"format": "int64",
+"type": "string"
+}
+},
+"type": "object"
+},
+"SubnetworkUtilizationDetailsIPV6Utilization": {
+"description": "The IPV6 utilization of a single IP range.",
+"id": "SubnetworkUtilizationDetailsIPV6Utilization",
+"properties": {
+"totalAllocatedIp": {
+"$ref": "Uint128"
+},
+"totalFreeIp": {
+"$ref": "Uint128"
 }
 },
 "type": "object"
@@ -108563,6 +109916,29 @@ false
 "description": "The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.",
 "type": "string"
 },
+"maintenanceOnShutdown": {
+"description": "Indicates whether the UpcomingMaintenance will be triggered on VM shutdown.",
+"type": "boolean"
+},
+"maintenanceReasons": {
+"description": "The reasons for the maintenance. Only valid for vms.",
+"items": {
+"enum": [
+"FAILURE_GPU_TEMPERATURE",
+"FAILURE_GPU_XID",
+"FAILURE_NVLINK",
+"MAINTENANCE_REASON_UNKNOWN"
+],
+"enumDescriptions": [
+"Maintenance due to high GPU temperature.",
+"Maintenance due to GPU xid failure.",
+"Maintenance due to NVLink failure.",
+"Unknown maintenance reason. Do not use this value."
+],
+"type": "string"
+},
+"type": "array"
+},
 "maintenanceStatus": {
 "enum": [
 "ONGOING",
@@ -109347,7 +110723,6 @@ false
 "type": "string"
 },
 "purpose": {
-"description": "The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.",
 "enum": [
 "AGGREGATE",
 "CLOUD_EXTENSION",
