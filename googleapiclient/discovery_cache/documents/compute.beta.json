@@ -3083,6 +3083,54 @@
 "https://www.googleapis.com/auth/compute"
 ]
 },
+"bulkSetLabels": {
+"description": "Sets the labels on many disks at once. To learn more about labels, read the Labeling Resources documentation.",
+"flatPath": "projects/{project}/zones/{zone}/disks/bulkSetLabels",
+"httpMethod": "POST",
+"id": "compute.disks.bulkSetLabels",
+"parameterOrder": [
+"project",
+"zone"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "query",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/disks/bulkSetLabels",
+"request": {
+"$ref": "BulkZoneSetLabelsRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
 "createSnapshot": {
 "description": "Creates a snapshot of a specified persistent disk. For regular snapshot creation, consider using snapshots.insert instead, as that method supports more features, such as creating snapshots in a project different from the source disk project.",
 "flatPath": "projects/{project}/zones/{zone}/disks/{disk}/createSnapshot",
@@ -22641,6 +22689,142 @@
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
+"previewFeatures": {
+"methods": {
+"get": {
+"description": "Returns the details of the given PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures/{previewFeature}",
+"httpMethod": "GET",
+"id": "compute.previewFeatures.get",
+"parameterOrder": [
+"project",
+"previewFeature"
+],
+"parameters": {
+"previewFeature": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/global/previewFeatures/{previewFeature}",
+"response": {
+"$ref": "PreviewFeature"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Returns the details of the given PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures",
+"httpMethod": "GET",
+"id": "compute.previewFeatures.list",
+"parameterOrder": [
+"project"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/global/previewFeatures",
+"response": {
+"$ref": "PreviewFeatureList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"update": {
+"description": "Patches the given PreviewFeature. This method is used to enable or disable a PreviewFeature.",
+"flatPath": "projects/{project}/global/previewFeatures/{previewFeature}",
+"httpMethod": "PATCH",
+"id": "compute.previewFeatures.update",
+"parameterOrder": [
+"project",
+"previewFeature"
+],
+"parameters": {
+"previewFeature": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/global/previewFeatures/{previewFeature}",
+"request": {
+"$ref": "PreviewFeature"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
 ]
 }
 }
@@ -45351,7 +45535,7 @@
 }
 }
 },
-"revision": "20250427",
+"revision": "20250505",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -50632,6 +50816,36 @@ false
 },
 "type": "object"
 },
+"BulkSetLabelsRequest": {
+"id": "BulkSetLabelsRequest",
+"properties": {
+"labelFingerprint": {
+"description": "The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You may optionally provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.",
+"format": "byte",
+"type": "string"
+},
+"labels": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "The labels to set for this resource.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"BulkZoneSetLabelsRequest": {
+"id": "BulkZoneSetLabelsRequest",
+"properties": {
+"requests": {
+"items": {
+"$ref": "BulkSetLabelsRequest"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
 "BundledLocalSsds": {
 "id": "BundledLocalSsds",
 "properties": {
@@ -51875,6 +52089,28 @@ false
 "source": {
 "description": "Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. For example: \"source\": \"/compute/v1/projects/project_id/zones/zone/disks/ disk_name ",
 "type": "string"
+}
+},
+"type": "object"
+},
+"Date": {
+"description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp",
+"id": "Date",
+"properties": {
+"day": {
+"description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
+"format": "int32",
+"type": "integer"
+},
+"month": {
+"description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
+"format": "int32",
+"type": "integer"
+},
+"year": {
+"description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
@@ -65511,6 +65747,22 @@ false
 ],
 "type": "string"
 },
+"candidateCloudRouterIpAddress": {
+"description": "Single IPv4 address + prefix length to be configured on the cloud router interface for this interconnect attachment. - Both candidate_cloud_router_ip_address and candidate_customer_router_ip_address fields must be set or both must be unset. - Prefix length of both candidate_cloud_router_ip_address and candidate_customer_router_ip_address must be the same. - Max prefix length is 31. ",
+"type": "string"
+},
+"candidateCloudRouterIpv6Address": {
+"description": "Single IPv6 address + prefix length to be configured on the cloud router interface for this interconnect attachment. - Both candidate_cloud_router_ipv6_address and candidate_customer_router_ipv6_address fields must be set or both must be unset. - Prefix length of both candidate_cloud_router_ipv6_address and candidate_customer_router_ipv6_address must be the same. - Max prefix length is 126. ",
+"type": "string"
+},
+"candidateCustomerRouterIpAddress": {
+"description": "Single IPv4 address + prefix length to be configured on the customer router interface for this interconnect attachment.",
+"type": "string"
+},
+"candidateCustomerRouterIpv6Address": {
+"description": "Single IPv6 address + prefix length to be configured on the customer router interface for this interconnect attachment.",
+"type": "string"
+},
 "candidateIpv6Subnets": {
 "description": "This field is not available.",
 "items": {
@@ -65631,7 +65883,7 @@ false
 "type": "object"
 },
 "mtu": {
-"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.",
+"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Valid values are 1440, 1460, 1500, and 8896. If not specified, the value will default to 1440.",
 "format": "int32",
 "type": "integer"
 },
@@ -78253,6 +78505,342 @@ false
 "literal": {
 "description": "An IPv4 internal network address to assign to the instance for this network interface.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"PreviewFeature": {
+"description": "Represents a single Google Compute Engine preview feature.",
+"id": "PreviewFeature",
+"properties": {
+"activationStatus": {
+"description": "Specifies whether the feature is enabled or disabled.",
+"enum": [
+"ACTIVATION_STATE_UNSPECIFIED",
+"DISABLED",
+"ENABLED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"creationTimestamp": {
+"description": "[Output Only] Creation timestamp in RFC3339 text format.",
+"type": "string"
+},
+"description": {
+"description": "[Output Only] Description of the feature.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
+"format": "uint64",
+"type": "string"
+},
+"kind": {
+"default": "compute#previewFeature",
+"description": "[Output only] The type of the feature. Always \"compute#previewFeature\" for preview features.",
+"type": "string"
+},
+"name": {
+"description": "Name of the feature.",
+"type": "string"
+},
+"rolloutOperation": {
+"$ref": "PreviewFeatureRolloutOperation",
+"description": "Rollout operation of the feature."
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for the resource.",
+"type": "string"
+},
+"status": {
+"$ref": "PreviewFeatureStatus",
+"description": "[Output only] Status of the feature."
+}
+},
+"type": "object"
+},
+"PreviewFeatureList": {
+"id": "PreviewFeatureList",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of PreviewFeature resources.",
+"items": {
+"$ref": "PreviewFeature"
+},
+"type": "array"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed operation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as deprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as experimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden. Deprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the network.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the same network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite the mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g: regions.list).",
+"The user attempted to use a resource that requires a TOS they have not accepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted because they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key: value format. For example: \"data\": [ { \"key\": \"scope\", \"value\": \"zones/us-east1-d\" } ",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperation": {
+"description": "Represents the rollout operation",
+"id": "PreviewFeatureRolloutOperation",
+"properties": {
+"rolloutInput": {
+"$ref": "PreviewFeatureRolloutOperationRolloutInput"
+},
+"rolloutStatus": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatus",
+"readOnly": true
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutInput": {
+"id": "PreviewFeatureRolloutOperationRolloutInput",
+"properties": {
+"name": {
+"description": "The name of the rollout plan Ex. organizations//locations/global/rolloutPlans/ Ex. folders//locations/global/rolloutPlans/ Ex. projects//locations/global/rolloutPlans/.",
+"type": "string"
+},
+"predefinedRolloutPlan": {
+"description": "Predefined rollout plan.",
+"enum": [
+"ROLLOUT_PLAN_FAST_ROLLOUT",
+"ROLLOUT_PLAN_TWO_DAY_ROLLOUT",
+"ROLLOUT_PLAN_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"retryUuid": {
+"description": "The UUID of the retry action. Only needed if this is a retry for an existing rollout. This can be used after the user canceled a rollout and want to retry it with no changes.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutStatus": {
+"id": "PreviewFeatureRolloutOperationRolloutStatus",
+"properties": {
+"ongoingRollouts": {
+"description": "Output only. The ongoing rollout resources. There can be multiple ongoing rollouts for a resource.",
+"items": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata"
+},
+"readOnly": true,
+"type": "array"
+},
+"previousRollout": {
+"$ref": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
+"description": "Output only. The last completed rollout resource. This field will not be populated until the first rollout is completed.",
+"readOnly": true
+}
+},
+"type": "object"
+},
+"PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata": {
+"id": "PreviewFeatureRolloutOperationRolloutStatusRolloutMetadata",
+"properties": {
+"rollout": {
+"description": "The name of the rollout Ex. organizations//locations/global/rollouts/ Ex. folders//locations/global/rollouts/ Ex. projects//locations/global/rollouts/.",
+"type": "string"
+},
+"rolloutPlan": {
+"description": "The name of the rollout plan Ex. organizations//locations/global/rolloutPlans/ Ex. folders//locations/global/rolloutPlans/ Ex. projects//locations/global/rolloutPlans/.",
+"type": "string"
+},
+"status": {
+"$ref": "PreviewFeatureStatus",
+"description": "The status of the rollout."
+}
+},
+"type": "object"
+},
+"PreviewFeatureStatus": {
+"description": "[Output Only] The status of the feature.",
+"id": "PreviewFeatureStatus",
+"properties": {
+"description": {
+"description": "[Output Only] The description of the feature.",
+"type": "string"
+},
+"releaseStatus": {
+"$ref": "PreviewFeatureStatusReleaseStatus"
+}
+},
+"type": "object"
+},
+"PreviewFeatureStatusReleaseStatus": {
+"id": "PreviewFeatureStatusReleaseStatus",
+"properties": {
+"stage": {
+"description": "[Output Only] The stage of the feature.",
+"enum": [
+"DEPRECATED",
+"GA",
+"INTERNAL",
+"PREVIEW",
+"STAGE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"Exclude until there's product requirements.",
+"",
+""
+],
+"type": "string"
+},
+"updateDate": {
+"$ref": "Date",
+"description": "Output only. The last date when a feature transitioned between ReleaseStatuses.",
+"readOnly": true
 }
 },
 "type": "object"

@@ -23667,30 +23667,30 @@
 "methods": {
 "get": {
 "description": "Returns the details of the given PreviewFeature.",
-"flatPath": "projects/{project}/global/previewFeatures/{resourceId}",
+"flatPath": "projects/{project}/global/previewFeatures/{previewFeature}",
 "httpMethod": "GET",
 "id": "compute.previewFeatures.get",
 "parameterOrder": [
 "project",
-"resourceId"
+"previewFeature"
 ],
 "parameters": {
+"previewFeature": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
 "project": {
 "description": "Project ID for this request.",
 "location": "path",
 "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
 "required": true,
 "type": "string"
-},
-"resourceId": {
-"description": "Name of the PreviewFeature for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
 }
 },
-"path": "projects/{project}/global/previewFeatures/{resourceId}",
+"path": "projects/{project}/global/previewFeatures/{previewFeature}",
 "response": {
 "$ref": "PreviewFeature"
 },
@@ -23757,14 +23757,21 @@
 },
 "update": {
 "description": "Patches the given PreviewFeature. This method is used to enable or disable a PreviewFeature.",
-"flatPath": "projects/{project}/global/previewFeatures/{resourceId}",
+"flatPath": "projects/{project}/global/previewFeatures/{previewFeature}",
 "httpMethod": "PATCH",
 "id": "compute.previewFeatures.update",
 "parameterOrder": [
 "project",
-"resourceId"
+"previewFeature"
 ],
 "parameters": {
+"previewFeature": {
+"description": "Name of the PreviewFeature for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
 "project": {
 "description": "Project ID for this request.",
 "location": "path",
@@ -23776,16 +23783,9 @@
 "description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
 "location": "query",
 "type": "string"
-},
-"resourceId": {
-"description": "Name of the PreviewFeature for this request.",
-"location": "path",
-"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
-"required": true,
-"type": "string"
 }
 },
-"path": "projects/{project}/global/previewFeatures/{resourceId}",
+"path": "projects/{project}/global/previewFeatures/{previewFeature}",
 "request": {
 "$ref": "PreviewFeature"
 },
@@ -49568,7 +49568,7 @@
 }
 }
 },
-"revision": "20250427",
+"revision": "20250505",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -62573,6 +62573,16 @@ false
 "description": "Maintenance Info for ReservationBlocks.",
 "id": "GroupMaintenanceInfo",
 "properties": {
+"instanceMaintenanceOngoingCount": {
+"description": "Describes number of instances that have ongoing maintenance.",
+"format": "int32",
+"type": "integer"
+},
+"instanceMaintenancePendingCount": {
+"description": "Describes number of instances that have pending maintenance.",
+"format": "int32",
+"type": "integer"
+},
 "maintenanceOngoingCount": {
 "description": "Progress for ongoing maintenance for this group of VMs/hosts. Describes number of hosts in the block that have ongoing maintenance.",
 "format": "int32",
@@ -67870,6 +67880,10 @@ false
 "MIG automatically repairs an unhealthy VM by recreating it."
 ],
 "type": "string"
+},
+"onRepair": {
+"$ref": "InstanceGroupManagerInstanceLifecyclePolicyOnRepair",
+"description": "Configuration for VM repairs in the MIG."
 }
 },
 "type": "object"
@@ -67882,6 +67896,25 @@ false
 "description": "The number of seconds to wait for a readiness signal during initialization before timing out.",
 "format": "int32",
 "type": "integer"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerInstanceLifecyclePolicyOnRepair": {
+"description": "Configuration for VM repairs in the MIG.",
+"id": "InstanceGroupManagerInstanceLifecyclePolicyOnRepair",
+"properties": {
+"allowChangingZone": {
+"description": "Specifies whether the MIG can change a VM's zone during repair.",
+"enum": [
+"NO",
+"YES"
+],
+"enumDescriptions": [
+"[Default] MIG cannot change a VM's zone during repair.",
+"MIG can select a different zone for the VM during repair."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -72640,7 +72673,7 @@ false
 "type": "object"
 },
 "mtu": {
-"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.",
+"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Valid values are 1440, 1460, 1500, and 8896. If not specified, the value will default to 1440.",
 "format": "int32",
 "type": "integer"
 },
@@ -73403,7 +73436,7 @@ false
 "description": "L2 Interconnect Attachment related config. This field is required if the type is L2_DEDICATED. The configuration specifies how VLAN tags (like dot1q, qinq, or dot1ad) within L2 packets are mapped to the destination appliances IP addresses. The packet is then encapsulated with the appliance IP address and sent to the edge appliance."
 },
 "mtu": {
-"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.",
+"description": "Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Valid values are 1440, 1460, 1500, or 8896. If not specified, the value will default to 1440.",
 "format": "int32",
 "type": "integer"
 },
@@ -92500,6 +92533,20 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"protectionTier": {
+"description": "Protection tier for the workload which specifies the workload expectations in the event of infrastructure failures at data center (e.g. power and/or cooling failures).",
+"enum": [
+"CAPACITY_OPTIMIZED",
+"PROTECTION_TIER_UNSPECIFIED",
+"STANDARD"
+],
+"enumDescriptions": [
+"CAPACITY_OPTIMIZED capacity leverages redundancies (e.g. power, cooling) at the data center during normal operating conditions. In the event of infrastructure failures at data center (e.g. power and/or cooling failures), this workload may be disrupted. As a consequence, it has a weaker availability SLO than STANDARD.",
+"Unspecified protection tier.",
+"STANDARD protection for workload that should be protected by redundancies (e.g. power, cooling) at the data center level. In the event of infrastructure failures at data center (e.g. power and/or cooling failures), this workload is expected to continue as normal using the redundancies."
+],
+"type": "string"
+},
 "reservationMode": {
 "description": "[Output only] Indicates the reservation mode of the reservation.",
 "enum": [
@@ -94774,7 +94821,7 @@ false
 "type": "boolean"
 },
 "enableOsInventoryMetadataValue": {
-"description": "Effective enable-osinventory value at Instance level.",
+"description": "Effective enable-os-inventory value at Instance level.",
 "type": "boolean"
 },
 "enableOsconfigMetadataValue": {
@@ -94787,6 +94834,10 @@ false
 },
 "serialPortEnableMetadataValue": {
 "description": "Effective serial-port-enable value at Instance level.",
+"type": "boolean"
+},
+"serialPortLoggingEnableMetadataValue": {
+"description": "Effective serial-port-logging-enable value at Instance level.",
 "type": "boolean"
 },
 "vmDnsSettingMetadataValue": {
@@ -98901,6 +98952,24 @@ false
 "SecurityPolicyDdosProtectionConfig": {
 "id": "SecurityPolicyDdosProtectionConfig",
 "properties": {
+"ddosAdaptiveProtection": {
+"enum": [
+"DISABLED",
+"ENABLED",
+"PREVIEW"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
+},
+"ddosImpactedBaselineThreshold": {
+"description": "Adaptive Protection for Network Load Balancers (and VMs with public IPs) builds DDos mitigations that minimize collateral damage. It quantifies this as the fraction of a non-abuse baseline that's inadvertently blocked. Rules whose collateral damage exceeds ddosAdaptiveImpactedBaselineThreshold will not be deployed. Using a lower value will prioritize keeping collateral damage low, possibly at the cost of its effectiveness in rate limiting some or all of the attack. It should typically be between 0.01 and 0.10.",
+"format": "float",
+"type": "number"
+},
 "ddosProtection": {
 "enum": [
 "ADVANCED",
