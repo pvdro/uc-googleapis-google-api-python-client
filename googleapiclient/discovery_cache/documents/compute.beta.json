@@ -45535,7 +45535,7 @@
 }
 }
 },
-"revision": "20250505",
+"revision": "20250511",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -49097,7 +49097,7 @@ false
 "type": "string"
 },
 "network": {
-"description": "The URL of the network to which this backend service belongs. This field must be set for Internal Passthrough Network Load Balancers when the haPolicy is enabled, and for External Passthrough Network Load Balancers when the haPolicy fastIpMove is enabled. This field can only be specified when the load balancing scheme is set to INTERNAL.",
+"description": "The URL of the network to which this backend service belongs. This field must be set for Internal Passthrough Network Load Balancers when the haPolicy is enabled, and for External Passthrough Network Load Balancers when the haPolicy fastIpMove is enabled. This field can only be specified when the load balancing scheme is set to INTERNAL, or when the load balancing scheme is set to EXTERNAL and haPolicy fastIpMove is enabled.",
 "type": "string"
 },
 "networkPassThroughLbTrafficPolicy": {
@@ -51173,6 +51173,7 @@ false
 "MEMORY_OPTIMIZED",
 "MEMORY_OPTIMIZED_M3",
 "MEMORY_OPTIMIZED_M4",
+"MEMORY_OPTIMIZED_M4_6TB",
 "MEMORY_OPTIMIZED_X4_16TB",
 "MEMORY_OPTIMIZED_X4_24TB",
 "MEMORY_OPTIMIZED_X4_32TB",
@@ -51180,6 +51181,7 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -55182,6 +55184,24 @@ false
 ],
 "type": "string"
 },
+"destNetworkType": {
+"description": "Network type of the traffic destination. Allowed values are: - UNSPECIFIED - INTERNET - NON_INTERNET ",
+"enum": [
+"INTERNET",
+"INTRA_VPC",
+"NON_INTERNET",
+"UNSPECIFIED",
+"VPC_NETWORKS"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
 "destRegionCodes": {
 "description": "Region codes whose IP addresses will be used to match for destination of traffic. Should be specified as 2 letter country code defined as per ISO 3166 alpha-2 country codes. ex.\"US\" Maximum number of dest region codes allowed is 5000.",
 "items": {
@@ -55226,6 +55246,24 @@ false
 },
 "srcNetworkScope": {
 "description": "Network scope of the traffic source.",
+"enum": [
+"INTERNET",
+"INTRA_VPC",
+"NON_INTERNET",
+"UNSPECIFIED",
+"VPC_NETWORKS"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+"",
+""
+],
+"type": "string"
+},
+"srcNetworkType": {
+"description": "Network type of the traffic source. Allowed values are: - UNSPECIFIED - INTERNET - INTRA_VPC - NON_INTERNET - VPC_NETWORKS ",
 "enum": [
 "INTERNET",
 "INTRA_VPC",
@@ -61060,6 +61098,10 @@ false
 "format": "int32",
 "type": "integer"
 },
+"targetSizePolicy": {
+"$ref": "InstanceGroupManagerTargetSizePolicy",
+"description": "The policy that specifies how the MIG creates its VMs to achieve the target size."
+},
 "targetStoppedSize": {
 "description": "The target number of stopped instances for this managed instance group. This number changes when you: - Stop instance using the stopInstances method or start instances using the startInstances method. - Manually change the targetStoppedSize using the update method. ",
 "format": "int32",
@@ -62031,6 +62073,10 @@ false
 "description": "[Output Only] The URL of the Autoscaler that targets this instance group manager.",
 "type": "string"
 },
+"bulkInstanceOperation": {
+"$ref": "InstanceGroupManagerStatusBulkInstanceOperation",
+"description": "[Output Only] The status of bulk instance operation."
+},
 "isStable": {
 "description": "[Output Only] A bit indicating whether the managed instance group is in a stable state. A stable state means that: none of the instances in the managed instance group is currently undergoing any type of change (for example, creation, restart, or deletion); no future changes are scheduled for instances in the managed instance group; and the managed instance group itself is not being modified.",
 "type": "boolean"
@@ -62056,6 +62102,80 @@ false
 "effective": {
 "description": "[Output Only] A bit indicating whether this configuration has been applied to all managed instances in the group.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerStatusBulkInstanceOperation": {
+"description": "Bulk instance operation is the creation of VMs in a MIG when the targetSizePolicy.mode is set to BULK.",
+"id": "InstanceGroupManagerStatusBulkInstanceOperation",
+"properties": {
+"inProgress": {
+"description": "[Output Only] Informs whether bulk instance operation is in progress.",
+"type": "boolean"
+},
+"lastProgressCheck": {
+"$ref": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
+"description": "[Output Only] Information from the last progress check of bulk instance operation."
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck": {
+"id": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
+"properties": {
+"error": {
+"description": "[Output Only] Errors encountered during bulk instance operation.",
+"properties": {
+"errors": {
+"description": "[Output Only] The array of errors encountered while processing this operation.",
+"items": {
+"properties": {
+"code": {
+"description": "[Output Only] The error type identifier for this error.",
+"type": "string"
+},
+"errorDetails": {
+"description": "[Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED.",
+"items": {
+"properties": {
+"errorInfo": {
+"$ref": "ErrorInfo"
+},
+"help": {
+"$ref": "Help"
+},
+"localizedMessage": {
+"$ref": "LocalizedMessage"
+},
+"quotaInfo": {
+"$ref": "QuotaExceededInfo"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"location": {
+"description": "[Output Only] Indicates the field in the request that caused the error. This property is optional.",
+"type": "string"
+},
+"message": {
+"description": "[Output Only] An optional, human-readable error message.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"timestamp": {
+"description": "[Output Only] Timestamp of the last progress check of bulk instance operation. Timestamp is in RFC3339 text format.",
+"format": "google-datetime",
+"type": "string"
 }
 },
 "type": "object"
@@ -62095,6 +62215,26 @@ false
 "isReached": {
 "description": "[Output Only] A bit indicating whether version target has been reached in this managed instance group, i.e. all instances are in their target version. Instances' target version are specified by version field on Instance Group Manager.",
 "type": "boolean"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerTargetSizePolicy": {
+"id": "InstanceGroupManagerTargetSizePolicy",
+"properties": {
+"mode": {
+"description": "The mode of target size policy based on which the MIG creates its VMs individually or all at once.",
+"enum": [
+"BULK",
+"INDIVIDUAL",
+"UNSPECIFIED_MODE"
+],
+"enumDescriptions": [
+"The mode in which the MIG creates VMs all at once. In this mode, if the MIG is unable to create even one VM, the MIG waits until all VMs can be created at the same time.",
+"The mode in which the MIG creates VMs individually. In this mode, if the MIG is unable to create a VM, the MIG will continue to create the other VMs in the group. This is the default mode.",
+"If mode is unspecified, MIG will behave as in the default `INDIVIDUAL` mode."
+],
+"type": "string"
 }
 },
 "type": "object"
@@ -73116,6 +73256,18 @@ false
 "fingerprint": {
 "description": "Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface. The request will fail with error 400 Bad Request if the fingerprint is not provided, or 412 Precondition Failed if the fingerprint is out of date.",
 "format": "byte",
+"type": "string"
+},
+"igmpQuery": {
+"description": "Indicate whether igmp query is enabled on the network interface or not. If enabled, also indicates the version of IGMP supported.",
+"enum": [
+"IGMP_QUERY_DISABLED",
+"IGMP_QUERY_V2"
+],
+"enumDescriptions": [
+"The network interface has disabled IGMP query.",
+"The network interface has enabled IGMP query - v2."
+],
 "type": "string"
 },
 "internalIpv6PrefixLength": {

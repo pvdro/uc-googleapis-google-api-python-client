@@ -748,6 +748,51 @@
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute"
 ]
+},
+"capacity": {
+"description": "Advice on making real-time decisions (such as choosing zone or machine types) during deployment to maximize your chances of obtaining capacity.",
+"flatPath": "projects/{project}/regions/{region}/advice/capacity",
+"httpMethod": "POST",
+"id": "compute.advice.capacity",
+"parameterOrder": [
+"project",
+"region",
+"size"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"size": {
+"description": "Size of requested capacity.",
+"format": "int32",
+"location": "query",
+"required": true,
+"type": "integer"
+}
+},
+"path": "projects/{project}/regions/{region}/advice/capacity",
+"request": {
+"$ref": "CapacityAdviceRequest"
+},
+"response": {
+"$ref": "CapacityAdviceResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
 }
 }
 },
@@ -25404,6 +25449,463 @@
 }
 }
 },
+"regionBackendBuckets": {
+"methods": {
+"delete": {
+"description": "Deletes the specified regional BackendBucket resource.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"httpMethod": "DELETE",
+"id": "compute.regionBackendBuckets.delete",
+"parameterOrder": [
+"project",
+"region",
+"backendBucket"
+],
+"parameters": {
+"backendBucket": {
+"description": "Name of the BackendBucket resource to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"forceDelete": {
+"description": "Force delete the backend bucket even if it is still in use by other resources. It's intended to be used internally only for requests from wipeout.",
+"location": "query",
+"type": "boolean"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified regional BackendBucket resource.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"httpMethod": "GET",
+"id": "compute.regionBackendBuckets.get",
+"parameterOrder": [
+"project",
+"region",
+"backendBucket"
+],
+"parameters": {
+"backendBucket": {
+"description": "Name of the BackendBucket resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"response": {
+"$ref": "BackendBucket"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getIamPolicy": {
+"description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{resource}/getIamPolicy",
+"httpMethod": "GET",
+"id": "compute.regionBackendBuckets.getIamPolicy",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"optionsRequestedPolicyVersion": {
+"description": "Requested IAM Policy version.",
+"format": "int32",
+"location": "query",
+"type": "integer"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{resource}/getIamPolicy",
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a RegionBackendBucket in the specified project in the given scope using the parameters that are included in the request.",
+"flatPath": "projects/{project}/regions/{region}/regionBackendBuckets",
+"httpMethod": "POST",
+"id": "compute.regionBackendBuckets.insert",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/regionBackendBuckets",
+"request": {
+"$ref": "BackendBucket"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Retrieves the list of BackendBucket resources available to the specified project in the given region.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets",
+"httpMethod": "GET",
+"id": "compute.regionBackendBuckets.list",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets",
+"response": {
+"$ref": "BackendBucketList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"listUsable": {
+"description": "Retrieves a list of all usable backend buckets in the specified project in the given region.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/listUsable",
+"httpMethod": "GET",
+"id": "compute.regionBackendBuckets.listUsable",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy=\"creationTimestamp desc\"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request. It must be a string that meets the requirements in RFC1035.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/listUsable",
+"response": {
+"$ref": "BackendBucketListUsable"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Updates the specified BackendBucket resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"httpMethod": "PATCH",
+"id": "compute.regionBackendBuckets.patch",
+"parameterOrder": [
+"project",
+"region",
+"backendBucket"
+],
+"parameters": {
+"backendBucket": {
+"description": "Name of the BackendBucket resource to patch.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{backendBucket}",
+"request": {
+"$ref": "BackendBucket"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"setIamPolicy": {
+"description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{resource}/setIamPolicy",
+"httpMethod": "POST",
+"id": "compute.regionBackendBuckets.setIamPolicy",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{resource}/setIamPolicy",
+"request": {
+"$ref": "RegionSetPolicyRequest"
+},
+"response": {
+"$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/regions/{region}/backendBuckets/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.regionBackendBuckets.testIamPermissions",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/backendBuckets/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
 "regionBackendServices": {
 "methods": {
 "delete": {
@@ -49568,7 +50070,7 @@
 }
 }
 },
-"revision": "20250505",
+"revision": "20250511",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -53286,7 +53788,7 @@ false
 "type": "string"
 },
 "network": {
-"description": "The URL of the network to which this backend service belongs. This field must be set for Internal Passthrough Network Load Balancers when the haPolicy is enabled, and for External Passthrough Network Load Balancers when the haPolicy fastIpMove is enabled. This field can only be specified when the load balancing scheme is set to INTERNAL.",
+"description": "The URL of the network to which this backend service belongs. This field must be set for Internal Passthrough Network Load Balancers when the haPolicy is enabled, and for External Passthrough Network Load Balancers when the haPolicy fastIpMove is enabled. This field can only be specified when the load balancing scheme is set to INTERNAL, or when the load balancing scheme is set to EXTERNAL and haPolicy fastIpMove is enabled.",
 "type": "string"
 },
 "networkPassThroughLbTrafficPolicy": {
@@ -55267,6 +55769,207 @@ false
 "fromPlugin": {
 "$ref": "MetadataCredentialsFromPlugin",
 "description": "Custom authenticator credentials. Valid if callCredentialType is FROM_PLUGIN."
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequest": {
+"description": "A request to provide Assistant Scores. These scores determine VM obtainability and preemption likelihood.",
+"id": "CapacityAdviceRequest",
+"properties": {
+"distributionPolicy": {
+"$ref": "CapacityAdviceRequestDistributionPolicy",
+"description": "Policy specifying the distribution of instances across zones within the requested region."
+},
+"instanceFlexibilityPolicy": {
+"$ref": "CapacityAdviceRequestInstanceFlexibilityPolicy",
+"description": "Policy for instance selectors."
+},
+"instanceProperties": {
+"$ref": "CapacityAdviceRequestInstanceProperties",
+"description": "Instance properties for this request."
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestDistributionPolicy": {
+"id": "CapacityAdviceRequestDistributionPolicy",
+"properties": {
+"targetShape": {
+"description": "The distribution shape to which the group converges.",
+"enum": [
+"ANY",
+"ANY_SINGLE_ZONE",
+"BALANCED",
+"TARGET_SHAPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The group picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.",
+"The group creates all VM instances within a single zone. The zone is selected based on the present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads with heavy interprocess communication.",
+"The group prioritizes acquisition of resources, scheduling VMs in zones where resources are available while distributing VMs as evenly as possible across selected zones to minimize the impact of zonal failure. Recommended for highly available serving workloads.",
+""
+],
+"type": "string"
+},
+"zones": {
+"description": "Zones where Capacity Advisor looks for capacity.",
+"items": {
+"$ref": "CapacityAdviceRequestDistributionPolicyZoneConfiguration"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestDistributionPolicyZoneConfiguration": {
+"id": "CapacityAdviceRequestDistributionPolicyZoneConfiguration",
+"properties": {
+"zone": {
+"description": "The URL of the zone.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestInstanceFlexibilityPolicy": {
+"description": "Specification of alternative, flexible instance subsets.",
+"id": "CapacityAdviceRequestInstanceFlexibilityPolicy",
+"properties": {
+"instanceSelections": {
+"additionalProperties": {
+"$ref": "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection"
+},
+"description": "Named instance selections configure properties. The key is an arbitrary, unique RFC1035 string that identifies the instance selection.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection": {
+"description": "Machine specification.",
+"id": "CapacityAdviceRequestInstanceFlexibilityPolicyInstanceSelection",
+"properties": {
+"machineTypes": {
+"description": "Full machine-type names, e.g. \"n1-standard-16\".",
+"items": {
+"type": "string"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestInstanceProperties": {
+"description": "Instance provisining properties.",
+"id": "CapacityAdviceRequestInstanceProperties",
+"properties": {
+"scheduling": {
+"$ref": "CapacityAdviceRequestInstancePropertiesScheduling",
+"description": "Specifies the scheduling options."
+}
+},
+"type": "object"
+},
+"CapacityAdviceRequestInstancePropertiesScheduling": {
+"description": "Defines the instance scheduling options.",
+"id": "CapacityAdviceRequestInstancePropertiesScheduling",
+"properties": {
+"provisioningModel": {
+"description": "Specifies the provisioning model of the instance.",
+"enum": [
+"FLEX_START",
+"RESERVATION_BOUND",
+"SPOT",
+"STANDARD"
+],
+"enumDescriptions": [
+"Instance is provisioned using the Flex Start provisioning model and has a limited runtime.",
+"Bound to the lifecycle of the reservation in which it is provisioned.",
+"Heavily discounted, no guaranteed runtime.",
+"Standard provisioning with user controlled runtime, no discounts."
+],
+"type": "string"
+}
+},
+"type": "object"
+},
+"CapacityAdviceResponse": {
+"description": "A response contains multiple scoring recommendations.",
+"id": "CapacityAdviceResponse",
+"properties": {
+"recommendations": {
+"description": "Initially the API will provide one recommendation which balances the individual scores according to Google's preference.",
+"items": {
+"$ref": "CapacityAdviceResponseRecommendation"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CapacityAdviceResponseRecommendation": {
+"id": "CapacityAdviceResponseRecommendation",
+"properties": {
+"scores": {
+"$ref": "CapacityAdviceResponseRecommendationScores"
+},
+"shards": {
+"items": {
+"$ref": "CapacityAdviceResponseRecommendationShard"
+},
+"type": "array"
+}
+},
+"type": "object"
+},
+"CapacityAdviceResponseRecommendationScores": {
+"description": "The Scores message groups information about a shard of capacity.",
+"id": "CapacityAdviceResponseRecommendationScores",
+"properties": {
+"obtainability": {
+"description": "The obtainability score indicates the likelihood of successfully obtaining (provisioning) the requested number of VMs. The score range is 0.0 through 1.0. Higher is better.",
+"format": "double",
+"type": "number"
+},
+"spotPreemption": {
+"description": "The preemption score indicates the likelihood that your Spot VMs is preempted. For more information about the preemption process, see Preemption of Spot VMs. The score range is 0.0 through 1.0. Higher is better.",
+"format": "double",
+"type": "number"
+}
+},
+"type": "object"
+},
+"CapacityAdviceResponseRecommendationShard": {
+"description": "Shards represent blocks of uniform capacity in recommendations. Each shard is for a single zone, single instance selection, and a single machine shape. Each shard defines a size expressed as the number of VMs.",
+"id": "CapacityAdviceResponseRecommendationShard",
+"properties": {
+"instanceCount": {
+"format": "int32",
+"type": "integer"
+},
+"machineType": {
+"description": "The machine type corresponds to the instance selection in the request.",
+"type": "string"
+},
+"provisioningModel": {
+"description": "Provisioning model of the recommended capacity.",
+"enum": [
+"FLEX_START",
+"RESERVATION_BOUND",
+"SPOT",
+"STANDARD"
+],
+"enumDescriptions": [
+"Instance is provisioned using the Flex Start provisioning model and has a limited runtime.",
+"Bound to the lifecycle of the reservation in which it is provisioned.",
+"Heavily discounted, no guaranteed runtime.",
+"Standard provisioning with user controlled runtime, no discounts."
+],
+"type": "string"
+},
+"zone": {
+"description": "The zone name for this shard.",
+"type": "string"
 }
 },
 "type": "object"
@@ -67439,7 +68142,7 @@ false
 },
 "targetSizePolicy": {
 "$ref": "InstanceGroupManagerTargetSizePolicy",
-"description": "Configures how target size of MIG is achieved."
+"description": "The policy that specifies how the MIG creates its VMs to achieve the target size."
 },
 "targetSizeUnit": {
 "description": "The unit of measure for the target size.",
@@ -68522,7 +69225,7 @@ false
 },
 "bulkInstanceOperation": {
 "$ref": "InstanceGroupManagerStatusBulkInstanceOperation",
-"description": "[Output Only] Status of bulk instance operation."
+"description": "[Output Only] The status of bulk instance operation."
 },
 "isStable": {
 "description": "[Output Only] A bit indicating whether the managed instance group is in a stable state. A stable state means that: none of the instances in the managed instance group is currently undergoing any type of change (for example, creation, restart, or deletion); no future changes are scheduled for instances in the managed instance group; and the managed instance group itself is not being modified.",
@@ -68554,6 +69257,7 @@ false
 "type": "object"
 },
 "InstanceGroupManagerStatusBulkInstanceOperation": {
+"description": "Bulk instance operation is the creation of VMs in a MIG when the targetSizePolicy.mode is set to BULK.",
 "id": "InstanceGroupManagerStatusBulkInstanceOperation",
 "properties": {
 "inProgress": {
@@ -68562,7 +69266,7 @@ false
 },
 "lastProgressCheck": {
 "$ref": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
-"description": "[Output Only] Information from last progress check of bulk instance operation."
+"description": "[Output Only] Information from the last progress check of bulk instance operation."
 }
 },
 "type": "object"
@@ -68571,7 +69275,7 @@ false
 "id": "InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck",
 "properties": {
 "error": {
-"description": "[Output Only] Contains errors encountered during bulk instance operation.",
+"description": "[Output Only] Errors encountered during bulk instance operation.",
 "properties": {
 "errors": {
 "description": "[Output Only] The array of errors encountered while processing this operation.",
@@ -68669,15 +69373,15 @@ false
 "id": "InstanceGroupManagerTargetSizePolicy",
 "properties": {
 "mode": {
-"description": "Mode in which operations on size are processed.",
+"description": "The mode of target size policy based on which the MIG creates its VMs individually or all at once.",
 "enum": [
 "BULK",
 "INDIVIDUAL",
 "UNSPECIFIED_MODE"
 ],
 "enumDescriptions": [
-"Mode in which MIG creates and starts VMs in all-or-nothing manner. If any VM from the request cannot be provisioned, the whole request waits for conditions that allow for provisioning whole capacity in bulk.",
-"Default mode in which MIG creates and starts VMs individually without cross-dependency between VMs. This means that in case of something blocking part of VMs to be provisioned, the other part will be created.",
+"The mode in which the MIG creates VMs all at once. In this mode, if the MIG is unable to create even one VM, the MIG waits until all VMs can be created at the same time.",
+"The mode in which the MIG creates VMs individually. In this mode, if the MIG is unable to create a VM, the MIG will continue to create the other VMs in the group. This is the default mode.",
 "If mode is unspecified, MIG will behave as in the default `INDIVIDUAL` mode."
 ],
 "type": "string"
