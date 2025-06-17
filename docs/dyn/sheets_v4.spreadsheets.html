@@ -2650,6 +2650,21 @@ Args:
           { # Data about each cell in a row.
             &quot;values&quot;: [ # The values in the row, one per column.
               { # Data about a specific cell.
+                &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                  { # The run of a chip. The chip continues until the start index of the next run.
+                    &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                      &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                        &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                        &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                      },
+                      &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                        &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                        &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                      },
+                    },
+                    &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                  },
+                ],
                 &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                   &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                     &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -3698,6 +3713,21 @@ Args:
       },
       &quot;repeatCell&quot;: { # Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula&#x27;s ranges will automatically increment for each field in the range. For example, if writing a cell with formula `=A1` into range B2:C4, B2 would be `=A1`, B3 would be `=A2`, B4 would be `=A3`, C2 would be `=B1`, C3 would be `=B2`, C4 would be `=B3`. To keep the formula&#x27;s ranges static, use the `$` indicator. For example, use the formula `=$A$1` to prevent both the row and the column from incrementing. # Repeats a single cell across a range.
         &quot;cell&quot;: { # Data about a specific cell. # The data to write.
+          &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+            { # The run of a chip. The chip continues until the start index of the next run.
+              &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                  &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                  &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                },
+                &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                  &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                  &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                },
+              },
+              &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+            },
+          ],
           &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
             &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
               &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -4933,6 +4963,21 @@ Args:
           { # Data about each cell in a row.
             &quot;values&quot;: [ # The values in the row, one per column.
               { # Data about a specific cell.
+                &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                  { # The run of a chip. The chip continues until the start index of the next run.
+                    &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                      &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                        &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                        &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                      },
+                      &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                        &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                        &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                      },
+                    },
+                    &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                  },
+                ],
                 &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                   &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                     &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -14242,6 +14287,21 @@ Returns:
               { # Data about each cell in a row.
                 &quot;values&quot;: [ # The values in the row, one per column.
                   { # Data about a specific cell.
+                    &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                      { # The run of a chip. The chip continues until the start index of the next run.
+                        &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                          &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                            &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                            &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                          },
+                          &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                            &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                            &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                          },
+                        },
+                        &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                      },
+                    ],
                     &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                       &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                         &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -17980,6 +18040,21 @@ Args:
             { # Data about each cell in a row.
               &quot;values&quot;: [ # The values in the row, one per column.
                 { # Data about a specific cell.
+                  &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                    { # The run of a chip. The chip continues until the start index of the next run.
+                      &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                        &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                          &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                          &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                        },
+                        &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                          &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                          &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                        },
+                      },
+                      &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                    },
+                  ],
                   &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                     &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                       &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -21711,6 +21786,21 @@ Returns:
             { # Data about each cell in a row.
               &quot;values&quot;: [ # The values in the row, one per column.
                 { # Data about a specific cell.
+                  &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                    { # The run of a chip. The chip continues until the start index of the next run.
+                      &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                        &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                          &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                          &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                        },
+                        &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                          &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                          &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                        },
+                      },
+                      &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                    },
+                  ],
                   &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                     &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                       &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -25452,6 +25542,21 @@ Returns:
             { # Data about each cell in a row.
               &quot;values&quot;: [ # The values in the row, one per column.
                 { # Data about a specific cell.
+                  &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                    { # The run of a chip. The chip continues until the start index of the next run.
+                      &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                        &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                          &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                          &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                        },
+                        &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                          &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                          &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                        },
+                      },
+                      &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                    },
+                  ],
                   &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                     &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                       &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
@@ -29229,6 +29334,21 @@ Returns:
             { # Data about each cell in a row.
               &quot;values&quot;: [ # The values in the row, one per column.
                 { # Data about a specific cell.
+                  &quot;chipRuns&quot;: [ # Optional. Runs of chips applied to subsections of the cell. Properties of a run start at a specific index in the text and continue until the next run. When reading, all chipped and non-chipped runs are included. Non-chipped runs will have an empty chip_run.chip. When writing, only runs with chips are included. Runs containing chips are of length 1 and are represented in the user-entered text by an “@” placeholder symbol. New runs will overwrite any prior runs. Writing a new user_entered_value will erase previous runs.
+                    { # The run of a chip. The chip continues until the start index of the next run.
+                      &quot;chip&quot;: { # The Smart Chip. # Optional. The chip of this run.
+                        &quot;personProperties&quot;: { # Properties specific to a linked person. # Properties of a linked person.
+                          &quot;displayFormat&quot;: &quot;A String&quot;, # Optional. The display format of the person chip. If not set, the default display format is used.
+                          &quot;email&quot;: &quot;A String&quot;, # Required. The email address linked to this person. This field is always present.
+                        },
+                        &quot;richLinkProperties&quot;: { # Properties of a link to a Google resource (such as a file in Drive, a YouTube video, a Maps address, or a Calendar event). Only Drive files can be written as chips. All other rich link types are read only. URIs cannot exceed 2000 bytes when writing. NOTE: Writing Drive file chips requires at least one of the `drive.file`, `drive.readonly`, or `drive` OAuth scopes. # Properties of a rich link.
+                          &quot;mimeType&quot;: &quot;A String&quot;, # Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there&#x27;s one (for example, when it&#x27;s a file in Drive).
+                          &quot;uri&quot;: &quot;A String&quot;, # Required. The URI to the link. This is always present.
+                        },
+                      },
+                      &quot;startIndex&quot;: 42, # Required. The zero-based character index where this run starts, in UTF-16 code units.
+                    },
+                  ],
                   &quot;dataSourceFormula&quot;: { # A data source formula. # Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.
                     &quot;dataExecutionStatus&quot;: { # The data execution status. A data execution is created to sync a data source object with the latest data from a DataSource. It is usually scheduled to run at background, you can check its state to tell if an execution completes There are several scenarios where a data execution is triggered to run: * Adding a data source creates an associated data source sheet as well as a data execution to sync the data from the data source to the sheet. * Updating a data source creates a data execution to refresh the associated data source sheet similarly. * You can send refresh request to explicitly refresh one or multiple data source objects. # Output only. The data execution status.
                       &quot;errorCode&quot;: &quot;A String&quot;, # The error code.
