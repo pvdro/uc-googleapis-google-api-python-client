@@ -50444,7 +50444,7 @@
 }
 }
 },
-"revision": "20250708",
+"revision": "20250717",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -51886,6 +51886,10 @@ false
 "$ref": "AllocationResourceStatusAggregateAllocation",
 "description": "Properties of this aggregatereservation."
 },
+"healthInfo": {
+"$ref": "AllocationResourceStatusHealthInfo",
+"description": "[Output only] Health information for the reservation."
+},
 "reservationBlockCount": {
 "description": "The number of reservation blocks associated with this reservation.",
 "format": "int32",
@@ -51913,6 +51917,37 @@ false
 },
 "description": "Per service utilization breakdown. The Key is the Google Cloud managed service name.",
 "type": "object"
+}
+},
+"type": "object"
+},
+"AllocationResourceStatusHealthInfo": {
+"description": "Health information for the reservation.",
+"id": "AllocationResourceStatusHealthInfo",
+"properties": {
+"degradedBlockCount": {
+"description": "The number of reservation blocks that are degraded.",
+"format": "int32",
+"type": "integer"
+},
+"healthStatus": {
+"description": "The health status of the reservation.",
+"enum": [
+"DEGRADED",
+"HEALTHY",
+"HEALTH_STATUS_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The reservation is degraded.",
+"The reservation is healthy.",
+"The health status of the reservation is unspecified."
+],
+"type": "string"
+},
+"healthyBlockCount": {
+"description": "The number of reservation blocks that are healthy.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
@@ -94875,6 +94910,10 @@ false
 "description": "[Output Only] Creation timestamp in RFC3339 text format.",
 "type": "string"
 },
+"healthInfo": {
+"$ref": "ReservationBlockHealthInfo",
+"description": "[Output Only] Health information for the reservation block."
+},
 "id": {
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
 "format": "uint64",
@@ -94944,6 +94983,37 @@ false
 "zone": {
 "description": "[Output Only] Zone in which the reservation block resides.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"ReservationBlockHealthInfo": {
+"description": "Health information for the reservation block.",
+"id": "ReservationBlockHealthInfo",
+"properties": {
+"degradedSubBlockCount": {
+"description": "The number of subBlocks that are degraded.",
+"format": "int32",
+"type": "integer"
+},
+"healthStatus": {
+"description": "The health status of the reservation block.",
+"enum": [
+"DEGRADED",
+"HEALTHY",
+"HEALTH_STATUS_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The reservation block is degraded.",
+"The reservation block is healthy.",
+"The health status of the reservation block is unspecified."
+],
+"type": "string"
+},
+"healthySubBlockCount": {
+"description": "The number of subBlocks that are healthy.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
@@ -95336,6 +95406,10 @@ false
 "description": "[Output Only] Creation timestamp in RFC3339 text format.",
 "type": "string"
 },
+"healthInfo": {
+"$ref": "ReservationSubBlockHealthInfo",
+"description": "[Output Only] Health information for the reservation subBlock."
+},
 "id": {
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
 "format": "uint64",
@@ -95390,6 +95464,47 @@ false
 "zone": {
 "description": "[Output Only] Zone in which the reservation subBlock resides.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"ReservationSubBlockHealthInfo": {
+"description": "Health information for the reservation subBlock.",
+"id": "ReservationSubBlockHealthInfo",
+"properties": {
+"degradedHostCount": {
+"description": "The number of degraded hosts in the reservation subBlock.",
+"format": "int32",
+"type": "integer"
+},
+"degradedInfraCount": {
+"description": "The number of degraded infrastructure (e.g NV link domain) in the reservation subblock.",
+"format": "int32",
+"type": "integer"
+},
+"healthStatus": {
+"description": "The health status of the reservation subBlock.",
+"enum": [
+"DEGRADED",
+"HEALTHY",
+"HEALTH_STATUS_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The reservation subBlock is degraded.",
+"The reservation subBlock is healthy.",
+"The health status of the reservation subBlock is unspecified."
+],
+"type": "string"
+},
+"healthyHostCount": {
+"description": "The number of healthy hosts in the reservation subBlock.",
+"format": "int32",
+"type": "integer"
+},
+"healthyInfraCount": {
+"description": "The number of healthy infrastructure (e.g NV link domain) in the reservation subblock.",
+"format": "int32",
+"type": "integer"
 }
 },
 "type": "object"
