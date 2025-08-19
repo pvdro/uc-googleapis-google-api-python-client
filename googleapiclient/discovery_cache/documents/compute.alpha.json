@@ -51140,7 +51140,7 @@
 }
 }
 },
-"revision": "20250729",
+"revision": "20250807",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -54928,7 +54928,7 @@ false
 "type": "array"
 },
 "localityLbPolicy": {
-"description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 - WEIGHTED_ROUND_ROBIN: Per-endpoint Weighted Round Robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics field. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured\u2014that is, if session affinity remains at the default value of NONE\u2014then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.",
+"description": "The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see Maglev: A Fast and Reliable Software Network Load Balancer. - WEIGHTED_ROUND_ROBIN: Per-endpoint Weighted Round Robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics field. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured\u2014that is, if session affinity remains at the default value of NONE\u2014then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.",
 "enum": [
 "INVALID_LB_POLICY",
 "LEAST_REQUEST",
@@ -54943,7 +54943,7 @@ false
 "enumDescriptions": [
 "",
 "An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.",
-"This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824",
+"This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see Maglev: A Fast and Reliable Software Network Load Balancer.",
 "Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.",
 "The load balancer selects a random healthy host.",
 "The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests.",
@@ -55055,7 +55055,7 @@ false
 "type": "array"
 },
 "serviceLbPolicy": {
-"description": "URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL, EXTERNAL_MANAGED, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.",
+"description": "URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL_MANAGED, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.",
 "type": "string"
 },
 "sessionAffinity": {
@@ -55989,7 +55989,7 @@ false
 "enumDescriptions": [
 "",
 "An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.",
-"This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824",
+"This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see Maglev: A Fast and Reliable Software Network Load Balancer.",
 "Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.",
 "The load balancer selects a random healthy host.",
 "The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests.",
@@ -57462,6 +57462,7 @@ false
 "GENERAL_PURPOSE_N2",
 "GENERAL_PURPOSE_N2D",
 "GENERAL_PURPOSE_N4",
+"GENERAL_PURPOSE_N4D",
 "GENERAL_PURPOSE_T2D",
 "GRAPHICS_OPTIMIZED",
 "MEMORY_OPTIMIZED",
@@ -57476,6 +57477,7 @@ false
 "TYPE_UNSPECIFIED"
 ],
 "enumDescriptions": [
+"",
 "",
 "",
 "",
@@ -58071,9 +58073,6 @@ false
 "description": "Contains a list of CompositeHealthChecksScopedList.",
 "id": "CompositeHealthCheckAggregatedList",
 "properties": {
-"etag": {
-"type": "string"
-},
 "id": {
 "description": "[Output Only] Unique identifier for the resource; defined by the server.",
 "type": "string"
@@ -58098,13 +58097,6 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources.",
-"items": {
-"type": "string"
-},
-"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -58236,9 +58228,6 @@ false
 "CompositeHealthCheckList": {
 "id": "CompositeHealthCheckList",
 "properties": {
-"etag": {
-"type": "string"
-},
 "id": {
 "description": "[Output Only] Unique identifier for the resource; defined by the server.",
 "type": "string"
@@ -58262,13 +58251,6 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
-"items": {
-"type": "string"
-},
-"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -61852,9 +61834,11 @@ false
 "description": "The type of the firewall policy. This field can be either VPC_POLICY or RDMA_ROCE_POLICY. Note: if not specified then VPC_POLICY will be used.",
 "enum": [
 "RDMA_ROCE_POLICY",
+"ULL_POLICY",
 "VPC_POLICY"
 ],
 "enumDescriptions": [
+"",
 "",
 ""
 ],
@@ -65846,9 +65830,6 @@ false
 "HealthAggregationPolicyList": {
 "id": "HealthAggregationPolicyList",
 "properties": {
-"etag": {
-"type": "string"
-},
 "id": {
 "description": "[Output Only] Unique identifier for the resource; defined by the server.",
 "type": "string"
@@ -65872,13 +65853,6 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
-"items": {
-"type": "string"
-},
-"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -67234,9 +67208,6 @@ false
 "description": "Contains a list of HealthSourcesScopedList.",
 "id": "HealthSourceAggregatedList",
 "properties": {
-"etag": {
-"type": "string"
-},
 "id": {
 "description": "[Output Only] Unique identifier for the resource; defined by the server.",
 "type": "string"
@@ -67261,13 +67232,6 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources.",
-"items": {
-"type": "string"
-},
-"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -67399,9 +67363,6 @@ false
 "HealthSourceList": {
 "id": "HealthSourceList",
 "properties": {
-"etag": {
-"type": "string"
-},
 "id": {
 "description": "[Output Only] Unique identifier for the resource; defined by the server.",
 "type": "string"
@@ -67425,13 +67386,6 @@ false
 "selfLink": {
 "description": "[Output Only] Server-defined URL for this resource.",
 "type": "string"
-},
-"unreachables": {
-"description": "[Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder",
-"items": {
-"type": "string"
-},
-"type": "array"
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
@@ -69252,6 +69206,12 @@ false
 "description": "[Output Only] The unique identifier for the resource. This identifier is defined by the server.",
 "format": "uint64",
 "type": "string"
+},
+"identity": {
+"type": "string"
+},
+"identityCertificate": {
+"type": "boolean"
 },
 "instanceEncryptionKey": {
 "$ref": "CustomerEncryptionKey",
@@ -73088,6 +73048,12 @@ false
 "$ref": "AcceleratorConfig"
 },
 "type": "array"
+},
+"identity": {
+"type": "string"
+},
+"identityCertificate": {
+"type": "boolean"
 },
 "keyRevocationActionType": {
 "description": "KeyRevocationActionType of the instance. Supported options are \"STOP\" and \"NONE\". The default value is \"NONE\" if it is not specified.",
@@ -85476,9 +85442,11 @@ false
 "items": {
 "enum": [
 "RDMA_ROCE_POLICY",
+"ULL_POLICY",
 "VPC_POLICY"
 ],
 "enumDescriptions": [
+"",
 "",
 ""
 ],
@@ -107319,12 +107287,14 @@ false
 "enum": [
 "COMPATIBLE",
 "CUSTOM",
+"FIPS_202205",
 "MODERN",
 "RESTRICTED"
 ],
 "enumDescriptions": [
 "Compatible profile. Allows the broadset set of clients, even those which support only out-of-date SSL features to negotiate with the load balancer.",
 "Custom profile. Allow only the set of allowed SSL features specified in the customFeatures field.",
+"FIPS complatible profile. Supports a reduced set of SSL features, intended to meet FIPS 140-3 compliance requirements.",
 "Modern profile. Supports a wide set of SSL features, allowing modern clients to negotiate SSL with the load balancer.",
 "Restricted profile. Supports a reduced set of SSL features, intended to meet stricter compliance requirements."
 ],
@@ -111190,7 +111160,7 @@ false
 "type": "object"
 },
 "TargetHttpsProxy": {
-"description": "Represents a Target HTTPS Proxy resource. Google Compute Engine has two Target HTTPS Proxy resources: * [Global](/compute/docs/reference/rest/alpha/targetHttpsProxies) * [Regional](/compute/docs/reference/rest/alpha/regionTargetHttpsProxies) A target HTTPS proxy is a component of Google Cloud HTTPS load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
+"description": "Represents a Target HTTPS Proxy resource. Google Compute Engine has two Target HTTPS Proxy resources: * [Global](/compute/docs/reference/rest/alpha/targetHttpsProxies) * [Regional](/compute/docs/reference/rest/alpha/regionTargetHttpsProxies) A target HTTPS proxy is a component of Google Cloud HTTPS load balancers. * targetHttpsProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpsProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.",
 "id": "TargetHttpsProxy",
 "properties": {
 "authentication": {
@@ -114388,6 +114358,7 @@ false
 "FAILURE_MEMORY",
 "FAILURE_NETWORK",
 "FAILURE_NVLINK",
+"FAILURE_REDUNDANT_HARDWARE_FAULT",
 "INFRASTRUCTURE_RELOCATION",
 "MAINTENANCE_REASON_UNKNOWN",
 "PLANNED_NETWORK_UPDATE",
@@ -114403,6 +114374,7 @@ false
 "Maintenance due to memory errors.",
 "Maintenance due to network errors.",
 "Maintenance due to NVLink failure.",
+"Maintenance due to redundant hardware fault.",
 "Maintenance due to infrastructure relocation.",
 "Unknown maintenance reason. Do not use this value.",
 "Maintenance due to planned network update.",
