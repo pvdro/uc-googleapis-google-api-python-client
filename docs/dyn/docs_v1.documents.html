@@ -236,6 +236,21 @@ Args:
           &quot;tabId&quot;: &quot;A String&quot;, # The tab that the location is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab&#x27;s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
         },
       },
+      &quot;insertPerson&quot;: { # Inserts a person mention. # Inserts a person mention.
+        &quot;endOfSegmentLocation&quot;: { # Location at the end of a body, header, footer or footnote. The location is immediately before the last newline in the document segment. # Inserts the person at the end of a header, footer, footnote or the document body.
+          &quot;segmentId&quot;: &quot;A String&quot;, # The ID of the header, footer or footnote the location is in. An empty segment ID signifies the document&#x27;s body.
+          &quot;tabId&quot;: &quot;A String&quot;, # The tab that the location is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab&#x27;s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+        },
+        &quot;location&quot;: { # A particular location in the document. # Inserts the person at a specific index in the document. The person mention must be inserted inside the bounds of an existing Paragraph. For instance, it cannot be inserted at a table&#x27;s start index (i.e. between the table and its preceding paragraph). People cannot be inserted inside an equation.
+          &quot;index&quot;: 42, # The zero-based index, in UTF-16 code units. The index is relative to the beginning of the segment specified by segment_id.
+          &quot;segmentId&quot;: &quot;A String&quot;, # The ID of the header, footer or footnote the location is in. An empty segment ID signifies the document&#x27;s body.
+          &quot;tabId&quot;: &quot;A String&quot;, # The tab that the location is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab&#x27;s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+        },
+        &quot;personProperties&quot;: { # Properties specific to a linked Person. # The properties of the person mention to insert.
+          &quot;email&quot;: &quot;A String&quot;, # The email address linked to this Person. This field is always present.
+          &quot;name&quot;: &quot;A String&quot;, # The name of the person if it&#x27;s displayed in the link text instead of the person&#x27;s email address.
+        },
+      },
       &quot;insertSectionBreak&quot;: { # Inserts a section break at the given location. A newline character will be inserted before the section break. # Inserts a section break at the specified location.
         &quot;endOfSegmentLocation&quot;: { # Location at the end of a body, header, footer or footnote. The location is immediately before the last newline in the document segment. # Inserts a newline and a section break at the end of the document body. Section breaks cannot be inserted inside a footnote, header or footer. Because section breaks can only be inserted inside the body, the segment ID field must be empty.
           &quot;segmentId&quot;: &quot;A String&quot;, # The ID of the header, footer or footnote the location is in. An empty segment ID signifies the document&#x27;s body.
