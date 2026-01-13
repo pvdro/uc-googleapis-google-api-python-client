@@ -99,6 +99,16 @@ Args:
 { # Request message for BatchUpdateDocument.
   &quot;requests&quot;: [ # A list of updates to apply to the document.
     { # A single update to apply to a document.
+      &quot;addDocumentTab&quot;: { # Adds a document tab. When a tab is added at a given index, all subsequent tabs&#x27; indexes are incremented. # Adds a document tab.
+        &quot;tabProperties&quot;: { # Properties of a tab. # The properties of the tab to add. All properties are optional.
+          &quot;iconEmoji&quot;: &quot;A String&quot;, # Optional. The emoji icon displayed with the tab. A valid emoji icon is represented by a non-empty Unicode string. Any set of characters that don&#x27;t represent a single emoji is invalid. If an emoji is invalid, a 400 bad request error is returned. If this value is unset or empty, the tab will display the default tab icon.
+          &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
+          &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
+          &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
+          &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
+          &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
+        },
+      },
       &quot;createFooter&quot;: { # Creates a Footer. The new footer is applied to the SectionStyle at the location of the SectionBreak if specified, otherwise it is applied to the DocumentStyle. If a footer of the specified type already exists, a 400 bad request error is returned. # Creates a footer.
         &quot;sectionBreakLocation&quot;: { # A particular location in the document. # The location of the SectionBreak immediately preceding the section whose SectionStyle this footer should belong to. If this is unset or refers to the first section break in the document, the footer applies to the document style.
           &quot;index&quot;: 42, # The zero-based index, in UTF-16 code units. The index is relative to the beginning of the segment specified by segment_id.
@@ -180,6 +190,9 @@ Args:
       &quot;deletePositionedObject&quot;: { # Deletes a PositionedObject from the document. # Deletes a positioned object from the document.
         &quot;objectId&quot;: &quot;A String&quot;, # The ID of the positioned object to delete.
         &quot;tabId&quot;: &quot;A String&quot;, # The tab that the positioned object to delete is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab&#x27;s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+      },
+      &quot;deleteTab&quot;: { # Deletes a tab. If the tab has child tabs, they are deleted as well. # Deletes a document tab.
+        &quot;tabId&quot;: &quot;A String&quot;, # The ID of the tab to delete.
       },
       &quot;deleteTableColumn&quot;: { # Deletes a column from a table. # Deletes a column from a table.
         &quot;tableCellLocation&quot;: { # Location of a single cell within a table. # The reference table cell location from which the column will be deleted. The column this cell spans will be deleted. If this is a merged cell that spans multiple columns, all columns that the cell spans will be deleted. If no columns remain in the table after this deletion, the whole table is deleted.
@@ -462,6 +475,17 @@ Args:
         },
         &quot;fields&quot;: &quot;A String&quot;, # The fields that should be updated. At least one field must be specified. The root `document_style` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field. For example to update the background, set `fields` to `&quot;background&quot;`.
         &quot;tabId&quot;: &quot;A String&quot;, # The tab that contains the style to update. When omitted, the request applies to the first tab. In a document containing a single tab: - If provided, must match the singular tab&#x27;s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If not provided, the request applies to the first tab in the document.
+      },
+      &quot;updateDocumentTabProperties&quot;: { # Update the properties of a document tab. # Updates the properties of a document tab.
+        &quot;fields&quot;: &quot;A String&quot;, # The fields that should be updated. At least one field must be specified. The root `tab_properties` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field.
+        &quot;tabProperties&quot;: { # Properties of a tab. # The tab properties to update.
+          &quot;iconEmoji&quot;: &quot;A String&quot;, # Optional. The emoji icon displayed with the tab. A valid emoji icon is represented by a non-empty Unicode string. Any set of characters that don&#x27;t represent a single emoji is invalid. If an emoji is invalid, a 400 bad request error is returned. If this value is unset or empty, the tab will display the default tab icon.
+          &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
+          &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
+          &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
+          &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
+          &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
+        },
       },
       &quot;updateParagraphStyle&quot;: { # Update the styling of all paragraphs that overlap with the given range. # Updates the paragraph style at the specified range.
         &quot;fields&quot;: &quot;A String&quot;, # The fields that should be updated. At least one field must be specified. The root `paragraph_style` is implied and should not be specified. A single `&quot;*&quot;` can be used as short-hand for listing every field. For example, to update the paragraph style&#x27;s alignment property, set `fields` to `&quot;alignment&quot;`. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
@@ -912,6 +936,16 @@ Returns:
   &quot;documentId&quot;: &quot;A String&quot;, # The ID of the document to which the updates were applied to.
   &quot;replies&quot;: [ # The reply of the updates. This maps 1:1 with the updates, although replies to some requests may be empty.
     { # A single response from an update.
+      &quot;addDocumentTab&quot;: { # The result of adding a document tab. # The result of adding a document tab.
+        &quot;tabProperties&quot;: { # Properties of a tab. # The properties of the newly added tab.
+          &quot;iconEmoji&quot;: &quot;A String&quot;, # Optional. The emoji icon displayed with the tab. A valid emoji icon is represented by a non-empty Unicode string. Any set of characters that don&#x27;t represent a single emoji is invalid. If an emoji is invalid, a 400 bad request error is returned. If this value is unset or empty, the tab will display the default tab icon.
+          &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
+          &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
+          &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
+          &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
+          &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
+        },
+      },
       &quot;createFooter&quot;: { # The result of creating a footer. # The result of creating a footer.
         &quot;footerId&quot;: &quot;A String&quot;, # The ID of the created footer.
       },
@@ -20191,7 +20225,7 @@ Args:
         &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
         &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
         &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
-        &quot;tabId&quot;: &quot;A String&quot;, # Output only. The ID of the tab. This field can&#x27;t be changed.
+        &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
         &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
       },
     },
@@ -39443,7 +39477,7 @@ Returns:
         &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
         &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
         &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
-        &quot;tabId&quot;: &quot;A String&quot;, # Output only. The ID of the tab. This field can&#x27;t be changed.
+        &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
         &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
       },
     },
@@ -58709,7 +58743,7 @@ Returns:
         &quot;index&quot;: 42, # The zero-based index of the tab within the parent.
         &quot;nestingLevel&quot;: 42, # Output only. The depth of the tab within the document. Root-level tabs start at 0.
         &quot;parentTabId&quot;: &quot;A String&quot;, # Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn&#x27;t have any parents.
-        &quot;tabId&quot;: &quot;A String&quot;, # Output only. The ID of the tab. This field can&#x27;t be changed.
+        &quot;tabId&quot;: &quot;A String&quot;, # The immutable ID of the tab.
         &quot;title&quot;: &quot;A String&quot;, # The user-visible name of the tab.
       },
     },
