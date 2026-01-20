@@ -32175,6 +32175,183 @@
 }
 }
 },
+"reservationSlots": {
+"methods": {
+"get": {
+"description": "Retrieves information about the specified reservation slot.",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservationsId}/reservationBlocks/{reservationBlocksId}/reservationSubBlocks/{reservationSubBlocksId}/reservationSlots/{reservationSlot}",
+"httpMethod": "GET",
+"id": "compute.reservationSlots.get",
+"parameterOrder": [
+"project",
+"zone",
+"parentName",
+"reservationSlot"
+],
+"parameters": {
+"parentName": {
+"description": "The name of the parent reservation and parent block, formatted as\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
+"location": "path",
+"pattern": "reservations/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationSubBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "The project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservationSlot": {
+"description": "The name of the reservation slot, formatted as RFC1035 or a resource ID\nnumber.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request, formatted as RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/{+parentName}/reservationSlots/{reservationSlot}",
+"response": {
+"$ref": "ReservationSlotsGetResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"list": {
+"description": "Retrieves a list of reservation slots under a single reservation.",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservationsId}/reservationBlocks/{reservationBlocksId}/reservationSubBlocks/{reservationSubBlocksId}/reservationSlots",
+"httpMethod": "GET",
+"id": "compute.reservationSlots.list",
+"parameterOrder": [
+"project",
+"zone",
+"parentName"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most\nCompute resources support two types of filter expressions:\nexpressions that support regular expressions and expressions that follow\nAPI improvement proposal AIP-160.\nThese two types of filter expressions cannot be mixed in one request.\n\nIf you want to use AIP-160, your expression must specify the field name, an\noperator, and the value that you want to use for filtering. The value\nmust be a string, a number, or a boolean. The operator\nmust be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.\n\nFor example, if you are filtering Compute Engine instances, you can\nexclude instances named `example-instance` by specifying\n`name != example-instance`.\n\nThe `:*` comparison can be used to test whether a key has been defined.\nFor example, to find all objects with `owner` label use:\n```\nlabels.owner:*\n```\n\nYou can also filter nested fields. For example, you could specify\n`scheduling.automaticRestart = false` to include instances only\nif they are not scheduled for automatic restarts. You can use filtering\non nested fields to filter based onresource labels.\n\nTo filter on multiple expressions, provide each separate expression within\nparentheses. For example:\n```\n(scheduling.automaticRestart = true)\n(cpuPlatform = \"Intel Skylake\")\n```\nBy default, each expression is an `AND` expression. However, you\ncan include `AND` and `OR` expressions explicitly.\nFor example:\n```\n(cpuPlatform = \"Intel Skylake\") OR\n(cpuPlatform = \"Intel Broadwell\") AND\n(scheduling.automaticRestart = true)\n```\n\nIf you want to use a regular expression, use the `eq` (equal) or `ne`\n(not equal) operator against a single un-parenthesized expression with or\nwithout quotes or against multiple parenthesized expressions. Examples:\n\n`fieldname eq unquoted literal`\n`fieldname eq 'single quoted literal'`\n`fieldname eq \"double quoted literal\"`\n`(fieldname1 eq literal) (fieldname2 ne \"literal\")`\n\nThe literal value is interpreted as a regular expression using GoogleRE2 library syntax.\nThe literal value must match the entire field.\n\nFor example, to filter for instances that do not end with name \"instance\",\nyou would use `name ne .*instance`.\n\nYou cannot combine constraints on multiple fields using regular\nexpressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned.\nIf the number of available results is larger than `maxResults`,\nCompute Engine returns a `nextPageToken` that can be used to get\nthe next page of results in subsequent list requests. Acceptable values are\n`0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results\nare returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation\ntimestamp using `orderBy=\"creationTimestamp desc\"`. This sorts\nresults based on the `creationTimestamp` field in\nreverse chronological order (newest result first). Use this to sort\nresources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by `name` or\n`creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the\n`nextPageToken` returned by a previous list request to get\nthe next page of results.",
+"location": "query",
+"type": "string"
+},
+"parentName": {
+"description": "The name of the parent reservation and parent block, formatted as\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
+"location": "path",
+"pattern": "reservations/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationSubBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "The project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
+"location": "query",
+"type": "boolean"
+},
+"zone": {
+"description": "The name of the zone for this request, formatted as RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/{+parentName}/reservationSlots",
+"response": {
+"$ref": "ReservationSlotsListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"update": {
+"description": "Update a reservation slot in the specified sub-block.",
+"flatPath": "projects/{project}/zones/{zone}/reservations/{reservationsId}/reservationBlocks/{reservationBlocksId}/reservationSubBlocks/{reservationSubBlocksId}/reservationSlots/{reservationSlot}",
+"httpMethod": "POST",
+"id": "compute.reservationSlots.update",
+"parameterOrder": [
+"project",
+"zone",
+"parentName",
+"reservationSlot"
+],
+"parameters": {
+"parentName": {
+"description": "The name of the sub-block resource.",
+"location": "path",
+"pattern": "reservations/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationSubBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "The project ID for this request.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"reservationSlot": {
+"description": "The name of the slot resource.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"updateMask": {
+"description": "The fields to be updated as part of this request.",
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request, formatted as RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/{+parentName}/reservationSlots/{reservationSlot}",
+"request": {
+"$ref": "ReservationSlot"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "reservationSubBlocks": {
 "methods": {
 "get": {
@@ -42914,7 +43091,7 @@
 }
 }
 },
-"revision": "20251230",
+"revision": "20260113",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -48071,6 +48248,10 @@ false
 "description": "The maximum number of instances to create.",
 "format": "int64",
 "type": "string"
+},
+"instanceFlexibilityPolicy": {
+"$ref": "InstanceFlexibilityPolicy",
+"description": "A flexible specification of machine type of instances to create."
 },
 "instanceProperties": {
 "$ref": "InstanceProperties",
@@ -57911,6 +58092,46 @@ false
 },
 "type": "object"
 },
+"InstanceFlexibilityPolicy": {
+"description": "A flexible specification of machine types for instances to create.",
+"id": "InstanceFlexibilityPolicy",
+"properties": {
+"instanceSelections": {
+"additionalProperties": {
+"$ref": "InstanceFlexibilityPolicyInstanceSelection"
+},
+"description": "Specification of alternative, flexible instance subsets.\nOne of them will be selected to create the instances\nbased on various criteria, like:\n- ranks,\n- location policy,\n- current capacity,\n- available reservations (you can specify affinity in\nInstanceProperties),\n- SWAN/GOOSE limitations.\nKey is an arbitrary, unique RFC1035 string that identifies the instance\nselection.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"InstanceFlexibilityPolicyInstanceSelection": {
+"description": "Specification of machine type to use. Every position inside this message\nis an alternative.\nThe count specified in the shape flexibility must not exceed the number\nof entries in per_instance_properties or the capacity of the\nname_pattern, if used.",
+"id": "InstanceFlexibilityPolicyInstanceSelection",
+"properties": {
+"disks": {
+"description": "Disks to be attached to the instances created from in this selection.\nThey override the disks specified in the instance properties.",
+"items": {
+"$ref": "AttachedDisk"
+},
+"type": "array"
+},
+"machineTypes": {
+"description": "Alternative machine types to use for instances that are created from\nthese properties. This field only accepts a machine type names, for\nexample `n2-standard-4` and not URLs or partial URLs.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"rank": {
+"description": "Rank when prioritizing the shape flexibilities.\nThe instance selections with rank are considered\nfirst, in the ascending order of the rank.\nIf not set, defaults to 0.",
+"format": "int64",
+"type": "string"
+}
+},
+"type": "object"
+},
 "InstanceGroup": {
 "description": "Represents an Instance Group resource.\n\nInstance Groups can be used to configure a target forload\nbalancing.\n\nInstance groups can either be managed or unmanaged.\n\nTo create \nmanaged instance groups, use the instanceGroupManager orregionInstanceGroupManager resource instead.\n\nUse zonal unmanaged instance groups if you need to applyload\nbalancing to groups of heterogeneous instances or if you need to manage\nthe instances yourself. You cannot create regional unmanaged instance groups.\n\nFor more information, readInstance\ngroups.",
 "id": "InstanceGroup",
@@ -61874,7 +62095,7 @@ false
 "Public reportable behaviors",
 "",
 "",
-""
+"Unrecoverable GPU error identified by an XID"
 ],
 "type": "string"
 },
@@ -63103,7 +63324,7 @@ false
 "type": "string"
 },
 "bandwidth": {
-"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s",
+"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s\n   - BPS_400G: 400 Gbit/s",
 "enum": [
 "BPS_100G",
 "BPS_100M",
@@ -63113,6 +63334,7 @@ false
 "BPS_20G",
 "BPS_2G",
 "BPS_300M",
+"BPS_400G",
 "BPS_400M",
 "BPS_500M",
 "BPS_50G",
@@ -63128,6 +63350,7 @@ false
 "20 Gbit/s",
 "2 Gbit/s",
 "300 Mbit/s",
+"400 Gbit/s",
 "400 Mbit/s",
 "500 Mbit/s",
 "50 Gbit/s",
@@ -80790,6 +81013,295 @@ false
 },
 "warning": {
 "description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed\noperation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as\ndeprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as\nexperimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden.\nDeprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is\nnot of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed\nwhich captures the amount of resources filtered out by\nuser-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the\nnetwork.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an\nipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the\nsame network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite\nthe mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g:\nregions.list).",
+"The user attempted to use a resource that requires a TOS they have not\naccepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted\nbecause they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but\nits application does not make a lot of sense, because it allows only\nsingle instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key:\nvalue format. For example:\n\n\"data\": [\n  {\n   \"key\": \"scope\",\n   \"value\": \"zones/us-east1-d\"\n  }",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being\nreturned. For example, for warnings where there are no results in a list\nrequest for a particular zone, this key might be scope and\nthe key value might be the zone name. Other examples might be a key\nindicating a deprecated resource and a suggested replacement, or a\nwarning about invalid network settings (for example, if an instance\nattempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
+}
+},
+"type": "object"
+},
+"ReservationSlot": {
+"description": "Represents a reservation slot resource.",
+"id": "ReservationSlot",
+"properties": {
+"creationTimestamp": {
+"description": "Output only. [Output Only] The creation timestamp, formatted asRFC3339 text.",
+"readOnly": true,
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] The unique identifier for this resource. This identifier is\ndefined by the server.",
+"format": "uint64",
+"readOnly": true,
+"type": "string"
+},
+"kind": {
+"default": "compute#reservationSlot",
+"description": "Output only. [Output Only] The type of resource. Alwayscompute#reservationSlot for reservation slots.",
+"readOnly": true,
+"type": "string"
+},
+"name": {
+"description": "Output only. [Output Only] The name of the reservation slot.",
+"readOnly": true,
+"type": "string"
+},
+"physicalTopology": {
+"$ref": "ReservationSlotPhysicalTopology",
+"deprecated": true,
+"description": "Output only. [Output Only] The physical topology of the reservation slot.",
+"readOnly": true
+},
+"selfLink": {
+"description": "Output only. [Output Only] A server-defined fully-qualified URL for this resource.",
+"readOnly": true,
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "Output only. [Output Only] A server-defined URL for this resource with the resource ID.",
+"readOnly": true,
+"type": "string"
+},
+"shareSettings": {
+"$ref": "ShareSettings",
+"description": "Specify share settings to create a shared slot. Set to empty\nto inherit the share settings from a parent resource."
+},
+"state": {
+"description": "Output only. [Output Only] The state of the reservation slot.",
+"enum": [
+"ACTIVE",
+"CREATING",
+"DELETING",
+"STATE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The reservation slot has allocated all its resources.",
+"The resources are being allocated for the reservation slot.",
+"The reservation slot is currently being deleted.",
+""
+],
+"readOnly": true,
+"type": "string"
+},
+"status": {
+"$ref": "ReservationSlotStatus",
+"description": "Output only. [Output Only] The status of the reservation slot.",
+"readOnly": true
+},
+"zone": {
+"description": "Output only. [Output Only] The zone in which the reservation slot resides.",
+"readOnly": true,
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationSlotPhysicalTopology": {
+"id": "ReservationSlotPhysicalTopology",
+"properties": {
+"block": {
+"description": "The unique identifier of the capacity block within the cluster.",
+"type": "string"
+},
+"cluster": {
+"description": "The cluster name of the reservation sub-block.",
+"type": "string"
+},
+"host": {
+"description": "The unique identifier of the capacity host within the capacity sub-block.",
+"type": "string"
+},
+"subBlock": {
+"description": "The unique identifier of the capacity sub-block within the capacity\nblock.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"ReservationSlotStatus": {
+"id": "ReservationSlotStatus",
+"properties": {
+"physicalTopology": {
+"$ref": "ReservationSlotPhysicalTopology",
+"description": "Output only. [Output Only] The physical topology of the reservation sub-block.",
+"readOnly": true
+},
+"rdmaIpAddresses": {
+"description": "Output only. The RDMA IP address of the physical host.",
+"items": {
+"type": "string"
+},
+"readOnly": true,
+"type": "array"
+},
+"runningInstances": {
+"description": "Output only. The URIs of the instances currently running on this slot.",
+"items": {
+"type": "string"
+},
+"readOnly": true,
+"type": "array"
+}
+},
+"type": "object"
+},
+"ReservationSlotsGetResponse": {
+"id": "ReservationSlotsGetResponse",
+"properties": {
+"resource": {
+"$ref": "ReservationSlot"
+}
+},
+"type": "object"
+},
+"ReservationSlotsListResponse": {
+"description": "A list of reservation slots within a single reservation.",
+"id": "ReservationSlotsListResponse",
+"properties": {
+"id": {
+"description": "The unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of reservation slot resources.",
+"items": {
+"$ref": "ReservationSlot"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#reservationSlot",
+"description": "The type of resource. Alwayscompute#reservationSlot for a list of reservation\nslots.",
+"type": "string"
+},
+"nextPageToken": {
+"description": "This token allows you to get the next page of results for\nlist requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for\nthe query parameter pageToken in the next list request.\nSubsequent list requests will have their own nextPageToken to\ncontinue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "The server-defined URL for this resource.",
+"type": "string"
+},
+"warning": {
+"description": "An informational warning message.",
 "properties": {
 "code": {
 "description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",

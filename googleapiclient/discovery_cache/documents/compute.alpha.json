@@ -40855,26 +40855,26 @@
 ],
 "parameters": {
 "parentName": {
-"description": "The name of the parent reservation and parent block. In the format of\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
+"description": "The name of the parent reservation and parent block, formatted as\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
 "location": "path",
 "pattern": "reservations/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationSubBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})",
 "required": true,
 "type": "string"
 },
 "project": {
-"description": "Project ID for this request.",
+"description": "The project ID for this request.",
 "location": "path",
 "required": true,
 "type": "string"
 },
 "reservationSlot": {
-"description": "The name of the reservation slot.\nName should conform to RFC1035 or be a resource ID.",
+"description": "The name of the reservation slot, formatted as RFC1035 or a resource ID\nnumber.",
 "location": "path",
 "required": true,
 "type": "string"
 },
 "zone": {
-"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"description": "The name of the zone for this request, formatted as RFC1035.",
 "location": "path",
 "required": true,
 "type": "string"
@@ -40925,14 +40925,14 @@
 "type": "string"
 },
 "parentName": {
-"description": "The name of the parent reservation and parent block. In the format of\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
+"description": "The name of the parent reservation and parent block, formatted as\nreservations/{reservation_name}/reservationBlocks/{reservation_block_name}/reservationSubBlocks/{reservation_sub_block_name}",
 "location": "path",
 "pattern": "reservations/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})/reservationSubBlocks/([a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19})",
 "required": true,
 "type": "string"
 },
 "project": {
-"description": "Project ID for this request.",
+"description": "The project ID for this request.",
 "location": "path",
 "required": true,
 "type": "string"
@@ -40943,7 +40943,7 @@
 "type": "boolean"
 },
 "zone": {
-"description": "Name of the zone for this request. Zone name should conform to RFC1035.",
+"description": "The name of the zone for this request, formatted as RFC1035.",
 "location": "path",
 "required": true,
 "type": "string"
@@ -53741,7 +53741,7 @@
 }
 }
 },
-"revision": "20251230",
+"revision": "20260113",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -58144,18 +58144,6 @@ false
 },
 "readOnly": true,
 "type": "array"
-},
-"vpcNetworkScope": {
-"description": "The network scope of the backends that can be added to the backend\nservice. This field can be either GLOBAL_VPC_NETWORK orREGIONAL_VPC_NETWORK.\n\nA backend service with the VPC scope set to GLOBAL_VPC_NETWORK\nis only allowed to have backends in global VPC networks.\n\nWhen the VPC scope is set to REGIONAL_VPC_NETWORK the backend\nservice is only allowed to have backends in regional networks in the same\nscope as the backend service.\nNote: if not specified then GLOBAL_VPC_NETWORK will be used.",
-"enum": [
-"GLOBAL_VPC_NETWORK",
-"REGIONAL_VPC_NETWORK"
-],
-"enumDescriptions": [
-"The backend service can only have backends in global VPCs",
-"The backend service can only have backends in regional VPCs"
-],
-"type": "string"
 }
 },
 "type": "object"
@@ -78982,7 +78970,7 @@ false
 "Public reportable behaviors",
 "",
 "",
-""
+"Unrecoverable GPU error identified by an XID"
 ],
 "type": "string"
 },
@@ -80373,7 +80361,7 @@ false
 "type": "string"
 },
 "bandwidth": {
-"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s",
+"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s\n   - BPS_400G: 400 Gbit/s",
 "enum": [
 "BPS_100G",
 "BPS_100M",
@@ -81246,7 +81234,7 @@ false
 "type": "boolean"
 },
 "bandwidth": {
-"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s",
+"description": "Provisioned bandwidth capacity for the interconnect attachment. For\nattachments of type DEDICATED, the user can set the bandwidth.\nFor attachments of type PARTNER, the Google Partner that is operating\nthe interconnect must set the bandwidth.\nOutput only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED,\nand can take one of the following values:\n   \n   - BPS_50M: 50 Mbit/s\n   - BPS_100M: 100 Mbit/s\n   - BPS_200M: 200 Mbit/s\n   - BPS_300M: 300 Mbit/s\n   - BPS_400M: 400 Mbit/s\n   - BPS_500M: 500 Mbit/s\n   - BPS_1G: 1 Gbit/s\n   - BPS_2G: 2 Gbit/s\n   - BPS_5G: 5 Gbit/s\n   - BPS_10G: 10 Gbit/s\n   - BPS_20G: 20 Gbit/s\n   - BPS_50G: 50 Gbit/s\n   - BPS_100G: 100 Gbit/s\n   - BPS_400G: 400 Gbit/s",
 "enum": [
 "BPS_100G",
 "BPS_100M",
@@ -103805,47 +103793,49 @@ false
 "id": "ReservationSlot",
 "properties": {
 "creationTimestamp": {
-"description": "Output only. [Output Only] Creation timestamp inRFC3339 text format.",
+"description": "Output only. [Output Only] The creation timestamp, formatted asRFC3339 text.",
 "readOnly": true,
 "type": "string"
 },
-"description": {
-"description": "An optional description of this resource.",
-"type": "string"
-},
 "id": {
-"description": "Output only. [Output Only] The unique identifier for the resource. This identifier is\ndefined by the server.",
+"description": "Output only. [Output Only] The unique identifier for this resource. This identifier is\ndefined by the server.",
 "format": "uint64",
 "readOnly": true,
 "type": "string"
 },
 "kind": {
 "default": "compute#reservationSlot",
-"description": "Output only. [Output Only] Type of the resource. Alwayscompute#reservationSlot for reservation slots.",
+"description": "Output only. [Output Only] The type of resource. Alwayscompute#reservationSlot for reservation slots.",
 "readOnly": true,
 "type": "string"
 },
 "name": {
-"description": "Output only. [Output Only] The name of this reservation slot generated by\nCompute Engine. The name must be 1-63 characters long, and comply with\nRFC1035 @pattern [a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"description": "Output only. [Output Only] The name of the reservation slot.",
 "readOnly": true,
 "type": "string"
 },
+"physicalTopology": {
+"$ref": "ReservationSlotPhysicalTopology",
+"deprecated": true,
+"description": "Output only. [Output Only] The physical topology of the reservation slot.",
+"readOnly": true
+},
 "selfLink": {
-"description": "Output only. [Output Only] Server-defined fully-qualified URL for this resource.",
+"description": "Output only. [Output Only] A server-defined fully-qualified URL for this resource.",
 "readOnly": true,
 "type": "string"
 },
 "selfLinkWithId": {
-"description": "Output only. [Output Only] Server-defined URL for this resource with the resource id.",
+"description": "Output only. [Output Only] A server-defined URL for this resource with the resource ID.",
 "readOnly": true,
 "type": "string"
 },
 "shareSettings": {
 "$ref": "ShareSettings",
-"description": "Specify share-settings to create a shared slot. Set to empty\nto inherit share settings from a parent resource."
+"description": "Specify share settings to create a shared slot. Set to empty\nto inherit the share settings from a parent resource."
 },
 "state": {
-"description": "Output only. [Output Only] State of the reservation slot.",
+"description": "Output only. [Output Only] The state of the reservation slot.",
 "enum": [
 "ACTIVE",
 "CREATING",
@@ -103853,9 +103843,9 @@ false
 "STATE_UNSPECIFIED"
 ],
 "enumDescriptions": [
-"Reservation slot has allocated all its resources.",
-"Resources are being allocated for the reservation slot.",
-"Reservation slot is currently being deleted.",
+"The reservation slot has allocated all its resources.",
+"The resources are being allocated for the reservation slot.",
+"The reservation slot is currently being deleted.",
 ""
 ],
 "readOnly": true,
@@ -103867,7 +103857,7 @@ false
 "readOnly": true
 },
 "zone": {
-"description": "Output only. [Output Only] Zone in which the reservation slot resides.",
+"description": "Output only. [Output Only] The zone in which the reservation slot resides.",
 "readOnly": true,
 "type": "string"
 }
@@ -103878,19 +103868,19 @@ false
 "id": "ReservationSlotPhysicalTopology",
 "properties": {
 "block": {
-"description": "The hash of the capacity block within the cluster.",
+"description": "The unique identifier of the capacity block within the cluster.",
 "type": "string"
 },
 "cluster": {
-"description": "The cluster name of the reservation subBlock.",
+"description": "The cluster name of the reservation sub-block.",
 "type": "string"
 },
 "host": {
-"description": "The hash of the capacity host within the capacity sub-block.",
+"description": "The unique identifier of the capacity host within the capacity sub-block.",
 "type": "string"
 },
 "subBlock": {
-"description": "The hash of the capacity sub-block within the capacity block.",
+"description": "The unique identifier of the capacity sub-block within the capacity\nblock.",
 "type": "string"
 }
 },
@@ -103901,7 +103891,7 @@ false
 "properties": {
 "physicalTopology": {
 "$ref": "ReservationSlotPhysicalTopology",
-"description": "Output only. [Output Only] The physical topology of the reservation subBlock.",
+"description": "Output only. [Output Only] The physical topology of the reservation sub-block.",
 "readOnly": true
 },
 "rdmaIpAddresses": {
@@ -103933,11 +103923,11 @@ false
 "type": "object"
 },
 "ReservationSlotsListResponse": {
-"description": "A list of reservation slots under a single reservation.",
+"description": "A list of reservation slots within a single reservation.",
 "id": "ReservationSlotsListResponse",
 "properties": {
 "id": {
-"description": "Unique identifier for the resource; defined by the server.",
+"description": "The unique identifier for the resource; defined by the server.",
 "type": "string"
 },
 "items": {
@@ -103949,7 +103939,7 @@ false
 },
 "kind": {
 "default": "compute#reservationSlot",
-"description": "Type of the resource. Alwayscompute#reservationSlot for a list of reservation\nslots.",
+"description": "The type of resource. Alwayscompute#reservationSlot for a list of reservation\nslots.",
 "type": "string"
 },
 "nextPageToken": {
@@ -103957,11 +103947,11 @@ false
 "type": "string"
 },
 "selfLink": {
-"description": "Server-defined URL for this resource.",
+"description": "The server-defined URL for this resource.",
 "type": "string"
 },
 "warning": {
-"description": "Informational warning message.",
+"description": "An informational warning message.",
 "properties": {
 "code": {
 "description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
