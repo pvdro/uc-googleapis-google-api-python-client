@@ -2950,8 +2950,101 @@ Args:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -5887,8 +5980,101 @@ Returns:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -8842,8 +9028,101 @@ Returns:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -11785,8 +12064,101 @@ Returns:
         &quot;type&quot;: &quot;A String&quot;, # User type.
       },
       &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+        &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+          &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+          &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+        },
         &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
         &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+        &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+        &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+          &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+            { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+              &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+                &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+                  &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+                  &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+                  &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                    &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                    &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+                  },
+                  &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+                  &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+                },
+              },
+              &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+              &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+                &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+                  &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+                  &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+                },
+                &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+                  &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+                  &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+                  &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+                },
+                &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+                  &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                    &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+                  },
+                  &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+                },
+                &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+                  &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+                  &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+                  &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+                },
+                &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+                &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+              },
+              &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+                &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+                  &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+                  &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+                  &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+                  &quot;type&quot;: &quot;A String&quot;, # User type.
+                },
+                &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+                &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+                &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+                &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+              },
+              &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+              &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+              &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+                &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+                &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+                  &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+                  &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+                  &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+                  &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+                  &quot;type&quot;: &quot;A String&quot;, # User type.
+                },
+              },
+            },
+          ],
+          &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+            { # An attachment in Google Chat.
+              &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+                &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+                &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+              },
+              &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+              &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+              &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+              &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+              &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+            },
+          ],
+          &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+          &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+          &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+        },
       },
       &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
         &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -14733,8 +15105,101 @@ Args:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -17664,8 +18129,101 @@ Returns:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -20595,8 +21153,101 @@ Args:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
@@ -23526,8 +24177,101 @@ Returns:
     &quot;type&quot;: &quot;A String&quot;, # User type.
   },
   &quot;quotedMessageMetadata&quot;: { # Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message). # Optional. Information about a message that another message quotes. When you create a message, you can quote messages within the same thread, or quote a root message to create a new root message. However, you can&#x27;t quote a message reply from a different thread. When you update a message, you can&#x27;t add or replace the `quotedMessageMetadata` field, but you can remove it. For example usage, see [Quote another message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+    &quot;forwardedMetadata&quot;: { # Metadata about the source space from which a message was forwarded. # Output only. Metadata about the source space of the quoted message. Populated only for FORWARD quote type.
+      &quot;space&quot;: &quot;A String&quot;, # Output only. The resource name of the source space. Format: spaces/{space}
+      &quot;spaceDisplayName&quot;: &quot;A String&quot;, # Output only. The display name of the source space or DM at the time of forwarding. For `SPACE`, this is the space name. For `DIRECT_MESSAGE`, this is the other participant&#x27;s name (e.g., &quot;User A&quot;). For `GROUP_CHAT`, this is a generated name based on members&#x27; first names, limited to 5 including the creator (e.g., &quot;User A, User B&quot;).
+    },
     &quot;lastUpdateTime&quot;: &quot;A String&quot;, # Required. The timestamp when the quoted message was created or when the quoted message was last updated. If the message was edited, use this field, `last_update_time`. If the message was never edited, use `create_time`. If `last_update_time` doesn&#x27;t match the latest version of the quoted message, the request fails.
     &quot;name&quot;: &quot;A String&quot;, # Required. Resource name of the message that is quoted. Format: `spaces/{space}/messages/{message}`
+    &quot;quoteType&quot;: &quot;A String&quot;, # Optional. Specifies the quote type. If not set, defaults to REPLY in the message read/write path for backward compatibility.
+    &quot;quotedMessageSnapshot&quot;: { # Provides a snapshot of the content of the quoted message at the time of quoting or forwarding # Output only. A snapshot of the quoted message&#x27;s content.
+      &quot;annotations&quot;: [ # Output only. Annotations parsed from the text body of the quoted message. Populated only for FORWARD quote type.
+        { # Output only. Annotations can be associated with the plain-text body of the message or with chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/workspace/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!&quot; ``` The corresponding annotations metadata: ``` &quot;annotations&quot;:[{ &quot;type&quot;:&quot;USER_MENTION&quot;, &quot;startIndex&quot;:6, &quot;length&quot;:7, &quot;userMention&quot;: { &quot;user&quot;: { &quot;name&quot;:&quot;users/{user}&quot;, &quot;displayName&quot;:&quot;FooBot&quot;, &quot;avatarUrl&quot;:&quot;https://goo.gl/aeDtrS&quot;, &quot;type&quot;:&quot;BOT&quot; }, &quot;type&quot;:&quot;MENTION&quot; } }] ```
+          &quot;customEmojiMetadata&quot;: { # Annotation metadata for custom emoji. # The metadata for a custom emoji.
+            &quot;customEmoji&quot;: { # Represents a [custom emoji](https://support.google.com/chat/answer/12800149). # The custom emoji.
+              &quot;emojiName&quot;: &quot;A String&quot;, # Optional. Immutable. User-provided name for the custom emoji, which is unique within the organization. Required when the custom emoji is created, output only otherwise. Emoji names must start and end with colons, must be lowercase and can only contain alphanumeric characters, hyphens, and underscores. Hyphens and underscores should be used to separate words and cannot be used consecutively. Example: `:valid-emoji-name:`
+              &quot;name&quot;: &quot;A String&quot;, # Identifier. The resource name of the custom emoji, assigned by the server. Format: `customEmojis/{customEmoji}`
+              &quot;payload&quot;: { # Payload data for the custom emoji. # Optional. Input only. Payload data. Required when the custom emoji is created.
+                &quot;fileContent&quot;: &quot;A String&quot;, # Required. Input only. The image used for the custom emoji. The payload must be under 256 KB and the dimension of the image must be square and between 64 and 500 pixels. The restrictions are subject to change.
+                &quot;filename&quot;: &quot;A String&quot;, # Required. Input only. The image file name. Supported file extensions: `.png`, `.jpg`, `.gif`.
+              },
+              &quot;temporaryImageUri&quot;: &quot;A String&quot;, # Output only. A temporary image URL for the custom emoji, valid for at least 10 minutes. Note that this is not populated in the response when the custom emoji is created.
+              &quot;uid&quot;: &quot;A String&quot;, # Output only. Unique key for the custom emoji resource.
+            },
+          },
+          &quot;length&quot;: 42, # Length of the substring in the plain-text message body this annotation corresponds to. If not present, indicates a length of 0.
+          &quot;richLinkMetadata&quot;: { # A rich link to a resource. Rich links can be associated with the plain-text body of the message or represent chips that link to Google Workspace resources like Google Docs or Sheets with `start_index` and `length` of 0. # The metadata for a rich link.
+            &quot;calendarEventLinkData&quot;: { # Data for Calendar event links. # Data for a Calendar event link.
+              &quot;calendarId&quot;: &quot;A String&quot;, # The [Calendar identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars) of the linked Calendar.
+              &quot;eventId&quot;: &quot;A String&quot;, # The [Event identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events) of the linked Calendar event.
+            },
+            &quot;chatSpaceLinkData&quot;: { # Data for Chat space links. # Data for a chat space link.
+              &quot;message&quot;: &quot;A String&quot;, # The message of the linked Chat space resource. Format: `spaces/{space}/messages/{message}`
+              &quot;space&quot;: &quot;A String&quot;, # The space of the linked Chat space resource. Format: `spaces/{space}`
+              &quot;thread&quot;: &quot;A String&quot;, # The thread of the linked Chat space resource. Format: `spaces/{space}/threads/{thread}`
+            },
+            &quot;driveLinkData&quot;: { # Data for Google Drive links. # Data for a drive link.
+              &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # A [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref) which references a Google Drive file.
+                &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+              },
+              &quot;mimeType&quot;: &quot;A String&quot;, # The mime type of the linked Google Drive resource.
+            },
+            &quot;meetSpaceLinkData&quot;: { # Data for Meet space links. # Data for a Meet space link.
+              &quot;huddleStatus&quot;: &quot;A String&quot;, # Optional. Output only. If the Meet is a Huddle, indicates the status of the huddle. Otherwise, this is unset.
+              &quot;meetingCode&quot;: &quot;A String&quot;, # Meeting code of the linked Meet space.
+              &quot;type&quot;: &quot;A String&quot;, # Indicates the type of the Meet space.
+            },
+            &quot;richLinkType&quot;: &quot;A String&quot;, # The rich link type.
+            &quot;uri&quot;: &quot;A String&quot;, # The URI of this link.
+          },
+          &quot;slashCommand&quot;: { # Annotation metadata for slash commands (/). # The metadata for a slash command.
+            &quot;bot&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The Chat app whose command was invoked.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+            &quot;commandId&quot;: &quot;A String&quot;, # The command ID of the invoked slash command.
+            &quot;commandName&quot;: &quot;A String&quot;, # The name of the invoked slash command.
+            &quot;triggersDialog&quot;: True or False, # Indicates whether the slash command is for a dialog.
+            &quot;type&quot;: &quot;A String&quot;, # The type of slash command.
+          },
+          &quot;startIndex&quot;: 42, # Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          &quot;type&quot;: &quot;A String&quot;, # The type of this annotation.
+          &quot;userMention&quot;: { # Annotation metadata for user mentions (@). # The metadata of user mention.
+            &quot;type&quot;: &quot;A String&quot;, # The type of user mention.
+            &quot;user&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # The user mentioned.
+              &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
+              &quot;domainId&quot;: &quot;A String&quot;, # Unique identifier of the user&#x27;s Google Workspace domain.
+              &quot;isAnonymous&quot;: True or False, # Output only. When `true`, the user is deleted or their profile is not visible.
+              &quot;name&quot;: &quot;A String&quot;, # Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `id` for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API. For example, `users/123456789` in Chat API represents the same person as the `123456789` Person profile ID in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. - the user&#x27;s email address can be used as an alias for `{user}` in API requests. For example, if the People API Person profile ID for `user@example.com` is `123456789`, you can use `users/user@example.com` as an alias to reference `users/123456789`. Only the canonical resource name (for example `users/123456789`) will be returned from the API.
+              &quot;type&quot;: &quot;A String&quot;, # User type.
+            },
+          },
+        },
+      ],
+      &quot;attachments&quot;: [ # Output only. Attachments that were part of the quoted message. These are copies of the quoted message&#x27;s attachment metadata. Populated only for FORWARD quote type.
+        { # An attachment in Google Chat.
+          &quot;attachmentDataRef&quot;: { # A reference to the attachment data. # Optional. A reference to the attachment data. This field is used to create or update messages with attachments, or with the media API to download the attachment data.
+            &quot;attachmentUploadToken&quot;: &quot;A String&quot;, # Optional. Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments.
+            &quot;resourceName&quot;: &quot;A String&quot;, # Optional. The resource name of the attachment data. This field is used with the media API to download the attachment data.
+          },
+          &quot;contentName&quot;: &quot;A String&quot;, # Output only. The original file name for the content, not the full path.
+          &quot;contentType&quot;: &quot;A String&quot;, # Output only. The content type (MIME type) of the file.
+          &quot;downloadUri&quot;: &quot;A String&quot;, # Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn&#x27;t use this URL to download attachment content.
+          &quot;driveDataRef&quot;: { # A reference to the data of a drive attachment. # Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+            &quot;driveFileId&quot;: &quot;A String&quot;, # The ID for the drive file. Use with the Drive API.
+          },
+          &quot;name&quot;: &quot;A String&quot;, # Identifier. Resource name of the attachment. Format: `spaces/{space}/messages/{message}/attachments/{attachment}`.
+          &quot;source&quot;: &quot;A String&quot;, # Output only. The source of the attachment.
+          &quot;thumbnailUri&quot;: &quot;A String&quot;, # Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn&#x27;t use this URL to download attachment content.
+        },
+      ],
+      &quot;formattedText&quot;: &quot;A String&quot;, # Output only. Contains the quoted message `text` with markups added to support rich formatting like hyperlinks,custom emojis, markup, etc. Populated only for FORWARD quote type.
+      &quot;sender&quot;: &quot;A String&quot;, # Output only. The quoted message&#x27;s author name. Populated for both REPLY &amp; FORWARD quote types.
+      &quot;text&quot;: &quot;A String&quot;, # Output only. Snapshot of the quoted message&#x27;s text content.
+    },
   },
   &quot;sender&quot;: { # A user in Google Chat. When returned as an output from a request, if your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output for a `User` resource only populates the user&#x27;s `name` and `type`. # Output only. The user who created the message. If your Chat app [authenticates as a user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user), the output populates the [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User) `name` and `type`.
     &quot;displayName&quot;: &quot;A String&quot;, # Output only. The user&#x27;s display name.
