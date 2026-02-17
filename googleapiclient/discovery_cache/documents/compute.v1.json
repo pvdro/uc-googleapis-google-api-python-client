@@ -4327,6 +4327,11 @@
 "httpMethod": "GET",
 "id": "compute.firewallPolicies.listAssociations",
 "parameters": {
+"includeInheritedPolicies": {
+"description": "If set to \"true\", the response will contain a list of all associations for\nthe containing folders and the containing organization of the target. The\nparameter has no effect if the target is an organization.",
+"location": "query",
+"type": "boolean"
+},
 "targetResource": {
 "description": "The target resource to list associations. It is an organization, or a\nfolder.",
 "location": "query",
@@ -6378,7 +6383,7 @@
 ]
 },
 "insert": {
-"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.",
+"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.\n\nNote: Use the following APIs to manage network endpoint groups:\n   \n   - \n   To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity\n   NEGs): zonal\n   API\n   - \n   To manage NEGs with regional scope (such as regional internet NEGs,\n   serverless NEGs, Private Service Connect NEGs): regional\n   API\n   - \n   To manage NEGs with global scope (such as global internet NEGs):global\n   API",
 "flatPath": "projects/{project}/global/networkEndpointGroups",
 "httpMethod": "POST",
 "id": "compute.globalNetworkEndpointGroups.insert",
@@ -17594,7 +17599,7 @@
 ]
 },
 "insert": {
-"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.",
+"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.\n\nNote: Use the following APIs to manage network endpoint groups:\n   \n   - \n   To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity\n   NEGs): zonal\n   API\n   - \n   To manage NEGs with regional scope (such as regional internet NEGs,\n   serverless NEGs, Private Service Connect NEGs): regional\n   API\n   - \n   To manage NEGs with global scope (such as global internet NEGs):global\n   API",
 "flatPath": "projects/{project}/zones/{zone}/networkEndpointGroups",
 "httpMethod": "POST",
 "id": "compute.networkEndpointGroups.insert",
@@ -28072,7 +28077,7 @@
 ]
 },
 "insert": {
-"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.",
+"description": "Creates a network endpoint group in the specified project using the\nparameters that are included in the request.\n\nNote: Use the following APIs to manage network endpoint groups:\n   \n   - \n   To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity\n   NEGs): zonal\n   API\n   - \n   To manage NEGs with regional scope (such as regional internet NEGs,\n   serverless NEGs, Private Service Connect NEGs): regional\n   API\n   - \n   To manage NEGs with global scope (such as global internet NEGs):global\n   API",
 "flatPath": "projects/{project}/regions/{region}/networkEndpointGroups",
 "httpMethod": "POST",
 "id": "compute.regionNetworkEndpointGroups.insert",
@@ -43137,7 +43142,7 @@
 }
 }
 },
-"revision": "20260122",
+"revision": "20260206",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -44730,7 +44735,7 @@ false
 "type": "object"
 },
 "AllocationSpecificSKUAllocationReservedInstanceProperties": {
-"description": "Properties of the SKU instances being reserved.\nNext ID: 9",
+"description": "Properties of the SKU instances being reserved.\nNext ID: 10",
 "id": "AllocationSpecificSKUAllocationReservedInstanceProperties",
 "properties": {
 "guestAccelerators": {
@@ -57936,6 +57941,9 @@ false
 "$ref": "Tags",
 "description": "Tags to apply to this instance. Tags are used to identify valid\nsources or targets for network firewalls and are specified by the client\nduring instance creation. The tags can be later modified by the setTags\nmethod. Each tag within the list must comply withRFC1035.\nMultiple tags can be specified via the 'tags.items' field."
 },
+"workloadIdentityConfig": {
+"$ref": "WorkloadIdentityConfig"
+},
 "zone": {
 "description": "Output only. [Output Only] URL of the zone where the instance resides.\nYou must specify this field as part of the HTTP request URL. It is\nnot settable as a field in the request body.",
 "readOnly": true,
@@ -59121,6 +59129,20 @@ false
 "enumDescriptions": [
 "",
 ""
+],
+"type": "string"
+},
+"onFailedHealthCheck": {
+"description": "The action that a MIG performs on an unhealthy VM. A VM is marked as\nunhealthy when the application running on that VM fails a health check.\nValid values are:\n   \n   - DEFAULT_ACTION (default): MIG uses the same action\n   configured for instanceLifecyclePolicy.defaultActionOnFailure field.\n   - REPAIR: MIG automatically repairs an unhealthy VM by\n   recreating it.\n   - DO_NOTHING: MIG doesn't repair an unhealthy VM.\n   For more information, see \n   About repairing VMs in a MIG.",
+"enum": [
+"DEFAULT_ACTION",
+"DO_NOTHING",
+"REPAIR"
+],
+"enumDescriptions": [
+"(Default) MIG uses the same action configured for\ninstanceLifecyclePolicy.defaultActionOnFailure field.",
+"MIG doesn't repair an unhealthy VM.",
+"MIG automatically repairs an unhealthy VM by recreating it."
 ],
 "type": "string"
 }
@@ -61352,6 +61374,9 @@ false
 "tags": {
 "$ref": "Tags",
 "description": "A list of tags to apply to the instances that are created from these\nproperties. The tags identify valid sources or targets for network\nfirewalls. The setTags method can modify this list of tags. Each tag within\nthe list must comply with RFC1035."
+},
+"workloadIdentityConfig": {
+"$ref": "WorkloadIdentityConfig"
 }
 },
 "type": "object"
@@ -62481,6 +62506,10 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"params": {
+"$ref": "InstantSnapshotParams",
+"description": "Input only. Additional params passed with the request, but not persisted\nas part of resource payload."
+},
 "region": {
 "description": "Output only. [Output Only] URL of the region where the instant snapshot resides.\nYou must specify this field as part of the HTTP request URL. It is\nnot settable as a field in the request body.",
 "readOnly": true,
@@ -62864,6 +62893,20 @@ false
 "type": "string"
 }
 },
+"type": "object"
+}
+},
+"type": "object"
+},
+"InstantSnapshotParams": {
+"description": "Additional instant snapshot params.",
+"id": "InstantSnapshotParams",
+"properties": {
+"resourceManagerTags": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Input only. Resource manager tags to be bound to the instant snapshot. Tag keys and\nvalues have the same definition as resource\nmanager tags. Keys and values can be either in numeric format,\nsuch as `tagKeys/{tag_key_id}` and `tagValues/{tag_value_id}` or in\nnamespaced format such as `{org_id|project_id}/{tag_key_short_name}` and\n`{tag_value_short_name}`. The field is ignored (both PUT &\nPATCH) when empty.",
 "type": "object"
 }
 },
@@ -63278,7 +63321,7 @@ false
 "type": "string"
 },
 "subzone": {
-"description": "Specific subzone in the InterconnectLocation that represents where\nthis connection is to be provisioned.",
+"description": "To be deprecated.",
 "enum": [
 "SUBZONE_A",
 "SUBZONE_B"
@@ -69808,7 +69851,7 @@ false
 "type": "object"
 },
 "NetworkEndpointGroup": {
-"description": "Represents a collection of network endpoints.\n\nA network endpoint group (NEG) defines how a set of endpoints should be\nreached, whether they are reachable, and where they are located.\nFor more information about using NEGs for different use cases, seeNetwork endpoint groups overview.",
+"description": "Represents a collection of network endpoints.\n\nA network endpoint group (NEG) defines how a set of endpoints should be\nreached, whether they are reachable, and where they are located.\nFor more information about using NEGs for different use cases, seeNetwork endpoint groups overview.\n\nNote: Use the following APIs to manage network endpoint groups:\n   \n   - \n   To manage NEGs with zonal scope (such as zonal NEGs, hybrid connectivity\n   NEGs): zonal\n   API\n   - \n   To manage NEGs with regional scope (such as regional internet NEGs,\n   serverless NEGs, Private Service Connect NEGs): regional\n   API\n   - \n   To manage NEGs with global scope (such as global internet NEGs):global\n   API",
 "id": "NetworkEndpointGroup",
 "properties": {
 "annotations": {
@@ -70877,6 +70920,10 @@ false
 "$ref": "AliasIpRange"
 },
 "type": "array"
+},
+"enableVpcScopedDns": {
+"description": "Optional. If true, DNS resolution will be enabled over this interface. Only valid\nwith network_attachment.",
+"type": "boolean"
 },
 "fingerprint": {
 "description": "Fingerprint hash of contents stored in this network interface.\nThis field will be ignored when inserting an Instance or\nadding a NetworkInterface. An up-to-date\nfingerprint must be provided in order to update theNetworkInterface. The request will fail with error400 Bad Request if the fingerprint is not provided, or412 Precondition Failed if the fingerprint is out of date.",
@@ -80360,6 +80407,20 @@ false
 },
 "description": {
 "description": "An optional description of this resource. Provide this property when you\ncreate the resource.",
+"type": "string"
+},
+"earlyAccessMaintenance": {
+"description": "Indicates the early access maintenance for the reservation.\nIf this field is absent or set to NO_EARLY_ACCESS, the reservation is not\nenrolled in early access maintenance and the standard notice applies.",
+"enum": [
+"NO_EARLY_ACCESS",
+"WAVE1",
+"WAVE2"
+],
+"enumDescriptions": [
+"No early access.",
+"Wave 1: Fastest notification period",
+"Wave 2: Medium notification period"
+],
 "type": "string"
 },
 "enableEmergentMaintenance": {
@@ -99999,6 +100060,18 @@ false
 "Default."
 ],
 "type": "string"
+}
+},
+"type": "object"
+},
+"WorkloadIdentityConfig": {
+"id": "WorkloadIdentityConfig",
+"properties": {
+"identity": {
+"type": "string"
+},
+"identityCertificateEnabled": {
+"type": "boolean"
 }
 },
 "type": "object"
