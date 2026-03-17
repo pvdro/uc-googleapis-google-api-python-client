@@ -54676,7 +54676,7 @@
 }
 }
 },
-"revision": "20260227",
+"revision": "20260306",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -59092,18 +59092,6 @@ false
 },
 "readOnly": true,
 "type": "array"
-},
-"vpcNetworkScope": {
-"description": "The network scope of the backends that can be added to the backend\nservice. This field can be either GLOBAL_VPC_NETWORK orREGIONAL_VPC_NETWORK.\n\nA backend service with the VPC scope set to GLOBAL_VPC_NETWORK\nis only allowed to have backends in global VPC networks.\n\nWhen the VPC scope is set to REGIONAL_VPC_NETWORK the backend\nservice is only allowed to have backends in regional networks in the same\nscope as the backend service.\nNote: if not specified then GLOBAL_VPC_NETWORK will be used.",
-"enum": [
-"GLOBAL_VPC_NETWORK",
-"REGIONAL_VPC_NETWORK"
-],
-"enumDescriptions": [
-"The backend service can only have backends in global VPCs",
-"The backend service can only have backends in regional VPCs"
-],
-"type": "string"
 }
 },
 "type": "object"
@@ -61271,6 +61259,10 @@ false
 "description": "Instance provisining properties.",
 "id": "CapacityAdviceRequestInstanceProperties",
 "properties": {
+"acceleratorTopology": {
+"description": "Input only. Specifies the topology required to create a partition for\nVMs that have interconnected GPUs or TPUs.\nExample values: 2x2 for ct5l-hightpu-4t.",
+"type": "string"
+},
 "scheduling": {
 "$ref": "CapacityAdviceRequestInstancePropertiesScheduling",
 "description": "Specifies the scheduling options."
@@ -74827,7 +74819,7 @@ false
 "type": "string"
 },
 "source": {
-"description": "The full Google Cloud Storage URL where the raw disk image archive is\nstored.\nThe following are valid formats for the URL:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
+"description": "The full Google Cloud Storage URL or Artifact Registry path where the raw\ndisk image archive is stored.\nThe following are valid formats:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id@dirsum_sha256:hex_value\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
 "type": "string"
 }
 },
@@ -78149,6 +78141,37 @@ false
 },
 "description": "Map of accelerator topologies that should have their state changed to\nthe specified value. The key is the hashed topology locus id. It can be\nobtained from the GetAvailableAcceleratorTopologies rpc.",
 "type": "object"
+},
+"acceleratorTopologyConfigurations": {
+"additionalProperties": {
+"$ref": "InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration"
+},
+"description": "Map of accelerator topologies that should have their state changed to\nthe specified configuration. The map key is the hashed topology locus id.\nIt can be obtained from the GetAvailableAcceleratorTopologies rpc.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration": {
+"description": "Configuration for a single accelerator topology.",
+"id": "InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration",
+"properties": {
+"action": {
+"enum": [
+"ACCELERATOR_TOPOLOGY_ACTION_UNSPECIFIED",
+"ACTIVATE",
+"DEACTIVATE"
+],
+"enumDescriptions": [
+"Default value. Should not be used.",
+"The accelerator topology is to be activated.",
+"The accelerator topology is to be deactivated."
+],
+"type": "string"
+},
+"externalId": {
+"description": "Identifier of the accelerator topology assigned externally to\ndifferentiate who is the owner of the topology. The format needs to\nconform to RFC1035 and be unique. The uniqueness is guaranteed by the\nrequestor. If it is provided on activating the sub-slice it will have to\nbe provided on deactivating as well. This identifier is cleared on\nsuccessful deform of a sub-slice.",
+"type": "string"
 }
 },
 "type": "object"
@@ -78233,14 +78256,12 @@ false
 "enum": [
 "DEGRADED",
 "HEALTHY",
-"UNHEALTHY",
-"UNKNOWN"
+"UNHEALTHY"
 ],
 "enumDescriptions": [
 "All VM are in RUNNING state, but there is an issue with\nthe inter-chip connectivity that makes this part\nof the infrastructure ready to use as a working\ninter-chip connected group only in a degraded mode.\nThis is allowed only for Instances configured with ICI\nresiliency",
 "All VM are in RUNNING state, there are no issues with the\ninter-chip connectivity.",
-"Some VMs may not be in RUNNING state, or there is an\nissue with the inter-chip connectivity that makes this\npart of the infrastructure unsuitable for forming a\nworking inter-chip connected group.",
-"No signal available"
+"Some VMs may not be in RUNNING state, or there is an\nissue with the inter-chip connectivity that makes this\npart of the infrastructure unsuitable for forming a\nworking inter-chip connected group."
 ],
 "type": "string"
 },
@@ -78341,6 +78362,10 @@ false
 "errorTimestamp": {
 "description": "Timestamp when the last error happened",
 "format": "google-datetime",
+"type": "string"
+},
+"externalId": {
+"description": "Identifier of the accelerator topology assigned externally to\ndifferentiate who is the owner of the topology. This is set in\nConfigureAcceleratorTopologies. If it is provided on activating the\nsub-slice it will have to be provided on deactivating as well.\nThis identifier is cleared on successful deform of a sub-slice.",
 "type": "string"
 }
 },
@@ -78560,6 +78585,10 @@ false
 "properties": {
 "noCreationRetries": {
 "description": "If this flag is true, the managed instance group attempts to create all\ninstances initiated by this resize request only once. If there is an error\nduring creation, the managed instance group does not retry create this\ninstance, and we will decrease the targetSize of the request\ninstead. If the flag is false, the group attempts to recreate each instance\ncontinuously until it succeeds.\n\nThis flag matters only in the first attempt of creation of an instance.\nAfter an instance is successfully created while this flag is enabled, the\ninstance behaves the same way as all the other instances created with a\nregular resize request. In particular, if a running instance dies\nunexpectedly at a later time and needs to be recreated, this mode does not\naffect the recreation behavior in that scenario.\n\nThis flag is applicable only to the current resize request. It does not\ninfluence other resize requests in any way.\n\nYou can see which instances is being creating in which mode by calling\nthe get or listManagedInstances API.",
+"type": "boolean"
+},
+"scaleInProtection": {
+"description": "If this flag is enabled within a request to decrease a MIG's target size,\nthen the MIG declines that request.",
 "type": "boolean"
 },
 "targetSize": {
@@ -99738,6 +99767,24 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"networkTier": {
+"description": "Network tier to be used for this prefix. All child delegated prefixes will\ninherit this field. If this field is not specified, it defaults to the\nnetwork tier of the project that the PublicAdvertisedPrefix belongs to.",
+"enum": [
+"FIXED_STANDARD",
+"PREMIUM",
+"SELECT",
+"STANDARD",
+"STANDARD_OVERRIDES_FIXED_STANDARD"
+],
+"enumDescriptions": [
+"Public internet quality with fixed bandwidth.",
+"High quality, Google-grade network tier, support for all networking\nproducts.",
+"Price competitive network tier, support for all networking products.",
+"Public internet quality, only limited support for other networking\nproducts.",
+"(Output only) Temporary tier for FIXED_STANDARD when fixed standard tier\nis expired or not configured."
+],
+"type": "string"
+},
 "pdpScope": {
 "description": "Specifies how child public delegated prefix will be scoped. It could\nbe one of following values:\n   \n   \n     - `REGIONAL`: The public delegated prefix is regional only. The\n     provisioning will take a few minutes.\n     - `GLOBAL`: The public delegated prefix is global only. The\n     provisioning will take ~4 weeks.\n     - `GLOBAL_AND_REGIONAL` [output only]: The public delegated prefixes is\n      BYOIP V1 legacy prefix. This is output only value and no longer\n      supported in BYOIP V2.",
 "enum": [
@@ -100083,6 +100130,24 @@ false
 },
 "description": "Name of the resource. Provided by the client when the resource is created.\nThe name must be 1-63 characters long, and comply withRFC1035.\nSpecifically, the name must be 1-63 characters long and match the regular\nexpression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first\ncharacter must be a lowercase letter, and all following characters must\nbe a dash, lowercase letter, or digit, except the last character, which\ncannot be a dash.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"networkTier": {
+"description": "Network tier of the public delegated prefix. If populated, it must match\nthe network tier of the parent public advertised prefix. If not populated,\nit defaults to the network tier of the parent public advertised prefix.",
+"enum": [
+"FIXED_STANDARD",
+"PREMIUM",
+"SELECT",
+"STANDARD",
+"STANDARD_OVERRIDES_FIXED_STANDARD"
+],
+"enumDescriptions": [
+"Public internet quality with fixed bandwidth.",
+"High quality, Google-grade network tier, support for all networking\nproducts.",
+"Price competitive network tier, support for all networking products.",
+"Public internet quality, only limited support for other networking\nproducts.",
+"(Output only) Temporary tier for FIXED_STANDARD when fixed standard tier\nis expired or not configured."
+],
 "type": "string"
 },
 "parentPrefix": {
@@ -104087,6 +104152,10 @@ false
 "properties": {
 "noCreationRetries": {
 "description": "If this flag is true, the managed instance group attempts to create all\ninstances initiated by this resize request only once. If there is an error\nduring creation, the managed instance group does not retry create this\ninstance, and we will decrease the targetSize of the request\ninstead. If the flag is false, the group attempts to recreate each instance\ncontinuously until it succeeds.\n\nThis flag matters only in the first attempt of creation of an instance.\nAfter an instance is successfully created while this flag is enabled, the\ninstance behaves the same way as all the other instances created with a\nregular resize request. In particular, if a running instance dies\nunexpectedly at a later time and needs to be recreated, this mode does not\naffect the recreation behavior in that scenario.\n\nThis flag is applicable only to the current resize request. It does not\ninfluence other resize requests in any way.\n\nYou can see which instances ar being created in which mode by calling\nthe get or listManagedInstances API.",
+"type": "boolean"
+},
+"scaleInProtection": {
+"description": "If this flag is enabled within a request to decrease a MIG's target size,\nthen the MIG declines that request.",
 "type": "boolean"
 },
 "targetSize": {
@@ -108447,6 +108516,16 @@ false
 "name": {
 "description": "Name of the resource. Provided by the client when the resource is created.\nThe name must be 1-63 characters long, and comply withRFC1035.\nSpecifically, the name must be 1-63 characters long and match the regular\nexpression `[a-z]([-a-z0-9]*[a-z0-9])?`\nwhich means the first character must be a lowercase letter, and all\nfollowing characters must be a dash, lowercase letter, or digit, except\nthe last character, which cannot be a dash.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"pauseTime": {
+"description": "Output only. The timestamp at which the Rollout was paused.",
+"readOnly": true,
+"type": "string"
+},
+"resumeTime": {
+"description": "Output only. The timestamp at which the Rollout was resumed.",
+"readOnly": true,
 "type": "string"
 },
 "rolloutEntity": {
@@ -120225,6 +120304,23 @@ false
 "properties": {
 "ipCidrRange": {
 "description": "The range of IP addresses belonging to this subnetwork secondary range.\nProvide this property when you create the subnetwork. Ranges must be\nunique and non-overlapping with all primary and secondary IP ranges\nwithin a network. Both IPv4 and IPv6 ranges are supported. For IPv4,\nthe range can be any range listed in theValid\nranges list.\n\nFor IPv6:\nThe range must have a /64 prefix length.\nThe range must be omitted, for auto-allocation from Google-defined ULA\nIPv6 range.\nFor BYOGUA internal IPv6 secondary range, the range may be specified\nalong with the `ipCollection` field.\nIf an `ipCollection` is specified, the requested ip_cidr_range must lie\nwithin the range of the PDP referenced by the `ipCollection` field for\nallocation.\nIf `ipCollection` field is specified, but ip_cidr_range is not,\nthe range is auto-allocated from the PDP referenced by the `ipCollection`\nfield.",
+"type": "string"
+},
+"ipCollection": {
+"description": "Reference to a Public Delegated Prefix (PDP) for BYOIP.\nThis field should be specified for configuring BYOGUA internal IPv6\nsecondary range.\nWhen specified along with the ip_cidr_range, the ip_cidr_range must lie\nwithin the PDP referenced by the `ipCollection` field.\nWhen specified without the ip_cidr_range, the range is auto-allocated\nfrom the PDP referenced by the `ipCollection` field.",
+"type": "string"
+},
+"ipVersion": {
+"enum": [
+"IPV4",
+"IPV6",
+"IP_VERSION_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"Treated as IPV4 for backward-compatibility."
+],
 "type": "string"
 },
 "rangeName": {

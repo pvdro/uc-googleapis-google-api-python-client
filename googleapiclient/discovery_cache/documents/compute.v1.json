@@ -10747,6 +10747,21 @@
 "pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
 "required": true,
 "type": "string"
+},
+"view": {
+"description": "View of the instance template.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
 }
 },
 "path": "projects/{project}/global/instanceTemplates/{instanceTemplate}",
@@ -10877,6 +10892,21 @@
 "description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
 "location": "query",
 "type": "boolean"
+},
+"view": {
+"description": "View of the instance template.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
 }
 },
 "path": "projects/{project}/global/instanceTemplates",
@@ -11527,6 +11557,21 @@
 "required": true,
 "type": "string"
 },
+"view": {
+"description": "View of the instance.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
+},
 "zone": {
 "description": "The name of the zone for this request.",
 "location": "path",
@@ -11690,6 +11735,54 @@
 "path": "projects/{project}/zones/{zone}/instances/{resource}/getIamPolicy",
 "response": {
 "$ref": "Policy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"getPartnerMetadata": {
+"description": "Gets partner metadata of the specified instance and namespaces.",
+"flatPath": "projects/{project}/zones/{zone}/instances/{instance}/getPartnerMetadata",
+"httpMethod": "GET",
+"id": "compute.instances.getPartnerMetadata",
+"parameterOrder": [
+"project",
+"zone",
+"instance"
+],
+"parameters": {
+"instance": {
+"description": "Name of the instance scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"namespaces": {
+"description": "Comma separated partner metadata namespaces.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/instances/{instance}/getPartnerMetadata",
+"response": {
+"$ref": "PartnerMetadata"
 },
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
@@ -11938,6 +12031,21 @@
 "location": "query",
 "type": "boolean"
 },
+"view": {
+"description": "View of the instance.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
+},
 "zone": {
 "description": "The name of the zone for this request.",
 "location": "path",
@@ -12025,6 +12133,56 @@
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute",
 "https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patchPartnerMetadata": {
+"description": "Patches partner metadata of the specified instance.",
+"flatPath": "projects/{project}/zones/{zone}/instances/{instance}/patchPartnerMetadata",
+"httpMethod": "POST",
+"id": "compute.instances.patchPartnerMetadata",
+"parameterOrder": [
+"project",
+"zone",
+"instance"
+],
+"parameters": {
+"instance": {
+"description": "Name of the instance scoping this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"zone": {
+"description": "The name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/instances/{instance}/patchPartnerMetadata",
+"request": {
+"$ref": "PartnerMetadata"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
 ]
 },
 "performMaintenance": {
@@ -26972,6 +27130,279 @@
 }
 }
 },
+"regionInstanceGroupManagerResizeRequests": {
+"methods": {
+"cancel": {
+"description": "Cancels the specified resize request.\nCancelled resize request no longer waits for the resources to be\nprovisioned. Cancel is only possible for requests that are in accepted\nstate.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+"httpMethod": "POST",
+"id": "compute.regionInstanceGroupManagerResizeRequests.cancel",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager",
+"resizeRequest"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "The name of the managed instance group.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region\nscoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resizeRequest": {
+"description": "The name of the resize request to cancel.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}/cancel",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"delete": {
+"description": "Deletes the specified, inactive resize request. Requests that are still\nactive cannot be deleted. Deleting request does not delete instances that\nwere provisioned previously.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"httpMethod": "DELETE",
+"id": "compute.regionInstanceGroupManagerResizeRequests.delete",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager",
+"resizeRequest"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "The name of the managed instance group.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region\nscoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"resizeRequest": {
+"description": "The name of the resize request to delete.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns all of the details about the specified resize request.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"httpMethod": "GET",
+"id": "compute.regionInstanceGroupManagerResizeRequests.get",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager",
+"resizeRequest"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "The name of the managed instance group.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region\nscoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"resizeRequest": {
+"description": "The name of the resize request.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests/{resizeRequest}",
+"response": {
+"$ref": "InstanceGroupManagerResizeRequest"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a new Resize Request that starts provisioning VMs immediately\nor queues VM creation.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"httpMethod": "POST",
+"id": "compute.regionInstanceGroupManagerResizeRequests.insert",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager"
+],
+"parameters": {
+"instanceGroupManager": {
+"description": "Name of the managed instance group to which the resize request is scoped.\nName should conform to RFC1035 or be a resource ID.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region\nscoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"request": {
+"$ref": "InstanceGroupManagerResizeRequest"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Retrieves a list of Resize Requests that are contained in the\nmanaged instance group.",
+"flatPath": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"httpMethod": "GET",
+"id": "compute.regionInstanceGroupManagerResizeRequests.list",
+"parameterOrder": [
+"project",
+"region",
+"instanceGroupManager"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most\nCompute resources support two types of filter expressions:\nexpressions that support regular expressions and expressions that follow\nAPI improvement proposal AIP-160.\nThese two types of filter expressions cannot be mixed in one request.\n\nIf you want to use AIP-160, your expression must specify the field name, an\noperator, and the value that you want to use for filtering. The value\nmust be a string, a number, or a boolean. The operator\nmust be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.\n\nFor example, if you are filtering Compute Engine instances, you can\nexclude instances named `example-instance` by specifying\n`name != example-instance`.\n\nThe `:*` comparison can be used to test whether a key has been defined.\nFor example, to find all objects with `owner` label use:\n```\nlabels.owner:*\n```\n\nYou can also filter nested fields. For example, you could specify\n`scheduling.automaticRestart = false` to include instances only\nif they are not scheduled for automatic restarts. You can use filtering\non nested fields to filter based onresource labels.\n\nTo filter on multiple expressions, provide each separate expression within\nparentheses. For example:\n```\n(scheduling.automaticRestart = true)\n(cpuPlatform = \"Intel Skylake\")\n```\nBy default, each expression is an `AND` expression. However, you\ncan include `AND` and `OR` expressions explicitly.\nFor example:\n```\n(cpuPlatform = \"Intel Skylake\") OR\n(cpuPlatform = \"Intel Broadwell\") AND\n(scheduling.automaticRestart = true)\n```\n\nIf you want to use a regular expression, use the `eq` (equal) or `ne`\n(not equal) operator against a single un-parenthesized expression with or\nwithout quotes or against multiple parenthesized expressions. Examples:\n\n`fieldname eq unquoted literal`\n`fieldname eq 'single quoted literal'`\n`fieldname eq \"double quoted literal\"`\n`(fieldname1 eq literal) (fieldname2 ne \"literal\")`\n\nThe literal value is interpreted as a regular expression using GoogleRE2 library syntax.\nThe literal value must match the entire field.\n\nFor example, to filter for instances that do not end with name \"instance\",\nyou would use `name ne .*instance`.\n\nYou cannot combine constraints on multiple fields using regular\nexpressions.",
+"location": "query",
+"type": "string"
+},
+"instanceGroupManager": {
+"description": "The name of the managed instance group. The name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned.\nIf the number of available results is larger than `maxResults`,\nCompute Engine returns a `nextPageToken` that can be used to get\nthe next page of results in subsequent list requests. Acceptable values are\n`0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results\nare returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation\ntimestamp using `orderBy=\"creationTimestamp desc\"`. This sorts\nresults based on the `creationTimestamp` field in\nreverse chronological order (newest result first). Use this to sort\nresources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by `name` or\n`creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the\n`nextPageToken` returned by a previous list request to get\nthe next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region\nscoping this request. Name should conform to RFC1035.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resizeRequests",
+"response": {
+"$ref": "RegionInstanceGroupManagerResizeRequestsListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+}
+}
+},
 "regionInstanceGroupManagers": {
 "methods": {
 "abandonInstances": {
@@ -28489,6 +28920,21 @@
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "required": true,
 "type": "string"
+},
+"view": {
+"description": "View of the instance template.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
 }
 },
 "path": "projects/{project}/regions/{region}/instanceTemplates/{instanceTemplate}",
@@ -28594,6 +29040,21 @@
 "description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
 "location": "query",
 "type": "boolean"
+},
+"view": {
+"description": "View of the instance template.",
+"enum": [
+"BASIC",
+"FULL",
+"INSTANCE_VIEW_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Include everything except Partner Metadata.",
+"Include everything.",
+"The default / unset value. The API will default to the BASIC view."
+],
+"location": "query",
+"type": "string"
 }
 },
 "path": "projects/{project}/regions/{region}/instanceTemplates",
@@ -44378,6 +44839,253 @@
 }
 }
 },
+"zoneVmExtensionPolicies": {
+"methods": {
+"delete": {
+"description": "Deletes a specified zone VM extension policy.",
+"flatPath": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"httpMethod": "DELETE",
+"id": "compute.zoneVmExtensionPolicies.delete",
+"parameterOrder": [
+"project",
+"zone",
+"vmExtensionPolicy"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"vmExtensionPolicy": {
+"description": "Name of the zone VM extension policy to delete.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Retrieves details of a specific zone VM extension policy.",
+"flatPath": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"httpMethod": "GET",
+"id": "compute.zoneVmExtensionPolicies.get",
+"parameterOrder": [
+"project",
+"zone",
+"vmExtensionPolicy"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"vmExtensionPolicy": {
+"description": "Name of the VM extension policy resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"response": {
+"$ref": "VmExtensionPolicy"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a new zone-level VM extension policy within a project.",
+"flatPath": "projects/{project}/zones/{zone}/vmExtensionPolicies",
+"httpMethod": "POST",
+"id": "compute.zoneVmExtensionPolicies.insert",
+"parameterOrder": [
+"project",
+"zone"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/vmExtensionPolicies",
+"request": {
+"$ref": "VmExtensionPolicy"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists all VM extension policies within a specific zone for a project.",
+"flatPath": "projects/{project}/zones/{zone}/vmExtensionPolicies",
+"httpMethod": "GET",
+"id": "compute.zoneVmExtensionPolicies.list",
+"parameterOrder": [
+"project",
+"zone"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most\nCompute resources support two types of filter expressions:\nexpressions that support regular expressions and expressions that follow\nAPI improvement proposal AIP-160.\nThese two types of filter expressions cannot be mixed in one request.\n\nIf you want to use AIP-160, your expression must specify the field name, an\noperator, and the value that you want to use for filtering. The value\nmust be a string, a number, or a boolean. The operator\nmust be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.\n\nFor example, if you are filtering Compute Engine instances, you can\nexclude instances named `example-instance` by specifying\n`name != example-instance`.\n\nThe `:*` comparison can be used to test whether a key has been defined.\nFor example, to find all objects with `owner` label use:\n```\nlabels.owner:*\n```\n\nYou can also filter nested fields. For example, you could specify\n`scheduling.automaticRestart = false` to include instances only\nif they are not scheduled for automatic restarts. You can use filtering\non nested fields to filter based onresource labels.\n\nTo filter on multiple expressions, provide each separate expression within\nparentheses. For example:\n```\n(scheduling.automaticRestart = true)\n(cpuPlatform = \"Intel Skylake\")\n```\nBy default, each expression is an `AND` expression. However, you\ncan include `AND` and `OR` expressions explicitly.\nFor example:\n```\n(cpuPlatform = \"Intel Skylake\") OR\n(cpuPlatform = \"Intel Broadwell\") AND\n(scheduling.automaticRestart = true)\n```\n\nIf you want to use a regular expression, use the `eq` (equal) or `ne`\n(not equal) operator against a single un-parenthesized expression with or\nwithout quotes or against multiple parenthesized expressions. Examples:\n\n`fieldname eq unquoted literal`\n`fieldname eq 'single quoted literal'`\n`fieldname eq \"double quoted literal\"`\n`(fieldname1 eq literal) (fieldname2 ne \"literal\")`\n\nThe literal value is interpreted as a regular expression using GoogleRE2 library syntax.\nThe literal value must match the entire field.\n\nFor example, to filter for instances that do not end with name \"instance\",\nyou would use `name ne .*instance`.\n\nYou cannot combine constraints on multiple fields using regular\nexpressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned.\nIf the number of available results is larger than `maxResults`,\nCompute Engine returns a `nextPageToken` that can be used to get\nthe next page of results in subsequent list requests. Acceptable values are\n`0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results\nare returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation\ntimestamp using `orderBy=\"creationTimestamp desc\"`. This sorts\nresults based on the `creationTimestamp` field in\nreverse chronological order (newest result first). Use this to sort\nresources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by `name` or\n`creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the\n`nextPageToken` returned by a previous list request to get\nthe next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
+"location": "query",
+"type": "boolean"
+},
+"zone": {
+"description": "Name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/vmExtensionPolicies",
+"response": {
+"$ref": "VmExtensionPolicyList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"update": {
+"description": "Modifies an existing zone VM extension policy.",
+"flatPath": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"httpMethod": "PATCH",
+"id": "compute.zoneVmExtensionPolicies.update",
+"parameterOrder": [
+"project",
+"zone",
+"vmExtensionPolicy"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).",
+"location": "query",
+"type": "string"
+},
+"vmExtensionPolicy": {
+"description": "Name of the zone VM extension policy to update.",
+"location": "path",
+"required": true,
+"type": "string"
+},
+"zone": {
+"description": "Name of the zone for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/vmExtensionPolicies/{vmExtensionPolicy}",
+"request": {
+"$ref": "VmExtensionPolicy"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "zones": {
 "methods": {
 "get": {
@@ -44473,7 +45181,7 @@
 }
 }
 },
-"revision": "20260227",
+"revision": "20260306",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -55655,6 +56363,17 @@ false
 "$ref": "FutureReservationCommitmentInfo",
 "description": "If not present, then FR will not deliver a new commitment or update an\nexisting commitment."
 },
+"confidentialComputeType": {
+"enum": [
+"CONFIDENTIAL_COMPUTE_TYPE_TDX",
+"CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Intel Trust Domain Extensions.",
+""
+],
+"type": "string"
+},
 "creationTimestamp": {
 "description": "Output only. [Output Only] The creation timestamp for this future reservation inRFC3339\ntext format.",
 "readOnly": true,
@@ -60655,7 +61374,7 @@ false
 "type": "string"
 },
 "source": {
-"description": "The full Google Cloud Storage URL where the raw disk image archive is\nstored.\nThe following are valid formats for the URL:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
+"description": "The full Google Cloud Storage URL or Artifact Registry path where the raw\ndisk image archive is stored.\nThe following are valid formats:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id@dirsum_sha256:hex_value\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
 "type": "string"
 }
 },
@@ -61122,6 +61841,13 @@ false
 "params": {
 "$ref": "InstanceParams",
 "description": "Input only. [Input Only] Additional params passed with the request, but not persisted\nas part of resource payload."
+},
+"partnerMetadata": {
+"additionalProperties": {
+"$ref": "StructuredEntries"
+},
+"description": "Partner Metadata assigned to the instance. A map from a subdomain\n(namespace) to entries map.",
+"type": "object"
 },
 "privateIpv6GoogleAccess": {
 "description": "The private IPv6 google access type for the VM.\nIf not specified, use  INHERIT_FROM_SUBNETWORK as default.",
@@ -62645,6 +63371,11 @@ false
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
+"region": {
+"description": "Output only. [Output Only] The URL of aregion\nwhere the resize request is located. Populated only for regional resize\nrequests.",
+"readOnly": true,
+"type": "string"
+},
 "requestedRunDuration": {
 "$ref": "Duration",
 "description": "Requested run duration for instances that will be created by this request.\nAt the end of the run duration instance will be deleted."
@@ -63032,6 +63763,11 @@ false
 "description": "Output only. [Output Only] The status of bulk instance operation.",
 "readOnly": true
 },
+"currentInstanceStatuses": {
+"$ref": "InstanceGroupManagerStatusInstanceStatusSummary",
+"description": "Output only. [Output Only] The list of instance statuses and the number of instances\nin this managed instance group that have the status. Currently only shown\nfor TPU MIGs",
+"readOnly": true
+},
 "isStable": {
 "description": "Output only. [Output Only] A bit indicating whether the managed instance group is in a\nstable state. A stable state means that: none of the instances in the\nmanaged instance group is currently undergoing any type of change (for\nexample, creation, restart, or deletion); no future changes are scheduled\nfor instances in the managed instance group; and the managed instance\ngroup itself is not being modified.",
 "readOnly": true,
@@ -63238,6 +63974,91 @@ false
 "format": "google-datetime",
 "readOnly": true,
 "type": "string"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagerStatusInstanceStatusSummary": {
+"description": "The list of instance statuses and the number of instances in this managed\ninstance group that have the status. For more information about how to\ninterpret each status check the instance lifecycle documentation.\nCurrently only shown for TPU MIGs.",
+"id": "InstanceGroupManagerStatusInstanceStatusSummary",
+"properties": {
+"deprovisioning": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have DEPROVISIONING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"nonExistent": {
+"description": "Output only. [Output Only] The number of instances that have not been created yet or\nhave been deleted. Includes only instances that would be shown in the\nlistManagedInstances method and not all instances that have been\ndeleted in the lifetime of the MIG.\nDoes not include FlexStart instances that are waiting for the resources\navailability, they are considered as 'pending'.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"pending": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have PENDING status, that is FlexStart instances that are waiting\nfor resources. Instances that do not exist because of the other reasons\nare counted as 'non_existent'.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"pendingStop": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have PENDING_STOP status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"provisioning": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have PROVISIONING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"repairing": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have REPAIRING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"running": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have RUNNING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"staging": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have STAGING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"stopped": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have STOPPED status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"stopping": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have STOPPING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"suspended": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have SUSPENDED status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"suspending": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have SUSPENDING status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
+},
+"terminated": {
+"description": "Output only. [Output Only] The number of instances in the managed instance group\nthat have TERMINATED status.",
+"format": "int32",
+"readOnly": true,
+"type": "integer"
 }
 },
 "type": "object"
@@ -64833,6 +65654,13 @@ false
 "networkPerformanceConfig": {
 "$ref": "NetworkPerformanceConfig",
 "description": "Note that for MachineImage, this is not supported yet."
+},
+"partnerMetadata": {
+"additionalProperties": {
+"$ref": "StructuredEntries"
+},
+"description": "Partner Metadata assigned to the instance properties. A map from a\nsubdomain (namespace) to entries map.",
+"type": "object"
 },
 "privateIpv6GoogleAccess": {
 "description": "The private IPv6 google access type for VMs.\nIf not specified, use  INHERIT_FROM_SUBNETWORK as default.\nNote that for MachineImage, this is not supported yet.",
@@ -80132,6 +80960,25 @@ false
 },
 "type": "object"
 },
+"PartnerMetadata": {
+"description": "Model definition of partner_metadata field.\nTo be used in dedicated Partner Metadata methods and to be inlined in\nthe Instance and InstanceTemplate resources.",
+"id": "PartnerMetadata",
+"properties": {
+"fingerprint": {
+"description": "Instance-level hash to be used for optimistic\nlocking.",
+"format": "byte",
+"type": "string"
+},
+"partnerMetadata": {
+"additionalProperties": {
+"$ref": "StructuredEntries"
+},
+"description": "Partner Metadata assigned to the instance. A map from a subdomain to\nentries map. Subdomain name must be compliant withRFC1035\ndefinition. The total size of all keys and values must be less than 2MB.\nSubdomain 'metadata.compute.googleapis.com' is reserverd for instance's\nmetadata.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "PathMatcher": {
 "description": "A matcher for the path portion of the URL. The BackendService\nfrom the longest-matched rule will serve the URL. If no rule was matched, the\ndefault service is used.",
 "id": "PathMatcher",
@@ -83265,6 +84112,176 @@ false
 },
 "type": "object"
 },
+"RegionInstanceGroupManagerResizeRequestsListResponse": {
+"id": "RegionInstanceGroupManagerResizeRequestsListResponse",
+"properties": {
+"etag": {
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] Unique identifier for the resource; defined by the server.",
+"readOnly": true,
+"type": "string"
+},
+"items": {
+"description": "A list of Resize Request resources.",
+"items": {
+"$ref": "InstanceGroupManagerResizeRequest"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#regionInstanceGroupManagerResizeRequestList",
+"description": "Output only. [Output Only] Type of the resource. Alwayscompute#regionInstanceGroupManagerResizeRequestList for\na list of Resize Requests.",
+"readOnly": true,
+"type": "string"
+},
+"nextPageToken": {
+"description": "Output only. [Output Only] This token allows you to get the next page of results for\nlist requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for\nthe query parameter pageToken in the next list request.\nSubsequent list requests will have their own nextPageToken to\ncontinue paging through the results.",
+"readOnly": true,
+"type": "string"
+},
+"selfLink": {
+"description": "Output only. [Output Only] Server-defined URL for this resource.",
+"readOnly": true,
+"type": "string"
+},
+"unreachables": {
+"description": "Output only. [Output Only] Unreachable resources.\nend_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"readOnly": true,
+"type": "array"
+},
+"warning": {
+"description": "Output only. [Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed\noperation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as\ndeprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as\nexperimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden.\nDeprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is\nnot of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed\nwhich captures the amount of resources filtered out by\nuser-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the\nnetwork.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an\nipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the\nsame network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite\nthe mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g:\nregions.list).",
+"The user attempted to use a resource that requires a TOS they have not\naccepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted\nbecause they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but\nits application does not make a lot of sense, because it allows only\nsingle instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key:\nvalue format. For example:\n\n\"data\": [\n  {\n   \"key\": \"scope\",\n   \"value\": \"zones/us-east1-d\"\n  }",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being\nreturned. For example, for warnings where there are no results in a list\nrequest for a particular zone, this key might be scope and\nthe key value might be the zone name. Other examples might be a key\nindicating a deprecated resource and a suggested replacement, or a\nwarning about invalid network settings (for example, if an instance\nattempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"readOnly": true,
+"type": "object"
+}
+},
+"type": "object"
+},
 "RegionInstanceGroupManagerUpdateInstanceConfigReq": {
 "description": "RegionInstanceGroupManagers.updatePerInstanceConfigs",
 "id": "RegionInstanceGroupManagerUpdateInstanceConfigReq",
@@ -84211,6 +85228,17 @@ false
 "commitment": {
 "description": "Output only. [Output Only] Full or partial URL to a parent commitment. This field\ndisplays for reservations that are tied to a commitment.",
 "readOnly": true,
+"type": "string"
+},
+"confidentialComputeType": {
+"enum": [
+"CONFIDENTIAL_COMPUTE_TYPE_TDX",
+"CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Intel Trust Domain Extensions.",
+""
+],
 "type": "string"
 },
 "creationTimestamp": {
@@ -95870,6 +96898,20 @@ false
 },
 "type": "object"
 },
+"StructuredEntries": {
+"id": "StructuredEntries",
+"properties": {
+"entries": {
+"additionalProperties": {
+"format": "google.protobuf.Value",
+"type": "any"
+},
+"description": "Map of a partner metadata that belong to the same subdomain.\nIt accepts any value including google.protobuf.Struct.",
+"type": "object"
+}
+},
+"type": "object"
+},
 "Subnetwork": {
 "description": "Represents a Subnetwork resource.\n\nA subnetwork (also known as a subnet) is a logical partition of a Virtual\nPrivate Cloud network with one primary IP range and zero or more secondary\nIP ranges. For more information, read\nVirtual Private Cloud (VPC) Network.",
 "id": "Subnetwork",
@@ -102178,6 +103220,316 @@ false
 "type": "string"
 }
 },
+"type": "object"
+}
+},
+"type": "object"
+},
+"VmExtensionPolicy": {
+"description": "Represents a VM extension policy.",
+"id": "VmExtensionPolicy",
+"properties": {
+"creationTimestamp": {
+"description": "Output only. [Output Only] Creation timestamp inRFC3339\ntext format.",
+"readOnly": true,
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource.",
+"type": "string"
+},
+"extensionPolicies": {
+"additionalProperties": {
+"$ref": "VmExtensionPolicyExtensionPolicy"
+},
+"description": "Required. A map of extension names (for example, \"ops-agent\") to their corresponding\npolicy configurations.",
+"type": "object"
+},
+"globalResourceLink": {
+"description": "Optional. Output only. [Output Only] Link to the global policy that manages this zone policy, if\napplicable.",
+"readOnly": true,
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] The unique identifier for the resource. This identifier is\ndefined by the server.",
+"format": "uint64",
+"readOnly": true,
+"type": "string"
+},
+"instanceSelectors": {
+"description": "Optional. Selectors to target VMs for this policy. VMs are selected if they match\n*any* of the provided selectors (logical OR). If this list is empty, the\npolicy applies to all VMs.",
+"items": {
+"$ref": "VmExtensionPolicyInstanceSelector"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#vmExtensionPolicy",
+"description": "Output only. [Output Only] Type of the resource. Alwayscompute#vmExtensionPolicy.",
+"readOnly": true,
+"type": "string"
+},
+"managedByGlobal": {
+"description": "Optional. Output only. [Output Only] Indicates if this policy is managed by a global policy.",
+"readOnly": true,
+"type": "boolean"
+},
+"name": {
+"annotations": {
+"required": [
+"compute.zoneVmExtensionPolicies.insert"
+]
+},
+"description": "Name of the resource. Provided by the client when the resource is created.\nThe name must be 1-63 characters long, and comply withRFC1035.\nSpecifically, the name must be 1-63 characters long and match the regular\nexpression `[a-z]([-a-z0-9]*[a-z0-9])?`\nwhich means the first character must be a lowercase letter, and all\nfollowing characters must be a dash, lowercase letter, or digit, except\nthe last character, which cannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"priority": {
+"description": "Optional. Priority of this policy. Used to resolve conflicts when multiple policies\napply to the same extension.\nThe policy priority is an integer from 0 to 65535, inclusive. Lower\nintegers indicate higher priorities. If you do not specify a priority when\ncreating a rule, it is assigned a priority of 1000. If priorities are\nequal, the policy with the most recent creation timestamp takes precedence.",
+"format": "int32",
+"type": "integer"
+},
+"selfLink": {
+"description": "Output only. [Output Only] Server-defined fully-qualified URL for this resource.",
+"readOnly": true,
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "Output only. [Output Only] Server-defined URL for this resource's resource id.",
+"readOnly": true,
+"type": "string"
+},
+"state": {
+"description": "Optional. Output only. [Output Only] Current state of the policy: ACTIVE or DELETING.",
+"enum": [
+"ACTIVE",
+"DELETING",
+"STATE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The policy is active and applied to matching VMs.\nNewly created VMs that match the policy will also receive the\nextension policy.",
+"The policy is in the process of being deleted. After the extension is\nremoved from all matching VMs, the policy will be deleted.",
+"Default value. Do not use."
+],
+"readOnly": true,
+"type": "string"
+},
+"updateTimestamp": {
+"description": "Output only. [Output Only] Update timestamp inRFC3339\ntext format.",
+"readOnly": true,
+"type": "string"
+}
+},
+"type": "object"
+},
+"VmExtensionPolicyExtensionPolicy": {
+"description": "Configuration for a specific VM extension.",
+"id": "VmExtensionPolicyExtensionPolicy",
+"properties": {
+"pinnedVersion": {
+"description": "Optional. The specific version of the extension to install. If not set, the latest\nversion is used.",
+"type": "string"
+},
+"stringConfig": {
+"description": "Optional. String-based configuration data for the extension.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"VmExtensionPolicyInstanceSelector": {
+"description": "Defines how to select VMs to apply a zone VM extension policy.",
+"id": "VmExtensionPolicyInstanceSelector",
+"properties": {
+"labelSelector": {
+"$ref": "VmExtensionPolicyLabelSelector",
+"description": "Optional. LabelSelector selects VMs based on their labels."
+}
+},
+"type": "object"
+},
+"VmExtensionPolicyLabelSelector": {
+"description": "A LabelSelector is applied to a VM only if it matches all the specified\nlabels.",
+"id": "VmExtensionPolicyLabelSelector",
+"properties": {
+"inclusionLabels": {
+"additionalProperties": {
+"type": "string"
+},
+"description": "Optional. A map of key-value pairs representing VM labels.\nVMs must have all of the labels specified in this map to be selected\n(logical AND).\n\ne.g. If the `inclusion_labels` are {(\"key1\", \"value1\"), (\"key2\",\n\"value2\")}, the VM labels must contain both (\"key1\", \"value1\") and\n(\"key2\", \"value2\") to be selected. If the VM labels are (\"key1\",\n\"value1\") and (\"something\", \"else\"), it will not be selected.\n\nIf the map is empty, it's considered a match.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"VmExtensionPolicyList": {
+"id": "VmExtensionPolicyList",
+"properties": {
+"etag": {
+"description": "Output only. [Output Only] Fingerprint of this resource. A hash of the contents stored\nin this object. This field is used in optimistic locking. This field will\nbe ignored when inserting a VmExtensionPolicy. An up-to-date\nfingerprint must be provided in order to update the VmExtensionPolicy.\n\nTo see the latest value of the fingerprint, make a get() request to\nretrieve a VmExtensionPolicy.",
+"readOnly": true,
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] Unique identifier for the resource; defined by the server.",
+"readOnly": true,
+"type": "string"
+},
+"items": {
+"description": "Output only. [Output Only] A list of VM extension policy resources.",
+"items": {
+"$ref": "VmExtensionPolicy"
+},
+"readOnly": true,
+"type": "array"
+},
+"kind": {
+"default": "compute#vmExtensionPolicyList",
+"description": "Output only. Type of resource.",
+"readOnly": true,
+"type": "string"
+},
+"nextPageToken": {
+"description": "Output only. [Output Only] This token allows you to get the next page of results for\nlist requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for\nthe query parameter pageToken in the next list request.\nSubsequent list requests will have their own nextPageToken to\ncontinue paging through the results.",
+"readOnly": true,
+"type": "string"
+},
+"selfLink": {
+"description": "Output only. [Output Only] Server-defined URL for this resource.",
+"readOnly": true,
+"type": "string"
+},
+"unreachables": {
+"description": "Output only. [Output Only] Unreachable resources.",
+"items": {
+"type": "string"
+},
+"readOnly": true,
+"type": "array"
+},
+"warning": {
+"description": "Output only. [Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed\noperation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as\ndeprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as\nexperimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden.\nDeprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is\nnot of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed\nwhich captures the amount of resources filtered out by\nuser-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the\nnetwork.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an\nipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the\nsame network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite\nthe mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g:\nregions.list).",
+"The user attempted to use a resource that requires a TOS they have not\naccepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted\nbecause they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but\nits application does not make a lot of sense, because it allows only\nsingle instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key:\nvalue format. For example:\n\n\"data\": [\n  {\n   \"key\": \"scope\",\n   \"value\": \"zones/us-east1-d\"\n  }",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being\nreturned. For example, for warnings where there are no results in a list\nrequest for a particular zone, this key might be scope and\nthe key value might be the zone name. Other examples might be a key\nindicating a deprecated resource and a suggested replacement, or a\nwarning about invalid network settings (for example, if an instance\nattempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"readOnly": true,
 "type": "object"
 }
 },

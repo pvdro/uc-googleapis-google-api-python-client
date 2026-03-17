@@ -51297,7 +51297,7 @@
 }
 }
 },
-"revision": "20260227",
+"revision": "20260306",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -63438,6 +63438,17 @@ false
 "$ref": "FutureReservationCommitmentInfo",
 "description": "If not present, then FR will not deliver a new commitment or update an\nexisting commitment."
 },
+"confidentialComputeType": {
+"enum": [
+"CONFIDENTIAL_COMPUTE_TYPE_TDX",
+"CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Intel Trust Domain Extensions.",
+""
+],
+"type": "string"
+},
 "creationTimestamp": {
 "description": "Output only. [Output Only] The creation timestamp for this future reservation inRFC3339\ntext format.",
 "readOnly": true,
@@ -68941,7 +68952,7 @@ false
 "type": "string"
 },
 "source": {
-"description": "The full Google Cloud Storage URL where the raw disk image archive is\nstored.\nThe following are valid formats for the URL:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
+"description": "The full Google Cloud Storage URL or Artifact Registry path where the raw\ndisk image archive is stored.\nThe following are valid formats:\n   \n   - https://storage.googleapis.com/bucket_name/image_archive_name\n   - https://storage.googleapis.com/bucket_name/folder_name/image_archive_name\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id\n   - projects/project/locations/location/repositories/repo/packages/package/versions/version_id@dirsum_sha256:hex_value\n\n\n\nIn order to create an image, you must provide the full or partial URL of\none of the following:\n   \n   - The rawDisk.source URL \n   - The sourceDisk URL \n   - The sourceImage URL \n   - The sourceSnapshot URL",
 "type": "string"
 }
 },
@@ -72039,6 +72050,37 @@ false
 },
 "description": "Map of accelerator topologies that should have their state changed to\nthe specified value. The key is the hashed topology locus id. It can be\nobtained from the GetAvailableAcceleratorTopologies rpc.",
 "type": "object"
+},
+"acceleratorTopologyConfigurations": {
+"additionalProperties": {
+"$ref": "InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration"
+},
+"description": "Map of accelerator topologies that should have their state changed to\nthe specified configuration. The map key is the hashed topology locus id.\nIt can be obtained from the GetAvailableAcceleratorTopologies rpc.",
+"type": "object"
+}
+},
+"type": "object"
+},
+"InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration": {
+"description": "Configuration for a single accelerator topology.",
+"id": "InstanceGroupManagersConfigureAcceleratorTopologiesRequestAcceleratorTopologyConfiguration",
+"properties": {
+"action": {
+"enum": [
+"ACCELERATOR_TOPOLOGY_ACTION_UNSPECIFIED",
+"ACTIVATE",
+"DEACTIVATE"
+],
+"enumDescriptions": [
+"Default value. Should not be used.",
+"The accelerator topology is to be activated.",
+"The accelerator topology is to be deactivated."
+],
+"type": "string"
+},
+"externalId": {
+"description": "Identifier of the accelerator topology assigned externally to\ndifferentiate who is the owner of the topology. The format needs to\nconform to RFC1035 and be unique. The uniqueness is guaranteed by the\nrequestor. If it is provided on activating the sub-slice it will have to\nbe provided on deactivating as well. This identifier is cleared on\nsuccessful deform of a sub-slice.",
+"type": "string"
 }
 },
 "type": "object"
@@ -72116,14 +72158,12 @@ false
 "enum": [
 "DEGRADED",
 "HEALTHY",
-"UNHEALTHY",
-"UNKNOWN"
+"UNHEALTHY"
 ],
 "enumDescriptions": [
 "All VM are in RUNNING state, but there is an issue with\nthe inter-chip connectivity that makes this part\nof the infrastructure ready to use as a working\ninter-chip connected group only in a degraded mode.\nThis is allowed only for Instances configured with ICI\nresiliency",
 "All VM are in RUNNING state, there are no issues with the\ninter-chip connectivity.",
-"Some VMs may not be in RUNNING state, or there is an\nissue with the inter-chip connectivity that makes this\npart of the infrastructure unsuitable for forming a\nworking inter-chip connected group.",
-"No signal available"
+"Some VMs may not be in RUNNING state, or there is an\nissue with the inter-chip connectivity that makes this\npart of the infrastructure unsuitable for forming a\nworking inter-chip connected group."
 ],
 "type": "string"
 },
@@ -72224,6 +72264,10 @@ false
 "errorTimestamp": {
 "description": "Timestamp when the last error happened",
 "format": "google-datetime",
+"type": "string"
+},
+"externalId": {
+"description": "Identifier of the accelerator topology assigned externally to\ndifferentiate who is the owner of the topology. This is set in\nConfigureAcceleratorTopologies. If it is provided on activating the\nsub-slice it will have to be provided on deactivating as well.\nThis identifier is cleared on successful deform of a sub-slice.",
 "type": "string"
 }
 },
@@ -95286,6 +95330,17 @@ false
 "commitment": {
 "description": "Output only. [Output Only] Full or partial URL to a parent commitment. This field\ndisplays for reservations that are tied to a commitment.",
 "readOnly": true,
+"type": "string"
+},
+"confidentialComputeType": {
+"enum": [
+"CONFIDENTIAL_COMPUTE_TYPE_TDX",
+"CONFIDENTIAL_COMPUTE_TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"Intel Trust Domain Extensions.",
+""
+],
 "type": "string"
 },
 "creationTimestamp": {
