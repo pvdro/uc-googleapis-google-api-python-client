@@ -54919,7 +54919,7 @@
 }
 }
 },
-"revision": "20260320",
+"revision": "20260331",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -60983,7 +60983,7 @@ false
 },
 "snapshotGroupParameters": {
 "$ref": "SnapshotGroupParameters",
-"description": "The parameters for the snapshot group."
+"description": "The parameters for the snapshot group. The usage of snapshot group feature\nis restricted."
 },
 "sourceConsistencyGroupPolicy": {
 "description": "The URL of the DiskConsistencyGroupPolicy for the group of disks to clone.\nThis may be a full or partial URL, such as:\n   \n   \n     - \n       https://www.googleapis.com/compute/v1/projects/project/regions/region/resourcePolicies/resourcePolicy\n     \n     - \n       projects/project/regions/region/resourcePolicies/resourcePolicy\n     \n     - \n       regions/region/resourcePolicies/resourcePolicy",
@@ -103172,12 +103172,12 @@ false
 "description": "Encrypts the snapshot using acustomer-supplied\nencryption key.\n\nAfter you encrypt a snapshot using a customer-supplied key, you must\nprovide the same key if you use the snapshot later. For example, you must\nprovide the encryption key when you create a disk from the encrypted\nsnapshot in a future request.\n\nCustomer-supplied encryption keys do not protect access to metadata\nof the snapshot.\n\nIf you do not provide an encryption key when creating the snapshot, then\nthe snapshot will be encrypted using an automatically generated key and\nyou do not need to provide a key to use the snapshot later."
 },
 "snapshotGroupId": {
-"description": "Output only. [Output Only] The unique ID of the snapshot group that this snapshot\nbelongs to.",
+"description": "Output only. [Output Only] The unique ID of the snapshot group that this snapshot\nbelongs to. The usage of snapshot group feature is restricted.",
 "readOnly": true,
 "type": "string"
 },
 "snapshotGroupName": {
-"description": "Output only. [Output only] The snapshot group that this snapshot belongs to.",
+"description": "Output only. [Output only] The snapshot group that this snapshot belongs to. The usage\nof snapshot group feature is restricted.",
 "readOnly": true,
 "type": "string"
 },
@@ -116257,12 +116257,12 @@ false
 "description": "Encrypts the snapshot using acustomer-supplied\nencryption key.\n\nAfter you encrypt a snapshot using a customer-supplied key, you must\nprovide the same key if you use the snapshot later. For example, you must\nprovide the encryption key when you create a disk from the encrypted\nsnapshot in a future request.\n\nCustomer-supplied encryption keys do not protect access to metadata\nof the snapshot.\n\nIf you do not provide an encryption key when creating the snapshot, then\nthe snapshot will be encrypted using an automatically generated key and you\ndo not need to provide a key to use the snapshot later."
 },
 "snapshotGroupId": {
-"description": "Output only. [Output Only] The unique ID of the snapshot group that this snapshot\nbelongs to.",
+"description": "Output only. [Output Only] The unique ID of the snapshot group that this snapshot\nbelongs to. The usage of snapshot group feature is restricted.",
 "readOnly": true,
 "type": "string"
 },
 "snapshotGroupName": {
-"description": "Output only. [Output only] The snapshot group that this snapshot belongs to.",
+"description": "Output only. [Output only] The snapshot group that this snapshot belongs to. The usage\nof snapshot group feature is restricted.",
 "readOnly": true,
 "type": "string"
 },
