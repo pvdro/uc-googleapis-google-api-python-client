@@ -52666,7 +52666,7 @@
 }
 }
 },
-"revision": "20260612",
+"revision": "20260625",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -98715,11 +98715,6 @@ false
 "description": "Represents a reservation block resource.",
 "id": "ReservationBlock",
 "properties": {
-"blockHealthInfo": {
-"$ref": "ReservationBlockHealthInfo",
-"description": "Output only. [Output Only] Health information for the reservation block.",
-"readOnly": true
-},
 "count": {
 "description": "Output only. [Output Only] The number of resources that are allocated in this\nreservation block.",
 "format": "int32",
@@ -98730,6 +98725,11 @@ false
 "description": "Output only. [Output Only] Creation timestamp inRFC3339 text format.",
 "readOnly": true,
 "type": "string"
+},
+"healthInfo": {
+"$ref": "ReservationBlockHealthInfo",
+"description": "Output only. [Output Only] Health information for the reservation block.",
+"readOnly": true
 },
 "id": {
 "description": "Output only. [Output Only] The unique identifier for the resource. This identifier is\ndefined by the server.",
@@ -99575,6 +99575,11 @@ false
 "readOnly": true,
 "type": "string"
 },
+"healthInfo": {
+"$ref": "ReservationSubBlockHealthInfo",
+"description": "Output only. [Output Only] Health information for the reservation subBlock.",
+"readOnly": true
+},
 "id": {
 "description": "Output only. [Output Only] The unique identifier for the resource. This identifier is\ndefined by the server.",
 "format": "uint64",
@@ -99640,11 +99645,6 @@ false
 ],
 "readOnly": true,
 "type": "string"
-},
-"subBlockHealthInfo": {
-"$ref": "ReservationSubBlockHealthInfo",
-"description": "Output only. [Output Only] Health information for the reservation subBlock.",
-"readOnly": true
 },
 "zone": {
 "description": "Output only. [Output Only] Zone in which the reservation subBlock resides.",
