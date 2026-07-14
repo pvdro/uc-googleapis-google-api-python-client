@@ -123,6 +123,234 @@
 },
 "protocol": "rest",
 "resources": {
+"acceleratorPodControllers": {
+"methods": {
+"delete": {
+"description": "Deletes the specified AcceleratorPodController resource.",
+"flatPath": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"httpMethod": "DELETE",
+"id": "compute.acceleratorPodControllers.delete",
+"parameterOrder": [
+"project",
+"zone",
+"resourceId"
+],
+"parameters": {
+"project": {
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"location": "query",
+"type": "string"
+},
+"resourceId": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Gets the specified AcceleratorPodController resource.",
+"flatPath": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"httpMethod": "GET",
+"id": "compute.acceleratorPodControllers.get",
+"parameterOrder": [
+"project",
+"zone",
+"resourceId"
+],
+"parameters": {
+"project": {
+"location": "path",
+"required": true,
+"type": "string"
+},
+"resourceId": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"zone": {
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"response": {
+"$ref": "AcceleratorPodController"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Inserts a new AcceleratorPodController resource.",
+"flatPath": "projects/{project}/zones/{zone}/acceleratorPodControllers",
+"httpMethod": "POST",
+"id": "compute.acceleratorPodControllers.insert",
+"parameterOrder": [
+"project",
+"zone"
+],
+"parameters": {
+"project": {
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"location": "query",
+"type": "string"
+},
+"zone": {
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/acceleratorPodControllers",
+"request": {
+"$ref": "AcceleratorPodController"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the AcceleratorPodController resources in the specified zone.",
+"flatPath": "projects/{project}/zones/{zone}/acceleratorPodControllers",
+"httpMethod": "GET",
+"id": "compute.acceleratorPodControllers.list",
+"parameterOrder": [
+"project",
+"zone"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most\nCompute resources support two types of filter expressions:\nexpressions that support regular expressions and expressions that follow\nAPI improvement proposal AIP-160.\nThese two types of filter expressions cannot be mixed in one request.\n\nIf you want to use AIP-160, your expression must specify the field name, an\noperator, and the value that you want to use for filtering. The value\nmust be a string, a number, or a boolean. The operator\nmust be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.\n\nFor example, if you are filtering Compute Engine instances, you can\nexclude instances named `example-instance` by specifying\n`name != example-instance`.\n\nThe `:*` comparison can be used to test whether a key has been defined.\nFor example, to find all objects with `owner` label use:\n```\nlabels.owner:*\n```\n\nYou can also filter nested fields. For example, you could specify\n`scheduling.automaticRestart = false` to include instances only\nif they are not scheduled for automatic restarts. You can use filtering\non nested fields to filter based onresource labels.\n\nTo filter on multiple expressions, provide each separate expression within\nparentheses. For example:\n```\n(scheduling.automaticRestart = true)\n(cpuPlatform = \"Intel Skylake\")\n```\nBy default, each expression is an `AND` expression. However, you\ncan include `AND` and `OR` expressions explicitly.\nFor example:\n```\n(cpuPlatform = \"Intel Skylake\") OR\n(cpuPlatform = \"Intel Broadwell\") AND\n(scheduling.automaticRestart = true)\n```\n\nIf you want to use a regular expression, use the `eq` (equal) or `ne`\n(not equal) operator against a single un-parenthesized expression with or\nwithout quotes or against multiple parenthesized expressions. Examples:\n\n`fieldname eq unquoted literal`\n`fieldname eq 'single quoted literal'`\n`fieldname eq \"double quoted literal\"`\n`(fieldname1 eq literal) (fieldname2 ne \"literal\")`\n\nThe literal value is interpreted as a regular expression using GoogleRE2 library syntax.\nThe literal value must match the entire field.\n\nFor example, to filter for instances that do not end with name \"instance\",\nyou would use `name ne .*instance`.\n\nYou cannot combine constraints on multiple fields using regular\nexpressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned.\nIf the number of available results is larger than `maxResults`,\nCompute Engine returns a `nextPageToken` that can be used to get\nthe next page of results in subsequent list requests. Acceptable values are\n`0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results\nare returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation\ntimestamp using `orderBy=\"creationTimestamp desc\"`. This sorts\nresults based on the `creationTimestamp` field in\nreverse chronological order (newest result first). Use this to sort\nresources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by `name` or\n`creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the\n`nextPageToken` returned by a previous list request to get\nthe next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"location": "path",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
+"location": "query",
+"type": "boolean"
+},
+"zone": {
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/acceleratorPodControllers",
+"response": {
+"$ref": "AcceleratorPodControllersListResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Patches the specified AcceleratorPodController resource.",
+"flatPath": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"httpMethod": "PATCH",
+"id": "compute.acceleratorPodControllers.patch",
+"parameterOrder": [
+"project",
+"zone",
+"resourceId"
+],
+"parameters": {
+"project": {
+"location": "path",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"location": "query",
+"type": "string"
+},
+"resourceId": {
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"updateMask": {
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+},
+"zone": {
+"location": "path",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/zones/{zone}/acceleratorPodControllers/{resourceId}",
+"request": {
+"$ref": "AcceleratorPodController"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
 "acceleratorTypes": {
 "methods": {
 "aggregatedList": {
@@ -2278,7 +2506,7 @@
 ]
 },
 "listUsable": {
-"description": "Retrieves a list of all usable backend services in the specified project.",
+"description": "Retrieves a list of all usable backend services for Application Load\nBalancers and Proxy Network Load Balancers in the specified project.\nBackend services for external and internal passthrough Network Load\nBalancers are not included in the response.",
 "flatPath": "projects/{project}/global/backendServices/listUsable",
 "httpMethod": "GET",
 "id": "compute.backendServices.listUsable",
@@ -2796,6 +3024,307 @@
 "scopes": [
 "https://www.googleapis.com/auth/cloud-platform",
 "https://www.googleapis.com/auth/compute"
+]
+}
+}
+},
+"dhcpOptionsConfigs": {
+"methods": {
+"delete": {
+"description": "Deletes the specified DhcpOptionsConfig in the given location",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"httpMethod": "DELETE",
+"id": "compute.dhcpOptionsConfigs.delete",
+"parameterOrder": [
+"project",
+"region",
+"dhcpOptionsConfig"
+],
+"parameters": {
+"dhcpOptionsConfig": {
+"description": "Name of the DhcpOptionsConfig resource to delete.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).\nend_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"get": {
+"description": "Returns the specified DhcpOptionsConfig resource in the given location.",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"httpMethod": "GET",
+"id": "compute.dhcpOptionsConfigs.get",
+"parameterOrder": [
+"project",
+"region",
+"dhcpOptionsConfig"
+],
+"parameters": {
+"dhcpOptionsConfig": {
+"description": "Name of the DhcpOptionsConfig resource to return.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"response": {
+"$ref": "DhcpOptionsConfig"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"insert": {
+"description": "Creates a DhcpOptionsConfig in the specified project in the given location\nusing the parameters that are included in the request.",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs",
+"httpMethod": "POST",
+"id": "compute.dhcpOptionsConfigs.insert",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).\nend_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs",
+"request": {
+"$ref": "DhcpOptionsConfig"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"list": {
+"description": "Lists the DhcpOptionsConfigs for a project in the given location.",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs",
+"httpMethod": "GET",
+"id": "compute.dhcpOptionsConfigs.list",
+"parameterOrder": [
+"project",
+"region"
+],
+"parameters": {
+"filter": {
+"description": "A filter expression that filters resources listed in the response. Most\nCompute resources support two types of filter expressions:\nexpressions that support regular expressions and expressions that follow\nAPI improvement proposal AIP-160.\nThese two types of filter expressions cannot be mixed in one request.\n\nIf you want to use AIP-160, your expression must specify the field name, an\noperator, and the value that you want to use for filtering. The value\nmust be a string, a number, or a boolean. The operator\nmust be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.\n\nFor example, if you are filtering Compute Engine instances, you can\nexclude instances named `example-instance` by specifying\n`name != example-instance`.\n\nThe `:*` comparison can be used to test whether a key has been defined.\nFor example, to find all objects with `owner` label use:\n```\nlabels.owner:*\n```\n\nYou can also filter nested fields. For example, you could specify\n`scheduling.automaticRestart = false` to include instances only\nif they are not scheduled for automatic restarts. You can use filtering\non nested fields to filter based onresource labels.\n\nTo filter on multiple expressions, provide each separate expression within\nparentheses. For example:\n```\n(scheduling.automaticRestart = true)\n(cpuPlatform = \"Intel Skylake\")\n```\nBy default, each expression is an `AND` expression. However, you\ncan include `AND` and `OR` expressions explicitly.\nFor example:\n```\n(cpuPlatform = \"Intel Skylake\") OR\n(cpuPlatform = \"Intel Broadwell\") AND\n(scheduling.automaticRestart = true)\n```\n\nIf you want to use a regular expression, use the `eq` (equal) or `ne`\n(not equal) operator against a single un-parenthesized expression with or\nwithout quotes or against multiple parenthesized expressions. Examples:\n\n`fieldname eq unquoted literal`\n`fieldname eq 'single quoted literal'`\n`fieldname eq \"double quoted literal\"`\n`(fieldname1 eq literal) (fieldname2 ne \"literal\")`\n\nThe literal value is interpreted as a regular expression using GoogleRE2 library syntax.\nThe literal value must match the entire field.\n\nFor example, to filter for instances that do not end with name \"instance\",\nyou would use `name ne .*instance`.\n\nYou cannot combine constraints on multiple fields using regular\nexpressions.",
+"location": "query",
+"type": "string"
+},
+"maxResults": {
+"default": "500",
+"description": "The maximum number of results per page that should be returned.\nIf the number of available results is larger than `maxResults`,\nCompute Engine returns a `nextPageToken` that can be used to get\nthe next page of results in subsequent list requests. Acceptable values are\n`0` to `500`, inclusive. (Default: `500`)",
+"format": "uint32",
+"location": "query",
+"minimum": "0",
+"type": "integer"
+},
+"orderBy": {
+"description": "Sorts list results by a certain order. By default, results\nare returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation\ntimestamp using `orderBy=\"creationTimestamp desc\"`. This sorts\nresults based on the `creationTimestamp` field in\nreverse chronological order (newest result first). Use this to sort\nresources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by `name` or\n`creationTimestamp desc` is supported.",
+"location": "query",
+"type": "string"
+},
+"pageToken": {
+"description": "Specifies a page token to use. Set `pageToken` to the\n`nextPageToken` returned by a previous list request to get\nthe next page of results.",
+"location": "query",
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region of this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"returnPartialSuccess": {
+"description": "Opt-in for partial success behavior which provides partial results in case\nof failure. The default value is false.\n\nFor example, when partial success behavior is enabled, aggregatedList for a\nsingle zone scope either returns all resources in the zone or no resources,\nwith an error code.",
+"location": "query",
+"type": "boolean"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs",
+"response": {
+"$ref": "DhcpOptionsConfigList"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
+]
+},
+"patch": {
+"description": "Patches the specified DhcpOptionsConfig resource with the data included in\nthe request. This method supports PATCH\nsemantics and usesJSON merge\npatch format and processing rules.",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"httpMethod": "PATCH",
+"id": "compute.dhcpOptionsConfigs.patch",
+"parameterOrder": [
+"project",
+"region",
+"dhcpOptionsConfig"
+],
+"parameters": {
+"dhcpOptionsConfig": {
+"description": "Name of the DhcpOptionsConfig resource to patch.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+},
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "Name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"requestId": {
+"description": "An optional request ID to identify requests. Specify a unique request ID so\nthat if you must retry your request, the server will know to ignore the\nrequest if it has already been completed.\n\nFor example, consider a situation where you make an initial request and\nthe request times out. If you make the request again with the same\nrequest ID, the server can check if original operation with the same\nrequest ID was received, and if so, will ignore the second request. This\nprevents clients from accidentally creating duplicate commitments.\n\nThe request ID must be\na valid UUID with the exception that zero UUID is not supported\n(00000000-0000-0000-0000-000000000000).\nend_interface: MixerMutationRequestBuilder",
+"location": "query",
+"type": "string"
+},
+"updateMask": {
+"description": "update_mask indicates fields to be updated as part of this request.",
+"format": "google-fieldmask",
+"location": "query",
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{dhcpOptionsConfig}",
+"request": {
+"$ref": "DhcpOptionsConfig"
+},
+"response": {
+"$ref": "Operation"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute"
+]
+},
+"testIamPermissions": {
+"description": "Returns permissions that a caller has on the specified resource.",
+"flatPath": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{resource}/testIamPermissions",
+"httpMethod": "POST",
+"id": "compute.dhcpOptionsConfigs.testIamPermissions",
+"parameterOrder": [
+"project",
+"region",
+"resource"
+],
+"parameters": {
+"project": {
+"description": "Project ID for this request.",
+"location": "path",
+"pattern": "(?:(?:[-a-z0-9]{1,63}\\.)*(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?):)?(?:[0-9]{1,19}|(?:[a-z0-9](?:[-a-z0-9]{0,61}[a-z0-9])?))",
+"required": true,
+"type": "string"
+},
+"region": {
+"description": "The name of the region for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"required": true,
+"type": "string"
+},
+"resource": {
+"description": "Name or id of the resource for this request.",
+"location": "path",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?|[1-9][0-9]{0,19}",
+"required": true,
+"type": "string"
+}
+},
+"path": "projects/{project}/regions/{region}/dhcpOptionsConfigs/{resource}/testIamPermissions",
+"request": {
+"$ref": "TestPermissionsRequest"
+},
+"response": {
+"$ref": "TestPermissionsResponse"
+},
+"scopes": [
+"https://www.googleapis.com/auth/cloud-platform",
+"https://www.googleapis.com/auth/compute",
+"https://www.googleapis.com/auth/compute.readonly"
 ]
 }
 }
@@ -30235,7 +30764,7 @@
 ]
 },
 "listUsable": {
-"description": "Retrieves a list of all usable backend services in the specified project in\nthe given region.",
+"description": "Retrieves a list of all usable backend services for Application Load\nBalancers and Proxy Network Load Balancers in the specified project in the\ngiven region. Backend services for external and internal passthrough\nNetwork Load Balancers are not included in the response.",
 "flatPath": "projects/{project}/regions/{region}/backendServices/listUsable",
 "httpMethod": "GET",
 "id": "compute.regionBackendServices.listUsable",
@@ -57095,7 +57624,7 @@
 }
 }
 },
-"revision": "20260625",
+"revision": "20260629",
 "rootUrl": "https://compute.googleapis.com/",
 "schemas": {
 "AWSV4Signature": {
@@ -57133,6 +57662,206 @@
 "acceleratorType": {
 "description": "Full or partial URL of the accelerator type resource to attach to this\ninstance. For example:projects/my-project/zones/us-central1-c/acceleratorTypes/nvidia-tesla-p100\nIf you are creating an instance template, specify only the\naccelerator name.\nSee GPUs on Compute Engine\nfor a full list of accelerator types.",
 "type": "string"
+}
+},
+"type": "object"
+},
+"AcceleratorPodController": {
+"description": "Represents a controller for managing out-of-band access to an accelerator\ndomain (e.g., NVLink Domain).",
+"id": "AcceleratorPodController",
+"properties": {
+"creationTimestamp": {
+"description": "Output only. [Output Only] Creation timestamp inRFC3339 text format.",
+"readOnly": true,
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource.",
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] The unique identifier for the resource. This identifier is\ndefined by the server.",
+"format": "uint64",
+"readOnly": true,
+"type": "string"
+},
+"kind": {
+"readOnly": true,
+"type": "string"
+},
+"managementInterfaces": {
+"additionalProperties": {
+"$ref": "ManagementInterface"
+},
+"description": "Map of management interfaces. Keys must be valid RFC1035 names and at most\n63 characters long.",
+"type": "object"
+},
+"name": {
+"description": "Required. The name of the resource, provided by the client when initially creating\nthe resource. The resource name must be 1-63 characters long, and comply\nwithRFC1035.\nSpecifically, the name must match the regular expression\n`[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a\nlowercase letter, and all following characters must be a dash, lowercase\nletter, or digit, except the last character, which cannot be a dash.",
+"type": "string"
+},
+"selfLink": {
+"description": "Output only. [Output Only] Server-defined URL for the resource.",
+"readOnly": true,
+"type": "string"
+},
+"selfLinkWithId": {
+"description": "Output only. [Output Only] Server-defined URL for the resource with the resource ID.",
+"readOnly": true,
+"type": "string"
+},
+"target": {
+"description": "Required. The target accelerator domain this controller manages.\nThis must be a resolvable identifier for the specific NVLink Domain or\nTPU system (e.g., a Reservation Sub-block URI).\nExample:\n\"projects/my-project/reservations/my-reservation/subBlocks/subblock-1\".",
+"type": "string"
+},
+"zone": {
+"description": "Output only. [Output Only] URL of the zone where the accelerator pod controller resides.",
+"readOnly": true,
+"type": "string"
+}
+},
+"type": "object"
+},
+"AcceleratorPodControllersListResponse": {
+"id": "AcceleratorPodControllersListResponse",
+"properties": {
+"items": {
+"items": {
+"$ref": "AcceleratorPodController"
+},
+"type": "array"
+},
+"kind": {
+"type": "string"
+},
+"nextPageToken": {
+"type": "string"
+},
+"selfLink": {
+"type": "string"
+},
+"warning": {
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed\noperation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as\ndeprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as\nexperimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden.\nDeprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is\nnot of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed\nwhich captures the amount of resources filtered out by\nuser-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the\nnetwork.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an\nipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the\nsame network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite\nthe mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g:\nregions.list).",
+"The user attempted to use a resource that requires a TOS they have not\naccepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted\nbecause they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but\nits application does not make a lot of sense, because it allows only\nsingle instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key:\nvalue format. For example:\n\n\"data\": [\n  {\n   \"key\": \"scope\",\n   \"value\": \"zones/us-east1-d\"\n  }",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being\nreturned. For example, for warnings where there are no results in a list\nrequest for a particular zone, this key might be scope and\nthe key value might be the zone name. Other examples might be a key\nindicating a deprecated resource and a suggested replacement, or a\nwarning about invalid network settings (for example, if an instance\nattempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -57765,6 +58494,7 @@ false
 "type": "string"
 },
 "publicDnsName": {
+"deprecated": true,
 "description": "Output only. [Output Only] The public DNS domain name for the instance.",
 "readOnly": true,
 "type": "string"
@@ -57778,6 +58508,7 @@ false
 "type": "string"
 },
 "setPublicDns": {
+"deprecated": true,
 "description": "Specifies whether a public DNS 'A' record should be created for the\nexternal IP address of this access configuration.",
 "type": "boolean"
 },
@@ -57840,7 +58571,7 @@ false
 "type": "string"
 },
 "ipCollection": {
-"description": "Reference to the source of external IPv4 addresses,\nlike a PublicDelegatedPrefix (PDP) for BYOIP.\nThe PDP must support enhanced IPv4 allocations.\n\nUse one of the following formats to specify a PDP when reserving an\nexternal IPv4 address using BYOIP.\n   \n   - \n   Full resource URL, as inhttps://www.googleapis.com/compute/v1/projects/projectId/regions/region/publicDelegatedPrefixes/pdp-name\n   - \n   Partial URL, as in\n     \n      \n          - projects/projectId/regions/region/publicDelegatedPrefixes/pdp-name\n          - regions/region/publicDelegatedPrefixes/pdp-name",
+"description": "Reference to the source of IP addresses.\n\nIt supports the following cases:\n   \n   - \n     Case 1: PublicDelegatedPrefix (PDP) for BYOIP external IPv4\n     addresses. The PDP must support enhanced IPv4 allocations.\n   - \n     Case 2: Internal Range for global internal addresses.\n\n\n\nUse one of the following formats to specify the resource:\n\nFor a Public Delegated Prefix:\n   \n   - \n   Full resource URL:https://www.googleapis.com/compute/v1/projects/projectId/regions/region/publicDelegatedPrefixes/pdp\n   - Partial URL:\n      - projects/projectId/regions/region/publicDelegatedPrefixes/pdp-name\n      - regions/region/publicDelegatedPrefixes/pdp-name\n   \n\n\nFor an Internal Range:\n   \n   - Full URL:https://networkconnectivity.googleapis.com/v1/projects/project/locations/global/internalRanges/internal-range\n   - Partial URL:projects/project/locations/global/internalRanges/internal-range",
 "type": "string"
 },
 "ipVersion": {
@@ -58516,6 +59247,18 @@ false
 "description": "An alias IP range attached to an instance's network interface.",
 "id": "AliasIpRange",
 "properties": {
+"candidateSubnetworkRangeNames": {
+"description": "Identifies the candidate subnetwork range names for the alias\nIPs to be allocated from. When it is set, the IP would be allocated from\nany subnetwork range defined here if the IPs are available.\nOnly one of subnetwork_range_name or candidate_subnetwork_range_names\nshould be set.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"effectiveSubnetworkRangeName": {
+"description": "Output only. [Output Only] The subnetwork range name where the IP is allocated.\nIt will be set to the subnetwork range where the IP is allocated only.",
+"readOnly": true,
+"type": "string"
+},
 "ipCidrRange": {
 "description": "The IP alias ranges to allocate for this interface. This IP CIDR range\nmust belong to the specified subnetwork and cannot contain IP addresses\nreserved by system or used by other network interfaces. This range may be\na single IP address (such as 10.2.3.4), a netmask (such as/24) or a CIDR-formatted string (such as10.1.2.0/24).",
 "type": "string"
@@ -59213,6 +59956,17 @@ false
 "Data writes. Example: CloudSQL Users create",
 "Default case. Should never be this."
 ],
+"type": "string"
+}
+},
+"type": "object"
+},
+"AuthenticationConfig": {
+"description": "Authentication configuration for the management interface, typically using\nmTLS.",
+"id": "AuthenticationConfig",
+"properties": {
+"trustConfig": {
+"description": "Required. Resource name of the Cloud Certificate Manager TrustConfig used to validate\nclient certificates for mTLS.\nFormat: projects/{project}/locations/{location}/trustConfigs/{trust_config}",
 "type": "string"
 }
 },
@@ -63966,19 +64720,23 @@ false
 "id": "CapacityHistoryResponse",
 "properties": {
 "location": {
+"description": "Output only. The location (region or zone) for which the capacity history is returned.\nIt is returned as a URL - For example,https://www.googleapis.com/compute/v1/projects/project/zones/zone.",
 "readOnly": true,
 "type": "string"
 },
 "machineType": {
+"description": "The machine type for which the capacity history is returned.",
 "type": "string"
 },
 "preemptionHistory": {
+"description": "The preemption history for the requested machine type and location.",
 "items": {
 "$ref": "CapacityHistoryResponsePreemptionRecord"
 },
 "type": "array"
 },
 "priceHistory": {
+"description": "The price history for the requested machine type and location.",
 "items": {
 "$ref": "CapacityHistoryResponsePriceRecord"
 },
@@ -63988,12 +64746,15 @@ false
 "type": "object"
 },
 "CapacityHistoryResponsePreemptionRecord": {
+"description": "A record of Spot VM preemption history.",
 "id": "CapacityHistoryResponsePreemptionRecord",
 "properties": {
 "interval": {
-"$ref": "Interval"
+"$ref": "Interval",
+"description": "The time interval for this preemption record."
 },
 "preemptionRate": {
+"description": "The preemption rate during the interval, representing the fraction of\nSpot VMs that were preempted. Range: 0.0 to 1.0. Preemption rate is\ncalculated as (total preempted Spots) / (total Spots that stopped\nrunning).",
 "format": "double",
 "type": "number"
 }
@@ -64001,13 +64762,16 @@ false
 "type": "object"
 },
 "CapacityHistoryResponsePriceRecord": {
+"description": "A record of price history.",
 "id": "CapacityHistoryResponsePriceRecord",
 "properties": {
 "interval": {
-"$ref": "Interval"
+"$ref": "Interval",
+"description": "The time interval for this price record."
 },
 "listPrice": {
-"$ref": "Money"
+"$ref": "Money",
+"description": "The Spot VM list price during the interval."
 }
 },
 "type": "object"
@@ -66066,6 +66830,330 @@ false
 "stateOverride": {
 "$ref": "RolloutPolicy",
 "description": "The rollout policy for this deprecation. This policy is only enforced by\nimage family views. The rollout policy restricts the zones where the\nassociated resource is considered in a deprecated state. When the rollout\npolicy does not include the user specified zone, or if the zone is rolled\nout, the associated resource is considered in a deprecated state.\n\nThe rollout policy for this deprecation is read-only, except for\nallowlisted users. This field might not be configured. To view the latest\nnon-deprecated image in a specific zone, use theimageFamilyViews.get method."
+}
+},
+"type": "object"
+},
+"DhcpOptionsConfig": {
+"description": "A standalone, regional API resource that encapsulates a set of user-defined\nDHCP configurations.",
+"id": "DhcpOptionsConfig",
+"properties": {
+"associations": {
+"additionalProperties": {
+"$ref": "DhcpOptionsConfigAssociation"
+},
+"description": "Mapping of user-defined keys to DhcpOptionsConfig to Network associations.",
+"type": "object"
+},
+"bootFileIpv4Name": {
+"description": "The file path and name of the boot image/file on the TFTP server that the\nclient VM guest OS should download and execute during network boot. Used\nwhen the standard DHCP header 'file' field is overloaded. Corresponds to\nDHCPv4 Option 67.",
+"type": "string"
+},
+"bootFileIpv6Parameters": {
+"description": "A list of UTF-8 encoded parameter strings to be passed as arguments to the\nbootloader program or OS kernel after downloading the boot file.\nCorresponds to DHCPv6 Option 60.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"bootFileIpv6Url": {
+"description": "The Uniform Resource Locator (URL) specifying the protocol, server address,\nand file path of the boot file that the client VM guest OS should download\nand execute for network boot (e.g., 'tftp://[2001:db8::1]/bootx64.efi' or\n'http://[2001:db8::1]/boot.img'). Corresponds to DHCPv6 Option 59.",
+"type": "string"
+},
+"creationTimestamp": {
+"description": "Output only. [Output Only] Creation timestamp inRFC3339\ntext format.",
+"readOnly": true,
+"type": "string"
+},
+"description": {
+"description": "An optional description of this resource. Provide this property when you\ncreate the resource.",
+"type": "string"
+},
+"dnsSearchPaths": {
+"description": "An ordered list of domain suffixes (search paths) that the client VM guest\nOS should append to resolve hostnames that are not fully qualified. Applies\nto both DHCPv4 Option 119 and DHCPv6 Option 24.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"dnsServerIpv4Addresses": {
+"description": "An ordered list of IPv4 addresses of DNS recursive name servers available\nto the client VM guest OS, specified in order of preference. Corresponds to\nDHCPv4 Option 6.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"dnsServerIpv6Addresses": {
+"description": "An ordered list of IPv6 addresses of DNS recursive name servers available\nto the client VM guest OS, specified in order of preference. Corresponds to\nDHCPv6 Option 23.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"domainName": {
+"description": "The domain name that the client VM guest OS should use when resolving\nhostnames via DNS (e.g., 'example.com'). It defines the default domain\nsuffix for the client. Corresponds to DHCPv4 Option 15.",
+"type": "string"
+},
+"id": {
+"description": "Output only. [Output Only] The unique identifier for the resource type. The server\ngenerates this identifier.",
+"format": "uint64",
+"readOnly": true,
+"type": "string"
+},
+"kind": {
+"default": "compute#dhcpOptionsConfig",
+"description": "Output only. [Output Only] Type of the resource. Alwayscompute#dhcpOptionsConfig for dhcp options configs.",
+"readOnly": true,
+"type": "string"
+},
+"leaseTimeSec": {
+"description": "The duration, in seconds, of the IPv4 address lease offered by the DHCP\nserver to the client VM guest OS. Corresponds to DHCPv4 Option 51.",
+"format": "int64",
+"type": "string"
+},
+"name": {
+"annotations": {
+"required": [
+"compute.dhcpOptionsConfigs.insert"
+]
+},
+"description": "Name of the resource. Provided by the client when the resource is created.\nThe name must be 1-63 characters long, and comply withRFC1035.\nSpecifically, the name must be 1-63 characters long and match the regular\nexpression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first\ncharacter must be a lowercase letter, and all following characters must\nbe a dash, lowercase letter, or digit, except the last character, which\ncannot be a dash.",
+"pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+"type": "string"
+},
+"ntpServerIpv4Addresses": {
+"description": "An ordered list of IPv4 addresses of Network Time Protocol (NTP) servers\navailable to the client VM guest OS for system clock synchronization,\nlisted in order of preference. Corresponds to DHCPv4 Option 42.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"ntpServerIpv6Addresses": {
+"description": "An ordered list of IPv6 addresses of Network Time Protocol (NTP) servers\navailable to the client VM guest OS for system clock synchronization.\nCorresponds to DHCPv6 Option 56.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"region": {
+"description": "Output only. [Output Only] URL of the region where the resource resides.",
+"readOnly": true,
+"type": "string"
+},
+"selfLink": {
+"description": "Output only. [Output Only] Server-defined URL for the resource.",
+"readOnly": true,
+"type": "string"
+},
+"tftpServerIpv4Addresses": {
+"description": "An ordered list of one or more IPv4 addresses of TFTP servers. Provides\nserver redundancy and failover support, and is generally prioritized by\nclients over the single hostname specified in Option 66. Corresponds to\nDHCPv4 Option 150.",
+"items": {
+"type": "string"
+},
+"type": "array"
+},
+"tftpServerIpv4Name": {
+"description": "The hostname or IP address of the Trivial File Transfer Protocol (TFTP)\nserver from which the client VM guest OS can download boot files. Typically\nused in network booting (PXE) when the standard DHCP header 'sname' field\nis overloaded. Corresponds to DHCPv4 Option 66.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"DhcpOptionsConfigAssociation": {
+"description": "Association represents the relationship between a DHCP options config and a\nnetwork. Association represents the relationship between a DHCP options\nconfig and a network.",
+"id": "DhcpOptionsConfigAssociation",
+"properties": {
+"network": {
+"description": "Required. The target network this DHCP option is attached to.\nYou can specify this as a full or partial URL. For example, the following\nare all valid URLs:\n   \n   \n     - https://www.googleapis.com/compute/v1/projects/project/global/networks/network\n   \n     - projects/project/global/networks/network",
+"type": "string"
+},
+"networkId": {
+"description": "Output only. [Output Only] The server-defined ID of the associated Network.",
+"format": "uint64",
+"readOnly": true,
+"type": "string"
+},
+"state": {
+"description": "Output only. [Output Only] State of the association.",
+"enum": [
+"ACTIVE",
+"ORPHANED",
+"STATE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"The association is active and the DHCP configuration is applied.",
+"The association is orphaned (the network has been deleted).",
+"Default value. This value is unused."
+],
+"readOnly": true,
+"type": "string"
+}
+},
+"type": "object"
+},
+"DhcpOptionsConfigList": {
+"id": "DhcpOptionsConfigList",
+"properties": {
+"etag": {
+"description": "Server-defined ETag for optimistic concurrency control.",
+"type": "string"
+},
+"id": {
+"description": "[Output Only] Unique identifier for the resource; defined by the server.",
+"type": "string"
+},
+"items": {
+"description": "A list of DhcpOptionsConfig resources.",
+"items": {
+"$ref": "DhcpOptionsConfig"
+},
+"type": "array"
+},
+"kind": {
+"default": "compute#dhcpOptionsConfigList",
+"description": "Output only. [Output Only] Type of the resource. Alwayscompute#dhcpOptionsConfigList for a list of dhcp options\nconfigs.",
+"readOnly": true,
+"type": "string"
+},
+"nextPageToken": {
+"description": "[Output Only] This token allows you to get the next page of results for\nlist requests. If the number of results is larger thanmaxResults, use the nextPageToken as a value for\nthe query parameter pageToken in the next list request.\nSubsequent list requests will have their own nextPageToken to\ncontinue paging through the results.",
+"type": "string"
+},
+"selfLink": {
+"description": "[Output Only] Server-defined URL for this resource.",
+"type": "string"
+},
+"unreachables": {
+"description": "Output only. [Output Only] Unreachable resources.\nend_interface: MixerListResponseWithEtagBuilder",
+"items": {
+"type": "string"
+},
+"readOnly": true,
+"type": "array"
+},
+"warning": {
+"description": "[Output Only] Informational warning message.",
+"properties": {
+"code": {
+"description": "[Output Only] A warning code, if applicable. For example, Compute\nEngine returns NO_RESULTS_ON_PAGE if there\nare no results in the response.",
+"enum": [
+"CLEANUP_FAILED",
+"DEPRECATED_RESOURCE_USED",
+"DEPRECATED_TYPE_USED",
+"DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+"EXPERIMENTAL_TYPE_USED",
+"EXTERNAL_API_WARNING",
+"FIELD_VALUE_OVERRIDEN",
+"INJECTED_KERNELS_DEPRECATED",
+"INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB",
+"LARGE_DEPLOYMENT_WARNING",
+"LIST_OVERHEAD_QUOTA_EXCEED",
+"MISSING_TYPE_DEPENDENCY",
+"NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+"NEXT_HOP_CANNOT_IP_FORWARD",
+"NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE",
+"NEXT_HOP_INSTANCE_NOT_FOUND",
+"NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+"NEXT_HOP_NOT_RUNNING",
+"NOT_CRITICAL_ERROR",
+"NO_RESULTS_ON_PAGE",
+"PARTIAL_SUCCESS",
+"QUOTA_INFO_UNAVAILABLE",
+"REQUIRED_TOS_AGREEMENT",
+"RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING",
+"RESOURCE_NOT_DELETED",
+"SCHEMA_VALIDATION_IGNORED",
+"SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+"UNDECLARED_PROPERTIES",
+"UNREACHABLE"
+],
+"enumDeprecated": [
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"enumDescriptions": [
+"Warning about failed cleanup of transient changes made by a failed\noperation.",
+"A link to a deprecated resource was created.",
+"When deploying and at least one of the resources has a type marked as\ndeprecated",
+"The user created a boot disk that is larger than image size.",
+"When deploying and at least one of the resources has a type marked as\nexperimental",
+"Warning that is present in an external api call",
+"Warning that value of a field has been overridden.\nDeprecated unused field.",
+"The operation involved use of an injected kernel, which is deprecated.",
+"A WEIGHTED_MAGLEV backend service is associated with a health check that is\nnot of type HTTP/HTTPS/HTTP2.",
+"When deploying a deployment with a exceedingly large number of resources",
+"Resource can't be retrieved due to list overhead quota exceed\nwhich captures the amount of resources filtered out by\nuser-defined list filter.",
+"A resource depends on a missing type",
+"The route's nextHopIp address is not assigned to an instance on the\nnetwork.",
+"The route's next hop instance cannot ip forward.",
+"The route's nextHopInstance URL refers to an instance that does not have an\nipv6 interface on the same network as the route.",
+"The route's nextHopInstance URL refers to an instance that does not exist.",
+"The route's nextHopInstance URL refers to an instance that is not on the\nsame network as the route.",
+"The route's next hop instance does not have a status of RUNNING.",
+"Error which is not critical. We decided to continue the process despite\nthe mentioned error.",
+"No results are present on a particular list page.",
+"Success is reported, but some results may be missing due to errors",
+"Quota information is not available to client requests (e.g:\nregions.list).",
+"The user attempted to use a resource that requires a TOS they have not\naccepted.",
+"Warning that a resource is in use.",
+"One or more of the resources set to auto-delete could not be deleted\nbecause they were in use.",
+"When a resource schema validation is ignored.",
+"Instance template used in instance group manager is valid as such, but\nits application does not make a lot of sense, because it allows only\nsingle instance in instance group.",
+"When undeclared properties in the schema are present",
+"A given scope cannot be reached."
+],
+"type": "string"
+},
+"data": {
+"description": "[Output Only] Metadata about this warning in key:\nvalue format. For example:\n\n\"data\": [\n  {\n   \"key\": \"scope\",\n   \"value\": \"zones/us-east1-d\"\n  }",
+"items": {
+"properties": {
+"key": {
+"description": "[Output Only] A key that provides more detail on the warning being\nreturned. For example, for warnings where there are no results in a list\nrequest for a particular zone, this key might be scope and\nthe key value might be the zone name. Other examples might be a key\nindicating a deprecated resource and a suggested replacement, or a\nwarning about invalid network settings (for example, if an instance\nattempts to perform IP forwarding but is not enabled for IP forwarding).",
+"type": "string"
+},
+"value": {
+"description": "[Output Only] A warning data value corresponding to the key.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"type": "array"
+},
+"message": {
+"description": "[Output Only] A human-readable description of the warning code.",
+"type": "string"
+}
+},
+"type": "object"
 }
 },
 "type": "object"
@@ -69345,7 +70433,7 @@ false
 "id": "FirewallPolicyRule",
 "properties": {
 "action": {
-"description": "The Action to perform when the client connection triggers the rule.\nValid actions for firewall rules are: \"allow\", \"deny\",\n\"apply_security_profile_group\" and \"goto_next\".\nValid actions for packet mirroring rules are: \"mirror\", \"do_not_mirror\"\nand \"goto_next\".",
+"description": "The Action to perform when the client connection triggers the rule.\nValid actions for firewall rules are: \"allow\", \"deny\",\n\"apply_security_profile_group\" and \"goto_next\" (\n\"apply_security_profile_group\" can be specified only for global\nnetwork firewall policies or hierarchical firewall policies).\nValid actions for packet mirroring rules are: \"mirror\", \"do_not_mirror\"\nand \"goto_next\".",
 "type": "string"
 },
 "description": {
@@ -69398,7 +70486,7 @@ false
 "type": "integer"
 },
 "securityProfileGroup": {
-"description": "A fully-qualified URL of a SecurityProfile resource instance.\nExample:\nhttps://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group\nMust be specified if action is one of 'apply_security_profile_group' or\n'mirror'. Cannot be specified for other actions.",
+"description": "A fully-qualified URL of a SecurityProfileGroup resource instance.\nExample:\nhttps://networksecurity.googleapis.com/v1/projects/{project}/locations/{location}/securityProfileGroups/my-security-profile-group\nMust be specified if action is one of 'apply_security_profile_group' or\n'mirror'. Cannot be specified for other actions. Can be specified only\nfor global network firewall policies or hierarchical firewall policies.",
 "type": "string"
 },
 "targetForwardingRules": {
@@ -70879,6 +71967,10 @@ false
 "description": "Name of reservations where the capacity is provisioned at the time of\ndelivery of  future reservations. If the reservation with the given name\ndoes not exist already, it is created automatically at the time of Approval\nwith INACTIVE state till specified start-time. Either provide the\nreservation_name or a name_prefix.",
 "type": "string"
 },
+"resourceName": {
+"description": "Name of the resource intended to be delivered. Name should conform to\nRFC1035. This will be the name of storage pool or Exapool for persistent\ndisk FRs.",
+"type": "string"
+},
 "schedulingType": {
 "description": "Maintenance information for this reservation",
 "enum": [
@@ -70919,6 +72011,10 @@ false
 "$ref": "FutureReservationStatus",
 "description": "Output only. [Output only] Status of the Future Reservation",
 "readOnly": true
+},
+"storagePoolProperties": {
+"$ref": "FutureReservationStoragePoolProperties",
+"description": "Storage pool details for the future reservation."
 },
 "timeWindow": {
 "$ref": "FutureReservationTimeWindow",
@@ -71034,6 +72130,11 @@ false
 "readOnly": true,
 "type": "array"
 },
+"exapoolProvisionedCapacityGb": {
+"$ref": "StoragePoolExapoolProvisionedCapacityGb",
+"description": "Output only. Exapool provisioned capacities for each SKU type.",
+"readOnly": true
+},
 "existingMatchingUsageInfo": {
 "$ref": "FutureReservationStatusExistingMatchingUsageInfo",
 "description": "Output only. [Output Only] Represents the existing matching usage for the future\nreservation.",
@@ -71092,6 +72193,11 @@ false
 },
 "specificSkuProperties": {
 "$ref": "FutureReservationStatusSpecificSKUProperties"
+},
+"storagePoolProvisionedCapacity": {
+"$ref": "FutureReservationStoragePoolProvisionedCapacity",
+"description": "Output only. Storage pool provisioned capacities for each SKU type.",
+"readOnly": true
 }
 },
 "type": "object"
@@ -71208,6 +72314,47 @@ false
 "properties": {
 "sourceInstanceTemplateId": {
 "description": "ID of the instance template used to populate the Future Reservation\nproperties.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureReservationStoragePoolProperties": {
+"description": "Storage pool properties for the future reservation.",
+"id": "FutureReservationStoragePoolProperties",
+"properties": {
+"requestedExapoolProvisionedCapacityGb": {
+"$ref": "StoragePoolExapoolProvisionedCapacityGb",
+"description": "Requested exapool provisioned capacity in GiB."
+},
+"requestedStoragePoolProvisionedCapacity": {
+"$ref": "FutureReservationStoragePoolProvisionedCapacity",
+"description": "Requested storage pool provisioned capacity."
+},
+"storagePoolType": {
+"description": "Type of the storage pool.",
+"type": "string"
+}
+},
+"type": "object"
+},
+"FutureReservationStoragePoolProvisionedCapacity": {
+"description": "Storage pool provisioned capacities for each SKU type.",
+"id": "FutureReservationStoragePoolProvisionedCapacity",
+"properties": {
+"poolProvisionedCapacityGb": {
+"description": "Size of the storage pool in GiB.",
+"format": "int64",
+"type": "string"
+},
+"poolProvisionedIops": {
+"description": "Provisioned IOPS of the storage pool. Only relevant if the storage pool\ntype is hyperdisk-balanced.",
+"format": "int64",
+"type": "string"
+},
+"poolProvisionedThroughput": {
+"description": "Provisioned throughput of the storage pool in MiB/s. Only relevant if\nthe storage pool type is hyperdisk-balanced or hyperdisk-throughput.",
+"format": "int64",
 "type": "string"
 }
 },
@@ -78620,6 +79767,20 @@ false
 "readOnly": true,
 "type": "string"
 },
+"localSsdEncryptionMode": {
+"description": "Specifies which method should be used for encrypting the\nLocal SSDs attached to the VM.",
+"enum": [
+"EPHEMERAL_KEY_ENCRYPTION",
+"LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED",
+"STANDARD_ENCRYPTION"
+],
+"enumDescriptions": [
+"The given VM will opt-in for using ephemeral key for\nencryption of Local SSDs.\nThe Local SSDs will not be able to recover data in case of VM\ncrash.",
+"The given VM will be encrypted using keys managed by the cloud\ninfrastructure and the keys will be deleted when the VM is\ndeleted.",
+"The given VM will be encrypted using keys managed by the cloud\ninfrastructure and the keys will be deleted when the VM is\ndeleted."
+],
+"type": "string"
+},
 "machineType": {
 "description": "Full or partial URL of the machine type resource to use for this instance,\nin the format:zones/zone/machineTypes/machine-type. This is provided by the client\nwhen the instance is created. For example, the following is a valid partial\nurl to a predefined\nmachine type:\n\nzones/us-central1-f/machineTypes/n1-standard-1\n\n\nTo create acustom\nmachine type, provide a URL to a machine type in the following format,\nwhere CPUS is 1 or an even number up to 32 (2,\n4, 6, ... 24, etc), and MEMORY is the total\nmemory for this instance. Memory must be a multiple of 256 MB and must\nbe supplied in MB (e.g. 5 GB of memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY\n\n\nFor example: zones/us-central1-f/machineTypes/custom-4-5120\nFor a full list of restrictions, read theSpecifications\nfor custom machine types.",
 "type": "string"
@@ -83093,6 +84254,20 @@ false
 },
 "description": "Labels to apply to instances that are created from these properties.",
 "type": "object"
+},
+"localSsdEncryptionMode": {
+"description": "Specifies which method should be used for encrypting the\nLocal SSDs attached to the VM.",
+"enum": [
+"EPHEMERAL_KEY_ENCRYPTION",
+"LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED",
+"STANDARD_ENCRYPTION"
+],
+"enumDescriptions": [
+"The given VM will opt-in for using ephemeral key for\nencryption of Local SSDs.\nThe Local SSDs will not be able to recover data in case of VM\ncrash.",
+"The given VM will be encrypted using keys managed by the cloud\ninfrastructure and the keys will be deleted when the VM is\ndeleted.",
+"The given VM will be encrypted using keys managed by the cloud\ninfrastructure and the keys will be deleted when the VM is\ndeleted."
+],
+"type": "string"
 },
 "machineType": {
 "annotations": {
@@ -92011,12 +93186,12 @@ false
 },
 "scheduling": {
 "$ref": "ManagedInstanceScheduling",
-"description": "Output only. [Output Only] Information about the termination timestamp of the instance,\nif applicable.",
+"description": "Output only. Information about the termination timestamp of the instance, if applicable.",
 "readOnly": true
 },
 "shutdownDetails": {
 "$ref": "ManagedInstanceShutdownDetails",
-"description": "Output only. [Output Only] Specifies the graceful shutdown details if the instance is in\n`PENDING_STOP` state or there is a programmed stop scheduled.",
+"description": "Output only. Specifies the graceful shutdown details if the instance is in\n`PENDING_STOP` state or there is a programmed stop scheduled.",
 "readOnly": true
 },
 "sizeInUnit": {
@@ -92077,7 +93252,7 @@ false
 "type": "string"
 },
 "trigger": {
-"description": "Output only. [Output Only] Details of the current action that the managed instance\ngroup has scheduled for the instance. Contains trigger for the current\naction, and methodName in case it was triggered by API call. Possible\nvalues for trigger:\n   \n   - API Any API call.\n   - PROACTIVE_UPDATE Proactive updater scheduled an update\n   on this managed instance.\n   - AUTOSCALING Instance being deleted/created after a\n   decision from the Autoscaler.\n   - REDISTRIBUTION The regional managed instance group is\n   moving instances between zones to restore balance.\n   - STANDBY_REFILL The managed instance group is refilling\n   the Standby Pool (stopped/suspended virtual machines) after scale\n   up.\n   - MAINTENANCE Manual maintenance.\n   - FAILED_CREATION The managed instance group is handling\n   failed instance creation.\n   - INSTANCE_FAILURE The managed instance group is handling\n   instance failure, according to\n   the Instance Lifecycle Policy.\n   - FAILED_HEALTH_CHECK The managed instance group is\n   handling failed health check, according to the Instance Lifecycle\n   Policy.\n   - TERMINATION_TIMESTAMP Instance reached termination time,\n   thus managed instance group stops/deletes it.",
+"description": "Output only. [Output Only] Details of the current action that the managed instance\ngroup has scheduled for the instance. Contains trigger for the current\naction, and methodName in case it was triggered by API call. Possible\nvalues for trigger:\n   \n   - API Any API call.\n   - PROACTIVE_UPDATE Proactive updater scheduled an update\n   on this managed instance.\n   - AUTOSCALING Instance being deleted/created after a\n   decision from the Autoscaler.\n   - REDISTRIBUTION The regional managed instance group is\n   moving instances between zones to restore balance.\n   - STANDBY_REFILL The managed instance group is refilling\n   the Standby Pool (stopped/suspended virtual machines) after scale\n   up.\n   - MAINTENANCE Manual maintenance.\n   - FAILED_CREATION The managed instance group is handling\n   failed instance creation.\n   - INSTANCE_FAILURE The managed instance group is handling\n   instance failure, according to\n   the Instance Lifecycle Policy.\n   - FAILED_HEALTH_CHECK The managed instance group is\n   handling failed health check, according to the Instance Lifecycle\n   Policy.\n   - TERMINATION_TIMESTAMP Instance reached termination time,\n   thus managed instance group stops/deletes it.\n   - GRACEFUL_SHUTDOWN_TIMESTAMP Instance reached graceful\n   shutdown time, thus managed instance group stops/deletes it to\n   gracefully shut it down.",
 "enum": [
 "API",
 "AUTOSCALING",
@@ -92289,13 +93464,13 @@ false
 "id": "ManagedInstanceScheduling",
 "properties": {
 "gracefulShutdownTimestamp": {
-"description": "Output only. [Output Only] The timestamp at which the underlying instance will be\ntriggered for graceful shutdown if it is configured. This is in RFC3339 text format.",
+"description": "Output only. The timestamp at which the underlying instance will be\ntriggered for graceful shutdown if it is configured. This is in RFC3339 text format.",
 "format": "google-datetime",
 "readOnly": true,
 "type": "string"
 },
 "terminationTimestamp": {
-"description": "Output only. [Output Only] The timestamp at which the managed instance will be\nterminated. This is in RFC3339 text format.",
+"description": "Output only. The timestamp at which the managed instance will be terminated. This is\nin RFC3339 text\nformat.",
 "format": "google-datetime",
 "readOnly": true,
 "type": "string"
@@ -92308,11 +93483,11 @@ false
 "properties": {
 "maxDuration": {
 "$ref": "Duration",
-"description": "Output only. [Output Only] The duration for graceful shutdown. Only applicable when\nthe instance is in `PENDING_STOP` state.",
+"description": "Output only. The duration for graceful shutdown. Only applicable when the instance is\nin `PENDING_STOP` state.",
 "readOnly": true
 },
 "requestTimestamp": {
-"description": "Output only. [Output Only] Past timestamp indicating the beginning of `PENDING_STOP`\nstate of instance in RFC3339 text format.",
+"description": "Output only. Past timestamp indicating the beginning of `PENDING_STOP` state of\ninstance in RFC3339\ntext format.",
 "format": "google-datetime",
 "readOnly": true,
 "type": "string"
@@ -92331,6 +93506,62 @@ false
 "name": {
 "description": "Output only. [Output Only] Name of the version.",
 "readOnly": true,
+"type": "string"
+}
+},
+"type": "object"
+},
+"ManagementInterface": {
+"description": "Represents a managed interface for an accelerator domain.\nIt defines the network endpoint and authentication configuration needed to\naccess specific management services like NMX-C or gNMI.",
+"id": "ManagementInterface",
+"properties": {
+"authenticationConfig": {
+"$ref": "AuthenticationConfig"
+},
+"ipv4Address": {
+"description": "The IPv4 internal IP address assigned to this management interface\nendpoint. This address will be used by the customer to route traffic to the\nmanagement interface.",
+"type": "string"
+},
+"ipv6Address": {
+"description": "The IPv6 internal IP address assigned to this management interface\nendpoint. This address will be used by the customer to route traffic to the\nmanagement interface if IPv6 is supported and configured.",
+"type": "string"
+},
+"network": {
+"description": "The URL of the VPC network to which the management interface endpoint is\nattached. The customer must ensure that this network is correctly\nconfigured for routing to the accelerator domain.",
+"type": "string"
+},
+"state": {
+"enum": [
+"ACTIVE",
+"INACTIVE",
+"PENDING",
+"STATE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+"",
+""
+],
+"readOnly": true,
+"type": "string"
+},
+"subnetwork": {
+"description": "The URL of the subnetwork from which to assign the IP address for the\nendpoint. The subnetwork must belong to the specified network and have\navailable IP addresses.",
+"type": "string"
+},
+"type": {
+"description": "Required. The type of management service this interface provides.\nSupported types include NMX-C for partition management and gNMI for switch\nmonitoring.",
+"enum": [
+"TYPE_NVLINK_PARTITION_MANAGEMENT",
+"TYPE_NVLINK_SWITCH_MONITORING",
+"TYPE_UNSPECIFIED"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
 "type": "string"
 }
 },
@@ -93353,14 +94584,14 @@ false
 "type": "string"
 },
 "producerAcceptLists": {
-"description": "Projects that are allowed to connect to this network attachment.\nThe project can be specified using its id or number.",
+"description": "Projects or service class ids that are allowed to connect to this network\nattachment. The project can be specified using its id or number. Service\nclass id can be specified as \"serviceclasses/{service_class_id}\".",
 "items": {
 "type": "string"
 },
 "type": "array"
 },
 "producerRejectLists": {
-"description": "Projects that are not allowed to connect to this network attachment.\nThe project can be specified using its id or number.",
+"description": "Projects or service class ids that are not allowed to connect to this\nnetwork attachment. The project can be specified using its id or number.\nService class id can be specified as \"serviceclasses/{service_class_id}\".",
 "items": {
 "type": "string"
 },
@@ -108669,7 +109900,7 @@ false
 "id": "ReliabilityRisk",
 "properties": {
 "creationTimestamp": {
-"description": "Output only. [Output Only] Creation timestamp inRFC3339\ntext format.",
+"description": "Output only. [Output Only] Creation timestamp in RFC3339\ntext format.",
 "readOnly": true,
 "type": "string"
 },
@@ -108693,13 +109924,13 @@ false
 "type": "string"
 },
 "name": {
-"description": "Name of the resource. The name must be 1-63 characters long and\ncomply withRFC1035.",
+"description": "Name of the resource. The name must be 1-63 characters long and\ncomply with RFC1035.",
 "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
 "type": "string"
 },
 "recommendation": {
 "$ref": "RiskRecommendation",
-"description": "The recommendations to mitigate the risk."
+"description": "The recommendation to mitigate the risk."
 },
 "selfLink": {
 "description": "Output only. [Output Only] Server-defined URL for the resource.",
@@ -108715,6 +109946,7 @@ false
 "type": "object"
 },
 "ReliabilityRisksListResponse": {
+"description": "Response message for the List method of ReliabilityRisksService.",
 "id": "ReliabilityRisksListResponse",
 "properties": {
 "etag": {
@@ -112179,6 +113411,11 @@ false
 "format": "int32",
 "type": "integer"
 },
+"gracefulShutdownTimestamp": {
+"description": "Output only. Specifies the timestamp, when the instance will start graceful shutdown\nprocess, in RFC3339 text format.",
+"readOnly": true,
+"type": "string"
+},
 "terminationTimestamp": {
 "description": "Time in future when the instance will be terminated inRFC3339 text format.",
 "type": "string"
@@ -112265,7 +113502,7 @@ false
 "type": "object"
 },
 "RiskDetails": {
-"description": "Details about a risk.",
+"description": "Detailed insights and metrics about a detected reliability risk.",
 "id": "RiskDetails",
 "properties": {
 "duration": {
@@ -112274,7 +113511,8 @@ false
 "type": "string"
 },
 "globalDnsInsight": {
-"$ref": "RiskDetailsGlobalDnsInsight"
+"$ref": "RiskDetailsGlobalDnsInsight",
+"description": "Insight details for global DNS risk."
 },
 "lastUpdateTimestamp": {
 "description": "The last time the risk was updated.",
@@ -112315,10 +113553,11 @@ false
 "type": "object"
 },
 "RiskDetailsGlobalDnsInsight": {
+"description": "Detailed insights for a global DNS reliability risk.",
 "id": "RiskDetailsGlobalDnsInsight",
 "properties": {
 "projectDefaultIsGlobalDns": {
-"description": "Whether the project default DNS setting is global or not.",
+"description": "Indicates whether the project's default DNS setting is global DNS.",
 "type": "boolean"
 },
 "queryObservationWindow": {
@@ -112327,7 +113566,7 @@ false
 "type": "string"
 },
 "riskyQueryCount": {
-"description": "The number of queries that are risky. This will always be less than\ntotal_query_count.",
+"description": "The number of queries that are risky. This is always less than or\nequal to total_query_count.",
 "format": "int64",
 "type": "string"
 },
@@ -112340,7 +113579,7 @@ false
 "type": "object"
 },
 "RiskRecommendation": {
-"description": "Recommendation with reference url.",
+"description": "Recommendation for mitigating a reliability risk, including a reference URL.",
 "id": "RiskRecommendation",
 "properties": {
 "content": {
@@ -115027,6 +116266,11 @@ false
 },
 "bfdStatus": {
 "$ref": "BfdStatus"
+},
+"depreferenced": {
+"description": "Output only. [Output Only] Indicates whether the BGP peer is in a depreferenced state.",
+"readOnly": true,
+"type": "boolean"
 },
 "enableIpv4": {
 "description": "Output only. Enable IPv4 traffic over BGP Peer.\nIt is enabled by default if the peerIpAddress is version 4.",
@@ -121816,7 +123060,6 @@ false
 "id": "SslPolicyReference",
 "properties": {
 "sslPolicy": {
-"description": "URL of the SSL policy resource. Set this to empty string to clear any\nexisting SSL policy associated with the target proxy resource.",
 "type": "string"
 }
 },
@@ -133081,6 +134324,19 @@ false
 },
 "identityCertificateEnabled": {
 "type": "boolean"
+},
+"identityType": {
+"enum": [
+"AGENT_IDENTITY",
+"IDENTITY_TYPE_UNSPECIFIED",
+"SERVICE_ACCOUNT"
+],
+"enumDescriptions": [
+"",
+"",
+""
+],
+"type": "string"
 }
 },
 "type": "object"
